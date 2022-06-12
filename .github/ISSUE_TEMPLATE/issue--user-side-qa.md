@@ -1,7 +1,7 @@
 ---
 name: 'Issue: User-side QA'
 about: UI/UX에 대한 QA 이슈 템플릿
-title: ''
+title: "[UI/UX]"
 labels: ''
 assignees: ''
 
