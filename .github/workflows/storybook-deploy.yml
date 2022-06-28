@@ -1,7 +1,7 @@
 name: Build & Deploy Storybook
 on:
   push:
-    branches: [feature/storybook]
+    branches: [dev]
     paths: ['src/components/**']
 jobs:
   build-and-deploy:
