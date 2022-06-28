@@ -1,16 +1,15 @@
-import Button from '../components/common/Button';
-import { Counter } from '../components/counter/Counter';
+import styled from 'styled-components';
 
 function Home() {
   return (
-    <>
+    <Wrapper>
       <div>Home</div>
-      <Counter />
-      <Button cyan to="settings">
-        Sample
-      </Button>
-    </>
+    </Wrapper>
   );
 }
 
 export default Home;
+
+const Wrapper = styled.div`
+  color: red;
+`;
