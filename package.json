@@ -1,5 +1,7 @@
 {
-  "name": "rtk",
+  "name": "bankids",
+  "repository": "bankids/bankids-client",
+  "homepage": "https://bankids.github.io/bankids-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
