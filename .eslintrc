@@ -1,0 +1,20 @@
+{
+  "extends": ["plugin:prettier/recommended"],
+  "plugins": ["react", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "react/jsx-uses-vars": 2,
+    "react/react-in-jsx-scope": 0,
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ]
+  },
+  "ignorePatterns": ["*.config.js"]
+}
