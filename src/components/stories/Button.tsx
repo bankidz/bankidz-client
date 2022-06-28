@@ -4,7 +4,7 @@ import './button.css';
 
 interface ButtonProps {
   /**
-   * Is this the principal call to action on the page?
+   * 이렇게 주석으로 설명 ㄱㄴ
    */
   primary?: boolean;
   /**
