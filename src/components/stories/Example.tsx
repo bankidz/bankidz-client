@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import './button.css';
+import './Example.css';
 
 interface ButtonProps {
   /**

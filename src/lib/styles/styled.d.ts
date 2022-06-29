@@ -3,30 +3,24 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     palette: {
+      yellow: ['#FFBE41', '#FFF7E5', '#FFEDC1', '#FFD56F', '#FFAA42'];
+      blue: ['#000', '#C6E8FF', '#9AD7FF', '#0099FF'];
+      red: ['#000', '#FFCFB1', '#FFBA8E', '#FA7E49'];
+      green: ['#000', '#C0F0A4', '#A5EE79', '#94DD7A'];
+
+      lightGray: '#FAFAFC';
       gray: [
-        '#f8f9fa',
-        '#f1f3f5',
-        '#e9ecef',
-        '#dee2e6',
-        '#ced4da',
-        '#adb5bd',
-        '#868e96',
-        '#495057',
-        '#343a40',
-        '#212529',
+        '#000',
+        '#F7F7F8',
+        '#EDEDED',
+        '#D1D1D4',
+        '#B3B2B8',
+        '#82818B',
+        '#4C4C52',
+        '#26262D',
       ];
-      cyan: [
-        '#e3fafc',
-        '#c5f6fa',
-        '#99e9f2',
-        '#66d9e8',
-        '#3bc9db',
-        '#22b8cf',
-        '#15aabf',
-        '#1098ad',
-        '#0c8599',
-        '#0b7285',
-      ];
+      white: '#fff';
+      black: '#000';
     };
     boxShadow: {
       normal: '0 3px 8px 0 rgb(0 0 0 / 10%)';
