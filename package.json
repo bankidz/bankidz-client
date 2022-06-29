@@ -84,6 +84,7 @@
     "prop-types": "^15.8.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "redux-logger": "^3.0.6",
+    "storybook-addon-paddings": "^4.3.0",
     "webpack": "^5.73.0"
   }
 }

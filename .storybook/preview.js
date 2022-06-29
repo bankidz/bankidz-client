@@ -49,4 +49,11 @@ export const parameters = {
     },
     defaultViewport: 'mobile1',
   },
+  paddings: {
+    values: [
+      { name: 'none', value: '0px' },
+      { name: 'default', value: '20px' },
+    ],
+    default: 'default',
+  },
 };
