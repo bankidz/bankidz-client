@@ -76,3 +76,4 @@ jobs:
           script: |
             sh /home/ubuntu/srv/bankids-client/config/scripts/deploy.sh
             sudo docker pull sanbonai06/bankids-test:dev
+            sudo docker run -p 80:80 sanbonai06/bankids-test:dev
