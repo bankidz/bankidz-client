@@ -1,7 +1,7 @@
 name: Docker
 on:
   push:
-    branches: [feature/docker]
+    branches: [dev]
     # Publish semver tags as releases.
     tags: ['v*.*.*']
 
@@ -12,6 +12,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # 도커 이미지에 env 파일 포함
+      - name: Create .env file
+        run: |
+          touch .env
+          echo REACT_APP_KAKAO_REST_API_KEY=${{ secrets.REACT_APP_KAKAO_REST_API_KEY }}\ >> .env
+
+      # 도커 메타데이터 가져오기
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
@@ -21,13 +28,16 @@ jobs:
             {{version}}
             {{major}}.{{minor}}
 
+      # 도커 빌드 관련 셋업
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+      # 내 도커허브 로그인
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      # 도커이미지 빌드하고 허브로 푸쉬
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
@@ -37,3 +47,32 @@ jobs:
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
+
+      # (dev브랜치 푸쉬 시 개인 레포 테스트용)
+      # EC2 접속, 디렉토리 없으면 만들기
+      - name: create remote directory
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_HOST }}
+          username: ubuntu
+          key: ${{ secrets.DEV_KEY }}
+          script: mkdir -p /home/ubuntu/srv/bankids-client
+      # EC2 접속, 액션 감지된 레포에서 소스 복사해오기 (비상용?)
+      - name: copy source via ssh key
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          remote_path: /home/ubuntu/srv/bankids-client
+          remote_host: ${{ secrets.DEV_HOST }}
+          remote_user: ubuntu
+          remote_key: ${{ secrets.DEV_KEY }}
+      #
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          script: |
+            sudo docker pull sanbonai06/bankids-test:dev
+            sudo docker run sanbonai06/bankids-test:dev
