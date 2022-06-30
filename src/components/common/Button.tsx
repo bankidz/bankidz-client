@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
-
+import kakao from '../../assets/icons/kakao.svg';
 interface ButtonProps {
   /**
+   * ButtonSet에서 받아온 prop
    * etc : 카카오로그인 / primary-secondary : 한칸 두칸
    */
-  property: 'etc' | 'primary' | 'secondary';
+  property?: 'etc' | 'primary' | 'secondary';
   /**
    * 버튼 내용
    */
@@ -19,15 +20,21 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-function Button({ property, label, state, onClick }: ButtonProps) {
+function Button({
+  property = 'primary',
+  label,
+  state = true,
+  onClick,
+}: ButtonProps) {
   return (
     <Wrapper
       property={property}
-      state={true}
+      state={state}
       onClick={onClick}
       disabled={!state}
     >
-      {label}
+      {property == 'etc' && <img src={kakao} />}
+      <p>{label}</p>
     </Wrapper>
   );
 }
@@ -38,17 +45,29 @@ const Wrapper = styled.button<{
   property: 'etc' | 'primary' | 'secondary';
   state: boolean;
 }>`
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${({ property }) => (property == 'secondary' ? '160px' : '100%')};
   height: 50px;
   border-radius: 8px;
   border: none;
   font-size: 16px;
   font-weight: bold;
+
   ${({ property }) =>
     property == 'etc'
       ? css`
-          color: ${({ theme }) => theme.palette.black};
-          background-color: ${({ theme }) => theme.palette.yellow[3]};
+          color: #191919;
+          background-color: #fee500;
+
+          img {
+            display: flex;
+            padding-right: 280px;
+          }
+          p {
+            position: absolute;
+          }
         `
       : css`
           color: ${({ theme }) => theme.palette.white};
