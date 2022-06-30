@@ -74,4 +74,5 @@ jobs:
           username: ubuntu
           key: ${{ secrets.DEV_KEY }}
           script: |
+            sh /home/ubuntu/srv/bankids-client/config/scripts/deploy.sh
             sudo docker pull sanbonai06/bankids-test:dev
