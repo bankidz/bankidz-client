@@ -8,5 +8,5 @@ function Margin({ children }: { children: ReactNode }) {
 export default Margin;
 
 const Wrapper = styled.div`
-  margin: 20px 0px;
+  margin: 0px 20px;
 `;

@@ -54,6 +54,6 @@ export const parameters = {
       { name: 'none', value: '0px' },
       { name: 'default', value: '20px' },
     ],
-    default: 'default',
+    default: 'none',
   },
 };
