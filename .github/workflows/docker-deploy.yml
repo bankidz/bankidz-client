@@ -75,4 +75,3 @@ jobs:
           key: ${{ secrets.DEV_KEY }}
           script: |
             sudo docker pull sanbonai06/bankids-test:dev
-            sudo docker run sanbonai06/bankids-test:dev
