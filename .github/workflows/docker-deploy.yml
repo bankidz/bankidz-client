@@ -66,13 +66,13 @@ jobs:
           remote_host: ${{ secrets.DEV_HOST }}
           remote_user: ubuntu
           remote_key: ${{ secrets.DEV_KEY }}
-      #
+      # 도커 이미지 땡겨와서 실행하기
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.DEV_HOST }}
           username: ubuntu
-          key: ${{ secrets.KEY }}
+          key: ${{ secrets.DEV_KEY }}
           script: |
             sudo docker pull sanbonai06/bankids-test:dev
             sudo docker run sanbonai06/bankids-test:dev
