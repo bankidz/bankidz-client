@@ -23,7 +23,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: sanbonai06/bankids-test
+          images: sanbonai06/bankids-client
           tag-semver: |
             {{version}}
             {{major}}.{{minor}}
@@ -75,5 +75,5 @@ jobs:
           key: ${{ secrets.DEV_KEY }}
           script: |
             sh /home/ubuntu/srv/bankids-client/config/scripts/deploy.sh
-            sudo docker pull sanbonai06/bankids-test:dev
-            sudo docker run -p 3000:3000 sanbonai06/bankids-test:dev
+            sudo docker-compose -f ~/srv/ubuntu/docker-compose.yml pull
+            sudo docker-compose -f ~/srv/ubuntu/docker-compose.yml up --build -d
