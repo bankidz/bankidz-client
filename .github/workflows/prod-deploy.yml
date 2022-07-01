@@ -47,33 +47,3 @@ jobs:
           push: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
-
-      # (dev브랜치 푸쉬 시 개인 레포 테스트용)
-      # EC2 접속, 디렉토리 없으면 만들기
-      - name: create remote directory
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_HOST }}
-          username: ubuntu
-          key: ${{ secrets.DEV_KEY }}
-          script: mkdir -p /home/ubuntu/srv/bankids-client
-      # EC2 접속, 액션 감지된 레포에서 소스 복사해오기 (비상용?)
-      - name: copy source via ssh key
-        uses: burnett01/rsync-deployments@4.1
-        with:
-          switches: -avzr --delete
-          remote_path: /home/ubuntu/srv/bankids-client
-          remote_host: ${{ secrets.DEV_HOST }}
-          remote_user: ubuntu
-          remote_key: ${{ secrets.DEV_KEY }}
-      # 도커 이미지 땡겨와서 실행하기
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_HOST }}
-          username: ubuntu
-          key: ${{ secrets.DEV_KEY }}
-          script: |
-            sh /home/ubuntu/srv/bankids-client/config/scripts/deploy.sh
-            sudo docker-compose -f ~/srv/ubuntu/docker-compose.yml pull
-            sudo docker-compose -f ~/srv/ubuntu/docker-compose.yml up --build -d
