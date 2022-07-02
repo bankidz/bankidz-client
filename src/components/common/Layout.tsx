@@ -1,6 +1,6 @@
 import { Outlet, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { media } from '../../lib/styles/theme';
 const menus = [
   {
     destination: '',
@@ -18,32 +18,20 @@ const menus = [
 
 function Layout() {
   return (
-    <>
-      <div className="menu-list">
-        {menus.map((menu) => (
-          <MenuItem
-            key={menu.destination}
-            to={`/${menu.destination}`}
-            className={({ isActive }) => (isActive ? 'active' : undefined)}
-          >
-            {menu.text}
-          </MenuItem>
-        ))}
-      </div>
+    <Wrapper>
       <Outlet />
-    </>
+    </Wrapper>
   );
 }
 
 export default Layout;
-
-const MenuItem = styled(NavLink)`
-  &.active {
-    font-size: bold;
-    border-bottom: 1px solid;
+const Wrapper = styled.div`
+  ${media.mobile} {
+    width: 100%;
+    min-width: 320px;
   }
+  width: 576px;
 
-  & + & {
-    margin-left: 1rem;
-  }
+  background-color: ${({ theme }) => theme.palette.lightGray};
+  height: 100vh;
 `;
