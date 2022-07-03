@@ -1,20 +1,6 @@
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '../../lib/styles/theme';
-const menus = [
-  {
-    destination: '',
-    text: 'Home',
-  },
-  {
-    destination: 'my',
-    text: 'My',
-  },
-  {
-    destination: 'settings',
-    text: 'Settings',
-  },
-];
 
 function Layout() {
   return (
@@ -29,9 +15,9 @@ const Wrapper = styled.div`
   ${media.mobile} {
     width: 100%;
     min-width: 320px;
+    height: calc(var(--vh, 1vh) * 100);
   }
   width: 576px;
-
-  background-color: ${({ theme }) => theme.palette.lightGray};
   height: 100vh;
+  background-color: ${({ theme }) => theme.palette.lightGray};
 `;

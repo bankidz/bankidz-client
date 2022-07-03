@@ -1,5 +1,26 @@
+import { useState, useEffect } from 'react';
+
 function HomeKid() {
-  return <>자녀 홈</>;
+  const [height, setHeight] = useState(window.innerHeight);
+
+  const handleResize = () => {
+    setHeight(window.innerHeight);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      // cleanup
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  return (
+    <>
+      {height}
+      <input type="text" />
+    </>
+  );
 }
 
 export default HomeKid;

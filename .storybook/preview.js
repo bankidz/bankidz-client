@@ -52,7 +52,7 @@ export const parameters = {
   paddings: {
     values: [
       { name: 'none', value: '0px' },
-      { name: 'default', value: '20px' },
+      { name: 'default', value: '18px' },
     ],
     default: 'none',
   },

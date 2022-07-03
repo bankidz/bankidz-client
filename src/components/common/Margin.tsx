@@ -7,6 +7,8 @@ function Margin({ children }: { children: ReactNode }) {
 
 export default Margin;
 
+/* 마진으로 쓰고 패딩 박아버리기 */
 const Wrapper = styled.div`
-  margin: 0px 20px;
+  width: 100%;
+  padding: 0px 18px;
 `;

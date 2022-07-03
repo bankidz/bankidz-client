@@ -11,6 +11,12 @@ import { theme } from './lib/styles/theme';
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
+const setScreenSize = () => {
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+};
+setScreenSize();
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
