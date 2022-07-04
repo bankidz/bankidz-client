@@ -5,7 +5,7 @@ import { ReactComponent as ProfileButtonBorder } from '../../assets/icons/profil
 import { theme } from '../../lib/styles/theme';
 
 interface ProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  /** 역할을 선택합니다. "아빠", "엄마", "아들", "딸" 중 하나를 선택합니다. */
+  /** 역할을 선택합니다. '아빠', '엄마', '아들', '딸' 중 하나를 선택합니다. */
   role: '아빠' | '엄마' | '아들' | '딸';
   isSelected?: boolean;
 }

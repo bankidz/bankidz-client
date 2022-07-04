@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ProfileButton from './ProfileButton';
-import Margin from '../common/Margin';
 
 export default {
   title: 'onboarding/ProfileButton',
@@ -8,13 +7,6 @@ export default {
   argTypes: {
     onClick: { action: 'set role' },
   },
-  decorators: [
-    (Story) => (
-      <Margin>
-        <Story />
-      </Margin>
-    ),
-  ],
 } as ComponentMeta<typeof ProfileButton>;
 
 const Template: ComponentStory<typeof ProfileButton> = (args) => (
