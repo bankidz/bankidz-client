@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ProfileButton from '../components/onboarding/ProfileButton';
 
 function TestPage() {
   return (
