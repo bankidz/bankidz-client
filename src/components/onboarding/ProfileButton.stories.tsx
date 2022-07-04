@@ -6,7 +6,7 @@ export default {
   title: 'onboarding/ProfileButton',
   component: ProfileButton,
   argTypes: {
-    onClick: { action: 'select' },
+    onClick: { action: 'set role' },
   },
   decorators: [
     (Story) => (
