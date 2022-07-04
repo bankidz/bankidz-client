@@ -7,7 +7,15 @@ export const decorators = [
   (Story) => (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Story />
+      <div
+        style={{
+          backgroundColor: '#F7F7F8',
+          width: '100%',
+          height: 'calc(var(--vh, 1vh) * 100)',
+        }}
+      >
+        <Story />
+      </div>
     </ThemeProvider>
   ),
 ];
@@ -33,8 +41,8 @@ export const parameters = {
       mobile2: {
         name: 'iPhone 13 / 13 pro',
         styles: {
-          width: '390px',
-          height: '844px',
+          width: '360px',
+          height: '740px',
         },
         type: 'mobile',
       },
@@ -47,7 +55,7 @@ export const parameters = {
         type: 'tablet',
       },
     },
-    defaultViewport: 'mobile1',
+    defaultViewport: 'mobile2',
   },
   paddings: {
     values: [

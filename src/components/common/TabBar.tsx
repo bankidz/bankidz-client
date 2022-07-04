@@ -8,7 +8,7 @@ import { theme } from '../../lib/styles/theme';
 
 interface TabBarProps {
   /**
-   * 부모-자식 여부 (금융콘텐츠-돈길모아보기)
+   * 부모-자식 여부 (금융콘텐츠<->돈길모아보기)
    */
   isKid: boolean;
 }

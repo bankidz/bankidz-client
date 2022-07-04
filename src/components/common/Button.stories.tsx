@@ -7,7 +7,7 @@ export default {
   title: 'Common/Button',
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {},
+  argTypes: { onClick: { action: 'event' } },
   decorators: [
     (Story) => (
       <Margin>
