@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ProfileButtonCharacter } from '../../assets/icons/profile-button-character.svg';
 import { ReactComponent as ProfileButtonBorder } from '../../assets/icons/profile-button-border.svg';
@@ -15,17 +15,30 @@ export function ProfileButton({
   isSelected = false,
   ...props
 }: ProfileButtonProps) {
+  const [fillColorByMouseEvent, setFillColorByMouseEvent] = useState('white');
+
+  function handleMouseDown() {
+    setFillColorByMouseEvent(theme.palette.yellow[1]);
+  }
+  function handleMouseUp() {
+    setFillColorByMouseEvent('white');
+  }
+
   return (
-    <StyledButton {...props}>
+    <StyledButton
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      {...props}
+    >
       <div className="border-wrapper">
         <ProfileButtonBorder
-          fill={isSelected ? theme.palette.yellow[1] : 'white'}
+          fill={isSelected ? theme.palette.yellow[1] : fillColorByMouseEvent}
         />
       </div>
       <div className="character-wrapper">
         <ProfileButtonCharacter />
       </div>
-      <Label>{role}</Label>
+      <span>{role}</span>
     </StyledButton>
   );
 }
@@ -59,23 +72,23 @@ const StyledButton = styled.button`
     transform: translate3d(-50%, 0, 0);
     z-index: 10;
   }
-`;
 
-const Label = styled.span`
-  position: absolute;
-  width: 24px;
-  height: 12px;
-  left: 50%;
-  top: 125px;
+  span {
+    position: absolute;
+    width: 24px;
+    height: 12px;
+    left: 50%;
+    top: 125px;
 
-  font-style: normal;
-  font-weight: 800;
-  font-size: 12px;
-  line-height: 100%;
-  text-align: center;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 100%;
+    text-align: center;
 
-  transform: translate3d(-50%, -50%, 0);
-  z-index: 10;
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 10;
+  }
 `;
 
 // https://velog.io/@apro_xo/CSS-top-left-translate%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EA%B0%80%EC%9A%B4%EB%8D%B0-%EC%A0%95%EB%A0%AC
