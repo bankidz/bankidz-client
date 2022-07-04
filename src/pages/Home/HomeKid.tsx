@@ -18,7 +18,7 @@ function HomeKid() {
   return (
     <>
       {height}
-      <input type="text" />
+      <input type="date" />
     </>
   );
 }

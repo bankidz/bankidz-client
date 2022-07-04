@@ -13,20 +13,7 @@ export default {
     (Story) => (
       <BrowserRouter>
         <Routes>
-          <Route
-            path="*"
-            element={
-              <div
-                style={{
-                  backgroundColor: '#F7F7F8',
-                  width: '100%',
-                  height: 'calc(var(--vh, 1vh) * 100)',
-                }}
-              >
-                <Story />
-              </div>
-            }
-          />
+          <Route path="*" element={<Story />} />
         </Routes>
       </BrowserRouter>
     ),

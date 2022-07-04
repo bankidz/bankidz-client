@@ -1,6 +1,8 @@
+import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import kakao from '../../assets/icons/kakao.svg';
-interface ButtonProps {
+
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * ButtonSet에서 받아온 prop
    * etc : 카카오로그인 / primary-secondary : 한칸 두칸
@@ -14,25 +16,16 @@ interface ButtonProps {
    * 버튼 활성화 상태
    */
   state?: boolean;
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void;
 }
 
 function Button({
   property = 'primary',
   label,
   state = true,
-  onClick,
+  ...props
 }: ButtonProps) {
   return (
-    <Wrapper
-      property={property}
-      state={state}
-      onClick={onClick}
-      disabled={!state}
-    >
+    <Wrapper property={property} state={state} disabled={!state} {...props}>
       {property == 'etc' && <img src={kakao} />}
       <p>{label}</p>
     </Wrapper>
@@ -54,6 +47,7 @@ const Wrapper = styled.button<{
   border: none;
   font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
 
   ${({ property }) =>
     property == 'etc'
