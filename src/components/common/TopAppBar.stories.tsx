@@ -23,5 +23,5 @@ const Template: ComponentStory<typeof TopAppBar> = (args) => (
 
 export const 내_정보_수정 = Template.bind({});
 내_정보_수정.args = {
-  previous: '내정보 수정',
+  label: '내정보 수정',
 };

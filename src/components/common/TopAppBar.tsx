@@ -5,10 +5,10 @@ interface TopAppBarProps {
   /**
    * 이전 페이지명
    */
-  previous: string;
+  label: string;
 }
 
-function TopAppBar({ previous }: TopAppBarProps) {
+function TopAppBar({ label }: TopAppBarProps) {
   const navigate = useNavigate();
 
   const onClickTopAppBar = () => {
@@ -18,7 +18,7 @@ function TopAppBar({ previous }: TopAppBarProps) {
   return (
     <Wrapper onClick={onClickTopAppBar}>
       <Arrow />
-      <p>{previous}</p>
+      <p>{label}</p>
     </Wrapper>
   );
 }
