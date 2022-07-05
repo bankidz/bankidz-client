@@ -20,7 +20,7 @@ const ComponentWrapper = styled.div`
 `;
 
 const StyledSpan = styled.span<{
-  riskLevel: string;
+  riskLevel: '안정' | '중립' | '위험';
 }>`
   width: 41.02px;
   height: 19.69px;
