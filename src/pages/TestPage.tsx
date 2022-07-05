@@ -3,6 +3,7 @@ import SuggestBadge from '../components/badges/SuggestBadge';
 import ProfileButton from '../components/onboarding/ProfileButton';
 import { darken, lighten } from 'polished';
 import InterestBadge from '../components/badges/InterestBadge';
+import RiskBadge from '../components/badges/RiskBadge';
 
 function TestPage() {
   return (
@@ -11,7 +12,8 @@ function TestPage() {
       <ProfileButton role="엄마" isSelected />
       <SuggestBadge isSuggesting={true} />
       <SuggestBadge isSuggesting={false} /> */}
-      <InterestBadge interestRate={10} />
+      {/* <InterestBadge interestRate={10} /> */}
+      <RiskBadge riskLevel="안정" />
       <span>컴포넌트 랜더링 테스트용 페이지 입니다.</span>
     </ComponentWrapper>
   );

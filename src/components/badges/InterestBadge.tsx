@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface InterestBadgeProps {
   /** 이자율(number)을 입력합니다. */
