@@ -5,7 +5,7 @@ declare module 'styled-components' {
     palette: {
       yellow: ['#FFBE41', '#FFF7E5', '#FFEDC1', '#FFD56F', '#FFAA42'];
       blue: ['#000', '#C6E8FF', '#9AD7FF', '#0099FF'];
-      red: ['#000', '#FFCFB1', '#FFBA8E', '#FA7E49'];
+      red: ['#000', '#FFCFB1', '#FFBA8E', '#FF6F42'];
       green: ['#000', '#C0F0A4', '#A5EE79', '#94DD7A'];
       lightGray: '#FAFAFC';
       gray: [
