@@ -13,17 +13,17 @@ const Template: ComponentStory<typeof InstructionBadge> = (args) => (
 export const tenWeeks = Template.bind({});
 tenWeeks.args = {
   property: 'primary',
-  children: '10주'
+  children: '10주',
 };
 
 export const fiveThousandWon = Template.bind({});
 fiveThousandWon.args = {
   property: 'secondary',
-  children: '5,000원'
+  children: '5,000원',
 };
 
 export const fiveHundredWon = Template.bind({});
 fiveHundredWon.args = {
   property: 'tertiary',
-  children: '500원'
+  children: '500원',
 };
