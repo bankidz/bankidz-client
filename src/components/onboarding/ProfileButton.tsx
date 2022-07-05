@@ -53,9 +53,7 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   border-radius: 28px;
-
   background-color: white;
-  cursor: pointer;
 
   .border-wrapper {
     position: absolute;

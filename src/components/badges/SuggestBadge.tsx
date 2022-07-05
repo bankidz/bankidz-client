@@ -7,20 +7,27 @@ interface SuggestBadgeProps {
 
 function SuggestBadge({ isSuggesting }: SuggestBadgeProps) {
   return (
-    <StyledDiv isSuggesting={isSuggesting}>
-      {isSuggesting ? '제안중' : '거절됨'}
-    </StyledDiv>
+    <ComponentWrapper>
+      <StyledSpan isSuggesting={isSuggesting}>
+        {isSuggesting ? '제안중' : '거절됨'}
+      </StyledSpan>
+    </ComponentWrapper>
   );
 }
 
 export default SuggestBadge;
 
-const StyledDiv = styled.button<{
+const ComponentWrapper = styled.div`
+  height: 28px;
+`;
+
+const StyledSpan = styled.span<{
   isSuggesting: boolean;
 }>`
   font-weight: 500;
   font-size: 12px;
-  line-height: 15px;
+  line-height: 28px;
+  vertical-align: middle;
   color: white;
 
   width: 64px;
@@ -28,6 +35,9 @@ const StyledDiv = styled.button<{
   border-radius: 8px;
   border: none;
   outline: none;
+
+  display: inline-block;
+  text-align: center;
 
   ${({ isSuggesting }) =>
     isSuggesting

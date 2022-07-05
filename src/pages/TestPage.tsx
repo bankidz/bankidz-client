@@ -8,7 +8,7 @@ function TestPage() {
     <ComponentWrapper>
       <button>Sample</button>
       <ProfileButton role="아빠" />
-      <ProfileButton role="엄마" isSelected={true} />
+      <ProfileButton role="엄마" isSelected />
       <SuggestBadge isSuggesting={true} />
       <SuggestBadge isSuggesting={false} />
       <span>컴포넌트 랜더링 테스트용 페이지 입니다.</span>
