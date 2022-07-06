@@ -2,6 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../src/lib/styles/global-style';
 import { theme } from '../src/lib/styles/theme';
+import '../src/assets/fonts/fontStyle.css';
 
 export const decorators = [
   (Story) => (
