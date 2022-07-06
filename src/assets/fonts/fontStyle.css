@@ -1,0 +1,41 @@
+@font-face {
+  font-family: 'TmoneyRoundWind';
+  font-style: normal;
+  font-weight: 800;
+  src: url(./TmoneyRoundWindExtraBold.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 700;
+  src: url(./Spoqa\ Han\ Sans\ Neo\ Bold.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 500;
+  src: url(./Spoqa\ Han\ Sans\ Neo\ Medium.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./Spoqa\ Han\ Sans\ Neo\ Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 300;
+  src: url(./Spoqa\ Han\ Sans\ Neo\ Light.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-style: normal;
+  font-weight: 100;
+  src: url(./Spoqa\ Han\ Sans\ Neo\ Thin.woff2) format('woff2');
+}
