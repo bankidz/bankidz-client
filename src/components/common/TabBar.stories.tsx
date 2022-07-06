@@ -1,8 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TabBar from './TabBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { storiesOf } from '@storybook/react';
-import StoryRouter from 'storybook-react-router';
 
 export default {
   title: 'Common/TabBar',
@@ -20,9 +18,7 @@ export default {
   ],
 } as ComponentMeta<typeof TabBar>;
 
-const Template: ComponentStory<typeof TabBar> = (args) => <TabBar {...args} />;
+const Template: ComponentStory<typeof TabBar> = (args) => <TabBar />;
 
 export const 자녀 = Template.bind({});
-자녀.args = {
-  isKid: true,
-};
+자녀.args = {};
