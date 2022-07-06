@@ -40,4 +40,14 @@ export const GlobalStyle = createGlobalStyle`
       font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
     }
+
+    button {
+      background: inherit; 
+      border: none; 
+      box-shadow: none; 
+      border-radius: 0; 
+      padding: 0; 
+      overflow: visible; 
+      cursor: pointer;
+    }
 `;

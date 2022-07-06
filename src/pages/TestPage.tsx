@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import InterestBadge from '../components/challenge/InterestBadge';
-import ChallengeBadge, {
-  TargetBadge,
-} from '../components/challenge/TargetBadge';
-
+import Pending from '../components/homekid/Pending';
 function TestPage() {
   // 컴포넌트 랜더링 테스트용 페이지 입니다.
   return (
     <ComponentWrapper>
-      <TargetBadge targetSaving={100000} />
-      <InterestBadge interestRate={10} />
+      <Pending
+        date={'2022-12-12 00:00:00'}
+        name={'예시'}
+        isSuggesting={true}
+      ></Pending>
     </ComponentWrapper>
   );
 }
