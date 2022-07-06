@@ -36,11 +36,11 @@ function App() {
         )}
 
         <Route path="*" element={<NotFound />} />
+        {/* 컴포넌트 랜더링 테스트용 페이지 입니다.*/}
+        <Route path="/test" element={<TestPage />} />
       </Route>
       {/* 소개페이지 (레이아웃 안쓰는..예시..?) */}
       <Route path="/introduce" element={<Introduce />} />
-      {/* 컴포넌트 랜더링 테스트용 페이지 입니다.*/}
-      <Route path="/test" element={<TestPage />} />
     </Routes>
   );
 }
