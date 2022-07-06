@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import TopAppBar from '../common/TopAppBar';
 
 interface StackedProps {
@@ -9,9 +10,11 @@ function Stacked({ children, label }: StackedProps) {
   return (
     <>
       <TopAppBar label={label} />
-      {children}
+      <Screen>{children}</Screen>
     </>
   );
 }
 
 export default Stacked;
+
+const Screen = styled.div``;
