@@ -1,14 +1,12 @@
 import styled from 'styled-components';
-import Pending from '../components/homekid/Pending';
+import CommonSheet from '../components/common/bottomSheet/CommonSheet';
 function TestPage() {
   // 컴포넌트 랜더링 테스트용 페이지 입니다.
   return (
     <ComponentWrapper>
-      <Pending
-        date={'2022-12-12 00:00:00'}
-        name={'예시'}
-        isSuggesting={true}
-      ></Pending>
+      <CommonSheet overlay={true}>
+        <div style={{ height: '200px' }}></div>
+      </CommonSheet>
     </ComponentWrapper>
   );
 }

@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Margin from '../common/Margin';
+import Margin from '../layout/Margin';
 import Pending from './Pending';
 
 export default {

@@ -49,4 +49,18 @@ export const GlobalStyle = createGlobalStyle`
       overflow: visible; 
       cursor: pointer;
     }
+
+    /* react spring bottom sheet */
+    :root {
+      --rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
+      --rsbs-bg: #fff;
+      --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
+      --rsbs-max-w: auto;
+      --rsbs-ml: env(safe-area-inset-left);
+      --rsbs-mr: env(safe-area-inset-right);
+      --rsbs-overlay-rounded: 16px;
+    }
+
+
+    
 `;

@@ -26,7 +26,6 @@ const Container = styled.div`
     width: 100%;
     min-width: 320px;
     height: calc(var(--vh, 1vh) * 100);
-
     border: none;
     border-radius: 0px;
   }
@@ -38,6 +37,7 @@ const Container = styled.div`
   box-sizing: content-box;
   border: 12px solid ${({ theme }) => theme.palette.gray[1]};
   border-radius: 36px;
+
   /* 탭바를 위한 */
   position: relative;
 `;
