@@ -1,5 +1,5 @@
 function Mypagekid() {
-  return <>자식-마이페이지</>;
+  return <></>;
 }
 
 export default Mypagekid;

@@ -1,14 +1,28 @@
 import { Route, Routes } from 'react-router-dom';
+import Base from '../../components/layout/Base';
+import Stacked from '../../components/layout/Stacked';
 import Challenge from './Challenge';
 import ChallengeDelete from './ChallengeDelete';
-import ChallengeStart from './ChallengStart';
 
 function ChallengeRouter() {
   return (
     <Routes>
-      <Route path="/" element={<Challenge />} />
-      <Route path="/start" element={<ChallengeStart />} />
-      <Route path="/delete/:chellengeId" element={<ChallengeDelete />} />
+      <Route
+        path="/"
+        element={
+          <Base>
+            <Challenge />
+          </Base>
+        }
+      />
+      {/* <Route
+        path="/delete/:challengeId"
+        element={
+          <Stacked label="">
+            <ChallengeDelete />
+          </Stacked>
+        }
+      /> */}
     </Routes>
   );
 }
