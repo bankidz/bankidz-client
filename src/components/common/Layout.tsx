@@ -14,7 +14,7 @@ export default Layout;
 const Wrapper = styled.div`
   ${media.mobile} {
     width: 100%;
-    min-width: 320px;
+    /* min-width: 320px; */
     height: calc(var(--vh, 1vh) * 100);
   }
   width: 576px;
