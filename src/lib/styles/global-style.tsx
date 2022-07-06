@@ -15,12 +15,11 @@ export const GlobalStyle = createGlobalStyle`
       -moz-osx-font-smoothing: grayscale;
       box-sizing: border-box; /* 엘리먼트의 box-sizing 값을 border-box로 설정 */
       min-height: 100%;
+      background-color: #FFD56F;
     }
 
     #root {
       min-height: 100%;
-      display: flex;
-      justify-content: center;
     }
 
     html {

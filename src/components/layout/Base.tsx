@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import TabBar from '../common/TabBar';
 
 interface BaseProps {
@@ -7,10 +8,12 @@ interface BaseProps {
 function Base({ children }: BaseProps) {
   return (
     <>
-      {children}
       <TabBar />
+      <Screen>{children}</Screen>
     </>
   );
 }
 
 export default Base;
+
+const Screen = styled.div``;
