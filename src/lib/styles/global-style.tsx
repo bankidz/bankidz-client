@@ -16,6 +16,9 @@ export const GlobalStyle = createGlobalStyle`
       box-sizing: border-box; /* 엘리먼트의 box-sizing 값을 border-box로 설정 */
       min-height: 100%;
       background-color: #FFD56F;
+      
+      /* 바텀시트 작업 중 추가 */
+      overflow: hidden;
     }
 
     #root {

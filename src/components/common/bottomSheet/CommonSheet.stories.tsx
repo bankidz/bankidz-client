@@ -1,5 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CommonSheet from './CommonSheet';
+//import './bottomSheetStyle.css';
+import 'react-spring-bottom-sheet/dist/style.css';
 
 export default {
   title: 'bottomSheet/CommonSheet',
@@ -21,4 +23,5 @@ export const 돈길계약_바텀시트 = Template.bind({});
 돈길계약_바텀시트.args = {
   children: <div style={{ height: '200px' }}>바텀시트</div>,
   overlay: false,
+  blocking: false,
 };

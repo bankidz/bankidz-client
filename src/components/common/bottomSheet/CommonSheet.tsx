@@ -5,9 +5,11 @@ import styled from 'styled-components';
 interface CommonSheetProps {
   children: JSX.Element;
   overlay: boolean;
+  blocking?: boolean;
+  expandOnContentDrag?: boolean;
 }
 
-function CommonSheet({ children, overlay }: CommonSheetProps) {
+function CommonSheet({ children, overlay, blocking }: CommonSheetProps) {
   const [open, setOpen] = useState(true);
 
   overlay
@@ -28,9 +30,10 @@ function CommonSheet({ children, overlay }: CommonSheetProps) {
   return (
     <Wrapper>
       <BottomSheet
-        open={true}
+        open={open}
         onDismiss={onDismiss}
         snapPoints={({ minHeight }) => minHeight}
+        blocking={blocking}
       >
         {children}
       </BottomSheet>

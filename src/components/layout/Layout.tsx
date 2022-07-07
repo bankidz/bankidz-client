@@ -1,12 +1,25 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '../../lib/styles/theme';
+import { useMediaQuery } from 'react-responsive';
+import { borderRadius } from 'polished';
 
 function Layout() {
+  const { pathname } = useLocation();
+
+  const isPC = useMediaQuery({ minWidth: 576 });
+
   return (
     <Wrapper>
       <Container>
-        <Outlet />
+        {isPC ? (
+          <iframe
+            src={pathname}
+            style={{ width: '100%', height: '714px', borderRadius: '28px' }}
+          ></iframe>
+        ) : (
+          <Outlet />
+        )}
       </Container>
     </Wrapper>
   );
