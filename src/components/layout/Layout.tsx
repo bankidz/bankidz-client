@@ -1,12 +1,25 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '../../lib/styles/theme';
+import { useMediaQuery } from 'react-responsive';
+import { borderRadius } from 'polished';
 
 function Layout() {
+  const { pathname } = useLocation();
+
+  const isPC = useMediaQuery({ minWidth: 576 });
+
   return (
     <Wrapper>
       <Container>
-        <Outlet />
+        {isPC ? (
+          <iframe
+            src={pathname}
+            style={{ width: '100%', height: '714px', borderRadius: '28px' }}
+          ></iframe>
+        ) : (
+          <Outlet />
+        )}
       </Container>
     </Wrapper>
   );
@@ -26,7 +39,6 @@ const Container = styled.div`
     width: 100%;
     min-width: 320px;
     height: calc(var(--vh, 1vh) * 100);
-
     border: none;
     border-radius: 0px;
   }
@@ -38,6 +50,7 @@ const Container = styled.div`
   box-sizing: content-box;
   border: 12px solid ${({ theme }) => theme.palette.gray[1]};
   border-radius: 36px;
+
   /* 탭바를 위한 */
   position: relative;
 `;

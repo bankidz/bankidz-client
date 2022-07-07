@@ -1,23 +1,27 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../src/lib/styles/global-style';
 import { theme } from '../src/lib/styles/theme';
+import { store } from '../src/store/app/store';
 import '../src/assets/fonts/fontStyle.css';
 
 export const decorators = [
   (Story) => (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <div
-        style={{
-          backgroundColor: '#F7F7F8',
-          width: '100%',
-          height: 'calc(var(--vh, 1vh) * 100)',
-        }}
-      >
-        <Story />
-      </div>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <div
+          style={{
+            backgroundColor: '#F7F7F8',
+            width: '100%',
+            height: 'calc(var(--vh, 1vh) * 100)',
+          }}
+        >
+          <Story />
+        </div>
+      </ThemeProvider>
+    </Provider>
   ),
 ];
 

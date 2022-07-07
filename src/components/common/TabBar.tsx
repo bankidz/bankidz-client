@@ -42,8 +42,7 @@ const Wrapper = styled.div`
   /* 테두리 위에만 */
   border: 1px solid ${({ theme }) => theme.palette.gray[1]};
   border-bottom: none;
-  position: absolute;
-  bottom: -1px;
+  position: fixed;
   height: 47px;
 
   background-color: ${({ theme }) => theme.palette.white};
@@ -53,18 +52,11 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-around;
 
-  /* 웹 테스트 화면 */
-  width: 360px;
+  width: calc(100% + 1px);
+  bottom: 0px;
   left: -1px;
-
-  /* 모바일 화면 */
-  ${media.mobile} {
-    width: calc(100% + 2px);
-    left: -1px;
-    position: fixed;
-    border-radius: 12px 12px 0px 0px;
-    padding-bottom: 0px;
-  }
+  border-radius: 12px 12px 0px 0px;
+  padding-bottom: 0px;
 
   a {
     display: flex;

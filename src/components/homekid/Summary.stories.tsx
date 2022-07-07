@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Margin from '../common/Margin';
+import Margin from '../layout/Margin';
 import Summary from './Summary';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
