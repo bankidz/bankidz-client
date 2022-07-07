@@ -1,7 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CommonSheet from './CommonSheet';
-//import './bottomSheetStyle.css';
-import 'react-spring-bottom-sheet/dist/style.css';
+import './sheetStyle.css';
+//import 'react-spring-bottom-sheet/dist/style.css';
+import SelectProfile from './sheetContent/SelectProfile';
 
 export default {
   title: 'bottomSheet/CommonSheet',
@@ -13,9 +14,9 @@ const Template: ComponentStory<typeof CommonSheet> = (args) => (
   <CommonSheet {...args} />
 );
 
-export const 모달_바텀시트 = Template.bind({});
-모달_바텀시트.args = {
-  children: <div style={{ height: '200px' }}>바텀시트</div>,
+export const 프로필_선택_확인 = Template.bind({});
+프로필_선택_확인.args = {
+  children: <SelectProfile role={'아빠'} onClick={() => {}} />,
   overlay: true,
 };
 

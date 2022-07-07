@@ -4,6 +4,12 @@
   font-weight: 800;
   src: url(./TmoneyRoundWindExtraBold.otf) format('opentype');
 }
+@font-face {
+  font-family: 'TmoneyRoundWind';
+  font-style: normal;
+  font-weight: 400;
+  src: url(./TmoneyRoundWindRegular.otf) format('opentype');
+}
 
 @font-face {
   font-family: 'Spoqa Han Sans Neo';

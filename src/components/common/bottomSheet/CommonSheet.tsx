@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
+import Margin from '../../layout/Margin';
 
 interface CommonSheetProps {
   children: JSX.Element;
@@ -34,8 +35,9 @@ function CommonSheet({ children, overlay, blocking }: CommonSheetProps) {
         onDismiss={onDismiss}
         snapPoints={({ minHeight }) => minHeight}
         blocking={blocking}
+        footer={<div></div>}
       >
-        {children}
+        <Margin>{children}</Margin>
       </BottomSheet>
     </Wrapper>
   );
