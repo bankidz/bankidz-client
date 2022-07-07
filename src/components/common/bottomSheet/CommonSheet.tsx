@@ -1,13 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
-import Margin from '../../layout/Margin';
 
 interface CommonSheetProps {
   children: JSX.Element;
   overlay: boolean;
   blocking?: boolean;
-  expandOnContentDrag?: boolean;
 }
 
 function CommonSheet({ children, overlay, blocking }: CommonSheetProps) {
@@ -35,9 +33,8 @@ function CommonSheet({ children, overlay, blocking }: CommonSheetProps) {
         onDismiss={onDismiss}
         snapPoints={({ minHeight }) => minHeight}
         blocking={blocking}
-        footer={<div></div>}
       >
-        <Margin>{children}</Margin>
+        <SheetContainer>{children}</SheetContainer>
       </BottomSheet>
     </Wrapper>
   );
@@ -46,3 +43,6 @@ function CommonSheet({ children, overlay, blocking }: CommonSheetProps) {
 export default CommonSheet;
 
 const Wrapper = styled.div``;
+const SheetContainer = styled.div`
+  margin: 0px 18px 14px 18px;
+`;

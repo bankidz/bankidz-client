@@ -30,8 +30,7 @@ export default SelectProfile;
 const Wrapper = styled.div``;
 
 const Container = styled.div`
-  margin: 36px 16px;
-  margin-top: 29px;
+  margin: 29px 16px 36px 16px;
   display: grid;
   grid-template-rows: auto;
   grid-gap: 16px;
