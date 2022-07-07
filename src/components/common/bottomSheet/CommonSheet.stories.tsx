@@ -19,12 +19,14 @@ export const 프로필_선택_확인 = Template.bind({});
 프로필_선택_확인.args = {
   children: <SelectProfile role={'아빠'} onClick={() => {}} />,
   overlay: true,
+  open: true,
 };
 
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
   children: <DeleteChallenge onClickDelete={() => {}} onDismiss={() => {}} />,
   overlay: true,
+  open: true,
 };
 
 export const 돈길계약_바텀시트 = Template.bind({});

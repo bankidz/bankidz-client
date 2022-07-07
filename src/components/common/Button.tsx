@@ -54,7 +54,7 @@ const Wrapper = styled.button<{
   align-items: center;
   justify-content: center;
   width: ${({ property }) => (property == 'secondary' ? '160px' : '100%')};
-  height: 50px;
+  height: 48px;
   border-radius: 12px;
   border: none;
   font-size: 16px;

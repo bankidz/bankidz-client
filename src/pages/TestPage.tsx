@@ -1,15 +1,23 @@
 import styled from 'styled-components';
 import CommonSheet from '../components/common/bottomSheet/CommonSheet';
+import DeleteChallenge from '../components/common/bottomSheet/sheetContent/DeleteChallenge';
+import useBottomSheet from '../hooks/useBottomSheet';
+
 function TestPage() {
   // 컴포넌트 랜더링 테스트용 페이지 입니다.
+  const [open, onOpen, onDismiss] = useBottomSheet();
   return (
     <ComponentWrapper>
       <div style={{ width: '100%' }}>
-        <div>dd</div>
-        <div>dd</div>
+        <button
+          style={{ padding: '16px', backgroundColor: '#ddd' }}
+          onClick={onOpen}
+        >
+          열기
+        </button>
       </div>
-      <CommonSheet overlay={true}>
-        <div style={{ height: '200px' }}></div>
+      <CommonSheet overlay={true} open={open} onDismiss={onDismiss}>
+        <DeleteChallenge onDismiss={onDismiss} onClickDelete={() => {}} />
       </CommonSheet>
     </ComponentWrapper>
   );

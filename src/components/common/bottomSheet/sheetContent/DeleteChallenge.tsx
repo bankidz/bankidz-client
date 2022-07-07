@@ -25,8 +25,8 @@ function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
         </Rule>
       </Container>
       <ButtonContainer>
-        <Button label="포기하기" sub={true} />
-        <Button label="다시 도전해볼게요" />
+        <Button label="포기하기" sub={true} onClick={onClickDelete} />
+        <Button label="다시 도전해볼게요" onClick={onDismiss} />
       </ButtonContainer>
     </Wrapper>
   );
