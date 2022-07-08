@@ -12,7 +12,6 @@ import { selectIsKid } from '../../store/slices/authSlice';
 function TabBar() {
   const isKid = useAppSelector(selectIsKid);
   const { pathname } = useLocation();
-  console.log(pathname);
   const active = [theme.palette.gray[3], theme.palette.yellow[0]];
 
   return (
