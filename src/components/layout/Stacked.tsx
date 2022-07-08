@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import TopAppBar from '../common/TopAppBar';
+import TopAppBar from './TopAppBar';
 
 interface StackedProps {
   children: JSX.Element;

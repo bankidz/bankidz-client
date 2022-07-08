@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Button from '../../Button';
+
 import { ReactComponent as DadBanky } from '../../../../assets/banky/dad.svg';
+import Button from '../../button/Button';
 
 interface SelectProfileProps {
   role: '엄마' | '아빠' | '아들' | '딸';
@@ -30,8 +31,7 @@ export default SelectProfile;
 const Wrapper = styled.div``;
 
 const Container = styled.div`
-  margin: 36px 16px;
-  margin-top: 29px;
+  margin: 29px 16px 36px 16px;
   display: grid;
   grid-template-rows: auto;
   grid-gap: 16px;

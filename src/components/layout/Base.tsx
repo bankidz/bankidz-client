@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import TabBar from '../common/TabBar';
+import TabBar from './TabBar';
 
 interface BaseProps {
   children: JSX.Element;

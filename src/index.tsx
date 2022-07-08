@@ -1,3 +1,6 @@
+import './assets/fonts/fontStyle.css';
+import 'react-spring-bottom-sheet/dist/style.css';
+//import './components/common/bottomSheet/sheetStyle.css';
 import React from 'react';
 import App from './App';
 import { Provider } from 'react-redux';

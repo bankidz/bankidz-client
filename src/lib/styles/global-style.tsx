@@ -52,6 +52,9 @@ export const GlobalStyle = createGlobalStyle`
       overflow: visible; 
       cursor: pointer;
     }
+    button:focus {
+      outline: none;
+    }
 
     /* react spring bottom sheet */
     :root {
