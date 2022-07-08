@@ -2,12 +2,12 @@ import ReactModal from 'react-modal';
 
 // @ts-expect-error
 function MyModal({ onSubmit, onClose }) {
-  const handleSubmit = () => {
+  function handleSubmit() {
     onSubmit();
-  };
-  const handleCancel = () => {
+  }
+  function handleCancel() {
     onClose();
-  };
+  }
   return (
     <ReactModal isOpen>
       <div>모달 입니다.</div>
