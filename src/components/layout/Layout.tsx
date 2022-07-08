@@ -15,7 +15,7 @@ function Layout() {
         {isPC ? (
           <iframe
             src={pathname}
-            style={{ width: '100%', height: '714px', borderRadius: '28px' }}
+            style={{ width: '100%', height: '715px', borderRadius: '28px' }}
           ></iframe>
         ) : (
           <Outlet />
@@ -50,7 +50,8 @@ const Container = styled.div`
   box-sizing: content-box;
   border: 12px solid ${({ theme }) => theme.palette.gray[1]};
   border-radius: 36px;
-
+  display: flex;
+  align-items: center;
   /* 탭바를 위한 */
   position: relative;
 `;
