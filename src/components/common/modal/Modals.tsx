@@ -1,5 +1,16 @@
 import React, { useContext } from 'react';
 import { ModalsDispatchContext, ModalsStateContext } from './ModalsContext';
+import MyModal from './MyModal';
+
+// 구현하는 서비스에서 사용하는 모달 컴포넌트를 이름에 매핑 시켜주면 된다.
+// 서비스 내에 사용되는 모든 모달을 Modals 컴포넌트에서 정의해두면
+// 매번 사용하는 컴포넌트에서 import 해서 사용하지 않고 이름만으로도 바로 사용할 수 있게 된다.
+// 필요한 컴포넌트만 그때그때 로딩할 수 있도록 다이나믹 import 기법을 사용해서 처리해준다.
+export const modals = {
+  myModal: MyModal,
+  // TODO: code splitting
+  // myModal: loadable(() => import('./MyModal')),
+};
 
 const Modals = () => {
   const openedModals = useContext(ModalsStateContext);

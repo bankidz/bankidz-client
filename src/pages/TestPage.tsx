@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Modals from '../components/common/modal/Modals';
+import Modals, { modals } from '../components/common/modal/Modals';
 import MyModal from '../components/common/modal/MyModal';
 import useModals from '../components/common/modal/useModals';
 
@@ -10,7 +10,7 @@ function TestPage() {
 
   function handleClick() {
     // setIsOpen(true);
-    openModal(MyModal, {
+    openModal(modals.myModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
