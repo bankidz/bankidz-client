@@ -7,7 +7,6 @@ interface InterestBadgeProps {
 
 function InterestBadge({ interestRate }: InterestBadgeProps) {
   const label = '이자율 ' + interestRate.toString() + '%';
-  console.log(label);
   return (
     <ComponentWrapper>
       <StyledSpan>{label}</StyledSpan>

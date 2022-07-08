@@ -1,34 +1,24 @@
-import styled from 'styled-components';
-import CommonSheet from '../components/common/bottomSheet/CommonSheet';
+import Modals, { modals } from '../components/common/modal/Modals';
+import useModals from '../components/common/modal/useModals';
+
 function TestPage() {
-  // 컴포넌트 랜더링 테스트용 페이지 입니다.
+  const { openModal } = useModals();
+  function handleClick() {
+    // modals.myModal: 열고자 하는 모달
+    // {...}: submit 시 처리되는 비즈니스 로직
+    openModal(modals.myModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+    });
+  }
   return (
-    <ComponentWrapper>
-      <div style={{ width: '100%' }}>
-        <div>dd</div>
-        <div>dd</div>
-      </div>
-      <CommonSheet overlay={true}>
-        <div style={{ height: '200px' }}></div>
-      </CommonSheet>
-    </ComponentWrapper>
+    <>
+      <button onClick={handleClick}>모달 열기</button>
+      {/* @ts-expect-error */}
+      <Modals />
+    </>
   );
 }
 
 export default TestPage;
-
-const ComponentWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera*/
-  }
-`;
