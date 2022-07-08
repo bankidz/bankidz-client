@@ -50,8 +50,6 @@ const Container = styled.div`
   box-sizing: content-box;
   border: 12px solid ${({ theme }) => theme.palette.gray[1]};
   border-radius: 36px;
-  display: flex;
-  align-items: center;
   /* 탭바를 위한 */
   position: relative;
 `;

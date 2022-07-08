@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Button from '../../Button';
+
 import { ReactComponent as SadBanky } from '../../../../assets/banky/sad.svg';
+import Button from '../../button/Button';
 
 interface DeleteChallengeProps {
   onClickDelete: () => void;

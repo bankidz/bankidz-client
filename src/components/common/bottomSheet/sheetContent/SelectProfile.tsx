@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import Button from '../../Button';
+
 import { ReactComponent as DadBanky } from '../../../../assets/banky/dad.svg';
+import Button from '../../button/Button';
 
 interface SelectProfileProps {
   role: '엄마' | '아빠' | '아들' | '딸';
