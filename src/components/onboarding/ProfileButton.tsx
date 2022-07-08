@@ -2,7 +2,7 @@ import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ProfileButtonCharacter } from '../../assets/icons/profile-button-character.svg';
 import { ReactComponent as ProfileButtonBorder } from '../../assets/icons/profile-button-border.svg';
-import { theme } from '../../lib/styles/theme';
+import { calcRem, clacRatio, theme } from '../../lib/styles/theme';
 
 interface ProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** 역할을 선택합니다. '아빠', '엄마', '아들', '딸' 중 하나를 선택합니다. */
@@ -30,15 +30,13 @@ export function ProfileButton({
       onMouseUp={handleMouseUp}
       {...props}
     >
-      <div className="border-wrapper">
-        <ProfileButtonBorder
-          fill={isSelected ? theme.palette.yellow[1] : fillColorByMouseEvent}
-        />
-      </div>
-      <div className="character-wrapper">
+      <ProfileButtonBorder
+        fill={isSelected ? theme.palette.yellow[1] : fillColorByMouseEvent}
+      />
+      <div className="content">
         <ProfileButtonCharacter />
+        <span>{role}</span>
       </div>
-      <span>{role}</span>
     </StyledButton>
   );
 }
@@ -47,46 +45,37 @@ export default ProfileButton;
 
 const StyledButton = styled.button`
   position: relative;
-  width: 152px;
-  height: 160px;
+  width: 100%;
 
   border: none;
   outline: none;
   border-radius: 28px;
-  background-color: white;
 
-  .border-wrapper {
+  .content {
+    width: 100%;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
-    z-index: 5;
-  }
 
-  .character-wrapper {
-    position: absolute;
-    left: 50%;
-    top: 24px;
-    transform: translate3d(-50%, 0, 0);
-    z-index: 10;
-  }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-  span {
-    position: absolute;
-    width: 24px;
-    height: 12px;
-    left: 50%;
-    top: 125px;
+    svg {
+      width: ${clacRatio(62.64, 152)};
+      margin-bottom: 25.23px;
+    }
 
-    font-style: normal;
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 100%;
-    text-align: center;
+    span {
+      width: 24px;
+      height: 12px;
 
-    transform: translate3d(-50%, -50%, 0);
-    z-index: 10;
+      font-style: normal;
+      font-weight: 800;
+      font-size: 12px;
+      line-height: 100%;
+    }
   }
 `;
-
-// https://velog.io/@apro_xo/CSS-top-left-translate%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EA%B0%80%EC%9A%B4%EB%8D%B0-%EC%A0%95%EB%A0%AC

@@ -7,17 +7,17 @@ interface SuggestBadgeProps {
 
 function SuggestBadge({ isSuggesting }: SuggestBadgeProps) {
   return (
-    <ComponentWrapper>
+    <Wrapper>
       <StyledSpan isSuggesting={isSuggesting}>
         {isSuggesting ? '제안중' : '거절됨'}
       </StyledSpan>
-    </ComponentWrapper>
+    </Wrapper>
   );
 }
 
 export default SuggestBadge;
 
-const ComponentWrapper = styled.div`
+const Wrapper = styled.div`
   height: 28px;
 `;
 

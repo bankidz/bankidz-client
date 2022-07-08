@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { ReactComponent as ChallengeBadgeBorder } from '../../assets/icons/challenge-badge-border.svg';
-import { theme } from '../../lib/styles/theme';
 
 interface ChallengeBadgeProps {
   /** 목표저금액(number)을 입력합니다. */
@@ -10,19 +9,19 @@ interface ChallengeBadgeProps {
 export function TargetBadge({ targetSaving }: ChallengeBadgeProps) {
   const stringTargetSaving = targetSaving.toLocaleString('ko-KR') + '원';
   return (
-    <ComponentWrapper>
+    <Wrapper>
       <ChallengeBadgeBorder />
       <TextWrapper>
         <span className="value">{stringTargetSaving}</span>
         <span className="label">목표저금액</span>
       </TextWrapper>
-    </ComponentWrapper>
+    </Wrapper>
   );
 }
 
 export default TargetBadge;
 
-const ComponentWrapper = styled.div`
+const Wrapper = styled.div`
   position: relative;
   width: 100%;
   min-width: 130px;

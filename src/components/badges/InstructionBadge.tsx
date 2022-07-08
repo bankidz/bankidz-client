@@ -9,15 +9,15 @@ interface InstructionBadgeProps {
 
 function InstructionBadge({ property, children }: InstructionBadgeProps) {
   return (
-    <ComponentWrapper>
+    <Wrapper>
       <StyledSpan property={property}>{children}</StyledSpan>
-    </ComponentWrapper>
+    </Wrapper>
   );
 }
 
 export default InstructionBadge;
 
-const ComponentWrapper = styled.div`
+const Wrapper = styled.div`
   height: 23px;
 `;
 

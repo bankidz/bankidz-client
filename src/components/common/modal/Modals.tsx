@@ -6,6 +6,7 @@ export const modals = {
   myModal: MyModal,
 };
 
+// 전역 상태 (배열)의 각 요소의 props를 Component와 매핑 & submit / cancel 시 로직을 추가하여 랜더링
 const Modals = () => {
   const { openedModals } = useModalsState();
   const dispatch = useModalsDispatch();

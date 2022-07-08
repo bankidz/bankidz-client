@@ -1,14 +1,18 @@
 import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
-  // source: https://yeun.github.io/open-color/
   palette: {
+    // yellow[0]: main yellow, yellow[1~4]: sub yellow
     yellow: ['#FFD749', '#FFF7E5', '#FFEDC1', '#FFD56F', '#FFAA42'],
+    // blue[1~3]: sub blue
     blue: ['#000', '#C6E8FF', '#9AD7FF', '#0099FF'],
+    // red[1~3]: sub red
     red: ['#000', '#FFCFB1', '#FFBA8E', '#FF6F42'],
+    // green[1~3]: sub green
     green: ['#000', '#C0F0A4', '#A5EE79', '#94DD7A'],
-
+    white: '#fff',
     lightGray: '#FAFAFC',
+    // gray[1~6]: gray scale
     gray: [
       '#000',
       '#F7F7F8',
@@ -19,7 +23,6 @@ export const theme: DefaultTheme = {
       '#4C4C52',
       '#26262D',
     ],
-    white: '#fff',
     black: '#000',
   },
   boxShadow: {
@@ -36,3 +39,9 @@ export const media = {
   tablet: customMediaQuery(768),
   mobile: customMediaQuery(576),
 };
+
+// svg 내부에 svg를 삽입하여 위치시키는 경우 내부 svg의 width를
+// % 단위로 계산하기 위한 함수, 소수점 아래는 버림
+export const clacRatio = (innerPx: number, OuterPx: number) =>
+  `${Math.floor((innerPx * 100) / OuterPx)}%`;
+export const calcRem = (px: number) => `${px / 16}rem`;
