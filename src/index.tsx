@@ -10,7 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 import './assets/fonts/fontStyle.css';
 import './components/common/bottomSheet/sheetStyle.css';
 import ReactModal from 'react-modal';
-// import ModalsProvider from './components/common/modal/ModalsContext';
 import { ModalsContextProvider } from './components/common/modal/ModalsContext';
 
 const container = document.getElementById('root')!;
@@ -31,8 +30,6 @@ root.render(
         <ModalsContextProvider>
           <App />
         </ModalsContextProvider>
-        {/* <ModalsProvider> */}
-        {/* </ModalsProvider> */}
       </ThemeProvider>
     </BrowserRouter>
   </Provider>,
