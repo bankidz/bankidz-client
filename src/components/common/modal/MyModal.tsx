@@ -1,12 +1,8 @@
 import ReactModal from 'react-modal';
 
-interface MyModalProps {
-  isOpen: boolean;
-}
-
-function MyModal({ isOpen }: MyModalProps) {
+function MyModal() {
   return (
-    <ReactModal isOpen={isOpen}>
+    <ReactModal isOpen>
       <div>모달 입니다.</div>
     </ReactModal>
   );
