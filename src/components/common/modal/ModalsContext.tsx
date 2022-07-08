@@ -30,7 +30,6 @@ const ModalsStateContext = createContext<TState | undefined>(undefined);
 const ModalsDispatchContext = createContext<TDispatch | undefined>(undefined);
 
 function reducer(state: TState, action: TAction): TState {
-  console.log(state);
   switch (action.type) {
     case 'OPEN':
       return {
