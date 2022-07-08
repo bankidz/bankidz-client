@@ -10,7 +10,11 @@ function TestPage() {
 
   function handleClick() {
     // setIsOpen(true);
-    openModal(MyModal, { foo: 'bar' });
+    openModal(MyModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+    });
   }
   return (
     <Wrapper>
