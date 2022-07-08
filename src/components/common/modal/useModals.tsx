@@ -1,19 +1,27 @@
 import { useContext } from 'react';
-import { ModalsDispatchContext } from './ModalsContext';
+import { useModalsDispatch } from './ModalsContext';
 
 export default function useModals() {
-  const { open, close } = useContext(ModalsDispatchContext);
+  // const { open, close } = useContext(ModalsDispatchContext);
+  const dispatch = useModalsDispatch();
 
   // @ts-expect-error
   const openModal = (Component, props) => {
-    // @ts-expect-error
-    open(Component, props);
+    // open(Component, props);
+    dispatch({
+      type: 'OPEN',
+      Component,
+      props,
+    });
   };
 
   // @ts-expect-error
   const closeModal = (Component) => {
-    // @ts-expect-error
-    close(Component);
+    // close(Component);
+    dispatch({
+      type: 'CLOSE',
+      Component,
+    });
   };
 
   return {

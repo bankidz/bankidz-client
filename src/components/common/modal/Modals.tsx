@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ModalsDispatchContext, ModalsStateContext } from './ModalsContext';
+import { useModalsDispatch, useModalsState } from './ModalsContext';
 import MyModal from './MyModal';
 
 // 구현하는 서비스에서 사용하는 모달 컴포넌트를 이름에 매핑 시켜주면 된다.
@@ -13,18 +13,22 @@ export const modals = {
 };
 
 const Modals = () => {
-  const openedModals = useContext(ModalsStateContext);
-  const { close } = useContext(ModalsDispatchContext);
+  // const openedModals = useContext(ModalsStateContext);
+  const { openedModals } = useModalsState();
+  const dispatch = useModalsDispatch();
+  // const { close } = useContext(ModalsDispatchContext);
 
   return openedModals.map((modal, index) => {
     const { Component, props } = modal;
     // props에서 onSubmit을 제외한 나머지를 restProps로 재정의 하고
     // Component에 스프레드로 넘겨주는 props를 restProps로 변경합니다.
-    // @ts-expect-error
     const { onSubmit, ...restProps } = props;
     const onClose = () => {
-      // @ts-expect-error
-      close(Component);
+      // close(Component);
+      dispatch({
+        type: 'CLOSE',
+        Component,
+      });
     };
 
     // 비즈니스 로직 처리
@@ -46,7 +50,6 @@ const Modals = () => {
       <Component
         {...restProps}
         key={index}
-        // @ts-expect-error
         {...props}
         onClose={onClose}
         onSubmit={handleSubmit}

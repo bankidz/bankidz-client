@@ -10,7 +10,8 @@ import { BrowserRouter } from 'react-router-dom';
 import './assets/fonts/fontStyle.css';
 import './components/common/bottomSheet/sheetStyle.css';
 import ReactModal from 'react-modal';
-import ModalsProvider from './components/common/modal/ModalsContext';
+// import ModalsProvider from './components/common/modal/ModalsContext';
+import { ModalsContextProvider } from './components/common/modal/ModalsContext';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -27,9 +28,11 @@ root.render(
     <BrowserRouter>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <ModalsProvider>
+        <ModalsContextProvider>
           <App />
-        </ModalsProvider>
+        </ModalsContextProvider>
+        {/* <ModalsProvider> */}
+        {/* </ModalsProvider> */}
       </ThemeProvider>
     </BrowserRouter>
   </Provider>,
