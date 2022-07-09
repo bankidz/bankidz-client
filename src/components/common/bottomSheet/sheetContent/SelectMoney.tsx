@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-function InsertMoney() {
+function SelectMoney() {
   return (
     <Wrapper>
       <ButtonContainer>
@@ -16,7 +16,7 @@ function InsertMoney() {
   );
 }
 
-export default InsertMoney;
+export default SelectMoney;
 
 const Wrapper = styled.div`
   margin: 17px 16px 32px 16px;

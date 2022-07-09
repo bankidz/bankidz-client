@@ -7,35 +7,24 @@ interface SuggestBadgeProps {
 
 function RiskBadge({ riskLevel }: SuggestBadgeProps) {
   return (
-    <ComponentWrapper>
-      <StyledSpan riskLevel={riskLevel}>{riskLevel}</StyledSpan>
+    <ComponentWrapper riskLevel={riskLevel}>
+      <StyledSpan>{riskLevel}</StyledSpan>
     </ComponentWrapper>
   );
 }
 
 export default RiskBadge;
 
-const ComponentWrapper = styled.div`
-  height: 19.69px;
-`;
-
-const StyledSpan = styled.span<{
+const ComponentWrapper = styled.div<{
   riskLevel: '안정' | '중립' | '위험';
 }>`
-  width: 41.02px;
-  height: 19.69px;
+  width: 41px;
+  height: 14px;
   border-radius: 6.56287px;
 
-  font-style: normal;
-  font-weight: 700;
-  font-size: 9.84431px;
-  line-height: 12px;
-  color: white;
-
-  line-height: 19.69px;
-  vertical-align: middle;
-  display: inline-block;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   ${({ riskLevel }) =>
     riskLevel === '안정' &&
@@ -52,4 +41,12 @@ const StyledSpan = styled.span<{
     css`
       background: ${({ theme }) => theme.palette.red[3]};
     `}
+`;
+
+const StyledSpan = styled.span`
+  font-family: 'TmoneyRoundWind';
+  font-size: 10px;
+  line-height: auto;
+  font-weight: 400;
+  color: ${({ theme }) => theme.palette.white};
 `;

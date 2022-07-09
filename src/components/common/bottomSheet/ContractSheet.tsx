@@ -28,7 +28,7 @@ function ContractSheet({
       blocking={blocking}
     >
       <SheetContainer>{children}</SheetContainer>
-      <NextButton />
+      <NextButton>{label}</NextButton>
     </StyledBottomSheet>
   );
 }
@@ -40,6 +40,7 @@ const StyledBottomSheet = styled(BottomSheet)`
   & > * {
     box-shadow: none !important;
   }
+
   div:first-child:before {
     width: 60px;
     height: 5px;
@@ -52,7 +53,14 @@ const SheetContainer = styled.div`
   margin: 0px 18px 32px 18px;
 `;
 
-const NextButton = styled.div`
+const NextButton = styled.button`
+  width: 100%;
   height: 48px;
   background-color: ${({ theme }) => theme.palette.yellow[0]};
+
+  font-family: 'TmoneyRoundWind';
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 800;
+  color: ${({ theme }) => theme.palette.white};
 `;
