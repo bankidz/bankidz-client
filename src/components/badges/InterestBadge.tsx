@@ -8,15 +8,15 @@ interface InterestBadgeProps {
 function InterestBadge({ interestRate }: InterestBadgeProps) {
   const label = '이자율 ' + interestRate.toString() + '%';
   return (
-    <ComponentWrapper>
+    <Wrapper>
       <StyledSpan>{label}</StyledSpan>
-    </ComponentWrapper>
+    </Wrapper>
   );
 }
 
 export default InterestBadge;
 
-const ComponentWrapper = styled.div`
+const Wrapper = styled.div`
   height: 27px;
 `;
 

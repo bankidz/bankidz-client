@@ -1,5 +1,6 @@
 import ReactModal from 'react-modal';
 
+// 모달 내부에 표시될 UI 작성
 // @ts-expect-error
 function MyModal({ onSubmit, onClose }) {
   function handleSubmit() {
