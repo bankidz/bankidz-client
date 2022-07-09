@@ -29,6 +29,7 @@ type TDispatch = Dispatch<TAction>;
 const ModalsStateContext = createContext<TState | undefined>(undefined);
 const ModalsDispatchContext = createContext<TDispatch | undefined>(undefined);
 
+// {모달 컴포넌트, 해당 컴포넌트에 넘겨줄 props} 객체 배열을 전역 상태로 관리
 function reducer(state: TState, action: TAction): TState {
   switch (action.type) {
     case 'OPEN':

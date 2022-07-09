@@ -7,6 +7,7 @@ declare module 'styled-components' {
       blue: ['#000', '#C6E8FF', '#9AD7FF', '#0099FF'];
       red: ['#000', '#FFCFB1', '#FFBA8E', '#FF6F42'];
       green: ['#000', '#C0F0A4', '#A5EE79', '#94DD7A'];
+      white: '#fff';
       lightGray: '#FAFAFC';
       gray: [
         '#000',
@@ -18,7 +19,6 @@ declare module 'styled-components' {
         '#4C4C52',
         '#26262D',
       ];
-      white: '#fff';
       black: '#000';
     };
     boxShadow: {

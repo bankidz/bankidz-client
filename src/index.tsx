@@ -1,6 +1,3 @@
-import './assets/fonts/fontStyle.css';
-import 'react-spring-bottom-sheet/dist/style.css';
-//import './components/common/bottomSheet/sheetStyle.css';
 import React from 'react';
 import App from './App';
 import { Provider } from 'react-redux';
@@ -10,6 +7,8 @@ import { theme } from './lib/styles/theme';
 import { GlobalStyle } from './lib/styles/global-style';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
+import './assets/fonts/fontStyle.css';
+import 'react-spring-bottom-sheet/dist/style.css';
 import './assets/fonts/fontStyle.css';
 import './components/common/bottomSheet/sheetStyle.css';
 import ReactModal from 'react-modal';

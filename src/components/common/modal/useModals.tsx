@@ -1,5 +1,6 @@
 import { useModalsDispatch } from './ModalsContext';
 
+// OPEN, CLOSE action 대한 dispatch 함수 사용 추상화
 function useModals() {
   const dispatch = useModalsDispatch();
 
