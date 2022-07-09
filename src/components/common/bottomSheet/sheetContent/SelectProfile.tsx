@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { ReactComponent as DadBanky } from '../../../../assets/banky/dad.svg';
-import Button from '../../button/Button';
+import Button from '../../Button';
 
 interface SelectProfileProps {
   role: '엄마' | '아빠' | '아들' | '딸';
@@ -21,7 +21,7 @@ function SelectProfile({ role, onClick }: SelectProfileProps) {
           <DadBanky />
         </BankyWrapper>
       </Container>
-      <Button label="확인" />
+      <Button label="확인" onClick={onClick} />
     </Wrapper>
   );
 }

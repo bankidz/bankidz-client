@@ -58,7 +58,7 @@ export const GlobalStyle = createGlobalStyle`
 
     /* react spring bottom sheet */
     :root {
-      --rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
+      --rsbs-backdrop-bg: rgba(0, 0, 0, 0.7);
       --rsbs-bg: #fff;
       --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
       --rsbs-max-w: auto;
