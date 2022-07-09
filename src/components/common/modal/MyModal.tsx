@@ -1,7 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import { clacRatio } from '../../../lib/styles/theme';
 import { ReactComponent as ModalContentBanky } from '../../../assets/icons/modal-content-banky.svg';
+import { ReactComponent as Check } from '../../../assets/icons/check.svg';
+import { darken } from 'polished';
+import './modalStyle.css';
 
 // 모달 내부에 표시될 UI 작성
 // @ts-expect-error
@@ -18,7 +21,7 @@ function MyModal({ onSubmit, onClose }) {
   return (
     <ReactModal
       isOpen
-      preventScroll={false}
+      closeTimeoutMS={500}
       style={{
         overlay: {
           position: 'fixed',
@@ -55,7 +58,9 @@ function MyModal({ onSubmit, onClose }) {
           <span className="sub-label">기획에서 워딩 생각해주세요.</span>
         </WhiteBox>
         <OverlayBox>
-          <button onClick={handleSubmit}>V</button>
+          <button onClick={handleSubmit}>
+            <Check />
+          </button>
         </OverlayBox>
       </Content>
     </ReactModal>
@@ -118,5 +123,14 @@ const OverlayBox = styled.div`
 
     background: ${({ theme }) => theme.palette.yellow[0]};
     border-radius: 12px;
+
+    ${({ theme }) => {
+      const selected = theme.palette.yellow[0];
+      return css`
+        &:active {
+          background: ${darken(0.1, selected)};
+        }
+      `;
+    }}
   }
 `;
