@@ -2,7 +2,7 @@ import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ProfileButtonCharacter } from '../../assets/icons/profile-button-character.svg';
 import { ReactComponent as ProfileButtonBorder } from '../../assets/icons/profile-button-border.svg';
-import { calcRem, clacRatio, theme } from '../../lib/styles/theme';
+import { clacRatio, theme } from '../../lib/styles/theme';
 
 interface ProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** 역할을 선택합니다. '아빠', '엄마', '아들', '딸' 중 하나를 선택합니다. */
@@ -46,6 +46,10 @@ export default ProfileButton;
 const StyledButton = styled.button`
   position: relative;
   width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   border: none;
   outline: none;
