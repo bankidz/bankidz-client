@@ -5,30 +5,31 @@ import 'swiper/swiper.min.css';
 import SwiperCore, { Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/components/navigation/navigation.min.css';
+import { useState } from 'react';
 
+// showcase
 function SungwooTestPage() {
   // const { openModal } = useModals();
-  SwiperCore.use([Navigation, Scrollbar]);
-  const settings = {
-    spaceBetween: 20, // px 단위 간격
-    navigation: {
-      // 좌우 버튼 커스텀
-      // prevEl: // 이전 버튼 Ref 또는 className
-      // nextEl: // 다음 버튼 Ref 또는 className
-    },
-    scrollbar: {
-      // 스크롤바 커스텀
-      draggable: true, // 드래그 가능 여부
-      el: null, // 스크롤바 Ref 또는 className
-    },
-    slidesPerView: 3, // 한 화면에 보이는 슬라이드 수
-    // onBeforeInit: // 이벤트 핸들러
+  const [swiper, setSwiper] = useState(null);
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+  console.log(mainImageIndex);
+
+  SwiperCore.use([Navigation]);
+
+  const swiperParams = {
+    navigation: true,
+    onSwiper: setSwiper,
+    onSlideChange: (e: any) => setMainImageIndex(e.activeIndex),
+    slidesPerView: 1.1,
+    // spaceBetween: 20,
   };
+
   return (
     <Wrapper>
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
-      <Swiper {...settings}>
+      {/* @ts-expect-error */}
+      <StyledSwiper {...swiperParams} ref={setSwiper}>
         <SwiperSlide>
           <Card>카드1</Card>
         </SwiperSlide>
@@ -38,43 +39,43 @@ function SungwooTestPage() {
         <SwiperSlide>
           <Card>카드3</Card>
         </SwiperSlide>
-        <SwiperSlide>
-          <Card>카드4</Card>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card>카드5</Card>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card>카드6</Card>
-        </SwiperSlide>
-      </Swiper>
+      </StyledSwiper>
     </Wrapper>
   );
 }
 
+// https://joyful-development.tistory.com/35
+// https://velog.io/@sohee-k/React-TypeScript-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Swiper-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0image-slider-library
+
 export default SungwooTestPage;
 
 const Wrapper = styled.div`
+  background: lightgray;
   .swiper {
-    &-wrapper,
-    &-container {
-      width: 62rem;
-      margin: 0;
-    }
-    &-container {
-      margin: 0 3.2rem;
-    }
     &-button-disabled {
-      // 더 이상 슬라이드를 넘길 수 없는 경우에 버튼을 숨기기 위함
       visibility: hidden;
     }
   }
 `;
 
+const StyledSwiper = styled(Swiper)`
+  position: relative;
+  background: lightgray;
+  width: 300px;
+  height: 760px;
+`;
+
 const Card = styled.div`
-  height: 200px;
-  width: 100px;
-  border-radius: 10px;
+  /* padding-left: 20px; */
+  font-size: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-left: 15px;
+  width: 250px;
+  height: 500px;
+  border-radius: 30px;
   background: pink;
 `;
 
