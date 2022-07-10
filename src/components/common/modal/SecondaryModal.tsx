@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import { clacRatio } from '../../../lib/styles/theme';
-import { ReactComponent as ModalContentBanky } from '../../../assets/icons/modal-content-banky.svg';
+import { ReactComponent as ModalContentFinish } from '../../../assets/icons/modal-content-finish.svg';
 import { ReactComponent as Check } from '../../../assets/icons/check.svg';
 import { darken } from 'polished';
 
-interface PrimaryModalProps {
+interface SecondaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
+  /** badge에 표시될 내용을 입력합니다. */
+  badgeContent: string;
   /** header에 표시될 내용을 입력합니다. */
   headerContent: string;
   /** body에 표시될 내용을 입력합니다. */
@@ -15,17 +17,18 @@ interface PrimaryModalProps {
 }
 
 // 모달 내부에 표시될 UI 작성
-function PrimaryModal({
+function SecondaryModal({
   onSubmit,
+  badgeContent,
   headerContent,
   bodyContent,
-}: PrimaryModalProps) {
+}: SecondaryModalProps) {
   function handleSubmit() {
     onSubmit();
   }
   // 확장성을 위해 함수로 작성하였습니다.
   function renderSvgContent() {
-    return <ModalContentBanky />;
+    return <ModalContentFinish />;
   }
   return (
     <ReactModal
@@ -41,9 +44,9 @@ function PrimaryModal({
           opacity: '0.7',
         },
         content: {
-          height: '488px',
+          height: '560px',
           position: 'absolute',
-          top: `${clacRatio(136, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
+          top: `${clacRatio(100, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
           left: '18px',
           right: '18px',
           background: '#191919',
@@ -61,8 +64,9 @@ function PrimaryModal({
       <Content>
         <WhiteBox>
           {renderSvgContent()}
-          <span className="main-label">{headerContent}</span>
-          <span className="sub-label">{bodyContent}</span>
+          <span className="badge">{badgeContent}</span>
+          <span className="header">{headerContent}</span>
+          <div className="body">{bodyContent}</div>
         </WhiteBox>
         <OverlayBox>
           <button onClick={handleSubmit}>
@@ -74,7 +78,7 @@ function PrimaryModal({
   );
 }
 
-export default PrimaryModal;
+export default SecondaryModal;
 
 const Content = styled.div`
   display: flex;
@@ -84,7 +88,7 @@ const Content = styled.div`
 
 const WhiteBox = styled.div`
   background: white;
-  height: 424px;
+  height: 496px;
   width: 100%;
 
   display: flex;
@@ -93,28 +97,47 @@ const WhiteBox = styled.div`
   align-items: center;
   border-radius: 24px;
 
+  // TODO: 디자인 이삼함. 피그마에 디자인팀 맨션해서 코멘트 남김.
   svg {
     padding-left: 16px;
     padding-right: 16px;
     padding-top: 36px;
-    padding-bottom: 36px;
+    padding-bottom: 8px;
   }
 
-  .main-label {
-    height: 21px;
+  .badge {
+    padding: 4px 8px;
+    gap: 8px;
+    height: 26px;
+    background: ${({ theme }) => theme.palette.yellow[0]};
+    border-radius: 12px;
+
     font-style: normal;
     font-weight: 800;
-    font-size: 21px;
-    margin-top: 8px;
-    margin-bottom: 16px;
+    font-size: 12px;
+    line-height: 150%;
+    color: white;
   }
 
-  .sub-label {
-    height: 14px;
+  .header {
+    margin-top: 12px;
     font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 100%;
+  }
+
+  .body {
+    margin-top: 16px;
+    font-style: normal;
+    font-weight: 400;
     font-size: 14px;
-    color: #82818b; // TODO: color: 디자인 시스템 확인 필요
-    margin-bottom: 36px;
+    line-height: 150%;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    white-space: pre-wrap;
   }
 `;
 
