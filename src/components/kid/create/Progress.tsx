@@ -50,6 +50,7 @@ const Circle = styled.div<{ fill: boolean }>`
   height: 16px;
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.palette.gray[2]};
+  box-sizing: border-box;
 
   ${({ fill }) =>
     fill &&

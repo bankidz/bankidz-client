@@ -11,4 +11,5 @@ export default Margin;
 const Wrapper = styled.div`
   width: 100%;
   padding: 0px 18px;
+  box-sizing: border-box;
 `;
