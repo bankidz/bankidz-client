@@ -2,11 +2,11 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 interface ProgressProps {
-  step: 1 | 2 | 3 | 4 | 5 | 6;
+  step: 1 | 2 | 3 | 4 | 5;
 }
 
 function Progress({ step }: ProgressProps) {
-  const fill = [false, false, false, false, false, false].map((v, i) =>
+  const fill = [false, false, false, false, false].map((v, i) =>
     i < step ? true : false,
   );
 
@@ -17,7 +17,6 @@ function Progress({ step }: ProgressProps) {
       <Circle fill={fill[2]}></Circle>
       <Circle fill={fill[3]}></Circle>
       <Circle fill={fill[4]}></Circle>
-      <Circle fill={fill[5]}></Circle>
     </Wrapper>
   );
 }
@@ -25,7 +24,7 @@ function Progress({ step }: ProgressProps) {
 export default Progress;
 
 const Wrapper = styled.div`
-  width: 166px;
+  width: 136px;
   display: flex;
   align-items: center;
   justify-content: space-between;

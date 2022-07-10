@@ -8,8 +8,8 @@ import Margin from '../../../components/layout/Margin';
 function CreateKid() {
   const { step } = useParams();
   const typedStep = (parsed: number) => {
-    if (step && parsed > 0 && parsed <= 6) {
-      return parsed as 1 | 2 | 3 | 4 | 5 | 6;
+    if (step && parsed > 0 && parsed <= 5) {
+      return parsed as 1 | 2 | 3 | 4 | 5;
     } else {
       throw 'step error';
     }
