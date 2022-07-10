@@ -7,15 +7,15 @@ interface SuggestBadgeProps {
 
 function RiskBadge({ riskLevel }: SuggestBadgeProps) {
   return (
-    <ComponentWrapper riskLevel={riskLevel}>
+    <Wrapper riskLevel={riskLevel}>
       <StyledSpan>{riskLevel}</StyledSpan>
-    </ComponentWrapper>
+    </Wrapper>
   );
 }
 
 export default RiskBadge;
 
-const ComponentWrapper = styled.div<{
+const Wrapper = styled.div<{
   riskLevel: '안정' | '중립' | '위험';
 }>`
   width: 41px;
