@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 
 type TChallengePayloadState = {
-  parentId: number | null;
+  isFemale: boolean | null;
   itemName: string | null;
   title: string | null;
   interestRate: number | null;
@@ -14,7 +14,7 @@ type TChallengePayloadState = {
 };
 
 const initialState: TChallengePayloadState = {
-  parentId: null,
+  isFemale: null,
   itemName: null,
   title: null,
   interestRate: null,
@@ -27,8 +27,8 @@ export const challengePayloadSlice = createSlice({
   name: 'challengePayload',
   initialState,
   reducers: {
-    dispatchParent(state, action: PayloadAction<number>) {
-      state.parentId = action.payload;
+    dispatchParent(state, action: PayloadAction<boolean>) {
+      state.isFemale = action.payload;
     },
     dispatchItemName(state, action: PayloadAction<string>) {
       state.itemName = action.payload;

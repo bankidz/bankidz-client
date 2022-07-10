@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { kidMock } from '../../../../lib/mocks/kid';
 import { TFamilyState } from '../../../../lib/types/kid';
@@ -13,8 +13,8 @@ function Step1() {
   const navigate = useNavigate();
   const { getFamily } = kidMock();
 
-  const onClickProfileButton = (id: number) => {
-    dispatch(dispatchParent(id));
+  const onClickProfileButton = (isFemale: boolean) => {
+    dispatch(dispatchParent(isFemale));
     navigate(`/create/2`, { state: { from: 1 } });
   };
 
@@ -34,12 +34,12 @@ function Step1() {
 
   return (
     <Wrapper>
-      {parents?.map((v) => (
+      {parents?.map((v, i) => (
         <ProfileButton
           isKid={v.isKid}
           isFemale={v.isFemale}
-          onClick={() => onClickProfileButton(v.userId)}
-          key={v.userId}
+          onClick={() => onClickProfileButton(v.isFemale)}
+          key={i}
         />
       ))}
     </Wrapper>

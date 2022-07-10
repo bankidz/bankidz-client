@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Step1 from '../../../components/kid/create/content/Step1';
+import Step2 from '../../../components/kid/create/content/Step2';
 import Progress from '../../../components/kid/create/Progress';
 import Margin from '../../../components/layout/Margin';
 
@@ -28,7 +29,9 @@ function CreateKid() {
         return <Step1 />;
         break;
       case 2:
-        return <div>2</div>;
+        return <Step2 />;
+      case 3:
+        return <div>3</div>;
       default:
         throw 'error';
     }
@@ -58,6 +61,7 @@ const Wrapper = styled.div`
   h1 {
     margin-top: 24px;
     margin-bottom: 56px;
+
     font-family: 'TmoneyRoundWind';
     font-size: 24px;
     line-height: 31px;
