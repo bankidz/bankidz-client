@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import SelectInterestButton from '../../../challenge/SelectInterestButton';
+import SelectInterestButton from '../../../kid/challenge/SelectInterestButton';
 
 function SelectInterest() {
   return (

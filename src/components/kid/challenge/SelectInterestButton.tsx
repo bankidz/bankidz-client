@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import RiskBadge from '../badges/RiskBadge';
+import RiskBadge from '../../common/badges/RiskBadge';
 
 interface SelectInterestButtonProps {
   isSelected: boolean;
