@@ -32,13 +32,8 @@ function SungwooTestPage() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
     openModal(modals.tertiaryModal, {
-      onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
-      },
-      badgeContent: '돈길완주 성공',
       headerContent: '에어팟 사기',
-      bodyContent:
-        '10주 간의 여정이 끝났어요.\n이제 돈을 찾아 구매하러 가보세요.',
+      bodyContent: '은행에서 돈을 맡기면\n맡긴 돈의 일정 부분을 주는 것',
     });
   }
   return (

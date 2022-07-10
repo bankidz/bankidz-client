@@ -1,27 +1,28 @@
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import { clacRatio } from '../../../lib/styles/theme';
-import { ReactComponent as ModalContentFinish } from '../../../assets/icons/modal-content-finish.svg';
-import { ReactComponent as Check } from '../../../assets/icons/check.svg';
+import { ReactComponent as ModalContentMoney } from '../../../assets/icons/modal-content-money.svg';
+import { ReactComponent as Close } from '../../../assets/icons/close.svg';
 import { darken } from 'polished';
 
 interface TertiaryProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
-  onSubmit?: any;
+  onClose: any;
   /** header에 표시될 내용을 입력합니다. */
   headerContent: string;
   /** body에 표시될 내용을 입력합니다. */
   bodyContent: string;
+  progress: number;
 }
 
 // 모달 내부에 표시될 UI 작성
-function Tertiary({ onSubmit, headerContent, bodyContent }: TertiaryProps) {
-  function handleSubmit() {
-    onSubmit();
+function Tertiary({ onClose, headerContent, bodyContent }: TertiaryProps) {
+  function handleCancel() {
+    onClose();
   }
   // 확장성을 위해 함수로 작성하였습니다.
   function renderSvgContent() {
-    return <ModalContentFinish />;
+    return <ModalContentMoney />;
   }
   return (
     <ReactModal
@@ -37,9 +38,9 @@ function Tertiary({ onSubmit, headerContent, bodyContent }: TertiaryProps) {
           opacity: '0.7',
         },
         content: {
-          height: '560px',
+          height: '568px',
           position: 'absolute',
-          top: `${clacRatio(100, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
+          top: `${clacRatio(96, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
           left: '18px',
           right: '18px',
           background: '#191919',
@@ -55,15 +56,21 @@ function Tertiary({ onSubmit, headerContent, bodyContent }: TertiaryProps) {
       }}
     >
       <Content>
+        <YellowBox>{renderSvgContent()}</YellowBox>
         <WhiteBox>
-          {renderSvgContent()}
-          <span className="badge">{badgeContent}</span>
-          <span className="header">{headerContent}</span>
-          <div className="body">{bodyContent}</div>
+          <div className="text-positioner">
+            <span className="header">{headerContent}</span>
+            <div className="body">{bodyContent}</div>
+          </div>
+          <ProgressCircle>
+            <div className="one" />
+            <div className="two" />
+            <div className="three" />
+          </ProgressCircle>
         </WhiteBox>
         <OverlayBox>
-          <button onClick={handleSubmit}>
-            <Check />
+          <button onClick={handleCancel}>
+            <Close />
           </button>
         </OverlayBox>
       </Content>
@@ -77,60 +84,85 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+`;
+
+const YellowBox = styled.div`
+  background: ${({ theme }) => theme.palette.yellow[1]};
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  height: 230px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const WhiteBox = styled.div`
   background: white;
-  height: 496px;
+  height: 274px; // 504 - 230
   width: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 24px;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
 
-  // TODO: 디자인 이삼함. 피그마에 디자인팀 맨션해서 코멘트 남김.
-  svg {
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 36px;
-    padding-bottom: 8px;
-  }
-
-  .badge {
-    padding: 4px 8px;
-    gap: 8px;
-    height: 26px;
-    background: ${({ theme }) => theme.palette.yellow[0]};
-    border-radius: 12px;
-
-    font-style: normal;
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 150%;
-    color: white;
-  }
-
-  .header {
-    margin-top: 12px;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 24px;
-    line-height: 100%;
-  }
-
-  .body {
-    margin-top: 16px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 150%;
-
+  .text-positioner {
+    margin-top: 24px;
+    gap: 16px;
+    width: 292px;
+    height: 198px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    white-space: pre-wrap;
+
+    .header {
+      font-weight: 800;
+      font-size: 24px;
+      line-height: 100%;
+      color: #191919;
+    }
+
+    .body {
+      margin-top: 16px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 160%;
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+      white-space: pre-wrap;
+    }
+  }
+`;
+
+const ProgressCircle = styled.div`
+  margin-bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 46px;
+  height: 10px;
+  div {
+    border-radius: 3px;
+    width: 10px;
+    height: 10px;
+  }
+  .one {
+    background-color: ${({ theme }) => theme.palette.yellow[0]};
+  }
+  .two {
+    background-color: ${({ theme }) => theme.palette.gray[2]};
+  }
+  .three {
+    background-color: ${({ theme }) => theme.palette.gray[2]};
   }
 `;
 
@@ -144,11 +176,10 @@ const OverlayBox = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${({ theme }) => theme.palette.yellow[0]};
+    background: ${({ theme }) => theme.palette.gray[2]};
     border-radius: 12px;
-
     ${({ theme }) => {
-      const selected = theme.palette.yellow[0];
+      const selected = theme.palette.gray[2];
       return css`
         &:active {
           background: ${darken(0.1, selected)};
