@@ -3,7 +3,7 @@ import TopAppBar from './TopAppBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default {
-  title: 'Common/TopAppBar',
+  title: 'Layout/TopAppBar',
   component: TopAppBar,
   argTypes: {},
   decorators: [

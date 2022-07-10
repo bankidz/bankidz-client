@@ -14,7 +14,6 @@ export const GlobalStyle = createGlobalStyle`
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       box-sizing: border-box; /* 엘리먼트의 box-sizing 값을 border-box로 설정 */
-      min-height: 100%;
       background-color: #FFD56F;
       
       /* 바텀시트 작업 중 추가 */
@@ -58,7 +57,7 @@ export const GlobalStyle = createGlobalStyle`
 
     /* react spring bottom sheet */
     :root {
-      --rsbs-backdrop-bg: rgba(0, 0, 0, 0.6);
+      --rsbs-backdrop-bg: rgba(0, 0, 0, 0.7);
       --rsbs-bg: #fff;
       --rsbs-handle-bg: hsla(0, 0%, 0%, 0.14);
       --rsbs-max-w: auto;

@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import kakao from '../../assets/icons/kakao.svg';
+import kakao from '../../../assets/icons/kakao.svg';
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
@@ -64,7 +64,7 @@ const Wrapper = styled.button<{
   ${({ property }) =>
     property == 'etc' &&
     css`
-      color: #191919;
+      color: #191919 !important;
       background-color: #fee500;
 
       img {

@@ -1,14 +1,13 @@
 import styled from 'styled-components';
-
 import { ReactComponent as SadBanky } from '../../../../assets/banky/sad.svg';
-import Button from '../../button/Button';
+import Button from '../../Button/Button';
 
 interface DeleteChallengeProps {
-  onClickDelete: () => void;
-  onDismiss: () => void;
+  /*   onClickDelete: () => void;
+  onDismiss: () => void; */
 }
 
-function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
+function DeleteChallenge({}: DeleteChallengeProps) {
   return (
     <Wrapper>
       <Container>
@@ -26,8 +25,8 @@ function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
         </Rule>
       </Container>
       <ButtonContainer>
-        <Button label="포기하기" sub={true} onClick={onClickDelete} />
-        <Button label="다시 도전해볼게요" onClick={onDismiss} />
+        <Button label="포기하기" sub={true} />
+        <Button label="다시 도전해볼게요" />
       </ButtonContainer>
     </Wrapper>
   );

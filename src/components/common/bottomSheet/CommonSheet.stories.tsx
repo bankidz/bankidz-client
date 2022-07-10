@@ -6,7 +6,7 @@ import SelectProfile from './sheetContent/SelectProfile';
 import DeleteChallenge from './sheetContent/DeleteChallenge';
 
 export default {
-  title: 'bottomSheet/CommonSheet',
+  title: 'Common/BottomSheet/CommonSheet',
   component: CommonSheet,
   argTypes: {},
 } as ComponentMeta<typeof CommonSheet>;
@@ -17,21 +17,12 @@ const Template: ComponentStory<typeof CommonSheet> = (args) => (
 
 export const 프로필_선택_확인 = Template.bind({});
 프로필_선택_확인.args = {
-  children: <SelectProfile role={'아빠'} onClick={() => {}} />,
-  overlay: true,
+  children: <SelectProfile role={'아들'} />,
   open: true,
 };
 
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
-  children: <DeleteChallenge onClickDelete={() => {}} onDismiss={() => {}} />,
-  overlay: true,
+  children: <DeleteChallenge />,
   open: true,
-};
-
-export const 돈길계약_바텀시트 = Template.bind({});
-돈길계약_바텀시트.args = {
-  children: <div style={{ height: '200px' }}>바텀시트</div>,
-  overlay: false,
-  blocking: false,
 };

@@ -10,7 +10,6 @@ import { BrowserRouter } from 'react-router-dom';
 import './assets/fonts/fontStyle.css';
 import 'react-spring-bottom-sheet/dist/style.css';
 import './assets/fonts/fontStyle.css';
-import './components/common/bottomSheet/sheetStyle.css';
 import ReactModal from 'react-modal';
 import { ModalsContextProvider } from './components/common/modal/ModalsContext';
 
