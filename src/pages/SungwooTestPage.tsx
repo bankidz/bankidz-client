@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Summary from '../components/homekid/Summary';
+import Summary from '../components/kid/home/Summary';
 import ProfileButton from '../components/onboarding/ProfileButton';
 
 function SungwooTestPage() {
