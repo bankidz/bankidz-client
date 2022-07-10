@@ -3,7 +3,7 @@ import Margin from '../../layout/Margin';
 import Pending from './Pending';
 
 export default {
-  title: 'Kid/home/Pending',
+  title: '자녀/홈/Pending',
   component: Pending,
   argTypes: { onClick: { action: 'event' } },
   decorators: [
