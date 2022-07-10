@@ -1,9 +1,9 @@
 import { useModalsDispatch, useModalsState } from './ModalsContext';
-import MyModal from './MyModal';
+import PrimaryModal from './PrimaryModal';
 
 // TODO: code splitting
 export const modals = {
-  myModal: MyModal,
+  primaryModal: PrimaryModal,
 };
 
 // 전역 상태 (배열)의 각 요소의 props를 Component와 매핑 & submit / cancel 시 로직을 추가하여 랜더링

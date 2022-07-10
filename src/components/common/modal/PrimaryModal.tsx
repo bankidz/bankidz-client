@@ -4,17 +4,19 @@ import { clacRatio } from '../../../lib/styles/theme';
 import { ReactComponent as ModalContentBanky } from '../../../assets/icons/modal-content-banky.svg';
 import { ReactComponent as Check } from '../../../assets/icons/check.svg';
 import { darken } from 'polished';
-import './modalStyle.css';
+
+interface PrimaryModalProps {
+  onSubmit?: any;
+  mainLabel: string;
+  subLabel: string;
+}
 
 // 모달 내부에 표시될 UI 작성
-// @ts-expect-error
-function MyModal({ onSubmit, onClose }) {
+function PrimaryModal({ onSubmit, mainLabel, subLabel }: PrimaryModalProps) {
   function handleSubmit() {
     onSubmit();
   }
-  function handleCancel() {
-    onClose();
-  }
+  // 확장성을 위해 함수로 작성하였습니다.
   function renderSvgContent() {
     return <ModalContentBanky />;
   }
@@ -35,8 +37,7 @@ function MyModal({ onSubmit, onClose }) {
         content: {
           height: '488px',
           position: 'absolute',
-          // TODO: status bar 포함해서 정렬하는지 확인 필요!
-          top: `${clacRatio(136, 760)}`,
+          top: `${clacRatio(136, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
           left: '18px',
           right: '18px',
           background: '#191919',
@@ -54,8 +55,8 @@ function MyModal({ onSubmit, onClose }) {
       <Content>
         <WhiteBox>
           {renderSvgContent()}
-          <span className="main-label">가족이 생겼어요.</span>
-          <span className="sub-label">기획에서 워딩 생각해주세요.</span>
+          <span className="main-label">{mainLabel}</span>
+          <span className="sub-label">{subLabel}</span>
         </WhiteBox>
         <OverlayBox>
           <button onClick={handleSubmit}>
@@ -67,7 +68,7 @@ function MyModal({ onSubmit, onClose }) {
   );
 }
 
-export default MyModal;
+export default PrimaryModal;
 
 const Content = styled.div`
   display: flex;
@@ -128,9 +129,12 @@ const OverlayBox = styled.div`
       const selected = theme.palette.yellow[0];
       return css`
         &:active {
-          background: ${darken(0.1, selected)};
+          background: ${darken(0.2, selected)};
         }
       `;
     }}
   }
 `;
+
+// https://stackoverflow.com/questions/58355628/animate-react-modal
+// https://codepen.io/designcouch/pen/obvKxm
