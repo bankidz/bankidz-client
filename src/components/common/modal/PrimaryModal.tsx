@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import { clacRatio } from '@lib/styles/theme';
-import { ReactComponent as ModalContentBanky } from '@assets/icons/modal-content-banky.svg';
-import { ReactComponent as Check } from '@assets/icons/check.svg';
+import { ReactComponent as ModalContentBanky } from '@assets/illust/modal-content-banki.svg';
+import { ReactComponent as Check } from '@assets/icon/check.svg';
 import { darken } from 'polished';
 
 interface PrimaryModalProps {

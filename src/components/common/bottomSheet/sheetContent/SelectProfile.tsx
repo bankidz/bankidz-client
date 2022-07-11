@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as DadBanky } from '@assets/banky/dad.svg';
+import { ReactComponent as SvgDadBanki } from '@assets/illust/profile-banki-dad.svg';
 import Button from '@components/common/Button/Button';
 
 interface SelectProfileProps {
@@ -16,7 +16,7 @@ function SelectProfile({ role }: SelectProfileProps) {
         </p>
         <p>한 번 설정한 프로필은 변경하기 어려워요</p>
         <BankyWrapper>
-          <DadBanky />
+          <SvgDadBanki />
         </BankyWrapper>
       </Container>
       <Button label="확인" />

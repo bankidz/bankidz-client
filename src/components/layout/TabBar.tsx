@@ -1,8 +1,8 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Home } from '@assets/icons/home.svg';
-import { ReactComponent as Contents } from '@assets/icons/contents.svg';
-import { ReactComponent as Mypage } from '@assets/icons/mypage.svg';
+import { ReactComponent as Home } from '@assets/icon/home.svg';
+import { ReactComponent as Contents } from '@assets/icon/contents.svg';
+import { ReactComponent as Mypage } from '@assets/icon/mypage.svg';
 import { theme } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';

@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import kakao from '@assets/icons/kakao.svg';
+import kakao from '@assets/icon/kakao.svg';
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**

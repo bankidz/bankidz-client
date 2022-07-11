@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import { clacRatio } from '@lib/styles/theme';
-import { ReactComponent as ModalContentFinish } from '@assets/icons/modal-content-finish.svg';
-import { ReactComponent as Check } from '@assets/icons/check.svg';
+import { ReactComponent as ModalContentFinish } from '@assets/illust/modal-content-finish.svg';
+import { ReactComponent as Check } from '@assets/icon/check.svg';
 import { darken } from 'polished';
 
 interface SecondaryModalProps {

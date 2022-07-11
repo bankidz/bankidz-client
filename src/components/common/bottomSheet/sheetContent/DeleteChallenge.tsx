@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as SadBanky } from '@assets/banky/sad.svg';
+import { ReactComponent as SvgSadBanki } from '@assets/illust/banki-sad.svg';
 import Button from '@components/common/Button/Button';
 
 interface DeleteChallengeProps {
@@ -13,7 +13,7 @@ function DeleteChallenge({}: DeleteChallengeProps) {
       <Container>
         <p>정말 포기할거예요?</p>
         <BankyWrapper>
-          <SadBanky />
+          <SvgSadBanki />
         </BankyWrapper>
         <Rule>
           <p>포기규칙</p>
