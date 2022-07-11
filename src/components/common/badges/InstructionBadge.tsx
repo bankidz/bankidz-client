@@ -1,4 +1,4 @@
-import { ReactNode } from '@mdx-js/react/lib';
+import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InstructionBadgeProps {

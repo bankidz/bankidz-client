@@ -40,6 +40,7 @@ const Wrapper = styled.div`
   }
 
   p {
+    //TODO : 보류
     font-family: 'TmoneyRoundWind';
     font-size: 17px;
     line-height: 100%;

@@ -44,9 +44,6 @@ const Wrapper = styled.div<{
 `;
 
 const StyledSpan = styled.span`
-  font-family: 'TmoneyRoundWind';
-  font-size: 10px;
-  line-height: auto;
-  font-weight: 400;
+  ${({ theme }) => theme.typo.tag.T_8_EB}
   color: ${({ theme }) => theme.palette.white};
 `;

@@ -57,9 +57,10 @@ const Wrapper = styled.button<{
   height: 48px;
   border-radius: 12px;
   border: none;
-  font-size: 16px;
-  font-weight: bold;
   cursor: pointer;
+  p {
+    ${({ theme }) => theme.typo.button.Primary_T_15_EB}
+  }
 
   ${({ property }) =>
     property == 'etc' &&

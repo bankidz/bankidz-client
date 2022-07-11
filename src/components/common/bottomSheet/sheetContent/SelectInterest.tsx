@@ -38,18 +38,13 @@ const Sub = styled.div`
   width: 100%;
   height: 68px;
   & > p:first-child {
-    font-family: 'TmoneyRoundWind';
-    font-size: 14px;
-    line-height: auto;
-    font-weight: 800;
+    ${({ theme }) => theme.typo.bottomSheet.T_14_EB};
     color: ${({ theme }) => theme.palette.red[3]};
   }
   & > p:nth-child(2) {
     margin-top: 10.5px;
-    font-family: 'TmoneyRoundWind';
-    font-size: 12px;
-    line-height: 1.5;
-    font-weight: 400;
+    ${({ theme }) => theme.typo.bottomSheet.S_12_R};
+    line-height: 150%;
     color: ${({ theme }) => theme.palette.gray[5]};
   }
 `;
