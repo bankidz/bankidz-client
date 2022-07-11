@@ -3,8 +3,8 @@ import { AppProps } from '../../App';
 
 import HomeParent from './parent/HomeParent';
 import PendingKid from './kid/PendingKid';
-import Base from '../../components/layout/Base';
-import Stacked from '../../components/layout/Stacked';
+import Base from '@components/layout/Base';
+import Stacked from '@components/layout/Stacked';
 import HomeKid from './kid/HomeKid';
 import PendingParent from './parent/PendingParent';
 import NowParent from './parent/NowParent';

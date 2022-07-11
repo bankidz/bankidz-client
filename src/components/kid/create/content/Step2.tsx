@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../../../store/app/hooks';
+import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
-import { dispatchItemName } from '../../../../store/slices/challengePayloadSlice';
+import { dispatchItemName } from '@store/slices/challengePayloadSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
-import a1 from '../../../../assets/icons/itemName/a1.svg';
-import a2 from '../../../../assets/icons/itemName/a2.svg';
-import a3 from '../../../../assets/icons/itemName/a3.svg';
-import b1 from '../../../../assets/icons/itemName/b1.svg';
-import b2 from '../../../../assets/icons/itemName/b2.svg';
-import b3 from '../../../../assets/icons/itemName/b3.svg';
-import c1 from '../../../../assets/icons/itemName/c1.svg';
-import c2 from '../../../../assets/icons/itemName/c2.svg';
-import c3 from '../../../../assets/icons/itemName/c3.svg';
+import a1 from '@assets/illust/itemNames/a1.svg';
+import a2 from '@assets/illust/itemNames/a2.svg';
+import a3 from '@assets/illust/itemNames/a3.svg';
+import b1 from '@assets/illust/itemNames/b1.svg';
+import b2 from '@assets/illust/itemNames/b2.svg';
+import b3 from '@assets/illust/itemNames/b3.svg';
+import c1 from '@assets/illust/itemNames/c1.svg';
+import c2 from '@assets/illust/itemNames/c2.svg';
+import c3 from '@assets/illust/itemNames/c3.svg';
 
 const itemNames = [
   { name: '학용품', image: <img src={a1} /> },

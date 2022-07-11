@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import SelectInterestButton from '../../../kid/create/SelectInterestButton';
+import SelectInterestButton from '@components/kid/create/SelectInterestButton';
 
 function SelectInterest() {
   return (
