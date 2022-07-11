@@ -47,10 +47,8 @@ const Content = styled.div`
   flex-direction: column;
   gap: 10px;
   p {
-    font-family: 'TmoneyRoundWind';
-    font-size: 12px;
-    line-height: 100%;
-    font-weight: 800;
+    //TODO : 비율대로 커지기 (폰트는 ㄴㄴ)
+    ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
     color: ${({ theme }) => theme.palette.gray[6]};
   }
 `;

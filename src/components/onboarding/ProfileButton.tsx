@@ -89,10 +89,7 @@ const StyledButton = styled.button`
       width: 24px;
       height: 12px;
 
-      font-style: normal;
-      font-weight: 800;
-      font-size: 12px;
-      line-height: 100%;
+      ${({ theme }) => theme.typo.button.InnerText_T_15_EB}
     }
   }
 `;

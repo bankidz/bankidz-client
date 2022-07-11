@@ -43,10 +43,7 @@ const Container = styled.div`
   grid-gap: 16px;
 
   & > p:first-child {
-    font-family: 'TmoneyRoundWind';
-    font-size: 21px;
-    line-height: 21px;
-    font-weight: 800;
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
     color: ${({ theme }) => theme.palette.black};
   }
 `;

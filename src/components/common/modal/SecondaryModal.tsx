@@ -121,17 +121,12 @@ const WhiteBox = styled.div`
 
   .header {
     margin-top: 12px;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 24px;
-    line-height: 100%;
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
   }
 
   .body {
     margin-top: 16px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
+    ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     line-height: 150%;
 
     display: flex;

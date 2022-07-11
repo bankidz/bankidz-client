@@ -35,17 +35,11 @@ const Container = styled.div`
   grid-gap: 16px;
 
   & > p:first-child {
-    font-family: 'TmoneyRoundWind';
-    font-size: 21px;
-    line-height: 21px;
-    font-weight: 800;
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
     color: ${({ theme }) => theme.palette.black};
   }
   & > p:nth-child(2) {
-    font-family: 'TmoneyRoundWind';
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: 400;
+    ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     color: ${({ theme }) => theme.palette.gray[5]};
   }
 `;
