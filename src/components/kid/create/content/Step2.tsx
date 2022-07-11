@@ -13,7 +13,7 @@ import c1 from '../../../../assets/icons/itemName/c1.svg';
 import c2 from '../../../../assets/icons/itemName/c2.svg';
 import c3 from '../../../../assets/icons/itemName/c3.svg';
 
-const itemNameList = [
+const itemNames = [
   { name: '학용품', image: <img src={a1} /> },
   { name: '생활용품', image: <img src={a2} /> },
   { name: '전자제품', image: <img src={a3} /> },
@@ -37,7 +37,7 @@ function Step2() {
 
   return (
     <Wrapper>
-      {itemNameList.map((v) => (
+      {itemNames.map((v) => (
         <SelectItemNameButton
           name={v.name}
           image={v.image}
