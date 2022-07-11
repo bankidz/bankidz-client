@@ -1,21 +1,34 @@
 import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ProfileButtonCharacter } from '../../assets/icons/profile-button-character.svg';
-import { ReactComponent as ProfileButtonBorder } from '../../assets/icons/profile-button-border.svg';
-import { clacRatio, theme } from '../../lib/styles/theme';
+import { ReactComponent as ProfileButtonCharacter } from '@assets/illust/profile-button-character.svg';
+import { ReactComponent as ProfileButtonBorder } from '@assets/border/profile-button-border.svg';
+import { clacRatio, theme } from '@lib/styles/theme';
 
 interface ProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  /** 역할을 선택합니다. '아빠', '엄마', '아들', '딸' 중 하나를 선택합니다. */
-  role: '아빠' | '엄마' | '아들' | '딸';
+  isKid: boolean;
+  isFemale: boolean;
   isSelected?: boolean;
 }
 
-export function ProfileButton({
-  role,
+function ProfileButton({
+  isKid,
+  isFemale,
   isSelected = false,
   ...props
 }: ProfileButtonProps) {
   const [fillColorByMouseEvent, setFillColorByMouseEvent] = useState('white');
+
+  const role = (isKid: boolean, isFemale: boolean) => {
+    if (isKid && isFemale) {
+      return '딸';
+    } else if (isKid && !isFemale) {
+      return '아들';
+    } else if (!isKid && isFemale) {
+      return '엄마';
+    } else {
+      return '아빠';
+    }
+  };
 
   function handleMouseDown() {
     setFillColorByMouseEvent(theme.palette.yellow[1]);
@@ -35,7 +48,7 @@ export function ProfileButton({
       />
       <div className="content">
         <ProfileButtonCharacter />
-        <span>{role}</span>
+        <span>{role(isKid, isFemale)}</span>
       </div>
     </StyledButton>
   );
@@ -73,13 +86,7 @@ const StyledButton = styled.button`
     }
 
     span {
-      width: 24px;
-      height: 12px;
-
-      font-style: normal;
-      font-weight: 800;
-      font-size: 12px;
-      line-height: 100%;
+      ${({ theme }) => theme.typo.button.InnerText_T_15_EB}
     }
   }
 `;

@@ -58,9 +58,6 @@ const NextButton = styled.button`
   height: 48px;
   background-color: ${({ theme }) => theme.palette.yellow[0]};
 
-  font-family: 'TmoneyRoundWind';
-  font-size: 15px;
-  line-height: 1;
-  font-weight: 800;
+  ${({ theme }) => theme.typo.button.Primary_T_15_EB}
   color: ${({ theme }) => theme.palette.white};
 `;

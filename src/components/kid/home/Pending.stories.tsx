@@ -1,9 +1,9 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Margin from '../layout/Margin';
+import Margin from '@components/layout/Margin';
 import Pending from './Pending';
 
 export default {
-  title: '자녀 홈/Pending',
+  title: '자녀/홈/Pending',
   component: Pending,
   argTypes: { onClick: { action: 'event' } },
   decorators: [

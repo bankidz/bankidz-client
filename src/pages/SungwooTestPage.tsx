@@ -21,7 +21,7 @@ function SungwooTestPage() {
     onSwiper: setSwiper,
     onSlideChange: (e: any) => setMainImageIndex(e.activeIndex),
     slidesPerView: 1.1,
-    // spaceBetween: 20,
+    spaceBetween: 20,
   };
 
   return (

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import RiskBadge from './RiskBadge';
 
 export default {
-  title: '뱃지/RiskBadge',
+  title: 'Common/뱃지/RiskBadge',
   component: RiskBadge,
 } as ComponentMeta<typeof RiskBadge>;
 

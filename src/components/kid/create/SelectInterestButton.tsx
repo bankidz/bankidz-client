@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import RiskBadge from '../badges/RiskBadge';
+import RiskBadge from '@components/common/badges/RiskBadge';
 
 interface SelectInterestButtonProps {
   isSelected: boolean;
@@ -55,10 +55,7 @@ const Wrapper = styled.div<{ isSelected: boolean }>`
   align-items: center;
 
   p {
-    font-family: 'TmoneyRoundWind';
-    font-size: 18px;
-    line-height: auto;
-    font-weight: 800;
+    ${({ theme }) => theme.typo.text.T_21_EB}
     color: ${({ theme }) => theme.palette.black};
   }
 `;

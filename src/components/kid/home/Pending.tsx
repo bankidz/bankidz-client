@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
-import SuggestBadge from '../badges/SuggestBadge';
+import SuggestBadge from '@components/common/badges/SuggestBadge';
 
 interface PendingProps extends HTMLAttributes<HTMLButtonElement> {
   /**

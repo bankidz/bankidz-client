@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as SummaryWrapper } from '../../assets/icons/homeKid-summary.svg';
+import { ReactComponent as SummaryWrapper } from '@assets/border/homeKid-summary.svg';
 
 interface SummaryProps {
   /**

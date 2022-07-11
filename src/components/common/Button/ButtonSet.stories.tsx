@@ -3,7 +3,7 @@ import ButtonSet from './ButtonSet';
 import Button from './Button';
 
 export default {
-  title: 'Common/Button/ButtonSet',
+  title: 'Common/버튼 셋/ButtonSet',
   component: ButtonSet,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},

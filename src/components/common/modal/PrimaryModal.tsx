@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
-import { clacRatio } from '../../../lib/styles/theme';
-import { ReactComponent as ModalContentBanky } from '../../../assets/icons/modal-content-banky.svg';
-import { ReactComponent as Check } from '../../../assets/icons/check.svg';
+import { clacRatio } from '@lib/styles/theme';
+import { ReactComponent as ModalContentBanky } from '@assets/illust/modal-content-banki.svg';
+import { ReactComponent as Check } from '@assets/icon/check.svg';
 import { darken } from 'polished';
 
 interface PrimaryModalProps {
@@ -101,18 +101,15 @@ const WhiteBox = styled.div`
   }
 
   .main-label {
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
     height: 21px;
-    font-style: normal;
-    font-weight: 800;
-    font-size: 21px;
     margin-top: 8px;
     margin-bottom: 16px;
   }
 
   .sub-label {
+    ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     height: 14px;
-    font-style: normal;
-    font-size: 14px;
     color: #82818b; // TODO: color: 디자인 시스템 확인 필요
     margin-bottom: 36px;
   }

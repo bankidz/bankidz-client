@@ -3,8 +3,8 @@ import { AppProps } from '../../App';
 
 import HomeParent from './parent/HomeParent';
 import PendingKid from './kid/PendingKid';
-import Base from '../../components/layout/Base';
-import Stacked from '../../components/layout/Stacked';
+import Base from '@components/layout/Base';
+import Stacked from '@components/layout/Stacked';
 import HomeKid from './kid/HomeKid';
 import PendingParent from './parent/PendingParent';
 import NowParent from './parent/NowParent';
@@ -40,9 +40,9 @@ function HomeRouter({ isKid }: AppProps) {
         }
       />
       <Route
-        path="/create"
+        path="/create/:step"
         element={
-          <Stacked label="돈길 만들기">
+          <Stacked label="돈길 계약하기">
             <CreateKid />
           </Stacked>
         }

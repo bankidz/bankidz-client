@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import kakao from '../../../assets/icons/kakao.svg';
+import kakao from '@assets/icon/kakao.svg';
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
@@ -57,9 +57,10 @@ const Wrapper = styled.button<{
   height: 48px;
   border-radius: 12px;
   border: none;
-  font-size: 16px;
-  font-weight: bold;
   cursor: pointer;
+  p {
+    ${({ theme }) => theme.typo.button.Primary_T_15_EB}
+  }
 
   ${({ property }) =>
     property == 'etc' &&

@@ -1,8 +1,8 @@
-import { ReactNode } from '@mdx-js/react/lib';
+import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InstructionBadgeProps {
-  /** 스타일을 선택합니다. 'primary', 'secondary', 'tertiary' 중 하나를 입력합니다. */
+  /** 스타일을 선택합니다. 'primary', 'secondary', 'tertiary' 중 하나를 입력합니다.! */
   property: 'primary' | 'secondary' | 'tertiary';
   children: ReactNode;
 }

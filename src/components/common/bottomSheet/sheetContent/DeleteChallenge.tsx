@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ReactComponent as SadBanky } from '../../../../assets/banky/sad.svg';
-import Button from '../../Button/Button';
+import { ReactComponent as SvgSadBanki } from '@assets/illust/banki-sad.svg';
+import Button from '@components/common/Button/Button';
 
 interface DeleteChallengeProps {
   /*   onClickDelete: () => void;
@@ -13,14 +13,14 @@ function DeleteChallenge({}: DeleteChallengeProps) {
       <Container>
         <p>정말 포기할거예요?</p>
         <BankyWrapper>
-          <SadBanky />
+          <SvgSadBanki />
         </BankyWrapper>
         <Rule>
           <p>포기규칙</p>
           <p>
             2주에 하나의 돈길만 포기할 수 있어요.
             <br />
-            단, 생성 후 일주일 전까지는 상관없이 포기할 수 있어요.
+            포기하면 돌이킬 수 없어요.
           </p>
         </Rule>
       </Container>
@@ -43,10 +43,7 @@ const Container = styled.div`
   grid-gap: 16px;
 
   & > p:first-child {
-    font-family: 'TmoneyRoundWind';
-    font-size: 21px;
-    line-height: 21px;
-    font-weight: 800;
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
     color: ${({ theme }) => theme.palette.black};
   }
 `;
