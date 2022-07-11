@@ -4,7 +4,7 @@ import MypageParent from './MypageParent';
 import Info from './Info';
 import Code from './Code';
 import { AppProps } from '../../App';
-import Base from '../../components/layout/Base';
+import Base from '@components/layout/Base';
 
 function MypageRouter({ isKid }: AppProps) {
   return (

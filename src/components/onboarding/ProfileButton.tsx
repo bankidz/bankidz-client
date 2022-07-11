@@ -1,8 +1,8 @@
 import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ProfileButtonCharacter } from '../../assets/icons/profile-button-character.svg';
-import { ReactComponent as ProfileButtonBorder } from '../../assets/icons/profile-button-border.svg';
-import { clacRatio, theme } from '../../lib/styles/theme';
+import { ReactComponent as ProfileButtonCharacter } from '@assets/icons/profile-button-character.svg';
+import { ReactComponent as ProfileButtonBorder } from '@assets/icons/profile-button-border.svg';
+import { clacRatio, theme } from '@lib/styles/theme';
 
 interface ProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;

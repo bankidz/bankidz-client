@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Arrow } from '../../assets/icons/arrow-left.svg';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-left.svg';
 interface TopAppBarProps {
   /**
    * 이전 페이지명

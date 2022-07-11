@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Step1 from '../../../components/kid/create/content/Step1';
-import Step2 from '../../../components/kid/create/content/Step2';
-import Progress from '../../../components/kid/create/Progress';
-import Margin from '../../../components/layout/Margin';
+import Step1 from '@components/kid/create/content/Step1';
+import Step2 from '@components/kid/create/content/Step2';
+import Progress from '@components/kid/create/Progress';
+import Margin from '@components/layout/Margin';
 
 function CreateKid() {
   const { step } = useParams();

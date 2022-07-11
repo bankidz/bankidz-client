@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Base from '../../components/layout/Base';
+import Base from '@components/layout/Base';
 import Stacked from '../../components/layout/Stacked';
 import Challenge from './Challenge';
 import ChallengeDelete from './ChallengeDelete';
