@@ -48,7 +48,7 @@ declare module 'styled-components' {
       button: {
         Primary_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: 15px;line-height: 100%;font-weight: 800;`;
         InnerText_T_12_EB: `font-family: 'TmoneyRoundWind';font-size: 12px;line-height: 100%;font-weight: 800;`;
-        InnerText_T_15_EB: `font-family: 'Spoqa Han Sans Neo';font-size: 15px;line-height: 100%;font-weight: 400;`;
+        InnerText_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: 15px;line-height: 100%;font-weight: 800;`;
       };
       bottomSheet: {
         T_14_EB: `font-family: 'TmoneyRoundWind';font-size: 14px;line-height: 100%;font-weight: 800;`;

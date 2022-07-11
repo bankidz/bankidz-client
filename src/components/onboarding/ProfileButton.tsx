@@ -86,9 +86,6 @@ const StyledButton = styled.button`
     }
 
     span {
-      width: 24px;
-      height: 12px;
-
       ${({ theme }) => theme.typo.button.InnerText_T_15_EB}
     }
   }
