@@ -6,7 +6,7 @@ import SelectProfile from './sheetContent/SelectProfile';
 import DeleteChallenge from './sheetContent/DeleteChallenge';
 
 export default {
-  title: 'Common/BottomSheet/CommonSheet',
+  title: 'Common/바텀 시트/CommonSheet',
   component: CommonSheet,
   argTypes: {},
 } as ComponentMeta<typeof CommonSheet>;

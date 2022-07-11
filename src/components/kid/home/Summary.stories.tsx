@@ -4,7 +4,7 @@ import Summary from './Summary';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Kid/home/Summary',
+  title: '자녀/홈/Summary',
   component: Summary,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   decorators: [

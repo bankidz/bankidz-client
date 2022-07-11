@@ -29,14 +29,21 @@ const Wrapper = styled.div`
   width: 100%;
   height: 48px;
   padding: 0px 18px;
+  margin-bottom: 16px;
 
   display: flex;
   align-items: center;
   cursor: pointer;
 
+  & > :first-child {
+    margin-right: 12.42px;
+  }
+
   p {
-    font-weight: bold;
-    font-size: 15px;
-    margin-left: 18px;
+    font-family: 'TmoneyRoundWind';
+    font-size: 17px;
+    line-height: 100%;
+    font-weight: 800;
+    color: ${({ theme }) => theme.palette.black};
   }
 `;

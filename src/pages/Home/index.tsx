@@ -42,7 +42,7 @@ function HomeRouter({ isKid }: AppProps) {
       <Route
         path="/create/:step"
         element={
-          <Stacked label="돈길 만들기">
+          <Stacked label="돈길 계약하기">
             <CreateKid />
           </Stacked>
         }

@@ -6,7 +6,7 @@ import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './sheetContent/SelectMoney';
 
 export default {
-  title: 'Common/BottomSheet/ContractSheet',
+  title: 'Common/바텀 시트/ContractSheet',
   component: ContractSheet,
   argTypes: {},
 } as ComponentMeta<typeof ContractSheet>;

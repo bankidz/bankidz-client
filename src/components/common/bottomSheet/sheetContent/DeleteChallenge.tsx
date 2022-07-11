@@ -20,7 +20,7 @@ function DeleteChallenge({}: DeleteChallengeProps) {
           <p>
             2주에 하나의 돈길만 포기할 수 있어요.
             <br />
-            단, 생성 후 일주일 전까지는 상관없이 포기할 수 있어요.
+            포기하면 돌이킬 수 없어요.
           </p>
         </Rule>
       </Container>
