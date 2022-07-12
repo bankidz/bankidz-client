@@ -24,8 +24,8 @@ const StyledSpan = styled.span`
   width: 90px;
   height: 27px;
 
-  background: ${({ theme }) => theme.palette.yellow[2]};
-  border-radius: 12px;
+  background: ${({ theme }) => theme.palette.main.yellow200};
+  border-radius: ${({ theme }) => theme.radius.medium};
 
   line-height: 27px;
   vertical-align: center;

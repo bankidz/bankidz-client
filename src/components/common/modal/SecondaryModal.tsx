@@ -95,7 +95,7 @@ const WhiteBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 24px;
+  border-radius: ${({ theme }) => theme.radius.large};
 
   // TODO: 디자인 이삼함. 피그마에 디자인팀 맨션해서 코멘트 남김.
   svg {
@@ -109,8 +109,9 @@ const WhiteBox = styled.div`
     padding: 4px 8px;
     gap: 8px;
     height: 26px;
-    background: ${({ theme }) => theme.palette.yellow[0]};
-    border-radius: 12px;
+    background: ${({ theme }) =>
+      theme.palette.main.yellow400}; // TODO: color 확인 필요
+    border-radius: ${({ theme }) => theme.radius.large};
 
     font-style: normal;
     font-weight: 800;
@@ -146,11 +147,12 @@ const OverlayBox = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${({ theme }) => theme.palette.yellow[0]};
-    border-radius: 12px;
+    background: ${({ theme }) =>
+      theme.palette.main.yellow400}; // TODO: color 확인 필요
+    border-radius: ${({ theme }) => theme.radius.medium};
 
     ${({ theme }) => {
-      const selected = theme.palette.yellow[0];
+      const selected = theme.palette.main.yellow400; // TODO: color 확인 필요
       return css`
         &:active {
           background: ${darken(0.1, selected)};

@@ -30,8 +30,8 @@ const ButtonContainer = styled.div`
   /* 임시 */
   & > div {
     height: 60px;
-    background-color: gray;
-    border-radius: 8px;
+    background-color: grey;
+    border-radius: ${({ theme }) => theme.radius.small};
   }
 `;
 
@@ -45,7 +45,7 @@ const Sub = styled.div`
     font-family: 'Spoqa Han Sans Neo';
     font-size: 14px;
     font-weight: 700;
-    color: ${({ theme }) => theme.palette.gray[4]};
+    color: ${({ theme }) => theme.palette.greyScale.grey400};
     text-decoration: underline;
   }
 `;
