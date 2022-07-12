@@ -43,7 +43,7 @@ const Wrapper = styled.div`
 
 const ButtonContainer = styled.div`
   width: 292px;
-  margin: 0 auto;
+  margin: 0px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;

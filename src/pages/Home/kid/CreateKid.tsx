@@ -56,7 +56,7 @@ export default CreateKid;
 
 const Wrapper = styled.div`
   & > :first-child {
-    margin: 0 auto;
+    margin: 0px auto;
   }
   h1 {
     margin-top: 24px;

@@ -17,12 +17,12 @@ const Template: ComponentStory<typeof CommonSheet> = (args) => (
 
 export const 프로필_선택_확인 = Template.bind({});
 프로필_선택_확인.args = {
-  children: <SelectProfile role={'아들'} />,
+  children: <SelectProfile role={'엄마'} />,
   open: true,
 };
 
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
-  children: <DeleteChallenge />,
+  children: <DeleteChallenge onClickDelete={() => {}} onDismiss={() => {}} />,
   open: true,
 };
