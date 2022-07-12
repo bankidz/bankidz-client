@@ -5,7 +5,6 @@ import Button from './Button';
 export default {
   title: 'Common/버튼 셋/ButtonSet',
   component: ButtonSet,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
 } as ComponentMeta<typeof ButtonSet>;
 
