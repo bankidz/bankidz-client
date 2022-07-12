@@ -73,6 +73,8 @@ const Wrapper = styled.button<{
         padding-right: 280px;
       }
       p {
+        font-family: 'Spoqa Han Sans Neo';
+        font-weight: 500;
         position: absolute;
       }
     `};

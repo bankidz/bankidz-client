@@ -53,10 +53,11 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  img {
+  svg {
     padding: 0px ${calcRatio(9, 92)};
     padding-top: ${calcRatio(7, 92)};
     width: 100%;
+    box-sizing: border-box;
   }
   p {
     ${({ theme }) => theme.typo.button.InnerText_T_12_EB}

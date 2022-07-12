@@ -3,26 +3,26 @@ import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/challengePayloadSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
-import a1 from '@assets/illust/ContractItemNames/a1.svg';
-import a2 from '@assets/illust/ContractItemNames/a2.svg';
-import a3 from '@assets/illust/ContractItemNames/a3.svg';
-import b1 from '@assets/illust/ContractItemNames/b1.svg';
-import b2 from '@assets/illust/ContractItemNames/b2.svg';
-import b3 from '@assets/illust/ContractItemNames/b3.svg';
-import c1 from '@assets/illust/ContractItemNames/c1.svg';
-import c2 from '@assets/illust/ContractItemNames/c2.svg';
-import c3 from '@assets/illust/ContractItemNames/c3.svg';
+import { ReactComponent as A1 } from '@assets/illust/ContractItemNames/a1.svg';
+import { ReactComponent as A2 } from '@assets/illust/ContractItemNames/a2.svg';
+import { ReactComponent as A3 } from '@assets/illust/ContractItemNames/a3.svg';
+import { ReactComponent as B1 } from '@assets/illust/ContractItemNames/b1.svg';
+import { ReactComponent as B2 } from '@assets/illust/ContractItemNames/b2.svg';
+import { ReactComponent as B3 } from '@assets/illust/ContractItemNames/b3.svg';
+import { ReactComponent as C1 } from '@assets/illust/ContractItemNames/c1.svg';
+import { ReactComponent as C2 } from '@assets/illust/ContractItemNames/c2.svg';
+import { ReactComponent as C3 } from '@assets/illust/ContractItemNames/c3.svg';
 
 const itemNames = [
-  { name: '학용품', image: <img src={a1} /> },
-  { name: '생활용품', image: <img src={a2} /> },
-  { name: '전자제품', image: <img src={a3} /> },
-  { name: '식품', image: <img src={b1} /> },
-  { name: '문화생활', image: <img src={b2} /> },
-  { name: '패션뷰티', image: <img src={b3} /> },
-  { name: '선물', image: <img src={c1} /> },
-  { name: '비상금', image: <img src={c2} /> },
-  { name: '기타', image: <img src={c3} /> },
+  { name: '학용품', image: <A1 /> },
+  { name: '생활용품', image: <A2 /> },
+  { name: '전자제품', image: <A3 /> },
+  { name: '식품', image: <B1 /> },
+  { name: '문화생활', image: <B2 /> },
+  { name: '패션뷰티', image: <B3 /> },
+  { name: '선물', image: <C1 /> },
+  { name: '비상금', image: <C2 /> },
+  { name: '기타', image: <C3 /> },
 ];
 
 function Step2() {
