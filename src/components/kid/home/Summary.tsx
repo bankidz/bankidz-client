@@ -79,7 +79,7 @@ const Count = styled.div`
   align-items: center;
   margin: 2px 0px;
   &:first-child {
-    border-right: 1px solid ${({ theme }) => theme.palette.gray[3]};
+    border-right: 1px solid ${({ theme }) => theme.palette.greyScale.grey300};
     padding-right: 50px;
   }
   &:last-child {
@@ -89,7 +89,7 @@ const Count = styled.div`
     font-size: 20px;
     line-height: 25px;
     font-weight: 600;
-    color: ${({ theme }) => theme.palette.yellow[4]};
+    color: ${({ theme }) => theme.palette.main.yellow400};
   }
   div:last-child {
     font-size: 12px;

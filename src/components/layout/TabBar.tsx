@@ -10,7 +10,10 @@ import { selectIsKid } from '@store/slices/authSlice';
 function TabBar() {
   const isKid = useAppSelector(selectIsKid);
   const { pathname } = useLocation();
-  const active = [theme.palette.gray[3], theme.palette.yellow[0]];
+  const active = [
+    theme.palette.greyScale.grey300,
+    theme.palette.main.yellow400,
+  ];
 
   return (
     <Wrapper>
@@ -37,12 +40,12 @@ export default TabBar;
 
 const Wrapper = styled.div`
   /* 테두리 위에만 */
-  border: 1px solid ${({ theme }) => theme.palette.gray[1]};
+  border: 1px solid ${({ theme }) => theme.palette.greyScale.grey100};
   border-bottom: none;
   position: fixed;
   height: 47px;
 
-  background-color: ${({ theme }) => theme.palette.white};
+  background-color: white;
   border-radius: 12px 12px 28px 28px;
   padding-bottom: 14px;
 

@@ -1,34 +1,49 @@
 import 'styled-components';
-
+import { clacRem } from '@lib/styles/theme';
 declare module 'styled-components' {
   export interface DefaultTheme {
     palette: {
-      yellow: ['#FFD749', '#FFF7E5', '#FFEDC1', '#FFD56F', '#FFAA42'];
-      blue: ['#000', '#C6E8FF', '#9AD7FF', '#0099FF'];
-      red: ['#000', '#FFCFB1', '#FFBA8E', '#FF6F42'];
-      green: ['#000', '#C0F0A4', '#A5EE79', '#94DD7A'];
-      white: '#fff';
-      lightGray: '#FAFAFC';
-      gray: [
-        '#000',
-        '#F7F7F8',
-        '#EDEDED',
-        '#D1D1D4',
-        '#B3B2B8',
-        '#82818B',
-        '#4C4C52',
-        '#26262D',
-      ];
-      black: '#000';
+      main: {
+        yellow100: '#FFF6D2';
+        yellow200: '#FFEEA6';
+        yellow300: '#FFDA40';
+        yellow400: '#FFC52F';
+      };
+      greyScale: {
+        white: '#FFFFFF';
+        grey100: '#FAFAFC';
+        grey200: '#EAEAEC';
+        grey300: '#DBDEE1';
+        grey400: '#CFCFCF';
+        grey500: '#A6A9AD';
+        grey600: '#828489';
+        grey700: '#525354';
+        black: '#2E3234';
+      };
+      sementic: {
+        red100: '#FFDDCA';
+        red200: '#FFAD80';
+        red300: '#FF6F42';
+        green300: '#62BE36';
+      };
+      level: {
+        grey100: '#AAAECD';
+        blue100: '#A8CAFC';
+        red100: '#FFB384';
+        green100: '#98E27D';
+        yellow100: '#FDD752';
+      };
     };
-    boxShadow: {
-      normal: '0 3px 8px 0 rgb(0 0 0 / 10%)';
+    radius: {
+      small: '8px';
+      medium: '12px';
+      large: '24px';
     };
     typo: {
       input: {
-        Title_T_24_EB: `font-family: 'TmoneyRoundWind';font-size: 24px;line-height: 100%;font-weight: 800;`;
-        TextField_T_16_EB: `font-family: 'TmoneyRoundWind';font-size: 16px;line-height: 100%;font-weight: 800;`;
-        TextField_Num_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: 21px;line-height: 100%;font-weight: 800;`;
+        Title_T_24_EB: string;
+        TextField_T_16_EB: string;
+        TextField_Num_T_21_EB: string;
         TextMessage_S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 500;`;
       };
       text: {

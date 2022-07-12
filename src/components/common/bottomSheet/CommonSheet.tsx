@@ -41,7 +41,9 @@ const StyledBottomSheet = styled(BottomSheet)`
     width: 60px;
     height: 5px;
     border-radius: 3px;
-    background-color: ${({ theme }) => theme.palette.gray[1]};
+    // TODO: color 확인 필요 */
+    background-color: pink;
+    /* background-color: ${({ theme }) => theme.palette.greyScale.grey100}; */
   }
 `;
 

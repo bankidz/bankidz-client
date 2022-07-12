@@ -18,9 +18,9 @@ export default RiskBadge;
 const Wrapper = styled.div<{
   riskLevel: '안정' | '중립' | '위험';
 }>`
-  width: 41px;
-  height: 14px;
-  border-radius: 6.56287px;
+  width: 32px;
+  height: 15px;
+  border-radius: ${({ theme }) => theme.radius.medium};
 
   display: flex;
   justify-content: center;
@@ -29,21 +29,21 @@ const Wrapper = styled.div<{
   ${({ riskLevel }) =>
     riskLevel === '안정' &&
     css`
-      background: ${({ theme }) => theme.palette.green[3]};
+      background: ${({ theme }) => theme.palette.sementic.green300};
     `}
   ${({ riskLevel }) =>
     riskLevel === '중립' &&
     css`
-      background: ${({ theme }) => theme.palette.yellow[3]};
+      background: ${({ theme }) => theme.palette.main.yellow400};
     `}
   ${({ riskLevel }) =>
     riskLevel === '위험' &&
     css`
-      background: ${({ theme }) => theme.palette.red[3]};
+      background: ${({ theme }) => theme.palette.sementic.red300};
     `}
 `;
 
 const StyledSpan = styled.span`
   ${({ theme }) => theme.typo.tag.T_8_EB}
-  color: ${({ theme }) => theme.palette.white};
+  color: ${({ theme }) => theme.palette.greyScale.white};
 `;

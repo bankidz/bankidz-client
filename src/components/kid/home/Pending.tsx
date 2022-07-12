@@ -37,8 +37,8 @@ export default Pending;
 const Wrapper = styled.button`
   width: 100%;
   height: 96px;
-  border-radius: 12px;
-  background-color: ${({ theme }) => theme.palette.white};
+  border-radius: ${({ theme }) => theme.radius.medium};
+  background-color: white;
   padding: 24px 16px;
 
   display: flex;
@@ -58,7 +58,7 @@ const Left = styled.div`
     font-size: 14px;
     line-height: 14px;
     font-weight: 700;
-    color: ${({ theme }) => theme.palette.gray[5]};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
   p:last-child {
     margin-top: 8px;
@@ -66,6 +66,6 @@ const Left = styled.div`
     font-size: 20px;
     line-height: 26px;
     font-weight: 800;
-    color: ${({ theme }) => theme.palette.black};
+    color: black;
   }
 `;

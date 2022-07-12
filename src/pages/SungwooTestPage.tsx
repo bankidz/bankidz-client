@@ -30,6 +30,7 @@ function SungwooTestPage() {
   }
   return (
     <Wrapper>
+      Test
       <button onClick={handleClick}>모달 열기</button>
       {/* @ts-expect-error */}
       <Modals />
@@ -39,4 +40,6 @@ function SungwooTestPage() {
 
 export default SungwooTestPage;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  ${({ theme }) => theme.typo.input.Title_T_24_EB}
+`;

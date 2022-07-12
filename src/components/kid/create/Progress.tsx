@@ -37,7 +37,7 @@ const Wrapper = styled.div`
     content: '';
     width: 14px;
     height: 2px;
-    background-color: ${({ theme }) => theme.palette.gray[2]};
+    background-color: ${({ theme }) => theme.palette.greyScale.grey300};
     position: absolute;
     left: 14px;
     top: 5px;
@@ -48,12 +48,12 @@ const Circle = styled.div<{ fill: boolean }>`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.palette.gray[2]};
+  border: 2px solid ${({ theme }) => theme.palette.greyScale.grey300};
   box-sizing: border-box;
 
   ${({ fill }) =>
     fill &&
     css`
-      background-color: ${({ theme }) => theme.palette.yellow[0]};
+      background-color: ${({ theme }) => theme.palette.main.yellow200};
     `}
 `;
