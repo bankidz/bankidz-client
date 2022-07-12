@@ -44,7 +44,7 @@ const Container = styled.div`
 
   & > p:first-child {
     ${({ theme }) => theme.typo.popup.Title_T_21_EB}
-    color: ${({ theme }) => theme.palette.black};
+    color: black;
   }
 `;
 
@@ -56,22 +56,22 @@ const BankyWrapper = styled.div`
 `;
 
 const Rule = styled.div`
-  background-color: ${({ theme }) => theme.palette.gray[1]};
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   padding: 16px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius.medium};
   & > p:first-child {
     font-family: 'TmoneyRoundWind';
     font-size: 14px;
     line-height: 1.5;
     font-weight: 800;
-    color: ${({ theme }) => theme.palette.gray[5]};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
   & > p:nth-child(2) {
     font-family: 'TmoneyRoundWind';
     font-size: 14px;
     line-height: 1.5;
     font-weight: 400;
-    color: ${({ theme }) => theme.palette.gray[5]};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
 `;
 

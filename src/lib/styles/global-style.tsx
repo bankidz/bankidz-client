@@ -15,7 +15,7 @@ export const GlobalStyle = createGlobalStyle`
       -moz-osx-font-smoothing: grayscale;
       box-sizing: border-box; /* 엘리먼트의 box-sizing 값을 border-box로 설정 */
       background-color: #FFD56F;
-      
+
       /* 바텀시트 작업 중 추가 */
       overflow: hidden;
     }
@@ -43,12 +43,12 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     button {
-      background: inherit; 
-      border: none; 
-      box-shadow: none; 
-      border-radius: 0; 
-      padding: 0; 
-      overflow: visible; 
+      background: inherit;
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 0;
+      overflow: visible;
       cursor: pointer;
     }
     button:focus {
@@ -67,5 +67,5 @@ export const GlobalStyle = createGlobalStyle`
     }
 
 
-    
+
 `;

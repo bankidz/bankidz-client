@@ -45,7 +45,9 @@ const StyledBottomSheet = styled(BottomSheet)`
     width: 60px;
     height: 5px;
     border-radius: 3px;
-    background-color: ${({ theme }) => theme.palette.gray[1]};
+    // TODO: color 확인 필요
+    background-color: pink;
+    /* background-color: ${({ theme }) => theme.palette.greyScale.grey100}; */
   }
 `;
 
@@ -56,8 +58,7 @@ const SheetContainer = styled.div`
 const NextButton = styled.button`
   width: 100%;
   height: 48px;
-  background-color: ${({ theme }) => theme.palette.yellow[0]};
-
+  background-color: ${({ theme }) => theme.palette.main.yellow300};
   ${({ theme }) => theme.typo.button.Primary_T_15_EB}
-  color: ${({ theme }) => theme.palette.white};
+  color: white;
 `;

@@ -14,7 +14,7 @@ function SelectInterestButton({ isSelected, risk }: SelectInterestButtonProps) {
         return '안정';
         break;
       case 2:
-        return '중립';
+        return '보통';
         break;
       case 3:
         return '위험';
@@ -37,15 +37,15 @@ export default SelectInterestButton;
 const Wrapper = styled.div<{ isSelected: boolean }>`
   height: 61px;
   width: 100%;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.radius.small};
   ${({ isSelected }) =>
     isSelected
       ? css`
-          background-color: ${({ theme }) => theme.palette.yellow[1]};
-          border: 1px solid ${({ theme }) => theme.palette.yellow[4]};
+          background-color: ${({ theme }) => theme.palette.main.yellow100};
+          border: 1px solid ${({ theme }) => theme.palette.main.yellow400};
         `
       : css`
-          border: 1px solid ${({ theme }) => theme.palette.yellow[1]};
+          border: 1px solid ${({ theme }) => theme.palette.main.yellow100};
         `}
 
   display: flex;
@@ -56,6 +56,6 @@ const Wrapper = styled.div<{ isSelected: boolean }>`
 
   p {
     ${({ theme }) => theme.typo.text.T_21_EB}
-    color: ${({ theme }) => theme.palette.black};
+    color: ${({ theme }) => theme.palette.greyScale.black};
   }
 `;

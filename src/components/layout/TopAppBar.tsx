@@ -45,6 +45,6 @@ const Wrapper = styled.div`
     font-size: 17px;
     line-height: 100%;
     font-weight: 800;
-    color: ${({ theme }) => theme.palette.black};
+    color: ${({ theme }) => theme.palette.greyScale.black};
   }
 `;
