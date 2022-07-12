@@ -91,4 +91,5 @@ const Wrapper = styled.button<{
     background-color: ${({ theme }) => theme.palette.greyScale.grey300};
     color: ${({ theme }) => theme.palette.greyScale.white};
   }
+  z-index: 2;
 `;

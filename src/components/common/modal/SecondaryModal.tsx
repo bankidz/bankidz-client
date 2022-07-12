@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
-import { clacRatio } from '@lib/styles/theme';
+import { calcRatio } from '@lib/styles/theme';
 import { ReactComponent as ModalContentFinish } from '@assets/illust/modal-content-finish.svg';
 import { ReactComponent as Check } from '@assets/icon/check.svg';
 import { darken } from 'polished';
@@ -46,7 +46,7 @@ function SecondaryModal({
         content: {
           height: '560px',
           position: 'absolute',
-          top: `${clacRatio(100, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
+          top: `${calcRatio(100, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
           left: '18px',
           right: '18px',
           background: '#191919',

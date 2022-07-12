@@ -3,15 +3,15 @@ import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/challengePayloadSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
-import a1 from '@assets/illust/itemNames/a1.svg';
-import a2 from '@assets/illust/itemNames/a2.svg';
-import a3 from '@assets/illust/itemNames/a3.svg';
-import b1 from '@assets/illust/itemNames/b1.svg';
-import b2 from '@assets/illust/itemNames/b2.svg';
-import b3 from '@assets/illust/itemNames/b3.svg';
-import c1 from '@assets/illust/itemNames/c1.svg';
-import c2 from '@assets/illust/itemNames/c2.svg';
-import c3 from '@assets/illust/itemNames/c3.svg';
+import a1 from '@assets/illust/ContractItemNames/a1.svg';
+import a2 from '@assets/illust/ContractItemNames/a2.svg';
+import a3 from '@assets/illust/ContractItemNames/a3.svg';
+import b1 from '@assets/illust/ContractItemNames/b1.svg';
+import b2 from '@assets/illust/ContractItemNames/b2.svg';
+import b3 from '@assets/illust/ContractItemNames/b3.svg';
+import c1 from '@assets/illust/ContractItemNames/c1.svg';
+import c2 from '@assets/illust/ContractItemNames/c2.svg';
+import c3 from '@assets/illust/ContractItemNames/c3.svg';
 
 const itemNames = [
   { name: '학용품', image: <img src={a1} /> },
@@ -55,4 +55,5 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 16px;
+  margin: 0px 8px;
 `;

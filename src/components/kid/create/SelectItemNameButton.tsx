@@ -1,7 +1,7 @@
 import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SelectItemNameButtonBorder } from '@assets/border/itemName-border.svg';
-import { theme } from '@lib/styles/theme';
+import { calcRatio, theme } from '@lib/styles/theme';
 
 interface SelectItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {
   name: string;
@@ -14,10 +14,14 @@ function SelectItemNameButton({
   ...props
 }: SelectItemNameButtonProps) {
   const [isSelected, setIsSelected] = useState(false);
+
   return (
-    <Wrapper {...props}>
+    <Wrapper
+      onMouseOver={() => setIsSelected(true)}
+      onMouseLeave={() => setIsSelected(false)}
+      {...props}
+    >
       <SelectItemNameButtonBorder
-        onClick={() => setIsSelected(true)}
         fill={isSelected ? theme.palette.main.yellow100 : 'white'}
         stroke={
           isSelected
@@ -42,17 +46,21 @@ const Wrapper = styled.button`
 const Content = styled.div`
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  top: 0px;
+  transform: translate3d(-50%, 0, 0);
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  img {
+    padding: 0px ${calcRatio(9, 92)};
+    padding-top: ${calcRatio(7, 92)};
+    width: 100%;
+  }
   p {
-    //TODO : 비율대로 커지기 (폰트는 ㄴㄴ)
     ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
+    padding-bottom: ${calcRatio(17, 92)};
   }
 `;

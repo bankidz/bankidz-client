@@ -52,7 +52,7 @@ const StyledBottomSheet = styled(BottomSheet)`
 `;
 
 const SheetContainer = styled.div`
-  margin: 0px 18px 32px 18px;
+  margin: 0px 18px 24px 18px;
 `;
 
 const NextButton = styled.button`

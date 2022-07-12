@@ -2,7 +2,7 @@ import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as ProfileButtonCharacter } from '@assets/illust/profile-button-character.svg';
 import { ReactComponent as ProfileButtonBorder } from '@assets/border/profile-button-border.svg';
-import { clacRatio, theme } from '@lib/styles/theme';
+import { calcRatio, theme } from '@lib/styles/theme';
 
 interface ProfileButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;
@@ -81,7 +81,7 @@ const StyledButton = styled.button`
     align-items: center;
 
     svg {
-      width: ${clacRatio(62.64, 152)};
+      width: ${calcRatio(62.64, 152)};
       margin-bottom: 25.23px;
     }
 
