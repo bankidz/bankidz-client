@@ -31,7 +31,7 @@ function ProfileButton({
   };
 
   function handleMouseDown() {
-    setFillColorByMouseEvent(theme.palette.yellow[1]);
+    setFillColorByMouseEvent(theme.palette.main.yellow100);
   }
   function handleMouseUp() {
     setFillColorByMouseEvent('white');
@@ -44,7 +44,7 @@ function ProfileButton({
       {...props}
     >
       <ProfileButtonBorder
-        fill={isSelected ? theme.palette.yellow[1] : fillColorByMouseEvent}
+        fill={isSelected ? theme.palette.main.yellow100 : fillColorByMouseEvent}
       />
       <div className="content">
         <ProfileButtonCharacter />

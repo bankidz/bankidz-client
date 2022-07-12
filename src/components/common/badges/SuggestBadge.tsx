@@ -32,7 +32,7 @@ const StyledSpan = styled.span<{
 
   width: 64px;
   height: 28px;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.radius.small};
   border: none;
   outline: none;
 
@@ -42,10 +42,10 @@ const StyledSpan = styled.span<{
   ${({ isSuggesting }) =>
     isSuggesting
       ? css`
-          // gray 색상은 디자인 되어 있지 않아 임의로 설정하였습니다.
-          background-color: ${({ theme }) => theme.palette.gray[3]};
+          // grey 색상은 디자인 되어 있지 않아 임의로 설정하였습니다.
+          background-color: ${({ theme }) => theme.palette.greyScale.grey300};
         `
       : css`
-          background-color: ${({ theme }) => theme.palette.red[3]};
+          background-color: pink;
         `};
 `;

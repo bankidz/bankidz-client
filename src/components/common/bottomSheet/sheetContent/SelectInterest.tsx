@@ -39,12 +39,12 @@ const Sub = styled.div`
   height: 68px;
   & > p:first-child {
     ${({ theme }) => theme.typo.bottomSheet.T_14_EB};
-    color: ${({ theme }) => theme.palette.red[3]};
+    color: ${({ theme }) => theme.palette.sementic.red300};
   }
   & > p:nth-child(2) {
     margin-top: 10.5px;
     ${({ theme }) => theme.typo.bottomSheet.S_12_R};
     line-height: 150%;
-    color: ${({ theme }) => theme.palette.gray[5]};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
 `;

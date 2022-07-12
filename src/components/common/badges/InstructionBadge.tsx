@@ -25,7 +25,7 @@ const StyledSpan = styled.span<{
   property: 'primary' | 'secondary' | 'tertiary';
 }>`
   height: 23px;
-  border-radius: 6.56287px;
+  /* border-radius: 6.56287px; */
 
   font-style: normal;
   font-weight: 300;
@@ -43,16 +43,16 @@ const StyledSpan = styled.span<{
   ${({ property }) =>
     property === 'primary' &&
     css`
-      background: ${({ theme }) => theme.palette.yellow[2]};
+      background: ${({ theme }) => theme.palette.main.yellow200};
     `}
   ${({ property }) =>
     property === 'secondary' &&
     css`
-      background: ${({ theme }) => theme.palette.yellow[4]};
+      background: ${({ theme }) => theme.palette.main.yellow400};
     `}
   ${({ property }) =>
     property === 'tertiary' &&
     css`
-      background: ${({ theme }) => theme.palette.yellow[3]};
+      background: ${({ theme }) => theme.palette.main.yellow300};
     `}
 `;

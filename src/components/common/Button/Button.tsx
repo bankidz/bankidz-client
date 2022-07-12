@@ -55,7 +55,7 @@ const Wrapper = styled.button<{
   justify-content: center;
   width: ${({ property }) => (property == 'secondary' ? '160px' : '100%')};
   height: 48px;
-  border-radius: 12px;
+  border-radius: ${({ theme }) => theme.radius.medium};
   border: none;
   cursor: pointer;
   p {
@@ -66,7 +66,7 @@ const Wrapper = styled.button<{
     property == 'etc' &&
     css`
       color: #191919 !important;
-      background-color: #fee500;
+      background-color: #fee500; // Kakao yellow
 
       img {
         display: flex;
@@ -79,16 +79,16 @@ const Wrapper = styled.button<{
   ${({ sub }) =>
     sub
       ? css`
-          color: ${({ theme }) => theme.palette.gray[5]};
-          background-color: ${({ theme }) => theme.palette.gray[2]};
+          color: ${({ theme }) => theme.palette.greyScale.white};
+          background-color: ${({ theme }) => theme.palette.greyScale.grey300};
         `
       : css`
-          color: ${({ theme }) => theme.palette.white};
-          background-color: ${({ theme }) => theme.palette.yellow[0]};
+          color: ${({ theme }) => theme.palette.greyScale.white};
+          background-color: ${({ theme }) => theme.palette.main.yellow300};
         `}
 
   :disabled {
-    background-color: ${({ theme }) => theme.palette.gray[2]};
-    color: ${({ theme }) => theme.palette.gray[5]};
+    background-color: ${({ theme }) => theme.palette.greyScale.grey300};
+    color: ${({ theme }) => theme.palette.greyScale.white};
   }
 `;

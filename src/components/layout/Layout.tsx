@@ -45,9 +45,9 @@ const Container = styled.div`
   /* pc 모바일 목업 화면 */
   width: 360px;
   height: 714px;
-  background-color: ${({ theme }) => theme.palette.lightGray};
+  background-color: ${({ theme }) => theme.palette.greyScale.white};
   box-sizing: content-box;
-  border: 12px solid ${({ theme }) => theme.palette.gray[1]};
+  border: 12px solid ${({ theme }) => theme.palette.greyScale.grey100};
   border-radius: 36px;
 
   /* 탭바 */

@@ -83,7 +83,7 @@ const Content = styled.div`
 `;
 
 const WhiteBox = styled.div`
-  background: white;
+  background: ${({ theme }) => theme.palette.greyScale.white};
   height: 424px;
   width: 100%;
 
@@ -91,7 +91,7 @@ const WhiteBox = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  border-radius: 24px;
+  border-radius: ${({ theme }) => theme.radius.large};
 
   svg {
     padding-left: 16px;
@@ -110,7 +110,7 @@ const WhiteBox = styled.div`
   .sub-label {
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     height: 14px;
-    color: #82818b; // TODO: color: 디자인 시스템 확인 필요
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
     margin-bottom: 36px;
   }
 `;
@@ -125,11 +125,11 @@ const OverlayBox = styled.div`
     justify-content: center;
     align-items: center;
 
-    background: ${({ theme }) => theme.palette.yellow[0]};
-    border-radius: 12px;
+    background: ${({ theme }) => theme.palette.main.yellow300};
+    border-radius: ${({ theme }) => theme.radius.medium};
 
     ${({ theme }) => {
-      const selected = theme.palette.yellow[0];
+      const selected = theme.palette.main.yellow300;
       return css`
         &:active {
           background: ${darken(0.1, selected)};

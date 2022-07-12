@@ -36,11 +36,11 @@ const Container = styled.div`
 
   & > p:first-child {
     ${({ theme }) => theme.typo.popup.Title_T_21_EB}
-    color: ${({ theme }) => theme.palette.black};
+    color: ${({ theme }) => theme.palette.greyScale.black};
   }
   & > p:nth-child(2) {
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
-    color: ${({ theme }) => theme.palette.gray[5]};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
 `;
 
