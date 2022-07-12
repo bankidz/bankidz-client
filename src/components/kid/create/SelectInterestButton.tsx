@@ -14,7 +14,7 @@ function SelectInterestButton({ isSelected, risk }: SelectInterestButtonProps) {
         return '안정';
         break;
       case 2:
-        return '중립';
+        return '보통';
         break;
       case 3:
         return '위험';

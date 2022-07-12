@@ -1,20 +1,19 @@
 import { DefaultTheme } from 'styled-components';
 
+// svg 내부에 svg를 삽입하여 위치시키는 경우 내부 svg의 width를
+// % 단위로 계산하기 위한 함수, 소수점 아래는 버림
+export const clacRatio = (innerPx: number, OuterPx: number) =>
+  `${Math.floor((innerPx * 100) / OuterPx)}%`;
+export const calcRem = (px: number) => `${px / 16}rem`;
+
 const customMediaQuery = (maxWidth: number): string =>
   `@media (max-width: ${maxWidth}px)`;
-
 export const media = {
   custom: customMediaQuery,
   pc: customMediaQuery(1440),
   tablet: customMediaQuery(768),
   mobile: customMediaQuery(576),
 };
-
-// svg 내부에 svg를 삽입하여 위치시키는 경우 내부 svg의 width를
-// % 단위로 계산하기 위한 함수, 소수점 아래는 버림
-export const clacRatio = (innerPx: number, OuterPx: number) =>
-  `${Math.floor((innerPx * 100) / OuterPx)}%`;
-export const calcRem = (px: number) => `${px / 16}rem`;
 
 export const theme: DefaultTheme = {
   palette: {
@@ -57,37 +56,75 @@ export const theme: DefaultTheme = {
   typo: {
     input: {
       Title_T_24_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
-        100,
+        24,
       )};line-height: 100%;font-weight: 800;`,
-      TextField_T_16_EB: `font-family: 'TmoneyRoundWind';font-size: 16px;line-height: 100%;font-weight: 800;`,
-      TextField_Num_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: 21px;line-height: 100%;font-weight: 800;`,
-      TextMessage_S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 500;`,
+      TextField_T_16_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        16,
+      )};line-height: 100%;font-weight: 800;`,
+      TextField_Num_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        21,
+      )};line-height: 100%;font-weight: 800;`,
+      TextMessage_S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        12,
+      )};line-height: 100%;font-weight: 500;`,
     },
     text: {
-      T_21_EB: `font-family: 'TmoneyRoundWind';font-size: 21px;line-height: 100%;font-weight: 800;`,
-      T_18_EB: `font-family: 'TmoneyRoundWind';font-size: 18px;line-height: 100%;font-weight: 800;`,
-      T_16_EB: `font-family: 'TmoneyRoundWind';font-size: 16px;line-height: 100%;font-weight: 800;`,
-      S_14_M: `font-family: 'Spoqa Han Sans Neo';font-size: 14px;line-height: 100%;font-weight: 500;`,
-      T_12_EB: ` font-family: 'TmoneyRoundWind';font-size: 12px;line-height: 100%;font-weight: 800;`,
-      S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 500;`,
+      T_21_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        21,
+      )};line-height: 100%;font-weight: 800;`,
+      T_18_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        18,
+      )};line-height: 100%;font-weight: 800;`,
+      T_16_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        16,
+      )};line-height: 100%;font-weight: 800;`,
+      S_14_M: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        14,
+      )};line-height: 100%;font-weight: 500;`,
+      T_12_EB: ` font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        12,
+      )};line-height: 100%;font-weight: 800;`,
+      S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        12,
+      )};line-height: 100%;font-weight: 500;`,
     },
     popup: {
-      T_24_EB: `font-family: 'TmoneyRoundWind';font-size: 24px;line-height: 100%;font-weight: 800;`,
-      Title_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: 21px;line-height: 100%;font-weight: 800;`,
-      S_15_R: `font-family: 'Spoqa Han Sans Neo';font-size: 15px;line-height: 100%;font-weight: 400;`,
-      Sub_S_14_R: `font-family: 'Spoqa Han Sans Neo';font-size: 14px;line-height: 100%;font-weight: 400;`,
+      T_24_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        24,
+      )};line-height: 100%;font-weight: 800;`,
+      Title_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        21,
+      )};line-height: 100%;font-weight: 800;`,
+      S_15_R: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        15,
+      )};line-height: 100%;font-weight: 400;`,
+      Sub_S_14_R: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        14,
+      )};line-height: 100%;font-weight: 400;`,
     },
     button: {
-      Primary_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: 15px;line-height: 100%;font-weight: 800;`,
-      InnerText_T_12_EB: `font-family: 'TmoneyRoundWind';font-size: 12px;line-height: 100%;font-weight: 800;`,
-      InnerText_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: 15px;line-height: 100%;font-weight: 800;`,
+      Primary_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        15,
+      )};line-height: 100%;font-weight: 800;`,
+      InnerText_T_12_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        12,
+      )};line-height: 100%;font-weight: 800;`,
+      InnerText_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        15,
+      )};line-height: 100%;font-weight: 800;`,
     },
     bottomSheet: {
-      T_14_EB: `font-family: 'TmoneyRoundWind';font-size: 14px;line-height: 100%;font-weight: 800;`,
-      S_12_R: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 400;`,
+      T_14_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        14,
+      )};line-height: 100%;font-weight: 800;`,
+      S_12_R: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        12,
+      )};line-height: 100%;font-weight: 400;`,
     },
     tag: {
-      T_8_EB: `font-family: 'TmoneyRoundWind';font-size: 8px;line-height: 100%;font-weight: 800;`,
+      T_8_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        8,
+      )};line-height: 100%;font-weight: 800;`,
     },
   },
 };

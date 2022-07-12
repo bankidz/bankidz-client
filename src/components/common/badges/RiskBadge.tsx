@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface SuggestBadgeProps {
-  /** 위험도를 선택합니다. '안정', '중립', '위헙' 중 하나를 입력합니다. */
-  riskLevel: '안정' | '중립' | '위험';
+  /** 위험도를 선택합니다. '안정', '보통', '위헙' 중 하나를 입력합니다. */
+  riskLevel: '안정' | '보통' | '위험';
 }
 
 function RiskBadge({ riskLevel }: SuggestBadgeProps) {
@@ -16,7 +16,7 @@ function RiskBadge({ riskLevel }: SuggestBadgeProps) {
 export default RiskBadge;
 
 const Wrapper = styled.div<{
-  riskLevel: '안정' | '중립' | '위험';
+  riskLevel: '안정' | '보통' | '위험';
 }>`
   width: 32px;
   height: 15px;
@@ -32,7 +32,7 @@ const Wrapper = styled.div<{
       background: ${({ theme }) => theme.palette.sementic.green300};
     `}
   ${({ riskLevel }) =>
-    riskLevel === '중립' &&
+    riskLevel === '보통' &&
     css`
       background: ${({ theme }) => theme.palette.main.yellow400};
     `}

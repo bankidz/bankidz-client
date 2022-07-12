@@ -44,33 +44,33 @@ declare module 'styled-components' {
         Title_T_24_EB: string;
         TextField_T_16_EB: string;
         TextField_Num_T_21_EB: string;
-        TextMessage_S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 500;`;
+        TextMessage_S_12_M: string;
       };
       text: {
-        T_21_EB: `font-family: 'TmoneyRoundWind';font-size: 21px;line-height: 100%;font-weight: 800;`;
-        T_18_EB: `font-family: 'TmoneyRoundWind';font-size: 18px;line-height: 100%;font-weight: 800;`;
-        T_16_EB: `font-family: 'TmoneyRoundWind';font-size: 16px;line-height: 100%;font-weight: 800;`;
-        S_14_M: `font-family: 'Spoqa Han Sans Neo';font-size: 14px;line-height: 100%;font-weight: 500;`;
-        T_12_EB: ` font-family: 'TmoneyRoundWind';font-size: 12px;line-height: 100%;font-weight: 800;`;
-        S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 500;`;
+        T_21_EB: string;
+        T_18_EB: string;
+        T_16_EB: string;
+        S_14_M: string;
+        T_12_EB: string;
+        S_12_M: string;
       };
       popup: {
-        T_24_EB: `font-family: 'TmoneyRoundWind';font-size: 24px;line-height: 100%;font-weight: 800;`;
-        Title_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: 21px;line-height: 100%;font-weight: 800;`;
-        S_15_R: `font-family: 'Spoqa Han Sans Neo';font-size: 15px;line-height: 100%;font-weight: 400;`;
-        Sub_S_14_R: `font-family: 'Spoqa Han Sans Neo';font-size: 14px;line-height: 100%;font-weight: 400;`;
+        T_24_EB: string;
+        Title_T_21_EB: string;
+        S_15_R: string;
+        Sub_S_14_R: string;
       };
       button: {
-        Primary_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: 15px;line-height: 100%;font-weight: 800;`;
-        InnerText_T_12_EB: `font-family: 'TmoneyRoundWind';font-size: 12px;line-height: 100%;font-weight: 800;`;
-        InnerText_T_15_EB: `font-family: 'TmoneyRoundWind';font-size: 15px;line-height: 100%;font-weight: 800;`;
+        Primary_T_15_EB: string;
+        InnerText_T_12_EB: string;
+        InnerText_T_15_EB: string;
       };
       bottomSheet: {
-        T_14_EB: `font-family: 'TmoneyRoundWind';font-size: 14px;line-height: 100%;font-weight: 800;`;
-        S_12_R: `font-family: 'Spoqa Han Sans Neo';font-size: 12px;line-height: 100%;font-weight: 400;`;
+        T_14_EB: string;
+        S_12_R: string;
       };
       tag: {
-        T_8_EB: `font-family: 'TmoneyRoundWind';font-size: 8px;line-height: 100%;font-weight: 800;`;
+        T_8_EB: string;
       };
     };
   }
