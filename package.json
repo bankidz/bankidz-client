@@ -29,6 +29,7 @@
     "react-spring-bottom-sheet": "^3.4.1",
     "styled-components": "^5.3.5",
     "styled-reset": "^4.4.1",
+    "swiper": "6.8.4",
     "typescript": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
