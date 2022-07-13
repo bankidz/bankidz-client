@@ -26,6 +26,7 @@ function ContractSheet({
       onDismiss={onDismiss}
       snapPoints={({ minHeight }) => minHeight}
       blocking={blocking}
+      id="bottomSheet"
     >
       <SheetContainer>{children}</SheetContainer>
       <NextButton>{label}</NextButton>

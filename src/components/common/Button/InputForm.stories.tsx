@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ContractInputForm from './ContractInputForm';
+import ContractInputForm from './InputForm';
 
 export default {
   title: '자녀/돈길 계약하기/ContractInputForm',
@@ -10,5 +10,7 @@ const Template: ComponentStory<typeof ContractInputForm> = (args) => (
   <ContractInputForm {...args} />
 );
 
-export const Step_1 = Template.bind({});
-Step_1.args = {};
+export const 돈길이름_입력 = Template.bind({});
+돈길이름_입력.args = {
+  placeholder: '돈길 이름을 입력하세요',
+};
