@@ -1,34 +1,39 @@
 import styled from 'styled-components';
-import money_500 from '@assets/illust/SelectMoney/money_500.svg';
-import money_1000 from '@assets/illust/SelectMoney/money_1000.svg';
-import money_5000 from '@assets/illust/SelectMoney/money_5000.svg';
-import money_10000 from '@assets/illust/SelectMoney/money_10000.svg';
-import money_50000 from '@assets/illust/SelectMoney/money_50000.svg';
+import { ReactComponent as Money_500 } from '@assets/illust/SelectMoney/money_500.svg';
+import { ReactComponent as Money_1000 } from '@assets/illust/SelectMoney/money_1000.svg';
+import { ReactComponent as Money_5000 } from '@assets/illust/SelectMoney/money_5000.svg';
+import { ReactComponent as Money_10000 } from '@assets/illust/SelectMoney/money_10000.svg';
+import { ReactComponent as Money_50000 } from '@assets/illust/SelectMoney/money_50000.svg';
+import { ReactComponent as Backspace } from '@assets/icon/backspace.svg';
+import { ReactComponent as Refresh } from '@assets/icon/refresh.svg';
+import { calcRatio } from '@lib/styles/theme';
 
 function SelectMoney() {
   return (
     <Wrapper>
       <ButtonContainer>
         <button>
-          <img src={money_500} />
+          <Money_500 />
         </button>
         <button>
-          <img src={money_1000} />
-        </button>
-
-        <button>
-          <img src={money_5000} />
+          <Money_1000 />
         </button>
         <button>
-          <img src={money_10000} />
+          <Money_5000 />
         </button>
-
         <button>
-          <img src={money_50000} />
+          <Money_10000 />
+        </button>
+        <button>
+          <Money_50000 />
         </button>
         <Remote>
-          <button></button>
-          <button></button>
+          <button>
+            <Backspace />
+          </button>
+          <button>
+            <Refresh />
+          </button>
         </Remote>
       </ButtonContainer>
     </Wrapper>
@@ -47,8 +52,12 @@ const ButtonContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
-  & > button {
+  button {
     height: 60px;
+    &:active {
+      transform: translateY(2px);
+      transition: all 0.1s ease;
+    }
   }
 `;
 
@@ -59,5 +68,14 @@ const Remote = styled.div`
   & > button {
     border-radius: 8px;
     background-color: #dbdee1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:first-child > svg {
+      padding-right: ${calcRatio(2, 61)};
+    }
+    & > svg {
+      box-sizing: content-box;
+    }
   }
 `;
