@@ -1,17 +1,36 @@
 import styled from 'styled-components';
+import money_500 from '@assets/illust/SelectMoney/money_500.svg';
+import money_1000 from '@assets/illust/SelectMoney/money_1000.svg';
+import money_5000 from '@assets/illust/SelectMoney/money_5000.svg';
+import money_10000 from '@assets/illust/SelectMoney/money_10000.svg';
+import money_50000 from '@assets/illust/SelectMoney/money_50000.svg';
 
 function SelectMoney() {
   return (
     <Wrapper>
       <ButtonContainer>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <button>
+          <img src={money_500} />
+        </button>
+        <button>
+          <img src={money_1000} />
+        </button>
+
+        <button>
+          <img src={money_5000} />
+        </button>
+        <button>
+          <img src={money_10000} />
+        </button>
+
+        <button>
+          <img src={money_50000} />
+        </button>
+        <Remote>
+          <button></button>
+          <button></button>
+        </Remote>
       </ButtonContainer>
-      <Sub>
-        <button>직접 입력할래요</button>
-      </Sub>
     </Wrapper>
   );
 }
@@ -19,33 +38,26 @@ function SelectMoney() {
 export default SelectMoney;
 
 const Wrapper = styled.div`
-  margin: 17px 16px 32px 16px;
+  margin: 9px 16px 0px 16px;
 `;
 
 const ButtonContainer = styled.div`
+  width: 292px;
+  margin: 0px auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
-
-  /* 임시 */
-  & > div {
+  & > button {
     height: 60px;
-    background-color: grey;
-    border-radius: ${({ theme }) => theme.radius.small};
   }
 `;
 
-const Sub = styled.div`
-  margin-top: 32px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-
-  button {
-    font-family: 'Spoqa Han Sans Neo';
-    font-size: 14px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.palette.greyScale.grey400};
-    text-decoration: underline;
+const Remote = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  & > button {
+    border-radius: 8px;
+    background-color: #dbdee1;
   }
 `;

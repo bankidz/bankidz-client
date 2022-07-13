@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as ModalContentBanky } from '@assets/illust/modal-content-banki.svg';
 import ReactModal from 'react-modal';
 import CheckButton from '../Button/CheckButton';
-import { clacRatio } from '@lib/styles/theme';
+import { calcRatio } from '@lib/styles/theme';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
@@ -37,7 +37,7 @@ function PrimaryModal({
       content: {
         height: '488px',
         position: 'absolute',
-        top: `${clacRatio(136, 760)}`,
+        top: `${calcRatio(136, 760)}`,
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

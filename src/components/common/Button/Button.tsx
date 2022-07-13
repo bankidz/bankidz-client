@@ -73,6 +73,8 @@ const Wrapper = styled.button<{
         padding-right: 280px;
       }
       p {
+        font-family: 'Spoqa Han Sans Neo';
+        font-weight: 500;
         position: absolute;
       }
     `};
@@ -91,4 +93,5 @@ const Wrapper = styled.button<{
     background-color: ${({ theme }) => theme.palette.greyScale.grey300};
     color: ${({ theme }) => theme.palette.greyScale.white};
   }
+  z-index: 2;
 `;

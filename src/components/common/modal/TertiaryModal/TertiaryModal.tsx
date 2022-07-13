@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { clacRatio } from '@lib/styles/theme';
+import { calcRatio } from '@lib/styles/theme';
 import InstructionCard from './InstructionCard';
 import CloseButton from '../../Button/CloseButton';
 import { ReactComponent as ModalContentMoney } from '@assets/illust/modal-content-money.svg';
@@ -29,7 +29,7 @@ function Tertiary({ onClose }: TertiaryProps) {
       content: {
         height: '568px',
         position: 'absolute',
-        top: `${clacRatio(96, 760)}`,
+        top: `${calcRatio(96, 760)}`,
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

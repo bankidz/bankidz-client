@@ -2,7 +2,7 @@ import { DefaultTheme } from 'styled-components';
 
 // svg 내부에 svg를 삽입하여 위치시키는 경우 내부 svg의 width를
 // % 단위로 계산하기 위한 함수, 소수점 아래는 버림
-export const clacRatio = (innerPx: number, OuterPx: number) =>
+export const calcRatio = (innerPx: number, OuterPx: number) =>
   `${Math.floor((innerPx * 100) / OuterPx)}%`;
 export const calcRem = (px: number) => `${px / 16}rem`;
 
