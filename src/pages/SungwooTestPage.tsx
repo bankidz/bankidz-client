@@ -4,42 +4,27 @@ import useModals from '../components/common/modal/useModals';
 import 'swiper/swiper.min.css';
 import SwiperCore, { Navigation, Scrollbar } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/components/navigation/navigation.min.css';
 import { useState } from 'react';
 
-// showcase
 function SungwooTestPage() {
-  // const { openModal } = useModals();
-  const [swiper, setSwiper] = useState(null);
-  const [mainImageIndex, setMainImageIndex] = useState(0);
-  console.log(mainImageIndex);
-
-  SwiperCore.use([Navigation]);
-
-  const swiperParams = {
-    navigation: true,
-    onSwiper: setSwiper,
-    onSlideChange: (e: any) => setMainImageIndex(e.activeIndex),
-    slidesPerView: 1.1,
-    spaceBetween: 20,
-  };
-
+  const { openModal } = useModals();
+  function handleClick() {
+    // modals.myModal: 열고자 하는 모달
+    // {...}: submit 시 처리되는 비즈니스 로직
+    openModal(modals.tertiaryModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+      headerContent: '이자율이란?',
+      bodyContent:
+        '전체 맡긴 돈 중에 이자가\n얼마나 차지하는 지를 나타내는 말\n\n예를 들어 20%의 이자율을 주는\n은행이라면 내가 100만원을 저금했을 때\n20만원의 이자를 받을 수 있어요',
+    });
+  }
   return (
     <Wrapper>
-      {/* <button onClick={handleClick}>모달 열기</button>
-      <Modals /> */}
+      <button onClick={handleClick}>모달 열기</button>
       {/* @ts-expect-error */}
-      <StyledSwiper {...swiperParams} ref={setSwiper}>
-        <SwiperSlide>
-          <Card>카드1</Card>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card>카드2</Card>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Card>카드3</Card>
-        </SwiperSlide>
-      </StyledSwiper>
+      <Modals />
     </Wrapper>
   );
 }
@@ -49,35 +34,7 @@ function SungwooTestPage() {
 
 export default SungwooTestPage;
 
-const Wrapper = styled.div`
-  background: lightgray;
-  .swiper {
-    &-button-disabled {
-      visibility: hidden;
-    }
-  }
-`;
-
-const StyledSwiper = styled(Swiper)`
-  position: relative;
-  background: lightgray;
-  width: 300px;
-  height: 760px;
-`;
-
-const Card = styled.div`
-  /* padding-left: 20px; */
-  font-size: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-left: 15px;
-  width: 250px;
-  height: 500px;
-  border-radius: 30px;
-  background: pink;
-`;
+const Wrapper = styled.div``;
 
 // function handleClick() {
 //   // modals.myModal: 열고자 하는 모달
