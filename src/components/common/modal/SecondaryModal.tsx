@@ -8,19 +8,19 @@ interface SecondaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
   /** badge에 표시될 내용을 입력합니다. */
-  badgeContent: string;
+  badgeText: string;
   /** header에 표시될 내용을 입력합니다. */
-  headerContent: string;
+  headerText: string;
   /** body에 표시될 내용을 입력합니다. */
-  bodyContent: string;
+  bodyText: string;
 }
 
 // 모달 내부에 표시될 UI 작성
 function SecondaryModal({
   onSubmit,
-  badgeContent,
-  headerContent,
-  bodyContent,
+  badgeText,
+  headerText,
+  bodyText,
 }: SecondaryModalProps) {
   function handleSubmit() {
     onSubmit();
@@ -62,9 +62,9 @@ function SecondaryModal({
       <Content>
         <WhiteBox>
           <ModalContentFinish />
-          <span className="badge">{badgeContent}</span>
-          <span className="header">{headerContent}</span>
-          <div className="body">{bodyContent}</div>
+          <span className="badge">{badgeText}</span>
+          <span className="header">{headerText}</span>
+          <div className="body">{bodyText}</div>
         </WhiteBox>
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />

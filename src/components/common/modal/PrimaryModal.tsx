@@ -8,17 +8,13 @@ interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
   /** header에 표시될 내용을 입력합니다. */
-  headerContent: string;
+  headerText: string;
   /** body에 표시될 내용을 입력합니다. */
-  bodyContent: string;
+  bodyText: string;
 }
 
 // 모달 내부에 표시될 UI 작성
-function PrimaryModal({
-  onSubmit,
-  headerContent,
-  bodyContent,
-}: PrimaryModalProps) {
+function PrimaryModal({ onSubmit, headerText, bodyText }: PrimaryModalProps) {
   function handleSubmit() {
     onSubmit();
   }
@@ -59,8 +55,8 @@ function PrimaryModal({
       <Content>
         <WhiteBox>
           <ModalContentBanky />
-          <span className="main-label">{headerContent}</span>
-          <span className="sub-label">{bodyContent}</span>
+          <span className="main-label">{headerText}</span>
+          <span className="sub-label">{bodyText}</span>
         </WhiteBox>
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />
