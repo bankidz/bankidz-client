@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import kakao from '@assets/icon/kakao.svg';
-
+import { darken } from 'polished';
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * ButtonSet에서 받아온 prop
@@ -58,8 +58,26 @@ const Wrapper = styled.button<{
   border-radius: ${({ theme }) => theme.radius.medium};
   border: none;
   cursor: pointer;
+
   p {
     ${({ theme }) => theme.typo.button.Primary_T_15_EB}
+  }
+
+  color: ${({ theme }) => theme.palette.greyScale.white};
+
+  background-color: ${({ sub, theme }) =>
+    sub ? theme.palette.greyScale.grey300 : theme.palette.main.yellow300};
+
+  &:active {
+    background-color: ${({ sub, theme }) => {
+      const selected = sub
+        ? theme.palette.greyScale.grey300
+        : theme.palette.main.yellow300;
+      return `${darken(0.1, selected)}`;
+    }};
+  }
+  :disabled {
+    background-color: ${({ theme }) => theme.palette.greyScale.grey300};
   }
 
   ${({ property }) =>
@@ -78,20 +96,4 @@ const Wrapper = styled.button<{
         position: absolute;
       }
     `};
-  ${({ sub }) =>
-    sub
-      ? css`
-          color: ${({ theme }) => theme.palette.greyScale.white};
-          background-color: ${({ theme }) => theme.palette.greyScale.grey300};
-        `
-      : css`
-          color: ${({ theme }) => theme.palette.greyScale.white};
-          background-color: ${({ theme }) => theme.palette.main.yellow300};
-        `}
-
-  :disabled {
-    background-color: ${({ theme }) => theme.palette.greyScale.grey300};
-    color: ${({ theme }) => theme.palette.greyScale.white};
-  }
-  z-index: 2;
 `;
