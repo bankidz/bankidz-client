@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { ReactComponent as ModalContentBanky } from '@assets/illust/modal-content-banki.svg';
 import ReactModal from 'react-modal';
 import CheckButton from '../../Button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
-import { ReactComponent as PerforationShape } from '@assets/border/perforation-shape.svg';
-import PerforatedLineTop from './PeforationBorderTop';
+import PerforatedLineTop from './PeforatedLineTop';
+import PerforatedLineBottom from './PerforatedLineBottom';
+import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
+import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
@@ -53,9 +54,9 @@ function PrimaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '544px',
+        height: '554px',
         position: 'absolute',
-        top: `${calcRatio(108, 760)}`,
+        top: `${calcRatio(103, 760)}`,
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -76,69 +77,45 @@ function PrimaryModal({
     <ReactModal {...reactModalParams}>
       <Content>
         <PerforatedLineTop />
-        {/* <PerforationBorderTop>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-          <div className="shape">
-            <PerforationShape />
-          </div>
-        </PerforationBorderTop> */}
         <Top>
           <span className="sub">계약서 전송 성공!</span>
           <span className="main">완구퍼펙트걸 되기</span>
           <div className="dashed-space"></div>
           <div className="dashed-space-linear"></div>
         </Top>
-        <Bottom>아빠, 학용품</Bottom>
+        <div className="vertical-dashed-border-wrapper">
+          <VerticalDashedBorder />
+        </div>
+        <div className="first-horizontal-dashed-border-wrapper">
+          <HorizontalDashedBorder />
+        </div>
+        <div className="second-horizontal-dashed-border-wrapper">
+          <HorizontalDashedBorder />
+        </div>
+        <div className="third-horizontal-dashed-border-wrapper">
+          <HorizontalDashedBorder />
+        </div>
+        <Bottom>
+          <div className="first-row">
+            <div className="계약-대상">계약대상</div>
+            <div className="목표-아이템">목표 아이템</div>
+          </div>
+          <div className="second-row">
+            <div className="목표-적금액">목표 저금액</div>
+            <div className="매주-저금액">매주 저금액</div>
+            <div className="이자부스터">이자부스터</div>
+          </div>
+          <div className="third-row">
+            <div className="총-소요기간">총 소요기간</div>
+            <div className="계약종료일">계약종료일</div>
+            <div className="placeholder">placeholder</div>
+          </div>
+          <div className="signature">대충 서명</div>
+        </Bottom>
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonPositioner>
+        <PerforatedLineBottom />
       </Content>
     </ReactModal>
   );
@@ -149,13 +126,73 @@ export default PrimaryModal;
 const Content = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 100%;
+
+  // background border (vertical, horizontal)
+  position: relative;
+  .vertical-dashed-border-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 167px;
+    transform: translate3d(-50%, -50%, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background: skyblue; */
+    width: 2px;
+    height: 100px;
+  }
+  .first-horizontal-dashed-border-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 115px;
+    transform: translate3d(-50%, -50%, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background: pink; */
+    width: 100%;
+    height: 3px;
+  }
+  .second-horizontal-dashed-border-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 216px;
+    transform: translate3d(-50%, -50%, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background: pink; */
+    width: 100%;
+    height: 3px;
+  }
+  .third-horizontal-dashed-border-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 286px;
+    transform: translate3d(-50%, -50%, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* background: pink; */
+    width: 100%;
+    height: 3px;
+  }
 `;
 
 const Top = styled.div`
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 110px;
+  height: 100px;
   width: 100%;
 
   display: flex;
@@ -163,18 +200,8 @@ const Top = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* border-top-left-radius: ${({ theme }) => theme.radius.large};
-  border-top-right-radius: ${({ theme }) => theme.radius.large}; */
   border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
   border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
-
-  /* border-top-color: lightgrey;
-  border-top-style: dotted;
-  border-top-width: 3px; */
-
-  /* border-bottom-color: lightgrey; // 선 색상
-  border-bottom-style: dashed; // 선 모양
-  border-bottom-width: 3px; // 선 두께 */
 
   .sub {
     ${({ theme }) => theme.typo.text.S_14_M};
@@ -185,44 +212,36 @@ const Top = styled.div`
     ${({ theme }) => theme.typo.popup.T_24_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
   }
-
-  position: relative;
-  .dashed-space {
-    position: absolute;
-    left: 50%;
-    top: 50px;
-    transform: translate3d(-50%, -50%, 0);
-
-    width: 92%;
-    height: 1px;
-    margin-top: 10px;
-    background-image: linear-gradient(
-      to right,
-      #f20afb 0%,
-      #f20afb 50%,
-      transparent 50%
-    );
-    background-size: 28px 1px;
-    background-repeat: repeat-x;
-  }
-  .dashed-space-linear {
-    background-image: linear-gradient(
-      to right,
-      #ccc 0%,
-      #f20afb 50%,
-      transparent 50%
-    );
-    background-size: 40px 1px;
-  }
 `;
 
 const Bottom = styled.div`
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
-  height: 370px;
+  height: 360px;
 
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: space-between;
+
+  .first-row {
+    width: 100%;
+    height: 102px;
+    background: green;
+  }
+  .second-row {
+    width: 100%;
+    height: 70px;
+    background: red;
+  }
+  .third-row {
+    width: 100%;
+    height: 100px;
+    background: blue;
+  }
 `;
 
 const CheckButtonPositioner = styled.div`
