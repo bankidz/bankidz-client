@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { ReactComponent as ModalContentBanky } from '@assets/illust/modal-content-banki.svg';
 import ReactModal from 'react-modal';
-import CheckButton from '../Button/CheckButton';
+import CheckButton from '../../Button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
 import { ReactComponent as PerforationShape } from '@assets/border/perforation-shape.svg';
+import PerforatedLineTop from './PeforationBorderTop';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
@@ -74,17 +75,60 @@ function PrimaryModal({
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
       <Content>
-        <PerforationBorder>
-          <span className="receipt-shape">
+        <PerforatedLineTop />
+        {/* <PerforationBorderTop>
+          <div className="shape">
             <PerforationShape />
-          </span>
-          <span className="receipt-shape">
+          </div>
+          <div className="shape">
             <PerforationShape />
-          </span>
-          <span className="receipt-shape">
+          </div>
+          <div className="shape">
             <PerforationShape />
-          </span>
-        </PerforationBorder>
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+          <div className="shape">
+            <PerforationShape />
+          </div>
+        </PerforationBorderTop> */}
         <Top>
           <span className="sub">계약서 전송 성공!</span>
           <span className="main">완구퍼펙트걸 되기</span>
@@ -102,79 +146,11 @@ function PrimaryModal({
 
 export default PrimaryModal;
 
-const PerforationBorder = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 50px;
-  width: 100%;
-  background: pink;
-
-  .receipt-shape {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    display: inline-block;
-    box-sizing: content-box;
-    position: relative;
-
-    height: 5px;
-    width: 20px;
-
-    /* font-size: 16px;
-    background-size: 100%;
-    background-repeat: no-repeat; */
-    /* background-image: radial-gradient(
-      circle at 13px 0,
-      rgba(36, 39, 41, 0) 0.4em,
-      white 0.5em
-    );
-    background-position: top left, top right; */
-    /* background: radial-gradient(
-      25% 25% at 50% 0%,
-      rgba(255, 255, 255, 0) 99.99%,
-      #ffffff 100%
-    ); */
-  }
-`;
-
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-
-  .receipt-border {
-  }
-  .receipt-shape {
-    /* display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-
-    display: inline-block;
-    box-sizing: content-box;
-    position: relative;
-
-    height: 5px;
-    width: 20px; */
-
-    /* font-size: 16px;
-    background-size: 100%;
-    background-repeat: no-repeat; */
-    /* background-image: radial-gradient(
-      circle at 13px 0,
-      rgba(36, 39, 41, 0) 0.4em,
-      white 0.5em
-    );
-    background-position: top left, top right; */
-    /* background: radial-gradient(
-      25% 25% at 50% 0%,
-      rgba(255, 255, 255, 0) 99.99%,
-      #ffffff 100%
-    ); */
-  }
 `;
 
 const Top = styled.div`
@@ -187,6 +163,8 @@ const Top = styled.div`
   justify-content: center;
   align-items: center;
 
+  /* border-top-left-radius: ${({ theme }) => theme.radius.large};
+  border-top-right-radius: ${({ theme }) => theme.radius.large}; */
   border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
   border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
 

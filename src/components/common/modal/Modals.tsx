@@ -2,7 +2,7 @@ import { useModalsDispatch, useModalsState } from './ModalsContext';
 import PrimaryModal from './PrimaryModal';
 import SecondaryModal from './SecondaryModal';
 import TertiaryModal from './TertiaryModal/TertiaryModal';
-import QuaternaryModal from './QuaternaryModal';
+import QuaternaryModal from './QuaternaryModal/QuaternaryModal';
 
 // TODO: code splitting
 export const modals = {
