@@ -4,22 +4,7 @@ import useBottomSheet from '@hooks/useBottomSheet';
 import ContractSheet from '@components/common/BottomSheet/ContractSheet';
 import SelectMoney from '@components/common/BottomSheet/sheetContent/SelectMoney';
 import styled from 'styled-components';
-import useValidation from '@hooks/useValidation';
-
-const validateNotificationWords = {
-  contractName: {
-    default: '특수문자 제외 15자 이하로 부탁해요!',
-    pass: '완전 좋은 이름인데요!',
-    outOfForm: '특수문자 제외 15자 이하로 부탁해요!',
-    duplicate: '기존 돈길과 동일한 이름이에요. 새롭게 지어줄래요?',
-  },
-  contractAmount: {
-    default: '최소 1500원에서 최대 50만원까지 설정할 수 있어요!',
-    pass: '적절한 금액이에요!',
-    under: '1,500원 이상으로 부탁해요!',
-    over: '50만원 이하로 부탁해요!',
-  },
-};
+import useValidation, { TValidationResult } from '@hooks/useValidation';
 
 function Step3() {
   const [form, setForm] = useState({ contractName: '', contractAmount: '' });
@@ -28,8 +13,8 @@ function Step3() {
   >(null);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
-
   const [open, onOpen, onDismiss] = useBottomSheet();
+
   const testDuplicate = ['중복된 이름'];
   const moneyRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -52,45 +37,43 @@ function Step3() {
     };
   }, [moneyRef, open]);
 
+  //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
-    console.log(validateName);
-    console.log(validateAmount);
-  }, [validateName, validateAmount]);
-
-  /*   //form 값이 바뀔때마다 유효성검사 실행
-  useEffect(() => {
-    nowFocus && validateCheck(nowFocus);
-  }, [form]); */
+    checkValidateName('contractName', form.contractName, testDuplicate);
+    checkValidateAmount('contractAmount', form.contractAmount);
+  }, [form]);
 
   return (
     <Wrapper>
-      <InputSection>
+      <InputSection validate={validateName}>
         <InputForm
           placeholder="돈길 이름을 입력하세요"
           value={form.contractName}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          onChange={(e) => {
             setForm({ ...form, contractName: e.target.value });
+          }}
+          onBlur={() => {
             checkValidateName('contractName', form.contractName, testDuplicate);
           }}
-          onBlur={() => {}}
           error={validateName.error}
         />
         {/* TODO : 여기 색깔 바꾸기 */}
         <p>{validateName.message}</p>
       </InputSection>
 
-      <InputSection>
+      <InputSection validate={validateAmount}>
         <div onClick={onOpen} ref={moneyRef}>
           <InputForm
             placeholder="부모님과 함께 모을 금액"
             value={form.contractAmount}
             error={validateAmount.error}
             readonly={true}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setForm({ ...form, contractAmount: e.target.value });
+            }}
+            onBlur={() => {
               checkValidateAmount('contractAmount', form.contractAmount);
             }}
-            onBlur={() => {}}
           />
         </div>
         <p>{validateAmount.message}</p>
@@ -112,10 +95,16 @@ const Wrapper = styled.div`
   gap: 24px;
 `;
 
-const InputSection = styled.div`
+const InputSection = styled.div<{ validate: TValidationResult }>`
   & > p {
     ${({ theme }) => theme.typo.input.TextMessage_S_12_M}
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    color: ${({ theme, validate }) =>
+      validate.error
+        ? theme.palette.sementic.red300
+        : validate.message === '완전 좋은 이름인데요!' ||
+          validate.message === '적절한 금액이에요!'
+        ? theme.palette.sementic.green300
+        : theme.palette.greyScale.grey500};
     margin: 12px 16px 0px 16px;
   }
 `;
