@@ -14,7 +14,7 @@ interface TertiaryProps {
 }
 
 // 모달 내부에 표시될 UI 작성
-function Tertiary({ onClose }: TertiaryProps) {
+function TertiaryModal({ onClose }: TertiaryProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -105,7 +105,7 @@ function Tertiary({ onClose }: TertiaryProps) {
   );
 }
 
-export default Tertiary;
+export default TertiaryModal;
 
 const Background = styled.div`
   position: relative;

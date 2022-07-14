@@ -5,7 +5,7 @@ export default {
   title: '모달/PrimaryModal',
   component: PrimaryModal,
   argTypes: {
-    onSubmit: { action: 'handle Submit' },
+    onSubmit: { action: 'handle click' },
   },
 } as ComponentMeta<typeof PrimaryModal>;
 
@@ -15,6 +15,6 @@ const Template: ComponentStory<typeof PrimaryModal> = (args) => (
 
 export const 가족이_생겼어요 = Template.bind({});
 가족이_생겼어요.args = {
-  headerContent: '가족이 생겼어요',
-  bodyContent: '기획에서 워딩 생각해주세요',
+  headerText: '가족이 생겼어요',
+  bodyText: '기획에서 워딩 생각해주세요',
 };
