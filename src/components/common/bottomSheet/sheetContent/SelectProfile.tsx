@@ -1,9 +1,10 @@
 import styled from 'styled-components';
-import dad from '@assets/illust/banki/sheet-dad.svg';
-import mom from '@assets/illust/banki/sheet-mom.svg';
-import son from '@assets/illust/banki/sheet-son.svg';
-import daughter from '@assets/illust/banki/sheet-daughter.svg';
+import { ReactComponent as Dad } from '@assets/illust/banki/banki_dad.svg';
+import { ReactComponent as Mom } from '@assets/illust/banki/banki_mom.svg';
+import { ReactComponent as Son } from '@assets/illust/banki/banki_son.svg';
+import { ReactComponent as Daughter } from '@assets/illust/banki/banki_daughter.svg';
 import Button from '@components/common/Button/Button';
+import { calcRatio } from '@lib/styles/theme';
 
 interface SelectProfileProps {
   role: '엄마' | '아빠' | '아들' | '딸';
@@ -13,16 +14,16 @@ function SelectProfile({ role }: SelectProfileProps) {
   const setCharacter = (role: '엄마' | '아빠' | '아들' | '딸') => {
     switch (role) {
       case '엄마':
-        return <img src={mom} />;
+        return <Mom />;
         break;
       case '아빠':
-        return <img src={dad} />;
+        return <Dad />;
         break;
       case '아들':
-        return <img src={son} />;
+        return <Son />;
         break;
       case '딸':
-        return <img src={daughter} />;
+        return <Daughter />;
         break;
     }
   };
@@ -35,7 +36,7 @@ function SelectProfile({ role }: SelectProfileProps) {
           {role === '아들' || role === '딸' ? '이' : '가'} 맞나요?
         </p>
         <p>한 번 설정한 프로필은 변경하기 어려워요</p>
-        <div style={{ margin: '0 auto' }}>{setCharacter(role)}</div>
+        <BankiWrapper>{setCharacter(role)}</BankiWrapper>
       </Container>
       <Button label="확인" />
     </Wrapper>
@@ -60,4 +61,10 @@ const Container = styled.div`
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
+`;
+
+const BankiWrapper = styled.div`
+  height: 140px;
+  padding-top: 23px;
+  padding-bottom: 7px;
 `;

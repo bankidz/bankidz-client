@@ -5,9 +5,9 @@ import { darken } from 'polished';
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * ButtonSet에서 받아온 prop
-   * etc : 카카오로그인 / primary-secondary : 한칸 두칸
+   * kakao : 카카오로그인 / primary-secondary : 한칸 두칸
    */
-  property?: 'etc' | 'primary' | 'secondary';
+  property?: 'kakao' | 'delete' | 'primary' | 'secondary';
   /**
    * 버튼 내용
    */
@@ -37,7 +37,7 @@ function Button({
       sub={sub}
       {...props}
     >
-      {property == 'etc' && <img src={kakao} />}
+      {property == 'kakao' && <img src={kakao} />}
       <p>{label}</p>
     </Wrapper>
   );
@@ -46,14 +46,14 @@ function Button({
 export default Button;
 
 const Wrapper = styled.button<{
-  property: 'etc' | 'primary' | 'secondary';
+  property: 'kakao' | 'delete' | 'primary' | 'secondary';
   state: boolean;
   sub: boolean;
 }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ property }) => (property == 'secondary' ? '160px' : '100%')};
+  width: ${({ property }) => (property == 'secondary' ? '154px' : '100%')};
   height: 48px;
   border-radius: ${({ theme }) => theme.radius.medium};
   border: none;
@@ -81,7 +81,7 @@ const Wrapper = styled.button<{
   }
 
   ${({ property }) =>
-    property == 'etc' &&
+    property === 'kakao' &&
     css`
       color: #191919 !important;
       background-color: #fee500; // Kakao yellow

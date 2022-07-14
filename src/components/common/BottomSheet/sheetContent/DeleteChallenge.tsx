@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as SvgSadBanki } from '@assets/illust/banki/common-sheet-sad.svg';
+import { ReactComponent as Banki } from '@assets/illust/banki/banki_giveup.svg';
 import Button from '@components/common/Button/Button';
 
 interface DeleteChallengeProps {
@@ -12,9 +12,9 @@ function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
     <Wrapper>
       <Container>
         <p>정말 포기할거예요?</p>
-        <BankyWrapper>
-          <SvgSadBanki />
-        </BankyWrapper>
+        <BankiWrapper>
+          <Banki />
+        </BankiWrapper>
         <Rule>
           <p>포기규칙</p>
           <p>
@@ -48,8 +48,9 @@ const Container = styled.div`
   }
 `;
 
-const BankyWrapper = styled.div`
-  height: 292px;
+const BankiWrapper = styled.div`
+  height: 185px;
+  padding: 28px;
   display: flex;
   justify-content: center;
   align-items: center;

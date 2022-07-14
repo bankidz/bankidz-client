@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ContractInputForm from './InputForm';
 
 export default {
-  title: '자녀/돈길 계약하기/ContractInputForm',
+  title: 'Common/버튼/InputForm',
   component: ContractInputForm,
 } as ComponentMeta<typeof ContractInputForm>;
 
