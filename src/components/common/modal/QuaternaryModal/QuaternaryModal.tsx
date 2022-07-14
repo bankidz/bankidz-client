@@ -78,14 +78,6 @@ function PrimaryModal({
     endDate.setDate(createdDate.getDate() + 7 * parseInt(weeks) - 1);
     return moment(endDate).format('YY.MM.DD');
   }
-  // console.log(moment(endDate).format('YY.MM.DD'));
-  // console.log(createdAt);
-  // console.log(weeks);
-  // console.log(createdDate);
-  // console.log(endDate);
-  // console.log(endDate.getDate());
-  // console.log(endDate.getMonth());
-  // console.log(endDate.getFullYear());
 
   return (
     // @ts-expect-error
