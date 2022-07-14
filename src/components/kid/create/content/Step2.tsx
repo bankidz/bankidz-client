@@ -3,15 +3,15 @@ import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/challengePayloadSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
-import { ReactComponent as A1 } from '@assets/illust/ContractItemNames/a1.svg';
-import { ReactComponent as A2 } from '@assets/illust/ContractItemNames/a2.svg';
-import { ReactComponent as A3 } from '@assets/illust/ContractItemNames/a3.svg';
-import { ReactComponent as B1 } from '@assets/illust/ContractItemNames/b1.svg';
-import { ReactComponent as B2 } from '@assets/illust/ContractItemNames/b2.svg';
-import { ReactComponent as B3 } from '@assets/illust/ContractItemNames/b3.svg';
-import { ReactComponent as C1 } from '@assets/illust/ContractItemNames/c1.svg';
-import { ReactComponent as C2 } from '@assets/illust/ContractItemNames/c2.svg';
-import { ReactComponent as C3 } from '@assets/illust/ContractItemNames/c3.svg';
+import { ReactComponent as A1 } from '@assets/illust/contractItemNames/pleaseChangeName/a1.svg';
+import { ReactComponent as A2 } from '@assets/illust/contractItemNames/pleaseChangeName/a2.svg';
+import { ReactComponent as A3 } from '@assets/illust/contractItemNames/pleaseChangeName/a3.svg';
+import { ReactComponent as B1 } from '@assets/illust/contractItemNames/pleaseChangeName/b1.svg';
+import { ReactComponent as B2 } from '@assets/illust/contractItemNames/pleaseChangeName/b2.svg';
+import { ReactComponent as B3 } from '@assets/illust/contractItemNames/pleaseChangeName/b3.svg';
+import { ReactComponent as C1 } from '@assets/illust/contractItemNames/pleaseChangeName/c1.svg';
+import { ReactComponent as C2 } from '@assets/illust/contractItemNames/pleaseChangeName/c2.svg';
+import { ReactComponent as C3 } from '@assets/illust/contractItemNames/pleaseChangeName/c3.svg';
 
 const itemNames = [
   { name: '학용품', image: <A1 /> },

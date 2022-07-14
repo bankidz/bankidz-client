@@ -5,7 +5,7 @@ export default {
   title: '모달/TertiaryModal',
   component: TertiaryModal,
   argTypes: {
-    onSubmit: { action: 'handle close' },
+    onSubmit: { action: 'handle click' },
   },
 } as ComponentMeta<typeof TertiaryModal>;
 
@@ -13,4 +13,4 @@ const Template: ComponentStory<typeof TertiaryModal> = (args) => (
   <TertiaryModal {...args} />
 );
 
-export const 예시 = Template.bind({});
+export const 이자란 = Template.bind({});

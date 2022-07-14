@@ -5,8 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { calcRatio } from '@lib/styles/theme';
 import InstructionCard from './InstructionCard';
 import CloseButton from '../../Button/CloseButton';
-import { ReactComponent as ModalContentMoney } from '@assets/illust/modal-content-money.svg';
-import { ReactComponent as ModalContentSaving } from '@assets/illust/modal-content-saving.svg';
+import { ReactComponent as ModalContentMoney } from '@assets/illust/congrats/coins.svg';
+import { ReactComponent as ModalContentSaving } from '@assets/illust/congrats/congrats_banki_with_coins.svg';
 
 interface TertiaryProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
