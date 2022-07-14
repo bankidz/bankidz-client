@@ -5,7 +5,11 @@ import { calcRatio } from '@lib/styles/theme';
 import PerforatedLineTop from './PeforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
-import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
+import { ReactComponent as VerticalDashedBorder } from '@assets/illust/banki/banki_dad.svg';
+import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
+import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
+import { ReactComponent as BankiSon } from '@assets/illust/banki/banki_son.svg';
+import { ReactComponent as BankiDauguter } from '@assets/illust/banki/banki_daughter.svg';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
@@ -97,7 +101,11 @@ function PrimaryModal({
         </div>
         <Bottom>
           <div className="first-row">
-            <div className="계약대상">계약대상</div>
+            <div className="계약대상">
+              <div className="banki-icon">아빠</div>
+              <div className="title">title</div>
+              <div className="content">content</div>
+            </div>
             <div className="목표아이템">목표아이템</div>
           </div>
           <div className="second-row">
