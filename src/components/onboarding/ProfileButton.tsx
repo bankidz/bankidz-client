@@ -1,6 +1,5 @@
 import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as ProfileButtonCharacter } from '@assets/illust/profile-button-character.svg';
 import { ReactComponent as ProfileButtonBorder } from '@assets/border/profile-button-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
 
@@ -47,7 +46,7 @@ function ProfileButton({
         fill={isSelected ? theme.palette.main.yellow100 : fillColorByMouseEvent}
       />
       <div className="content">
-        <ProfileButtonCharacter />
+        {/* <ProfileButtonCharacter /> */}
         <span>{role(isKid, isFemale)}</span>
       </div>
     </StyledButton>
