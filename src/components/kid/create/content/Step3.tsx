@@ -19,7 +19,7 @@ type TStep3Form = {
   contractAmount: number;
 };
 
-function Step3() {
+function Step3({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [form, setForm] = useState<TStep3Form>({
@@ -39,7 +39,7 @@ function Step3() {
   const onClickNextButton = () => {
     dispatch(dispatchTitle(form.contractName));
     dispatch(dispatchTotalPrice(form.contractAmount));
-    navigate(`/create/4`, { state: { from: 3 } });
+    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
   // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록

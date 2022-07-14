@@ -1,10 +1,13 @@
-export function kidMock() {
+export function kidMock(number: 1 | 2) {
   const getFamily = async () => {
     await wait(20);
-    return [
-      { username: '엄마이름', isFemale: true, isKid: false },
-      { username: '아빠이름', isFemale: false, isKid: false },
-    ];
+    if (number === 1)
+      return [{ username: '엄마이름', isFemale: true, isKid: false }];
+    else
+      return [
+        { username: '엄마이름', isFemale: true, isKid: false },
+        { username: '아빠이름', isFemale: false, isKid: false },
+      ];
   };
 
   return { getFamily };

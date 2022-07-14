@@ -25,14 +25,14 @@ const itemNames = [
   { name: '기타', image: <C3 /> },
 ];
 
-function Step2() {
+function Step2({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onClickItemNameButton = (itemName: string) => {
     console.log(itemName);
     dispatch(dispatchItemName(itemName));
-    navigate(`/create/3`, { state: { from: 2 } });
+    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
   return (
