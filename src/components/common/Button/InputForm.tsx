@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
-  value: string;
+  value: string | number;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error: boolean;
   readonly?: boolean;
@@ -39,7 +39,7 @@ const Wrapper = styled.input<{ error: boolean }>`
   border: 3px solid
     ${({ theme, error }) =>
       error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
-  padding: 20px 16px;
+  padding: 20px 13px;
   ${({ theme }) => theme.typo.input.TextField_T_16_EB};
   color: ${({ theme }) => theme.palette.greyScale.black};
   :not(:focus) {

@@ -5,9 +5,10 @@ interface ContractSheetProps {
   children: JSX.Element;
   open: boolean;
   onDismiss: () => void;
-  blocking?: boolean;
   label: string;
   onClickNext: () => void;
+  disabledNext: boolean;
+  blocking?: boolean;
   sheetRef?: React.RefObject<HTMLDivElement>;
 }
 
@@ -16,15 +17,15 @@ function ContractSheet({
   open,
   onDismiss,
   onClickNext,
-  blocking = false,
   label,
+  disabledNext = true,
+  blocking = false,
   sheetRef,
 }: ContractSheetProps) {
   document.documentElement.style.setProperty('--rsbs-backdrop-bg', `none`);
   document.documentElement.style.setProperty('--rsbs-content-opacity', `0`);
   return (
     /* 이 컴포넌트의 onDismiss는 바텀시트의 바깥 빈 공간을 터치했을때 닫는 기능에 쓰입니다. */
-
     <StyledBottomSheet
       open={open}
       onDismiss={onDismiss}
@@ -33,7 +34,9 @@ function ContractSheet({
     >
       <div ref={sheetRef}>
         <SheetContainer>{children}</SheetContainer>
-        <NextButton onClick={onClickNext}>{label}</NextButton>
+        <NextButton onClick={onClickNext} disabled={disabledNext}>
+          {label}
+        </NextButton>
       </div>
     </StyledBottomSheet>
   );
@@ -63,6 +66,10 @@ const NextButton = styled.button`
   width: 100%;
   height: 48px;
   background-color: ${({ theme }) => theme.palette.main.yellow300};
+  &:disabled {
+    background-color: ${({ theme }) => theme.palette.greyScale.grey300};
+    cursor: default;
+  }
   ${({ theme }) => theme.typo.button.Primary_T_15_EB}
   color: white;
 `;

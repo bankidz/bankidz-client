@@ -17,7 +17,13 @@ const Template: ComponentStory<typeof ContractSheet> = (args) => (
 
 export const 모을_금액_입력 = Template.bind({});
 모을_금액_입력.args = {
-  children: <SelectMoney />,
+  children: (
+    <SelectMoney
+      pushAmount={() => {}}
+      popAmount={() => {}}
+      resetAmount={() => {}}
+    />
+  ),
   open: true,
   label: '다음',
 };

@@ -33,11 +33,21 @@ export const challengePayloadSlice = createSlice({
     dispatchItemName(state, action: PayloadAction<string>) {
       state.itemName = action.payload;
     },
+    dispatchTitle(state, action: PayloadAction<string>) {
+      state.title = action.payload;
+    },
+    dispatchTotalPrice(state, action: PayloadAction<number>) {
+      state.totalPrice = action.payload;
+    },
   },
 });
 
-export const { dispatchParent, dispatchItemName } =
-  challengePayloadSlice.actions;
+export const {
+  dispatchParent,
+  dispatchItemName,
+  dispatchTitle,
+  dispatchTotalPrice,
+} = challengePayloadSlice.actions;
 
 export const selectChallengePayload = (state: RootState) =>
   state.challengePayload;

@@ -9,30 +9,56 @@ import { ReactComponent as Refresh } from '@assets/icon/refresh.svg';
 import { calcRatio } from '@lib/styles/theme';
 import { darken } from 'polished';
 
-function SelectMoney() {
+interface SelectMoneyProps {
+  pushAmount: (amount: number) => void;
+  popAmount: () => void;
+  resetAmount: () => void;
+}
+
+function SelectMoney({ pushAmount, popAmount, resetAmount }: SelectMoneyProps) {
   return (
     <Wrapper>
       <ButtonContainer>
-        <button>
+        <button
+          onClick={() => {
+            pushAmount(500);
+          }}
+        >
           <Money_500 />
         </button>
-        <button>
+        <button
+          onClick={() => {
+            pushAmount(1000);
+          }}
+        >
           <Money_1000 />
         </button>
-        <button>
+        <button
+          onClick={() => {
+            pushAmount(5000);
+          }}
+        >
           <Money_5000 />
         </button>
-        <button>
+        <button
+          onClick={() => {
+            pushAmount(10000);
+          }}
+        >
           <Money_10000 />
         </button>
-        <button>
+        <button
+          onClick={() => {
+            pushAmount(50000);
+          }}
+        >
           <Money_50000 />
         </button>
         <Remote>
-          <button>
+          <button onClick={popAmount}>
             <Backspace />
           </button>
-          <button>
+          <button onClick={resetAmount}>
             <Refresh />
           </button>
         </Remote>
