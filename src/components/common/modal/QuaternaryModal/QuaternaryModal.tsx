@@ -2,14 +2,15 @@ import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import CheckButton from '../../Button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
-import PerforatedLineTop from './PeforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
+import PerforatedLineTop from './PerforatedLineTop';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { ReactComponent as BankiSon } from '@assets/illust/banki/banki_son.svg';
-import { ReactComponent as BankiDauguter } from '@assets/illust/banki/banki_daughter.svg';
+import { ReactComponent as BankiDaughter } from '@assets/illust/banki/banki_daughter.svg';
+import { TRole } from '@lib/types/kid';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
@@ -31,7 +32,7 @@ interface PrimaryModalProps {
 function PrimaryModal({
   onSubmit,
   id,
-  isMom,
+  isMom = 'false',
   title,
   isAchieved,
   interestRate,
@@ -45,7 +46,6 @@ function PrimaryModal({
   function handleSubmit() {
     onSubmit();
   }
-
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -76,6 +76,14 @@ function PrimaryModal({
     },
   };
 
+  function getBankiIllust(isMom: string) {
+    if (isMom === 'true') {
+      return <BankiMom />;
+    } else {
+      return <BankiDad />;
+    }
+  }
+
   return (
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
@@ -102,9 +110,15 @@ function PrimaryModal({
         <Bottom>
           <div className="first-row">
             <div className="계약대상">
-              <div className="banki-icon">아빠</div>
-              <div className="title">title</div>
-              <div className="content">content</div>
+              <div className="banki-illust">
+                {isMom === 'true' ? <BankiMom /> : <BankiDad />}
+              </div>
+              <div className="text-wrapper">
+                <span className="title">계약대상</span>
+                <span className="content">
+                  {isMom === 'true' ? '엄마' : '아빠'}
+                </span>
+              </div>
             </div>
             <div className="목표아이템">목표아이템</div>
           </div>
@@ -238,15 +252,44 @@ const Bottom = styled.div`
   .first-row {
     width: 100%;
     height: 102px;
-    background: green;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     .계약대상 {
+      display: flex;
+      justify-content: space-between;
+
       width: 50%;
       height: 100%;
+
+      .banki-illust {
+        width: 60.98px;
+        margin-left: ${calcRatio(21, 162)};
+      }
+
+      .text-wrapper {
+        width: 47px;
+        height: 100%;
+        margin-right: ${calcRatio(20, 162)};
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .title {
+          ${({ theme }) => theme.typo.text.S_12_M};
+          color: ${({ theme }) => theme.palette.greyScale.grey500};
+          margin-bottom: 8px;
+        }
+
+        .content {
+          ${({ theme }) => theme.typo.button.InnerText_T_15_EB};
+          color: ${({ theme }) => theme.palette.greyScale.grey700};
+        }
+      }
     }
     .목표아이템 {
       width: 50%;

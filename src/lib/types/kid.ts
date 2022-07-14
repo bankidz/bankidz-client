@@ -3,3 +3,5 @@ export type TFamilyState = {
   isFemale: boolean;
   isKid: boolean;
 };
+
+export type TRole = 'dad' | 'mom' | 'son' | 'daughter';
