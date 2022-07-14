@@ -4,15 +4,16 @@ import useBottomSheet from '@hooks/useBottomSheet';
 import ContractSheet from '@components/common/BottomSheet/ContractSheet';
 import SelectMoney from '@components/common/BottomSheet/sheetContent/SelectMoney';
 import styled from 'styled-components';
+import useValidation from '@hooks/useValidation';
 
 const validateNotificationWords = {
-  name: {
+  contractName: {
     default: '특수문자 제외 15자 이하로 부탁해요!',
     pass: '완전 좋은 이름인데요!',
     outOfForm: '특수문자 제외 15자 이하로 부탁해요!',
     duplicate: '기존 돈길과 동일한 이름이에요. 새롭게 지어줄래요?',
   },
-  money: {
+  contractAmount: {
     default: '최소 1500원에서 최대 50만원까지 설정할 수 있어요!',
     pass: '적절한 금액이에요!',
     under: '1,500원 이상으로 부탁해요!',
@@ -21,18 +22,19 @@ const validateNotificationWords = {
 };
 
 function Step3() {
-  const [form, setForm] = useState({ name: '', money: '' });
-  const [nowFocus, setNowFocus] = useState<'name' | 'money' | null>(null);
-  const [validateNotification, setValidateNotification] = useState({
-    name: validateNotificationWords.name.default,
-    money: validateNotificationWords.money.default,
-  });
+  const [form, setForm] = useState({ contractName: '', contractAmount: '' });
+  const [nowFocus, setNowFocus] = useState<
+    'contractName' | 'contractAmount' | null
+  >(null);
+  const [validateName, checkValidateName] = useValidation();
+  const [validateAmount, checkValidateAmount] = useValidation();
+
   const [open, onOpen, onDismiss] = useBottomSheet();
-  // test
-  const validation = true;
-  const testDuplicate = '중복된 이름';
+  const testDuplicate = ['중복된 이름'];
   const moneyRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+
+  // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
@@ -50,76 +52,48 @@ function Step3() {
     };
   }, [moneyRef, open]);
 
-  // 유효성 검사
-  const validateCheck = (formType: 'name' | 'money') => {
-    if (formType === 'name') {
-      if (
-        form.name.length > 15 ||
-        form.name.match(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g)
-      )
-        setValidateNotification({
-          ...validateNotification,
-          name: validateNotificationWords.name.outOfForm,
-        });
-      else if (form.name === testDuplicate)
-        setValidateNotification({
-          ...validateNotification,
-          name: validateNotificationWords.name.duplicate,
-        });
-      else
-        setValidateNotification({
-          ...validateNotification,
-          name: validateNotificationWords.name.default,
-        });
-    }
-    if (formType === 'money') {
-      if (form.money < '1500')
-        setValidateNotification({
-          ...validateNotification,
-          money: validateNotificationWords.money.under,
-        });
-      else if (form.money > '500000')
-        setValidateNotification({
-          ...validateNotification,
-          money: validateNotificationWords.money.over,
-        });
-      else
-        setValidateNotification({
-          ...validateNotification,
-          name: validateNotificationWords.money.default,
-        });
-    }
-  };
+  useEffect(() => {
+    console.log(validateName);
+    console.log(validateAmount);
+  }, [validateName, validateAmount]);
 
-  //form 값이 바뀔때마다 유효성검사 실행
+  /*   //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
     nowFocus && validateCheck(nowFocus);
-  }, [form]);
+  }, [form]); */
 
   return (
     <Wrapper>
       <InputSection>
         <InputForm
           placeholder="돈길 이름을 입력하세요"
-          value={form.name}
+          value={form.contractName}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setForm({ ...form, name: e.target.value });
+            setForm({ ...form, contractName: e.target.value });
+            checkValidateName('contractName', form.contractName, testDuplicate);
           }}
-          validation={validation}
+          onBlur={() => {}}
+          error={validateName.error}
         />
-        <p>{validateNotification.name}</p>
+        {/* TODO : 여기 색깔 바꾸기 */}
+        <p>{validateName.message}</p>
       </InputSection>
 
       <InputSection>
         <div onClick={onOpen} ref={moneyRef}>
           <InputForm
             placeholder="부모님과 함께 모을 금액"
-            value={form.money}
-            validation={validation}
+            value={form.contractAmount}
+            error={validateAmount.error}
             readonly={true}
+            onChange={(e) => {
+              setForm({ ...form, contractAmount: e.target.value });
+              checkValidateAmount('contractAmount', form.contractAmount);
+            }}
+            onBlur={() => {}}
           />
         </div>
-        <p>{validateNotification.money}</p>
+        <p>{validateAmount.message}</p>
       </InputSection>
       <ContractSheet open={open} onDismiss={onDismiss} label={'다음'}>
         <div ref={sheetRef}>
@@ -141,7 +115,7 @@ const Wrapper = styled.div`
 const InputSection = styled.div`
   & > p {
     ${({ theme }) => theme.typo.input.TextMessage_S_12_M}
-    color: ${({ theme }) => theme.palette.sementic.green300};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
     margin: 12px 16px 0px 16px;
   }
 `;
