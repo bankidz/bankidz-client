@@ -7,14 +7,18 @@ interface ContractSheetProps {
   onDismiss: () => void;
   blocking?: boolean;
   label: string;
+  onClickNext: () => void;
+  sheetRef?: React.RefObject<HTMLDivElement>;
 }
 
 function ContractSheet({
   children,
   open,
   onDismiss,
+  onClickNext,
   blocking = false,
   label,
+  sheetRef,
 }: ContractSheetProps) {
   document.documentElement.style.setProperty('--rsbs-backdrop-bg', `none`);
   document.documentElement.style.setProperty('--rsbs-content-opacity', `0`);
@@ -26,10 +30,11 @@ function ContractSheet({
       onDismiss={onDismiss}
       snapPoints={({ minHeight }) => minHeight}
       blocking={blocking}
-      id="bottomSheet"
     >
-      <SheetContainer>{children}</SheetContainer>
-      <NextButton>{label}</NextButton>
+      <div ref={sheetRef}>
+        <SheetContainer>{children}</SheetContainer>
+        <NextButton onClick={onClickNext}>{label}</NextButton>
+      </div>
     </StyledBottomSheet>
   );
 }

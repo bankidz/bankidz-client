@@ -5,12 +5,11 @@ import ContractSheet from '@components/common/BottomSheet/ContractSheet';
 import SelectMoney from '@components/common/BottomSheet/sheetContent/SelectMoney';
 import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@hooks/useValidation';
+import { useNavigate } from 'react-router-dom';
 
 function Step3() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({ contractName: '', contractAmount: '' });
-  const [nowFocus, setNowFocus] = useState<
-    'contractName' | 'contractAmount' | null
-  >(null);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
   const [open, onOpen, onDismiss] = useBottomSheet();
@@ -18,6 +17,10 @@ function Step3() {
   const testDuplicate = ['중복된 이름'];
   const moneyRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+
+  const onClickNextButton = () => {
+    navigate(`/create/4`, { state: { from: 3 } });
+  };
 
   // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록
   useEffect(() => {
@@ -71,6 +74,7 @@ function Step3() {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setForm({ ...form, contractAmount: e.target.value });
             }}
+            onFocus={onOpen}
             onBlur={() => {
               checkValidateAmount('contractAmount', form.contractAmount);
             }}
@@ -78,7 +82,14 @@ function Step3() {
         </div>
         <p>{validateAmount.message}</p>
       </InputSection>
-      <ContractSheet open={open} onDismiss={onDismiss} label={'다음'}>
+
+      <ContractSheet
+        open={open}
+        onDismiss={onDismiss}
+        label={'다음'}
+        onClickNext={onClickNextButton}
+        sheetRef={sheetRef}
+      >
         <div ref={sheetRef}>
           <SelectMoney />
         </div>

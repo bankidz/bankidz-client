@@ -5,6 +5,7 @@ import Step2 from '@components/kid/create/content/Step2';
 import Progress from '@components/kid/create/Progress';
 import Margin from '@components/layout/Margin';
 import Step3 from '@components/kid/create/content/Step3';
+import Step4 from '@components/kid/create/content/Step4';
 
 function CreateKid() {
   const { step } = useParams();
@@ -33,6 +34,8 @@ function CreateKid() {
         return <Step2 />;
       case 3:
         return <Step3 />;
+      case 4:
+        return <Step4 />;
       default:
         throw 'error';
     }
