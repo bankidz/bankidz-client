@@ -5,43 +5,37 @@ import { calcRatio } from '@lib/styles/theme';
 import PerforatedLineBottom from './PerforatedLineBottom';
 import PerforatedLineTop from './PerforatedLineTop';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
-import { ReactComponent as VerticalDashedBorder } from '@assets/illust/banki/banki_dad.svg';
+import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import { ReactComponent as BankiSon } from '@assets/illust/banki/banki_son.svg';
-import { ReactComponent as BankiDaughter } from '@assets/illust/banki/banki_daughter.svg';
-import { TRole } from '@lib/types/kid';
+import useRenderContractItem from '@hooks/useRenderContractItem';
+import { TCategory } from '@lib/types/kid';
+import moment from 'moment';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
-  id: string;
   isMom: string;
   title: string;
-  isAchieved: string;
   interestRate: string;
   totalPrice: string;
   weekPrice: string;
   weeks: string;
   createdAt: string;
-  progressList: string | null;
-  comment: string | null;
+  category: TCategory;
 }
 
 // 모달 내부에 표시될 UI 작성
 function PrimaryModal({
   onSubmit,
-  id,
   isMom = 'false',
-  title,
-  isAchieved,
-  interestRate,
-  totalPrice,
-  weekPrice,
-  weeks,
-  createdAt,
-  progressList,
-  comment,
+  title = '완구퍼펙트걸 되기',
+  interestRate = '10',
+  totalPrice = '30000',
+  weekPrice = '1500',
+  weeks = '10',
+  createdAt = '2022-07-12 03:08:07',
+  category = '학용품',
 }: PrimaryModalProps) {
   function handleSubmit() {
     onSubmit();
@@ -76,13 +70,22 @@ function PrimaryModal({
     },
   };
 
-  function getBankiIllust(isMom: string) {
-    if (isMom === 'true') {
-      return <BankiMom />;
-    } else {
-      return <BankiDad />;
-    }
+  const renderContractItem = useRenderContractItem();
+
+  function getContractEndDate(createdAt: string, weeks: string) {
+    const createdDate = new Date(createdAt);
+    const endDate = new Date(createdDate);
+    endDate.setDate(createdDate.getDate() + 7 * parseInt(weeks) - 1);
+    return moment(endDate).format('YY.MM.DD');
   }
+  // console.log(moment(endDate).format('YY.MM.DD'));
+  // console.log(createdAt);
+  // console.log(weeks);
+  // console.log(createdDate);
+  // console.log(endDate);
+  // console.log(endDate.getDate());
+  // console.log(endDate.getMonth());
+  // console.log(endDate.getFullYear());
 
   return (
     // @ts-expect-error
@@ -91,7 +94,7 @@ function PrimaryModal({
         <PerforatedLineTop />
         <Top>
           <span className="sub">계약서 전송 성공!</span>
-          <span className="main">완구퍼펙트걸 되기</span>
+          <span className="main">{title}</span>
           <div className="dashed-space"></div>
           <div className="dashed-space-linear"></div>
         </Top>
@@ -114,30 +117,56 @@ function PrimaryModal({
                 {isMom === 'true' ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
-                <span className="title">계약대상</span>
-                <span className="content">
+                <div className="title">계약대상</div>
+                <div className="content">
                   {isMom === 'true' ? '엄마' : '아빠'}
-                </span>
+                </div>
               </div>
             </div>
-            <div className="목표아이템">목표아이템</div>
+            <div className="목표아이템">
+              <div className="category-illust">
+                {renderContractItem(category)}
+              </div>
+              <div className="text-wrapper">
+                <div className="title">목표 아이템</div>
+                <div className="content">{category}</div>
+              </div>
+            </div>
           </div>
           <div className="second-row">
-            {/* <div className="목표적금액">목표저금액</div> */}
-            <div className="목표저금액">목표저금액</div>
-            <div className="매주저금액">매주저금액</div>
-            <div className="이자부스터">이자부스터</div>
+            <div className="목표저금액">
+              <div className="title">목표 저금액</div>
+              <div className="content">{totalPrice}</div>
+            </div>
+            <div className="매주저금액">
+              <div className="title">매주 저금액</div>
+              <div className="content">{weekPrice}</div>
+            </div>
+            <div className="이자부스터">
+              <div className="title">이자부스터</div>
+              <div className="content">{interestRate}%</div>
+            </div>
           </div>
           <div className="third-row">
-            <div className="총소요기간">총소요기간</div>
-            <div className="계약종료일">계약종료일</div>
+            <div className="총소요기간">
+              <div className="title">총 소요기간</div>
+              <div className="content">{weeks}주</div>
+            </div>
+            <div className="계약종료일">
+              <div className="text-wrapper">
+                <div className="title">계약종료일</div>
+                <div className="content">
+                  {getContractEndDate(createdAt, weeks)}
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="signature">대충서명</div>
+          <SignatureWrapper>대충 서명</SignatureWrapper>
         </Bottom>
+        <PerforatedLineBottom />
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonPositioner>
-        <PerforatedLineBottom />
       </Content>
     </ReactModal>
   );
@@ -155,6 +184,7 @@ const Content = styled.div`
   // background border (vertical, horizontal)
   position: relative;
   .vertical-dashed-border-wrapper {
+    z-index: 10;
     position: absolute;
     left: 50%;
     top: 167px;
@@ -164,11 +194,11 @@ const Content = styled.div`
     justify-content: center;
     align-items: center;
 
-    /* background: skyblue; */
     width: 2px;
     height: 100px;
   }
   .first-horizontal-dashed-border-wrapper {
+    z-index: 10;
     position: absolute;
     left: 50%;
     top: 115px;
@@ -178,11 +208,11 @@ const Content = styled.div`
     justify-content: center;
     align-items: center;
 
-    /* background: pink; */
     width: 100%;
     height: 3px;
   }
   .second-horizontal-dashed-border-wrapper {
+    z-index: 10;
     position: absolute;
     left: 50%;
     top: 216px;
@@ -192,11 +222,11 @@ const Content = styled.div`
     justify-content: center;
     align-items: center;
 
-    /* background: pink; */
     width: 100%;
     height: 3px;
   }
   .third-horizontal-dashed-border-wrapper {
+    z-index: 10;
     position: absolute;
     left: 50%;
     top: 286px;
@@ -206,7 +236,6 @@ const Content = styled.div`
     justify-content: center;
     align-items: center;
 
-    /* background: pink; */
     width: 100%;
     height: 3px;
   }
@@ -252,7 +281,6 @@ const Bottom = styled.div`
   .first-row {
     width: 100%;
     height: 102px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -260,87 +288,164 @@ const Bottom = styled.div`
     .계약대상 {
       display: flex;
       justify-content: space-between;
-
       width: 50%;
       height: 100%;
-
       .banki-illust {
         width: 60.98px;
         margin-left: ${calcRatio(21, 162)};
       }
-
       .text-wrapper {
         width: 47px;
         height: 100%;
         margin-right: ${calcRatio(20, 162)};
-
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         .title {
           ${({ theme }) => theme.typo.text.S_12_M};
           color: ${({ theme }) => theme.palette.greyScale.grey500};
           margin-bottom: 8px;
         }
-
         .content {
           ${({ theme }) => theme.typo.button.InnerText_T_15_EB};
           color: ${({ theme }) => theme.palette.greyScale.grey700};
         }
       }
     }
+
     .목표아이템 {
+      display: flex;
+      justify-content: space-between;
       width: 50%;
       height: 100%;
+      .category-illust {
+        width: 70px;
+        margin-left: ${calcRatio(9, 162)};
+      }
+      .text-wrapper {
+        width: 58px;
+        height: 100%;
+        margin-right: ${calcRatio(16, 162)};
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .title {
+          ${({ theme }) => theme.typo.text.S_12_M};
+          color: ${({ theme }) => theme.palette.greyScale.grey500};
+          margin-bottom: 8px;
+        }
+        .content {
+          ${({ theme }) => theme.typo.button.InnerText_T_15_EB};
+          color: ${({ theme }) => theme.palette.greyScale.grey700};
+        }
+      }
     }
   }
+
   .second-row {
     width: 100%;
     height: 70px;
-    /* background: red; */
-
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .목표저금액 {
-      width: 33%;
+    div {
+      width: 33.3%;
       height: 100%;
-      background: red;
-    }
-    .매주저금액 {
-      width: 33%;
-      height: 100%;
-      background: red;
-    }
-    .이자부스터 {
-      width: 33%;
-      height: 100%;
-      background: red;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: ${calcRatio(24, 324)};
+      .title {
+        width: 100%;
+        height: 12px;
+        ${({ theme }) => theme.typo.text.S_12_M};
+        color: ${({ theme }) => theme.palette.greyScale.grey500};
+        margin-bottom: 8px;
+        padding: 0;
+      }
+      .content {
+        width: 100%;
+        height: 16px;
+        ${({ theme }) => theme.typo.text.T_16_EB};
+        color: ${({ theme }) => theme.palette.greyScale.grey700};
+        padding: 0;
+      }
     }
   }
+
   .third-row {
     width: 100%;
     height: 100px;
-    /* background: blue; */
-
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
     .총소요기간 {
-      width: 33%;
+      width: 33.3%;
       height: 100%;
-      background: blue;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: ${calcRatio(24, 324)};
+      .title {
+        height: 12px;
+        ${({ theme }) => theme.typo.text.S_12_M};
+        color: ${({ theme }) => theme.palette.greyScale.grey500};
+        margin-bottom: 8px;
+        padding: 0;
+      }
+      .content {
+        height: 16px;
+        ${({ theme }) => theme.typo.text.T_21_EB};
+        color: ${({ theme }) => theme.palette.main.yellow400};
+        padding: 0;
+      }
     }
+
     .계약종료일 {
-      width: 33%;
+      width: 66.6%;
       height: 100%;
-      background: blue;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding-left: ${calcRatio(24, 324)};
+      .text-wrapper {
+        .title {
+          height: 12px;
+          ${({ theme }) => theme.typo.text.S_12_M};
+          color: ${({ theme }) => theme.palette.greyScale.grey500};
+          margin-bottom: 8px;
+        }
+        .content {
+          height: 16px;
+          ${({ theme }) => theme.typo.text.T_21_EB};
+          color: ${({ theme }) => theme.palette.main.yellow400};
+        }
+      }
     }
   }
+  position: relative;
+`;
+
+const SignatureWrapper = styled.div`
+  z-index: 999;
+  position: absolute;
+  right: 2px;
+  bottom: 0;
+
+  width: ${calcRatio(146, 324)};
+  height: 173px; // TODO: delete height (temporary)
+  background: rgba(36, 39, 41, 0.1);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CheckButtonPositioner = styled.div`

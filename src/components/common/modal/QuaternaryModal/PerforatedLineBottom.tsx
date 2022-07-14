@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-// import { ReactComponent as PerforatedLineShapeBottom } from '@assets/border/perforated-line-shape-bottom.svg';
+import { ReactComponent as PerforatedLineShapeBottom } from '@assets/border/perforated-line-shape-bottom.svg';
 
 function PerforatedLineBottom() {
   function render() {
@@ -12,7 +12,7 @@ function PerforatedLineBottom() {
     for (let i = 0; i < cnt; ++i) {
       ret.push(
         <div key={i} className="shape">
-          {/* <PerforatedLineShapeBottom /> */}
+          <PerforatedLineShapeBottom />
         </div>,
       );
     }
