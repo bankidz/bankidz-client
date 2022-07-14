@@ -97,20 +97,20 @@ function PrimaryModal({
         </div>
         <Bottom>
           <div className="first-row">
-            <div className="계약-대상">계약대상</div>
-            <div className="목표-아이템">목표 아이템</div>
+            <div className="계약대상">계약대상</div>
+            <div className="목표아이템">목표아이템</div>
           </div>
           <div className="second-row">
-            <div className="목표-적금액">목표 저금액</div>
-            <div className="매주-저금액">매주 저금액</div>
+            {/* <div className="목표적금액">목표저금액</div> */}
+            <div className="목표저금액">목표저금액</div>
+            <div className="매주저금액">매주저금액</div>
             <div className="이자부스터">이자부스터</div>
           </div>
           <div className="third-row">
-            <div className="총-소요기간">총 소요기간</div>
+            <div className="총소요기간">총소요기간</div>
             <div className="계약종료일">계약종료일</div>
-            <div className="placeholder">placeholder</div>
           </div>
-          <div className="signature">대충 서명</div>
+          <div className="signature">대충서명</div>
         </Bottom>
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />
@@ -231,16 +231,64 @@ const Bottom = styled.div`
     width: 100%;
     height: 102px;
     background: green;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .계약대상 {
+      width: 50%;
+      height: 100%;
+    }
+    .목표아이템 {
+      width: 50%;
+      height: 100%;
+    }
   }
   .second-row {
     width: 100%;
     height: 70px;
-    background: red;
+    /* background: red; */
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .목표저금액 {
+      width: 33%;
+      height: 100%;
+      background: red;
+    }
+    .매주저금액 {
+      width: 33%;
+      height: 100%;
+      background: red;
+    }
+    .이자부스터 {
+      width: 33%;
+      height: 100%;
+      background: red;
+    }
   }
   .third-row {
     width: 100%;
     height: 100px;
-    background: blue;
+    /* background: blue; */
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    .총소요기간 {
+      width: 33%;
+      height: 100%;
+      background: blue;
+    }
+    .계약종료일 {
+      width: 33%;
+      height: 100%;
+      background: blue;
+    }
   }
 `;
 
