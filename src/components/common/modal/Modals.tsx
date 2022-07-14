@@ -1,11 +1,15 @@
 import { useModalsDispatch, useModalsState } from './ModalsContext';
 import PrimaryModal from './PrimaryModal';
 import SecondaryModal from './SecondaryModal';
+import TertiaryModal from './TertiaryModal/TertiaryModal';
+import QuaternaryModal from './QuaternaryModal';
 
 // TODO: code splitting
 export const modals = {
   primaryModal: PrimaryModal,
   secondaryModal: SecondaryModal,
+  tertiaryModal: TertiaryModal,
+  quaternaryModal: QuaternaryModal,
 };
 
 // 전역 상태 (배열)의 각 요소의 props를 Component와 매핑 & submit / cancel 시 로직을 추가하여 랜더링

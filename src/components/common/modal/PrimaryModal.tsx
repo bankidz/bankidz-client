@@ -1,74 +1,66 @@
-import styled, { css } from 'styled-components';
-import ReactModal from 'react-modal';
-import { calcRatio } from '@lib/styles/theme';
+import styled from 'styled-components';
 import { ReactComponent as ModalContentBanky } from '@assets/illust/modal-content-banki.svg';
-import { ReactComponent as Check } from '@assets/icon/check.svg';
-import { darken } from 'polished';
+import ReactModal from 'react-modal';
+import CheckButton from '../Button/CheckButton';
+import { calcRatio } from '@lib/styles/theme';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
   /** header에 표시될 내용을 입력합니다. */
-  headerContent: string;
+  headerText: string;
   /** body에 표시될 내용을 입력합니다. */
-  bodyContent: string;
+  bodyText: string;
 }
 
 // 모달 내부에 표시될 UI 작성
-function PrimaryModal({
-  onSubmit,
-  headerContent,
-  bodyContent,
-}: PrimaryModalProps) {
+function PrimaryModal({ onSubmit, headerText, bodyText }: PrimaryModalProps) {
   function handleSubmit() {
     onSubmit();
   }
-  // 확장성을 위해 함수로 작성하였습니다.
-  function renderSvgContent() {
-    return <ModalContentBanky />;
-  }
+
+  const reactModalParams = {
+    isOpen: true,
+    style: {
+      overlay: {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(36, 39, 41, 0.7)',
+      },
+      content: {
+        height: '488px',
+        position: 'absolute',
+        top: `${calcRatio(136, 760)}`,
+        left: '18px',
+        right: '18px',
+        background: 'rgba(36, 39, 41, 0)',
+        overflow: 'hidden',
+        WebkitOverflowScrolling: 'touch',
+        border: 'none',
+        padding: '0',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      },
+    },
+  };
+
   return (
-    <ReactModal
-      isOpen
-      style={{
-        overlay: {
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: '#191919',
-          opacity: '0.7',
-        },
-        content: {
-          height: '488px',
-          position: 'absolute',
-          top: `${calcRatio(136, 760)}`, // TODO: status bar 포함해서 정렬하는지 확인 필요
-          left: '18px',
-          right: '18px',
-          background: '#191919',
-          overflow: 'hidden',
-          WebkitOverflowScrolling: 'touch',
-          border: 'none',
-          padding: '0',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-        },
-      }}
-    >
+    // @ts-expect-error
+    <ReactModal {...reactModalParams}>
       <Content>
         <WhiteBox>
-          {renderSvgContent()}
-          <span className="main-label">{headerContent}</span>
-          <span className="sub-label">{bodyContent}</span>
+          <ModalContentBanky />
+          <span className="main-label">{headerText}</span>
+          <span className="sub-label">{bodyText}</span>
         </WhiteBox>
-        <OverlayBox>
-          <button onClick={handleSubmit}>
-            <Check />
-          </button>
-        </OverlayBox>
+        <CheckButtonPositioner>
+          <CheckButton onClick={handleSubmit} />
+        </CheckButtonPositioner>
       </Content>
     </ReactModal>
   );
@@ -115,29 +107,6 @@ const WhiteBox = styled.div`
   }
 `;
 
-const OverlayBox = styled.div`
-  padding-top: 16px;
-  button {
-    width: 48px;
-    height: 48px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: ${({ theme }) => theme.palette.main.yellow300};
-    border-radius: ${({ theme }) => theme.radius.medium};
-
-    ${({ theme }) => {
-      const selected = theme.palette.main.yellow300;
-      return css`
-        &:active {
-          background: ${darken(0.1, selected)};
-        }
-      `;
-    }}
-  }
+const CheckButtonPositioner = styled.div`
+  margin-top: 16px;
 `;
-
-// https://stackoverflow.com/questions/58355628/animate-react-modal
-// https://codepen.io/designcouch/pen/obvKxm
