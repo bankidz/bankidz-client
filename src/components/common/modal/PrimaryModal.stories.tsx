@@ -5,7 +5,7 @@ export default {
   title: '모달/PrimaryModal',
   component: PrimaryModal,
   argTypes: {
-    onSubmit: { action: 'handle Submit' },
+    onSubmit: { action: 'handle click' },
   },
 } as ComponentMeta<typeof PrimaryModal>;
 

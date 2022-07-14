@@ -1,42 +1,23 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import CheckButton from '../../Button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
+import CheckButton from '../../Button/CheckButton';
 import PerforatedLineBottom from './PerforatedLineBottom';
 import PerforatedLineTop from './PerforatedLineTop';
+import useRenderContractItem from '@hooks/useRenderContractItem';
+import moment from 'moment';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import useRenderContractItem from '@hooks/useRenderContractItem';
-import { TCategory } from '@lib/types/kid';
-import moment from 'moment';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
-  isMom: string;
-  title: string;
-  interestRate: string;
-  totalPrice: string;
-  weekPrice: string;
-  weeks: string;
-  createdAt: string;
-  category: TCategory;
 }
 
 // 모달 내부에 표시될 UI 작성
-function PrimaryModal({
-  onSubmit,
-  isMom = 'false',
-  title = '완구퍼펙트걸 되기',
-  interestRate = '10',
-  totalPrice = '30000',
-  weekPrice = '1500',
-  weeks = '10',
-  createdAt = '2022-07-12 03:08:07',
-  category = '학용품',
-}: PrimaryModalProps) {
+function PrimaryModal({ onSubmit }: PrimaryModalProps) {
   function handleSubmit() {
     onSubmit();
   }
@@ -69,6 +50,15 @@ function PrimaryModal({
       },
     },
   };
+
+  const isMom = 'false';
+  const title = '완구퍼펙트걸 되기';
+  const interestRate = '10';
+  const totalPrice = '30000';
+  const weekPrice = '1500';
+  const weeks = '10';
+  const createdAt = '2022-07-12 03:08:07';
+  const category = '학용품';
 
   const renderContractItem = useRenderContractItem();
 
@@ -106,11 +96,13 @@ function PrimaryModal({
           <div className="first-row">
             <div className="계약대상">
               <div className="banki-illust">
+                {/* @ts-expect-error */}
                 {isMom === 'true' ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
                 <div className="title">계약대상</div>
                 <div className="content">
+                  {/* @ts-expect-error */}
                   {isMom === 'true' ? '엄마' : '아빠'}
                 </div>
               </div>
@@ -445,5 +437,4 @@ const CheckButtonPositioner = styled.div`
 `;
 
 // http://jsfiddle.net/dineshranawat/Ls95n95L/
-// https://codepen.io/amit_sheen/pen/xxZeyjO
 // http://www.liangshunet.com/en/202004/998851523.htm
