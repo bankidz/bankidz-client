@@ -9,7 +9,7 @@ import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizon
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import { TCategory } from '@lib/types/kid';
+import { TItemName } from '@lib/types/kid';
 import { ReactComponent as A1 } from '@assets/illust/contractItemNames/contractReceipt/a1.svg';
 import { ReactComponent as A2 } from '@assets/illust/contractItemNames/contractReceipt/a2.svg';
 import { ReactComponent as A3 } from '@assets/illust/contractItemNames/contractReceipt/a3.svg';
@@ -69,7 +69,7 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
   const createdAt = '2022-07-12 03:08:07';
   const category = '학용품';
 
-  function renderContractItem(category: TCategory) {
+  function renderContractItem(category: TItemName) {
     if (category === '학용품') {
       return <A1 />;
     } else if (category === '생활용품') {
@@ -255,6 +255,7 @@ const Content = styled.div`
 `;
 
 const Top = styled.div`
+  margin: -1px 0; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   height: 100px;
   width: 100%;
@@ -279,6 +280,7 @@ const Top = styled.div`
 `;
 
 const Bottom = styled.div`
+  margin-bottom: -1px; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
   height: 360px;
@@ -450,7 +452,7 @@ const Bottom = styled.div`
 `;
 
 const SignatureWrapper = styled.div`
-  z-index: 999;
+  z-index: 900;
   position: absolute;
   right: 2px;
   bottom: 0;

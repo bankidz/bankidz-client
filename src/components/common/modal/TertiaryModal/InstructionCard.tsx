@@ -2,16 +2,17 @@ import styled from 'styled-components';
 import 'swiper/components/navigation/navigation.min.css';
 import { ReactNode } from 'react';
 
-interface CardProps {
+interface InstructionCardProps {
   headerText: string;
   bodyText: string;
   children: ReactNode;
 }
 
-function InstructionCard({ headerText, bodyText, children }: CardProps) {
-  // function renderSvgContent() {
-  //   return <ModalContentMoney />;
-  // }
+function InstructionCard({
+  headerText,
+  bodyText,
+  children,
+}: InstructionCardProps) {
   return (
     <>
       <YellowBox>{children}</YellowBox>

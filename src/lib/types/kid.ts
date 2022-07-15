@@ -7,7 +7,7 @@ export type TFamilyState = {
 export type TRole = 'dad' | 'mom' | 'son' | 'daughter';
 
 // contract item
-export type TCategory =
+export type TItemName =
   | '학용품'
   | '생활용품'
   | '전자제품'
