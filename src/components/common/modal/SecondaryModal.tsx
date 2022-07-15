@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as ModalContentFinish } from '@assets/illust/congrats/congrats_goal.svg';
 import ReactModal from 'react-modal';
-import CheckButton from '../Button/CheckButton';
+import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
 
 interface SecondaryModalProps {

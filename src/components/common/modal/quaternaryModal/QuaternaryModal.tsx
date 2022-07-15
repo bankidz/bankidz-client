@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
-import CheckButton from '../../Button/CheckButton';
-import PerforatedLineBottom from './PerforatedLineBottom';
-import PerforatedLineTop from './PerforatedLineTop';
+import CheckButton from '../../button/CheckButton';
 import moment from 'moment';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
@@ -19,6 +17,8 @@ import { ReactComponent as B3 } from '@assets/illust/contractItemNames/contractR
 import { ReactComponent as C1 } from '@assets/illust/contractItemNames/contractReceipt/c1.svg';
 import { ReactComponent as C2 } from '@assets/illust/contractItemNames/contractReceipt/c2.svg';
 import { ReactComponent as C3 } from '@assets/illust/contractItemNames/contractReceipt/c3.svg';
+import PerforatedLineTop from './PerforatedLineTop';
+import PerforatedLineBottom from './PerforatedLineBottom';
 
 interface PrimaryModalProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */

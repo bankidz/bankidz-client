@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import InputForm from '@components/common/Button/InputForm';
+import InputForm from '@components/common/button/InputForm';
 import useBottomSheet from '@hooks/useBottomSheet';
-import ContractSheet from '@components/common/BottomSheet/ContractSheet';
-import SelectMoney from '@components/common/BottomSheet/sheetContent/SelectMoney';
+import ContractSheet from '@components/common/bottomSheet/ContractSheet';
+import SelectMoney from '@components/common/bottomSheet/sheetContent/SelectMoney';
 import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@hooks/useValidation';
 import { useNavigate } from 'react-router-dom';

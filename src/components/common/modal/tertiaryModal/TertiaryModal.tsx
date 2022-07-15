@@ -3,10 +3,10 @@ import { useState } from 'react';
 import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { calcRatio } from '@lib/styles/theme';
-import InstructionCard from './InstructionCard';
-import CloseButton from '../../Button/CloseButton';
+import CloseButton from '../../button/CloseButton';
 import { ReactComponent as ModalContentMoney } from '@assets/illust/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illust/congrats/congrats_banki_with_coins.svg';
+import InstructionCard from './InstructionCard';
 
 interface TertiaryProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
