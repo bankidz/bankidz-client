@@ -61,18 +61,14 @@ const Rule = styled.div`
   padding: 16px;
   border-radius: ${({ theme }) => theme.radius.medium};
   & > p:first-child {
-    font-family: 'TmoneyRoundWind';
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 800;
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    ${({ theme }) => theme.typo.bottomSheet.T_14_EB}
+    line-height: 160%;
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
   & > p:nth-child(2) {
-    font-family: 'TmoneyRoundWind';
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 400;
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    ${({ theme }) => theme.typo.bottomSheet.S_12_R}
+    line-height: 160%;
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
 `;
 

@@ -4,10 +4,10 @@ export type TFamilyState = {
   isKid: boolean;
 };
 
-export type TRole = 'dad' | 'mom' | 'son' | 'daughter';
+export type TRole = '엄마' | '아빠' | '아들' | '딸';
 
 // contract item
-export type TCategory =
+export type TItemName =
   | '학용품'
   | '생활용품'
   | '전자제품'

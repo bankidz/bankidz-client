@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CommonSheet from './CommonSheet';
-//import './sheetStyle.css';
 import 'react-spring-bottom-sheet/dist/style.css';
 import SelectProfile from './sheetContent/SelectProfile';
 import DeleteChallenge from './sheetContent/DeleteChallenge';

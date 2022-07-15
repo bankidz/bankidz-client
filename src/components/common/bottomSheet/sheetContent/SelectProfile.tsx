@@ -4,13 +4,9 @@ import { ReactComponent as Mom } from '@assets/illust/banki/banki_mom.svg';
 import { ReactComponent as Son } from '@assets/illust/banki/banki_son.svg';
 import { ReactComponent as Daughter } from '@assets/illust/banki/banki_daughter.svg';
 import Button from '@components/common/Button/Button';
-import { calcRatio } from '@lib/styles/theme';
+import { TRole } from '@lib/types/kid';
 
-interface SelectProfileProps {
-  role: '엄마' | '아빠' | '아들' | '딸';
-}
-
-function SelectProfile({ role }: SelectProfileProps) {
+function SelectProfile({ role }: { role: TRole }) {
   const setCharacter = (role: '엄마' | '아빠' | '아들' | '딸') => {
     switch (role) {
       case '엄마':
