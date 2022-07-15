@@ -1,8 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import CommonSheet from './CommonSheet';
 import 'react-spring-bottom-sheet/dist/style.css';
-import SelectProfile from './sheetContent/SelectProfile';
+import CommonSheet from './CommonSheet';
 import DeleteChallenge from './sheetContent/DeleteChallenge';
+import SelectProfile from './sheetContent/SelectProfile';
 
 export default {
   title: 'Common/바텀 시트/CommonSheet',

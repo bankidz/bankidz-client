@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illust/banki/banki_giveup.svg';
-import Button from '@components/common/Button/Button';
+import Button from '@components/common/button/Button';
 
 interface DeleteChallengeProps {
   onClickDelete: () => void;

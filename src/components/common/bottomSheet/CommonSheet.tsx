@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
 
 interface CommonSheetProps {

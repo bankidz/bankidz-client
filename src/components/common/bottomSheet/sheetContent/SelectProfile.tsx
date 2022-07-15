@@ -3,7 +3,7 @@ import { ReactComponent as Dad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as Mom } from '@assets/illust/banki/banki_mom.svg';
 import { ReactComponent as Son } from '@assets/illust/banki/banki_son.svg';
 import { ReactComponent as Daughter } from '@assets/illust/banki/banki_daughter.svg';
-import Button from '@components/common/Button/Button';
+import Button from '@components/common/button/Button';
 import { TRole } from '@lib/types/kid';
 
 function SelectProfile({ role }: { role: TRole }) {
