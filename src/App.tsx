@@ -12,6 +12,7 @@ import { selectIsKid } from './store/slices/authSlice';
 import Init from './pages/OnBoarding/Init';
 import SungwooTestPage from './pages/SungwooTestPage';
 import LoginPage from './pages/OnBoarding/LoginPage';
+import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
 
 /* 부모자식 여부를 아래로 내려주는 props에 대한 타입인데, 네이밍 고민.
 각각 하위 컴포넌트에서 중복으로 만들어서 쓰는게 나으려나요 */
@@ -25,6 +26,7 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
         {isKid == null ? (
           /* 임시!!! 회원가입 완료 안되어있으면 무조건 init 페이지로.
           일단 이렇게 해놨고 나중에 hoc로 변경 예정 */
@@ -37,7 +39,6 @@ function App() {
             <Route path="/mypage/*" element={<MypageRouter isKid={isKid} />} />
           </>
         )}
-
         <Route path="*" element={<NotFound />} />
         {/* 컴포넌트 랜더링 테스트용 페이지 입니다.*/}
         <Route path="/test" element={<TestPage />} />

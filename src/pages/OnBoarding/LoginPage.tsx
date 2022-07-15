@@ -1,16 +1,19 @@
 import styled from 'styled-components';
 
+const DOMAIN = 'http://localhost:3000'; // TODO: mv to constant
+
+const REST_API_KEY = `${process.env.REACT_APP_KAKAO_REST_API_KEY}`;
+const REDIRECT_URI = `${DOMAIN}/auth/kakao/callback`;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
 function LoginPage() {
-  function handleClick() {}
   return (
     <Wrapper>
       <TextWrapper>
         <span className="title">BANKIDZ</span>
         <span className="congrats">뱅키즈에 오신 것을 환영합니다!</span>
       </TextWrapper>
-      <StartWithKakaoButton onClick={handleClick}>
-        카카오로 시작하기
-      </StartWithKakaoButton>
+      <StartWithKakao href={KAKAO_AUTH_URL}>카카오로 시작하기</StartWithKakao>
     </Wrapper>
   );
 }
@@ -38,7 +41,7 @@ const TextWrapper = styled.div`
   align-items: center;
 
   .title {
-    // type exception
+    // typo exception
     font-family: 'Tmoney RoundWind';
     font-style: normal;
     font-weight: 800;
@@ -54,7 +57,7 @@ const TextWrapper = styled.div`
   }
 `;
 
-const StartWithKakaoButton = styled.button`
+const StartWithKakao = styled.a`
   width: 90%;
   height: 49px;
   background: yellow;
