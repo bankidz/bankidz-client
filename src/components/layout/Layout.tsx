@@ -12,10 +12,12 @@ function Layout() {
     <Wrapper>
       <Container>
         {isPC ? (
-          <iframe
-            src={pathname}
-            style={{ width: '100%', height: '715px', borderRadius: '28px' }}
-          ></iframe>
+          <Mockup>
+            <iframe
+              src={pathname}
+              style={{ width: '360px', height: '715px', borderRadius: '28px' }}
+            ></iframe>
+          </Mockup>
         ) : (
           <Outlet />
         )}
@@ -33,6 +35,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   /* 모바일 화면 */
   ${media.mobile} {
     width: 100%;
@@ -43,13 +46,22 @@ const Container = styled.div`
   }
 
   /* pc 모바일 목업 화면 */
-  width: 360px;
-  height: 714px;
-  background-color: ${({ theme }) => theme.palette.greyScale.white};
+  width: 390px;
+  height: 744px;
   box-sizing: content-box;
-  border: 12px solid ${({ theme }) => theme.palette.greyScale.grey100};
   border-radius: 36px;
 
   /* 탭바 */
   position: relative;
+`;
+
+const Mockup = styled.div`
+  width: 390px;
+  height: 744px;
+  box-shadow: inset -2px -10px 20px rgba(13, 10, 37, 0.25),
+    inset 10px 2px 20px #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 36px;
 `;

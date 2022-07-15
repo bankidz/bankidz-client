@@ -54,6 +54,9 @@ export const GlobalStyle = createGlobalStyle`
     button:focus {
       outline: none;
     }
+    input:focus {
+      outline: none;
+    }
 
     /* react spring bottom sheet */
     :root {

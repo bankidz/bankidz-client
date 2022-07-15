@@ -3,15 +3,15 @@ import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/challengePayloadSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
-import { ReactComponent as A1 } from '@assets/illust/contractItemNames/pleaseChangeName/a1.svg';
-import { ReactComponent as A2 } from '@assets/illust/contractItemNames/pleaseChangeName/a2.svg';
-import { ReactComponent as A3 } from '@assets/illust/contractItemNames/pleaseChangeName/a3.svg';
-import { ReactComponent as B1 } from '@assets/illust/contractItemNames/pleaseChangeName/b1.svg';
-import { ReactComponent as B2 } from '@assets/illust/contractItemNames/pleaseChangeName/b2.svg';
-import { ReactComponent as B3 } from '@assets/illust/contractItemNames/pleaseChangeName/b3.svg';
-import { ReactComponent as C1 } from '@assets/illust/contractItemNames/pleaseChangeName/c1.svg';
-import { ReactComponent as C2 } from '@assets/illust/contractItemNames/pleaseChangeName/c2.svg';
-import { ReactComponent as C3 } from '@assets/illust/contractItemNames/pleaseChangeName/c3.svg';
+import { ReactComponent as A1 } from '@assets/illust/contractItemNames/contractSelect/a1.svg';
+import { ReactComponent as A2 } from '@assets/illust/contractItemNames/contractSelect/a2.svg';
+import { ReactComponent as A3 } from '@assets/illust/contractItemNames/contractSelect/a3.svg';
+import { ReactComponent as B1 } from '@assets/illust/contractItemNames/contractSelect/b1.svg';
+import { ReactComponent as B2 } from '@assets/illust/contractItemNames/contractSelect/b2.svg';
+import { ReactComponent as B3 } from '@assets/illust/contractItemNames/contractSelect/b3.svg';
+import { ReactComponent as C1 } from '@assets/illust/contractItemNames/contractSelect/c1.svg';
+import { ReactComponent as C2 } from '@assets/illust/contractItemNames/contractSelect/c2.svg';
+import { ReactComponent as C3 } from '@assets/illust/contractItemNames/contractSelect/c3.svg';
 
 const itemNames = [
   { name: '학용품', image: <A1 /> },
@@ -25,14 +25,14 @@ const itemNames = [
   { name: '기타', image: <C3 /> },
 ];
 
-function Step2() {
+function Step2({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onClickItemNameButton = (itemName: string) => {
     console.log(itemName);
     dispatch(dispatchItemName(itemName));
-    navigate(`/create/3`, { state: { from: 2 } });
+    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
   return (

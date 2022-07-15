@@ -16,8 +16,10 @@ function TopAppBar({ label }: TopAppBarProps) {
   };
 
   return (
-    <Wrapper onClick={onClickTopAppBar}>
-      <Arrow />
+    <Wrapper>
+      <div onClick={onClickTopAppBar}>
+        <Arrow />
+      </div>
       <p>{label}</p>
     </Wrapper>
   );
@@ -36,7 +38,12 @@ const Wrapper = styled.div`
   cursor: pointer;
 
   & > :first-child {
-    margin-right: 12.42px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -16px;
   }
 
   p {

@@ -27,5 +27,5 @@ export const 포기하기_수락하기 = Template.bind({});
 
 export const 카카오로_시작하기 = Template.bind({});
 카카오로_시작하기.args = {
-  children: <Button property="etc" label="카카오로 시작하기" />,
+  children: <Button property="kakao" label="카카오로 시작하기" />,
 };

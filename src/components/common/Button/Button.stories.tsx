@@ -36,7 +36,7 @@ export const 다음_disabled = Template.bind({});
 export const 카카오로_시작하기 = Template.bind({});
 카카오로_시작하기.args = {
   label: '카카오로 시작하기',
-  property: 'etc',
+  property: 'kakao',
 };
 
 export const 가족_추가하기 = Template.bind({});
