@@ -1,4 +1,5 @@
 import ContractSheet from '@components/common/bottomSheet/ContractSheet';
+import SelectInterest from '@components/common/bottomSheet/sheetContent/SelectInterest';
 import InputForm from '@components/common/button/InputForm';
 import SheetButton from '@components/common/button/SheetButton';
 import useBottomSheet from '@hooks/useBottomSheet';
@@ -12,7 +13,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-type TStep4Form = {
+export type TStep4Form = {
   weekPrice: number;
   interestRate: 10 | 20 | 30 | null;
 };
@@ -44,15 +45,17 @@ function Step4({ currentStep }: { currentStep: number }) {
     const handleClickOutside = (e: MouseEvent): void => {
       if (
         weekPriceSheetRef.current &&
-        interestRateInputRef.current &&
-        !weekPriceSheetRef.current.contains(e.target as Node)
+        weekPriceInputRef.current &&
+        !weekPriceSheetRef.current.contains(e.target as Node) &&
+        !weekPriceInputRef.current.contains(e.target as Node)
       ) {
         onDismissWeekPrice();
       }
       if (
         interestRateSheetRef.current &&
-        weekPriceInputRef.current &&
-        !interestRateSheetRef.current.contains(e.target as Node)
+        interestRateInputRef.current &&
+        !interestRateSheetRef.current.contains(e.target as Node) &&
+        !interestRateInputRef.current.contains(e.target as Node)
       ) {
         onDismissInterestRate();
       }
@@ -116,7 +119,9 @@ function Step4({ currentStep }: { currentStep: number }) {
         sheetRef={interestRateSheetRef}
         disabledNext={disabledNext}
       >
-        <div ref={interestRateSheetRef}>{'이자부스터'}</div>
+        <div ref={interestRateSheetRef}>
+          <SelectInterest form={form} setForm={setForm} />
+        </div>
       </ContractSheet>
     </Wrapper>
   );
