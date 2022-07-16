@@ -3,10 +3,12 @@ import MypageKid from './MypageKid';
 import MypageParent from './MypageParent';
 import Info from './Info';
 import Code from './Code';
-import { AppProps } from '../../App';
 import Base from '@components/layout/Base';
+import { useAppSelector } from '@store/app/hooks';
+import { selectIsKid } from '@store/slices/authSlice';
 
-function MypageRouter({ isKid }: AppProps) {
+function MypageRouter() {
+  const isKid = useAppSelector(selectIsKid);
   return (
     <Routes>
       <Route

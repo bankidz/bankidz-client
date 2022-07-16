@@ -2,8 +2,9 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 //import './sheetStyle.css';
 import 'react-spring-bottom-sheet/dist/style.css';
 import ContractSheet from './ContractSheet';
-import SelectInterest from './sheetContent/SelectInterest';
+// import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './sheetContent/SelectMoney';
+import SelectInterestButton from '@components/kid/create/SelectInterestButton';
 
 export default {
   title: 'Common/바텀 시트/ContractSheet',
@@ -30,7 +31,7 @@ export const 모을_금액_입력 = Template.bind({});
 
 export const 이자율_선택 = Template.bind({});
 이자율_선택.args = {
-  children: <SelectInterest />,
+  // children: <SelectInterestButton />,
   open: true,
   label: '다음',
 };
