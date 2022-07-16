@@ -1,4 +1,4 @@
-import TopAppBar from '@components/layout/TopAppBar';
+import TopAppBar from '@components/layout/AppBar';
 import { axiosPublic } from '@lib/api/axios';
 
 function RegisterPage() {

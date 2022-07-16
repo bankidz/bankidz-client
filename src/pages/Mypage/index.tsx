@@ -13,7 +13,11 @@ function MypageRouter() {
     <Routes>
       <Route
         path="/"
-        element={<BackgroundTemplate>{isKid ? <MypageKid /> : <MypageParent />}</BackgroundTemplate>}
+        element={
+          <BackgroundTemplate>
+            {isKid ? <MypageKid /> : <MypageParent />}
+          </BackgroundTemplate>
+        }
       />
       <Route path="/info" element={<Info />} />
       <Route path="/code" element={<Code />} />
