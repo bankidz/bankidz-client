@@ -74,13 +74,15 @@ function Step3({ currentStep }: { currentStep: number }) {
     checkValidateAmount('contractAmount', form.contractAmount);
   }, [form]);
 
-  // 다음으로 버튼 활성화 처리
+  // 다음으로 버튼 활성화,비활성화 처리
   useEffect(() => {
     if (
       validateName.message === '완전 좋은 이름인데요!' &&
       validateAmount.message === '적절한 금액이에요!'
     ) {
       setDisabledNext(false);
+    } else {
+      setDisabledNext(true);
     }
   }, [validateAmount, validateName]);
 
@@ -113,6 +115,7 @@ function Step3({ currentStep }: { currentStep: number }) {
             onBlur={() => {
               checkValidateAmount('contractAmount', form.contractAmount);
             }}
+            sheetOpen={open}
           />
         </div>
         <p>{validateAmount.message}</p>
