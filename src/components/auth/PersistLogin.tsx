@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useAppSelector } from '../../store/app/hooks';
-import useRefreshToken from '../../hooks/auth/useRefreshToken';
-import useLocalStorage from '../../hooks/auth/useLocalStorage';
-import { selectAccessToken } from '../../store/slices/authSlice';
+import useRefreshToken from '@hooks/auth/useRefreshToken';
+import { useAppSelector } from '@store/app/hooks';
+import { selectAccessToken } from '@store/slices/authSlice';
+import useLocalStorage from '@hooks/auth/useLocalStorage';
 
 function PersistLogin() {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,7 +29,15 @@ function PersistLogin() {
   }, []);
 
   return (
-    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    <>
+      {!persist ? (
+        <Outlet />
+      ) : isLoading ? (
+        <p>새로고침 처리중입니다...</p>
+      ) : (
+        <Outlet />
+      )}
+    </>
   );
 }
 

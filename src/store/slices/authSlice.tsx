@@ -51,10 +51,14 @@ export const authSlice = createSlice({
       state.auth.accessToken = action.payload.accessToken;
       state.auth.isKid = action.payload.isKid;
     },
+    resetCredentials: (state) => {
+      state.auth.accessToken = null;
+      state.auth.isKid = null;
+    }
   },
 });
 
-export const { setCredentials } = authSlice.actions;
+export const { setCredentials, resetCredentials } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
