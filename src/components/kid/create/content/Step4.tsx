@@ -1,3 +1,6 @@
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import ContractSheet from '@components/common/bottomSheet/ContractSheet';
 import SelectInterest from '@components/common/bottomSheet/sheetContent/SelectInterest';
 import InputForm from '@components/common/button/InputForm';
@@ -8,14 +11,19 @@ import {
   dispatchInterestRate,
   dispatchWeekPrice,
   selectStep4InitData,
+  selectTotalPrice,
 } from '@store/slices/challengePayloadSlice';
-import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { ReactComponent as Divider } from '@assets/border/create-challenge-dashed-divider.svg';
+import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
+import commaThreeDigits from '@lib/utils/commaThreeDigits';
 
 export type TStep4Form = {
   weekPrice: number;
   interestRate: 10 | 20 | 30 | null;
+};
+export type TSetStep4Form = {
+  form?: TStep4Form;
+  setForm?: Dispatch<SetStateAction<TStep4Form>>;
 };
 
 function Step4({ currentStep }: { currentStep: number }) {
@@ -24,6 +32,7 @@ function Step4({ currentStep }: { currentStep: number }) {
   const [form, setForm] = useState<TStep4Form>(
     useAppSelector(selectStep4InitData),
   );
+  const totalPrice = useAppSelector(selectTotalPrice);
 
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] = useBottomSheet();
@@ -39,6 +48,11 @@ function Step4({ currentStep }: { currentStep: number }) {
     dispatch(dispatchInterestRate(form.interestRate));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
+
+  // TODO : 최대최소 계산 유틸 추가
+  const min = 500;
+  const max = 15000;
+  const getMiddlePrice = () => (min + max) / 2 - (((min + max) / 2) % 500);
 
   // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록
   useEffect(() => {
@@ -66,14 +80,23 @@ function Step4({ currentStep }: { currentStep: number }) {
     };
   }, [weekPriceInputRef, interestRateInputRef]);
 
+  // 다음으로 버튼 활성화,비활성화 처리
+  useEffect(() => {
+    form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
+  }, [form]);
+
   return (
     <Wrapper>
       <InputSection>
         <p>저금액</p>
         <div onClick={onOpenWeekPrice} ref={weekPriceInputRef}>
           <InputForm
-            placeholder="중간금액..."
-            value={form.weekPrice === 0 ? '' : form.weekPrice}
+            placeholder={commaThreeDigits(getMiddlePrice()) + ' 원'}
+            value={
+              form.weekPrice === 0
+                ? ''
+                : commaThreeDigits(form.weekPrice) + ' 원'
+            }
             readonly={true}
             onFocus={onOpenWeekPrice}
             sheetOpen={openWeekPrice}
@@ -85,8 +108,13 @@ function Step4({ currentStep }: { currentStep: number }) {
         <p>이자 부스터</p>
         <div onClick={onOpenInterestRate} ref={interestRateInputRef}>
           <InputForm
-            placeholder="20% 금액..."
-            value={form.interestRate ? form.interestRate : ''}
+            placeholder={commaThreeDigits(getMiddlePrice() * 0.2) + ' 원'}
+            value={
+              form.interestRate
+                ? commaThreeDigits(form.weekPrice * form.interestRate * 0.01) +
+                  ' 원'
+                : ''
+            }
             readonly={true}
             onFocus={onOpenInterestRate}
             sheetOpen={openInterestRate}
@@ -94,6 +122,13 @@ function Step4({ currentStep }: { currentStep: number }) {
           />
         </div>
       </InputSection>
+      <StyledDivider />
+      <Summary>
+        <p>
+          <span>{10}</span>주 후, <span>{'9월 2주'}</span>에 완주예정
+        </p>
+        <p>마지막 주에는 {500}원만 모아요</p>
+      </Summary>
       <SheetButton
         onClickNext={onClickNextButton}
         disabledNext={disabledNext}
@@ -109,7 +144,15 @@ function Step4({ currentStep }: { currentStep: number }) {
         sheetRef={weekPriceSheetRef}
         disabledNext={disabledNext}
       >
-        <div ref={weekPriceSheetRef}>{'저금액'}</div>
+        <div ref={weekPriceSheetRef}>
+          <RangeInput
+            totalPrice={totalPrice}
+            min={min}
+            max={max}
+            form={form}
+            setForm={setForm}
+          />
+        </div>
       </ContractSheet>
       <ContractSheet
         open={openInterestRate}
@@ -143,5 +186,27 @@ const InputSection = styled.div`
     color: ${({ theme }) => theme.palette.greyScale.grey600};
     display: flex;
     align-items: center;
+  }
+`;
+
+const StyledDivider = styled(Divider)`
+  margin: 8px 0;
+`;
+
+const Summary = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  & > p:first-child {
+    ${({ theme }) => theme.typo.text.T_21_EB};
+    color: ${({ theme }) => theme.palette.main.yellow400};
+    & > span {
+      color: ${({ theme }) => theme.palette.greyScale.black};
+    }
+  }
+  & > p:last-child {
+    ${({ theme }) => theme.typo.text.S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
 `;

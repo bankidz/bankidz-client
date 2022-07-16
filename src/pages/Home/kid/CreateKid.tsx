@@ -9,6 +9,7 @@ import Step4 from '@components/kid/create/content/Step4';
 import { useEffect, useState } from 'react';
 import { kidMock } from '@lib/mocks/kid';
 import { TFamilyState } from '@lib/types/kid';
+import Step5 from '@components/kid/create/content/Step5';
 
 const title = [
   '누구와 계약하나요?',
@@ -54,6 +55,9 @@ function CreateKid() {
           return <Step3 currentStep={2} />;
         case 3:
           return <Step4 currentStep={3} />;
+        case 4:
+          return <Step5 currentStep={4} />;
+
         default:
           throw 'error';
       }
@@ -66,7 +70,9 @@ function CreateKid() {
         case 3:
           return <Step3 currentStep={3} />;
         case 4:
-          return <Step4 currentStep={3} />;
+          return <Step4 currentStep={4} />;
+        case 5:
+          return <Step5 currentStep={4} />;
         default:
           throw 'error';
       }

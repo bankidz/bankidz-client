@@ -71,5 +71,7 @@ export const selectStep4InitData = (state: RootState) => {
     interestRate: state.challengePayload.interestRate,
   };
 };
+export const selectTotalPrice = (state: RootState) =>
+  state.challengePayload.totalPrice;
 
 export default challengePayloadSlice.reducer;

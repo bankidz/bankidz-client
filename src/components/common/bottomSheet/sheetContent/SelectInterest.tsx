@@ -1,12 +1,7 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SelectInterestButton from '@components/kid/create/SelectInterestButton';
-import { TStep4Form } from '@components/kid/create/content/Step4';
-
-type SelectInterestProps = {
-  form?: TStep4Form;
-  setForm?: Dispatch<SetStateAction<TStep4Form>>;
-};
+import { TSetStep4Form } from '@components/kid/create/content/Step4';
 
 const notifications = {
   10: {
@@ -21,12 +16,14 @@ const notifications = {
   30: {
     title: '위험 상품을 선택하셨네요!',
     description:
-      '일주일이라도 저금하지 않으면 챌린지가 사라져요.\n이자율은 높지만 그만큼 위험이 따른다는 것, 알아두세요!',
+      '일주일이라도 저금하지 않으면 챌린지가 사라져요. \n이자율은 높지만 그만큼 위험이 따른다는 것, 알아두세요!',
   },
 };
 
-function SelectInterest({ form, setForm }: SelectInterestProps) {
-  const [select, setSelect] = useState<10 | 20 | 30 | null>(null);
+function SelectInterest({ form, setForm }: TSetStep4Form) {
+  const [select, setSelect] = useState<10 | 20 | 30 | null>(
+    form?.interestRate ? form.interestRate : null,
+  );
 
   const onClickInterestButton = (risk: 10 | 20 | 30) => {
     setSelect(risk);

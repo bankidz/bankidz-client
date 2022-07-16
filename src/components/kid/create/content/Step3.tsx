@@ -14,6 +14,7 @@ import {
   selectStep3InitData,
 } from '@store/slices/challengePayloadSlice';
 import SheetButton from '@components/common/button/SheetButton';
+import commaThreeDigits from '@lib/utils/commaThreeDigits';
 
 type TStep3Form = {
   contractName: string;
@@ -111,7 +112,11 @@ function Step3({ currentStep }: { currentStep: number }) {
         <div onClick={onOpen} ref={moneyRef}>
           <InputForm
             placeholder="부모님과 함께 모을 금액"
-            value={form.contractAmount === 0 ? '' : form.contractAmount}
+            value={
+              form.contractAmount === 0
+                ? ''
+                : commaThreeDigits(form.contractAmount)
+            }
             error={validateAmount.error}
             readonly={true}
             onFocus={onOpen}
