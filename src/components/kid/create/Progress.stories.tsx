@@ -10,7 +10,14 @@ const Template: ComponentStory<typeof Progress> = (args) => (
   <Progress {...args} />
 );
 
-export const Step_1 = Template.bind({});
-Step_1.args = {
+export const 부모선택_건너뛰기 = Template.bind({});
+부모선택_건너뛰기.args = {
   step: 3,
+  skipSelectParents: true,
+};
+
+export const 부모선택_포함 = Template.bind({});
+부모선택_포함.args = {
+  step: 3,
+  skipSelectParents: false,
 };

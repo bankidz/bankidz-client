@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ReactComponent as SvgSadBanki } from '@assets/illust/banki/common-sheet-sad.svg';
-import Button from '@components/common/Button/Button';
+import { ReactComponent as Banki } from '@assets/illust/banki/banki_giveup.svg';
+import Button from '@components/common/button/Button';
 
 interface DeleteChallengeProps {
   onClickDelete: () => void;
@@ -12,9 +12,9 @@ function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
     <Wrapper>
       <Container>
         <p>정말 포기할거예요?</p>
-        <BankyWrapper>
-          <SvgSadBanki />
-        </BankyWrapper>
+        <BankiWrapper>
+          <Banki />
+        </BankiWrapper>
         <Rule>
           <p>포기규칙</p>
           <p>
@@ -25,7 +25,7 @@ function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
         </Rule>
       </Container>
       <ButtonContainer>
-        <Button label="포기하기" sub={true} onClick={onClickDelete} />
+        <Button label="포기하기" property="sub" onClick={onClickDelete} />
         <Button label="다시 도전해볼게요" onClick={onDismiss} />
       </ButtonContainer>
     </Wrapper>
@@ -48,8 +48,9 @@ const Container = styled.div`
   }
 `;
 
-const BankyWrapper = styled.div`
-  height: 292px;
+const BankiWrapper = styled.div`
+  height: 185px;
+  padding: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,18 +61,14 @@ const Rule = styled.div`
   padding: 16px;
   border-radius: ${({ theme }) => theme.radius.medium};
   & > p:first-child {
-    font-family: 'TmoneyRoundWind';
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 800;
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    ${({ theme }) => theme.typo.bottomSheet.T_14_EB}
+    line-height: 160%;
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
   & > p:nth-child(2) {
-    font-family: 'TmoneyRoundWind';
-    font-size: 14px;
-    line-height: 1.5;
-    font-weight: 400;
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    ${({ theme }) => theme.typo.bottomSheet.S_12_R}
+    line-height: 160%;
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
 `;
 

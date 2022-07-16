@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ContractSheet from './ContractSheet';
 //import './sheetStyle.css';
 import 'react-spring-bottom-sheet/dist/style.css';
+import ContractSheet from './ContractSheet';
 // import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './sheetContent/SelectMoney';
 import SelectInterestButton from '@components/kid/create/SelectInterestButton';
@@ -18,7 +18,13 @@ const Template: ComponentStory<typeof ContractSheet> = (args) => (
 
 export const 모을_금액_입력 = Template.bind({});
 모을_금액_입력.args = {
-  children: <SelectMoney />,
+  children: (
+    <SelectMoney
+      pushAmount={() => {}}
+      popAmount={() => {}}
+      resetAmount={() => {}}
+    />
+  ),
   open: true,
   label: '다음',
 };

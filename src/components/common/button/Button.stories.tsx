@@ -22,13 +22,11 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
 export const 다음 = Template.bind({});
 다음.args = {
-  property: 'primary',
   label: '다음',
 };
 
 export const 다음_disabled = Template.bind({});
 다음_disabled.args = {
-  property: 'primary',
   label: '다음',
   state: false,
 };
@@ -36,11 +34,17 @@ export const 다음_disabled = Template.bind({});
 export const 카카오로_시작하기 = Template.bind({});
 카카오로_시작하기.args = {
   label: '카카오로 시작하기',
-  property: 'etc',
+  property: 'kakao',
 };
 
-export const 가족_추가하기 = Template.bind({});
-가족_추가하기.args = {
-  label: '가족 추가하기',
-  property: 'secondary',
+export const 삭제하기_바텀시트 = Template.bind({});
+삭제하기_바텀시트.args = {
+  label: '삭제하기',
+  property: 'delete',
+};
+
+export const 삭제하기_모달 = Template.bind({});
+삭제하기_모달.args = {
+  label: '삭제하기',
+  fixed: true,
 };

@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { BottomSheet, BottomSheetRef } from 'react-spring-bottom-sheet';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
 
 interface CommonSheetProps {
@@ -41,9 +40,7 @@ const StyledBottomSheet = styled(BottomSheet)`
     width: 60px;
     height: 5px;
     border-radius: 3px;
-    // TODO: color 확인 필요 */
-    background-color: pink;
-    /* background-color: ${({ theme }) => theme.palette.greyScale.grey100}; */
+    background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   }
 `;
 

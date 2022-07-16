@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { kidMock } from '@lib/mocks/kid';
 import { TFamilyState } from '@lib/types/kid';
@@ -7,15 +7,15 @@ import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';
 import ProfileButton from '@components/onboarding/ProfileButton';
 
-function Step1() {
+function Step1({ currentStep }: { currentStep: number }) {
   const [parents, setParents] = useState<TFamilyState[]>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { getFamily } = kidMock();
+  const { getFamily } = kidMock(2);
 
   const onClickProfileButton = (isFemale: boolean) => {
     dispatch(dispatchParent(isFemale));
-    navigate(`/create/2`, { state: { from: 1 } });
+    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
   useEffect(() => {

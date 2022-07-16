@@ -4,7 +4,7 @@ export type TFamilyState = {
   isKid: boolean;
 };
 
-export type TRole = 'dad' | 'mom' | 'son' | 'daughter';
+export type TRole = '엄마' | '아빠' | '아들' | '딸';
 
 export type TItemName =
   | '학용품'
