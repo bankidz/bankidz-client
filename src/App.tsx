@@ -2,8 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import LoginPage from './pages/OnBoarding/LoginPage';
 import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
-import RegisterBirthPage from './pages/OnBoarding/RegisterBirthPage';
-import RegisterRolePage from './pages/OnBoarding/RegisterBirthPage';
+import RegisterPage from './pages/OnBoarding/RegisterPage';
 import RequireAuth from '@components/auth/RequireAuth';
 import HomeRouter from './pages/Home';
 import ChallengeRouter from './pages/Challenge';
@@ -20,8 +19,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
         {/* <Route element={<PersistLogin />}> */}
-        <Route path="/register/1" element={<RegisterBirthPage />} />
-        <Route path="/register/2" element={<RegisterRolePage />} />
+        <Route path="/register/*" element={<RegisterPage />} />
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/*" element={<HomeRouter />} />
         <Route path="/challenge/*" element={<ChallengeRouter />} />

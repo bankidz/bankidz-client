@@ -5,7 +5,7 @@ interface BackgroundTemplateProps {
   children: JSX.Element;
 }
 
-// 'TapBar'를 함께 랜더링 하는 activity stack의 하위 UI template
+// 화면 하단에 'TapBar'를 함께 랜더링 하는 activity stack의 하위 UI template
 function BackgroundTemplate({ children }: BackgroundTemplateProps) {
   return (
     <>

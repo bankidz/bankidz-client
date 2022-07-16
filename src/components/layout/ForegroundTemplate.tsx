@@ -6,7 +6,7 @@ interface ForegroundTemplateProps {
   label: string;
 }
 
-// 'TopBar'를 함께 랜더링 하는 activity stack의 상위 UI template
+// 화면 상단에 'AppBar'를 함께 랜더링 하는 activity stack의 상위 UI template
 function ForegroundTemplate({ children, label }: ForegroundTemplateProps) {
   return (
     <>
