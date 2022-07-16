@@ -3,7 +3,7 @@ import MypageKid from './MypageKid';
 import MypageParent from './MypageParent';
 import Info from './Info';
 import Code from './Code';
-import Base from '@components/layout/Base';
+import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 
@@ -13,7 +13,7 @@ function MypageRouter() {
     <Routes>
       <Route
         path="/"
-        element={<Base>{isKid ? <MypageKid /> : <MypageParent />}</Base>}
+        element={<BackgroundTemplate>{isKid ? <MypageKid /> : <MypageParent />}</BackgroundTemplate>}
       />
       <Route path="/info" element={<Info />} />
       <Route path="/code" element={<Code />} />

@@ -15,7 +15,8 @@ type TAuthState = {
 const initialState: TAuthState = {
   auth: {
     accessToken: null,
-    isKid: null,
+    // TODO: init isKid
+    isKid: true,
   },
   status: 'idle',
   error: undefined,

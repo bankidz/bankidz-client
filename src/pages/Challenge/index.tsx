@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import Base from '@components/layout/Base';
-import Stacked from '../../components/layout/Stacked';
+import BackgroundTemplate from '@components/layout/BackgroundTemplate';
+import ForegroundTemplate from '../../components/layout/ForegroundTemplate';
 import Challenge from './Challenge';
 import ChallengeDelete from './ChallengeDelete';
 
@@ -10,17 +10,17 @@ function ChallengeRouter() {
       <Route
         path="/"
         element={
-          <Base>
+          <BackgroundTemplate>
             <Challenge />
-          </Base>
+          </BackgroundTemplate>
         }
       />
       {/* <Route
         path="/delete/:challengeId"
         element={
-          <Stacked label="">
+          <ForegroundTemplate label="">
             <ChallengeDelete />
-          </Stacked>
+          </ForegroundTemplate>
         }
       /> */}
     </Routes>

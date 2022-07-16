@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import TabBar from './TabBar';
 
-interface BaseProps {
+interface BackgroundTemplateProps {
   children: JSX.Element;
 }
 
-function Base({ children }: BaseProps) {
+function BackgroundTemplate({ children }: BackgroundTemplateProps) {
   return (
     <>
       <TabBar />
@@ -14,6 +14,6 @@ function Base({ children }: BaseProps) {
   );
 }
 
-export default Base;
+export default BackgroundTemplate;
 
 const Screen = styled.div``;

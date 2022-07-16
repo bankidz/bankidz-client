@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import TopAppBar from './TopAppBar';
 
-interface StackedProps {
+interface ForegroundTemplateProps {
   children: JSX.Element;
   label: string;
 }
 
-function Stacked({ children, label }: StackedProps) {
+function ForegroundTemplate({ children, label }: ForegroundTemplateProps) {
   return (
     <>
       <TopAppBar label={label} />
@@ -15,6 +15,6 @@ function Stacked({ children, label }: StackedProps) {
   );
 }
 
-export default Stacked;
+export default ForegroundTemplate;
 
 const Screen = styled.div``;
