@@ -9,8 +9,8 @@ import ChallengeRouter from './pages/Challenge';
 import ContentsRouter from './pages/Contents';
 import MypageRouter from './pages/Mypage';
 import NotFound from './pages/Common/NotFound';
-import TestPage from './pages/TestPage';
 import SungwooTestPage from './pages/SungwooTestPage';
+import PersistLogin from '@components/auth/PersistLogin';
 
 function App() {
   return (
@@ -18,16 +18,17 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route element={<RequireAuth />}>
-          <Route path="/*" element={<HomeRouter />} />
-          <Route path="/challenge/*" element={<ChallengeRouter />} />
-          <Route path="/contents/*" element={<ContentsRouter />} />
-          <Route path="/mypage/*" element={<MypageRouter />} />
-          <Route path="/sungwoo" element={<SungwooTestPage />} />
+        <Route element={<PersistLogin />}>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route element={<RequireAuth />}>
+            <Route path="/*" element={<HomeRouter />} />
+            <Route path="/challenge/*" element={<ChallengeRouter />} />
+            <Route path="/contents/*" element={<ContentsRouter />} />
+            <Route path="/mypage/*" element={<MypageRouter />} />
+            <Route path="/sungwoo" element={<SungwooTestPage />} />
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
-        <Route path="/test" element={<TestPage />} />
       </Route>
     </Routes>
   );

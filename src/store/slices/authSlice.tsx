@@ -54,7 +54,7 @@ export const authSlice = createSlice({
     resetCredentials: (state) => {
       state.auth.accessToken = null;
       state.auth.isKid = null;
-    }
+    },
   },
 });
 
