@@ -14,8 +14,11 @@ import {
   selectTotalPrice,
 } from '@store/slices/challengePayloadSlice';
 import { ReactComponent as Divider } from '@assets/border/create-challenge-dashed-divider.svg';
+import { ReactComponent as Alert } from '@assets/icon/alert.svg';
 import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
 import commaThreeDigits from '@lib/utils/commaThreeDigits';
+import useModals from '@components/common/modal/useModals';
+import Modals, { modals } from '@components/common/modal/Modals';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -42,7 +45,18 @@ function Step4({ currentStep }: { currentStep: number }) {
   const interestRateSheetRef = useRef<HTMLDivElement>(null);
   const weekPriceInputRef = useRef<HTMLDivElement>(null);
   const interestRateInputRef = useRef<HTMLDivElement>(null);
+  const { openModal } = useModals();
 
+  // 모달 여는 함수
+  const handleClickAlert = () => {
+    openModal(modals.tertiaryModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+    });
+  };
+
+  // 다음으로 버튼 클릭
   const onClickNextButton = () => {
     dispatch(dispatchWeekPrice(form.weekPrice));
     dispatch(dispatchInterestRate(form.interestRate));
@@ -105,7 +119,12 @@ function Step4({ currentStep }: { currentStep: number }) {
         </div>
       </InputSection>
       <InputSection>
-        <p>이자 부스터</p>
+        <p>
+          이자 부스터
+          <span onClick={handleClickAlert}>
+            <Alert />
+          </span>
+        </p>
         <div onClick={onOpenInterestRate} ref={interestRateInputRef}>
           <InputForm
             placeholder={commaThreeDigits(getMiddlePrice() * 0.2) + ' 원'}
@@ -166,6 +185,7 @@ function Step4({ currentStep }: { currentStep: number }) {
           <SelectInterest form={form} setForm={setForm} />
         </div>
       </ContractSheet>
+      <Modals />
     </Wrapper>
   );
 }
@@ -186,6 +206,11 @@ const InputSection = styled.div`
     color: ${({ theme }) => theme.palette.greyScale.grey600};
     display: flex;
     align-items: center;
+    & > span {
+      display: flex;
+      margin-left: -7px;
+      cursor: pointer;
+    }
   }
 `;
 

@@ -17,7 +17,6 @@ function SungwooTestPage() {
   return (
     <Wrapper>
       <button onClick={handleClick}>모달 열기</button>
-      {/* @ts-expect-error */}
       <Modals />
     </Wrapper>
   );

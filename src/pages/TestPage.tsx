@@ -16,7 +16,6 @@ function TestPage() {
   return (
     <>
       <button onClick={handleClick}>모달 열기</button>
-      {/* @ts-expect-error */}
       <Modals />
     </>
   );
