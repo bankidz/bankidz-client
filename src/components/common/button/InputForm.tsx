@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
@@ -11,6 +11,7 @@ interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   readonly?: boolean;
   /* 바텀시트가 올라와있는 상황에 포커스와 같은 스타일을 보여줍니다 */
   sheetOpen?: boolean;
+  birthday?: '년' | '월' | '일';
 }
 
 function InputForm({
@@ -20,25 +21,58 @@ function InputForm({
   error,
   readonly = false,
   sheetOpen = false,
+  birthday,
   ...props
 }: InputFormProps) {
   return (
-    <Wrapper
-      type={'text'}
-      placeholder={placeholder}
-      onChange={onChange}
-      value={value}
-      error={error}
-      sheetOpen={sheetOpen}
-      readOnly={readonly}
-      {...props}
-    />
+    <Wrapper value={value} birthday={birthday}>
+      <InputBox
+        type={'text'}
+        placeholder={placeholder}
+        onChange={onChange}
+        value={value}
+        error={error}
+        sheetOpen={sheetOpen}
+        readOnly={readonly}
+        birthday={birthday}
+        {...props}
+      />
+      {birthday && <p>{birthday}</p>}
+    </Wrapper>
   );
 }
 
 export default InputForm;
 
-const Wrapper = styled.input<{ error: boolean; sheetOpen: boolean }>`
+const Wrapper = styled.div<{
+  value: string | number;
+  birthday: '년' | '월' | '일' | undefined;
+}>`
+  position: relative;
+  & > p {
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    ${({ birthday }) =>
+      birthday === '년'
+        ? css`
+            right: calc((100% - 6px) / 2 - 27px);
+          `
+        : css`
+            right: calc((100% - 6px) / 2 - 16px);
+          `}
+
+    ${({ theme }) => theme.typo.input.TextField_T_16_EB};
+    color: ${({ value, theme }) =>
+      value ? theme.palette.greyScale.black : theme.palette.greyScale.grey300};
+  }
+`;
+
+const InputBox = styled.input<{
+  error: boolean;
+  sheetOpen: boolean;
+  birthday?: '년' | '월' | '일';
+}>`
   width: 100%;
   height: 56px;
   border-radius: ${({ theme }) => theme.radius.medium};
@@ -61,4 +95,15 @@ const Wrapper = styled.input<{ error: boolean; sheetOpen: boolean }>`
     border-color: ${({ theme, error }) =>
       error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
   }
+
+  ${({ birthday }) =>
+    birthday === '년' &&
+    css`
+      padding-left: calc((100% - 6px) / 2 - 30px);
+    `}
+  ${({ birthday }) =>
+    (birthday === '월' || birthday === '일') &&
+    css`
+      padding-left: calc((100% - 6px) / 2 - 19px);
+    `}
 `;
