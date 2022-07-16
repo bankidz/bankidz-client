@@ -6,9 +6,9 @@ import { RootState } from '../app/store';
 type TChallengePayloadState = {
   isMom: boolean | null;
   itemName: string | null;
-  title: string | null;
+  title: string;
   interestRate: number | null;
-  totalPrice: number | null;
+  totalPrice: number;
   weekPrice: number | null;
   weeks: number | null;
 };
@@ -16,9 +16,9 @@ type TChallengePayloadState = {
 const initialState: TChallengePayloadState = {
   isMom: null,
   itemName: null,
-  title: null,
+  title: '',
   interestRate: null,
-  totalPrice: null,
+  totalPrice: 0,
   weekPrice: null,
   weeks: null,
 };
@@ -51,5 +51,11 @@ export const {
 
 export const selectChallengePayload = (state: RootState) =>
   state.challengePayload;
+export const selectStep3InitData = (state: RootState) => {
+  return {
+    contractName: state.challengePayload.title,
+    contractAmount: state.challengePayload.totalPrice,
+  };
+};
 
 export default challengePayloadSlice.reducer;

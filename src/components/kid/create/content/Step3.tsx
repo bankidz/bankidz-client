@@ -7,12 +7,13 @@ import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@hooks/useValidation';
 import { useNavigate } from 'react-router-dom';
 import useStackAmount from '@hooks/useStackAmount';
-import { useAppDispatch } from '@store/app/hooks';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  dispatchItemName,
   dispatchTitle,
   dispatchTotalPrice,
+  selectStep3InitData,
 } from '@store/slices/challengePayloadSlice';
+import SheetButton from '@components/common/button/SheetButton';
 
 type TStep3Form = {
   contractName: string;
@@ -22,19 +23,19 @@ type TStep3Form = {
 function Step3({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [form, setForm] = useState<TStep3Form>({
-    contractName: '',
-    contractAmount: 0,
-  });
+  const [form, setForm] = useState<TStep3Form>(
+    useAppSelector(selectStep3InitData),
+  );
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
   const [open, onOpen, onDismiss] = useBottomSheet();
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
-
-  const testDuplicate = ['중복된 이름'];
   const moneyRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
+
+  //TODO : api fetching
+  const testDuplicate = ['중복된 이름'];
 
   const onClickNextButton = () => {
     dispatch(dispatchTitle(form.contractName));
@@ -68,6 +69,12 @@ function Step3({ currentStep }: { currentStep: number }) {
     setForm({ ...form, contractAmount: amount });
   }, [amountStack]);
 
+  // 첫 렌더링시에 스토어에 있는 값 가져와서 초기화??? (for 뒤로가기해서 온 경우)
+  // 코어타임때 물어보기
+  /*  useEffect(() => {
+    pushAmount(form.contractAmount);
+  }, []); */
+
   //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
     checkValidateName('contractName', form.contractName, testDuplicate);
@@ -76,14 +83,10 @@ function Step3({ currentStep }: { currentStep: number }) {
 
   // 다음으로 버튼 활성화,비활성화 처리
   useEffect(() => {
-    if (
-      validateName.message === '완전 좋은 이름인데요!' &&
-      validateAmount.message === '적절한 금액이에요!'
-    ) {
-      setDisabledNext(false);
-    } else {
-      setDisabledNext(true);
-    }
+    validateName.message === '완전 좋은 이름인데요!' &&
+    validateAmount.message === '적절한 금액이에요!'
+      ? setDisabledNext(false)
+      : setDisabledNext(true);
   }, [validateAmount, validateName]);
 
   return (
@@ -100,7 +103,6 @@ function Step3({ currentStep }: { currentStep: number }) {
           }}
           error={validateName.error}
         />
-        {/* TODO : 여기 색깔 바꾸기 */}
         <p>{validateName.message}</p>
       </InputSection>
 
@@ -120,6 +122,12 @@ function Step3({ currentStep }: { currentStep: number }) {
         </div>
         <p>{validateAmount.message}</p>
       </InputSection>
+      <SheetButton
+        onClickNext={onClickNextButton}
+        disabledNext={disabledNext}
+        label={'다음'}
+        outerSheet={true}
+      />
 
       <ContractSheet
         open={open}
