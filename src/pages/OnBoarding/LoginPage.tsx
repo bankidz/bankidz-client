@@ -1,3 +1,5 @@
+import { useAppSelector } from '@store/app/hooks';
+import { selectAuth } from '@store/slices/authSlice';
 import styled from 'styled-components';
 
 const DOMAIN = 'http://localhost:3000'; // TODO: mv to constant
@@ -7,6 +9,11 @@ const REDIRECT_URI = `${DOMAIN}/auth/kakao/callback`;
 const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 function LoginPage() {
+  const auth = useAppSelector(selectAuth);
+
+  // console.log('aT in login page');
+  // console.log(auth);
+
   return (
     <Wrapper>
       <TextWrapper>

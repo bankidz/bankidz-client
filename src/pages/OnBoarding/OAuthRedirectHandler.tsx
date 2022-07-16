@@ -1,46 +1,43 @@
+import { useEffect } from 'react';
 import { axiosPublic } from '@lib/api/axios';
 import { useAppDispatch } from '@store/app/hooks';
-import { login } from '@store/slices/authSlice';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { setCredentials } from '@store/slices/authSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export type TRequestStatus = 'idle' | 'pending';
 
 function OAuthRedirectHandler() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const [loginRequestStatus, setLoginRequestStatus] =
-    useState<TRequestStatus>('idle');
+  const location = useLocation();
 
   const href = window.location.href;
   // @ts-expect-error
   let params = new URL(document.location).searchParams;
   let code = params.get('code');
 
-  // useEffect(() => {
-  function handleClick() {
-    try {
-      setLoginRequestStatus('pending');
-      console.log({ code });
-      dispatch(login({ code })).unwrap();
-      console.log('로그인에 성공했습니다.');
-      // navigate('/home');
-    } catch (err) {
-      console.error('로그인에 실패했습니다.', err);
-    } finally {
-      setLoginRequestStatus('idle');
+  // POST: 뱅키즈 서버로 인가코드 전송
+  useEffect(() => {
+    async function login() {
+      try {
+        const response = await axiosPublic.post('/kakao/login', { code });
+        const { accessToken, isKid } = response.data.data;
+        dispatch(setCredentials({ accessToken, isKid }));
+        navigate('/');
+      } catch (err) {
+        console.log(err);
+      }
     }
-  }
-  // }, []);
+    login();
+  }, []);
 
   return (
     <>
-      <div>OAuthRedirectHandler</div>
       <div>로그인 처리중입니다...</div>
-      <button onClick={handleClick}>서버로 코드 전송</button>
     </>
   );
 }
 
 export default OAuthRedirectHandler;
+
+// https://velog.io/@he0_077/useEffect-%ED%9B%85%EC%97%90%EC%84%9C-async-await-%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
