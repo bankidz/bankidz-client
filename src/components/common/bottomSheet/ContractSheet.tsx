@@ -1,5 +1,6 @@
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
+import SheetButton from '../button/SheetButton';
 
 interface ContractSheetProps {
   children: JSX.Element;
@@ -34,9 +35,11 @@ function ContractSheet({
     >
       <div ref={sheetRef}>
         <SheetContainer>{children}</SheetContainer>
-        <NextButton onClick={onClickNext} disabled={disabledNext}>
-          {label}
-        </NextButton>
+        <SheetButton
+          onClickNext={onClickNext}
+          disabledNext={disabledNext}
+          label={label}
+        />
       </div>
     </StyledBottomSheet>
   );

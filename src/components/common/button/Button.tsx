@@ -2,12 +2,12 @@ import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import kakao from '@assets/icon/kakao.svg';
 import { darken } from 'polished';
+import { theme } from '@lib/styles/theme';
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
-   * ButtonSet에서 받아온 prop
-   * kakao : 카카오로그인 / primary-secondary : 한칸 두칸
+   * 기본, 카카오로그인, 삭제, 강조되지 않은 버튼
    */
-  property?: 'kakao' | 'delete' | 'primary' | 'secondary';
+  property?: 'default' | 'kakao' | 'delete' | 'sub';
   /**
    * 버튼 내용
    */
@@ -17,24 +17,23 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
    */
   state?: boolean;
   /**
-   * 강조되지 않은 버튼
+   * 너비 고정, 가운데 정렬인 버튼 (모달->삭제하기)
    */
-  sub?: boolean;
+  fixed?: boolean;
 }
 
 function Button({
-  property = 'primary',
+  property = 'default',
   label,
   state = true,
-  sub = false,
   ...props
 }: ButtonProps) {
   return (
     <Wrapper
       property={property}
       state={state}
+      fixed={false}
       disabled={!state}
-      sub={sub}
       {...props}
     >
       {property == 'kakao' && <img src={kakao} />}
@@ -45,37 +44,56 @@ function Button({
 
 export default Button;
 
+const handleColorType = (property: 'default' | 'kakao' | 'delete' | 'sub') => {
+  const defaultColor = theme.palette.main.yellow300;
+  const subColor = theme.palette.greyScale.grey300;
+  const deleteColor = theme.palette.sementic.red300;
+  const kakaoColor = '#fee500';
+
+  switch (property) {
+    case 'default':
+      return defaultColor;
+    case 'sub':
+      return subColor;
+    case 'delete':
+      return deleteColor;
+    case 'kakao':
+      return kakaoColor;
+    default:
+      return subColor;
+  }
+};
+
 const Wrapper = styled.button<{
-  property: 'kakao' | 'delete' | 'primary' | 'secondary';
+  property: 'default' | 'kakao' | 'delete' | 'sub';
+  fixed: boolean;
   state: boolean;
-  sub: boolean;
 }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: ${({ property }) => (property == 'secondary' ? '154px' : '100%')};
+  width: ${({ fixed }) => (fixed ? '154px' : '100%')};
   height: 48px;
   border-radius: ${({ theme }) => theme.radius.medium};
   border: none;
-  cursor: pointer;
 
+  cursor: pointer;
   p {
     ${({ theme }) => theme.typo.button.Primary_T_15_EB}
   }
-
   color: ${({ theme }) => theme.palette.greyScale.white};
 
-  background-color: ${({ sub, theme }) =>
-    sub ? theme.palette.greyScale.grey300 : theme.palette.main.yellow300};
+  background-color: ${({ property }) => handleColorType(property)};
 
-  &:active {
-    background-color: ${({ sub, theme }) => {
-      const selected = sub
-        ? theme.palette.greyScale.grey300
-        : theme.palette.main.yellow300;
-      return `${darken(0.1, selected)}`;
-    }};
-  }
+  ${({ property }) => {
+    const selected = handleColorType(property) as string;
+    return css`
+      &:active {
+        background-color: ${darken(0.1, selected)};
+      }
+    `;
+  }}
+
   :disabled {
     background-color: ${({ theme }) => theme.palette.greyScale.grey300};
   }
@@ -84,11 +102,9 @@ const Wrapper = styled.button<{
     property === 'kakao' &&
     css`
       color: #191919 !important;
-      background-color: #fee500; // Kakao yellow
-
       img {
-        display: flex;
-        padding-right: 280px;
+        position: absolute;
+        left: 34px;
       }
       p {
         font-family: 'Spoqa Han Sans Neo';
