@@ -53,7 +53,7 @@ function CreateKid() {
         case 2:
           return <Step3 currentStep={2} />;
         case 3:
-          return <Step4 />;
+          return <Step4 currentStep={3} />;
         default:
           throw 'error';
       }
@@ -66,7 +66,7 @@ function CreateKid() {
         case 3:
           return <Step3 currentStep={3} />;
         case 4:
-          return <Step4 />;
+          return <Step4 currentStep={3} />;
         default:
           throw 'error';
       }
@@ -82,7 +82,11 @@ function CreateKid() {
             skipSelectParents={parents?.length === 1 ? true : false}
           />
           <Margin>
-            <h1>{title[parseInt(step) - 1]}</h1>
+            <h1>
+              {parents?.length === 1
+                ? title[parseInt(step)]
+                : title[parseInt(step) - 1]}
+            </h1>
             {renderContent(parseInt(step))}
           </Margin>
         </Wrapper>

@@ -7,9 +7,9 @@ type TChallengePayloadState = {
   isMom: boolean | null;
   itemName: string | null;
   title: string;
-  interestRate: number | null;
+  interestRate: 10 | 20 | 30 | null;
   totalPrice: number;
-  weekPrice: number | null;
+  weekPrice: number;
   weeks: number | null;
 };
 
@@ -19,7 +19,7 @@ const initialState: TChallengePayloadState = {
   title: '',
   interestRate: null,
   totalPrice: 0,
-  weekPrice: null,
+  weekPrice: 0,
   weeks: null,
 };
 
@@ -39,6 +39,12 @@ export const challengePayloadSlice = createSlice({
     dispatchTotalPrice(state, action: PayloadAction<number>) {
       state.totalPrice = action.payload;
     },
+    dispatchWeekPrice(state, action: PayloadAction<number>) {
+      state.weekPrice = action.payload;
+    },
+    dispatchInterestRate(state, action: PayloadAction<10 | 20 | 30 | null>) {
+      state.interestRate = action.payload;
+    },
   },
 });
 
@@ -47,6 +53,8 @@ export const {
   dispatchItemName,
   dispatchTitle,
   dispatchTotalPrice,
+  dispatchWeekPrice,
+  dispatchInterestRate,
 } = challengePayloadSlice.actions;
 
 export const selectChallengePayload = (state: RootState) =>
@@ -55,6 +63,12 @@ export const selectStep3InitData = (state: RootState) => {
   return {
     contractName: state.challengePayload.title,
     contractAmount: state.challengePayload.totalPrice,
+  };
+};
+export const selectStep4InitData = (state: RootState) => {
+  return {
+    weekPrice: state.challengePayload.weekPrice,
+    interestRate: state.challengePayload.interestRate,
   };
 };
 

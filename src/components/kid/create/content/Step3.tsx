@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import InputForm from '@components/common/button/InputForm';
 import useBottomSheet from '@hooks/useBottomSheet';
 import ContractSheet from '@components/common/bottomSheet/ContractSheet';
@@ -26,6 +26,7 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [form, setForm] = useState<TStep3Form>(
     useAppSelector(selectStep3InitData),
   );
+
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
