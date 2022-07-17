@@ -1,4 +1,4 @@
-import { useModalsDispatch } from './ModalsContext';
+import { useModalsDispatch } from '../components/common/modal/ModalsContext';
 
 // OPEN, CLOSE action 대한 dispatch 함수 사용 추상화
 function useModals() {

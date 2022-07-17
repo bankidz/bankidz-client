@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import axios from 'axios';
-// import { axiosPublic } from '../../lib/api/axios';
+import axios from 'axios';
+import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import { RootState } from '../app/store';
 
 type TChallengePayloadState = {
@@ -22,6 +22,23 @@ const initialState: TChallengePayloadState = {
   weekPrice: 0,
   weeks: null,
 };
+
+export const setProfile = createAsyncThunk(
+  'auth/setProfile',
+  async (profile: any) => {
+    const axiosPrivate = useAxiosPrivate();
+    try {
+      console.log(`in setProfile thunk code: ${JSON.stringify(profile)}`);
+      const response = await axiosPrivate.post('/set/profile', profile);
+      console.log(`in setProfile thunk response: ${response}`);
+      return response.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.message;
+      }
+    }
+  },
+);
 
 export const challengePayloadSlice = createSlice({
   name: 'challengePayload',

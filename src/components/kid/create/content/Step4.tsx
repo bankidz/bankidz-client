@@ -17,7 +17,7 @@ import { ReactComponent as Divider } from '@assets/border/create-challenge-dashe
 import { ReactComponent as Alert } from '@assets/icon/alert.svg';
 import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
 import commaThreeDigits from '@lib/utils/commaThreeDigits';
-import useModals from '@components/common/modal/useModals';
+import useModals from '@hooks/useModals';
 import Modals, { modals } from '@components/common/modal/Modals';
 
 export type TStep4Form = {

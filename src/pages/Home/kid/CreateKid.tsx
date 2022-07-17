@@ -9,6 +9,7 @@ import Step4 from '@components/kid/create/content/Step4';
 import { useEffect, useState } from 'react';
 import { kidMock } from '@lib/mocks/kid';
 import { TFamilyState } from '@lib/types/kid';
+import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import Step5 from '@components/kid/create/content/Step5';
 
 const title = [
@@ -22,7 +23,7 @@ const title = [
 function CreateKid() {
   const { step } = useParams();
   const [parents, setParents] = useState<TFamilyState[]>();
-  const { getFamily } = kidMock(1);
+  const axiosPrivate = useAxiosPrivate();
 
   const getTypedStep = (parsedStep: number) => {
     if (step && parsedStep > 0 && parsedStep <= 5) {
@@ -36,11 +37,12 @@ function CreateKid() {
     async function fetchData() {
       // You can await here
       try {
-        const response = await getFamily();
-        const parent = response.filter((v) => v.isKid === false);
-        setParents(parent);
+        const response = await axiosPrivate.get('/family');
+        console.log(response);
+        //const parent = response.filter((v) => v.isKid === false);
+        //setParents(parent);
       } catch (e) {
-        console.log('서버통신오류');
+        console.log(e);
       }
     }
     fetchData();
