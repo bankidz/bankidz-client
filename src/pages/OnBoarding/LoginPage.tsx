@@ -64,8 +64,5 @@ const TextWrapper = styled.div`
 `;
 
 const ButtonWithMarginBottom = styled(Button)`
-  /* width: 90%; */
-  /* height: 49px; */
-  /* background: yellow; */
-  margin-bottom: 31px;
+  margin-bottom: 16px;
 `;

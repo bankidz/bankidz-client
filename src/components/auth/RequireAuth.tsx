@@ -7,14 +7,13 @@ import { useAppSelector } from '../../store/app/hooks';
 function RequireAuth() {
   const auth = useAppSelector(selectAuth);
 
+  console.log(auth);
   if (auth.accessToken === null) {
     return <Navigate to="/login" replace />;
+  } else if (auth.isKid === null) {
+    return <Navigate to="/register/1" replace />;
   } else {
-    if (auth.isKid === null) {
-      return <Navigate to="/register" replace />;
-    } else {
-      return <Outlet />;
-    }
+    return <Outlet />;
   }
 }
 

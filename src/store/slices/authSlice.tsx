@@ -7,6 +7,8 @@ type TAuthState = {
   auth: {
     accessToken: string | null;
     isKid: boolean | null;
+    isFemale: boolean | null;
+    birthday: string | null;
   };
   status: TReduxStatus;
   error: string | undefined;
@@ -14,9 +16,11 @@ type TAuthState = {
 
 const initialState: TAuthState = {
   auth: {
-    accessToken: null,
-    // TODO: init isKid
+    accessToken:
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiY…VSIn0.iDYdnSSA37BhPwoC2nrjbuPXMOV04XODAwBk9vYbKrU',
     isKid: true,
+    isFemale: null,
+    birthday: null,
   },
   status: 'idle',
   error: undefined,
@@ -44,6 +48,10 @@ interface IAuth {
   isKid: boolean | null;
 }
 
+interface IBirthDay {
+  birthday: string;
+}
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -56,10 +64,14 @@ export const authSlice = createSlice({
       state.auth.accessToken = null;
       state.auth.isKid = null;
     },
+    setBirthday: (state, action: PayloadAction<IBirthDay>) => {
+      state.auth.birthday = action.payload.birthday;
+    },
   },
 });
 
-export const { setCredentials, resetCredentials } = authSlice.actions;
+export const { setCredentials, resetCredentials, setBirthday } =
+  authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>

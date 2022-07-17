@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Modals, { modals } from '../components/common/modal/Modals';
-import useModals from '../components/common/modal/useModals';
 import 'swiper/swiper.min.css';
+import useModals from '@components/common/modal/useModals';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
