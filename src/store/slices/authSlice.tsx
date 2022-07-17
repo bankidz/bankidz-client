@@ -1,6 +1,8 @@
+import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import { axiosPublic } from '@lib/api/axios';
 import { TReduxStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { RootState } from '../app/store';
 
 type TAuthState = {
@@ -9,6 +11,8 @@ type TAuthState = {
     isKid: boolean | null;
     isFemale: boolean | null;
     birthday: string | null;
+    username: string | null;
+    phone: string | null;
   };
   status: TReduxStatus;
   error: string | undefined;
@@ -23,27 +27,32 @@ const initialState: TAuthState = {
     isKid: null,
     isFemale: null,
     birthday: null,
+    username: null,
+    phone: null,
   },
   status: 'idle',
   error: undefined,
 };
 
-// POST: 프로필 정보가 없는 회원에 대해 입력받은 프로필 정보 전송
-/* export const setProfile = createAsyncThunk(
-  'auth/setProfile',
-  async (profile: any) => {
+// PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
+export const register = createAsyncThunk(
+  'auth/register',
+  // TODO: type
+  async (additgit addionalUserInfo: any) => {
+    const axiosPrivate = useAxiosPrivate();
     try {
-      console.log(`in setProfile thunk code: ${JSON.stringify(profile)}`);
-      const response = await axiosPublic.post('/set/profile', profile);
-      console.log(`in setProfile thunk response: ${response}`);
+      console.log(
+        `in setProfile thunk code: ${JSON.stringify(additionalUserInfo)}`,
+      );
+      const response = await axiosPrivate.patch('/user', additionalUserInfo);
       return response.data;
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        return err.message;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return error.message;
       }
     }
   },
-); */
+);
 
 interface IAuth {
   accessToken: string | null;
@@ -69,6 +78,15 @@ export const authSlice = createSlice({
     setBirthday: (state, action: PayloadAction<IBirthDay>) => {
       state.auth.birthday = action.payload.birthday;
     },
+  },
+  extraReducers(builder) {
+    builder.addCase(register.fulfilled, (state, action) => {
+      state.auth.accessToken = action.payload.username;
+      state.auth.isFemale = action.payload.isFemale;
+      state.auth.isKid = action.payload.isKid;
+      state.auth.birthday = action.payload.birthday;
+      state.auth.phone = action.payload.phone;
+    });
   },
 });
 

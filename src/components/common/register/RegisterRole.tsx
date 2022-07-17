@@ -1,4 +1,9 @@
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { register, selectAuth } from '@store/slices/authSlice';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { TRequestStatus } from 'src/pages/OnBoarding/OAuthRedirectHandler';
 import styled from 'styled-components';
 import CommonSheet from '../bottomSheet/CommonSheet';
 import RoleButton from '../button/RoleButton';
@@ -17,6 +22,29 @@ function RegisterRole() {
   function handleDaughterButtonClick() {
     setRole('daughter');
   }
+
+  const dispatch = useAppDispatch();
+  const [registerRequestStatus, setRegisterRequestStatus] =
+    useState<TRequestStatus>('idle');
+  const canRegister = role && registerRequestStatus === 'idle';
+  const auth = useAppSelector(selectAuth);
+  const navigate = useNavigate();
+
+  function handleSRegister() {
+    if (canRegister) {
+      try {
+        setRegisterRequestStatus('pending');
+        dispatch(register({ birthday, isKid, isFemale })).unwrap();
+        setRole('');
+        // navigate('/');
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setRegisterRequestStatus('idle');
+      }
+    }
+  }
+
   return (
     <Wrapper>
       <span className="header">프로필을 선택해요</span>

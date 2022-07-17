@@ -39,6 +39,7 @@ function RegisterPage() {
           {currentStep === 2 && <RegisterRole />}
         </MarginTemplate>
       </ForegroundTemplate>
+      {/* TODO: delete test code */}
       <button onClick={handleClick}>토큰 리프레시 테스트</button>
     </>
   );
