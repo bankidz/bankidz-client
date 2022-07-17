@@ -1,5 +1,7 @@
-import TopAppBar from '@components/layout/AppBar';
+import RegisterBirth from '@components/common/register/RegisterBirth';
+import RegisterRole from '@components/common/register/RegisterRole';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import { axiosPublic } from '@lib/api/axios';
 
 function RegisterPage() {
@@ -19,7 +21,10 @@ function RegisterPage() {
   return (
     <>
       <ForegroundTemplate label="">
-        <div>register birth</div>
+        <MarginTemplate>
+          <RegisterBirth />
+          <RegisterRole />
+        </MarginTemplate>
       </ForegroundTemplate>
       {/* <button onClick={handleClick}>토큰 리프레시 테스트</button> */}
     </>

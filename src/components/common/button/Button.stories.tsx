@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Margin from '@components/layout/Margin';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import Button from './Button';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -10,9 +10,9 @@ export default {
   argTypes: { onClick: { action: 'event' } },
   decorators: [
     (Story) => (
-      <Margin>
+      <MarginTemplate>
         <Story />
-      </Margin>
+      </MarginTemplate>
     ),
   ],
 } as ComponentMeta<typeof Button>;

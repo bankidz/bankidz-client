@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 function RegisterBirth() {
-  return <Wrapper></Wrapper>;
+  return <Wrapper>RegisterBirth</Wrapper>;
 }
 
 export default RegisterBirth;

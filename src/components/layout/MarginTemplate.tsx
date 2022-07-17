@@ -1,11 +1,12 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-function Margin({ children }: { children: ReactNode }) {
+// 디자인 시스템에 맞추어 좌우 18px margin을 부여하는 template
+function MarginTemplate({ children }: { children: ReactNode }) {
   return <Wrapper>{children}</Wrapper>;
 }
 
-export default Margin;
+export default MarginTemplate;
 
 /* 마진으로 쓰고 패딩 박아버리기 */
 const Wrapper = styled.div`
