@@ -24,9 +24,9 @@ function CreateKid() {
   const [parents, setParents] = useState<TFamilyState[]>();
   const { getFamily } = kidMock(1);
 
-  const typedStep = (parsed: number) => {
-    if (step && parsed > 0 && parsed <= 5) {
-      return parsed as 1 | 2 | 3 | 4 | 5;
+  const getTypedStep = (parsedStep: number) => {
+    if (step && parsedStep > 0 && parsedStep <= 5) {
+      return parsedStep as 1 | 2 | 3 | 4 | 5;
     } else {
       throw 'step error';
     }
@@ -58,7 +58,7 @@ function CreateKid() {
         case 4:
           return <Step5 currentStep={4} />;
 
-        default:
+        default: //step1으로
           throw 'error';
       }
     } else {
@@ -84,7 +84,7 @@ function CreateKid() {
       {step && (
         <Wrapper>
           <Progress
-            step={typedStep(parseInt(step))}
+            step={getTypedStep(parseInt(step))}
             skipSelectParents={parents?.length === 1 ? true : false}
           />
           <Margin>
