@@ -1,8 +1,8 @@
+import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import useInputs from '@hooks/useInputs';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import InputForm from '../button/InputForm';
 
 // yyyy/mm/dd | yyyy/m/d
@@ -11,20 +11,19 @@ const YEAR_REGEX = /^(19[0-9][0-9]|20[0-9][0-9])$/; // 1900 ~ 2099
 const MONTH_REGEX = /^(0[0-9]|[0-9]|1[0-2])$/; // 1 ~ 12
 const DAY_REGEX = /^(0[1-9]|[1-9]|[1-2][0-9]|3[01])$/; // 1 ~ 31
 
-// TODO: profile button 옮기기
-function Register() {
+function RegisterBirthday() {
   const [{ year, month, day }, onChange, reset] = useInputs({
     year: '',
     month: '',
     day: '',
   });
 
-  const [isValidYear, setIsValidYear] = useState(false);
-  const [yearFocus, setYearFocus] = useState(false);
-  const [isValidMonth, setIsValidMonth] = useState(false);
-  const [monthFocus, setMonthFocus] = useState(false);
-  const [isValidDay, setIsValidDay] = useState(false);
-  const [dayFocus, setDayFocus] = useState(false);
+  const [isValidYear, setIsValidYear] = useState(true);
+  const [yearFocus, setYearFocus] = useState(true);
+  const [isValidMonth, setIsValidMonth] = useState(true);
+  const [monthFocus, setMonthFocus] = useState(true);
+  const [isValidDay, setIsValidDay] = useState(true);
+  const [dayFocus, setDayFocus] = useState(true);
 
   useEffect(() => {
     setIsValidYear(YEAR_REGEX.test(year));
@@ -69,7 +68,6 @@ function Register() {
 
   return (
     <Wrapper>
-      {/* <button onClick={print}>print</button> */}
       <span>생년월일을 입력해요</span>
       <form onSubmit={handleSubmit}>
         <InputWrapper>
@@ -77,11 +75,11 @@ function Register() {
             // TODO: 연, 월, 일 속성 지정
             // @ts-expect-error
             name="year"
-            placeholder="2022년"
+            placeholder="2000년"
             onChange={onChange}
             value={year}
-            error={false}
-            autoFocus
+            error={year && !isValidYear}
+            // autoFocus
             type="text"
             required
             onFocus={() => setYearFocus(true)}
@@ -91,10 +89,10 @@ function Register() {
           <InputForm
             // @ts-expect-error
             name="month"
-            placeholder="09월"
+            placeholder="01월"
             onChange={onChange}
             value={month}
-            error={false}
+            error={month && !isValidMonth}
             type="text"
             required
             onFocus={() => setMonthFocus(true)}
@@ -107,7 +105,7 @@ function Register() {
             placeholder="01일"
             onChange={onChange}
             value={day}
-            error={false}
+            error={day && !isValidDay}
             type="text"
             required
             onFocus={() => setDayFocus(true)}
@@ -130,7 +128,7 @@ function Register() {
   );
 }
 
-export default Register;
+export default RegisterBirthday;
 
 const Wrapper = styled.div`
   span {

@@ -1,4 +1,4 @@
-import RegisterBirth from '@components/common/register/RegisterBirth';
+import RegisterBirth from '@components/common/register/RegisterBirthday';
 import RegisterRole from '@components/common/register/RegisterRole';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';

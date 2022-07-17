@@ -16,9 +16,11 @@ type TAuthState = {
 
 const initialState: TAuthState = {
   auth: {
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiY…VSIn0.iDYdnSSA37BhPwoC2nrjbuPXMOV04XODAwBk9vYbKrU',
-    isKid: true,
+    // accessToken:
+    //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiY…VSIn0.iDYdnSSA37BhPwoC2nrjbuPXMOV04XODAwBk9vYbKrU',
+    accessToken: null,
+    // isKid: true,
+    isKid: null,
     isFemale: null,
     birthday: null,
   },

@@ -5,7 +5,7 @@ import { kidMock } from '@lib/mocks/kid';
 import { TFamilyState } from '@lib/types/kid';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';
-import ProfileButton from '@components/onboarding/ProfileButton';
+import RoleButton from '@components/common/button/RoleButton';
 
 function Step1({ currentStep }: { currentStep: number }) {
   const [parents, setParents] = useState<TFamilyState[]>();
@@ -13,7 +13,7 @@ function Step1({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const { getFamily } = kidMock(2);
 
-  const onClickProfileButton = (isFemale: boolean) => {
+  const onClickRoleButton = (isFemale: boolean) => {
     dispatch(dispatchParent(isFemale));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
@@ -35,10 +35,10 @@ function Step1({ currentStep }: { currentStep: number }) {
   return (
     <Wrapper>
       {parents?.map((v, i) => (
-        <ProfileButton
+        <RoleButton
           isKid={v.isKid}
           isFemale={v.isFemale}
-          onClick={() => onClickProfileButton(v.isFemale)}
+          onClick={() => onClickRoleButton(v.isFemale)}
           key={i}
         />
       ))}
