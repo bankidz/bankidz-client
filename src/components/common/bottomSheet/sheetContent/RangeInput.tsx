@@ -23,9 +23,7 @@ const valueToPercent = ({ value, min, max }: TRangeInputSelectorProps) => {
 
 function RangeInput({ totalPrice, min, max, form, setForm }: RangeInputProps) {
   const [value, setValue] = useState<number>(
-    form?.weekPrice
-      ? form.weekPrice
-      : (min + max) / 2 - (((min + max) / 2) % 500),
+    form?.weekPrice ? form.weekPrice : 0,
   );
 
   useEffect(() => {

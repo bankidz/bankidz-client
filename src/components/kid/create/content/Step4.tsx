@@ -127,7 +127,11 @@ function Step4({ currentStep }: { currentStep: number }) {
         </p>
         <div onClick={onOpenInterestRate} ref={interestRateInputRef}>
           <InputForm
-            placeholder={commaThreeDigits(getMiddlePrice() * 0.2) + ' 원'}
+            placeholder={
+              form.weekPrice
+                ? commaThreeDigits(form.weekPrice * 0.2) + ' 원'
+                : commaThreeDigits(getMiddlePrice() * 0.2) + ' 원'
+            }
             value={
               form.interestRate
                 ? commaThreeDigits(form.weekPrice * form.interestRate * 0.01) +
