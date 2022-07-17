@@ -1,9 +1,3 @@
-export type TFamilyState = {
-  username: string;
-  isFemale: boolean;
-  isKid: boolean;
-};
-
 export type TRole = '엄마' | '아빠' | '아들' | '딸';
 
 export type TItemName =

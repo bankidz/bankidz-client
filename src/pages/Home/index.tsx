@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import HomeParent from './parent/HomeParent';
 import PendingKid from './kid/PendingKid';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
@@ -9,6 +9,7 @@ import NowParent from './parent/NowParent';
 import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
+import CheckStepParams from '@components/kid/create/CheckStepParams';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -47,9 +48,19 @@ function HomeRouter() {
       <Route
         path="/create/:step"
         element={
-          <ForegroundTemplate label="돈길 계약하기">
-            <CreateKid />
-          </ForegroundTemplate>
+          <CheckStepParams>
+            <ForegroundTemplate label="돈길 계약하기">
+              <CreateKid />
+            </ForegroundTemplate>
+          </CheckStepParams>
+        }
+      />
+      <Route
+        path="/create/*"
+        element={
+          <CheckStepParams>
+            <Navigate replace to="/create/1" />
+          </CheckStepParams>
         }
       />
     </Routes>

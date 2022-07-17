@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/challengePayloadSlice';
@@ -28,6 +28,8 @@ const itemNames = [
 function Step2({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location);
 
   const onClickItemNameButton = (itemName: string) => {
     console.log(itemName);

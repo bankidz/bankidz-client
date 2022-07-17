@@ -16,13 +16,10 @@ function SelectInterestButton({
     switch (risk) {
       case 10:
         return '안정';
-        break;
       case 20:
         return '보통';
-        break;
       case 30:
         return '위험';
-        break;
       default:
         return '안정';
     }
