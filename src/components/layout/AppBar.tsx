@@ -1,23 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icon/arrow-left.svg';
-interface TopAppBarProps {
+
+interface AppBarProps {
   /**
    * 이전 페이지명
    */
   label: string;
 }
 
-function TopAppBar({ label }: TopAppBarProps) {
+function AppBar({ label }: AppBarProps) {
   const navigate = useNavigate();
 
-  const onClickTopAppBar = () => {
+  const onClickAppBar = () => {
     navigate(-1);
   };
 
   return (
     <Wrapper>
-      <div onClick={onClickTopAppBar}>
+      <div onClick={onClickAppBar}>
         <Arrow />
       </div>
       <p>{label}</p>
@@ -25,7 +26,7 @@ function TopAppBar({ label }: TopAppBarProps) {
   );
 }
 
-export default TopAppBar;
+export default AppBar;
 
 const Wrapper = styled.div`
   width: 100%;

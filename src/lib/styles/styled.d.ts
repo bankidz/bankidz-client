@@ -1,5 +1,6 @@
 import 'styled-components';
 import { clacRem } from '@lib/styles/theme';
+
 declare module 'styled-components' {
   export interface DefaultTheme {
     palette: {

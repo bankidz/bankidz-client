@@ -255,6 +255,7 @@ const Content = styled.div`
 `;
 
 const Top = styled.div`
+  margin: -1px 0; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   height: 100px;
   width: 100%;
@@ -279,6 +280,7 @@ const Top = styled.div`
 `;
 
 const Bottom = styled.div`
+  margin-bottom: -1px; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
   height: 360px;
@@ -450,7 +452,7 @@ const Bottom = styled.div`
 `;
 
 const SignatureWrapper = styled.div`
-  z-index: 999;
+  z-index: 900;
   position: absolute;
   right: 2px;
   bottom: 0;

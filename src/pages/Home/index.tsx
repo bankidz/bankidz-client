@@ -1,50 +1,55 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppProps } from '../../App';
-
 import HomeParent from './parent/HomeParent';
 import PendingKid from './kid/PendingKid';
-import Base from '@components/layout/Base';
-import Stacked from '@components/layout/Stacked';
+import BackgroundTemplate from '@components/layout/BackgroundTemplate';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import HomeKid from './kid/HomeKid';
 import PendingParent from './parent/PendingParent';
 import NowParent from './parent/NowParent';
 import CreateKid from './kid/CreateKid';
+import { useAppSelector } from '@store/app/hooks';
+import { selectIsKid } from '@store/slices/authSlice';
 
-function HomeRouter({ isKid }: AppProps) {
+function HomeRouter() {
+  const isKid = useAppSelector(selectIsKid);
   return (
     <Routes>
       <Route
         path="/"
-        element={<Base>{isKid ? <HomeKid /> : <HomeParent />}</Base>}
+        element={
+          <BackgroundTemplate>
+            {isKid ? <HomeKid /> : <HomeParent />}
+          </BackgroundTemplate>
+        }
       />
       <Route
         path="pending/:challengeId"
         element={
           isKid ? (
-            <Stacked label="대기중인 돈길">
+            <ForegroundTemplate label="대기중인 돈길">
               <PendingKid />
-            </Stacked>
+            </ForegroundTemplate>
           ) : (
-            <Stacked label="제안받은 돈길">
+            <ForegroundTemplate label="제안받은 돈길">
               <PendingParent />
-            </Stacked>
+            </ForegroundTemplate>
           )
         }
       />
       <Route
         path="/now/:challengeId"
         element={
-          <Stacked label="걷고있는 돈길">
+          <ForegroundTemplate label="걷고있는 돈길">
             <NowParent />
-          </Stacked>
+          </ForegroundTemplate>
         }
       />
       <Route
         path="/create/:step"
         element={
-          <Stacked label="돈길 계약하기">
+          <ForegroundTemplate label="돈길 계약하기">
             <CreateKid />
-          </Stacked>
+          </ForegroundTemplate>
         }
       />
     </Routes>

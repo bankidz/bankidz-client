@@ -6,7 +6,6 @@ export type TFamilyState = {
 
 export type TRole = '엄마' | '아빠' | '아들' | '딸';
 
-// contract item
 export type TItemName =
   | '학용품'
   | '생활용품'
