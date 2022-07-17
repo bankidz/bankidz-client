@@ -1,14 +1,25 @@
+import Button from '@components/common/button/Button';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import { KAKAO_AUTH_URL } from '@lib/constants';
 import styled from 'styled-components';
 
 function LoginPage() {
+  function handleClick() {
+    window.location.href = KAKAO_AUTH_URL;
+  }
   return (
     <Wrapper>
-      <TextWrapper>
-        <span className="title">BANKIDZ</span>
-        <span className="congrats">뱅키즈에 오신 것을 환영합니다!</span>
-      </TextWrapper>
-      <StartWithKakao href={KAKAO_AUTH_URL}>카카오로 시작하기</StartWithKakao>
+      <MarginTemplate>
+        <TextWrapper>
+          <span className="title">BANKIDZ</span>
+          <span className="congrats">뱅키즈에 오신 것을 환영합니다!</span>
+        </TextWrapper>
+        <ButtonWithMarginBottom
+          label="카카오로 시작하기"
+          property="kakao"
+          onClick={handleClick}
+        />
+      </MarginTemplate>
     </Wrapper>
   );
 }
@@ -52,9 +63,9 @@ const TextWrapper = styled.div`
   }
 `;
 
-const StartWithKakao = styled.a`
-  width: 90%;
-  height: 49px;
-  background: yellow;
+const ButtonWithMarginBottom = styled(Button)`
+  /* width: 90%; */
+  /* height: 49px; */
+  /* background: yellow; */
   margin-bottom: 31px;
 `;

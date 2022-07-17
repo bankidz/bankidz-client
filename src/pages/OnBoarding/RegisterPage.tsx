@@ -23,7 +23,7 @@ function RegisterPage() {
       <ForegroundTemplate label="">
         <MarginTemplate>
           <RegisterBirth />
-          <RegisterRole />
+          {/* <RegisterRole /> */}
         </MarginTemplate>
       </ForegroundTemplate>
       {/* <button onClick={handleClick}>토큰 리프레시 테스트</button> */}

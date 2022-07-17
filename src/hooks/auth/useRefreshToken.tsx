@@ -6,7 +6,7 @@ function useRefreshToken() {
   const dispatch = useAppDispatch();
 
   const refresh = async () => {
-    const response = await axiosPublic.get('/user/refresh');
+    const response = await axiosPublic.patch('/user/refresh');
     const { accessToken, isKid } = response.data;
     dispatch(setCredentials({ accessToken, isKid }));
     return accessToken;
