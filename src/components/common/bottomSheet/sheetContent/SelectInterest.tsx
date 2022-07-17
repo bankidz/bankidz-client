@@ -6,17 +6,25 @@ import { TSetStep4Form } from '@components/kid/create/content/Step4';
 const notifications = {
   10: {
     title: '안정 상품을 선택하셨네요!',
-    description: '이자율이 비교적 낮아요. 그렇지만 특별한 위험은 없어요.',
+    description: <p>이자율이 비교적 낮아요. 그렇지만 특별한 위험은 없어요.</p>,
   },
   20: {
     title: '보통 상품을 선택하셨네요!',
-    description:
-      '저금하지 않은 주가 세 번이나 되면 챌린지가 사라져요.\n이자율은 높지만 그만큼 위험이 따른다는 것, 알아두세요!',
+    description: (
+      <>
+        <p>저금하지 않은 주가 세 번이나 되면 챌린지가 사라져요.</p>
+        <p>이자율은 높지만 그만큼 위험이 따른다는 것, 알아두세요!</p>
+      </>
+    ),
   },
   30: {
     title: '위험 상품을 선택하셨네요!',
-    description:
-      '일주일이라도 저금하지 않으면 챌린지가 사라져요. \n이자율은 높지만 그만큼 위험이 따른다는 것, 알아두세요!',
+    description: (
+      <>
+        <p>일주일이라도 저금하지 않으면 챌린지가 사라져요. </p>
+        <p>이자율은 높지만 그만큼 위험이 따른다는 것, 알아두세요!</p>
+      </>
+    ),
   },
 };
 
@@ -56,7 +64,7 @@ function SelectInterest({ form, setForm }: TSetStep4Form) {
       {select && (
         <Sub select={select}>
           <p>{notifications[select].title}</p>
-          <p>{notifications[select].description}</p>
+          {notifications[select].description}
         </Sub>
       )}
     </Wrapper>
@@ -66,7 +74,7 @@ function SelectInterest({ form, setForm }: TSetStep4Form) {
 export default SelectInterest;
 
 const Wrapper = styled.div`
-  margin: 17px 16px 32px 16px;
+  margin: 9px 16px 32px 16px;
 `;
 
 const ButtonContainer = styled.div`
@@ -76,7 +84,7 @@ const ButtonContainer = styled.div`
 `;
 
 const Sub = styled.div<{ select: 10 | 20 | 30 | null }>`
-  margin-top: 21px;
+  margin-top: 20px;
   width: 100%;
   height: 62px;
   & > p:first-child {
@@ -87,12 +95,14 @@ const Sub = styled.div<{ select: 10 | 20 | 30 | null }>`
         : select === 20
         ? theme.palette.main.yellow400
         : theme.palette.sementic.red300};
+    margin-bottom: 14px;
   }
-  & > p:nth-child(2) {
-    margin-top: 11px;
+  & > p:not(:first-child) {
     ${({ theme }) => theme.typo.bottomSheet.S_12_R};
-    line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.grey500};
     white-space: pre-wrap;
+  }
+  & > p:last-child {
+    margin-top: 6px;
   }
 `;

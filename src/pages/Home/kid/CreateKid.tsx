@@ -19,7 +19,10 @@ const title = [
   '계약 상품이 무엇인가요?',
   '이름과 목표 금액을 정해요',
   '매주 얼마를 모을까요?',
-  '멋진 사인으로\n부모님께 계약서를 보내요',
+  <>
+    <p>멋진 사인으로</p>
+    <p>부모님께 계약서를 보내요</p>
+  </>,
 ];
 
 function CreateKid() {
@@ -95,7 +98,11 @@ function CreateKid() {
                 skipSelectParents={parents?.length === 1 ? true : false}
               />
               <MarginTemplate>
-                <h1>{title[parseInt(step) - 1]}</h1>
+                <h1>
+                  {parents.length === 1
+                    ? title[parseInt(step)]
+                    : title[parseInt(step) - 1]}
+                </h1>
                 {renderContent(getTypedStep(parseInt(step)))}
               </MarginTemplate>
             </>
@@ -119,8 +126,12 @@ const Wrapper = styled.div`
     margin-bottom: 56px;
 
     ${({ theme }) => theme.typo.input.Title_T_24_EB}
-    line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.black};
     white-space: pre-wrap;
+
+    /* paragraph-spacing 대용 */
+    & > p:last-child {
+      margin-top: 10px;
+    }
   }
 `;
