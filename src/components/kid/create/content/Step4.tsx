@@ -16,9 +16,10 @@ import {
 import { ReactComponent as Divider } from '@assets/border/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icon/alert.svg';
 import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
-import commaThreeDigits from '@lib/utils/commaThreeDigits';
+import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 import useModals from '@hooks/useModals';
 import Modals, { modals } from '@components/common/modal/Modals';
+import getChallengeStep4Prices from '@lib/utils/getChallengeStep4Prices';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -32,19 +33,21 @@ export type TSetStep4Form = {
 function Step4({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const totalPrice = useAppSelector(selectTotalPrice);
   const [form, setForm] = useState<TStep4Form>(
     useAppSelector(selectStep4InitData),
   );
-  const totalPrice = useAppSelector(selectTotalPrice);
-
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
-  const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] = useBottomSheet();
-  const [openInterestRate, onOpenInterestRate, onDismissInterestRate] =
-    useBottomSheet();
   const weekPriceSheetRef = useRef<HTMLDivElement>(null);
   const interestRateSheetRef = useRef<HTMLDivElement>(null);
   const weekPriceInputRef = useRef<HTMLDivElement>(null);
   const interestRateInputRef = useRef<HTMLDivElement>(null);
+
+  const { minPrice, maxPrice, middlePrice } =
+    getChallengeStep4Prices(totalPrice);
+  const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] = useBottomSheet();
+  const [openInterestRate, onOpenInterestRate, onDismissInterestRate] =
+    useBottomSheet();
   const { openModal } = useModals();
 
   // 모달 여는 함수
@@ -62,11 +65,6 @@ function Step4({ currentStep }: { currentStep: number }) {
     dispatch(dispatchInterestRate(form.interestRate));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
-
-  // TODO : 최대최소 계산 유틸 추가
-  const min = 500;
-  const max = 15000;
-  const getMiddlePrice = () => (min + max) / 2 - (((min + max) / 2) % 500);
 
   // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록
   useEffect(() => {
@@ -105,7 +103,7 @@ function Step4({ currentStep }: { currentStep: number }) {
         <p>저금액</p>
         <div onClick={onOpenWeekPrice} ref={weekPriceInputRef}>
           <InputForm
-            placeholder={commaThreeDigits(getMiddlePrice()) + ' 원'}
+            placeholder={commaThreeDigits(middlePrice) + ' 원'}
             value={
               form.weekPrice === 0
                 ? ''
@@ -130,7 +128,7 @@ function Step4({ currentStep }: { currentStep: number }) {
             placeholder={
               form.weekPrice
                 ? commaThreeDigits(form.weekPrice * 0.2) + ' 원'
-                : commaThreeDigits(getMiddlePrice() * 0.2) + ' 원'
+                : commaThreeDigits(middlePrice * 0.2) + ' 원'
             }
             value={
               form.interestRate
@@ -170,8 +168,8 @@ function Step4({ currentStep }: { currentStep: number }) {
         <div ref={weekPriceSheetRef}>
           <RangeInput
             totalPrice={totalPrice}
-            min={min}
-            max={max}
+            min={minPrice}
+            max={maxPrice}
             form={form}
             setForm={setForm}
           />

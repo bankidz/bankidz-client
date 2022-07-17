@@ -14,7 +14,7 @@ import {
   selectStep3InitData,
 } from '@store/slices/challengePayloadSlice';
 import SheetButton from '@components/common/button/SheetButton';
-import commaThreeDigits from '@lib/utils/commaThreeDigits';
+import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 
 type TStep3Form = {
   contractName: string;

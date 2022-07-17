@@ -1,7 +1,7 @@
 import { TSetStep4Form } from '@components/kid/create/content/Step4';
 import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingBanki } from '@assets/illust/banki/banki_walking.svg';
-import commaThreeDigits from '@lib/utils/commaThreeDigits';
+import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 import { useEffect, useState } from 'react';
 
 interface RangeInputProps extends TSetStep4Form {
@@ -9,17 +9,6 @@ interface RangeInputProps extends TSetStep4Form {
   min: number;
   max: number;
 }
-
-type TRangeInputSelectorProps = {
-  value: number;
-  min: number;
-  max: number;
-};
-
-const valueToPercent = ({ value, min, max }: TRangeInputSelectorProps) => {
-  const percent = ((value - min) * 100) / (max - min);
-  return percent;
-};
 
 function RangeInput({ totalPrice, min, max, form, setForm }: RangeInputProps) {
   const [value, setValue] = useState<number>(
@@ -29,6 +18,8 @@ function RangeInput({ totalPrice, min, max, form, setForm }: RangeInputProps) {
   useEffect(() => {
     form && setForm && setForm({ ...form, weekPrice: value });
   }, [value]);
+
+  const percent = ((value - min) * 100) / (max - min);
 
   return (
     <Wrapper>
@@ -41,10 +32,10 @@ function RangeInput({ totalPrice, min, max, form, setForm }: RangeInputProps) {
           onChange={(e) => setValue(parseInt(e.target.value))}
           step={500}
         />
-        <Selector value={value} min={min} max={max}>
+        <Selector percent={percent}>
           <WalkingBanki />
         </Selector>
-        <ProgressBar value={value} min={min} max={max} />
+        <ProgressBar percent={percent} />
       </RangeInputForm>
       <div>
         <p>{commaThreeDigits(min)}</p>
@@ -90,20 +81,23 @@ const RangeInputForm = styled.div`
     }
   }
 `;
-const Selector = styled.div<TRangeInputSelectorProps>`
+const Selector = styled.div<{ percent: number }>`
   height: 40px;
   width: 44px;
   position: absolute;
   bottom: -8px;
   z-index: 3;
-  ${({ value, min, max }) => {
-    const percent = valueToPercent({ value, min, max });
-    return css`
-      left: calc(${percent}% - (0.44 * ${percent}px));
-    `;
-  }}
+  ${({ percent }) => {
+    return percent > 0
+      ? css`
+          left: calc(${percent}% - (0.44 * ${percent}px));
+        `
+      : css`
+          left: 0px;
+        `;
+  }};
 `;
-const ProgressBar = styled.div<TRangeInputSelectorProps>`
+const ProgressBar = styled.div<{ percent: number }>`
   position: absolute;
   height: 16px;
   border-radius: 8px;
@@ -111,10 +105,13 @@ const ProgressBar = styled.div<TRangeInputSelectorProps>`
   background-color: ${({ theme }) => theme.palette.main.yellow300};
   left: 0px;
   z-index: 2;
-  ${({ value, min, max }) => {
-    const percent = valueToPercent({ value, min, max });
-    return css`
-      width: calc(${percent}% - (0.44 * ${percent}px) + 22px);
-    `;
-  }}
+  ${({ percent }) => {
+    return percent > 0
+      ? css`
+          width: calc(${percent}% - (0.44 * ${percent}px) + 22px);
+        `
+      : css`
+          width: 0px;
+        `;
+  }};
 `;
