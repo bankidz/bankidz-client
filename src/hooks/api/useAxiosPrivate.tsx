@@ -13,9 +13,9 @@ function useAxiosPrivate() {
     const requestIntercept = axiosPrivateInstance.interceptors.request.use(
       (config) => {
         // @ts-expect-error
-        if (!config.headers['Authorization']) {
+        if (!config.headers['X-AUTH-TOKEN']) {
           // @ts-expect-error
-          config.headers['Authorization'] = `Bearer ${accessToken}`;
+          config.headers['X-AUTH-TOKEN'] = `${accessToken}`;
         }
         return config;
       },
@@ -31,7 +31,7 @@ function useAxiosPrivate() {
           // access token expired (401) -> refresh access token -> request prevRequest
           prevRequest.sent = true;
           const newAccessToken = await refresh();
-          prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          prevRequest.headers['X-AUTH-TOKEN'] = `${newAccessToken}`;
           return axiosPrivateInstance(prevRequest);
         }
         return Promise.reject(error); // refresh token expired (again 401) -> navigate to loginPage

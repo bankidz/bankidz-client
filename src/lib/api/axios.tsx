@@ -6,7 +6,7 @@ const BASE_URL = 'https://bankids.click';
 export const axiosPublic = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
-  // withCredentials: true,
+  withCredentials: true,
 });
 
 // axiosPrivateInstance는 useAxiosPrivate hook에서 import 되고,

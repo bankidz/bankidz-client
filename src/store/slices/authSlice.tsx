@@ -1,5 +1,4 @@
 import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
-import { axiosPublic } from '@lib/api/axios';
 import { TReduxStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
@@ -20,9 +19,9 @@ type TAuthState = {
 
 const initialState: TAuthState = {
   auth: {
-    // accessToken:
-    //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiY…VSIn0.iDYdnSSA37BhPwoC2nrjbuPXMOV04XODAwBk9vYbKrU',
-    accessToken: null,
+    accessToken:
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4MDM1ODc2LCJzdWIiOiIyIiwiZXhwIjoxNjYwNDU1MDc2LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.KXzamQgcDWrLw3MAkPzewQI_hK9NCzGa3z8GcLeH-p8',
+    // accessToken: null,
     // isKid: true,
     isKid: null,
     isFemale: null,
@@ -37,16 +36,28 @@ const initialState: TAuthState = {
 // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
 export const register = createAsyncThunk(
   'auth/register',
-  // TODO: type
-  async (additgit addionalUserInfo: any) => {
-    const axiosPrivate = useAxiosPrivate();
+  async (thunkPayload: {
+    axiosPrivate: any;
+    // axiosPublic: any;
+    birthday: string | null;
+    isKid: boolean | null;
+    isFemale: boolean | null;
+  }) => {
     try {
-      console.log(
-        `in setProfile thunk code: ${JSON.stringify(additionalUserInfo)}`,
-      );
-      const response = await axiosPrivate.patch('/user', additionalUserInfo);
+      console.log('in thunk:', thunkPayload);
+      // console.log(`in thunk: ${JSON.stringify(thunkPayload)}`);
+      // const response = await thunkPayload.axiosPublic.get('/health');
+      const response = await thunkPayload.axiosPrivate.get('/user');
+      // const response = await thunkPayload.axiosPrivate.patch('/user', {
+      //   birthday: thunkPayload.birthday,
+      //   isKid: thunkPayload.isKid,
+      //   isFemale: thunkPayload.isFemale,
+      // });
+      console.log(`res: ${response.data}`);
+      console.log(`asdfasdf`);
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
+      console.log(error.response.data.message);
       if (axios.isAxiosError(error)) {
         return error.message;
       }
@@ -61,6 +72,11 @@ interface IAuth {
 
 interface IBirthDay {
   birthday: string;
+}
+
+interface IRole {
+  isKid: boolean;
+  isFemale: boolean;
 }
 
 export const authSlice = createSlice({
@@ -78,19 +94,23 @@ export const authSlice = createSlice({
     setBirthday: (state, action: PayloadAction<IBirthDay>) => {
       state.auth.birthday = action.payload.birthday;
     },
+    setRole: (state, action: PayloadAction<IRole>) => {
+      state.auth.isKid = action.payload.isKid;
+      state.auth.isFemale = action.payload.isFemale;
+    },
   },
   extraReducers(builder) {
     builder.addCase(register.fulfilled, (state, action) => {
-      state.auth.accessToken = action.payload.username;
-      state.auth.isFemale = action.payload.isFemale;
-      state.auth.isKid = action.payload.isKid;
-      state.auth.birthday = action.payload.birthday;
-      state.auth.phone = action.payload.phone;
+      // state.auth.accessToken = action.payload.username;
+      // state.auth.isFemale = action.payload.isFemale;
+      // state.auth.isKid = action.payload.isKid;
+      // state.auth.birthday = action.payload.birthday;
+      // state.auth.phone = action.payload.phone;
     });
   },
 });
 
-export const { setCredentials, resetCredentials, setBirthday } =
+export const { setCredentials, resetCredentials, setBirthday, setRole } =
   authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.auth;

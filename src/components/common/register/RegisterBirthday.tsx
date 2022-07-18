@@ -4,6 +4,7 @@ import useInputs from '@hooks/useInputs';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
 import InputForm from '../button/InputForm';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 // yyyy/mm/dd | yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -47,6 +48,8 @@ function RegisterBirthday() {
   }
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const temp1 = YEAR_REGEX.test(year);
@@ -57,9 +60,11 @@ function RegisterBirthday() {
       return;
     }
     reset();
+    // TODO: change name preprocess
     const birthday = stringifyBirthday(year, month, day);
     console.log(birthday);
     dispatch(setBirthday({ birthday }));
+    navigate('/register/2');
   }
 
   const toggleYearErrorMessage = yearFocus && year && !isValidYear;
