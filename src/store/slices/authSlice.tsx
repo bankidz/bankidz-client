@@ -1,7 +1,7 @@
 import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import { TReduxStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
 type TAuthState = {
@@ -37,27 +37,21 @@ const initialState: TAuthState = {
 export const register = createAsyncThunk(
   'auth/register',
   async (thunkPayload: {
-    axiosPrivate: any;
-    // axiosPublic: any;
+    axiosPrivate: AxiosInstance;
     birthday: string | null;
     isKid: boolean | null;
     isFemale: boolean | null;
   }) => {
+    const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
     try {
-      console.log('in thunk:', thunkPayload);
-      // console.log(`in thunk: ${JSON.stringify(thunkPayload)}`);
-      // const response = await thunkPayload.axiosPublic.get('/health');
-      const response = await thunkPayload.axiosPrivate.get('/user');
-      // const response = await thunkPayload.axiosPrivate.patch('/user', {
-      //   birthday: thunkPayload.birthday,
-      //   isKid: thunkPayload.isKid,
-      //   isFemale: thunkPayload.isFemale,
-      // });
-      console.log(`res: ${response.data}`);
-      console.log(`asdfasdf`);
+      const response = await axiosPrivate.patch('/user', {
+        birthday,
+        isKid,
+        isFemale,
+      });
       return response.data;
     } catch (error: any) {
-      console.log(error.response.data.message);
+      console.error(error.response.data.message);
       if (axios.isAxiosError(error)) {
         return error.message;
       }
@@ -101,11 +95,11 @@ export const authSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(register.fulfilled, (state, action) => {
-      // state.auth.accessToken = action.payload.username;
-      // state.auth.isFemale = action.payload.isFemale;
-      // state.auth.isKid = action.payload.isKid;
-      // state.auth.birthday = action.payload.birthday;
-      // state.auth.phone = action.payload.phone;
+      state.auth.accessToken = action.payload.username;
+      state.auth.isFemale = action.payload.isFemale;
+      state.auth.isKid = action.payload.isKid;
+      state.auth.birthday = action.payload.birthday;
+      state.auth.phone = action.payload.phone;
     });
   },
 });

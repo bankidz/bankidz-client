@@ -1,15 +1,12 @@
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
+import styled from 'styled-components';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectAuth, setRole } from '@store/slices/authSlice';
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { TRequestStatus } from 'src/pages/OnBoarding/OAuthRedirectHandler';
-import styled from 'styled-components';
-import CommonSheet from '../bottomSheet/CommonSheet';
+import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import RoleButton from '../button/RoleButton';
-import { axiosPublic } from '@lib/api/axios';
-import axios from 'axios';
+import CommonSheet from '../bottomSheet/CommonSheet';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -34,17 +31,12 @@ function RegisterRole() {
     auth.isKid !== null &&
     auth.isFemale !== null &&
     registerRequestStatus === 'idle';
-  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
 
-  async function handleRegister() {
-    try {
-      // setRegisterRequestStatus('pending');
-      // const response = await axiosPrivate.patch('/user', {
-      //   birthday: auth.birthday,
-      //   isKid: auth.isKid,
-      //   isFemale: auth.isFemale,
-      // });
+  async function handleSubmit() {
+    if (canRegister) {
+      setRegisterRequestStatus('pending');
       dispatch(
         register({
           axiosPrivate,
@@ -52,26 +44,16 @@ function RegisterRole() {
           isKid: auth.isKid,
           isFemale: auth.isFemale,
         }),
-      ).unwrap();
-      // navigate('/');
-    } catch (err: any) {
-      console.log(err.response.data.message);
-    } finally {
+      );
       setRegisterRequestStatus('idle');
+      // navigate('/');
     }
-
-    // } catch (error) {
-    //   console.error(error);
-    // } finally {
-    //   setRegisterRequestStatus('idle');
-    // }
-    // }
   }
 
   return (
     <Wrapper>
       <span className="header">프로필을 선택해요</span>
-      <button onClick={handleRegister}>Submit</button>
+      <button onClick={handleSubmit}>Submit Test</button>
       <div className="button-wrapper">
         {/* 아빠 */}
         <RoleButton
@@ -139,55 +121,3 @@ const Wrapper = styled.div`
     column-gap: 16px;
   }
 `;
-
-// dispatch(
-//   register({
-//     axiosPrivate,
-//     birthday: auth.birthday,
-//     isKid: auth.isKid,
-//     isFemale: auth.isFemale,
-//   }),
-// ).unwrap();
-// navigate('/');
-// } catch (error) {
-//   console.error(error);
-// } finally {
-//   setRegisterRequestStatus('idle');
-// }
-// }
-
-// console.log('f called');
-// async function test() {
-//   try {
-//     console.log('in');
-//     const response = await axiosPrivate.get('/family');
-//     // const response = await axiosPublic.get('/health');
-//     console.log(response.data);
-//   } catch (error) {
-//     if (axios.isAxiosError(error)) {
-//       console.log(error.message);
-//     }
-//   }
-// }
-// test();
-
-// useEffect(() => {
-//   console.log('useEffect!');
-//   async function fetchData() {
-//     console.log('in func!');
-//     try {
-//       const response = await axiosPrivate.get('/family');
-//       console.log('res');
-//       console.log(response.data);
-//       // const responseData: TFamilyState[] = response.data.data.familyUserList;
-//       // const parents = responseData.filter((v) => v.isKid === false);
-//       // if (parents.length === 1) {
-//       //   dispatch(dispatchParent(parents[0].isFemale));
-//       // }
-//       // setParents(parents);
-//     } catch (e) {
-//       alert('서버 통신 오류');
-//     }
-//   }
-//   fetchData();
-// }, []);
