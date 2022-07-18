@@ -20,6 +20,7 @@ import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 import useModals from '@hooks/useModals';
 import Modals, { modals } from '@components/common/modal/Modals';
 import getChallengeStep4Prices from '@lib/utils/getChallengeStep4Prices';
+import getChallengeStep4Weeks from '@lib/utils/getChallengeStep4Weeks';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -30,6 +31,12 @@ export type TSetStep4Form = {
   setForm?: Dispatch<SetStateAction<TStep4Form>>;
 };
 
+type TContractInfo = {
+  weekCost: number;
+  contractEndWeek: any;
+  overPrice: number;
+};
+
 function Step4({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -37,6 +44,11 @@ function Step4({ currentStep }: { currentStep: number }) {
   const [form, setForm] = useState<TStep4Form>(
     useAppSelector(selectStep4InitData),
   );
+  const [contractInfo, setContractInfo] = useState<TContractInfo>({
+    weekCost: 0,
+    contractEndWeek: 0,
+    overPrice: 0,
+  });
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const weekPriceSheetRef = useRef<HTMLDivElement>(null);
   const interestRateSheetRef = useRef<HTMLDivElement>(null);
@@ -97,6 +109,21 @@ function Step4({ currentStep }: { currentStep: number }) {
     form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
   }, [form]);
 
+  useEffect(() => {
+    if (form.interestRate && form.weekPrice) {
+      const { weekCost, totalPriceWithInterest } = getChallengeStep4Weeks(
+        totalPrice,
+        form.weekPrice,
+        form.interestRate,
+      );
+      setContractInfo({
+        weekCost: weekCost,
+        contractEndWeek: 0,
+        overPrice: totalPriceWithInterest - totalPrice,
+      });
+    }
+  }, [form]);
+
   return (
     <Wrapper>
       <InputSection>
@@ -146,9 +173,15 @@ function Step4({ currentStep }: { currentStep: number }) {
       <StyledDivider />
       <Summary>
         <p>
-          <span>{10}</span>주 후, <span>{'9월 2주'}</span>에 완주예정
+          <span>
+            {contractInfo.weekCost === 0 ? '00' : contractInfo.weekCost}주{' '}
+          </span>
+          후, <span>{contractInfo.contractEndWeek}</span>에 완주예정
         </p>
-        <p>마지막 주에는 {500}원만 모아요</p>
+        <p>
+          {contractInfo.overPrice - totalPrice !== 0 &&
+            `${contractInfo.overPrice}원을 더 모을 수 있어요`}
+        </p>
       </Summary>
       <SheetButton
         onClickNext={onClickNextButton}
