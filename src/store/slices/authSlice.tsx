@@ -1,3 +1,4 @@
+import { axiosPublic } from '@lib/api/axios';
 import { TReduxStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
@@ -16,6 +17,7 @@ type TAuthState = {
   error: string | undefined;
 };
 
+// 김원진: 규진의 엄마
 const initialState: TAuthState = {
   auth: {
     accessToken:
@@ -43,11 +45,15 @@ export const register = createAsyncThunk(
   }) => {
     const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
     try {
-      const response = await axiosPrivate.patch('/user', {
-        birthday,
-        isKid,
-        isFemale,
-      });
+      // const response = await axiosPrivate.patch('/user', {
+      //   birthday,
+      //   isKid,
+      //   isFemale,
+      // });
+      // const response = await axiosPrivate('/user');
+      const response = await axiosPublic('/health');
+      console.log(response.data);
+
       return response.data;
     } catch (error: any) {
       return error.response.data;

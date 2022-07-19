@@ -65,7 +65,6 @@ function PrimaryModal({
         <WhiteBox>
           <div className="illust-wrapper">
             {renderCongratsIllust(isKid, isFemale)}
-            {/* <Illust /> */}
           </div>
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>

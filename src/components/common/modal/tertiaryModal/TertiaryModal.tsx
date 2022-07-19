@@ -29,7 +29,7 @@ function TertiaryModal({ onClose }: TertiaryProps) {
       content: {
         height: '568px',
         position: 'absolute',
-        top: `${calcRatio(96, 760)}`,
+        top: '13vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

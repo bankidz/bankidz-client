@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://bankids.click';
-// const BASE_URL = 'https://b3ef-175-118-225-161.ngrok.io';
+// const BASE_URL = 'https://458e-118-33-117-126.ngrok.io';
 
 export const axiosPublic = axios.create({
   baseURL: BASE_URL,

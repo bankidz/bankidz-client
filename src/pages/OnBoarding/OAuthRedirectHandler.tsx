@@ -4,8 +4,6 @@ import { useAppDispatch } from '@store/app/hooks';
 import { setCredentials } from '@store/slices/authSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export type TRequestStatus = 'idle' | 'pending';
-
 function OAuthRedirectHandler() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -21,8 +19,11 @@ function OAuthRedirectHandler() {
     async function login() {
       try {
         const response = await axiosPublic.post('/kakao/login', { code });
+        console.log('response: ');
+        console.log(response);
         const { accessToken, isKid } = response.data.data;
         dispatch(setCredentials({ accessToken, isKid }));
+        // navigate('/register/1');
         navigate('/');
       } catch (err) {
         console.log(err);

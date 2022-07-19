@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import 'swiper/components/navigation/navigation.min.css';
 import { ReactNode } from 'react';
+import { calcRatio } from '@lib/styles/theme';
 
 interface InstructionCardProps {
   headerText: string;
@@ -35,6 +36,11 @@ const YellowBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  svg {
+    /* background: pink; */
+    width: ${calcRatio(96, 324)};
+  }
 `;
 
 const WhiteBox = styled.div`

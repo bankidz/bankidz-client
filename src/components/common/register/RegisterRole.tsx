@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectAuth, setRole } from '@store/slices/authSlice';
-import { TRequestStatus } from 'src/pages/OnBoarding/OAuthRedirectHandler';
 import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import RoleButton from '../button/RoleButton';
 import CommonSheet from '../bottomSheet/CommonSheet';
@@ -14,6 +13,7 @@ import SelectProfile from '../bottomSheet/sheetContent/SelectProfile';
 import useModals from '../modal/useModals';
 import { modals } from '../modal/Modals';
 import Modals from '../modal/Modals';
+import { TRequestStatus } from '@lib/types/api';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -83,7 +83,7 @@ function RegisterRole() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.primaryModal, {
+    openModal(modals.tertiaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
