@@ -5,7 +5,7 @@ import SheetButton from '../button/SheetButton';
 interface ContractSheetProps {
   children: JSX.Element;
   open: boolean;
-  onDismiss: () => void;
+  onDismiss?: () => void;
   label: string;
   onClickNext: () => void;
   disabledNext: boolean;

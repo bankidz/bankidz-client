@@ -34,7 +34,7 @@ export type TSetStep4Form = {
 
 type TContractInfo = {
   weekCost: number;
-  contractEndWeek: any;
+  contractEndWeek: string;
   overPrice: number;
 };
 
@@ -47,7 +47,7 @@ function Step4({ currentStep }: { currentStep: number }) {
   );
   const [contractInfo, setContractInfo] = useState<TContractInfo>({
     weekCost: 0,
-    contractEndWeek: 0,
+    contractEndWeek: '0월 0주',
     overPrice: 0,
   });
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
@@ -113,7 +113,6 @@ function Step4({ currentStep }: { currentStep: number }) {
   }, [form]);
   // form 변경될때마다 필요 주 수 계산
   useEffect(() => {
-    console.log('여기');
     if (form.interestRate && form.weekPrice) {
       const { weekCost, totalPriceWithInterest } = getChallengeStep4Weeks(
         totalPrice,
@@ -122,7 +121,7 @@ function Step4({ currentStep }: { currentStep: number }) {
       );
       setContractInfo({
         weekCost: weekCost,
-        contractEndWeek: 0,
+        contractEndWeek: '0월 0주', //TODO
         overPrice: totalPriceWithInterest - totalPrice,
       });
     }
@@ -175,7 +174,7 @@ function Step4({ currentStep }: { currentStep: number }) {
         </div>
       </InputSection>
       <StyledDivider />
-      <Summary>
+      <Summary weekCost={contractInfo.weekCost}>
         <p>
           <span>
             {contractInfo.weekCost === 0 ? '00' : contractInfo.weekCost}주{' '}
@@ -257,7 +256,7 @@ const StyledDivider = styled(Divider)`
   margin: 8px 0;
 `;
 
-const Summary = styled.div`
+const Summary = styled.div<{ weekCost: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -266,7 +265,10 @@ const Summary = styled.div`
     ${({ theme }) => theme.typo.text.T_21_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
     & > span {
-      color: ${({ theme }) => theme.palette.greyScale.black};
+      color: ${({ theme, weekCost }) =>
+        weekCost === 0
+          ? theme.palette.greyScale.grey400
+          : theme.palette.greyScale.black};
     }
   }
   & > p:last-child {

@@ -11,8 +11,10 @@ import {
   selectPostChallengeResponse,
 } from '@store/slices/challengePayloadSlice';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Step5({ currentStep }: { currentStep: number }) {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { responseData, status } = useAppSelector(selectPostChallengeResponse);
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
@@ -28,19 +30,19 @@ function Step5({ currentStep }: { currentStep: number }) {
 
   useEffect(() => {
     if (status === 'succeeded') {
+      // 스토어 초기화
       dispatch(dispatchResetChallengePayload());
-      onDismiss();
-    }
-  }, [status]);
-
-  useEffect(() => {
-    !open &&
+      //onDismiss(); 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
       openModal(modals.quaternaryModal, {
         onSubmit: () => {
-          console.log('비즈니스 로직 처리...');
+          closeModal(modals.quaternaryModal);
+          navigate('/', { replace: true });
         },
       });
-  }, [open]);
+    } else if (status === 'failed') {
+      console.log('err');
+    }
+  }, [status]);
 
   return (
     <>
@@ -48,7 +50,6 @@ function Step5({ currentStep }: { currentStep: number }) {
       <ContractSheet
         open={open}
         label={'다음'}
-        onDismiss={() => {}}
         onClickNext={onClickNextButton}
         disabledNext={disabledNext}
       >
