@@ -16,18 +16,36 @@ import { TRequestStatus } from '@lib/types/api';
 function RegisterRole() {
   const dispatch = useAppDispatch();
   const auth = useAppSelector(selectAuth);
+  const [open, onOpen, onDismiss] = useBottomSheet();
 
   function handleDadButtonClick() {
     dispatch(setRole({ isKid: false, isFemale: false }));
+    onOpen();
   }
   function handleMomButtonClick() {
     dispatch(setRole({ isKid: false, isFemale: true }));
+    onOpen();
   }
   function handleSonButtonClick() {
     dispatch(setRole({ isKid: true, isFemale: false }));
+    onOpen();
   }
   function handleDaughterButtonClick() {
     dispatch(setRole({ isKid: true, isFemale: true }));
+    onOpen();
+  }
+
+  const { openModal } = useModals();
+  function handleModalOpen() {
+    openModal(modals.primaryModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+      isKid: auth.isKid,
+      isFemale: auth.isFemale,
+      headerText: '뱅키즈 첫 가입을 축하해요',
+      bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
+    });
   }
 
   const [registerRequestStatus, setRegisterRequestStatus] =
@@ -51,40 +69,15 @@ function RegisterRole() {
         }),
       );
       setRegisterRequestStatus('idle');
+      onDismiss();
+      handleModalOpen();
       // navigate('/');
     }
   }
 
-  const [open, onOpen, onDismiss] = useBottomSheet();
-  // onDissmiss는 내리기
-
-  const { openModal } = useModals();
-  function handleClick() {
-    // modals.myModal: 열고자 하는 모달
-    // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.tertiaryModal, {
-      onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
-      },
-      isKid: auth.isKid,
-      isFemale: auth.isFemale,
-      headerText: '뱅키즈 첫 가입을 축하해요',
-      bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
-    });
-  }
-
   return (
     <Wrapper>
-      <button onClick={handleClick}>모달 열기</button>
-      <button
-        onClick={() => {
-          onOpen();
-        }}
-      >
-        바텀시트 열기
-      </button>
       <span className="header">프로필을 선택해요</span>
-      <button onClick={handleSubmit}>Submit Test</button>
       <div className="button-wrapper">
         {/* 아빠 */}
         <RoleButton
@@ -116,7 +109,11 @@ function RegisterRole() {
         />
       </div>
       <CommonSheet open={open} onDismiss={onDismiss}>
-        <SelectProfile isKid={auth.isKid} isFemale={auth.isFemale} />
+        <SelectProfile
+          isKid={auth.isKid}
+          isFemale={auth.isFemale}
+          onClick={handleSubmit}
+        />
       </CommonSheet>
       {/* @ts-expect-error */}
       <Modals />

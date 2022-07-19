@@ -2,8 +2,14 @@ import styled from 'styled-components';
 import Button from '@components/common/button/Button';
 import { TRoleDependency } from '@lib/types/kid';
 import { renderRoleIllust, renderRoleText } from '@lib/utils/renderRole';
+import { HTMLAttributes } from 'react';
 
-function SelectProfile({ isKid, isFemale }: TRoleDependency) {
+interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
+  isKid: boolean | null;
+  isFemale: boolean | null;
+}
+
+function SelectProfile({ isKid, isFemale, ...props }: SelectProfileProps) {
   return (
     <Wrapper>
       <Container>
@@ -14,7 +20,8 @@ function SelectProfile({ isKid, isFemale }: TRoleDependency) {
         <p>한 번 설정한 프로필은 변경하기 어려워요</p>
         <BankiWrapper>{renderRoleIllust(isKid, isFemale)}</BankiWrapper>
       </Container>
-      <Button label="확인" />
+      {/* @ts-expect-error */}
+      <Button label="확인" {...props} />
     </Wrapper>
   );
 }
