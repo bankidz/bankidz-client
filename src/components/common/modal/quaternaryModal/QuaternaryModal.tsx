@@ -44,7 +44,7 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
       content: {
         height: '554px',
         position: 'absolute',
-        top: `${calcRatio(103, 760)}`,
+        top: '14vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

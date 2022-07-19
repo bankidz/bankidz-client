@@ -83,7 +83,7 @@ function RegisterRole() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.tertiaryModal, {
+    openModal(modals.quaternaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
