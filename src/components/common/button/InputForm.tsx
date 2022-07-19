@@ -75,8 +75,23 @@ const InputBox = styled.input<{
   width: 100%;
   height: 56px;
   border-radius: ${({ theme }) => theme.radius.medium};
-  border-color: ${({ theme, error }) =>
-    error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
+  padding: 20px 13px;
+  ${({ theme }) => theme.typo.input.TextField_T_16_EB};
+  color: ${({ theme }) => theme.palette.greyScale.black};
+  &::placeholder {
+    color: ${({ theme }) => theme.palette.greyScale.grey300};
+  }
+  border: 3px solid ${({ theme }) => theme.palette.main.yellow100};
+  border-color: ${({ theme, error, sheetOpen }) =>
+    error
+      ? theme.palette.sementic.red200
+      : sheetOpen
+      ? theme.palette.main.yellow300
+      : theme.palette.main.yellow100};
+  &:focus {
+    border-color: ${({ theme, error }) =>
+      error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
+  }
   ${({ postfix }) =>
     postfix === '년' &&
     css`

@@ -8,7 +8,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
-const YEAR_REGEX = /^(19[0-9][0-9]|20[0-9][0-9])$/; // 1900 ~ 2099
+const YEAR_REGEX = /^(19[2-9][3-9]|20[0-2][0-2])$/; // 1923 ~ 2022
 const MONTH_REGEX = /^(0[0-9]|[0-9]|1[0-2])$/; // 1 ~ 12
 const DAY_REGEX = /^(0[1-9]|[1-9]|[1-2][0-9]|3[01])$/; // 1 ~ 31
 
@@ -81,12 +81,13 @@ function RegisterBirthday() {
             onChange={onChange}
             value={year}
             error={year && !isValidYear}
-            // autoFocus
+            autoFocus
             type="text"
             required
             onFocus={() => setYearFocus(true)}
             onBlur={() => setYearFocus(false)}
             autoComplete="off"
+            postfix="년"
           />
           <InputForm
             // @ts-expect-error
@@ -100,6 +101,7 @@ function RegisterBirthday() {
             onFocus={() => setMonthFocus(true)}
             onBlur={() => setMonthFocus(false)}
             autoComplete="off"
+            postfix="월"
           />
           <InputForm
             // @ts-expect-error
@@ -113,6 +115,7 @@ function RegisterBirthday() {
             onFocus={() => setDayFocus(true)}
             onBlur={() => setDayFocus(false)}
             autoComplete="off"
+            postfix="일"
           />
         </InputWrapper>
         <DummyButton type="submit" />
