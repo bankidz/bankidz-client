@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-function useBottomSheet() {
-  const [open, setOpen] = useState(false);
+function useBottomSheet(initial: boolean) {
+  const [open, setOpen] = useState(initial);
 
   function onOpen() {
     setOpen(true);

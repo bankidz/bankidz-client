@@ -12,7 +12,6 @@ import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import Step5 from '@components/kid/create/content/Step5';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';
-import CheckStepParams from '@components/kid/create/CheckStepParams';
 
 const title = [
   '누구와 계약하나요?',

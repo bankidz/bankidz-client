@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchInterestRate,
   dispatchWeekPrice,
+  dispatchWeeks,
   selectStep4InitData,
   selectTotalPrice,
 } from '@store/slices/challengePayloadSlice';
@@ -57,9 +58,10 @@ function Step4({ currentStep }: { currentStep: number }) {
 
   const { minPrice, maxPrice, middlePrice } =
     getChallengeStep4Prices(totalPrice);
-  const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] = useBottomSheet();
+  const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] =
+    useBottomSheet(false);
   const [openInterestRate, onOpenInterestRate, onDismissInterestRate] =
-    useBottomSheet();
+    useBottomSheet(false);
   const { openModal } = useModals();
 
   // 모달 여는 함수
@@ -75,6 +77,7 @@ function Step4({ currentStep }: { currentStep: number }) {
   const onClickNextButton = () => {
     dispatch(dispatchWeekPrice(form.weekPrice));
     dispatch(dispatchInterestRate(form.interestRate));
+    dispatch(dispatchWeeks(contractInfo.weekCost));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
@@ -108,8 +111,9 @@ function Step4({ currentStep }: { currentStep: number }) {
   useEffect(() => {
     form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
   }, [form]);
-
+  // form 변경될때마다 필요 주 수 계산
   useEffect(() => {
+    console.log('여기');
     if (form.interestRate && form.weekPrice) {
       const { weekCost, totalPriceWithInterest } = getChallengeStep4Weeks(
         totalPrice,

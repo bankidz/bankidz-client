@@ -31,7 +31,7 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
-  const [open, onOpen, onDismiss] = useBottomSheet();
+  const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const moneyRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
