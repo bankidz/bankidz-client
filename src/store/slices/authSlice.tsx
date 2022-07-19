@@ -1,4 +1,4 @@
-import { TStatus } from '@lib/types/api';
+import { TReduxStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -12,7 +12,7 @@ type TAuthState = {
     username: string | null;
     phone: string | null;
   };
-  status: TStatus;
+  status: TReduxStatus;
   error: string | undefined;
 };
 

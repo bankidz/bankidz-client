@@ -1,11 +1,8 @@
 import { HTMLAttributes, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as RoleButtonBorder } from '@assets/border/role-button-border.svg';
-import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
-import { ReactComponent as BankiDaughter } from '@assets/illust/banki/banki_daughter.svg';
-import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import { ReactComponent as BankiSon } from '@assets/illust/banki/banki_son.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
+import { renderRoleIllust, renderRoleText } from '@lib/utils/renderRole';
 
 interface RoleButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;
@@ -31,30 +28,6 @@ function RoleButton({
   function handleMouseLeave() {
     setFillColorByMouseEvent(theme.palette.greyScale.white);
     setStrokeColorByMouseEvent(theme.palette.main.yellow100);
-  }
-
-  function renderRoleIllust(isKid: boolean, isFemale: boolean) {
-    if (isKid && isFemale) {
-      return <BankiDaughter />;
-    } else if (isKid && !isFemale) {
-      return <BankiSon />;
-    } else if (!isKid && isFemale) {
-      return <BankiMom />;
-    } else {
-      return <BankiDad />;
-    }
-  }
-
-  function renderRoleText(isKid: boolean, isFemale: boolean) {
-    if (isKid && isFemale) {
-      return '딸';
-    } else if (isKid && !isFemale) {
-      return '아들';
-    } else if (!isKid && isFemale) {
-      return '엄마';
-    } else {
-      return '아빠';
-    }
   }
 
   return (
