@@ -16,7 +16,6 @@ function InstructionCard({
   currentCardIdx,
   children,
 }: InstructionCardProps) {
-  console.log(currentCardIdx);
   return (
     <>
       <YellowBox currentCardIdx={currentCardIdx}>{children}</YellowBox>

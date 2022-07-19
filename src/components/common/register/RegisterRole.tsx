@@ -7,10 +7,8 @@ import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import RoleButton from '../button/RoleButton';
 import CommonSheet from '../bottomSheet/CommonSheet';
 import useBottomSheet from '@hooks/useBottomSheet';
-import Button from '../button/Button';
-import { renderRoleIllust } from '@lib/utils/renderRole';
 import SelectProfile from '../bottomSheet/sheetContent/SelectProfile';
-import useModals from '../modal/useModals';
+import useModals from '../../../hooks/useModals';
 import { modals } from '../modal/Modals';
 import Modals from '../modal/Modals';
 import { TRequestStatus } from '@lib/types/api';
@@ -60,30 +58,11 @@ function RegisterRole() {
   const [open, onOpen, onDismiss] = useBottomSheet();
   // onDissmiss는 내리기
 
-  function renderText() {
-    let headerText;
-    if (auth.isKid === false && auth.isFemale === false) {
-      headerText = '아빠가 맞나요?';
-    } else if (auth.isKid === false && auth.isFemale === true) {
-      headerText = '엄마가 맞나요?';
-    } else if (auth.isKid === true && auth.isFemale === false) {
-      headerText = '아들이 맞나요?';
-    } else {
-      headerText = '딸이 맞나요?';
-    }
-    return (
-      <div className="text-wrapper">
-        <span className="header">{headerText}</span>
-        <span className="body">한 번 설정한 프로필은 변경하기 어려워요</span>
-      </div>
-    );
-  }
-
   const { openModal } = useModals();
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.quaternaryModal, {
+    openModal(modals.tertiaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { calcRatio } from '@lib/styles/theme';
 import CloseButton from '../../button/CloseButton';
 import { ReactComponent as ModalContentMoney } from '@assets/illust/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illust/congrats/congrats_banki_with_coins.svg';
@@ -10,11 +9,10 @@ import InstructionCard from './InstructionCard';
 
 interface TertiaryProps {
   /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
-  onClose: any;
+  onSubmit?: any;
 }
 
-// 모달 내부에 표시될 UI 작성
-function TertiaryModal({ onClose }: TertiaryProps) {
+function TertiaryModal({ onSubmit }: TertiaryProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -46,14 +44,15 @@ function TertiaryModal({ onClose }: TertiaryProps) {
   };
 
   const [swiper, setSwiper] = useState(null);
-  const [currentCardIdx, setCurrentCardIdx] = useState<number>(0);
+  const [currentCardIdx, setCurrentCardIdx] = useState(0);
   const swiperParams = {
     onSwiper: setSwiper,
     onSlideChange: (e: any) => setCurrentCardIdx(e.activeIndex),
     slidesPerView: 1,
   };
-  function handleCancel() {
-    onClose();
+
+  function handleSubmit() {
+    onSubmit();
   }
 
   return (
@@ -101,7 +100,7 @@ function TertiaryModal({ onClose }: TertiaryProps) {
           </SwiperSlide>
         </StyledSwiper>
         <CloseButtonPositioner>
-          <CloseButton onClick={handleCancel} />
+          <CloseButton onClick={handleSubmit} />
         </CloseButtonPositioner>
       </Content>
     </ReactModal>
