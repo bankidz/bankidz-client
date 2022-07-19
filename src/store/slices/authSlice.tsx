@@ -12,8 +12,8 @@ type TAuthState = {
     username: string | null;
     phone: string | null;
   };
-  requestStatus: TRequestStatus;
-  error: string | undefined;
+  requestStatus: TRequestStatus; // for GET method
+  error: string | undefined; // for GET method
 };
 
 // 김원진: 규진의 엄마

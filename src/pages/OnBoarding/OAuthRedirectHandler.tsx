@@ -25,8 +25,8 @@ function OAuthRedirectHandler() {
         dispatch(setCredentials({ accessToken, isKid }));
         // navigate('/register/1');
         navigate('/');
-      } catch (err) {
-        console.log(err);
+      } catch (error) {
+        console.error(error);
       }
     }
     login();

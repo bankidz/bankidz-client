@@ -60,7 +60,6 @@ function RegisterBirthday() {
       return;
     }
     reset();
-    // TODO: change name preprocess
     dispatch(setBirthday({ birthday: preporocess(year, month, day) }));
     navigate('/register/2');
   }
