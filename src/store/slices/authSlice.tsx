@@ -1,5 +1,4 @@
-import { axiosPublic } from '@lib/api/axios';
-import { TReduxStatus } from '@lib/types/api';
+import { TRequestStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -13,7 +12,7 @@ type TAuthState = {
     username: string | null;
     phone: string | null;
   };
-  status: TReduxStatus;
+  requestStatus: TRequestStatus;
   error: string | undefined;
 };
 
@@ -30,7 +29,7 @@ const initialState: TAuthState = {
     username: null,
     phone: null,
   },
-  status: 'idle',
+  requestStatus: 'idle',
   error: undefined,
 };
 
@@ -45,15 +44,13 @@ export const register = createAsyncThunk(
   }) => {
     const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
     try {
-      // const response = await axiosPrivate.patch('/user', {
-      //   birthday,
-      //   isKid,
-      //   isFemale,
-      // });
+      const response = await axiosPrivate.patch('/user', {
+        birthday,
+        isKid,
+        isFemale,
+      });
+      // const response = await axiosPublic('/health');
       // const response = await axiosPrivate('/user');
-      const response = await axiosPublic('/health');
-      console.log(response.data);
-
       return response.data;
     } catch (error: any) {
       return error.response.data;
@@ -65,11 +62,9 @@ interface IAuth {
   accessToken: string | null;
   isKid: boolean | null;
 }
-
 interface IBirthDay {
   birthday: string;
 }
-
 interface IRole {
   isKid: boolean;
   isFemale: boolean;

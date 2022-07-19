@@ -6,7 +6,6 @@ import { ReactComponent as CongratsBankiDad } from '@assets/illust/congrats/cong
 import { ReactComponent as CongratsBankiMom } from '@assets/illust/congrats/congrats_banki_mom.svg';
 import { ReactComponent as CongratsBankiSon } from '@assets/illust/congrats/congrats_banki_son.svg';
 import { ReactComponent as CongratsBankiDaughter } from '@assets/illust/congrats/congrats_banki_daughter.svg';
-import { TRoleDependency } from '@lib/types/kid';
 
 export function renderRoleIllust(
   isKid: boolean | null,

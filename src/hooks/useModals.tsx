@@ -28,3 +28,23 @@ function useModals() {
 }
 
 export default useModals;
+
+// 컴포넌트 내부 사용 예시
+// function ExampleComponent() {
+//   const { openModal } = useModals();
+//   function handleClick() {
+//     // modals.someModal: 열고자 하는 모달
+//     openModal(modals.someModal, {
+//       onSubmit: () => {
+//         console.log('submit (제출 버튼 클릭) 시 처리되는 비즈니스 로직...');
+//       },
+//     });
+//   }
+//   return (
+//     <Wrapper>
+//       <button onClick={handleClick}>모달 열기</button>
+//       {/* @ts-expect-error */}
+//       <Modals />
+//     </Wrapper>
+//   );
+// }

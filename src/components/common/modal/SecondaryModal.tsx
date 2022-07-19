@@ -5,7 +5,7 @@ import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
 
 interface SecondaryModalProps {
-  /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
+  /** submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
   /** badge에 표시될 내용을 입력합니다. */
   badgeText: string;

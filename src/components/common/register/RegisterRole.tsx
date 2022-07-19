@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectAuth, setRole } from '@store/slices/authSlice';
@@ -11,7 +10,6 @@ import SelectProfile from '../bottomSheet/sheetContent/SelectProfile';
 import useModals from '../../../hooks/useModals';
 import { modals } from '../modal/Modals';
 import Modals from '../modal/Modals';
-import { TRequestStatus } from '@lib/types/api';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -48,18 +46,12 @@ function RegisterRole() {
     });
   }
 
-  const [registerRequestStatus, setRegisterRequestStatus] =
-    useState<TRequestStatus>('idle');
-  const canRegister =
-    auth.isKid !== null &&
-    auth.isFemale !== null &&
-    registerRequestStatus === 'idle';
+  const canRegister = auth.isKid !== null && auth.isFemale !== null;
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
-  async function handleSubmit() {
+  function handleSubmit() {
     if (canRegister) {
-      setRegisterRequestStatus('pending');
       dispatch(
         register({
           axiosPrivate,
@@ -68,10 +60,10 @@ function RegisterRole() {
           isFemale: auth.isFemale,
         }),
       );
-      setRegisterRequestStatus('idle');
       onDismiss();
       handleModalOpen();
-      // navigate('/');
+      console.log('가입 성공');
+      navigate('/');
     }
   }
 
@@ -143,31 +135,5 @@ const Wrapper = styled.div`
     grid-template-columns: 1fr 1fr;
     row-gap: 16px;
     column-gap: 16px;
-  }
-`;
-
-const SheetContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  .text-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-
-    width: 100%;
-
-    background: pink;
-    .header {
-    }
-    .body {
-    }
-  }
-
-  svg {
-    width: 20%;
   }
 `;

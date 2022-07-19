@@ -7,29 +7,28 @@ import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizon
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import { TItemName } from '@lib/types/kid';
-import { ReactComponent as A1 } from '@assets/illust/contractItemNames/contractReceipt/a1.svg';
-import { ReactComponent as A2 } from '@assets/illust/contractItemNames/contractReceipt/a2.svg';
-import { ReactComponent as A3 } from '@assets/illust/contractItemNames/contractReceipt/a3.svg';
-import { ReactComponent as B1 } from '@assets/illust/contractItemNames/contractReceipt/b1.svg';
-import { ReactComponent as B2 } from '@assets/illust/contractItemNames/contractReceipt/b2.svg';
-import { ReactComponent as B3 } from '@assets/illust/contractItemNames/contractReceipt/b3.svg';
-import { ReactComponent as C1 } from '@assets/illust/contractItemNames/contractReceipt/c1.svg';
-import { ReactComponent as C2 } from '@assets/illust/contractItemNames/contractReceipt/c2.svg';
-import { ReactComponent as C3 } from '@assets/illust/contractItemNames/contractReceipt/c3.svg';
+
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
+import { renderContractItem } from '@lib/utils/renderContractItem';
+
+// mock data
+const isMom = false;
+const title = '완구퍼펙트걸 되기';
+const interestRate = 10;
+const totalPrice = 30000;
+const weekPrice = 1500;
+const weeks = 10;
+const createdAt = '2022-07-12 03:08:07';
+const category = '학용품';
 
 interface PrimaryModalProps {
-  /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
+  /** submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
 }
 
 // 모달 내부에 표시될 UI 작성
 function PrimaryModal({ onSubmit }: PrimaryModalProps) {
-  function handleSubmit() {
-    onSubmit();
-  }
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -60,41 +59,14 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
     },
   };
 
-  const isMom = 'false';
-  const title = '완구퍼펙트걸 되기';
-  const interestRate = '10';
-  const totalPrice = '30000';
-  const weekPrice = '1500';
-  const weeks = '10';
-  const createdAt = '2022-07-12 03:08:07';
-  const category = '학용품';
-
-  function renderContractItem(category: TItemName) {
-    if (category === '학용품') {
-      return <A1 />;
-    } else if (category === '생활용품') {
-      return <A2 />;
-    } else if (category === '전자제품') {
-      return <A3 />;
-    } else if (category === '식품') {
-      return <B1 />;
-    } else if (category === '문화생활') {
-      return <B2 />;
-    } else if (category === '패션뷰티') {
-      return <B3 />;
-    } else if (category === '선물') {
-      return <C1 />;
-    } else if (category === '비상금') {
-      return <C2 />;
-    } else if (category === '기타') {
-      return <C3 />;
-    }
+  function handleSubmit() {
+    onSubmit();
   }
 
-  function getContractEndDate(createdAt: string, weeks: string) {
+  function getContractEndDate(createdAt: string, weeks: number) {
     const createdDate = new Date(createdAt);
     const endDate = new Date(createdDate);
-    endDate.setDate(createdDate.getDate() + 7 * parseInt(weeks) - 1);
+    endDate.setDate(createdDate.getDate() + 7 * weeks - 1);
     return moment(endDate).format('YY.MM.DD');
   }
 
@@ -104,11 +76,11 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
       <Content>
         <PerforatedLineTop />
         <Top>
-          <span className="sub">계약서 전송 성공!</span>
-          <span className="main">{title}</span>
-          <div className="dashed-space"></div>
-          <div className="dashed-space-linear"></div>
+          <span className="header">계약서 전송 성공!</span>
+          <span className="body">{title}</span>
         </Top>
+
+        {/* background border (vertical, horizontal) */}
         <div className="vertical-dashed-border-wrapper">
           <VerticalDashedBorder />
         </div>
@@ -121,12 +93,12 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
         <div className="third-horizontal-dashed-border-wrapper">
           <HorizontalDashedBorder />
         </div>
+
         <Bottom>
           <div className="first-row">
             <div className="계약대상">
               <div className="banki-illust">
-                {/* @ts-expect-error */}
-                {isMom === 'true' ? <BankiMom /> : <BankiDad />}
+                {isMom ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
                 <div className="title">계약대상</div>
@@ -174,6 +146,7 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
               </div>
             </div>
           </div>
+
           <SignatureWrapper>대충 서명</SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom />
@@ -268,11 +241,11 @@ const Top = styled.div`
   border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
   border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
 
-  .sub {
+  .header {
     ${({ theme }) => theme.typo.text.S_14_M};
     color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
-  .main {
+  .body {
     margin-top: 12px;
     ${({ theme }) => theme.typo.popup.T_24_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};

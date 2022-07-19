@@ -11,24 +11,18 @@ function RegisterPage() {
     if (step && 1 <= step && step <= 2) {
       return step as 1 | 2;
     } else {
-      // TODO: flow 벗어나는 경우 어떻게 handle 할것인지 논의하기
-      return alert('부적절한 접근입니다.');
+      console.error('부적절한 접근입니다.');
     }
   }
   const currentStep = getValidCurrentStep(parseInt(step!));
 
-  function handleClick() {
-    console.log('click!');
-    const refresh = async () => {
-      console.log('async!');
-      try {
-        const response = await axiosPublic.patch('/user/refresh');
-        console.log(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    refresh();
+  async function handleClick() {
+    try {
+      const response = await axiosPublic.patch('/user/refresh');
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -39,7 +33,7 @@ function RegisterPage() {
           {currentStep === 2 && <RegisterRole />}
         </MarginTemplate>
       </ForegroundTemplate>
-      {/* TODO: delete test code */}
+      {/* TODO: test code */}
       <button onClick={handleClick}>토큰 리프레시 테스트</button>
     </>
   );

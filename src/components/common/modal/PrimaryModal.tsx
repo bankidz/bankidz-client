@@ -1,13 +1,11 @@
 import styled from 'styled-components';
-import { ReactComponent as Illust } from '@assets/illust/congrats/congrats_main.svg';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
-import { TRoleDependency } from '@lib/types/kid';
 import { renderCongratsIllust } from '@lib/utils/renderRole';
 
 interface PrimaryModalProps {
-  /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
+  /** submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
   onSubmit?: any;
   isKid: boolean;
   isFemale: boolean;
@@ -24,10 +22,6 @@ function PrimaryModal({
   headerText,
   bodyText,
 }: PrimaryModalProps) {
-  function handleSubmit() {
-    onSubmit();
-  }
-
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -57,6 +51,10 @@ function PrimaryModal({
       },
     },
   };
+
+  function handleSubmit() {
+    onSubmit();
+  }
 
   return (
     // @ts-expect-error

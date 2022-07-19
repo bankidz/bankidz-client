@@ -5,7 +5,7 @@ export default {
   title: 'Common/버튼/CheckButton',
   component: CheckButton,
   argTypes: {
-    onClick: { action: 'handle close' },
+    onClick: { action: 'handle click' },
   },
 } as ComponentMeta<typeof CheckButton>;
 
