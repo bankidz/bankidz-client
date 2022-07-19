@@ -74,7 +74,6 @@ function RegisterBirthday() {
       <form onSubmit={handleSubmit}>
         <InputWrapper>
           <InputForm
-            // TODO: 연, 월, 일 속성 지정
             // @ts-expect-error
             name="year"
             placeholder="2000년"
