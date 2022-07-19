@@ -1,19 +1,7 @@
-import { TRequestStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-
-type TAuthState = {
-  auth: {
-    accessToken: string | null;
-    isKid: boolean | null;
-    isFemale: boolean | null;
-    birthday: string | null;
-    username: string | null;
-    phone: string | null;
-  };
-  requestStatus: TRequestStatus; // for GET method
-};
+import { IAuth, IBirthDay, IRole, TAuthState } from './authTypes';
 
 // 김원진: 규진의 엄마
 const initialState: TAuthState = {
@@ -55,18 +43,6 @@ export const register = createAsyncThunk(
     }
   },
 );
-
-interface IAuth {
-  accessToken: string | null;
-  isKid: boolean | null;
-}
-interface IBirthDay {
-  birthday: string;
-}
-interface IRole {
-  isKid: boolean;
-  isFemale: boolean;
-}
 
 export const authSlice = createSlice({
   name: 'auth',
