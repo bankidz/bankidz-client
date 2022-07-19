@@ -2,7 +2,7 @@ import { HTMLAttributes, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as RoleButtonBorder } from '@assets/border/role-button-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
-import { renderRoleIllust, renderRoleText } from '@lib/utils/renderRole';
+import { renderRoleIllust, renderRoleText } from '@lib/utils/kid';
 
 interface RoleButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;
@@ -99,7 +99,7 @@ const StyledButton = styled.button<{
           margin-left: ${calcRatio(34, 146)};
           width: ${calcRatio(88.81, 146)};
         `}
-    // 엄마
+      // 엄마
       ${({ isKid, isFemale }) =>
         !isKid &&
         isFemale &&
@@ -107,7 +107,6 @@ const StyledButton = styled.button<{
           margin-left: ${calcRatio(25, 146)};
           width: ${calcRatio(97.56, 146)};
         `}
-      margin-bottom: 10px;
       // 아빠
       ${({ isKid, isFemale }) =>
         !isKid &&

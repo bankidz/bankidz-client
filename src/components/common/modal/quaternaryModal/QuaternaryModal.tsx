@@ -10,7 +10,7 @@ import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import { renderContractItem } from '@lib/utils/renderContractItem';
+import { renderContractItem } from '@lib/utils/kid';
 
 // mock data
 const isMom = false;

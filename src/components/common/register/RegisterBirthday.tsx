@@ -76,7 +76,7 @@ function RegisterBirthday() {
           <InputForm
             // @ts-expect-error
             name="year"
-            placeholder="2000년"
+            placeholder="2000"
             onChange={onChange}
             value={year}
             error={year && !isValidYear}
@@ -91,7 +91,7 @@ function RegisterBirthday() {
           <InputForm
             // @ts-expect-error
             name="month"
-            placeholder="01월"
+            placeholder="01"
             onChange={onChange}
             value={month}
             error={month && !isValidMonth}
@@ -105,7 +105,7 @@ function RegisterBirthday() {
           <InputForm
             // @ts-expect-error
             name="day"
-            placeholder="01일"
+            placeholder="01"
             onChange={onChange}
             value={day}
             error={day && !isValidDay}

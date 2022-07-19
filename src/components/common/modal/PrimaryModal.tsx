@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
-import { renderCongratsIllust } from '@lib/utils/renderRole';
+import { renderCongratsIllust } from '@lib/utils/kid';
 
 interface PrimaryModalProps {
   /** submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
