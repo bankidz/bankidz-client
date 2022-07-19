@@ -1,13 +1,14 @@
-import { selectAuth } from '@store/slices/authSlice';
+import { selectAccessToken, selectIsKid } from '@store/slices/authSlice';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from '../../store/app/hooks';
 
 function RequireAuth() {
-  const auth = useAppSelector(selectAuth);
+  const accessToken = useAppSelector(selectAccessToken);
+  const isKid = useAppSelector(selectIsKid);
 
-  if (auth.accessToken === null) {
+  if (accessToken === null) {
     return <Navigate to="/login" replace />;
-  } else if (auth.isKid === null) {
+  } else if (isKid === null) {
     return <Navigate to="/register/1" replace />;
   } else {
     return <Outlet />;

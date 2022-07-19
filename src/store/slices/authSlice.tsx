@@ -13,7 +13,6 @@ type TAuthState = {
     phone: string | null;
   };
   requestStatus: TRequestStatus; // for GET method
-  error: string | undefined; // for GET method
 };
 
 // 김원진: 규진의 엄마
@@ -30,7 +29,6 @@ const initialState: TAuthState = {
     phone: null,
   },
   requestStatus: 'idle',
-  error: undefined,
 };
 
 // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
@@ -112,9 +110,10 @@ export const authSlice = createSlice({
 export const { setCredentials, resetCredentials, setBirthday, setRole } =
   authSlice.actions;
 
-export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
   state.auth.auth.accessToken;
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
+export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
+export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 
 export default authSlice.reducer;

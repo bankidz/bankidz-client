@@ -1,7 +1,13 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { register, selectAuth, setRole } from '@store/slices/authSlice';
+import {
+  register,
+  selectBirthday,
+  selectIsFemale,
+  selectIsKid,
+  setRole,
+} from '@store/slices/authSlice';
 import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import RoleButton from '../button/RoleButton';
 import CommonSheet from '../bottomSheet/CommonSheet';
@@ -13,7 +19,10 @@ import Modals from '../modal/Modals';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
-  const auth = useAppSelector(selectAuth);
+  const isKid = useAppSelector(selectIsKid);
+  const isFemale = useAppSelector(selectIsFemale);
+  const birthday = useAppSelector(selectBirthday);
+
   const [open, onOpen, onDismiss] = useBottomSheet();
 
   function handleDadButtonClick() {
@@ -39,14 +48,14 @@ function RegisterRole() {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
-      isKid: auth.isKid,
-      isFemale: auth.isFemale,
+      isKid: isKid,
+      isFemale: isFemale,
       headerText: '뱅키즈 첫 가입을 축하해요',
       bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
     });
   }
 
-  const canRegister = auth.isKid !== null && auth.isFemale !== null;
+  const canRegister = isKid !== null && isFemale !== null;
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
@@ -55,9 +64,9 @@ function RegisterRole() {
       dispatch(
         register({
           axiosPrivate,
-          birthday: auth.birthday,
-          isKid: auth.isKid,
-          isFemale: auth.isFemale,
+          birthday: birthday,
+          isKid,
+          isFemale,
         }),
       );
       onDismiss();
@@ -76,34 +85,34 @@ function RegisterRole() {
           onClick={handleDadButtonClick}
           isKid={false}
           isFemale={false}
-          isSelected={auth.isKid === false && auth.isFemale === false}
+          isSelected={!isKid && !isFemale}
         />
         {/* 엄마 */}
         <RoleButton
           onClick={handleMomButtonClick}
           isKid={false}
           isFemale={true}
-          isSelected={auth.isKid === false && auth.isFemale === true}
+          isSelected={!isKid && isFemale}
         />
         {/* 아들 */}
         <RoleButton
           onClick={handleSonButtonClick}
           isKid={true}
           isFemale={false}
-          isSelected={auth.isKid === true && auth.isFemale === false}
+          isSelected={isKid && !isFemale}
         />
         {/* 딸 */}
         <RoleButton
           onClick={handleDaughterButtonClick}
           isKid={true}
           isFemale={true}
-          isSelected={auth.isKid === true && auth.isFemale === true}
+          isSelected={isKid && isFemale}
         />
       </div>
       <CommonSheet open={open} onDismiss={onDismiss}>
         <SelectProfile
-          isKid={auth.isKid}
-          isFemale={auth.isFemale}
+          isKid={isKid}
+          isFemale={isFemale}
           onClick={handleSubmit}
         />
       </CommonSheet>

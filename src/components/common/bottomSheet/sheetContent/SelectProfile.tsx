@@ -15,7 +15,7 @@ function SelectProfile({ isKid, isFemale, ...props }: SelectProfileProps) {
       <Container>
         <p>
           {renderRoleText(isKid, isFemale)}
-          {isKid === true ? '이' : '가'} 맞나요?
+          {isKid ? '이' : '가'} 맞나요?
         </p>
         <p>한 번 설정한 프로필은 변경하기 어려워요</p>
         <BankiWrapper>{renderRoleIllust(isKid, isFemale)}</BankiWrapper>

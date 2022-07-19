@@ -11,11 +11,11 @@ export function renderRoleIllust(
   isKid: boolean | null,
   isFemale: boolean | null,
 ) {
-  if (isKid === false && isFemale === false) {
+  if (!isKid && !isFemale) {
     return <BankiDad />;
-  } else if (isKid === false && isFemale === true) {
+  } else if (!isKid && isFemale) {
     return <BankiMom />;
-  } else if (isKid === true && isFemale === false) {
+  } else if (isKid && !isFemale) {
     return <BankiSon />;
   } else {
     return <BankiDaughter />;
@@ -26,11 +26,11 @@ export function renderRoleText(
   isKid: boolean | null,
   isFemale: boolean | null,
 ) {
-  if (isKid === false && isFemale === false) {
+  if (!isKid && !isFemale) {
     return '아빠';
-  } else if (isKid === false && isFemale === true) {
+  } else if (!isKid && isFemale) {
     return '엄마';
-  } else if (isKid === true && isFemale === false) {
+  } else if (isKid && !isFemale) {
     return '아들';
   } else {
     return '딸';
@@ -41,11 +41,11 @@ export function renderCongratsIllust(
   isKid: boolean | null,
   isFemale: boolean | null,
 ) {
-  if (isKid === false && isFemale === false) {
+  if (!isKid && !isFemale) {
     return <CongratsBankiDad />;
-  } else if (isKid === false && isFemale === true) {
+  } else if (!isKid && isFemale) {
     return <CongratsBankiMom />;
-  } else if (isKid === true && isFemale === false) {
+  } else if (isKid && !isFemale) {
     return <CongratsBankiSon />;
   } else {
     return <CongratsBankiDaughter />;
