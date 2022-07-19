@@ -98,11 +98,11 @@ export const authSlice = createSlice({
         return;
       }
       const { username, isFemale, isKid, birthday, phone } = action.payload;
-      state.auth.accessToken = action.payload.username;
-      state.auth.isFemale = action.payload.isFemale;
-      state.auth.isKid = action.payload.isKid;
-      state.auth.birthday = action.payload.birthday;
-      state.auth.phone = action.payload.phone;
+      state.auth.accessToken = username;
+      state.auth.isFemale = isFemale;
+      state.auth.isKid = isKid;
+      state.auth.birthday = birthday;
+      state.auth.phone = phone;
     });
   },
 });
