@@ -7,6 +7,7 @@ import { TRequestStatus } from 'src/pages/OnBoarding/OAuthRedirectHandler';
 import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
 import RoleButton from '../button/RoleButton';
 import CommonSheet from '../bottomSheet/CommonSheet';
+import useBottomSheet from '@hooks/useBottomSheet';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();

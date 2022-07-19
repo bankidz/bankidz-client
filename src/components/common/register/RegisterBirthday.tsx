@@ -6,7 +6,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import InputForm from '../button/InputForm';
 import { Navigate, useNavigate } from 'react-router-dom';
 
-// yyyy/mm/dd | yyyy/m/d
+// yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
 const YEAR_REGEX = /^(19[0-9][0-9]|20[0-9][0-9])$/; // 1900 ~ 2099
 const MONTH_REGEX = /^(0[0-9]|[0-9]|1[0-2])$/; // 1 ~ 12
@@ -37,7 +37,7 @@ function RegisterBirthday() {
   }, [day]);
 
   // 서버에서 요구하는 spec으로 birthday 가공
-  function stringifyBirthday(year: string, month: string, day: string) {
+  function preporocess(year: string, month: string, day: string) {
     if (month.length === 1) {
       month = '0' + month; // attach zero padding
     }
@@ -61,9 +61,7 @@ function RegisterBirthday() {
     }
     reset();
     // TODO: change name preprocess
-    const birthday = stringifyBirthday(year, month, day);
-    console.log(birthday);
-    dispatch(setBirthday({ birthday }));
+    dispatch(setBirthday({ birthday: preporocess(year, month, day) }));
     navigate('/register/2');
   }
 

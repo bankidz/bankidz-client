@@ -1,7 +1,6 @@
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
-import { TReduxStatus } from '@lib/types/api';
+import { TStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios, { AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
 type TAuthState = {
@@ -13,7 +12,7 @@ type TAuthState = {
     username: string | null;
     phone: string | null;
   };
-  status: TReduxStatus;
+  status: TStatus;
   error: string | undefined;
 };
 
@@ -51,10 +50,7 @@ export const register = createAsyncThunk(
       });
       return response.data;
     } catch (error: any) {
-      console.error(error.response.data.message);
-      if (axios.isAxiosError(error)) {
-        return error.message;
-      }
+      return error.response.data;
     }
   },
 );
@@ -78,23 +74,31 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<IAuth>) => {
-      state.auth.accessToken = action.payload.accessToken;
-      state.auth.isKid = action.payload.isKid;
+      const { accessToken, isKid } = action.payload;
+      state.auth.accessToken = accessToken;
+      state.auth.isKid = isKid;
     },
     resetCredentials: (state) => {
       state.auth.accessToken = null;
       state.auth.isKid = null;
     },
     setBirthday: (state, action: PayloadAction<IBirthDay>) => {
-      state.auth.birthday = action.payload.birthday;
+      const { birthday } = action.payload;
+      state.auth.birthday = birthday;
     },
     setRole: (state, action: PayloadAction<IRole>) => {
-      state.auth.isKid = action.payload.isKid;
-      state.auth.isFemale = action.payload.isFemale;
+      const { isKid, isFemale } = action.payload;
+      state.auth.isKid = isKid;
+      state.auth.isFemale = isFemale;
     },
   },
   extraReducers(builder) {
     builder.addCase(register.fulfilled, (state, action) => {
+      if (!action.payload.username) {
+        console.error(action.payload.message);
+        return;
+      }
+      const { username, isFemale, isKid, birthday, phone } = action.payload;
       state.auth.accessToken = action.payload.username;
       state.auth.isFemale = action.payload.isFemale;
       state.auth.isKid = action.payload.isKid;
@@ -113,10 +117,3 @@ export const selectAccessToken = (state: RootState) =>
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
 
 export default authSlice.reducer;
-
-// https://github.com/gitdagray/redux_jwt_auth/blob/main/src/features/auth/authSlice.js
-// https://github.com/Neogasogaeseo/Naega-Web/blob/dev/src/presentation/pages/OAuthRedirectHandler/index.tsx
-// https://bobbyhadz.com/blog/typescript-left-hand-side-of-assignment-not-optional
-// https://kyounghwan01.github.io/blog/TS/object-null/#%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5
-// https://stackoverflow.com/questions/61339968/error-message-devtools-failed-to-load-sourcemap-could-not-load-content-for-chr
-// https://velog.io/@lieblichoi/%ED%81%AC%EB%A1%ACChrome-DevTools-failed-to-load-source-map-Could-not-load-content-for-%EC%88%A8%EA%B8%B0%EA%B8%B0
