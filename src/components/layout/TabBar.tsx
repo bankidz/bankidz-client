@@ -19,16 +19,16 @@ function TabBar() {
 
   return (
     <Wrapper>
-      <NavLink to={isKid ? '/' : '/contents'}>
+      <NavLink to={isKid === true ? '/' : '/contents'}>
         {isKid ? (
           <Home stroke={pathname === '/' ? active[1] : active[0]} />
         ) : (
           <Content stroke={pathname === '/contents' ? active[1] : active[0]} />
         )}
       </NavLink>
-      <NavLink to={isKid ? '/challenge' : '/'}>
-        {(isKid && pathname === '/challenge') ||
-        (!isKid && pathname === '/') ? (
+      <NavLink to={isKid === true ? '/challenge' : '/'}>
+        {(isKid === true && pathname === '/challenge') ||
+        (isKid === false && pathname === '/') ? (
           <CenterSelected />
         ) : (
           <Center />
