@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import axios, { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IAuth, IBirthDay, IRole, TAuthState } from './authTypes';
 
@@ -16,7 +16,7 @@ const initialState: TAuthState = {
     username: null,
     phone: null,
   },
-  requestStatus: 'idle',
+  authRequestStatus: 'idle', // for GET method
 };
 
 // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
@@ -29,18 +29,13 @@ export const register = createAsyncThunk(
     isFemale: boolean | null;
   }) => {
     const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
-    try {
-      const response = await axiosPrivate.patch('/user', {
-        birthday,
-        isKid,
-        isFemale,
-      });
-      // const response = await axiosPublic('/health');
-      // const response = await axiosPrivate('/user');
-      return response.data;
-    } catch (error: any) {
-      return error.response.data;
-    }
+    const response = await axiosPrivate.patch('/user', {
+      birthday,
+      isKid,
+      isFemale,
+    });
+    // const response = await axiosPrivate.get('/health');
+    return response.data;
   },
 );
 
@@ -69,10 +64,6 @@ export const authSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(register.fulfilled, (state, action) => {
-      if (!action.payload.username) {
-        console.error(action.payload.message);
-        return;
-      }
       const { username, isFemale, isKid, birthday, phone } = action.payload;
       state.auth.accessToken = username;
       state.auth.isFemale = isFemale;

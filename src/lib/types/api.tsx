@@ -1,1 +1,6 @@
-export type TRequestStatus = 'idle' | 'loading' | 'succeeded' | 'failed';
+export type TRequestStatus =
+  | 'idle'
+  | 'loading'
+  | 'pending'
+  | 'succeeded'
+  | 'failed';

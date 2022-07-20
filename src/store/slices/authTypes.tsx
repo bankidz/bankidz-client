@@ -1,4 +1,4 @@
-import { TRequestStatus } from "@lib/types/api";
+import { TRequestStatus } from '@lib/types/api';
 
 export type TAuthState = {
   auth: {
@@ -9,7 +9,7 @@ export type TAuthState = {
     username: string | null;
     phone: string | null;
   };
-  requestStatus: TRequestStatus; // for GET method
+  authRequestStatus: TRequestStatus;
 };
 
 export interface IAuth {

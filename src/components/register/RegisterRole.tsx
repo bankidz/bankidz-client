@@ -16,6 +16,8 @@ import SelectProfile from '../common/bottomSheet/sheetContent/SelectProfile';
 import useModals from '../../hooks/useModals';
 import { modals } from '../common/modal/Modals';
 import Modals from '../common/modal/Modals';
+import { useState } from 'react';
+import { TRequestStatus } from '@lib/types/api';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -43,10 +45,11 @@ function RegisterRole() {
   }
 
   const { openModal } = useModals();
+  const navigate = useNavigate();
   function handleModalOpen() {
     openModal(modals.primaryModal, {
       onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
+        navigate('/');
       },
       isKid: isKid,
       isFemale: isFemale,
@@ -55,24 +58,31 @@ function RegisterRole() {
     });
   }
 
-  const canRegister = isKid !== null && isFemale !== null;
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
+  const [registerRequestStatus, setRegisterRequestStatus] =
+    useState<TRequestStatus>('idle');
+  const canRegister =
+    isKid !== null && isFemale !== null && registerRequestStatus === 'idle';
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (canRegister) {
-      dispatch(
-        register({
-          axiosPrivate,
-          birthday: birthday,
-          isKid,
-          isFemale,
-        }),
-      );
-      onDismiss();
-      handleModalOpen();
-      console.log('가입 성공');
-      navigate('/');
+      try {
+        setRegisterRequestStatus('pending');
+        await dispatch(
+          register({
+            axiosPrivate,
+            birthday,
+            isKid,
+            isFemale,
+          }),
+        ).unwrap();
+        onDismiss();
+        handleModalOpen();
+      } catch (error: any) {
+        console.error(error.message);
+      } finally {
+        setRegisterRequestStatus('idle');
+      }
     }
   }
 
