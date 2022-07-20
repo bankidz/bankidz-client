@@ -6,6 +6,7 @@ import CloseButton from '../../button/CloseButton';
 import { ReactComponent as ModalContentMoney } from '@assets/illust/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illust/congrats/congrats_banki_with_coins.svg';
 import InstructionCard from './InstructionCard';
+import 'swiper/swiper.min.css';
 
 interface TertiaryProps {
   /**

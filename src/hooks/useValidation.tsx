@@ -4,14 +4,14 @@ export type TValidationResult = {
   error: boolean;
   message: string;
 };
-type TValidationCheck = [
+/* type TValidationCheck = [
   TValidationResult,
   (
     formType: TFormType,
     value: string | number,
     existChallengeNames?: string[] | undefined,
   ) => void,
-];
+]; */
 // 유효성 검사 로직 추가할때마다 타입도 같이 추가
 type TFormType = 'contractName' | 'contractAmount';
 
@@ -41,7 +41,7 @@ const kid_create_content_step3_validateResult = {
   },
 };
 
-function useValidation(): TValidationCheck {
+function useValidation() {
   const [validateResult, setValidateResult] =
     useState<TValidationResult>(initialState);
 
@@ -96,7 +96,7 @@ function useValidation(): TValidationCheck {
     }
   };
 
-  return [validateResult, checkValidate];
+  return [validateResult, checkValidate] as const;
 }
 
 export default useValidation;

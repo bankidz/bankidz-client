@@ -25,7 +25,7 @@ function RegisterRole() {
   const isFemale = useAppSelector(selectIsFemale);
   const birthday = useAppSelector(selectBirthday);
 
-  const [open, onOpen, onDismiss] = useBottomSheet();
+  const [open, onOpen, onDismiss] = useBottomSheet(false);
 
   function handleDadButtonClick() {
     dispatch(setRole({ isKid: false, isFemale: false }));
@@ -126,7 +126,6 @@ function RegisterRole() {
           onClick={handleSubmit}
         />
       </CommonSheet>
-      {/* @ts-expect-error */}
       <Modals />
     </Wrapper>
   );

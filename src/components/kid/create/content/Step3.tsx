@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import InputForm from '@components/common/button/InputForm';
 import useBottomSheet from '@hooks/useBottomSheet';
 import ContractSheet from '@components/common/bottomSheet/ContractSheet';
@@ -14,6 +14,7 @@ import {
   selectStep3InitData,
 } from '@store/slices/challengePayloadSlice';
 import SheetButton from '@components/common/button/SheetButton';
+import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 
 type TStep3Form = {
   contractName: string;
@@ -26,10 +27,11 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [form, setForm] = useState<TStep3Form>(
     useAppSelector(selectStep3InitData),
   );
+
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
-  const [open, onOpen, onDismiss] = useBottomSheet();
+  const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const moneyRef = useRef<HTMLDivElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
@@ -110,7 +112,11 @@ function Step3({ currentStep }: { currentStep: number }) {
         <div onClick={onOpen} ref={moneyRef}>
           <InputForm
             placeholder="부모님과 함께 모을 금액"
-            value={form.contractAmount === 0 ? '' : form.contractAmount}
+            value={
+              form.contractAmount === 0
+                ? ''
+                : commaThreeDigits(form.contractAmount)
+            }
             error={validateAmount.error}
             readonly={true}
             onFocus={onOpen}

@@ -1,51 +1,53 @@
-import { useCallback } from 'react';
+import { HTMLAttributes, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import RiskBadge from '@components/common/badges/RiskBadge';
 
-interface SelectInterestButtonProps {
+interface SelectInterestButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isSelected: boolean;
-  risk: 1 | 2 | 3;
+  risk: 10 | 20 | 30;
 }
 
-function SelectInterestButton({ isSelected, risk }: SelectInterestButtonProps) {
+function SelectInterestButton({
+  isSelected,
+  risk,
+  ...props
+}: SelectInterestButtonProps) {
   const levelToString = useCallback((risk: number) => {
     switch (risk) {
-      case 1:
+      case 10:
         return '안정';
-        break;
-      case 2:
+      case 20:
         return '보통';
-        break;
-      case 3:
+      case 30:
         return '위험';
-        break;
       default:
         return '안정';
     }
   }, []);
 
   return (
-    <Wrapper isSelected={isSelected}>
+    <Wrapper isSelected={isSelected} {...props}>
       <RiskBadge riskLevel={levelToString(risk)} />
-      <p>{risk}0%</p>
+      <p>{risk}%</p>
     </Wrapper>
   );
 }
 
 export default SelectInterestButton;
 
-const Wrapper = styled.div<{ isSelected: boolean }>`
-  height: 61px;
+const Wrapper = styled.button<{ isSelected: boolean }>`
+  height: 75px;
   width: 100%;
-  border-radius: ${({ theme }) => theme.radius.small};
+  border-radius: ${({ theme }) => theme.radius.medium};
   ${({ isSelected }) =>
     isSelected
       ? css`
           background-color: ${({ theme }) => theme.palette.main.yellow100};
-          border: 1px solid ${({ theme }) => theme.palette.main.yellow400};
+          border: 3px solid ${({ theme }) => theme.palette.main.yellow300};
         `
       : css`
-          border: 1px solid ${({ theme }) => theme.palette.main.yellow100};
+          background-color: ${({ theme }) => theme.palette.greyScale.white};
+          border: 3px solid ${({ theme }) => theme.palette.main.yellow100};
         `}
 
   display: flex;

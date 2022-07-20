@@ -5,7 +5,7 @@ import SheetButton from '../button/SheetButton';
 interface ContractSheetProps {
   children: JSX.Element;
   open: boolean;
-  onDismiss: () => void;
+  onDismiss?: () => void;
   label: string;
   onClickNext: () => void;
   disabledNext: boolean;
@@ -48,9 +48,16 @@ function ContractSheet({
 export default ContractSheet;
 
 const StyledBottomSheet = styled(BottomSheet)`
+  scrollbar-width: none;
+  overflow: hidden;
   /* 라이브러리 css 억지 커스텀 */
   & > * {
+    //바텀시트 상단 그림자 제거
     box-shadow: none !important;
+  }
+  & > div > * {
+    // 이자율 선택하기에서 초기 선택할때 스크롤바 생기는 현상 잡기
+    overflow: hidden;
   }
 
   div:first-child:before {

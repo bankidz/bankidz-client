@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icon/arrow-left.svg';
 
@@ -11,7 +11,6 @@ interface AppBarProps {
 
 function AppBar({ label }: AppBarProps) {
   const navigate = useNavigate();
-
   const onClickAppBar = () => {
     navigate(-1);
   };

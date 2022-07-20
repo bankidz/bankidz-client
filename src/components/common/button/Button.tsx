@@ -101,6 +101,7 @@ const Wrapper = styled.button<{
   ${({ property }) =>
     property === 'kakao' &&
     css`
+      height: 49px;
       color: #191919 !important;
       img {
         position: absolute;

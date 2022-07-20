@@ -2,46 +2,34 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { kidMock } from '@lib/mocks/kid';
-import { TFamilyState } from '@lib/types/kid';
+import { TFamilyState } from '@lib/types/family';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';
 import RoleButton from '@components/common/button/RoleButton';
 
 function Step1({ currentStep }: { currentStep: number }) {
-  const [parents, setParents] = useState<TFamilyState[]>();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { getFamily } = kidMock(2);
 
   const onClickRoleButton = (isFemale: boolean) => {
     dispatch(dispatchParent(isFemale));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      // You can await here
-      try {
-        const response = await getFamily();
-        const parent = response.filter((v) => !v.isKid);
-        setParents(parent);
-      } catch (e) {
-        console.log('서버통신오류');
-      }
-    }
-    fetchData();
-  }, []);
-
   return (
     <Wrapper>
-      {parents?.map((v, i) => (
-        <RoleButton
-          isKid={v.isKid}
-          isFemale={v.isFemale}
-          onClick={() => onClickRoleButton(v.isFemale)}
-          key={i}
-        />
-      ))}
+      <RoleButton
+        isKid={false}
+        isFemale={false}
+        onClick={() => onClickRoleButton(false)}
+        key={'dad'}
+      />
+      <RoleButton
+        isKid={false}
+        isFemale={true}
+        onClick={() => onClickRoleButton(true)}
+        key={'mom'}
+      />
     </Wrapper>
   );
 }

@@ -28,8 +28,8 @@ function App() {
         </Route>
         <Route path="/sungwoo" element={<SungwooTestPage />} />
         <Route path="*" element={<NotFound />} />
-        {/* </Route> */}
       </Route>
+      {/* </Route> */}
     </Routes>
   );
 }

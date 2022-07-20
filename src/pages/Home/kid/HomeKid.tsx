@@ -7,7 +7,7 @@ function HomeKid() {
       자식 - 홈 페이지
       <button
         onClick={() => {
-          navigate('/create?step=1');
+          navigate('/create/1', { state: { from: 'home' } });
         }}
       >
         새로운 돈길 계약하기

@@ -62,12 +62,12 @@ const Rule = styled.div`
   border-radius: ${({ theme }) => theme.radius.medium};
   & > p:first-child {
     ${({ theme }) => theme.typo.bottomSheet.T_14_EB}
-    line-height: 160%;
+    line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
   & > p:nth-child(2) {
     ${({ theme }) => theme.typo.bottomSheet.S_12_R}
-    line-height: 160%;
+    line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
 `;

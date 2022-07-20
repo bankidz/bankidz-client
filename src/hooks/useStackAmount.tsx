@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-type TStackAmount = [
+/* type TStackAmount = [
   number[],
   (amount: number) => void,
   () => void,
   () => void,
-];
+]; */
 
-function useStackAmount(): TStackAmount {
+function useStackAmount() {
   const [amountStack, setAmountStack] = useState<number[]>([]);
 
   const pushAmount = (amount: number) => {
@@ -20,7 +20,7 @@ function useStackAmount(): TStackAmount {
     setAmountStack([]);
   };
 
-  return [amountStack, pushAmount, popAmount, resetAmount];
+  return [amountStack, pushAmount, popAmount, resetAmount] as const;
 }
 
 export default useStackAmount;
