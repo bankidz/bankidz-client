@@ -3,11 +3,12 @@ function getChallengeStep4Weeks(
   weekPrice: number,
   interestRate: 10 | 20 | 30,
 ) {
-  const weekCost = Math.floor(
-    totalprice / (weekPrice + weekPrice * 0.01 * interestRate),
-  );
+  const alonePrice = (1 - 0.01 * interestRate) * totalprice;
+  console.log(alonePrice);
+  const weekCost = Math.ceil(alonePrice / weekPrice);
+  //혼자 모으는 금액 + 총 이자
   const totalPriceWithInterest =
-    totalprice + weekPrice * 0.01 * interestRate * weekCost;
+    weekPrice * weekCost + totalprice * 0.01 * interestRate;
   return { weekCost, totalPriceWithInterest };
 }
 

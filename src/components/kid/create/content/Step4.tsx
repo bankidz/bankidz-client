@@ -182,7 +182,7 @@ function Step4({ currentStep }: { currentStep: number }) {
           후, <span>{contractInfo.contractEndWeek}</span>에 완주예정
         </p>
         <p>
-          {contractInfo.overPrice - totalPrice !== 0 &&
+          {contractInfo.overPrice !== 0 &&
             `${contractInfo.overPrice}원을 더 모을 수 있어요`}
         </p>
       </Summary>
