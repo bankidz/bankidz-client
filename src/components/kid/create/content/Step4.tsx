@@ -111,7 +111,6 @@ function Step4({ currentStep }: { currentStep: number }) {
 
   // 다음으로 버튼 활성화,비활성화 처리
   useEffect(() => {
-    console.log(form, middlePrice, minPrice, maxPrice);
     form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
   }, [form]);
 
@@ -242,7 +241,7 @@ function Step4({ currentStep }: { currentStep: number }) {
             max={maxPrice}
             form={form}
             setForm={setForm}
-            step={totalPrice > 500000 ? 1000 : 500}
+            step={500}
           />
         </div>
       </ContractSheet>

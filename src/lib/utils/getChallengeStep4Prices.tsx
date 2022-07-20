@@ -13,22 +13,12 @@ function getChallengeStep4Prices(
   const getRoundDownBy1000 = (price: number) =>
     price % 1000 === 0 ? price : price - (price % 1000);
 
-  const maxPrice =
-    totalPrice > 300000
-      ? interestRate
-        ? getRoundUpBy1000(((1 - 0.01 * interestRate) * totalPrice) / 3)
-        : getRoundUpBy1000((0.8 * totalPrice) / 3)
-      : interestRate
-      ? getRoundUpBy500(((1 - 0.01 * interestRate) * totalPrice) / 3)
-      : getRoundUpBy500((0.8 * totalPrice) / 3);
-  const minPrice =
-    totalPrice > 300000
-      ? interestRate
-        ? getRoundUpBy1000(((1 - 0.01 * interestRate) * totalPrice) / 15)
-        : getRoundUpBy1000((0.8 * totalPrice) / 15)
-      : interestRate
-      ? getRoundUpBy500(((1 - 0.01 * interestRate) * totalPrice) / 15)
-      : getRoundUpBy500((0.8 * totalPrice) / 15);
+  const maxPrice = interestRate
+    ? getRoundUpBy500(((1 - 0.01 * interestRate) * totalPrice) / 3)
+    : getRoundUpBy500((0.8 * totalPrice) / 3);
+  const minPrice = interestRate
+    ? getRoundUpBy500(((1 - 0.01 * interestRate) * totalPrice) / 15)
+    : getRoundUpBy500((0.8 * totalPrice) / 15);
 
   // 이자율 포함 전 계산식
   /*   const min =
