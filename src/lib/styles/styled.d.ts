@@ -47,7 +47,7 @@ declare module 'styled-components' {
         TabName_T_21_EB: string;
         HomeTitle_T_24_EB: string;
         HomeSubtitle_T_16_EB: string;
-        GraphNum_T_21_EB: String;
+        GraphNum_T_21_EB: string;
         GraphSub_S_12_M: string;
         EmptyText_S_16_M: string;
       };

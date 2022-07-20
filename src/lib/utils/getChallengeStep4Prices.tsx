@@ -20,6 +20,7 @@ function getChallengeStep4Prices(totalPrice: number) {
       ? totalPrice / 3
       : Math.floor(totalPrice / 3 - ((totalPrice / 3) % 500)) + 500; */
 
+  // 20퍼센트일때 가정한 중간금액
   const middlePrice =
     (minPrice + maxPrice) / 2 - (((minPrice + maxPrice) / 2) % 500);
 
