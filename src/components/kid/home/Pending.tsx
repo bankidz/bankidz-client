@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import SuggestBadge from '@components/common/badges/SuggestBadge';
+import { darken } from 'polished';
 
 interface PendingProps extends HTMLAttributes<HTMLButtonElement> {
   /**
@@ -24,8 +25,8 @@ function Pending({ date, name, isSuggesting, ...props }: PendingProps) {
   return (
     <Wrapper {...props}>
       <Left>
-        <p>{dateOnly}</p>
         <p>{name}</p>
+        <p>{dateOnly}</p>
       </Left>
       <SuggestBadge isSuggesting={isSuggesting} />
     </Wrapper>
@@ -36,14 +37,23 @@ export default Pending;
 
 const Wrapper = styled.button`
   width: 100%;
-  height: 96px;
+  height: 68px;
   border-radius: ${({ theme }) => theme.radius.medium};
   background-color: white;
-  padding: 24px 16px;
+  padding: 16px;
 
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  ${({ theme }) => {
+    const selected = theme.palette.greyScale.white;
+    return css`
+      &:active {
+        background: ${darken(0.1, selected)};
+      }
+    `;
+  }}
 `;
 
 const Left = styled.div`
@@ -54,18 +64,12 @@ const Left = styled.div`
   text-align: left;
 
   p:first-child {
-    font-family: 'Spoqa Han Sans Neo';
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: 700;
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    ${({ theme }) => theme.typo.button.Text_T_14_EB}
+    color: ${({ theme }) => theme.palette.greyScale.black};
   }
   p:last-child {
     margin-top: 8px;
-    font-family: 'TmoneyRoundWind';
-    font-size: 20px;
-    line-height: 26px;
-    font-weight: 800;
-    color: black;
+    ${({ theme }) => theme.typo.text.S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
 `;
