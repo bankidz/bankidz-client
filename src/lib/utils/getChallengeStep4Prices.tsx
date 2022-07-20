@@ -1,11 +1,12 @@
 function getChallengeStep4Prices(totalPrice: number) {
   // 500원 단위로 올림
-  const getRoundBy500 = (price: number) =>
+  const getRoundUpBy500 = (price: number) =>
     price % 500 === 0 ? price : price - (price % 500) + 500;
+  const getRoundDownBy500 = (price: number) =>
+    price % 500 === 0 ? price : price - (price % 500);
 
-  // 이자율 포함
-  const maxPrice = getRoundBy500(totalPrice / 1.3 / 3);
-  const minPrice = getRoundBy500(totalPrice / 1.1 / 15);
+  const maxPrice = getRoundUpBy500(totalPrice / 1.1 / 3);
+  const minPrice = getRoundDownBy500(totalPrice / 1.3 / 15);
 
   // 이자율 포함 전 계산식
   /*   const min =

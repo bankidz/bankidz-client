@@ -32,7 +32,7 @@ function Step5({ currentStep }: { currentStep: number }) {
     if (status === 'succeeded') {
       // 스토어 초기화
       dispatch(dispatchResetChallengePayload());
-      //onDismiss(); 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
+      onDismiss(); // 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
       openModal(modals.quaternaryModal, {
         onSubmit: () => {
           closeModal(modals.quaternaryModal);
