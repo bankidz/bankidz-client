@@ -1,5 +1,6 @@
+import { axiosPublic } from '@lib/api/axios';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios, { AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IAuth, IBirthDay, IRole, TAuthState } from './authTypes';
 
@@ -19,6 +20,18 @@ const initialState: TAuthState = {
   authRequestStatus: 'idle', // for GET method
 };
 
+// POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
+export const login = createAsyncThunk(
+  'auth/login',
+  async (thunkPayload: { code: string | null }) => {
+    const { code } = thunkPayload;
+    const response = await axiosPublic.post('/kakao/login', {
+      code,
+    });
+    return response.data;
+  },
+);
+
 // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
 export const register = createAsyncThunk(
   'auth/register',
@@ -34,7 +47,6 @@ export const register = createAsyncThunk(
       isKid,
       isFemale,
     });
-    // const response = await axiosPrivate.get('/health');
     return response.data;
   },
 );
@@ -63,14 +75,20 @@ export const authSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(register.fulfilled, (state, action) => {
-      const { username, isFemale, isKid, birthday, phone } = action.payload;
-      state.auth.accessToken = username;
-      state.auth.isFemale = isFemale;
-      state.auth.isKid = isKid;
-      state.auth.birthday = birthday;
-      state.auth.phone = phone;
-    });
+    builder
+      .addCase(login.fulfilled, (state, action) => {
+        const { accessToken, isKid } = action.payload.data;
+        state.auth.accessToken = accessToken;
+        state.auth.isKid = isKid;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        const { username, isFemale, isKid, birthday, phone } = action.payload;
+        state.auth.accessToken = username;
+        state.auth.isFemale = isFemale;
+        state.auth.isKid = isKid;
+        state.auth.birthday = birthday;
+        state.auth.phone = phone;
+      });
   },
 });
 
@@ -84,3 +102,6 @@ export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 
 export default authSlice.reducer;
+
+// const response = await axiosPublic.get('/health');
+// console.log(response.data);
