@@ -7,45 +7,29 @@ interface SuggestBadgeProps {
 
 function SuggestBadge({ isSuggesting }: SuggestBadgeProps) {
   return (
-    <Wrapper>
-      <StyledSpan isSuggesting={isSuggesting}>
-        {isSuggesting ? '제안중' : '거절됨'}
-      </StyledSpan>
+    <Wrapper isSuggesting={isSuggesting}>
+      {isSuggesting ? '제안중' : '거절됨'}
     </Wrapper>
   );
 }
 
 export default SuggestBadge;
 
-const Wrapper = styled.div`
-  height: 28px;
-`;
-
-const StyledSpan = styled.span<{
-  isSuggesting: boolean;
-}>`
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 28px;
-  vertical-align: middle;
-  color: white;
-
-  width: 64px;
-  height: 28px;
+const Wrapper = styled.div<{ isSuggesting: boolean }>`
+  height: 26px;
+  width: 67px;
   border-radius: ${({ theme }) => theme.radius.small};
-  border: none;
-  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  display: inline-block;
-  text-align: center;
-
-  ${({ isSuggesting }) =>
+  ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
+  color: ${({ theme, isSuggesting }) =>
     isSuggesting
-      ? css`
-          // grey 색상은 디자인 되어 있지 않아 임의로 설정하였습니다.
-          background-color: ${({ theme }) => theme.palette.greyScale.grey300};
-        `
-      : css`
-          background-color: pink;
-        `};
+      ? theme.palette.sementic.red300
+      : theme.palette.greyScale.grey600};
+  background-color: ${({ theme, isSuggesting }) =>
+    isSuggesting
+      ? theme.palette.sementic.red100
+      : theme.palette.greyScale.grey200};
 `;
