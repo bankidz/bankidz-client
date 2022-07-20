@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package.json ./
 # Installs all node packages
 # RUN npm ci 
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 
 # Copies everything over to Docker environment
