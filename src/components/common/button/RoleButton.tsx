@@ -83,37 +83,37 @@ const StyledButton = styled.button<{
 
     svg {
       margin-bottom: 10px;
-      // 딸
+      // 아빠
       ${({ isKid, isFemale }) =>
-        isKid &&
-        isFemale &&
-        css`
-          margin-left: ${calcRatio(23.02, 146)};
-          width: ${calcRatio(101.1, 146)};
-        `}
-      // 아들
-      ${({ isKid, isFemale }) =>
-        isKid &&
-        !isFemale &&
+        isKid === false &&
+        isFemale === false &&
         css`
           margin-left: ${calcRatio(34, 146)};
-          width: ${calcRatio(88.81, 146)};
+          width: ${calcRatio(87.12, 146)};
         `}
       // 엄마
       ${({ isKid, isFemale }) =>
-        !isKid &&
-        isFemale &&
+        isKid === false &&
+        isFemale === true &&
         css`
           margin-left: ${calcRatio(25, 146)};
           width: ${calcRatio(97.56, 146)};
         `}
-      // 아빠
+      // 아들
       ${({ isKid, isFemale }) =>
-        !isKid &&
-        !isFemale &&
+        isKid === true &&
+        isFemale === false &&
         css`
           margin-left: ${calcRatio(34, 146)};
-          width: ${calcRatio(87.12, 146)};
+          width: ${calcRatio(88.81, 146)};
+        `}
+      // 딸
+      ${({ isKid, isFemale }) =>
+        isKid == true &&
+        isFemale == true &&
+        css`
+          margin-left: ${calcRatio(23.02, 146)};
+          width: ${calcRatio(101.1, 146)};
         `}
     }
 

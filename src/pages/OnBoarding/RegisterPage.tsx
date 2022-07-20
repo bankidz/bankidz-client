@@ -1,5 +1,5 @@
-import RegisterBirth from '@components/common/register/RegisterBirthday';
-import RegisterRole from '@components/common/register/RegisterRole';
+import RegisterBirth from '@components/register/RegisterBirthday';
+import RegisterRole from '@components/register/RegisterRole';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { axiosPublic } from '@lib/api/axios';

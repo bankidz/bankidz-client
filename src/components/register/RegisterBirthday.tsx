@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useInputs from '@hooks/useInputs';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import InputForm from '../button/InputForm';
+import InputForm from '../common/button/InputForm';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 // yyyy/mm/dd || yyyy/m/d
@@ -37,7 +37,7 @@ function RegisterBirthday() {
   }, [day]);
 
   // 서버에서 요구하는 spec으로 birthday 가공
-  function preporocess(year: string, month: string, day: string) {
+  function preprocess(year: string, month: string, day: string) {
     if (month.length === 1) {
       month = '0' + month; // attach zero padding
     }
@@ -60,7 +60,7 @@ function RegisterBirthday() {
       return;
     }
     reset();
-    dispatch(setBirthday({ birthday: preporocess(year, month, day) }));
+    dispatch(setBirthday({ birthday: preprocess(year, month, day) }));
     navigate('/register/2');
   }
 
@@ -81,7 +81,7 @@ function RegisterBirthday() {
             value={year}
             error={year && !isValidYear}
             autoFocus
-            type="text"
+            type="number"
             required
             onFocus={() => setYearFocus(true)}
             onBlur={() => setYearFocus(false)}
@@ -95,7 +95,7 @@ function RegisterBirthday() {
             onChange={onChange}
             value={month}
             error={month && !isValidMonth}
-            type="text"
+            type="number"
             required
             onFocus={() => setMonthFocus(true)}
             onBlur={() => setMonthFocus(false)}
@@ -109,7 +109,7 @@ function RegisterBirthday() {
             onChange={onChange}
             value={day}
             error={day && !isValidDay}
-            type="text"
+            type="number"
             required
             onFocus={() => setDayFocus(true)}
             onBlur={() => setDayFocus(false)}

@@ -10,7 +10,7 @@ import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import { renderContractItem } from '@lib/utils/kid';
+import { renderItemIllust } from '@lib/utils/kid';
 
 // mock data
 const isMom = false;
@@ -20,7 +20,7 @@ const totalPrice = 30000;
 const weekPrice = 1500;
 const weeks = 10;
 const createdAt = '2022-07-12 03:08:07';
-const category = '학용품';
+const itemName = '학용품';
 
 interface PrimaryModalProps {
   /** submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
@@ -109,12 +109,10 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
               </div>
             </div>
             <div className="목표아이템">
-              <div className="category-illust">
-                {renderContractItem(category)}
-              </div>
+              <div className="item-illust">{renderItemIllust(itemName)}</div>
               <div className="text-wrapper">
                 <div className="title">목표 아이템</div>
-                <div className="content">{category}</div>
+                <div className="content">{itemName}</div>
               </div>
             </div>
           </div>
@@ -307,7 +305,7 @@ const Bottom = styled.div`
       justify-content: space-between;
       width: 50%;
       height: 100%;
-      .category-illust {
+      .item-illust {
         display: flex;
         justify-content: center;
         align-items: center;

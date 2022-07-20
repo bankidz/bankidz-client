@@ -65,6 +65,19 @@ const Wrapper = styled.div<{
     color: ${({ value, theme }) =>
       value ? theme.palette.greyScale.black : theme.palette.greyScale.grey300};
   }
+
+  /* hide number type input arrow */
+  /* https://stackoverflow.com/questions/3790935/can-i-hide-the-html5-number-input-s-spin-box */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield; /* Firefox */
+  }
 `;
 
 const InputBox = styled.input<{

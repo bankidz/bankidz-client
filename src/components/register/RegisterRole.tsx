@@ -9,13 +9,13 @@ import {
   setRole,
 } from '@store/slices/authSlice';
 import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
-import RoleButton from '../button/RoleButton';
-import CommonSheet from '../bottomSheet/CommonSheet';
+import RoleButton from '../common/button/RoleButton';
+import CommonSheet from '../common/bottomSheet/CommonSheet';
 import useBottomSheet from '@hooks/useBottomSheet';
-import SelectProfile from '../bottomSheet/sheetContent/SelectProfile';
-import useModals from '../../../hooks/useModals';
-import { modals } from '../modal/Modals';
-import Modals from '../modal/Modals';
+import SelectProfile from '../common/bottomSheet/sheetContent/SelectProfile';
+import useModals from '../../hooks/useModals';
+import { modals } from '../common/modal/Modals';
+import Modals from '../common/modal/Modals';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -85,28 +85,28 @@ function RegisterRole() {
           onClick={handleDadButtonClick}
           isKid={false}
           isFemale={false}
-          isSelected={!isKid && !isFemale}
+          isSelected={isKid === false && isFemale === false}
         />
         {/* 엄마 */}
         <RoleButton
           onClick={handleMomButtonClick}
           isKid={false}
           isFemale={true}
-          isSelected={!isKid && isFemale}
+          isSelected={isKid === false && isFemale === true}
         />
         {/* 아들 */}
         <RoleButton
           onClick={handleSonButtonClick}
           isKid={true}
           isFemale={false}
-          isSelected={isKid && !isFemale}
+          isSelected={isKid === true && isFemale === false}
         />
         {/* 딸 */}
         <RoleButton
           onClick={handleDaughterButtonClick}
           isKid={true}
           isFemale={true}
-          isSelected={isKid && isFemale}
+          isSelected={isKid === true && isFemale === true}
         />
       </div>
       <CommonSheet open={open} onDismiss={onDismiss}>

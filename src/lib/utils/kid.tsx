@@ -7,11 +7,11 @@ export function renderRoleIllust(
   isKid: boolean | null,
   isFemale: boolean | null,
 ) {
-  if (!isKid && !isFemale) {
+  if (isKid === false && isFemale === false) {
     return <BankiDad />;
-  } else if (!isKid && isFemale) {
+  } else if (isKid === false && isFemale === true) {
     return <BankiMom />;
-  } else if (isKid && !isFemale) {
+  } else if (isKid === true && isFemale === false) {
     return <BankiSon />;
   } else {
     return <BankiDaughter />;
@@ -22,11 +22,11 @@ export function renderRoleText(
   isKid: boolean | null,
   isFemale: boolean | null,
 ) {
-  if (!isKid && !isFemale) {
+  if (isKid === false && isFemale === false) {
     return '아빠';
-  } else if (!isKid && isFemale) {
+  } else if (isKid === false && isFemale === true) {
     return '엄마';
-  } else if (isKid && !isFemale) {
+  } else if (isKid === true && isFemale === false) {
     return '아들';
   } else {
     return '딸';
@@ -42,11 +42,11 @@ export function renderCongratsIllust(
   isKid: boolean | null,
   isFemale: boolean | null,
 ) {
-  if (!isKid && !isFemale) {
+  if (isKid === false && isFemale === false) {
     return <CongratsBankiDad />;
-  } else if (!isKid && isFemale) {
+  } else if (isKid === false && isFemale === true) {
     return <CongratsBankiMom />;
-  } else if (isKid && !isFemale) {
+  } else if (isKid === true && isFemale === false) {
     return <CongratsBankiSon />;
   } else {
     return <CongratsBankiDaughter />;
@@ -64,24 +64,24 @@ import { ReactComponent as C2 } from '@assets/illust/contractItemNames/contractR
 import { ReactComponent as C3 } from '@assets/illust/contractItemNames/contractReceipt/c3.svg';
 import { TItemName } from '@lib/types/kid';
 
-export function renderContractItem(category: TItemName) {
-  if (category === '학용품') {
+export function renderItemIllust(itemName: TItemName) {
+  if (itemName === '학용품') {
     return <A1 />;
-  } else if (category === '생활용품') {
+  } else if (itemName === '생활용품') {
     return <A2 />;
-  } else if (category === '전자제품') {
+  } else if (itemName === '전자제품') {
     return <A3 />;
-  } else if (category === '식품') {
+  } else if (itemName === '식품') {
     return <B1 />;
-  } else if (category === '문화생활') {
+  } else if (itemName === '문화생활') {
     return <B2 />;
-  } else if (category === '패션뷰티') {
+  } else if (itemName === '패션뷰티') {
     return <B3 />;
-  } else if (category === '선물') {
+  } else if (itemName === '선물') {
     return <C1 />;
-  } else if (category === '비상금') {
+  } else if (itemName === '비상금') {
     return <C2 />;
-  } else if (category === '기타') {
+  } else if (itemName === '기타') {
     return <C3 />;
   }
 }
