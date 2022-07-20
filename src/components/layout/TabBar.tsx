@@ -1,7 +1,9 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Home } from '@assets/icon/home.svg';
-import { ReactComponent as Contents } from '@assets/icon/contents.svg';
+import { ReactComponent as CenterSelected } from '@assets/icon/tabbar_center_selected.svg';
+import { ReactComponent as Center } from '@assets/icon/tabbar_center.svg';
+import { ReactComponent as Content } from '@assets/icon/tabbar_contents.svg';
 import { ReactComponent as Mypage } from '@assets/icon/mypage.svg';
 import { theme } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
@@ -17,17 +19,20 @@ function TabBar() {
 
   return (
     <Wrapper>
-      <NavLink to="/">
-        <Home stroke={pathname === '/' ? active[1] : active[0]} />
+      <NavLink to={isKid ? '/' : '/contents'}>
+        {isKid ? (
+          <Home stroke={pathname === '/' ? active[1] : active[0]} />
+        ) : (
+          <Content stroke={pathname === '/contents' ? active[1] : active[0]} />
+        )}
       </NavLink>
-      <NavLink to={isKid ? '/challenge' : '/contents'}>
-        <Contents
-          fill={
-            pathname === '/challenge' || pathname === '/contents'
-              ? active[1]
-              : active[0]
-          }
-        />
+      <NavLink to={isKid ? '/challenge' : '/'}>
+        {(isKid && pathname === '/challenge') ||
+        (!isKid && pathname === '/') ? (
+          <CenterSelected />
+        ) : (
+          <Center />
+        )}
       </NavLink>
       <NavLink to="/mypage">
         <Mypage fill={pathname === '/mypage' ? active[1] : active[0]} />
@@ -47,7 +52,6 @@ const Wrapper = styled.div`
 
   background-color: white;
   border-radius: 12px 12px 28px 28px;
-  padding-bottom: 14px;
 
   display: flex;
   justify-content: space-around;
@@ -56,11 +60,19 @@ const Wrapper = styled.div`
   bottom: 0px;
   left: -1px;
   border-radius: 12px 12px 0px 0px;
-  padding-bottom: 0px;
+  padding-bottom: 14px;
 
   a {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  & > a:not(:nth-child(2)) {
+    width: 48px;
+  }
+
+  & > a:nth-child(2) {
+    margin-bottom: 17px;
   }
 `;

@@ -7,9 +7,13 @@ interface AppBarProps {
    * 이전 페이지명
    */
   label: string;
+  /**
+   * 레벨
+   */
+  level?: 1 | 2 | 3 | 4 | 5;
 }
 
-function AppBar({ label }: AppBarProps) {
+function AppBar({ label, level }: AppBarProps) {
   const navigate = useNavigate();
   const onClickAppBar = () => {
     navigate(-1);
@@ -18,9 +22,9 @@ function AppBar({ label }: AppBarProps) {
   return (
     <Wrapper>
       <div onClick={onClickAppBar}>
-        <Arrow />
+        {level ? <Arrow fill={'#FFFFFF'} /> : <Arrow fill={'#2E3234'} />}
       </div>
-      <p>{label}</p>
+      <p style={level ? { color: '#ffffff' } : { color: '#2e3234' }}>{label}</p>
     </Wrapper>
   );
 }
