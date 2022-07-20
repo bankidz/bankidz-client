@@ -1,5 +1,10 @@
 export type TRole = '엄마' | '아빠' | '아들' | '딸';
 
+export type TRoleDependency = {
+  isKid: boolean | null;
+  isFemale: boolean | null;
+};
+
 export type TItemName =
   | '학용품'
   | '생활용품'

@@ -1,77 +1,107 @@
 import { axiosPublic } from '@lib/api/axios';
-import { TReduxStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
+import { IAuth, IBirthDay, IRole, TAuthState } from './authTypes';
 
-type TAuthState = {
-  auth: {
-    accessToken: string | null;
-    isKid: boolean | null;
-  };
-  status: TReduxStatus;
-  error: string | undefined;
-};
-
+// 김원진: 규진의 엄마
 const initialState: TAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4MjEyNDUwLCJzdWIiOiI0IiwiZXhwIjoxNjYwNjMxNjUwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.DpRPdGtazTqTxJYeW3ad9AbRmGS5GjjLbmZ3gp8WxQ4',
-    // TODO: init isKid
-    isKid: true,
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4MDM1ODc2LCJzdWIiOiIyIiwiZXhwIjoxNjYwNDU1MDc2LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.KXzamQgcDWrLw3MAkPzewQI_hK9NCzGa3z8GcLeH-p8',
+    // accessToken: null,
+    // isKid: true,
+    isKid: null,
+    isFemale: null,
+    birthday: null,
+    username: null,
+    phone: null,
   },
-  status: 'idle',
-  error: undefined,
+  authRequestStatus: 'idle', // for GET method
 };
 
-// POST: 프로필 정보가 없는 회원에 대해 입력받은 프로필 정보 전송
-/* export const setProfile = createAsyncThunk(
-  'auth/setProfile',
-  async (profile: any) => {
-    try {
-      console.log(`in setProfile thunk code: ${JSON.stringify(profile)}`);
-      const response = await axiosPublic.post('/set/profile', profile);
-      console.log(`in setProfile thunk response: ${response}`);
-      return response.data;
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        return err.message;
-      }
-    }
+// POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
+export const login = createAsyncThunk(
+  'auth/login',
+  async (thunkPayload: { code: string | null }) => {
+    const { code } = thunkPayload;
+    const response = await axiosPublic.post('/kakao/login', {
+      code,
+    });
+    return response.data;
   },
-); */
+);
 
-interface IAuth {
-  accessToken: string | null;
-  isKid: boolean | null;
-}
+// PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
+export const register = createAsyncThunk(
+  'auth/register',
+  async (thunkPayload: {
+    axiosPrivate: AxiosInstance;
+    birthday: string | null;
+    isKid: boolean | null;
+    isFemale: boolean | null;
+  }) => {
+    const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
+    const response = await axiosPrivate.patch('/user', {
+      birthday,
+      isKid,
+      isFemale,
+    });
+    return response.data;
+  },
+);
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<IAuth>) => {
-      state.auth.accessToken = action.payload.accessToken;
-      state.auth.isKid = action.payload.isKid;
+      const { accessToken, isKid } = action.payload;
+      state.auth.accessToken = accessToken;
+      state.auth.isKid = isKid;
     },
     resetCredentials: (state) => {
       state.auth.accessToken = null;
       state.auth.isKid = null;
     },
+    setBirthday: (state, action: PayloadAction<IBirthDay>) => {
+      const { birthday } = action.payload;
+      state.auth.birthday = birthday;
+    },
+    setRole: (state, action: PayloadAction<IRole>) => {
+      const { isKid, isFemale } = action.payload;
+      state.auth.isKid = isKid;
+      state.auth.isFemale = isFemale;
+    },
+  },
+  extraReducers(builder) {
+    builder
+      .addCase(login.fulfilled, (state, action) => {
+        const { accessToken, isKid } = action.payload.data;
+        state.auth.accessToken = accessToken;
+        state.auth.isKid = isKid;
+      })
+      .addCase(register.fulfilled, (state, action) => {
+        const { username, isFemale, isKid, birthday, phone } = action.payload;
+        state.auth.accessToken = username;
+        state.auth.isFemale = isFemale;
+        state.auth.isKid = isKid;
+        state.auth.birthday = birthday;
+        state.auth.phone = phone;
+      });
   },
 });
 
-export const { setCredentials, resetCredentials } = authSlice.actions;
+export const { setCredentials, resetCredentials, setBirthday, setRole } =
+  authSlice.actions;
 
-export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
   state.auth.auth.accessToken;
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
+export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
+export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 
 export default authSlice.reducer;
 
-// https://github.com/gitdagray/redux_jwt_auth/blob/main/src/features/auth/authSlice.js
-// https://github.com/Neogasogaeseo/Naega-Web/blob/dev/src/presentation/pages/OAuthRedirectHandler/index.tsx
-// https://bobbyhadz.com/blog/typescript-left-hand-side-of-assignment-not-optional
-// https://kyounghwan01.github.io/blog/TS/object-null/#%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5
-// https://stackoverflow.com/questions/61339968/error-message-devtools-failed-to-load-sourcemap-could-not-load-content-for-chr
-// https://velog.io/@lieblichoi/%ED%81%AC%EB%A1%ACChrome-DevTools-failed-to-load-source-map-Could-not-load-content-for-%EC%88%A8%EA%B8%B0%EA%B8%B0
+// const response = await axiosPublic.get('/health');
+// console.log(response.data);

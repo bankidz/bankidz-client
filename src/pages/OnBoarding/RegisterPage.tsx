@@ -1,32 +1,40 @@
-import RegisterBirth from '@components/common/register/RegisterBirth';
-import RegisterRole from '@components/common/register/RegisterRole';
+import RegisterBirth from '@components/register/RegisterBirthday';
+import RegisterRole from '@components/register/RegisterRole';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { axiosPublic } from '@lib/api/axios';
+import { useParams } from 'react-router-dom';
 
 function RegisterPage() {
-  // function handleClick() {
-  //   console.log('click!');
-  //   const refresh = async () => {
-  //     console.log('async!');
-  //     try {
-  //       const response = await axiosPublic.get('/user/refresh');
-  //       console.log(response.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   refresh();
-  // }
+  const { step } = useParams();
+  function getValidCurrentStep(step: number) {
+    if (step && 1 <= step && step <= 2) {
+      return step as 1 | 2;
+    } else {
+      console.error('부적절한 접근입니다.');
+    }
+  }
+  const currentStep = getValidCurrentStep(parseInt(step!));
+
+  async function handleClick() {
+    try {
+      const response = await axiosPublic.patch('/user/refresh');
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <ForegroundTemplate label="">
         <MarginTemplate>
-          <RegisterBirth />
-          {/* <RegisterRole /> */}
+          {currentStep === 1 && <RegisterBirth />}
+          {currentStep === 2 && <RegisterRole />}
         </MarginTemplate>
       </ForegroundTemplate>
-      {/* <button onClick={handleClick}>토큰 리프레시 테스트</button> */}
+      {/* TODO: test code */}
+      <button onClick={handleClick}>토큰 리프레시 테스트</button>
     </>
   );
 }

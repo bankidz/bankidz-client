@@ -1,21 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import 'swiper/components/navigation/navigation.min.css';
 import { ReactNode } from 'react';
+import { calcRatio } from '@lib/styles/theme';
 
 interface InstructionCardProps {
   headerText: string;
   bodyText: string;
+  currentCardIdx: number;
   children: ReactNode;
 }
 
 function InstructionCard({
   headerText,
   bodyText,
+  currentCardIdx,
   children,
 }: InstructionCardProps) {
   return (
     <>
-      <YellowBox>{children}</YellowBox>
+      <YellowBox currentCardIdx={currentCardIdx}>{children}</YellowBox>
       <WhiteBox>
         <div className="text-positioner">
           <span className="header">{headerText}</span>
@@ -28,13 +31,24 @@ function InstructionCard({
 
 export default InstructionCard;
 
-const YellowBox = styled.div`
+const YellowBox = styled.div<{ currentCardIdx: number }>`
   height: 230px;
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  svg {
+    ${({ currentCardIdx }) =>
+      currentCardIdx === 2
+        ? css`
+            width: ${calcRatio(160, 324)};
+          `
+        : css`
+            width: ${calcRatio(96, 324)};
+          `}
+  }
 `;
 
 const WhiteBox = styled.div`

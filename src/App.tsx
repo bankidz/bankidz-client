@@ -19,7 +19,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
         {/* <Route element={<PersistLogin />}> */}
-        <Route path="/register/*" element={<RegisterPage />} />
+        <Route path="/register/:step" element={<RegisterPage />} />
         <Route element={<RequireAuth />}>
           <Route path="/*" element={<HomeRouter />} />
           <Route path="/challenge/*" element={<ChallengeRouter />} />

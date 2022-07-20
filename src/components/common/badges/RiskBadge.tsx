@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface SuggestBadgeProps {
-  /** 위험도를 선택합니다. '안정', '보통', '위헙' 중 하나를 입력합니다. */
+  /** 위험도를 선택합니다. */
   riskLevel: '안정' | '보통' | '위험';
 }
 
