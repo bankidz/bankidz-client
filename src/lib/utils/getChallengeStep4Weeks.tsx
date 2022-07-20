@@ -1,13 +1,14 @@
 function getChallengeStep4Weeks(
-  totalprice: number,
+  totalPrice: number,
   weekPrice: number,
   interestRate: 10 | 20 | 30,
 ) {
-  const weekCost = Math.floor(
-    totalprice / (weekPrice + weekPrice * 0.01 * interestRate),
+  const weekCost = Math.ceil(
+    // totalprice / (weekPrice + weekPrice * 0.01 * interestRate),
+    (totalPrice - totalPrice * 0.01 * interestRate) / weekPrice,
   );
   const totalPriceWithInterest =
-    totalprice + weekPrice * 0.01 * interestRate * weekCost;
+    weekPrice * weekCost + totalPrice * 0.01 * interestRate;
   return { weekCost, totalPriceWithInterest };
 }
 
