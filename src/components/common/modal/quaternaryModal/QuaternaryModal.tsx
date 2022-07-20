@@ -23,7 +23,10 @@ const createdAt = '2022-07-12 03:08:07';
 const itemName = '학용품';
 
 interface PrimaryModalProps {
-  /** submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
+  /**
+   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * useModals hook에 의해 반환 됩니다.
+   * */
   onSubmit?: any;
 }
 
