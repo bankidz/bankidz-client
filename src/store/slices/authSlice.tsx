@@ -1,8 +1,20 @@
 import { axiosPublic } from '@lib/api/axios';
+import { TRequestStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-import { IAuth, IBirthDay, IRole, TAuthState } from './authTypes';
+
+export type TAuthState = {
+  auth: {
+    accessToken: string | null;
+    isKid: boolean | null;
+    isFemale: boolean | null;
+    birthday: string | null;
+    username: string | null;
+    phone: string | null;
+  };
+  authRequestStatus: TRequestStatus;
+};
 
 // 김원진: 규진의 엄마
 const initialState: TAuthState = {
@@ -51,6 +63,20 @@ export const register = createAsyncThunk(
   },
 );
 
+export interface IAuth {
+  accessToken: string | null;
+  isKid: boolean | null;
+}
+
+export interface IBirthDay {
+  birthday: string;
+}
+
+export interface IRole {
+  isKid: boolean;
+  isFemale: boolean;
+}
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -82,7 +108,8 @@ export const authSlice = createSlice({
         state.auth.isKid = isKid;
       })
       .addCase(register.fulfilled, (state, action) => {
-        const { username, isFemale, isKid, birthday, phone } = action.payload;
+        const { username, isFemale, isKid, birthday, phone } =
+          action.payload.data;
         state.auth.accessToken = username;
         state.auth.isFemale = isFemale;
         state.auth.isKid = isKid;

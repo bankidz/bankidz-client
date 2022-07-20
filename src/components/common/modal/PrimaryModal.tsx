@@ -136,3 +136,5 @@ const WhiteBox = styled.div`
 const CheckButtonPositioner = styled.div`
   margin-top: 16px;
 `;
+
+// https://codepen.io/designcouch/pen/obvKxm
