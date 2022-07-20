@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InstructionBadgeProps {
-  /** 스타일을 선택합니다. 'primary', 'secondary', 'tertiary' 중 하나를 입력합니다.! */
+  /** 스타일을 선택합니다. */
   property: 'primary' | 'secondary' | 'tertiary';
   children: ReactNode;
 }
@@ -25,7 +25,6 @@ const StyledSpan = styled.span<{
   property: 'primary' | 'secondary' | 'tertiary';
 }>`
   height: 23px;
-  /* border-radius: 6.56287px; */
 
   font-style: normal;
   font-weight: 300;

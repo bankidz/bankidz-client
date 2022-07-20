@@ -1,24 +1,30 @@
 import styled from 'styled-components';
-import { ReactComponent as ModalContentBanky } from '@assets/illust/congrats/congrats_main.svg';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
+import { renderCongratsIllust } from '@lib/utils/kid';
 
 interface PrimaryModalProps {
-  /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
+  /**
+   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * useModals hook에 의해 반환 됩니다.
+   * */
   onSubmit?: any;
+  isKid: boolean;
+  isFemale: boolean;
   /** header에 표시될 내용을 입력합니다. */
   headerText: string;
   /** body에 표시될 내용을 입력합니다. */
   bodyText: string;
 }
 
-// 모달 내부에 표시될 UI 작성
-function PrimaryModal({ onSubmit, headerText, bodyText }: PrimaryModalProps) {
-  function handleSubmit() {
-    onSubmit();
-  }
-
+function PrimaryModal({
+  onSubmit,
+  isKid,
+  isFemale,
+  headerText,
+  bodyText,
+}: PrimaryModalProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -33,7 +39,7 @@ function PrimaryModal({ onSubmit, headerText, bodyText }: PrimaryModalProps) {
       content: {
         height: '488px',
         position: 'absolute',
-        top: `${calcRatio(136, 760)}`,
+        top: '19vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -49,14 +55,20 @@ function PrimaryModal({ onSubmit, headerText, bodyText }: PrimaryModalProps) {
     },
   };
 
+  function handleSubmit() {
+    onSubmit();
+  }
+
   return (
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
       <Content>
         <WhiteBox>
-          <ModalContentBanky />
-          <span className="main-label">{headerText}</span>
-          <span className="sub-label">{bodyText}</span>
+          <div className="illust-wrapper">
+            {renderCongratsIllust(isKid, isFemale)}
+          </div>
+          <span className="header">{headerText}</span>
+          <span className="body">{bodyText}</span>
         </WhiteBox>
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />
@@ -72,6 +84,8 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100%;
 `;
 
 const WhiteBox = styled.div`
@@ -85,21 +99,33 @@ const WhiteBox = styled.div`
   align-items: center;
   border-radius: ${({ theme }) => theme.radius.large};
 
-  svg {
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 36px;
-    padding-bottom: 36px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+  .illust-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 293px;
+
+    margin-top: 32px;
+    margin-bottom: 8px;
   }
 
-  .main-label {
+  svg {
+    width: ${calcRatio(206, 292)};
+  }
+
+  .header {
     ${({ theme }) => theme.typo.popup.Title_T_21_EB}
     height: 21px;
     margin-top: 8px;
     margin-bottom: 16px;
   }
 
-  .sub-label {
+  .body {
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     height: 14px;
     color: ${({ theme }) => theme.palette.greyScale.grey600};

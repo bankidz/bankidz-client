@@ -18,17 +18,17 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
-        <Route element={<PersistLogin />}>
-          <Route path="/register" element={<RegisterPage />} />
-          <Route element={<RequireAuth />}>
-            <Route path="/*" element={<HomeRouter />} />
-            <Route path="/challenge/*" element={<ChallengeRouter />} />
-            <Route path="/contents/*" element={<ContentsRouter />} />
-            <Route path="/mypage/*" element={<MypageRouter />} />
-            <Route path="/sungwoo" element={<SungwooTestPage />} />
-          </Route>
-          <Route path="*" element={<NotFound />} />
+        {/* <Route element={<PersistLogin />}> */}
+        <Route path="/register/:step" element={<RegisterPage />} />
+        <Route element={<RequireAuth />}>
+          <Route path="/*" element={<HomeRouter />} />
+          <Route path="/challenge/*" element={<ChallengeRouter />} />
+          <Route path="/contents/*" element={<ContentsRouter />} />
+          <Route path="/mypage/*" element={<MypageRouter />} />
         </Route>
+        <Route path="/sungwoo" element={<SungwooTestPage />} />
+        <Route path="*" element={<NotFound />} />
+        {/* </Route> */}
       </Route>
     </Routes>
   );

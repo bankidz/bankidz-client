@@ -18,12 +18,12 @@ export const 돈길이름_입력 = Template.bind({});
 export const 생년월일_입력_init = Template.bind({});
 생년월일_입력_init.args = {
   placeholder: '2022',
-  birthday: '년',
+  postfix: '년',
 };
 
 export const 생년월일_입력_중 = Template.bind({});
 생년월일_입력_중.args = {
   placeholder: '2022',
-  birthday: '년',
+  postfix: '년',
   value: 202,
 };

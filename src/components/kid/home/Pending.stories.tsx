@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Margin from '@components/layout/Margin';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import Pending from './Pending';
 
 export default {
@@ -8,9 +8,9 @@ export default {
   argTypes: { onClick: { action: 'event' } },
   decorators: [
     (Story) => (
-      <Margin>
+      <MarginTemplate>
         <Story />
-      </Margin>
+      </MarginTemplate>
     ),
   ],
 } as ComponentMeta<typeof Pending>;

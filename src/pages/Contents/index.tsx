@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Base from '../../components/layout/Base';
-import Stacked from '../../components/layout/Stacked';
+import BackgroundTemplate from '../../components/layout/BackgroundTemplate';
+import ForegroundTemplate from '../../components/layout/ForegroundTemplate';
 import Article from './Article';
 import Contents from './Contents';
 import Edu from './Edu';
@@ -12,42 +12,42 @@ function ContentsRouter() {
       <Route
         path="/"
         element={
-          <Base>
+          <BackgroundTemplate>
             <Contents />
-          </Base>
+          </BackgroundTemplate>
         }
       />
       <Route
         path="/edu"
         element={
-          <Stacked label="금융 교육 전체보기">
+          <ForegroundTemplate label="금융 교육 전체보기">
             <Edu />
-          </Stacked>
+          </ForegroundTemplate>
         }
       />
       <Route
         path="/life"
         element={
-          <Stacked label="금융 생할 전체보기">
+          <ForegroundTemplate label="금융 생할 전체보기">
             <Life />
-          </Stacked>
+          </ForegroundTemplate>
         }
       />
 
       <Route
         path="/edu/:articleId"
         element={
-          <Stacked label="금융 교육">
+          <ForegroundTemplate label="금융 교육">
             <Article />
-          </Stacked>
+          </ForegroundTemplate>
         }
       />
       <Route
         path="/life/:articleId"
         element={
-          <Stacked label="금융 생활">
+          <ForegroundTemplate label="금융 생활">
             <Article />
-          </Stacked>
+          </ForegroundTemplate>
         }
       />
     </Routes>

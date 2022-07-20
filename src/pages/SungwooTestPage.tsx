@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import Modals, { modals } from '../components/common/modal/Modals';
-import useModals from '../components/common/modal/useModals';
 import 'swiper/swiper.min.css';
+import useModals from '@hooks/useModals';
+import RoleButton from '@components/common/button/RoleButton';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.quaternaryModal, {
+    openModal(modals.tertiaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },

@@ -2,19 +2,20 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { calcRatio } from '@lib/styles/theme';
 import CloseButton from '../../button/CloseButton';
 import { ReactComponent as ModalContentMoney } from '@assets/illust/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illust/congrats/congrats_banki_with_coins.svg';
 import InstructionCard from './InstructionCard';
 
 interface TertiaryProps {
-  /** submit 시 처리될 지스니스 로직을 처리하는 함수 입니다. */
-  onClose: any;
+  /**
+   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * useModals hook에 의해 반환 됩니다.
+   * */
+  onSubmit?: any;
 }
 
-// 모달 내부에 표시될 UI 작성
-function TertiaryModal({ onClose }: TertiaryProps) {
+function TertiaryModal({ onSubmit }: TertiaryProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -29,7 +30,7 @@ function TertiaryModal({ onClose }: TertiaryProps) {
       content: {
         height: '568px',
         position: 'absolute',
-        top: `${calcRatio(96, 760)}`,
+        top: '13vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -52,8 +53,9 @@ function TertiaryModal({ onClose }: TertiaryProps) {
     onSlideChange: (e: any) => setCurrentCardIdx(e.activeIndex),
     slidesPerView: 1,
   };
-  function handleCancel() {
-    onClose();
+
+  function handleSubmit() {
+    onSubmit();
   }
 
   return (
@@ -76,6 +78,7 @@ function TertiaryModal({ onClose }: TertiaryProps) {
             <InstructionCard
               headerText="이자란?"
               bodyText={`은행에서는 돈을 맡기면\n맡긴 돈의 일정 부분을 주는 것`}
+              currentCardIdx={currentCardIdx}
             >
               <ModalContentMoney />
             </InstructionCard>
@@ -84,6 +87,7 @@ function TertiaryModal({ onClose }: TertiaryProps) {
             <InstructionCard
               headerText="아지율이란?"
               bodyText={`전체 맡긴 돈 중에 이자가\n얼마나 차지하는 지를 나태내는 말\n\n예를 들어 20%의 이자율을 주는\n은행이라면 내가 100만원을 저금했을 때\n20만원의 지아를 받을 수 있어요`}
+              currentCardIdx={currentCardIdx}
             >
               <ModalContentMoney />
             </InstructionCard>
@@ -92,13 +96,14 @@ function TertiaryModal({ onClose }: TertiaryProps) {
             <InstructionCard
               headerText="이자부스터란?"
               bodyText={`실제 은행의 이자율과 같은 말로\n뱅키즈 내에서 사용돼요!`}
+              currentCardIdx={currentCardIdx}
             >
               <ModalContentSaving />
             </InstructionCard>
           </SwiperSlide>
         </StyledSwiper>
         <CloseButtonPositioner>
-          <CloseButton onClick={handleCancel} />
+          <CloseButton onClick={handleSubmit} />
         </CloseButtonPositioner>
       </Content>
     </ReactModal>

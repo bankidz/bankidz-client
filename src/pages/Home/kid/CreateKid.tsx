@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Step1 from '@components/kid/create/content/Step1';
 import Step2 from '@components/kid/create/content/Step2';
 import Progress from '@components/kid/create/Progress';
-import Margin from '@components/layout/Margin';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/kid/create/content/Step3';
 import Step4 from '@components/kid/create/content/Step4';
 import { useEffect, useState } from 'react';
@@ -81,10 +81,10 @@ function CreateKid() {
             step={typedStep(parseInt(step))}
             skipSelectParents={parents?.length === 1 ? true : false}
           />
-          <Margin>
+          <MarginTemplate>
             <h1>{title[parseInt(step) - 1]}</h1>
             {renderContent(parseInt(step))}
-          </Margin>
+          </MarginTemplate>
         </Wrapper>
       )}
     </>

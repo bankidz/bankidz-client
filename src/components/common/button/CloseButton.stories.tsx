@@ -5,7 +5,7 @@ export default {
   title: 'Common/버튼/CloseButton',
   component: CloseButton,
   argTypes: {
-    onClick: { action: 'handle close' },
+    onClick: { action: 'handle click' },
   },
 } as ComponentMeta<typeof CloseButton>;
 

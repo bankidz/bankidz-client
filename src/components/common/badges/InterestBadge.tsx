@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface InterestBadgeProps {
-  /** 이자율(number)을 입력합니다. */
+  /** 이자율을 입력합니다. */
   interestRate: number;
 }
 

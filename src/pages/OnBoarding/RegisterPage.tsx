@@ -1,24 +1,39 @@
-import TopAppBar from '@components/layout/TopAppBar';
+import RegisterBirth from '@components/register/RegisterBirthday';
+import RegisterRole from '@components/register/RegisterRole';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import { axiosPublic } from '@lib/api/axios';
+import { useParams } from 'react-router-dom';
 
 function RegisterPage() {
-  // 테스트 중입니다.
-  function handleClick() {
-    console.log('click!');
-    const refresh = async () => {
-      console.log('async!');
-      try {
-        const response = await axiosPublic.get('/user/refresh');
-        console.log(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    refresh();
+  const { step } = useParams();
+  function getValidCurrentStep(step: number) {
+    if (step && 1 <= step && step <= 2) {
+      return step as 1 | 2;
+    } else {
+      console.error('부적절한 접근입니다.');
+    }
   }
+  const currentStep = getValidCurrentStep(parseInt(step!));
+
+  async function handleClick() {
+    try {
+      const response = await axiosPublic.patch('/user/refresh');
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
-      <TopAppBar label="" />
+      <ForegroundTemplate label="">
+        <MarginTemplate>
+          {currentStep === 1 && <RegisterBirth />}
+          {currentStep === 2 && <RegisterRole />}
+        </MarginTemplate>
+      </ForegroundTemplate>
+      {/* TODO: test code */}
       <button onClick={handleClick}>토큰 리프레시 테스트</button>
     </>
   );

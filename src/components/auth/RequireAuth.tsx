@@ -1,20 +1,17 @@
-import { selectAuth } from '@store/slices/authSlice';
+import { selectAccessToken, selectIsKid } from '@store/slices/authSlice';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from '../../store/app/hooks';
 
-// require register
-// 추후 auth에 의한 구분 로직 추가 예정
 function RequireAuth() {
-  const auth = useAppSelector(selectAuth);
+  const accessToken = useAppSelector(selectAccessToken);
+  const isKid = useAppSelector(selectIsKid);
 
-  if (auth.accessToken === null) {
+  if (accessToken === null) {
     return <Navigate to="/login" replace />;
+  } else if (isKid === null) {
+    return <Navigate to="/register/1" replace />;
   } else {
-    if (auth.isKid === null) {
-      return <Navigate to="/register" replace />;
-    } else {
-      return <Outlet />;
-    }
+    return <Outlet />;
   }
 }
 

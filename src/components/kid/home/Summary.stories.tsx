@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Margin from '@components/layout/Margin';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import Summary from './Summary';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -9,9 +9,9 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   decorators: [
     (Story) => (
-      <Margin>
+      <MarginTemplate>
         <Story />
-      </Margin>
+      </MarginTemplate>
     ),
   ],
 } as ComponentMeta<typeof Summary>;
