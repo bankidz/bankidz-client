@@ -9,10 +9,10 @@ export type TAuthState = {
     accessToken: string | null;
     isKid: boolean | null;
     level: 1 | 2 | 3 | 4 | 5 | null;
-    isFemale: boolean | null;
     birthday: string | null;
-    username: string | null;
+    isFemale: boolean | null;
     phone: string | null;
+    username: string | null;
   };
   authRequestStatus: TRequestStatus;
 };
@@ -26,10 +26,10 @@ const initialState: TAuthState = {
     // isKid: true,
     isKid: false,
     level: null,
-    isFemale: null,
     birthday: null,
-    username: null,
+    isFemale: null,
     phone: null,
+    username: null,
   },
   authRequestStatus: 'idle', // for GET method
 };
@@ -52,32 +52,27 @@ export const register = createAsyncThunk(
   async (thunkPayload: {
     axiosPrivate: AxiosInstance;
     birthday: string | null;
-    isKid: boolean | null;
     isFemale: boolean | null;
+    isKid: boolean | null;
   }) => {
-    const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
+    console.log(thunkPayload);
+    const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
     const response = await axiosPrivate.patch('/user', {
       birthday,
-      isKid,
       isFemale,
+      isKid,
     });
     return response.data;
   },
 );
 
-export interface IAuth {
+interface IAuth {
   accessToken: string | null;
   isKid: boolean | null;
   level: 1 | 2 | 3 | 4 | 5 | null;
 }
-
-export interface IBirthDay {
+interface IBirthDay {
   birthday: string;
-}
-
-export interface IRole {
-  isKid: boolean;
-  isFemale: boolean;
 }
 
 export const authSlice = createSlice({
@@ -99,32 +94,28 @@ export const authSlice = createSlice({
       const { birthday } = action.payload;
       state.auth.birthday = birthday;
     },
-    setRole: (state, action: PayloadAction<IRole>) => {
-      const { isKid, isFemale } = action.payload;
-      state.auth.isKid = isKid;
-      state.auth.isFemale = isFemale;
-    },
   },
   extraReducers(builder) {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        const { accessToken, isKid } = action.payload.data;
+        const { accessToken, isKid, level } = action.payload.data;
         state.auth.accessToken = accessToken;
         state.auth.isKid = isKid;
+        state.auth.level = level;
       })
       .addCase(register.fulfilled, (state, action) => {
-        const { username, isFemale, isKid, birthday, phone } =
+        const { birthday, isFemale, isKid, phone, username } =
           action.payload.data;
-        state.auth.accessToken = username;
+        state.auth.birthday = birthday;
         state.auth.isFemale = isFemale;
         state.auth.isKid = isKid;
-        state.auth.birthday = birthday;
         state.auth.phone = phone;
+        state.auth.username = username;
       });
   },
 });
 
-export const { setCredentials, resetCredentials, setBirthday, setRole } =
+export const { setCredentials, resetCredentials, setBirthday } =
   authSlice.actions;
 
 export const selectAccessToken = (state: RootState) =>
