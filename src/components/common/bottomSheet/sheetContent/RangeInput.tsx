@@ -8,9 +8,17 @@ interface RangeInputProps extends TSetStep4Form {
   totalPrice: number;
   min: number;
   max: number;
+  step: 500 | 1000;
 }
 
-function RangeInput({ totalPrice, min, max, form, setForm }: RangeInputProps) {
+function RangeInput({
+  totalPrice,
+  min,
+  max,
+  form,
+  setForm,
+  step,
+}: RangeInputProps) {
   const [value, setValue] = useState<number>(
     form?.weekPrice ? form.weekPrice : 0,
   );
@@ -30,7 +38,7 @@ function RangeInput({ totalPrice, min, max, form, setForm }: RangeInputProps) {
           max={max}
           value={value}
           onChange={(e) => setValue(parseInt(e.target.value))}
-          step={500}
+          step={step}
         />
         <Selector percent={percent}>
           <WalkingBanki />

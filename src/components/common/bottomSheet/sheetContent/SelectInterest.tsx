@@ -4,6 +4,15 @@ import SelectInterestButton from '@components/kid/create/SelectInterestButton';
 import { TSetStep4Form } from '@components/kid/create/content/Step4';
 
 const notifications = {
+  null: {
+    title: '선택한 이자부스터만큼 마지막 주에 지원받아요',
+    description: (
+      <>
+        <p>돈길 걷기에 성공한 주 수만큼 이자가 쌓이고,</p>
+        <p>마지막 주에 부모님으로부터 쌓인 이자를 한 번에 받아요</p>
+      </>
+    ),
+  },
   10: {
     title: '안정 상품을 선택하셨네요!',
     description: <p>이자율이 비교적 낮아요. 그렇지만 특별한 위험은 없어요.</p>,
@@ -61,10 +70,15 @@ function SelectInterest({ form, setForm }: TSetStep4Form) {
           onClick={() => onClickInterestButton(30)}
         />
       </ButtonContainer>
-      {select && (
+      {select ? (
         <Sub select={select}>
           <p>{notifications[select].title}</p>
           {notifications[select].description}
+        </Sub>
+      ) : (
+        <Sub select={select}>
+          <p>{notifications['null'].title}</p>
+          {notifications['null'].description}
         </Sub>
       )}
     </Wrapper>
@@ -90,11 +104,13 @@ const Sub = styled.div<{ select: 10 | 20 | 30 | null }>`
   & > p:first-child {
     ${({ theme }) => theme.typo.bottomSheet.T_14_EB};
     color: ${({ select, theme }) =>
-      select === 10
-        ? theme.palette.sementic.green300
-        : select === 20
-        ? theme.palette.main.yellow400
-        : theme.palette.sementic.red300};
+      select
+        ? select === 10
+          ? theme.palette.sementic.green300
+          : select === 20
+          ? theme.palette.main.yellow400
+          : theme.palette.sementic.red300
+        : theme.palette.greyScale.black};
     margin-bottom: 14px;
   }
   & > p:not(:first-child) {

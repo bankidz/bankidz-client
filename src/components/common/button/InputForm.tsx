@@ -11,6 +11,11 @@ interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   readonly?: boolean;
   /* 바텀시트가 올라와있는 상황에 포커스와 같은 스타일을 보여줍니다 */
   sheetOpen?: boolean;
+  /* 선택할 수 없는 인풋 */
+  disabled?: boolean;
+  /*이자율. 매주 저금액*/
+  bigFontSize?: boolean;
+  autoFocus?: boolean;
   postfix?: '년' | '월' | '일';
 }
 
@@ -22,6 +27,8 @@ function InputForm({
   readonly = false,
   sheetOpen = false,
   postfix,
+  autoFocus = false,
+  bigFontSize = false,
   ...props
 }: InputFormProps) {
   return (
@@ -35,6 +42,8 @@ function InputForm({
         sheetOpen={sheetOpen}
         readOnly={readonly}
         postfix={postfix}
+        bigFontSize={bigFontSize}
+        autoFocus={autoFocus}
         {...props}
       />
       {postfix && <p>{postfix}</p>}
@@ -84,12 +93,16 @@ const InputBox = styled.input<{
   error: boolean;
   sheetOpen: boolean;
   postfix?: '년' | '월' | '일';
+  bigFontSize?: boolean;
 }>`
   width: 100%;
   height: 56px;
   border-radius: ${({ theme }) => theme.radius.medium};
   padding: 20px 13px;
-  ${({ theme }) => theme.typo.input.TextField_T_16_EB};
+  ${({ theme, bigFontSize }) =>
+    bigFontSize
+      ? theme.typo.input.TextField_Num_T_21_EB
+      : theme.typo.input.TextField_T_16_EB}
   color: ${({ theme }) => theme.palette.greyScale.black};
   &::placeholder {
     color: ${({ theme }) => theme.palette.greyScale.grey300};
@@ -104,6 +117,10 @@ const InputBox = styled.input<{
   &:focus {
     border-color: ${({ theme, error }) =>
       error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
+  }
+  &:disabled {
+    background-color: ${({ theme }) => theme.palette.greyScale.white};
+    border-color: ${({ theme }) => theme.palette.greyScale.grey200};
   }
   ${({ postfix }) =>
     postfix === '년' &&

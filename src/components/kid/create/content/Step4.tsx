@@ -56,8 +56,10 @@ function Step4({ currentStep }: { currentStep: number }) {
   const weekPriceInputRef = useRef<HTMLDivElement>(null);
   const interestRateInputRef = useRef<HTMLDivElement>(null);
 
-  const { minPrice, maxPrice, middlePrice } =
-    getChallengeStep4Prices(totalPrice);
+  const { minPrice, maxPrice, middlePrice } = getChallengeStep4Prices(
+    totalPrice,
+    form.interestRate,
+  );
   const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] =
     useBottomSheet(false);
   const [openInterestRate, onOpenInterestRate, onDismissInterestRate] =
@@ -111,6 +113,7 @@ function Step4({ currentStep }: { currentStep: number }) {
   useEffect(() => {
     form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
   }, [form]);
+
   // form 변경될때마다 필요 주 수 계산
   useEffect(() => {
     if (form.interestRate && form.weekPrice) {
@@ -127,25 +130,13 @@ function Step4({ currentStep }: { currentStep: number }) {
     }
   }, [form]);
 
+  // 이자부스터 값이 변경될때마다 매주 저금액 초기화
+  useEffect(() => {
+    setForm({ ...form, weekPrice: 0 });
+  }, [form.interestRate]);
+
   return (
     <Wrapper>
-      <InputSection>
-        <p>저금액</p>
-        <div onClick={onOpenWeekPrice} ref={weekPriceInputRef}>
-          <InputForm
-            placeholder={commaThreeDigits(middlePrice) + ' 원'}
-            value={
-              form.weekPrice === 0
-                ? ''
-                : commaThreeDigits(form.weekPrice) + ' 원'
-            }
-            readonly={true}
-            onFocus={onOpenWeekPrice}
-            sheetOpen={openWeekPrice}
-            error={false}
-          />
-        </div>
-      </InputSection>
       <InputSection>
         <p>
           이자 부스터
@@ -155,24 +146,53 @@ function Step4({ currentStep }: { currentStep: number }) {
         </p>
         <div onClick={onOpenInterestRate} ref={interestRateInputRef}>
           <InputForm
-            placeholder={
-              form.weekPrice
-                ? commaThreeDigits(form.weekPrice * 0.2) + ' 원'
-                : commaThreeDigits(middlePrice * 0.2) + ' 원'
-            }
+            placeholder={commaThreeDigits(middlePrice * 0.2) + ' 원'}
             value={
               form.interestRate
-                ? commaThreeDigits(form.weekPrice * form.interestRate * 0.01) +
-                  ' 원'
+                ? form.weekPrice
+                  ? commaThreeDigits(
+                      form.weekPrice * form.interestRate * 0.01,
+                    ) + ' 원'
+                  : commaThreeDigits(middlePrice * form.interestRate * 0.01) +
+                    ' 원'
                 : ''
             }
             readonly={true}
             onFocus={onOpenInterestRate}
             sheetOpen={openInterestRate}
+            bigFontSize={true}
             error={false}
+            autoFocus={true}
           />
         </div>
       </InputSection>
+      <InputSection>
+        <p>저금액</p>
+        <div
+          onClick={() => {
+            form.interestRate ? onOpenWeekPrice() : null;
+          }}
+          ref={weekPriceInputRef}
+        >
+          <InputForm
+            placeholder={commaThreeDigits(middlePrice) + ' 원'}
+            value={
+              form.weekPrice === 0
+                ? ''
+                : commaThreeDigits(form.weekPrice) + ' 원'
+            }
+            readonly={true}
+            onFocus={() => {
+              form.interestRate ? onOpenWeekPrice() : null;
+            }}
+            sheetOpen={openWeekPrice}
+            bigFontSize={true}
+            error={false}
+            disabled={form.interestRate ? false : true}
+          />
+        </div>
+      </InputSection>
+
       <StyledDivider />
       <Summary weekCost={contractInfo.weekCost}>
         <p>
@@ -182,7 +202,7 @@ function Step4({ currentStep }: { currentStep: number }) {
           후, <span>{contractInfo.contractEndWeek}</span>에 완주예정
         </p>
         <p>
-          {contractInfo.overPrice - totalPrice !== 0 &&
+          {contractInfo.overPrice !== 0 &&
             `${contractInfo.overPrice}원을 더 모을 수 있어요`}
         </p>
       </Summary>
@@ -193,6 +213,19 @@ function Step4({ currentStep }: { currentStep: number }) {
         outerSheet={true}
       />
 
+      {/* 바텀시트 영역 */}
+      <ContractSheet
+        open={openInterestRate}
+        onDismiss={onDismissInterestRate}
+        label={'다음'}
+        onClickNext={onClickNextButton}
+        sheetRef={interestRateSheetRef}
+        disabledNext={disabledNext}
+      >
+        <div ref={interestRateSheetRef}>
+          <SelectInterest form={form} setForm={setForm} />
+        </div>
+      </ContractSheet>
       <ContractSheet
         open={openWeekPrice}
         onDismiss={onDismissWeekPrice}
@@ -208,21 +241,11 @@ function Step4({ currentStep }: { currentStep: number }) {
             max={maxPrice}
             form={form}
             setForm={setForm}
+            step={500}
           />
         </div>
       </ContractSheet>
-      <ContractSheet
-        open={openInterestRate}
-        onDismiss={onDismissInterestRate}
-        label={'다음'}
-        onClickNext={onClickNextButton}
-        sheetRef={interestRateSheetRef}
-        disabledNext={disabledNext}
-      >
-        <div ref={interestRateSheetRef}>
-          <SelectInterest form={form} setForm={setForm} />
-        </div>
-      </ContractSheet>
+
       <Modals />
     </Wrapper>
   );
