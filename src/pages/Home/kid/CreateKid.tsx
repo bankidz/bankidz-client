@@ -8,7 +8,7 @@ import Step3 from '@components/kid/create/content/Step3';
 import Step4 from '@components/kid/create/content/Step4';
 import { useEffect, useState } from 'react';
 import { TFamilyState } from '@lib/types/family';
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
+import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import Step5 from '@components/kid/create/content/Step5';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';

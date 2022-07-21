@@ -33,7 +33,7 @@ function PersistLogin() {
       {!persist ? (
         <Outlet />
       ) : isLoading ? (
-        <p>새로고침 처리중입니다...</p>
+        <p>Loading...</p>
       ) : (
         <Outlet />
       )}

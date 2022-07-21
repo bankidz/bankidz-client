@@ -8,6 +8,7 @@ export type TAuthState = {
   auth: {
     accessToken: string | null;
     isKid: boolean | null;
+    level: 1 | 2 | 3 | 4 | 5 | null;
     isFemale: boolean | null;
     birthday: string | null;
     username: string | null;
@@ -24,6 +25,7 @@ const initialState: TAuthState = {
     // accessToken: null,
     // isKid: true,
     isKid: false,
+    level: null,
     isFemale: null,
     birthday: null,
     username: null,
@@ -66,6 +68,7 @@ export const register = createAsyncThunk(
 export interface IAuth {
   accessToken: string | null;
   isKid: boolean | null;
+  level: 1 | 2 | 3 | 4 | 5 | null;
 }
 
 export interface IBirthDay {
@@ -82,13 +85,15 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<IAuth>) => {
-      const { accessToken, isKid } = action.payload;
+      const { accessToken, isKid, level } = action.payload;
       state.auth.accessToken = accessToken;
       state.auth.isKid = isKid;
+      state.auth.level = level;
     },
     resetCredentials: (state) => {
       state.auth.accessToken = null;
       state.auth.isKid = null;
+      state.auth.level = null;
     },
     setBirthday: (state, action: PayloadAction<IBirthDay>) => {
       const { birthday } = action.payload;

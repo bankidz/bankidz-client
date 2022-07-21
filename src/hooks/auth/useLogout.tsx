@@ -1,4 +1,4 @@
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
+import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import { resetCredentials } from '@store/slices/authSlice';
 import { useDispatch } from 'react-redux';
 

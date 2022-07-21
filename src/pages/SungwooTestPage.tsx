@@ -2,17 +2,19 @@ import styled from 'styled-components';
 import Modals, { modals } from '../components/common/modal/Modals';
 import 'swiper/swiper.min.css';
 import useModals from '@hooks/useModals';
-import RoleButton from '@components/common/button/RoleButton';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.tertiaryModal, {
+    openModal(modals.secondaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
+      badgeText: '돈길완주 성공',
+      headerText: '에어팟 사기',
+      bodyText: '10주간의 여정이 끝났어요.\n이제 돈을 찾아 구매하러 가보세요.',
     });
   }
   return (

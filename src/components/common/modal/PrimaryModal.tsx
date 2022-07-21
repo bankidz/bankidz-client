@@ -127,8 +127,8 @@ const WhiteBox = styled.div`
 
   .body {
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
-    height: 14px;
     color: ${({ theme }) => theme.palette.greyScale.grey600};
+    height: 14px;
     margin-bottom: 36px;
   }
 `;

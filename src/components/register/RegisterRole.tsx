@@ -8,7 +8,7 @@ import {
   selectIsKid,
   setRole,
 } from '@store/slices/authSlice';
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
+import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/button/RoleButton';
 import CommonSheet from '../common/bottomSheet/CommonSheet';
 import useBottomSheet from '@hooks/useBottomSheet';
