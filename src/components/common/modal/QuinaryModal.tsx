@@ -1,18 +1,19 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
-import CheckButton from '../../button/CheckButton';
 import moment from 'moment';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
-import PerforatedLineTop from './PerforatedLineTop';
-import PerforatedLineBottom from './PerforatedLineBottom';
 import { renderItemIllust } from '@lib/utils/kid';
+import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
+import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
+import SuggestBadge from '../badges/SuggestBadge';
+import CheckButton from '../button/CheckButton';
 
-interface QuaternaryModalProps {
+interface QuinaryModalProps {
   /**
    * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
@@ -29,7 +30,7 @@ interface QuaternaryModalProps {
 }
 
 // 모달 내부에 표시될 UI 작성
-function QuaternaryModal({
+function QuinaryModal({
   onSubmit,
   createdAt = '2022-07-05 05:05:05',
   interestRate = 30,
@@ -39,7 +40,7 @@ function QuaternaryModal({
   totalPrice = 150000,
   weekPrice = 10000,
   weeks = 15,
-}: QuaternaryModalProps) {
+}: QuinaryModalProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -52,9 +53,9 @@ function QuaternaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '554px',
+        height: '580px',
         position: 'absolute',
-        top: '14vh',
+        top: '13vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -87,7 +88,7 @@ function QuaternaryModal({
       <Content>
         <PerforatedLineTop />
         <Top>
-          <span className="header">계약서 전송 성공!</span>
+          <SuggestBadge isSuggesting />
           <span className="body">{title}</span>
         </Top>
 
@@ -168,7 +169,7 @@ function QuaternaryModal({
   );
 }
 
-export default QuaternaryModal;
+export default QuinaryModal;
 
 const Content = styled.div`
   display: flex;
@@ -197,7 +198,7 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 115px;
+    top: 140px;
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -211,7 +212,7 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 216px;
+    top: 241px;
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -225,7 +226,7 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 286px;
+    top: 311px;
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -240,7 +241,7 @@ const Content = styled.div`
 const Top = styled.div`
   margin: -1px 0; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 100px;
+  height: 126px;
   width: 100%;
 
   display: flex;
@@ -251,12 +252,8 @@ const Top = styled.div`
   border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
   border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
 
-  .header {
-    ${({ theme }) => theme.typo.text.S_14_M};
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
-  }
   .body {
-    margin-top: 12px;
+    margin-top: 16px;
     ${({ theme }) => theme.typo.popup.T_24_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
   }
@@ -382,7 +379,7 @@ const Bottom = styled.div`
 
   .third-row {
     width: 100%;
-    height: 100px;
+    height: 70px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -412,7 +409,7 @@ const Bottom = styled.div`
 
     .계약종료일 {
       width: 66.6%;
-      height: 70px;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
