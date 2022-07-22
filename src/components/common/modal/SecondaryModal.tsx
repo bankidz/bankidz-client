@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as ModalContentFinish } from '@assets/illust/congrats/congrats_goal.svg';
+import { ReactComponent as CongratsGoal } from '@assets/illust/congrats/congrats_goal.svg';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
@@ -41,9 +41,9 @@ function SecondaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '560px',
+        height: '552px',
         position: 'absolute',
-        top: `${calcRatio(100, 760)}`,
+        top: '14vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -64,7 +64,9 @@ function SecondaryModal({
     <ReactModal {...reactModalParams}>
       <Content>
         <WhiteBox>
-          <ModalContentFinish />
+          <div className="illust-wrapper">
+            <CongratsGoal />
+          </div>
           <span className="badge">{badgeText}</span>
           <span className="header">{headerText}</span>
           <div className="body">{bodyText}</div>
@@ -83,11 +85,12 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
 const WhiteBox = styled.div`
-  background: white;
-  height: 496px;
+  background: ${({ theme }) => theme.palette.greyScale.white};
+  height: 488px;
   width: 100%;
 
   display: flex;
@@ -96,36 +99,51 @@ const WhiteBox = styled.div`
   align-items: center;
   border-radius: ${({ theme }) => theme.radius.large};
 
-  // TODO:
+  padding-left: 16px;
+  padding-right: 16px;
+
+  .illust-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 293px;
+
+    margin-top: 32px;
+    margin-bottom: 8px;
+  }
+
   svg {
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-top: 36px;
-    padding-bottom: 8px;
+    width: ${calcRatio(202, 292)};
   }
 
   .badge {
-    padding: 4px 8px;
-    gap: 8px;
+    width: 97px;
     height: 26px;
-    background: ${({ theme }) => theme.palette.main.yellow400}; // TODO:
+
+    background: ${({ theme }) => theme.palette.main.yellow100};
     border-radius: ${({ theme }) => theme.radius.large};
 
-    font-style: normal;
-    font-weight: 800;
-    font-size: 12px;
-    line-height: 150%;
-    color: white;
+    ${({ theme }) => theme.typo.tag.T_12_EB};
+    color: ${({ theme }) => theme.palette.main.yellow400};
+
+    line-height: 26px;
+    vertical-align: center;
+    display: inline-block;
+    text-align: center;
   }
 
   .header {
-    margin-top: 12px;
-    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
+    margin-top: 16px;
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB};
+    color: ${({ theme }) => theme.palette.greyScale.black};
   }
 
   .body {
     margin-top: 16px;
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
     line-height: 150%;
 
     display: flex;

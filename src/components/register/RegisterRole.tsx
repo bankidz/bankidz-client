@@ -1,14 +1,8 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  register,
-  selectBirthday,
-  selectIsFemale,
-  selectIsKid,
-  setRole,
-} from '@store/slices/authSlice';
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
+import { register, selectBirthday } from '@store/slices/authSlice';
+import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/button/RoleButton';
 import CommonSheet from '../common/bottomSheet/CommonSheet';
 import useBottomSheet from '@hooks/useBottomSheet';
@@ -21,26 +15,31 @@ import { TRequestStatus } from '@lib/types/api';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
-  const isKid = useAppSelector(selectIsKid);
-  const isFemale = useAppSelector(selectIsFemale);
+
+  const [isKid, setIsKid] = useState<boolean | null>(null);
+  const [isFemale, setIsFemale] = useState<boolean | null>(null);
   const birthday = useAppSelector(selectBirthday);
 
   const [open, onOpen, onDismiss] = useBottomSheet(false);
 
   function handleDadButtonClick() {
-    dispatch(setRole({ isKid: false, isFemale: false }));
+    setIsKid(false);
+    setIsFemale(false);
     onOpen();
   }
   function handleMomButtonClick() {
-    dispatch(setRole({ isKid: false, isFemale: true }));
+    setIsKid(false);
+    setIsFemale(true);
     onOpen();
   }
   function handleSonButtonClick() {
-    dispatch(setRole({ isKid: true, isFemale: false }));
+    setIsKid(true);
+    setIsFemale(false);
     onOpen();
   }
   function handleDaughterButtonClick() {
-    dispatch(setRole({ isKid: true, isFemale: true }));
+    setIsKid(true);
+    setIsFemale(true);
     onOpen();
   }
 

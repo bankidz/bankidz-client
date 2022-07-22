@@ -1,18 +1,19 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio, theme } from '@lib/styles/theme';
-import CheckButton from '../../button/CheckButton';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
-import PerforatedLineTop from './PerforatedLineTop';
-import PerforatedLineBottom from './PerforatedLineBottom';
 import { renderItemIllust } from '@lib/utils/kid';
+import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
+import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
+import SuggestBadge from '../badges/SuggestBadge';
+import Button from '../button/Button';
 import { getContractEndDate } from '@lib/utils/common';
 
-interface QuaternaryModalProps {
+interface SenaryModalProps {
   /**
    * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
@@ -26,10 +27,11 @@ interface QuaternaryModalProps {
   totalPrice: number;
   weekPrice: number;
   weeks: number;
+  comment: string;
 }
 
 // 모달 내부에 표시될 UI 작성
-function QuaternaryModal({
+function SenaryModal({
   onSubmit,
   createdAt = '2022-07-05 05:05:05',
   interestRate = 30,
@@ -39,7 +41,8 @@ function QuaternaryModal({
   totalPrice = 150000,
   weekPrice = 10000,
   weeks = 15,
-}: QuaternaryModalProps) {
+  comment = '큰 이자를 줄만한 목표가 아닌것 같다~',
+}: SenaryModalProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -52,9 +55,9 @@ function QuaternaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '554px',
+        height: '670px',
         position: 'absolute',
-        top: '14vh',
+        top: '5vh',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -80,7 +83,7 @@ function QuaternaryModal({
       <Content>
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top>
-          <span className="header">계약서 전송 성공!</span>
+          <SuggestBadge isSuggesting={false} />
           <span className="body">{title}</span>
         </Top>
 
@@ -95,6 +98,9 @@ function QuaternaryModal({
           <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
         <div className="third-horizontal-dashed-border-wrapper">
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
+        </div>
+        <div className="fourth-horizontal-dashed-border-wrapper">
           <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
 
@@ -152,16 +158,25 @@ function QuaternaryModal({
 
           <SignatureWrapper>대충 서명</SignatureWrapper>
         </Bottom>
+        <Comment>
+          <div className="header">부모님의 한줄평</div>
+          <div className="body">{comment}</div>
+        </Comment>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <CheckButtonPositioner>
-          <CheckButton onClick={handleSubmit} />
+          <Button
+            onClick={handleSubmit}
+            property="default"
+            label="삭제하기"
+            fixed
+          />
         </CheckButtonPositioner>
       </Content>
     </ReactModal>
   );
 }
 
-export default QuaternaryModal;
+export default SenaryModal;
 
 const Content = styled.div`
   display: flex;
@@ -176,7 +191,7 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 167px;
+    top: 180px;
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -190,7 +205,7 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 115px;
+    top: 130px; // 10px decreased
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -206,7 +221,7 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 216px;
+    top: 231px; // 10px decreased
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -222,7 +237,23 @@ const Content = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 286px;
+    top: 301px; // 10px decreased
+    transform: translate3d(-50%, -50%, 0);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .fourth-horizontal-dashed-border-wrapper {
+    z-index: 10;
+    position: absolute;
+    left: 50%;
+    top: 478px; // 10px decreased
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -239,7 +270,7 @@ const Content = styled.div`
 const Top = styled.div`
   margin: -1px 0; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 100px;
+  height: 116px; // 10px decreased
   width: 100%;
 
   display: flex;
@@ -250,12 +281,8 @@ const Top = styled.div`
   border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
   border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
 
-  .header {
-    ${({ theme }) => theme.typo.text.S_14_M};
-    color: ${({ theme }) => theme.palette.greyScale.grey500};
-  }
   .body {
-    margin-top: 12px;
+    margin-top: 16px;
     ${({ theme }) => theme.typo.popup.T_24_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
   }
@@ -265,7 +292,7 @@ const Bottom = styled.div`
   margin-bottom: -1px; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
-  height: 360px;
+  height: 350px; // 10px decreased
 
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};
@@ -381,7 +408,7 @@ const Bottom = styled.div`
 
   .third-row {
     width: 100%;
-    height: 100px;
+    height: 70px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -411,7 +438,7 @@ const Bottom = styled.div`
 
     .계약종료일 {
       width: 66.6%;
-      height: 70px;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -433,6 +460,8 @@ const Bottom = styled.div`
     }
   }
   position: relative;
+  border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
+  border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
 `;
 
 const SignatureWrapper = styled.div`
@@ -448,6 +477,37 @@ const SignatureWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const Comment = styled.div`
+  border-top-left-radius: ${({ theme }) => theme.radius.medium};
+  border-top-right-radius: ${({ theme }) => theme.radius.medium};
+  width: 100%;
+  height: 86px;
+  background: ${({ theme }) => theme.palette.greyScale.white};
+  margin: -1px 0; // overlap 1px
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .header {
+    width: 80px;
+    height: 12px;
+    ${({ theme }) => theme.typo.text.S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    margin-left: 24px;
+    margin-top: 18px;
+  }
+  .body {
+    width: 276px;
+    height: 14px; // arbitrary decreased 2px
+    ${({ theme }) => theme.typo.text.T_16_EB}
+    color: ${({ theme }) => theme.palette.sementic.red300};
+    margin-left: 24px;
+    margin-top: 18px;
+  }
 `;
 
 const CheckButtonPositioner = styled.div`

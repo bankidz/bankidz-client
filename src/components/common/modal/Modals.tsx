@@ -3,6 +3,8 @@ import PrimaryModal from './PrimaryModal';
 import SecondaryModal from './SecondaryModal';
 import TertiaryModal from './tertiaryModal/TertiaryModal';
 import QuaternaryModal from './quaternaryModal/QuaternaryModal';
+import QuinaryModal from './QuinaryModal';
+import SenaryModal from './SenaryModal';
 
 // TODO: code splitting
 export const modals = {
@@ -10,6 +12,8 @@ export const modals = {
   secondaryModal: SecondaryModal,
   tertiaryModal: TertiaryModal,
   quaternaryModal: QuaternaryModal,
+  quinaryModal: QuinaryModal,
+  senaryModal: SenaryModal,
 };
 
 // 전역 상태 (배열)의 각 요소의 props를 Component와 매핑 & submit / cancel 시 로직을 추가하여 랜더링

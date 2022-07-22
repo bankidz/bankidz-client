@@ -83,7 +83,7 @@ const WhiteBox = styled.div`
       white-space: pre-line;
 
       ${({ theme }) => theme.typo.popup.S_15_R}
-      color: ${({ theme }) => theme.palette.greyScale.black};
+      color: ${({ theme }) => theme.palette.greyScale.grey600};
       line-height: 150%;
     }
   }

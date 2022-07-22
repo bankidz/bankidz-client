@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { ReactComponent as PerforatedLineShapeBottom } from '@assets/border/perforated-line-shape-bottom.svg';
 
-function PerforatedLineBottom() {
+interface PerforatedLineBottomProps {
+  fill: string;
+}
+
+function PerforatedLineBottom({ fill }: PerforatedLineBottomProps) {
   function render() {
     const vw = Math.max(
       document.documentElement.clientWidth || 0,
@@ -12,7 +16,7 @@ function PerforatedLineBottom() {
     for (let i = 0; i < cnt; ++i) {
       ret.push(
         <div key={i} className="shape">
-          <PerforatedLineShapeBottom />
+          <PerforatedLineShapeBottom fill={fill} />
         </div>,
       );
     }

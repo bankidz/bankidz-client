@@ -64,6 +64,7 @@ import { ReactComponent as C2 } from '@assets/illust/contractItemNames/contractR
 import { ReactComponent as C3 } from '@assets/illust/contractItemNames/contractReceipt/c3.svg';
 import { TItemName } from '@lib/types/kid';
 
+// svg width 70px fixed
 export function renderItemIllust(itemName: TItemName) {
   if (itemName === '학용품') {
     return <A1 />;

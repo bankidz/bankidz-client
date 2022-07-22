@@ -1,16 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import QuaternaryModal from './QuaternaryModal';
+import QuinaryModal from './QuinaryModal';
 
 export default {
-  title: '모달/QuaternaryModal',
-  component: QuaternaryModal,
+  title: '모달/QuinaryModal',
+  component: QuinaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },
   },
-} as ComponentMeta<typeof QuaternaryModal>;
+} as ComponentMeta<typeof QuinaryModal>;
 
-const Template: ComponentStory<typeof QuaternaryModal> = (args) => (
-  <QuaternaryModal {...args} />
+const Template: ComponentStory<typeof QuinaryModal> = (args) => (
+  <QuinaryModal {...args} />
 );
 
 export const 에어팟_사기 = Template.bind({});

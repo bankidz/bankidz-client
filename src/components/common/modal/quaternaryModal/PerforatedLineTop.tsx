@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { ReactComponent as PerforatedLineShapeTop } from '@assets/border/perforated-line-shape-top.svg';
 
-function PerforatedLineTop() {
+interface PerforatedLineTopProps {
+  fill: string;
+}
+
+function PerforatedLineTop({ fill }: PerforatedLineTopProps) {
   function render() {
     const vw = Math.max(
       document.documentElement.clientWidth || 0,
@@ -12,7 +16,7 @@ function PerforatedLineTop() {
     for (let i = 0; i < cnt; ++i) {
       ret.push(
         <div key={i} className="shape">
-          <PerforatedLineShapeTop />
+          <PerforatedLineShapeTop fill={fill} />
         </div>,
       );
     }
