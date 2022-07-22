@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingBanki } from '@assets/illust/banki/banki_walking.svg';
 import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 import { useEffect, useState } from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 interface RangeInputProps extends TSetStep4Form {
   totalPrice: number;
@@ -32,19 +34,23 @@ function RangeInput({
   return (
     <Wrapper>
       <RangeInputForm>
-        <input
-          type="range"
+        <StyledSlider
           min={min}
           max={max}
           value={value}
-          onChange={(e) => setValue(parseInt(e.target.value))}
+          onChange={(v) => setValue(v as number)}
           step={step}
+          railStyle={RcSliderRailStyle}
+          trackStyle={RcSliderTrackStyle}
+          handleStyle={RcSliderHandleStyle}
         />
         <Selector percent={percent}>
           <WalkingBanki />
         </Selector>
         <ProgressBar percent={percent} />
+        <Track />
       </RangeInputForm>
+
       <div>
         <p>{commaThreeDigits(min)}</p>
         <p>{commaThreeDigits(max)}</p>
@@ -70,30 +76,41 @@ const Wrapper = styled.div`
 
 const RangeInputForm = styled.div`
   position: relative;
-  & > input {
-    width: 100%;
-    -webkit-appearance: none;
-    background-color: ${({ theme }) => theme.palette.greyScale.grey200};
-    outline: none;
-    margin: 0px;
-    height: 16px;
-    border-radius: 8px;
-
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 44px;
-      height: 40px;
-      z-index: 4;
-      position: relative;
-      transform: translateY(-2px);
-    }
-  }
 `;
+
+const StyledSlider = styled(Slider)`
+  width: calc(100% - 44px);
+  margin: 0 auto;
+  padding: 0px;
+  height: 16px;
+`;
+
+const RcSliderRailStyle = {
+  display: 'none',
+  height: '16px',
+  borderRadius: '8px',
+};
+const RcSliderTrackStyle = {
+  display: 'none',
+  height: '16px',
+  borderRadius: '8px',
+};
+const RcSliderHandleStyle = {
+  top: '-11px',
+  border: 'none',
+  width: '44px',
+  height: '40px',
+  zIndex: '4',
+  boxShadow: 'none',
+  opacity: 0,
+  borderRadius: '0px',
+};
+
 const Selector = styled.div<{ percent: number }>`
+  position: absolute;
+  top: -16px;
   height: 40px;
   width: 44px;
-  position: absolute;
-  bottom: -8px;
   z-index: 3;
   ${({ percent }) => {
     return percent > 0
@@ -107,9 +124,9 @@ const Selector = styled.div<{ percent: number }>`
 `;
 const ProgressBar = styled.div<{ percent: number }>`
   position: absolute;
+  top: 0px;
   height: 16px;
   border-radius: 8px;
-  bottom: 2px;
   background-color: ${({ theme }) => theme.palette.main.yellow300};
   left: 0px;
   z-index: 2;
@@ -122,4 +139,12 @@ const ProgressBar = styled.div<{ percent: number }>`
           width: 0px;
         `;
   }};
+`;
+const Track = styled.div`
+  position: absolute;
+  top: 0px;
+  height: 16px;
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.palette.greyScale.grey200};
+  width: 100%;
 `;
