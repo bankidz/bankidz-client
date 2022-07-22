@@ -8,7 +8,7 @@ function SungwooTestPage() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.quaternaryModal, {
+    openModal(modals.quinaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
