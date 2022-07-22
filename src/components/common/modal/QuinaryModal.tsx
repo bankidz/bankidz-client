@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
-import moment from 'moment';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
@@ -12,6 +11,7 @@ import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import CheckButton from '../button/CheckButton';
+import { getContractEndDate } from '@lib/utils/common';
 
 interface QuinaryModalProps {
   /**
@@ -73,13 +73,6 @@ function QuinaryModal({
 
   function handleSubmit() {
     onSubmit();
-  }
-
-  function getContractEndDate(createdAt: string, weeks: number) {
-    const createdDate = new Date(createdAt);
-    const endDate = new Date(createdDate);
-    endDate.setDate(createdDate.getDate() + 7 * weeks - 1);
-    return moment(endDate).format('YY.MM.DD');
   }
 
   return (
@@ -241,7 +234,7 @@ const Content = styled.div`
 const Top = styled.div`
   margin: -1px 0; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 116px; // 10px down
+  height: 116px; // 10px decreased
   width: 100%;
 
   display: flex;
@@ -263,7 +256,7 @@ const Bottom = styled.div`
   margin-bottom: -1px; // overlap 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
-  height: 360px; // 10px down
+  height: 360px; // 10px decreased
 
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};

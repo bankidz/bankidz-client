@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
 import CheckButton from '../../button/CheckButton';
-import moment from 'moment';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
@@ -11,6 +10,7 @@ import { TItemName } from '@lib/types/kid';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
 import { renderItemIllust } from '@lib/utils/kid';
+import { getContractEndDate } from '@lib/utils/common';
 
 interface QuaternaryModalProps {
   /**
@@ -72,13 +72,6 @@ function QuaternaryModal({
 
   function handleSubmit() {
     onSubmit();
-  }
-
-  function getContractEndDate(createdAt: string, weeks: number) {
-    const createdDate = new Date(createdAt);
-    const endDate = new Date(createdDate);
-    endDate.setDate(createdDate.getDate() + 7 * weeks - 1);
-    return moment(endDate).format('YY.MM.DD');
   }
 
   return (

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
-import moment from 'moment';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
@@ -11,8 +10,8 @@ import { renderItemIllust } from '@lib/utils/kid';
 import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
-import CheckButton from '../button/CheckButton';
 import Button from '../button/Button';
+import { getContractEndDate } from '@lib/utils/common';
 
 interface SenaryModalProps {
   /**
@@ -76,13 +75,6 @@ function SenaryModal({
 
   function handleSubmit() {
     onSubmit();
-  }
-
-  function getContractEndDate(createdAt: string, weeks: number) {
-    const createdDate = new Date(createdAt);
-    const endDate = new Date(createdDate);
-    endDate.setDate(createdDate.getDate() + 7 * weeks - 1);
-    return moment(endDate).format('YY.MM.DD');
   }
 
   return (

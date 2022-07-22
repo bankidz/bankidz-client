@@ -2,13 +2,15 @@ import styled from 'styled-components';
 import Modals, { modals } from '../components/common/modal/Modals';
 import 'swiper/swiper.min.css';
 import useModals from '@hooks/useModals';
+import MarginTemplate from '@components/layout/MarginTemplate';
+// import Receipt from '@components/common/Receipt';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.quinaryModal, {
+    openModal(modals.senaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -19,8 +21,19 @@ function SungwooTestPage() {
   }
   return (
     <Wrapper>
-      <button onClick={handleClick}>모달 열기</button>
-      <Modals />
+      <MarginTemplate>
+        {/* <Receipt
+          createdAt="2022-07-05 05:05:05"
+          interestRate={30}
+          isMom={true}
+          itemName="전자제품"
+          totalPrice={150000}
+          weekPrice={10000}
+          weeks={15}
+        /> */}
+      </MarginTemplate>
+      {/* <button onClick={handleClick}>모달 열기</button>
+      <Modals /> */}
     </Wrapper>
   );
 }
