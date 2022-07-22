@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { ReactComponent as SummaryWrapper } from '@assets/border/homeKid-summary.svg';
 
 interface SummaryProps {
   /**
@@ -24,22 +23,20 @@ function Summary({ current, goal, month, week }: SummaryProps) {
   // 일단은 크기 고정
   return (
     <Wrapper>
-      <SummaryWrapper></SummaryWrapper>
-      <Content>
-        <p>
-          {month}월 {week}주차
-        </p>
-        <InnerContent>
-          <Count>
-            <div>{current}원</div>
-            <div>내 저금통</div>
-          </Count>
-          <Count>
-            <div>{goal}원</div>
-            <div>목표 저금액</div>
-          </Count>
-        </InnerContent>
-      </Content>
+      <p>
+        {month}월 {week}주차
+      </p>
+      <InnerContent>
+        <Count>
+          <div>{current}원</div>
+          <div>내 저금통</div>
+        </Count>
+        <Divider />
+        <Count>
+          <div>{goal}원</div>
+          <div>목표 저금액</div>
+        </Count>
+      </InnerContent>
     </Wrapper>
   );
 }
@@ -47,52 +44,48 @@ function Summary({ current, goal, month, week }: SummaryProps) {
 export default Summary;
 
 const Wrapper = styled.div`
-  position: relative;
-`;
-const Content = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  width: 100%;
+  height: 120px;
+  background-color: ${({ theme }) => theme.palette.greyScale.white};
   display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: ${({ theme }) => theme.radius.large};
   flex-direction: column;
-
-  p {
-    font-size: 12px;
-    font-weight: bold;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 0px;
+  & > p {
+    ${({ theme }) => theme.typo.text.T_14_EB}
+    color: ${({ theme }) => theme.palette.greyScale.grey500}
   }
 `;
-
 const InnerContent = styled.div`
   display: flex;
-  flex-direction: row;
-  margin: 8px;
+  justify-content: center;
+  width: 100%;
+  grid-template-columns: 1fr 2px 1fr;
+  margin-top: 12px;
 `;
 
 const Count = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 2px 0px;
-  &:first-child {
-    border-right: 1px solid ${({ theme }) => theme.palette.greyScale.grey300};
-    padding-right: 50px;
-  }
-  &:last-child {
-    padding-left: 50px;
-  }
   div:first-child {
-    font-size: 20px;
-    line-height: 25px;
-    font-weight: 600;
+    ${({ theme }) => theme.typo.fixed.GraphNum_T_21_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
   }
   div:last-child {
-    font-size: 12px;
-    line-height: 15px;
+    ${({ theme }) => theme.typo.fixed.GraphSub_S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    margin-top: 8px;
   }
+`;
+
+const Divider = styled.div`
+  width: 2px;
+  height: 53px;
+  border-radius: 1px;
+  background-color: ${({ theme }) => theme.palette.greyScale.grey200};
 `;
