@@ -37,8 +37,6 @@ function InputForm(
   return (
     <Wrapper value={value} postfix={postfix}>
       <InputBox
-        // type={'text'}
-        placeholder={placeholder}
         onChange={onChange}
         value={value}
         error={error}
@@ -46,8 +44,8 @@ function InputForm(
         readOnly={readonly}
         postfix={postfix}
         ref={ref}
-        autoFocus
-        bigFontSize
+        autoFocus={autoFocus}
+        bigFontSize={bigFontSize}
         {...props}
       />
       {postfix && <p>{postfix}</p>}
