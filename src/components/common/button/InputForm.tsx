@@ -14,16 +14,19 @@ interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   postfix?: '년' | '월' | '일';
 }
 
-function InputForm({
-  placeholder,
-  value,
-  onChange,
-  error,
-  readonly = false,
-  sheetOpen = false,
-  postfix,
-  ...props
-}: InputFormProps) {
+function InputForm(
+  {
+    placeholder,
+    value,
+    onChange,
+    error,
+    readonly = false,
+    sheetOpen = false,
+    postfix,
+    ...props
+  }: InputFormProps,
+  ref: any,
+) {
   return (
     <Wrapper value={value} postfix={postfix}>
       <InputBox
@@ -35,6 +38,7 @@ function InputForm({
         sheetOpen={sheetOpen}
         readOnly={readonly}
         postfix={postfix}
+        ref={ref}
         {...props}
       />
       {postfix && <p>{postfix}</p>}
@@ -42,7 +46,7 @@ function InputForm({
   );
 }
 
-export default InputForm;
+export default forwardRef(InputForm);
 
 const Wrapper = styled.div<{
   value: string | number;

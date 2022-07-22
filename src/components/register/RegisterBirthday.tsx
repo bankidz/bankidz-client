@@ -1,27 +1,27 @@
 import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
-import useInputs from '@hooks/useInputs';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
 import InputForm from '../common/button/InputForm';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { execArgv } from 'process';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
 const YEAR_REGEX = /^(19[2-9][3-9]|20[0-2][0-2])$/; // 1923 ~ 2022
-const MONTH_REGEX = /^(0[0-9]|[0-9]|1[0-2])$/; // 1 ~ 12
+const MONTH_REGEX = /^(0[1-9]|[1-9]|1[0-2])$/; // 1 ~ 12
 const DAY_REGEX = /^(0[1-9]|[1-9]|[1-2][0-9]|3[01])$/; // 1 ~ 31
 
 function RegisterBirthday() {
   const [year, setYear] = useState('');
   const [month, setMonth] = useState('');
   const [day, setDay] = useState('');
-  const [isValidYear, setIsValidYear] = useState(true);
-  const [yearFocus, setYearFocus] = useState(true);
-  const [isValidMonth, setIsValidMonth] = useState(true);
-  const [monthFocus, setMonthFocus] = useState(true);
-  const [isValidDay, setIsValidDay] = useState(true);
-  const [dayFocus, setDayFocus] = useState(true);
+  const [isValidYear, setIsValidYear] = useState(false);
+  const [isValidMonth, setIsValidMonth] = useState(false);
+  const [isValidDay, setIsValidDay] = useState(false);
+  const [yearFocus, setYearFocus] = useState(false);
+  const [monthFocus, setMonthFocus] = useState(false);
+  const [dayFocus, setDayFocus] = useState(false);
 
   function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
     setYear(e.target.value.slice(0, 4));
@@ -33,14 +33,22 @@ function RegisterBirthday() {
     setDay(e.target.value.slice(0, 2));
   }
 
+  const monthInputRef = useRef<HTMLInputElement>(null);
+  const dayInputRef = useRef<HTMLInputElement>(null);
+
+  // 형식에 맞는 input이 입려되면 바로 focus 이동
   useEffect(() => {
-    console.log(year.length);
-    console.log(year);
     setIsValidYear(YEAR_REGEX.test(year));
-  }, [year]);
+    if (YEAR_REGEX.test(year) === true) {
+      monthInputRef.current!.focus();
+    }
+  }, [year, isValidYear]);
   useEffect(() => {
     setIsValidMonth(MONTH_REGEX.test(month));
-  }, [month]);
+    if (MONTH_REGEX.test(month) === true && parseInt(month) >= 2) {
+      dayInputRef.current!.focus();
+    }
+  }, [month, isValidMonth]);
   useEffect(() => {
     setIsValidDay(DAY_REGEX.test(day));
   }, [day]);
@@ -81,7 +89,6 @@ function RegisterBirthday() {
 
   return (
     <Wrapper>
-      {/* <button onClick={test}>test</button> */}
       <span>생년월일을 입력해요</span>
       <form onSubmit={handleSubmit}>
         <InputWrapper>
@@ -111,6 +118,7 @@ function RegisterBirthday() {
             onBlur={() => setMonthFocus(false)}
             autoComplete="off"
             postfix="월"
+            ref={monthInputRef}
           />
           <InputForm
             placeholder="01"
@@ -124,6 +132,7 @@ function RegisterBirthday() {
             onBlur={() => setDayFocus(false)}
             autoComplete="off"
             postfix="일"
+            ref={dayInputRef}
           />
         </InputWrapper>
         <DummyButton type="submit" />
