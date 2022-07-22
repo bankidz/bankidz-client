@@ -1,7 +1,7 @@
 import ContractSheet from '@components/common/bottomSheet/ContractSheet';
 import Signature from '@components/common/bottomSheet/sheetContent/Signature';
 import Modals, { modals } from '@components/common/modal/Modals';
-import useAxiosPrivate from '@hooks/api/useAxiosPrivate';
+import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import useBottomSheet from '@hooks/useBottomSheet';
 import useModals from '@hooks/useModals';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';

@@ -26,10 +26,10 @@ const Wrapper = styled.div<{ isSuggesting: boolean }>`
   ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
   color: ${({ theme, isSuggesting }) =>
     isSuggesting
-      ? theme.palette.sementic.red300
-      : theme.palette.greyScale.grey600};
+      ? theme.palette.greyScale.grey600
+      : theme.palette.sementic.red300};
   background-color: ${({ theme, isSuggesting }) =>
     isSuggesting
-      ? theme.palette.sementic.red100
-      : theme.palette.greyScale.grey200};
+      ? theme.palette.greyScale.grey200
+      : theme.palette.sementic.red100};
 `;

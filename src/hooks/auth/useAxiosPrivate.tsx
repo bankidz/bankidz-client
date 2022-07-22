@@ -44,7 +44,7 @@ function useAxiosPrivate() {
     };
   }, [accessToken, refresh]);
 
-  return axiosPrivateInstance; // return instance including interceptors
+  return axiosPrivateInstance; // return instance applied interceptors
 }
 
 export default useAxiosPrivate;

@@ -1,16 +1,16 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import QuaternaryModal from './QuaternaryModal';
+import SenaryModal from './SenaryModal';
 
 export default {
-  title: '모달/QuaternaryModal',
-  component: QuaternaryModal,
+  title: '모달/SenaryModal',
+  component: SenaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },
   },
-} as ComponentMeta<typeof QuaternaryModal>;
+} as ComponentMeta<typeof SenaryModal>;
 
-const Template: ComponentStory<typeof QuaternaryModal> = (args) => (
-  <QuaternaryModal {...args} />
+const Template: ComponentStory<typeof SenaryModal> = (args) => (
+  <SenaryModal {...args} />
 );
 
 export const 에어팟_사기 = Template.bind({});
@@ -23,4 +23,5 @@ export const 에어팟_사기 = Template.bind({});
   totalPrice: 150000,
   weekPrice: 10000,
   weeks: 15,
+  comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
 };

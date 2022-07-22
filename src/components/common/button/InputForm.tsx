@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
@@ -19,22 +19,23 @@ interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   postfix?: '년' | '월' | '일';
 }
 
-function InputForm({
-  placeholder,
-  value,
-  onChange,
-  error,
-  readonly = false,
-  sheetOpen = false,
-  postfix,
-  autoFocus = false,
-  bigFontSize = false,
-  ...props
-}: InputFormProps) {
+function InputForm(
+  {
+    placeholder,
+    value,
+    onChange,
+    error,
+    readonly = false,
+    sheetOpen = false,
+    postfix,
+    ...props
+  }: InputFormProps,
+  ref: any,
+) {
   return (
     <Wrapper value={value} postfix={postfix}>
       <InputBox
-        type={'text'}
+        // type={'text'}
         placeholder={placeholder}
         onChange={onChange}
         value={value}
@@ -42,8 +43,7 @@ function InputForm({
         sheetOpen={sheetOpen}
         readOnly={readonly}
         postfix={postfix}
-        bigFontSize={bigFontSize}
-        autoFocus={autoFocus}
+        ref={ref}
         {...props}
       />
       {postfix && <p>{postfix}</p>}
@@ -51,7 +51,7 @@ function InputForm({
   );
 }
 
-export default InputForm;
+export default forwardRef(InputForm);
 
 const Wrapper = styled.div<{
   value: string | number;

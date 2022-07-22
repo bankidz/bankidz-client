@@ -1,8 +1,21 @@
 import { axiosPublic } from '@lib/api/axios';
+import { TRequestStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-import { IAuth, IBirthDay, IRole, TAuthState } from './authTypes';
+
+export type TAuthState = {
+  auth: {
+    accessToken: string | null;
+    isKid: boolean | null;
+    level: 1 | 2 | 3 | 4 | 5 | null;
+    birthday: string | null;
+    isFemale: boolean | null;
+    phone: string | null;
+    username: string | null;
+  };
+  authRequestStatus: TRequestStatus;
+};
 
 // 김원진: 규진의 엄마
 const initialState: TAuthState = {
@@ -11,11 +24,12 @@ const initialState: TAuthState = {
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4MDM1ODc2LCJzdWIiOiIyIiwiZXhwIjoxNjYwNDU1MDc2LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.KXzamQgcDWrLw3MAkPzewQI_hK9NCzGa3z8GcLeH-p8',
     // accessToken: null,
     // isKid: true,
-    isKid: true,
-    isFemale: null,
+    isKid: false,
+    level: null,
     birthday: null,
-    username: null,
+    isFemale: null,
     phone: null,
+    username: null,
   },
   authRequestStatus: 'idle', // for GET method
 };
@@ -38,61 +52,70 @@ export const register = createAsyncThunk(
   async (thunkPayload: {
     axiosPrivate: AxiosInstance;
     birthday: string | null;
-    isKid: boolean | null;
     isFemale: boolean | null;
+    isKid: boolean | null;
   }) => {
-    const { axiosPrivate, birthday, isKid, isFemale } = thunkPayload;
+    console.log(thunkPayload);
+    const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
     const response = await axiosPrivate.patch('/user', {
       birthday,
-      isKid,
       isFemale,
+      isKid,
     });
     return response.data;
   },
 );
+
+interface IAuth {
+  accessToken: string | null;
+  isKid: boolean | null;
+  level: 1 | 2 | 3 | 4 | 5 | null;
+}
+interface IBirthDay {
+  birthday: string;
+}
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<IAuth>) => {
-      const { accessToken, isKid } = action.payload;
+      const { accessToken, isKid, level } = action.payload;
       state.auth.accessToken = accessToken;
       state.auth.isKid = isKid;
+      state.auth.level = level;
     },
     resetCredentials: (state) => {
       state.auth.accessToken = null;
       state.auth.isKid = null;
+      state.auth.level = null;
     },
     setBirthday: (state, action: PayloadAction<IBirthDay>) => {
       const { birthday } = action.payload;
       state.auth.birthday = birthday;
     },
-    setRole: (state, action: PayloadAction<IRole>) => {
-      const { isKid, isFemale } = action.payload;
-      state.auth.isKid = isKid;
-      state.auth.isFemale = isFemale;
-    },
   },
   extraReducers(builder) {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        const { accessToken, isKid } = action.payload.data;
+        const { accessToken, isKid, level } = action.payload.data;
         state.auth.accessToken = accessToken;
         state.auth.isKid = isKid;
+        state.auth.level = level;
       })
       .addCase(register.fulfilled, (state, action) => {
-        const { username, isFemale, isKid, birthday, phone } = action.payload;
-        state.auth.accessToken = username;
+        const { birthday, isFemale, isKid, phone, username } =
+          action.payload.data;
+        state.auth.birthday = birthday;
         state.auth.isFemale = isFemale;
         state.auth.isKid = isKid;
-        state.auth.birthday = birthday;
         state.auth.phone = phone;
+        state.auth.username = username;
       });
   },
 });
 
-export const { setCredentials, resetCredentials, setBirthday, setRole } =
+export const { setCredentials, resetCredentials, setBirthday } =
   authSlice.actions;
 
 export const selectAccessToken = (state: RootState) =>

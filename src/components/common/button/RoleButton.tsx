@@ -19,7 +19,7 @@ function RoleButton({
 }: RoleButtonProps) {
   const [fillColorByMouseEvent, setFillColorByMouseEvent] = useState('white');
   const [strokeColorByMouseEvent, setStrokeColorByMouseEvent] =
-    useState('white');
+    useState('#FFF6D2'); // main yellow 100
 
   function handleMouseOver() {
     setFillColorByMouseEvent(theme.palette.main.yellow100);
