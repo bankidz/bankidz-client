@@ -19,7 +19,6 @@ interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   postfix?: '년' | '월' | '일';
 }
 
-<<<<<<< HEAD
 function InputForm(
   {
     placeholder,
@@ -33,20 +32,6 @@ function InputForm(
   }: InputFormProps,
   ref: any,
 ) {
-=======
-function InputForm({
-  placeholder,
-  value,
-  onChange,
-  error,
-  readonly = false,
-  sheetOpen = false,
-  postfix,
-  autoFocus = false,
-  bigFontSize = false,
-  ...props
-}: InputFormProps) {
->>>>>>> dev
   return (
     <Wrapper value={value} postfix={postfix}>
       <InputBox
@@ -58,12 +43,7 @@ function InputForm({
         sheetOpen={sheetOpen}
         readOnly={readonly}
         postfix={postfix}
-<<<<<<< HEAD
         ref={ref}
-=======
-        bigFontSize={bigFontSize}
-        autoFocus={autoFocus}
->>>>>>> dev
         {...props}
       />
       {postfix && <p>{postfix}</p>}
