@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import ReactModal from 'react-modal';
-import { calcRatio } from '@lib/styles/theme';
+import { calcRatio, theme } from '@lib/styles/theme';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
@@ -81,7 +81,7 @@ function SenaryModal({
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
       <Content>
-        <PerforatedLineTop />
+        <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top>
           <SuggestBadge isSuggesting={false} />
           <span className="body">{title}</span>
@@ -92,16 +92,16 @@ function SenaryModal({
           <VerticalDashedBorder />
         </div>
         <div className="first-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
         <div className="second-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
         <div className="third-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
         <div className="fourth-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
 
         <Bottom>
@@ -162,7 +162,7 @@ function SenaryModal({
           <div className="header">부모님의 한줄평</div>
           <div className="body">{comment}</div>
         </Comment>
-        <PerforatedLineBottom />
+        <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <CheckButtonPositioner>
           <Button
             onClick={handleSubmit}
@@ -214,6 +214,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .second-horizontal-dashed-border-wrapper {
     z-index: 10;
@@ -228,6 +230,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .third-horizontal-dashed-border-wrapper {
     z-index: 10;
@@ -242,6 +246,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .fourth-horizontal-dashed-border-wrapper {
     z-index: 10;
@@ -256,6 +262,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 

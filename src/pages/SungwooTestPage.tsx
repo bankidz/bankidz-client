@@ -3,7 +3,7 @@ import Modals, { modals } from '../components/common/modal/Modals';
 import 'swiper/swiper.min.css';
 import useModals from '@hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
-// import Receipt from '@components/common/Receipt';
+import Receipt from '@components/common/Receipt';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -22,7 +22,7 @@ function SungwooTestPage() {
   return (
     <Wrapper>
       <MarginTemplate>
-        {/* <Receipt
+        <Receipt
           createdAt="2022-07-05 05:05:05"
           interestRate={30}
           isMom={true}
@@ -30,7 +30,7 @@ function SungwooTestPage() {
           totalPrice={150000}
           weekPrice={10000}
           weeks={15}
-        /> */}
+        />
       </MarginTemplate>
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
@@ -40,7 +40,9 @@ function SungwooTestPage() {
 
 export default SungwooTestPage;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  background: red;
+`;
 
 // https://joyful-development.tistory.com/35
 // https://velog.io/@sohee-k/React-TypeScript-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Swiper-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0image-slider-library

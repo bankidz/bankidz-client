@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import { calcRatio } from '@lib/styles/theme';
+import { calcRatio, theme } from '@lib/styles/theme';
 import CheckButton from '../../button/CheckButton';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
@@ -78,7 +78,7 @@ function QuaternaryModal({
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
       <Content>
-        <PerforatedLineTop />
+        <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top>
           <span className="header">계약서 전송 성공!</span>
           <span className="body">{title}</span>
@@ -89,13 +89,13 @@ function QuaternaryModal({
           <VerticalDashedBorder />
         </div>
         <div className="first-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
         <div className="second-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
         <div className="third-horizontal-dashed-border-wrapper">
-          <HorizontalDashedBorder />
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
 
         <Bottom>
@@ -152,7 +152,7 @@ function QuaternaryModal({
 
           <SignatureWrapper>대충 서명</SignatureWrapper>
         </Bottom>
-        <PerforatedLineBottom />
+        <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <CheckButtonPositioner>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonPositioner>
@@ -199,6 +199,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .second-horizontal-dashed-border-wrapper {
     z-index: 10;
@@ -213,6 +215,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
   .third-horizontal-dashed-border-wrapper {
     z-index: 10;
@@ -227,6 +231,8 @@ const Content = styled.div`
 
     width: 100%;
     height: 3px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 

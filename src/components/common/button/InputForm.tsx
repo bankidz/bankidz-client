@@ -35,7 +35,7 @@ function InputForm(
   return (
     <Wrapper value={value} postfix={postfix}>
       <InputBox
-        type={'text'}
+        // type={'text'}
         placeholder={placeholder}
         onChange={onChange}
         value={value}

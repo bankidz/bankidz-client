@@ -1,12 +1,12 @@
-<svg width="292" height="2" viewBox="0 0 292 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="30" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="60" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="90" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="120" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="150" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="180" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="210" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="240" width="22" height="2" rx="1" fill="#FAFAFC"/>
-<rect x="270" width="22" height="2" rx="1" fill="#FAFAFC"/>
+<svg width="100%" height="100%" viewBox="0 0 292 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="22" height="2" rx="1" fill="current"/>
+<rect x="30" width="22" height="2" rx="1" fill="current"/>
+<rect x="60" width="22" height="2" rx="1" fill="current"/>
+<rect x="90" width="22" height="2" rx="1" fill="current"/>
+<rect x="120" width="22" height="2" rx="1" fill="current"/>
+<rect x="150" width="22" height="2" rx="1" fill="current"/>
+<rect x="180" width="22" height="2" rx="1" fill="current"/>
+<rect x="210" width="22" height="2" rx="1" fill="current"/>
+<rect x="240" width="22" height="2" rx="1" fill="current"/>
+<rect x="270" width="22" height="2" rx="1" fill="current"/>
 </svg>
