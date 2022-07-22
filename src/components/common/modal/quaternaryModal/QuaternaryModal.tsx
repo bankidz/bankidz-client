@@ -129,11 +129,13 @@ function PrimaryModal({
           <div className="second-row">
             <div className="목표저금액">
               <div className="title">목표 저금액</div>
-              <div className="content">{totalPrice}</div>
+              <div className="content">
+                {totalPrice.toLocaleString('ko-KR')}
+              </div>
             </div>
             <div className="매주저금액">
               <div className="title">매주 저금액</div>
-              <div className="content">{weekPrice}</div>
+              <div className="content">{weekPrice.toLocaleString('ko-KR')}</div>
             </div>
             <div className="이자부스터">
               <div className="title">이자부스터</div>
