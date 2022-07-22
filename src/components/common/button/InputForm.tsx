@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {

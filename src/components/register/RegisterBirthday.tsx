@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useInputs from '@hooks/useInputs';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
@@ -13,12 +13,9 @@ const MONTH_REGEX = /^(0[0-9]|[0-9]|1[0-2])$/; // 1 ~ 12
 const DAY_REGEX = /^(0[1-9]|[1-9]|[1-2][0-9]|3[01])$/; // 1 ~ 31
 
 function RegisterBirthday() {
-  const [{ year, month, day }, onChange, reset] = useInputs({
-    year: '',
-    month: '',
-    day: '',
-  });
-
+  const [year, setYear] = useState('');
+  const [month, setMonth] = useState('');
+  const [day, setDay] = useState('');
   const [isValidYear, setIsValidYear] = useState(true);
   const [yearFocus, setYearFocus] = useState(true);
   const [isValidMonth, setIsValidMonth] = useState(true);
@@ -26,7 +23,19 @@ function RegisterBirthday() {
   const [isValidDay, setIsValidDay] = useState(true);
   const [dayFocus, setDayFocus] = useState(true);
 
+  function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setYear(e.target.value.slice(0, 4));
+  }
+  function handleMonthChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setMonth(e.target.value.slice(0, 2));
+  }
+  function handleDayChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setDay(e.target.value.slice(0, 2));
+  }
+
   useEffect(() => {
+    console.log(year.length);
+    console.log(year);
     setIsValidYear(YEAR_REGEX.test(year));
   }, [year]);
   useEffect(() => {
@@ -59,7 +68,9 @@ function RegisterBirthday() {
       console.error('자바스크립트 해킹이 감지되었습니다.');
       return;
     }
-    reset();
+    setYear('');
+    setMonth('');
+    setDay('');
     dispatch(setBirthday({ birthday: preprocess(year, month, day) }));
     navigate('/register/2');
   }
@@ -70,15 +81,15 @@ function RegisterBirthday() {
 
   return (
     <Wrapper>
+      {/* <button onClick={test}>test</button> */}
       <span>생년월일을 입력해요</span>
       <form onSubmit={handleSubmit}>
         <InputWrapper>
           <InputForm
-            // @ts-expect-error
-            name="year"
             placeholder="2000"
-            onChange={onChange}
+            onChange={handleYearChange}
             value={year}
+            // @ts-expect-error
             error={year && !isValidYear}
             autoFocus
             type="number"
@@ -89,11 +100,10 @@ function RegisterBirthday() {
             postfix="년"
           />
           <InputForm
-            // @ts-expect-error
-            name="month"
             placeholder="01"
-            onChange={onChange}
+            onChange={handleMonthChange}
             value={month}
+            // @ts-expect-error
             error={month && !isValidMonth}
             type="number"
             required
@@ -103,11 +113,10 @@ function RegisterBirthday() {
             postfix="월"
           />
           <InputForm
-            // @ts-expect-error
-            name="day"
             placeholder="01"
-            onChange={onChange}
+            onChange={handleDayChange}
             value={day}
+            // @ts-expect-error
             error={day && !isValidDay}
             type="number"
             required
@@ -171,3 +180,6 @@ const DummyButton = styled.button`
 // https://regexland.com/regex-dates/
 // https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s04.html
 // https://whackur.tistory.com/148
+
+// https://velog.io/@leyuri/TIL-input-%EC%97%90%EC%84%9C-%EC%9E%85%EB%A0%A5-%EA%B8%80%EC%9E%90%EC%88%98-%EC%A0%9C%ED%95%9C%ED%95%98%EB%8A%94-2%EA%B0%80%EC%A7%80-%EB%B0%A9%EB%B2%95
+// https://bobbyhadz.com/blog/react-input-character-limit
