@@ -13,4 +13,14 @@ const Template: ComponentStory<typeof QuaternaryModal> = (args) => (
   <QuaternaryModal {...args} />
 );
 
-export const 완구퍼펙트걸_되기 = Template.bind({});
+export const 에어팟_사기 = Template.bind({});
+에어팟_사기.args = {
+  createdAt: '2022-07-05 05:05:05',
+  interestRate: 30,
+  isMom: true,
+  itemName: '전자제품',
+  title: '에어팟 사기',
+  totalPrice: 150000,
+  weekPrice: 10000,
+  weeks: 15,
+};

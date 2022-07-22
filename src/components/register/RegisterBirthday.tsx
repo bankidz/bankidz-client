@@ -192,3 +192,4 @@ const DummyButton = styled.button`
 
 // https://velog.io/@leyuri/TIL-input-%EC%97%90%EC%84%9C-%EC%9E%85%EB%A0%A5-%EA%B8%80%EC%9E%90%EC%88%98-%EC%A0%9C%ED%95%9C%ED%95%98%EB%8A%94-2%EA%B0%80%EC%A7%80-%EB%B0%A9%EB%B2%95
 // https://bobbyhadz.com/blog/react-input-character-limit
+// https://www.daleseo.com/react-forward-ref/

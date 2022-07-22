@@ -7,20 +7,10 @@ import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizon
 import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-
+import { TItemName } from '@lib/types/kid';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
 import { renderItemIllust } from '@lib/utils/kid';
-
-// mock data
-const isMom = false;
-const title = '완구퍼펙트걸 되기';
-const interestRate = 10;
-const totalPrice = 30000;
-const weekPrice = 1500;
-const weeks = 10;
-const createdAt = '2022-07-12 03:08:07';
-const itemName = '학용품';
 
 interface PrimaryModalProps {
   /**
@@ -28,10 +18,28 @@ interface PrimaryModalProps {
    * useModals hook에 의해 반환 됩니다.
    * */
   onSubmit?: any;
+  createdAt: string;
+  interestRate: number;
+  isMom: boolean;
+  itemName: TItemName;
+  title: string;
+  totalPrice: number;
+  weekPrice: number;
+  weeks: number;
 }
 
 // 모달 내부에 표시될 UI 작성
-function PrimaryModal({ onSubmit }: PrimaryModalProps) {
+function PrimaryModal({
+  onSubmit,
+  createdAt = '2022-07-05 05:05:05',
+  interestRate = 30,
+  isMom = true,
+  itemName = '전자제품',
+  title = '에어팟 사기',
+  totalPrice = 150000,
+  weekPrice = 10000,
+  weeks = 15,
+}: PrimaryModalProps) {
   const reactModalParams = {
     isOpen: true,
     style: {
@@ -106,8 +114,7 @@ function PrimaryModal({ onSubmit }: PrimaryModalProps) {
               <div className="text-wrapper">
                 <div className="title">계약대상</div>
                 <div className="content">
-                  {/* @ts-expect-error */}
-                  {isMom === 'true' ? '엄마' : '아빠'}
+                  {isMom === true ? '엄마' : '아빠'}
                 </div>
               </div>
             </div>
@@ -329,6 +336,8 @@ const Bottom = styled.div`
           margin-bottom: 8px;
         }
         .content {
+          width: 65px;
+          text-align: center;
           ${({ theme }) => theme.typo.button.InnerText_T_15_EB};
           color: ${({ theme }) => theme.palette.greyScale.grey700};
         }
