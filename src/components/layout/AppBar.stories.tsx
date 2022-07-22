@@ -19,7 +19,13 @@ export default {
 
 const Template: ComponentStory<typeof AppBar> = (args) => <AppBar {...args} />;
 
-export const 내_정보_수정 = Template.bind({});
-내_정보_수정.args = {
+export const 돈길_계약하기 = Template.bind({});
+돈길_계약하기.args = {
   label: '내정보 수정',
+};
+
+export const 걷고있는_돈길 = Template.bind({});
+걷고있는_돈길.args = {
+  label: '내정보 수정',
+  level: 5,
 };
