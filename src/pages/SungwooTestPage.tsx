@@ -5,13 +5,14 @@ import useModals from '@hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Receipt from '@components/common/Receipt';
 import LevelBadge from '@components/common/badges/LevelBadge';
+import WalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoad';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.primaryModal, {
+    openModal(modals.quaternaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -22,20 +23,18 @@ function SungwooTestPage() {
   }
   return (
     <Wrapper>
-      <LevelBadge level={1} />
-      <LevelBadge level={2} />
-      <LevelBadge level={3} />
-      <LevelBadge level={4} />
-      <LevelBadge level={5} />
-      <button onClick={handleClick}>모달 열기</button>
-      <Modals />
+      <WalkingMoneyRoad />
+      {/* <button onClick={handleClick}>모달 열기</button>
+      <Modals /> */}
     </Wrapper>
   );
 }
 
 export default SungwooTestPage;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  background: pink;
+`;
 
 // https://joyful-development.tistory.com/35
 // https://velog.io/@sohee-k/React-TypeScript-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Swiper-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0image-slider-library
