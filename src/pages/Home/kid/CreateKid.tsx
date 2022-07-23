@@ -44,14 +44,9 @@ function CreateKid() {
   useEffect(() => {
     async function fetchData() {
       try {
-<<<<<<< HEAD
-        const response = await axiosPrivate.get('/family');
-        const responseData: IFamilyState[] = response.data.data.familyUserList;
-=======
         //const response = await axiosPrivate.get('/family');
         //const responseData: TFamilyState[] = response.data.data.familyUserList;
         const responseData = await getFamily();
->>>>>>> dev
         const parents = responseData.filter((v) => v.isKid === false);
         if (parents.length === 1) {
           dispatch(dispatchParent(parents[0].isFemale));
