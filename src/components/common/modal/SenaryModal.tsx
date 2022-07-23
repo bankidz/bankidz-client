@@ -55,7 +55,7 @@ function SenaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '670px',
+        height: '645px',
         position: 'absolute',
         // top: '5vh',
         top: '50vh',

@@ -7,7 +7,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/kid/create/content/Step3';
 import Step4 from '@components/kid/create/content/Step4';
 import { useEffect, useState } from 'react';
-import { TFamilyState } from '@lib/types/family';
+import { IFamilyState } from '@lib/types/family';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import Step5 from '@components/kid/create/content/Step5';
 import { useAppDispatch } from '@store/app/hooks';
@@ -26,7 +26,7 @@ const title = [
 
 function CreateKid() {
   const { step } = useParams();
-  const [parents, setParents] = useState<TFamilyState[]>();
+  const [parents, setParents] = useState<IFamilyState[]>();
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useAppDispatch();
 
@@ -43,7 +43,7 @@ function CreateKid() {
     async function fetchData() {
       try {
         const response = await axiosPrivate.get('/family');
-        const responseData: TFamilyState[] = response.data.data.familyUserList;
+        const responseData: IFamilyState[] = response.data.data.familyUserList;
         const parents = responseData.filter((v) => v.isKid === false);
         if (parents.length === 1) {
           dispatch(dispatchParent(parents[0].isFemale));

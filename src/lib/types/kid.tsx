@@ -1,9 +1,7 @@
-export type TRole = '엄마' | '아빠' | '아들' | '딸';
-
-export type TRoleDependency = {
+export interface IRoleDependency {
   isKid: boolean | null;
   isFemale: boolean | null;
-};
+}
 
 export type TItemName =
   | '학용품'
