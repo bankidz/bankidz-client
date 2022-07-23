@@ -19,23 +19,6 @@ function RegisterPage() {
 
   const refresh = useRefreshToken();
 
-  async function handleClick() {
-    try {
-      const response = await axiosPublic.patch('/user/refresh');
-      console.log('response.data in handleClick:', response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function handleClickHook() {
-    try {
-      await refresh();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <>
       <ForegroundTemplate label="">
@@ -44,9 +27,6 @@ function RegisterPage() {
           {currentStep === 2 && <RegisterRole />}
         </MarginTemplate>
       </ForegroundTemplate>
-      {/* TODO: test code */}
-      <button onClick={handleClick}>토큰 리프레시 테스트 일반</button>
-      <button onClick={handleClickHook}>토큰 리프레시 테스트 훅</button>
     </>
   );
 }

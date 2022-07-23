@@ -28,9 +28,6 @@ function PersistLogin() {
     return () => (isMounted = false);
   }, []);
 
-  console.log(persist);
-  console.log('aT in PersistLogin: ', accessToken);
-
   return (
     <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
   );
