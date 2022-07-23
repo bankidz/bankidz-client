@@ -119,7 +119,8 @@ const StyledButton = styled.button<{
 
     span {
       width: 100%;
-      ${({ theme }) => theme.typo.button.InnerText_T_15_EB}
+      ${({ theme }) => theme.typo.button.InnerText_T_15_EB};
+      color: ${({ theme }) => theme.palette.greyScale.grey700};
     }
   }
 `;

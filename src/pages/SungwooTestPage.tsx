@@ -10,7 +10,7 @@ function SungwooTestPage() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.senaryModal, {
+    openModal(modals.primaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -21,7 +21,7 @@ function SungwooTestPage() {
   }
   return (
     <Wrapper>
-      <MarginTemplate>
+      {/* <MarginTemplate>
         <Receipt
           createdAt="2022-07-05 05:05:05"
           interestRate={30}
@@ -31,18 +31,16 @@ function SungwooTestPage() {
           weekPrice={10000}
           weeks={15}
         />
-      </MarginTemplate>
-      {/* <button onClick={handleClick}>모달 열기</button>
-      <Modals /> */}
+      </MarginTemplate> */}
+      <button onClick={handleClick}>모달 열기</button>
+      <Modals />
     </Wrapper>
   );
 }
 
 export default SungwooTestPage;
 
-const Wrapper = styled.div`
-  background: red;
-`;
+const Wrapper = styled.div``;
 
 // https://joyful-development.tistory.com/35
 // https://velog.io/@sohee-k/React-TypeScript-%ED%99%98%EA%B2%BD%EC%97%90%EC%84%9C-Swiper-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0image-slider-library

@@ -31,7 +31,9 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
       content: {
         height: '568px',
         position: 'absolute',
-        top: '13vh',
+        // top: '13vh',
+        top: '50vh',
+        transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',
@@ -86,7 +88,7 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
           </SwiperSlide>
           <SwiperSlide>
             <InstructionCard
-              headerText="아지율이란?"
+              headerText="이자율이란?"
               bodyText={`전체 맡긴 돈 중에 이자가\n얼마나 차지하는 지를 나태내는 말\n\n예를 들어 20%의 이자율을 주는\n은행이라면 내가 100만원을 저금했을 때\n20만원의 지아를 받을 수 있어요`}
               currentCardIdx={currentCardIdx}
             >
