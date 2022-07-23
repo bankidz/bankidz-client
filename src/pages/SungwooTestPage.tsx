@@ -4,6 +4,7 @@ import 'swiper/swiper.min.css';
 import useModals from '@hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Receipt from '@components/common/Receipt';
+import LevelBadge from '@components/common/badges/LevelBadge';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -21,17 +22,11 @@ function SungwooTestPage() {
   }
   return (
     <Wrapper>
-      {/* <MarginTemplate>
-        <Receipt
-          createdAt="2022-07-05 05:05:05"
-          interestRate={30}
-          isMom={true}
-          itemName="전자제품"
-          totalPrice={150000}
-          weekPrice={10000}
-          weeks={15}
-        />
-      </MarginTemplate> */}
+      <LevelBadge level={1} />
+      <LevelBadge level={2} />
+      <LevelBadge level={3} />
+      <LevelBadge level={4} />
+      <LevelBadge level={5} />
       <button onClick={handleClick}>모달 열기</button>
       <Modals />
     </Wrapper>
