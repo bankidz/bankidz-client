@@ -17,7 +17,7 @@ function OAuthRedirectHandler() {
     async function processLogin() {
       try {
         await dispatch(login({ code })).unwrap();
-        navigate('/');
+        navigate('/register/1');
       } catch (error: any) {
         console.error(error.message);
       }
