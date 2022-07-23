@@ -4,13 +4,15 @@ import 'swiper/swiper.min.css';
 import useModals from '@hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Receipt from '@components/common/Receipt';
+import LevelBadge from '@components/common/badges/LevelBadge';
+import WalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoad';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.senaryModal, {
+    openModal(modals.quaternaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -21,17 +23,7 @@ function SungwooTestPage() {
   }
   return (
     <Wrapper>
-      <MarginTemplate>
-        <Receipt
-          createdAt="2022-07-05 05:05:05"
-          interestRate={30}
-          isMom={true}
-          itemName="전자제품"
-          totalPrice={150000}
-          weekPrice={10000}
-          weeks={15}
-        />
-      </MarginTemplate>
+      <WalkingMoneyRoad />
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
     </Wrapper>
@@ -41,7 +33,7 @@ function SungwooTestPage() {
 export default SungwooTestPage;
 
 const Wrapper = styled.div`
-  background: red;
+  background: pink;
 `;
 
 // https://joyful-development.tistory.com/35

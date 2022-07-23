@@ -53,9 +53,11 @@ function QuinaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '580px',
+        height: '570px',
         position: 'absolute',
-        top: '13vh',
+        // top: '13vh',
+        top: '50vh',
+        transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

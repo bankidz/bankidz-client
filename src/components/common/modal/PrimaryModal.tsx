@@ -39,7 +39,9 @@ function PrimaryModal({
       content: {
         height: '488px',
         position: 'absolute',
-        top: '19vh',
+        // top: '19vh',
+        top: '50vh',
+        transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

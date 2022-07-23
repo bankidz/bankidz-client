@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Button from '@components/common/button/Button';
-import { TRoleDependency } from '@lib/types/kid';
+import { IRoleDependency } from '@lib/types/kid';
 import { renderRoleIllust, renderRoleText } from '@lib/utils/kid';
 import { HTMLAttributes } from 'react';
 
