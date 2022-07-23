@@ -24,20 +24,15 @@ function PersistLogin() {
       }
     };
     // verify only on refresh
-    accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
+    !accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
     return () => (isMounted = false);
   }, []);
 
+  console.log(persist);
+  console.log('aT in PersistLogin: ', accessToken);
+
   return (
-    <>
-      {!persist ? (
-        <Outlet />
-      ) : isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <Outlet />
-      )}
-    </>
+    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
   );
 }
 
