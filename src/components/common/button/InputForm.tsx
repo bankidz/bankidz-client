@@ -2,9 +2,9 @@ import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
-  placeholder: string;
+  //placeholder: string;
   value: string | number;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  //onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /* 유효성 검사 후 조건에 따라 빨간색 테두리로 나타납니다  */
   error: boolean;
   /* 바텀시트를 사용하는 경우에 true */
@@ -28,6 +28,8 @@ function InputForm(
     readonly = false,
     sheetOpen = false,
     postfix,
+    autoFocus = false,
+    bigFontSize = false,
     ...props
   }: InputFormProps,
   ref: any,
@@ -35,8 +37,6 @@ function InputForm(
   return (
     <Wrapper value={value} postfix={postfix}>
       <InputBox
-        // type={'text'}
-        placeholder={placeholder}
         onChange={onChange}
         value={value}
         error={error}
@@ -44,6 +44,8 @@ function InputForm(
         readOnly={readonly}
         postfix={postfix}
         ref={ref}
+        autoFocus={autoFocus}
+        bigFontSize={bigFontSize}
         {...props}
       />
       {postfix && <p>{postfix}</p>}

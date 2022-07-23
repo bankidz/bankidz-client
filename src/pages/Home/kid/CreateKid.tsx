@@ -12,6 +12,7 @@ import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import Step5 from '@components/kid/create/content/Step5';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';
+import { kidMock } from '@lib/mocks/kid';
 
 const title = [
   '누구와 계약하나요?',
@@ -29,6 +30,7 @@ function CreateKid() {
   const [parents, setParents] = useState<TFamilyState[]>();
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useAppDispatch();
+  const { getFamily } = kidMock(1);
 
   const getTypedStep = (parsedStep: number) => {
     if (step && parsedStep > 0 && parsedStep <= 5) {
@@ -42,8 +44,9 @@ function CreateKid() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axiosPrivate.get('/family');
-        const responseData: TFamilyState[] = response.data.data.familyUserList;
+        //const response = await axiosPrivate.get('/family');
+        //const responseData: TFamilyState[] = response.data.data.familyUserList;
+        const responseData = await getFamily();
         const parents = responseData.filter((v) => v.isKid === false);
         if (parents.length === 1) {
           dispatch(dispatchParent(parents[0].isFemale));

@@ -97,7 +97,7 @@ function Step3({ currentStep }: { currentStep: number }) {
         <InputForm
           placeholder="돈길 이름을 입력하세요"
           value={form.contractName}
-          onChange={(e) => {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setForm({ ...form, contractName: e.target.value });
           }}
           onBlur={() => {
