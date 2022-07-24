@@ -118,11 +118,15 @@ export const authSlice = createSlice({
 export const { setCredentials, resetCredentials, setBirthday } =
   authSlice.actions;
 
+export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
   state.auth.auth.accessToken;
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
-export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
+export const selectLevel = (state: RootState) => state.auth.auth.level;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
+export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
+export const selectPhone = (state: RootState) => state.auth.auth.phone;
+export const selectUsername = (state: RootState) => state.auth.auth.username;
 
 export default authSlice.reducer;
 

@@ -29,7 +29,15 @@ function PersistLogin() {
   }, []);
 
   return (
-    <>{!persist ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}</>
+    <>
+      {!persist ? (
+        <Outlet />
+      ) : isLoading ? (
+        <p>자동 로그인 처리중입니다...</p>
+      ) : (
+        <Outlet />
+      )}
+    </>
   );
 }
 

@@ -16,9 +16,6 @@ function RegisterPage() {
     }
   }
   const currentStep = getValidCurrentStep(parseInt(step!));
-
-  const refresh = useRefreshToken();
-
   return (
     <>
       <ForegroundTemplate label="">
