@@ -1,6 +1,6 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
 import { TMoneyRoadStatus } from '@lib/types/kid';
-import { getDate } from '@lib/utils/common';
+import { getDate } from '@lib/utils/common/getDate';
 import styled from 'styled-components';
 
 interface ChallengeItemProps {

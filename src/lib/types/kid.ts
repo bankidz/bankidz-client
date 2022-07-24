@@ -19,3 +19,9 @@ export type TItemName =
 
 // 0: rejected / 1: pending / 2: succeeded
 export type TMoneyRoadStatus = 0 | 1 | 2;
+
+export interface IFamilyState {
+  username: string;
+  isFemale: boolean;
+  isKid: boolean;
+}

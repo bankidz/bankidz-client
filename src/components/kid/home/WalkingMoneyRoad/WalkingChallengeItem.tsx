@@ -1,5 +1,5 @@
 import { TItemName } from '@lib/types/kid';
-import { renderItemIllust } from '@lib/utils/kid';
+import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
 import styled from 'styled-components';
 
 interface ChallengeItemProps {

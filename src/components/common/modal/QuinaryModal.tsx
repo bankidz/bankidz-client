@@ -6,12 +6,12 @@ import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
-import { renderItemIllust } from '@lib/utils/kid';
 import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import CheckButton from '../button/CheckButton';
-import { getContractEndDate } from '@lib/utils/common';
+import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
+import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
 
 interface QuinaryModalProps {
   /**
