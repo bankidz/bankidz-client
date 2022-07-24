@@ -26,7 +26,13 @@ function RangeInput({
   );
 
   useEffect(() => {
-    form && setForm && setForm({ ...form, weekPrice: value });
+    if (totalPrice < 100000) {
+      form && setForm && setForm({ ...form, weekPrice: value });
+    } else {
+      const roundedValue = Math.min(max, value + (value % 1000));
+      console.log(roundedValue);
+      form && setForm && setForm({ ...form, weekPrice: roundedValue });
+    }
   }, [value]);
 
   const percent = ((value - min) * 100) / (max - min);
