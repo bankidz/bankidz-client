@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth } from '@store/slices/authSlice';
 import { access } from 'fs';
+import WaitingMoneyRoad from '@components/kid/home/WaitingMoneyRoad/WaitingMoneyRoad';
 
 function SungwooTestPage() {
   // const { openModal } = useModals();
@@ -55,7 +56,7 @@ function SungwooTestPage() {
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
       <MarginTemplate>
-        <WalkingMoneyRoad />
+        <WaitingMoneyRoad />
       </MarginTemplate>
     </Wrapper>
   );

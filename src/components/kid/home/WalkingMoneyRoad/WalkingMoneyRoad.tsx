@@ -1,6 +1,6 @@
 import { TItemName } from '@lib/types/kid';
 import styled, { css } from 'styled-components';
-import ChallengeItem from './ChallengeItem';
+import WalkingChallengeItem from './WalkingChallengeItem';
 import { ReactComponent as Plus } from '@assets/icon/plus.svg';
 import { ReactComponent as PlusCircle } from '@assets/icon/plus-circle.svg';
 import { theme } from '@lib/styles/theme';
@@ -82,7 +82,7 @@ function WalkingMoneyRoad() {
       ) : (
         <>
           {challenges.map((challenge) => (
-            <ChallengeItem
+            <WalkingChallengeItem
               key={challenge.id}
               itemName={challenge.itemName as TItemName}
               title={challenge.title}
@@ -107,6 +107,21 @@ function WalkingMoneyRoad() {
 
 export default WalkingMoneyRoad;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .header {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;
+
 const Initial = styled.div`
   width: 100%;
   height: 162px;
@@ -128,21 +143,6 @@ const Initial = styled.div`
     margin-top: 16px;
     ${({ theme }) => theme.typo.text.T_18_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  .header {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
   }
 `;
 

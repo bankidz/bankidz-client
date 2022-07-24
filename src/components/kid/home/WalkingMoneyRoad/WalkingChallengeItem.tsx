@@ -1,7 +1,6 @@
-import { calcRatio } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/kid';
 import { renderItemIllust } from '@lib/utils/kid';
-import styled, { ThemeContext } from 'styled-components';
+import styled from 'styled-components';
 
 interface ChallengeItemProps {
   itemName: TItemName;
@@ -11,8 +10,8 @@ interface ChallengeItemProps {
 function ChallengeItem({ itemName, title }: ChallengeItemProps) {
   return (
     <Wrapper>
-      <div className="Illust-wrapper">{renderItemIllust(itemName)}</div>
-      <span className="body">{title}</span>
+      <div>{renderItemIllust(itemName)}</div>
+      <span>{title}</span>
     </Wrapper>
   );
 }
