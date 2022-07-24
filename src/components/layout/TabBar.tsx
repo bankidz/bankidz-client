@@ -49,7 +49,6 @@ const Wrapper = styled.div`
   border-bottom: none;
   position: fixed;
   height: 47px;
-
   background-color: white;
   border-radius: 12px 12px 28px 28px;
 

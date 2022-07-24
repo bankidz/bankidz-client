@@ -1,10 +1,10 @@
 import { TSetStep4Form } from '@components/kid/create/content/Step4';
 import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingBanki } from '@assets/illust/banki/banki_walking.svg';
-import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import getCommaThreeDigits from '@lib/utils/createChallenge/getCommaThreeDigits';
 
 interface RangeInputProps extends TSetStep4Form {
   totalPrice: number;
@@ -58,8 +58,8 @@ function RangeInput({
       </RangeInputForm>
 
       <div>
-        <p>{commaThreeDigits(min)}</p>
-        <p>{commaThreeDigits(max)}</p>
+        <p>{getCommaThreeDigits(min)}</p>
+        <p>{getCommaThreeDigits(max)}</p>
       </div>
     </Wrapper>
   );

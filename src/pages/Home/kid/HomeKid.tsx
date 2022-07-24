@@ -14,6 +14,13 @@ function HomeKid() {
       </button>
       <button
         onClick={() => {
+          navigate('/proceeding/1');
+        }}
+      >
+        걷고 있는 돈길
+      </button>
+      <button
+        onClick={() => {
           navigate('/pending/1');
         }}
       >

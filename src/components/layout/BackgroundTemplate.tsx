@@ -9,12 +9,14 @@ interface BackgroundTemplateProps {
 function BackgroundTemplate({ children }: BackgroundTemplateProps) {
   return (
     <>
-      <Screen>{children}</Screen>
       <TabBar />
+      <Screen>{children}</Screen>
     </>
   );
 }
 
 export default BackgroundTemplate;
 
-const Screen = styled.div``;
+const Screen = styled.div`
+  z-index: 0;
+`;

@@ -7,12 +7,13 @@ import HomeKid from './kid/HomeKid';
 import PendingParent from './parent/PendingParent';
 import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import CheckStepParams from '@components/kid/create/CheckStepParams';
 import ProceedingChallenge from './ProceedingChallenge';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
+  const level = useAppSelector(selectLevel);
   return (
     <Routes>
       <Route
@@ -40,8 +41,8 @@ function HomeRouter() {
       <Route
         path="/proceeding/:challengeId"
         element={
-          <ForegroundTemplate label="걷고있는 돈길">
-            <ProceedingChallenge />
+          <ForegroundTemplate label="걷고있는 돈길" level={level}>
+            <ProceedingChallenge level={level} />
           </ForegroundTemplate>
         }
       />

@@ -17,11 +17,11 @@ import {
 import { ReactComponent as Divider } from '@assets/border/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icon/alert.svg';
 import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
-import commaThreeDigits from '@lib/utils/getCommaThreeDigits';
 import useModals from '@hooks/useModals';
 import Modals, { modals } from '@components/common/modal/Modals';
-import getChallengeStep4Prices from '@lib/utils/getChallengeStep4Prices';
-import getChallengeStep4Weeks from '@lib/utils/getChallengeStep4Weeks';
+import getChallengeStep4Prices from '@lib/utils/createChallenge/getChallengeStep4Prices';
+import getChallengeStep4Weeks from '@lib/utils/createChallenge/getChallengeStep4Weeks';
+import getCommaThreeDigits from '@lib/utils/createChallenge/getCommaThreeDigits';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -146,15 +146,11 @@ function Step4({ currentStep }: { currentStep: number }) {
         </p>
         <div onClick={onOpenInterestRate} ref={interestRateInputRef}>
           <InputForm
-            placeholder={commaThreeDigits(middlePrice * 0.2) + ' 원'}
+            placeholder={getCommaThreeDigits(totalPrice * 0.2) + ' 원'}
             value={
               form.interestRate
-                ? form.weekPrice
-                  ? commaThreeDigits(
-                      form.weekPrice * form.interestRate * 0.01,
-                    ) + ' 원'
-                  : commaThreeDigits(middlePrice * form.interestRate * 0.01) +
-                    ' 원'
+                ? getCommaThreeDigits(totalPrice * form.interestRate * 0.01) +
+                  ' 원'
                 : ''
             }
             readonly={true}
@@ -175,11 +171,11 @@ function Step4({ currentStep }: { currentStep: number }) {
           ref={weekPriceInputRef}
         >
           <InputForm
-            placeholder={commaThreeDigits(middlePrice) + ' 원'}
+            placeholder={getCommaThreeDigits(middlePrice) + ' 원'}
             value={
               form.weekPrice === 0
                 ? ''
-                : commaThreeDigits(form.weekPrice) + ' 원'
+                : getCommaThreeDigits(form.weekPrice) + ' 원'
             }
             readonly={true}
             onFocus={() => {

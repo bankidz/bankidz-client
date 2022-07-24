@@ -25,7 +25,7 @@ const initialState: TAuthState = {
     // accessToken: null,
     // isKid: true,
     isKid: true,
-    level: null,
+    level: 1,
     birthday: null,
     isFemale: null,
     phone: null,
@@ -123,6 +123,7 @@ export const selectAccessToken = (state: RootState) =>
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
 export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
+export const selectLevel = (state: RootState) => state.auth.auth.level;
 
 export default authSlice.reducer;
 
