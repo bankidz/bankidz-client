@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://api.bankidz.com';
+// const BASE_URL = 'https://bankids.click';
 // const BASE_URL = 'https://458e-118-33-117-126.ngrok.io';
 
 export const axiosPublic = axios.create({

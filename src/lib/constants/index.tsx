@@ -1,4 +1,5 @@
 export const DOMAIN = 'https://bankidz.com';
+// export const DOMAIN = 'http://localhost:3000';
 
 export const REST_API_KEY = `${process.env.REACT_APP_KAKAO_REST_API_KEY}`;
 export const REDIRECT_URI = `${DOMAIN}/auth/kakao/callback`;

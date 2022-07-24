@@ -4,7 +4,6 @@ import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { axiosPublic } from '@lib/api/axios';
 import { useParams } from 'react-router-dom';
-import useRefreshToken from '@hooks/auth/useRefreshToken';
 
 function RegisterPage() {
   const { step } = useParams();
