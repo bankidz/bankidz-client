@@ -5,11 +5,11 @@ import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import HomeKid from './kid/HomeKid';
 import PendingParent from './parent/PendingParent';
-import NowParent from './parent/NowParent';
 import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import CheckStepParams from '@components/kid/create/CheckStepParams';
+import ProceedingChallenge from './ProceedingChallenge';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -38,10 +38,10 @@ function HomeRouter() {
         }
       />
       <Route
-        path="/now/:challengeId"
+        path="/proceeding/:challengeId"
         element={
           <ForegroundTemplate label="걷고있는 돈길">
-            <NowParent />
+            <ProceedingChallenge />
           </ForegroundTemplate>
         }
       />
