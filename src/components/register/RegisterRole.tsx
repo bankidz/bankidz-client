@@ -11,7 +11,7 @@ import useModals from '../../hooks/useModals';
 import { modals } from '../common/modal/Modals';
 import Modals from '../common/modal/Modals';
 import { useState } from 'react';
-import { TRequestStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/api';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -59,7 +59,7 @@ function RegisterRole() {
 
   const axiosPrivate = useAxiosPrivate();
   const [registerRequestStatus, setRegisterRequestStatus] =
-    useState<TRequestStatus>('idle');
+    useState<TFetchStatus>('idle');
   const canRegister =
     isKid !== null && isFemale !== null && registerRequestStatus === 'idle';
 

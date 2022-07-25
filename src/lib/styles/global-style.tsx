@@ -17,6 +17,14 @@ export const GlobalStyle = createGlobalStyle`
 
       /* 바텀시트 작업 중 추가 */
       overflow: hidden;
+
+       // 스크롤바 제거
+      -ms-overflow-style: none;
+    }
+
+    // 스크롤바 제거
+    ::-webkit-scrollbar {
+      display: none;
     }
 
     #root {

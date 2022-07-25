@@ -2,12 +2,12 @@ import { TItemName } from '@lib/types/kid';
 import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
 import styled from 'styled-components';
 
-interface ChallengeItemProps {
+interface WalkingChallengeItemProps {
   itemName: TItemName;
-  title: string;
+  title: string | null;
 }
 
-function ChallengeItem({ itemName, title }: ChallengeItemProps) {
+function WalkingChallengeItem({ itemName, title }: WalkingChallengeItemProps) {
   return (
     <Wrapper>
       <div>{renderItemIllust(itemName)}</div>
@@ -16,7 +16,7 @@ function ChallengeItem({ itemName, title }: ChallengeItemProps) {
   );
 }
 
-export default ChallengeItem;
+export default WalkingChallengeItem;
 
 const Wrapper = styled.div`
   width: 100%;

@@ -1,13 +1,16 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import authReducer from '../slices/authSlice';
 import logger from 'redux-logger';
+import authReducer from '../slices/authSlice';
 import challengePayloadReducer from '../slices/challengePayloadSlice';
+import walkingMoneyRoadReducer from '../slices/walkingMoneyRoadSlice';
+import pendingMoneyRoadReducer from '../slices/pendingMoneyRoadSlice';
 
-// configureStore는 리덕스 코어 라이브러리의 표준 함수인 createStore를 추상화한 것이다.
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     challengePayload: challengePayloadReducer,
+    walkingMoneyRoad: walkingMoneyRoadReducer,
+    pendingMoneyRoad: pendingMoneyRoadReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

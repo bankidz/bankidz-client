@@ -4,8 +4,8 @@ import { getDate } from '@lib/utils/common/getDate';
 import styled from 'styled-components';
 
 interface ChallengeItemProps {
-  title: string;
-  createdAt: string;
+  title: string | null;
+  createdAt: string | null;
   status: TMoneyRoadStatus;
 }
 
@@ -55,9 +55,6 @@ const Wrapper = styled.div`
       ${({ theme }) => theme.typo.text.S_12_M};
       color: ${({ theme }) => theme.palette.greyScale.grey500};
     }
-  }
-
-  .suggest-badge-position {
   }
 `;
 
