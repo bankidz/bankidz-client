@@ -56,7 +56,6 @@ export const register = createAsyncThunk(
     isFemale: boolean | null;
     isKid: boolean | null;
   }) => {
-    console.log(thunkPayload);
     const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
     const response = await axiosPrivate.patch('/user', {
       birthday,
