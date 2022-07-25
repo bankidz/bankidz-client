@@ -25,7 +25,7 @@ function App() {
         <Route path="/challenge/*" element={<ChallengeRouter />} />
         <Route path="/contents/*" element={<ContentsRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
-        <Route path="/sungwoo" element={<SungwooTestPage />} />
+        {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
       </Route>
       <Route path="*" element={<NotFound />} />
       {/* </Route>

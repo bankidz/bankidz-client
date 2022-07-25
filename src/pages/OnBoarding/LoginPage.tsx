@@ -5,8 +5,10 @@ import styled from 'styled-components';
 
 function LoginPage() {
   function handleClick() {
+    console.log('KURL: ', KAKAO_AUTH_URL);
     window.location.href = KAKAO_AUTH_URL;
   }
+
   return (
     <Wrapper>
       <MarginTemplate>
