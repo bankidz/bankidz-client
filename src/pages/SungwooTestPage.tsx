@@ -30,29 +30,29 @@ function SungwooTestPage() {
   // }
 
   // JWT test code
-  // const refresh = useRefreshToken();
-  // async function handleRefresh() {
-  //   const newAccessToken = await refresh();
-  //   console.log('newAccessToken in handleRefresh: ', newAccessToken);
-  // }
-  // const axiosPrivate = useAxiosPrivate();
-  // async function handleRequestWithAT() {
-  //   const response = await axiosPrivate.get('/user');
-  //   console.log('response.data in handleRequest: ', response); // response.status 401 인지 확인
-  //   console.log('response.data in handleRequest: ', response.status); // response.status 401 인지 확인
-  // }
-  // const auth = useAppSelector(selectAuth);
-  // function handlePrint() {
-  //   console.log('=======================');
-  //   console.log(auth);
-  //   console.log('=======================');
-  // }
+  const refresh = useRefreshToken();
+  async function handleRefresh() {
+    const newAccessToken = await refresh();
+    console.log('newAccessToken in handleRefresh: ', newAccessToken);
+  }
+  const axiosPrivate = useAxiosPrivate();
+  async function handleRequestWithAT() {
+    const response = await axiosPrivate.get('/user');
+    console.log('response.data in handleRequest: ', response); // response.status 401 인지 확인
+    console.log('response.data in handleRequest: ', response.status); // response.status 401 인지 확인
+  }
+  const auth = useAppSelector(selectAuth);
+  function handlePrint() {
+    console.log('=======================');
+    console.log(auth);
+    console.log('=======================');
+  }
 
   return (
     <Wrapper>
-      {/* <button onClick={handleRefresh}>refresh test</button>
+      <button onClick={handleRefresh}>refresh test</button>
       <button onClick={handleRequestWithAT}>request with aT test</button>
-      <button onClick={handlePrint}>print auth</button> */}
+      <button onClick={handlePrint}>print auth</button>
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
       <MarginTemplate>{/* <WaitingMoneyRoad /> */}</MarginTemplate>
@@ -63,14 +63,14 @@ function SungwooTestPage() {
 export default SungwooTestPage;
 
 const Wrapper = styled.div`
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   button + button {
     margin-top: 10px;
-  } */
-  background: grey;
+  }
+  /* background: grey; */
 `;
 
 // https://joyful-development.tistory.com/35

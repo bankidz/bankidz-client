@@ -36,7 +36,7 @@ function HomeKid() {
   useEffect(() => {
     async function fetchData() {
       try {
-        // await dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
+        await dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
         // await dispatch(fetchPendingMoneyRoad({ axiosPrivate }));
       } catch (error: any) {
         console.log(error.message);
