@@ -2,9 +2,12 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icon/BANKIDZ.svg';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
 import Summary from '@components/kid/home/Summary';
+import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import { TLevel } from '@lib/types/common';
+import { selectLevel } from '@store/slices/authSlice';
 import { renderHomeBackground } from '@lib/utils/common/renderHomeBackground';
 import { renderHomeBanki } from '@lib/utils/common/renderHomeBanki';
 import EmptyWalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/EmptyWalkingMoneyRoad';
@@ -12,30 +15,41 @@ import WalkingMoneyRoadList from '@components/kid/home/WalkingMoneyRoad/WalkingM
 import ContractNewMoneyRoadButton from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadButton';
 import EmptyWaitingMoneyRoad from '@components/kid/home/WaitingMoneyRoad/EmptyWaitingMoneyRoad';
 import WaitingMoneyRoadList from '@components/kid/home/WaitingMoneyRoad/WaitingMoneyRoadList';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   fetchWalkingMoneyRoad,
   selectWalkingMoneyRoad,
   selectWalkingMoneyRoadRequestStatus,
 } from '@store/slices/walkingMoneyRoadSlice';
-import { TRequestStatus } from '@lib/types/api';
-import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
+import {
+  fetchWaitingMoneyRoad,
+  selectWaitingMoneyRoad,
+  selectWaitingMoneyRoadRequestStatus,
+} from '@store/slices/waitingMoneyRoadSlice';
 import { useEffect } from 'react';
 
 function HomeKid() {
   const navigate = useNavigate();
-  const level = 3;
-
-  const isEmpty = false;
-  const disable = false;
-
+  const level = useAppSelector(selectLevel);
   const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
-  // TODO: useEffect
-  async function handleTest() {
-    dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
-  }
 
+  const axiosPrivate = useAxiosPrivate();
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // await dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
+        // await dispatch(fetchWaitingMoneyRoad({ axiosPrivate }));
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // TODO: fetch summary
+
+  // 요약
+
+  // 걷고있는 돈길
   const walkingMoneyRoadRequestStatus = useAppSelector(
     selectWalkingMoneyRoadRequestStatus,
   );
@@ -43,7 +57,7 @@ function HomeKid() {
   let walkingMoneyRoadContent;
   if (walkingMoneyRoadRequestStatus === 'loading') {
     walkingMoneyRoadContent = <p>Loading...</p>;
-  } else if (walkingMoneyRoadRequestStatus === 'failed') {
+  } else if (walkingMoneyRoadRequestStatus === 'succeeded') {
     if (walkingMoneyRoad === null) {
       walkingMoneyRoadContent = <EmptyWalkingMoneyRoad />;
     } else {
@@ -54,8 +68,28 @@ function HomeKid() {
         </>
       );
     }
-  } else {
+  } else if (walkingMoneyRoadRequestStatus === 'failed') {
     walkingMoneyRoadContent = <p>Failed</p>;
+  }
+
+  // 대기중인 돈길
+  const waitingMoneyRoadRequestStatus = useAppSelector(
+    selectWaitingMoneyRoadRequestStatus,
+  );
+  const waitingMoneyRoad = useAppSelector(selectWaitingMoneyRoad);
+  let waitingMoneyRoadContent;
+  if (waitingMoneyRoadRequestStatus === 'loading') {
+    waitingMoneyRoadContent = <p>Loading...</p>;
+  } else if (waitingMoneyRoadRequestStatus === 'succeeded') {
+    if (waitingMoneyRoad === null) {
+      waitingMoneyRoadContent = <EmptyWaitingMoneyRoad />;
+    } else {
+      waitingMoneyRoadContent = (
+        <WaitingMoneyRoadList waitingMoneyRoad={waitingMoneyRoad} />
+      );
+    }
+  } else if (waitingMoneyRoadRequestStatus === 'failed') {
+    waitingMoneyRoadContent = <p>Failed</p>;
   }
 
   return (
@@ -63,9 +97,7 @@ function HomeKid() {
       <Content>
         <MarginTemplate>
           {/* TODO: delete test code */}
-          <button onClick={handleTest}>fetch test</button>
-          {/* <div>{walkingMoneyRoadContent}</div> */}
-
+          {/* <button onClick={handleTest}>fetch test</button> */}
           <div className="logo-positioner">
             <BANKIDZ />
           </div>
@@ -80,35 +112,22 @@ function HomeKid() {
           <WalkingMoneyRoadWrapper>
             <header>걷고있는 돈길</header>
             {walkingMoneyRoadContent}
-            {/* {isEmpty === true ? (
-              <EmptyWalkingMoneyRoad />
-            ) : (
-              <>
-                <WalkingMoneyRoadList />
-                <ContractNewMoneyRoadButton disable={false} />
-              </>
-            )} */}
           </WalkingMoneyRoadWrapper>
-
           <WaitingMoneyRoadWrapper>
             <header>대기중인 돈길</header>
-            {/* @ts-expect-error */}
-            {isEmpty === true ? (
-              <EmptyWaitingMoneyRoad />
-            ) : (
-              <WaitingMoneyRoadList />
-            )}
+            {waitingMoneyRoadContent}
           </WaitingMoneyRoadWrapper>
+          <Spaceholder />
         </MarginTemplate>
-        <Spaceholder />
       </Content>
 
+      {/* absolutely positioned background components */}
       <BackgroundBox level={level} />
       <BackgroundEllipse level={level} />
       <HomeBackgroundPositioner>
-        {renderHomeBackground(level)}
+        {renderHomeBackground(level!)}
       </HomeBackgroundPositioner>
-      <HomeBankiPositioner>{renderHomeBanki(level)}</HomeBankiPositioner>
+      <HomeBankiPositioner>{renderHomeBanki(level!)}</HomeBankiPositioner>
     </Wrapper>
   );
 }
@@ -188,7 +207,7 @@ const WaitingMoneyRoadWrapper = styled.div`
 `;
 
 // absolutely positioned background components
-const BackgroundBox = styled.div<{ level: TLevel }>`
+const BackgroundBox = styled.div<{ level: TLevel | null }>`
   position: absolute;
   top: 0;
   left: 50%;
@@ -225,7 +244,7 @@ const BackgroundBox = styled.div<{ level: TLevel }>`
     `}
 `;
 
-const BackgroundEllipse = styled.div<{ level: TLevel }>`
+const BackgroundEllipse = styled.div<{ level: TLevel | null }>`
   position: absolute;
   top: 337px;
   left: 50%;

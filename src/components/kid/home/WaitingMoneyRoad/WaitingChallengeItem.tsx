@@ -4,8 +4,8 @@ import { getDate } from '@lib/utils/common/getDate';
 import styled from 'styled-components';
 
 interface ChallengeItemProps {
-  title: string;
-  createdAt: string;
+  title: string | null;
+  createdAt: string | null;
   status: TMoneyRoadStatus;
 }
 

@@ -1,67 +1,17 @@
 import { TMoneyRoadStatus } from '@lib/types/kid';
+import { TWaitingMoneyRoadState } from '@store/slices/waitingMoneyRoadSlice';
 import styled from 'styled-components';
 import WaitingChallengeItem from './WaitingChallengeItem';
 
-const challenges = [
-  {
-    id: 9,
-    isMom: true,
-    title: '에어팟 사기',
-    targetItemName: '전자제품',
-    challengeCategoryName: '이자율 받기',
-    isAchieved: false,
-    interestRate: 30,
-    totalPrice: 150000,
-    weekPrice: 10000,
-    weeks: 15,
-    createdAt: '2022-07-15 01:17:46',
-    status: 1,
-    progressList: null,
-    comment: null,
-  },
-  {
-    id: 10,
-    isMom: true,
-    title: '에어팟 사기',
-    targetItemName: '전자제품',
-    challengeCategoryName: '이자율 받기',
-    isAchieved: false,
-    interestRate: 30,
-    totalPrice: 150000,
-    weekPrice: 10000,
-    weeks: 15,
-    createdAt: '2022-07-15 01:17:46',
-    status: 1,
-    progressList: null,
-    comment: null,
-  },
-  {
-    id: 11,
-    isMom: true,
-    title: '에어팟 사기',
-    targetItemName: '전자제품',
-    challengeCategoryName: '이자율 받기',
-    isAchieved: false,
-    interestRate: 30,
-    totalPrice: 150000,
-    weekPrice: 10000,
-    weeks: 15,
-    createdAt: '2022-07-15 01:17:46',
-    status: 1,
-    progressList: null,
-    comment: null,
-  },
-];
-
-function WaitingMoneyRoadList() {
+function WaitingMoneyRoadList({ waitingMoneyRoad }: TWaitingMoneyRoadState) {
   return (
     <Wrapper>
-      {challenges.map((challenge) => (
+      {waitingMoneyRoad.map((waitingChallengeItem) => (
         <WaitingChallengeItem
-          key={challenge.id}
-          title={challenge.title}
-          createdAt={challenge.createdAt}
-          status={challenge.status as TMoneyRoadStatus}
+          key={waitingChallengeItem.id}
+          title={waitingChallengeItem.title}
+          createdAt={waitingChallengeItem.createdAt}
+          status={waitingChallengeItem.status as TMoneyRoadStatus}
         />
       ))}
     </Wrapper>

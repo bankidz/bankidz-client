@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 interface LevelBadgeProps {
   /** 레벨을 입력합니다. */
-  level: TLevel;
+  level: TLevel | null;
 }
 
 function LevelBadge({ level }: LevelBadgeProps) {
@@ -22,7 +22,7 @@ function LevelBadge({ level }: LevelBadgeProps) {
   }
   return (
     <Wrapper>
-      <StyledSpan level={level as TLevel}>{renderText(level)}</StyledSpan>
+      <StyledSpan level={level as TLevel}>{renderText(level!)}</StyledSpan>
     </Wrapper>
   );
 }

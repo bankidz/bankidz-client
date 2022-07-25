@@ -55,9 +55,7 @@ function SungwooTestPage() {
       <button onClick={handlePrint}>print auth</button> */}
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
-      <MarginTemplate>
-        <WaitingMoneyRoad />
-      </MarginTemplate>
+      <MarginTemplate>{/* <WaitingMoneyRoad /> */}</MarginTemplate>
     </Wrapper>
   );
 }

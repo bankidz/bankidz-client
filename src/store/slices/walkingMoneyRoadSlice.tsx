@@ -6,29 +6,31 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
+export interface IMoneyRoad {
+  id: number | null;
+  isMom: boolean | null;
+  title: string | null;
+  targetItemName: TItemName | null;
+  challengeCategoryName: TChallengeCategory | null;
+  isAchieved: boolean | null;
+  interestRate: TInterestRate | null;
+  totalPrice: number | null;
+  weekPrice: number | null;
+  weeks: number | null;
+  createdAt: string | null;
+  status: TMoneyRoadStatus | null;
+  progressList:
+    | {
+        challengeId: number;
+        weeks: number;
+        isAchieved: boolean;
+      }[]
+    | null;
+  comment: string | null;
+}
+
 export type TWalkingMoneyRoadState = {
-  walkingMoneyRoad: {
-    id: number | null;
-    isMom: boolean | null;
-    title: string | null;
-    targetItemName: TItemName | null;
-    challengeCategoryName: TChallengeCategory | null;
-    isAchieved: boolean | null;
-    interestRate: TInterestRate | null;
-    totalPrice: number | null;
-    weekPrice: number | null;
-    weeks: number | null;
-    createdAt: string | null;
-    status: TMoneyRoadStatus | null;
-    progressList:
-      | {
-          challengeId: number;
-          weeks: number;
-          isAchieved: boolean;
-        }[]
-      | null;
-    comment: string | null;
-  }[];
+  walkingMoneyRoad: IMoneyRoad[];
   walkingMoneyRoadRequestStatus?: TRequestStatus;
 };
 
