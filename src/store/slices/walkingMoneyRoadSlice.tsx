@@ -71,7 +71,7 @@ export const fetchWalkingMoneyRoad = createAsyncThunk(
   },
 );
 
-export const WalkingMoneyRoadSlice = createSlice({
+export const walkingMoneyRoadSlice = createSlice({
   name: 'walkingMoneyRoad',
   initialState,
   reducers: {},
@@ -95,4 +95,4 @@ export const selectWalkingMoneyRoadRequestStatus = (state: RootState) =>
   state.walkingMoneyRoad.walkingMoneyRoadRequestStatus;
 export const selectWalkingMoneyRoad = (state: RootState) =>
   state.walkingMoneyRoad.walkingMoneyRoad;
-export default WalkingMoneyRoadSlice.reducer;
+export default walkingMoneyRoadSlice.reducer;
