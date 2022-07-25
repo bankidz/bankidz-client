@@ -17,8 +17,6 @@ export type TAuthState = {
   };
 };
 
-// 김원진 엄마
-// 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4MDM1ODc2LCJzdWIiOiIyIiwiZXhwIjoxNjYwNDU1MDc2LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.KXzamQgcDWrLw3MAkPzewQI_hK9NCzGa3z8GcLeH-p8',
 // 주어진 딸
 // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzI3NzkxLCJzdWIiOiI2IiwiZXhwIjoxNjU4NzI3ODIxLCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.G9UwEE7nBmsYka3XT-HQ0AWWDOs3y47O3kZEmr1-b64',
 const initialState: TAuthState = {
