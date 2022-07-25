@@ -16,8 +16,9 @@ function OAuthRedirectHandler() {
   useEffect(() => {
     async function processLogin() {
       try {
-        await dispatch(login({ code })).unwrap();
-        navigate('/sungwoo'); // TODO: replace with '/'
+        // await dispatch(login({ code })).unwrap();
+        console.log('stop!');
+        // navigate('/sungwoo'); // TODO: replace with '/'
       } catch (error: any) {
         console.error(error.message);
       }
