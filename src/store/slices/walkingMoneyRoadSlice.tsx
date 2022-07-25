@@ -28,31 +28,39 @@ export type TWalkingMoneyRoadState = {
         }[]
       | null;
     comment: string | null;
-  };
-  walkingMoneyRoadRequestStatus: TRequestStatus;
+  }[];
+  walkingMoneyRoadRequestStatus?: TRequestStatus;
 };
 
 const initialState: TWalkingMoneyRoadState = {
-  walkingMoneyRoad: {
-    id: null,
-    isMom: null,
-    title: null,
-    targetItemName: null,
-    challengeCategoryName: null,
-    isAchieved: null,
-    interestRate: null,
-    totalPrice: null,
-    weekPrice: null,
-    weeks: null,
-    createdAt: null,
-    status: null,
-    progressList: null,
-    comment: null,
-  },
+  walkingMoneyRoad: [
+    {
+      id: 8,
+      isMom: true,
+      title: '아이패드 사기',
+      targetItemName: '전자제품',
+      challengeCategoryName: '이자율 받기',
+      isAchieved: false,
+      interestRate: 10,
+      totalPrice: 150000,
+      weekPrice: 10000,
+      weeks: 15,
+      createdAt: '2022-07-14 03:28:29',
+      status: 2,
+      progressList: [
+        {
+          challengeId: 8,
+          weeks: 1,
+          isAchieved: false,
+        },
+      ],
+      comment: null,
+    },
+  ],
   walkingMoneyRoadRequestStatus: 'idle',
 };
 
-// GET: 걷고있는 돈길 정보 fetch
+// GET: 걷고있는 돈길 데이터 fetch
 export const fetchWalkingMoneyRoad = createAsyncThunk(
   'walkingMoneyRoad/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
@@ -66,17 +74,25 @@ export const fetchWalkingMoneyRoad = createAsyncThunk(
 export const WalkingMoneyRoadSlice = createSlice({
   name: 'walkingMoneyRoad',
   initialState,
-  reducers: {
-    
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchWalkingMoneyRoad.pending, (state) => {
+        state.walkingMoneyRoadRequestStatus = 'loading';
+      })
+      .addCase(fetchWalkingMoneyRoad.fulfilled, (state, action) => {
+        state.walkingMoneyRoadRequestStatus = 'succeeded';
+        state.walkingMoneyRoad.concat(action.payload.data);
+      })
+      .addCase(fetchWalkingMoneyRoad.rejected, (state, action) => {
+        state.walkingMoneyRoadRequestStatus = 'failed';
+        console.error(action.error.message);
+      });
   },
 });
 
-export const {} = WalkingMoneyRoadSlice.actions;
-
 export const selectWalkingMoneyRoadRequestStatus = (state: RootState) =>
   state.walkingMoneyRoad.walkingMoneyRoadRequestStatus;
-
+export const selectWalkingMoneyRoad = (state: RootState) =>
+  state.walkingMoneyRoad.walkingMoneyRoad;
 export default WalkingMoneyRoadSlice.reducer;
-
-// const response = await axiosPublic.get('/health');
-// console.log(response.data);

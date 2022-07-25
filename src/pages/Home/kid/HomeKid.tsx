@@ -15,10 +15,12 @@ import WaitingMoneyRoadList from '@components/kid/home/WaitingMoneyRoad/WaitingM
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   fetchWalkingMoneyRoad,
+  selectWalkingMoneyRoad,
   selectWalkingMoneyRoadRequestStatus,
 } from '@store/slices/walkingMoneyRoadSlice';
 import { TRequestStatus } from '@lib/types/api';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
+import { useEffect } from 'react';
 
 function HomeKid() {
   const navigate = useNavigate();
@@ -29,19 +31,31 @@ function HomeKid() {
 
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
+  // TODO: useEffect
   async function handleTest() {
     dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
-    // const response = await axiosPrivate.get('/challenge/?status=pending');
   }
 
-  const walkingMoneyRoadRequestStatus = useAppSelector<TRequestStatus>(
+  const walkingMoneyRoadRequestStatus = useAppSelector(
     selectWalkingMoneyRoadRequestStatus,
   );
+  const walkingMoneyRoad = useAppSelector(selectWalkingMoneyRoad);
   let walkingMoneyRoadContent;
   if (walkingMoneyRoadRequestStatus === 'loading') {
     walkingMoneyRoadContent = <p>Loading...</p>;
-  } else if (walkingMoneyRoadRequestStatus === 'succeeded') {
-    walkingMoneyRoadContent = <p>Content</p>;
+  } else if (walkingMoneyRoadRequestStatus === 'failed') {
+    if (walkingMoneyRoad === null) {
+      walkingMoneyRoadContent = <EmptyWalkingMoneyRoad />;
+    } else {
+      walkingMoneyRoadContent = (
+        <>
+          <WalkingMoneyRoadList walkingMoneyRoad={walkingMoneyRoad} />
+          <ContractNewMoneyRoadButton disable={false} />
+        </>
+      );
+    }
+  } else {
+    walkingMoneyRoadContent = <p>Failed</p>;
   }
 
   return (
@@ -50,6 +64,7 @@ function HomeKid() {
         <MarginTemplate>
           {/* TODO: delete test code */}
           <button onClick={handleTest}>fetch test</button>
+          {/* <div>{walkingMoneyRoadContent}</div> */}
 
           <div className="logo-positioner">
             <BANKIDZ />
@@ -64,15 +79,15 @@ function HomeKid() {
 
           <WalkingMoneyRoadWrapper>
             <header>걷고있는 돈길</header>
-            {/* @ts-expect-error */}
-            {isEmpty === true ? (
+            {walkingMoneyRoadContent}
+            {/* {isEmpty === true ? (
               <EmptyWalkingMoneyRoad />
             ) : (
               <>
                 <WalkingMoneyRoadList />
                 <ContractNewMoneyRoadButton disable={false} />
               </>
-            )}
+            )} */}
           </WalkingMoneyRoadWrapper>
 
           <WaitingMoneyRoadWrapper>

@@ -1,5 +1,6 @@
 import { axiosPublic } from '@lib/api/axios';
 import { TRequestStatus } from '@lib/types/api';
+import { TLevel } from '@lib/types/common';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -8,13 +9,12 @@ export type TAuthState = {
   auth: {
     accessToken: string | null;
     isKid: boolean | null;
-    level: 1 | 2 | 3 | 4 | 5 | null;
+    level: TLevel | null;
     birthday: string | null;
     isFemale: boolean | null;
     phone: string | null;
     username: string | null;
   };
-  authRequestStatus: TRequestStatus;
 };
 
 // 김원진 엄마
@@ -34,7 +34,6 @@ const initialState: TAuthState = {
     phone: null,
     username: null,
   },
-  authRequestStatus: 'idle', // for GET method
 };
 
 // POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
@@ -72,7 +71,7 @@ export const register = createAsyncThunk(
 interface IAuth {
   accessToken: string | null;
   isKid: boolean | null;
-  level: 1 | 2 | 3 | 4 | 5 | null;
+  level: TLevel | null;
 }
 interface IBirthDay {
   birthday: string;
@@ -120,7 +119,6 @@ export const authSlice = createSlice({
 
 export const { setCredentials, resetCredentials, setBirthday } =
   authSlice.actions;
-
 export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
   state.auth.auth.accessToken;
@@ -130,7 +128,6 @@ export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 export const selectIsFemale = (state: RootState) => state.auth.auth.isFemale;
 export const selectPhone = (state: RootState) => state.auth.auth.phone;
 export const selectUsername = (state: RootState) => state.auth.auth.username;
-
 export default authSlice.reducer;
 
 // const response = await axiosPublic.get('/health');

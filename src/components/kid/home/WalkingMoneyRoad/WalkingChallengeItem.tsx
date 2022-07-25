@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 interface WalkingChallengeItemProps {
   itemName: TItemName;
-  title: string;
+  title: string | null;
 }
 
 function WalkingChallengeItem({ itemName, title }: WalkingChallengeItemProps) {
