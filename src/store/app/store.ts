@@ -3,14 +3,14 @@ import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
 import challengePayloadReducer from '../slices/challengePayloadSlice';
 import walkingMoneyRoadReducer from '../slices/walkingMoneyRoadSlice';
-import waitingMoneyRoadReducer from '../slices/waitingMoneyRoadSlice';
+import pendingMoneyRoadReducer from '../slices/pendingMoneyRoadSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     challengePayload: challengePayloadReducer,
     walkingMoneyRoad: walkingMoneyRoadReducer,
-    waitingMoneyRoad: waitingMoneyRoadReducer,
+    pendingMoneyRoad: pendingMoneyRoadReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

@@ -18,13 +18,13 @@ import WaitingMoneyRoadList from '@components/kid/home/WaitingMoneyRoad/WaitingM
 import {
   fetchWalkingMoneyRoad,
   selectWalkingMoneyRoad,
-  selectWalkingMoneyRoadRequestStatus,
+  selectWalkingMoneyRoadStatus,
 } from '@store/slices/walkingMoneyRoadSlice';
 import {
-  fetchWaitingMoneyRoad,
-  selectWaitingMoneyRoad,
-  selectWaitingMoneyRoadRequestStatus,
-} from '@store/slices/waitingMoneyRoadSlice';
+  fetchPendingMoneyRoad,
+  selectPendingMoneyRoad,
+  selectPendingMoneyRoadStatus,
+} from '@store/slices/pendingMoneyRoadSlice';
 import { useEffect } from 'react';
 
 function HomeKid() {
@@ -37,7 +37,7 @@ function HomeKid() {
     async function fetchData() {
       try {
         // await dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
-        // await dispatch(fetchWaitingMoneyRoad({ axiosPrivate }));
+        // await dispatch(fetchPendingMoneyRoad({ axiosPrivate }));
       } catch (error: any) {
         console.log(error.message);
       }
@@ -50,14 +50,12 @@ function HomeKid() {
   // 요약
 
   // 걷고있는 돈길
-  const walkingMoneyRoadRequestStatus = useAppSelector(
-    selectWalkingMoneyRoadRequestStatus,
-  );
+  const walkingMoneyRoadStatus = useAppSelector(selectWalkingMoneyRoadStatus);
   const walkingMoneyRoad = useAppSelector(selectWalkingMoneyRoad);
   let walkingMoneyRoadContent;
-  if (walkingMoneyRoadRequestStatus === 'loading') {
+  if (walkingMoneyRoadStatus === 'loading') {
     walkingMoneyRoadContent = <p>Loading...</p>;
-  } else if (walkingMoneyRoadRequestStatus === 'succeeded') {
+  } else if (walkingMoneyRoadStatus === 'succeeded') {
     if (walkingMoneyRoad === null) {
       walkingMoneyRoadContent = <EmptyWalkingMoneyRoad />;
     } else {
@@ -68,28 +66,26 @@ function HomeKid() {
         </>
       );
     }
-  } else if (walkingMoneyRoadRequestStatus === 'failed') {
+  } else if (walkingMoneyRoadStatus === 'failed') {
     walkingMoneyRoadContent = <p>Failed</p>;
   }
 
   // 대기중인 돈길
-  const waitingMoneyRoadRequestStatus = useAppSelector(
-    selectWaitingMoneyRoadRequestStatus,
-  );
-  const waitingMoneyRoad = useAppSelector(selectWaitingMoneyRoad);
-  let waitingMoneyRoadContent;
-  if (waitingMoneyRoadRequestStatus === 'loading') {
-    waitingMoneyRoadContent = <p>Loading...</p>;
-  } else if (waitingMoneyRoadRequestStatus === 'succeeded') {
-    if (waitingMoneyRoad === null) {
-      waitingMoneyRoadContent = <EmptyWaitingMoneyRoad />;
+  const pendingMoneyRoadStatus = useAppSelector(selectPendingMoneyRoadStatus);
+  const pendingMoneyRoad = useAppSelector(selectPendingMoneyRoad);
+  let pendingMoneyRoadContent;
+  if (pendingMoneyRoadStatus === 'loading') {
+    pendingMoneyRoadContent = <p>Loading...</p>;
+  } else if (pendingMoneyRoadStatus === 'succeeded') {
+    if (pendingMoneyRoad === null) {
+      pendingMoneyRoadContent = <EmptyWaitingMoneyRoad />;
     } else {
-      waitingMoneyRoadContent = (
-        <WaitingMoneyRoadList waitingMoneyRoad={waitingMoneyRoad} />
+      pendingMoneyRoadContent = (
+        <WaitingMoneyRoadList pendingMoneyRoad={pendingMoneyRoad} />
       );
     }
-  } else if (waitingMoneyRoadRequestStatus === 'failed') {
-    waitingMoneyRoadContent = <p>Failed</p>;
+  } else if (pendingMoneyRoadStatus === 'failed') {
+    pendingMoneyRoadContent = <p>Failed</p>;
   }
 
   return (
@@ -115,7 +111,7 @@ function HomeKid() {
           </WalkingMoneyRoadWrapper>
           <WaitingMoneyRoadWrapper>
             <header>대기중인 돈길</header>
-            {waitingMoneyRoadContent}
+            {pendingMoneyRoadContent}
           </WaitingMoneyRoadWrapper>
           <Spaceholder />
         </MarginTemplate>

@@ -1,9 +1,11 @@
 import { TMoneyRoadStatus } from '@lib/types/kid';
-import { TWaitingMoneyRoadState } from '@store/slices/waitingMoneyRoadSlice';
+import { TPendingMoneyRoadState } from '@store/slices/pendingMoneyRoadSlice';
 import styled from 'styled-components';
 import WaitingChallengeItem from './WaitingChallengeItem';
 
-function WaitingMoneyRoadList({ waitingMoneyRoad }: TWaitingMoneyRoadState) {
+function WaitingMoneyRoadList({
+  pendingMoneyRoad: waitingMoneyRoad,
+}: TPendingMoneyRoadState) {
   return (
     <Wrapper>
       {waitingMoneyRoad.map((waitingChallengeItem) => (

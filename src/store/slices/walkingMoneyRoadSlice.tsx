@@ -1,5 +1,5 @@
 import { axiosPublic } from '@lib/api/axios';
-import { TRequestStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/api';
 import { TChallengeCategory, TInterestRate } from '@lib/types/common';
 import { TItemName, TMoneyRoadStatus } from '@lib/types/kid';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -31,7 +31,7 @@ export interface IMoneyRoad {
 
 export type TWalkingMoneyRoadState = {
   walkingMoneyRoad: IMoneyRoad[];
-  walkingMoneyRoadRequestStatus?: TRequestStatus;
+  walkingMoneyRoadStatus?: TFetchStatus;
 };
 
 const initialState: TWalkingMoneyRoadState = {
@@ -59,7 +59,7 @@ const initialState: TWalkingMoneyRoadState = {
       comment: null,
     },
   ],
-  walkingMoneyRoadRequestStatus: 'idle',
+  walkingMoneyRoadStatus: 'idle',
 };
 
 // GET: 걷고있는 돈길 데이터 fetch
@@ -80,21 +80,21 @@ export const walkingMoneyRoadSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchWalkingMoneyRoad.pending, (state) => {
-        state.walkingMoneyRoadRequestStatus = 'loading';
+        state.walkingMoneyRoadStatus = 'loading';
       })
       .addCase(fetchWalkingMoneyRoad.fulfilled, (state, action) => {
-        state.walkingMoneyRoadRequestStatus = 'succeeded';
+        state.walkingMoneyRoadStatus = 'succeeded';
         state.walkingMoneyRoad.concat(action.payload.data);
       })
       .addCase(fetchWalkingMoneyRoad.rejected, (state, action) => {
-        state.walkingMoneyRoadRequestStatus = 'failed';
+        state.walkingMoneyRoadStatus = 'failed';
         console.error(action.error.message);
       });
   },
 });
 
-export const selectWalkingMoneyRoadRequestStatus = (state: RootState) =>
-  state.walkingMoneyRoad.walkingMoneyRoadRequestStatus;
+export const selectWalkingMoneyRoadStatus = (state: RootState) =>
+  state.walkingMoneyRoad.walkingMoneyRoadStatus;
 export const selectWalkingMoneyRoad = (state: RootState) =>
   state.walkingMoneyRoad.walkingMoneyRoad;
 export default walkingMoneyRoadSlice.reducer;

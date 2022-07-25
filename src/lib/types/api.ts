@@ -1,4 +1,4 @@
-export type TRequestStatus =
+export type TFetchStatus =
   | 'idle'
   | 'loading'
   | 'pending'
