@@ -56,9 +56,6 @@ const Wrapper = styled.div`
       color: ${({ theme }) => theme.palette.greyScale.grey500};
     }
   }
-
-  .suggest-badge-position {
-  }
 `;
 
 const SuggestBadgeWrapper = styled.div`

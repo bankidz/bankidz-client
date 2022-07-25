@@ -1,12 +1,13 @@
+import { TLevel } from '@lib/types/common';
 import styled, { css } from 'styled-components';
 
 interface LevelBadgeProps {
   /** 레벨을 입력합니다. */
-  level: 1 | 2 | 3 | 4 | 5;
+  level: TLevel;
 }
 
 function LevelBadge({ level }: LevelBadgeProps) {
-  function renderText(level: 1 | 2 | 3 | 4 | 5) {
+  function renderText(level: TLevel) {
     if (level === 1) {
       return 'Lv.1 뱅키학';
     } else if (level === 2) {
@@ -21,7 +22,7 @@ function LevelBadge({ level }: LevelBadgeProps) {
   }
   return (
     <Wrapper>
-      <StyledSpan level={level}>{renderText(level)}</StyledSpan>
+      <StyledSpan level={level as TLevel}>{renderText(level)}</StyledSpan>
     </Wrapper>
   );
 }
@@ -32,7 +33,7 @@ const Wrapper = styled.div`
   height: 28px;
 `;
 
-const StyledSpan = styled.span<{ level: 1 | 2 | 3 | 4 | 5 }>`
+const StyledSpan = styled.span<{ level: TLevel }>`
   width: 100px;
   padding: 8px 12px;
   gap: 8px;

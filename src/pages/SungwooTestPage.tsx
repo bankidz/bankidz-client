@@ -5,14 +5,14 @@ import useModals from '@hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Receipt from '@components/common/Receipt';
 import LevelBadge from '@components/common/badges/LevelBadge';
-import WalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoad';
+import WalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoadList';
 import useRefreshToken from '@hooks/auth/useRefreshToken';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import axios from 'axios';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth } from '@store/slices/authSlice';
 import { access } from 'fs';
-import WaitingMoneyRoad from '@components/kid/home/WaitingMoneyRoad/WaitingMoneyRoad';
+import WaitingMoneyRoad from '@components/kid/home/WaitingMoneyRoad/WaitingMoneyRoadList';
 
 function SungwooTestPage() {
   // const { openModal } = useModals();

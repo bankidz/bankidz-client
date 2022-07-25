@@ -110,8 +110,8 @@ const StyledButton = styled.button<{
         `}
       // 딸
       ${({ isKid, isFemale }) =>
-        isKid == true &&
-        isFemale == true &&
+        isKid === true &&
+        isFemale === true &&
         css`
           margin-left: ${calcRatio(23.02, 146)};
           width: ${calcRatio(101.1, 146)};
