@@ -23,12 +23,13 @@ export type TAuthState = {
 // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzI3NzkxLCJzdWIiOiI2IiwiZXhwIjoxNjU4NzI3ODIxLCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.G9UwEE7nBmsYka3XT-HQ0AWWDOs3y47O3kZEmr1-b64',
 const initialState: TAuthState = {
   auth: {
-    // accessToken: null,
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzI3NzkxLCJzdWIiOiI2IiwiZXhwIjoxNjU4NzI3ODIxLCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.G9UwEE7nBmsYka3XT-HQ0AWWDOs3y47O3kZEmr1-b64',
-    // isKid: null,
-    isKid: true,
-    level: 3,
+    accessToken: null,
+    // accessToken:
+    //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzI3NzkxLCJzdWIiOiI2IiwiZXhwIjoxNjU4NzI3ODIxLCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.G9UwEE7nBmsYka3XT-HQ0AWWDOs3y47O3kZEmr1-b64',
+    isKid: null,
+    // isKid: true,
+    // level: 3,
+    level: null,
     birthday: null,
     isFemale: null,
     phone: null,
