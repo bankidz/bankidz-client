@@ -5,6 +5,9 @@ export type TInterestRate = 10 | 20 | 30;
 
 export type TChallengeCategory = '이자율 받기';
 
+// 0: rejected / 1: pending / 2: succeeded
+export type TMoneyRoadStatus = 0 | 1 | 2;
+
 export enum EMoneyRoadStatus {
   REJECTED,
   PENDING,

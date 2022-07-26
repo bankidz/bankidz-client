@@ -1,4 +1,3 @@
-import { TMoneyRoadStatus } from '@lib/types/kid';
 import { TPendingMoneyRoadsState } from '@store/slices/pendingMoneyRoadsSlice';
 import styled from 'styled-components';
 import PendingMoneyRoadItem from './PendingMoneyRoadItem';

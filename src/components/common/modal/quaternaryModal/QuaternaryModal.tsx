@@ -44,6 +44,7 @@ function QuaternaryModal({
     isOpen: true,
     style: {
       overlay: {
+        zIndex: '700',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -52,6 +53,7 @@ function QuaternaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
+        zIndex: '700',
         height: '554px',
         position: 'absolute',
         // top: '14vh',
@@ -175,7 +177,7 @@ const Content = styled.div`
   // background border (vertical, horizontal)
   position: relative;
   .vertical-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 167px;
@@ -189,7 +191,7 @@ const Content = styled.div`
     height: 100px;
   }
   .first-horizontal-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 115px;
@@ -205,7 +207,7 @@ const Content = styled.div`
     padding-right: 16px;
   }
   .second-horizontal-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 216px;
@@ -221,7 +223,7 @@ const Content = styled.div`
     padding-right: 16px;
   }
   .third-horizontal-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 286px;
@@ -438,7 +440,7 @@ const Bottom = styled.div`
 `;
 
 const SignatureWrapper = styled.div`
-  z-index: 900;
+  z-index: 710;
   position: absolute;
   right: 2px;
   bottom: 0;

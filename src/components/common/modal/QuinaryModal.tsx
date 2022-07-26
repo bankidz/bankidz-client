@@ -45,6 +45,7 @@ function QuinaryModal({
     isOpen: true,
     style: {
       overlay: {
+        zIndex: '700',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -176,7 +177,7 @@ const Content = styled.div`
   // background border (vertical, horizontal)
   position: relative;
   .vertical-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 180px;
@@ -190,7 +191,7 @@ const Content = styled.div`
     height: 100px;
   }
   .first-horizontal-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 130px; // 10px decreased
@@ -206,7 +207,7 @@ const Content = styled.div`
     padding-right: 16px;
   }
   .second-horizontal-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 231px; // 10px decreased
@@ -222,7 +223,7 @@ const Content = styled.div`
     padding-right: 16px;
   }
   .third-horizontal-dashed-border-wrapper {
-    z-index: 10;
+    z-index: 700;
     position: absolute;
     left: 50%;
     top: 301px; // 10px decreased
@@ -435,7 +436,7 @@ const Bottom = styled.div`
 `;
 
 const SignatureWrapper = styled.div`
-  z-index: 900;
+  z-index: 710;
   position: absolute;
   right: 2px;
   bottom: 0;

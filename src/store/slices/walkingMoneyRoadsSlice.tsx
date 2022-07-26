@@ -1,6 +1,10 @@
 import { TFetchStatus } from '@lib/types/api';
-import { TChallengeCategory, TInterestRate } from '@lib/types/common';
-import { TItemName, TMoneyRoadStatus } from '@lib/types/kid';
+import {
+  TChallengeCategory,
+  TInterestRate,
+  TMoneyRoadStatus,
+} from '@lib/types/common';
+import { TItemName } from '@lib/types/kid';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';

@@ -118,10 +118,9 @@ function KidHome() {
 
   return (
     <Wrapper>
-      {/* 다음 모달은 대기중인 돈길 Item을 통해 열리며,
-      click에 대한 action은 PendingMoneyRoadItem에서 trigger된다. */}
-      <Modals />
+      {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 처리됩니다. */}
       <Content>
+        <Modals />
         <MarginTemplate>
           <div className="logo-positioner">
             <BANKIDZ />
@@ -313,7 +312,7 @@ const HomeBackgroundPositioner = styled.div`
 `;
 
 const HomeBankiPositioner = styled.div`
-  z-index: 900;
+  z-index: 101;
   position: absolute;
   top: 146px;
   right: 0;
