@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import kakao from '@assets/icon/kakao.svg';
 import { darken } from 'polished';
 import { theme } from '@lib/styles/theme';
+
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * 기본, 카카오로그인, 삭제, 강조되지 않은 버튼

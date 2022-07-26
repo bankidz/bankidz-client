@@ -5,6 +5,8 @@ import { setBirthday } from '@store/slices/authSlice';
 import InputForm from '../common/button/InputForm';
 import { useNavigate } from 'react-router-dom';
 import { execArgv } from 'process';
+import Button from '@components/common/button/Button';
+import MarginTemplate from '@components/layout/MarginTemplate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -149,6 +151,17 @@ function RegisterBirthday() {
       {toggleDayErrorMessage && (
         <ErrorMessage>일 형식이 올바르지 않아요</ErrorMessage>
       )}
+      <ButtonPositioner>
+        <Button
+          label="다음"
+          property="default"
+          state={
+            isValidYear === true && isValidMonth === true && isValidDay === true
+          }
+          // @ts-expect-error
+          type="submit"
+        />
+      </ButtonPositioner>
     </Wrapper>
   );
 }
@@ -196,3 +209,13 @@ const DummyButton = styled.button`
 // https://velog.io/@leyuri/TIL-input-%EC%97%90%EC%84%9C-%EC%9E%85%EB%A0%A5-%EA%B8%80%EC%9E%90%EC%88%98-%EC%A0%9C%ED%95%9C%ED%95%98%EB%8A%94-2%EA%B0%80%EC%A7%80-%EB%B0%A9%EB%B2%95
 // https://bobbyhadz.com/blog/react-input-character-limit
 // https://www.daleseo.com/react-forward-ref/
+
+const ButtonPositioner = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 17px;
+  padding-left: 18px;
+  padding-right: 18px;
+`;
