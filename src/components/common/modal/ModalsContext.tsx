@@ -20,7 +20,7 @@ type TAction =
   | {
       type: 'OPEN';
       Component: Component;
-      props: HTMLAttributes<HTMLButtonElement>;
+      props: any;
     }
   | { type: 'CLOSE'; Component: Component };
 

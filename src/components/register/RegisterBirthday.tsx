@@ -105,6 +105,7 @@ function RegisterBirthday() {
             onBlur={() => setYearFocus(false)}
             autoComplete="off"
             postfix="년"
+            pattern="\d*"
           />
           <InputForm
             placeholder="01"
@@ -119,6 +120,7 @@ function RegisterBirthday() {
             autoComplete="off"
             postfix="월"
             ref={monthInputRef}
+            pattern="\d*"
           />
           <InputForm
             placeholder="01"
@@ -133,6 +135,7 @@ function RegisterBirthday() {
             autoComplete="off"
             postfix="일"
             ref={dayInputRef}
+            pattern="\d*"
           />
         </InputWrapper>
         <DummyButton type="submit" />
