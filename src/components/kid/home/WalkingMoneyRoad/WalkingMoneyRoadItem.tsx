@@ -2,12 +2,12 @@ import { TItemName } from '@lib/types/kid';
 import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
 import styled from 'styled-components';
 
-interface WalkingChallengeItemProps {
+interface WalkingMoneyRoadItemProps {
   itemName: TItemName;
   title: string | null;
 }
 
-function WalkingChallengeItem({ itemName, title }: WalkingChallengeItemProps) {
+function WalkingMoneyRoadItem({ itemName, title }: WalkingMoneyRoadItemProps) {
   return (
     <Wrapper>
       <div>{renderItemIllust(itemName)}</div>
@@ -16,7 +16,7 @@ function WalkingChallengeItem({ itemName, title }: WalkingChallengeItemProps) {
   );
 }
 
-export default WalkingChallengeItem;
+export default WalkingMoneyRoadItem;
 
 const Wrapper = styled.div`
   width: 100%;

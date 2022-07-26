@@ -1,16 +1,16 @@
 import { TItemName } from '@lib/types/kid';
-import { TWalkingMoneyRoadState } from '@store/slices/walkingMoneyRoadSlice';
+import { TWalkingMoneyRoadsState } from '@store/slices/walkingMoneyRoadsSlice';
 import styled from 'styled-components';
-import WalkingChallengeItem from './WalkingChallengeItem';
+import WalkingMoneyRoadItem from './WalkingMoneyRoadItem';
 
-function WalkingMoneyRoadList({ walkingMoneyRoad }: TWalkingMoneyRoadState) {
+function WalkingMoneyRoadList({ walkingMoneyRoads }: TWalkingMoneyRoadsState) {
   return (
     <Wrapper>
-      {walkingMoneyRoad.map((walkingChallengeItem) => (
-        <WalkingChallengeItem
-          key={walkingChallengeItem.id}
-          itemName={walkingChallengeItem.targetItemName as TItemName}
-          title={walkingChallengeItem.title}
+      {walkingMoneyRoads!.map((walkingMoneyRoad) => (
+        <WalkingMoneyRoadItem
+          key={walkingMoneyRoad.id}
+          itemName={walkingMoneyRoad.targetItemName as TItemName}
+          title={walkingMoneyRoad.title}
         />
       ))}
     </Wrapper>

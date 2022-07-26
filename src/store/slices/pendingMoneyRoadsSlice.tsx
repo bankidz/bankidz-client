@@ -2,15 +2,15 @@ import { TFetchStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-import { IMoneyRoad } from './walkingMoneyRoadSlice';
+import { IMoneyRoad } from './walkingMoneyRoadsSlice';
 
-export type TPendingMoneyRoadState = {
-  pendingMoneyRoad: IMoneyRoad[];
-  pendingMoneyRoadStatus?: TFetchStatus;
+export type TPendingMoneyRoadsState = {
+  pendingMoneyRoads: IMoneyRoad[] | null;
+  pendingMoneyRoadsStatus?: TFetchStatus;
 };
 
-const initialState: TPendingMoneyRoadState = {
-  pendingMoneyRoad: [
+const initialState: TPendingMoneyRoadsState = {
+  pendingMoneyRoads: [
     {
       id: 8,
       isMom: true,
@@ -34,12 +34,12 @@ const initialState: TPendingMoneyRoadState = {
       comment: null,
     },
   ],
-  pendingMoneyRoadStatus: 'idle',
+  pendingMoneyRoadsStatus: 'idle',
 };
 
 // GET: 대기중인 돈길 데이터 fetch
-export const fetchPendingMoneyRoad = createAsyncThunk(
-  'PendingMoneyRoad/fetch',
+export const fetchPendingMoneyRoads = createAsyncThunk(
+  'PendingMoneyRoads/fetchPendingMoneyRoads',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/?status=pending');
@@ -47,30 +47,30 @@ export const fetchPendingMoneyRoad = createAsyncThunk(
   },
 );
 
-export const PendingMoneyRoadSlice = createSlice({
-  name: 'PendingMoneyRoad',
+export const PendingMoneyRoadsSlice = createSlice({
+  name: 'PendingMoneyRoads',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchPendingMoneyRoad.pending, (state) => {
-        state.pendingMoneyRoadStatus = 'loading';
+      .addCase(fetchPendingMoneyRoads.pending, (state) => {
+        state.pendingMoneyRoadsStatus = 'loading';
       })
-      .addCase(fetchPendingMoneyRoad.fulfilled, (state, action) => {
-        state.pendingMoneyRoadStatus = 'succeeded';
-        state.pendingMoneyRoad = state.pendingMoneyRoad.concat(
+      .addCase(fetchPendingMoneyRoads.fulfilled, (state, action) => {
+        state.pendingMoneyRoadsStatus = 'succeeded';
+        state.pendingMoneyRoads = state.pendingMoneyRoads!.concat(
           action.payload.data,
         );
       })
-      .addCase(fetchPendingMoneyRoad.rejected, (state, action) => {
-        state.pendingMoneyRoadStatus = 'failed';
+      .addCase(fetchPendingMoneyRoads.rejected, (state, action) => {
+        state.pendingMoneyRoadsStatus = 'failed';
         console.error(action.error.message);
       });
   },
 });
 
-export const selectPendingMoneyRoadStatus = (state: RootState) =>
-  state.pendingMoneyRoad.pendingMoneyRoadStatus;
-export const selectPendingMoneyRoad = (state: RootState) =>
-  state.pendingMoneyRoad.pendingMoneyRoad;
-export default PendingMoneyRoadSlice.reducer;
+export const selectPendingMoneyRoadsStatus = (state: RootState) =>
+  state.pendingMoneyRoads.pendingMoneyRoadsStatus;
+export const selectPendingMoneyRoads = (state: RootState) =>
+  state.pendingMoneyRoads.pendingMoneyRoads;
+export default PendingMoneyRoadsSlice.reducer;
