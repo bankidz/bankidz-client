@@ -4,9 +4,7 @@ import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
 import InputForm from '../common/button/InputForm';
 import { useNavigate } from 'react-router-dom';
-import { execArgv } from 'process';
 import Button from '@components/common/button/Button';
-import MarginTemplate from '@components/layout/MarginTemplate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -202,14 +200,6 @@ const DummyButton = styled.button`
   left: -9999px;
 `;
 
-// https://regexland.com/regex-dates/
-// https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s04.html
-// https://whackur.tistory.com/148
-
-// https://velog.io/@leyuri/TIL-input-%EC%97%90%EC%84%9C-%EC%9E%85%EB%A0%A5-%EA%B8%80%EC%9E%90%EC%88%98-%EC%A0%9C%ED%95%9C%ED%95%98%EB%8A%94-2%EA%B0%80%EC%A7%80-%EB%B0%A9%EB%B2%95
-// https://bobbyhadz.com/blog/react-input-character-limit
-// https://www.daleseo.com/react-forward-ref/
-
 const ButtonPositioner = styled.div`
   position: absolute;
   width: 100%;
@@ -219,3 +209,11 @@ const ButtonPositioner = styled.div`
   padding-left: 18px;
   padding-right: 18px;
 `;
+
+// https://regexland.com/regex-dates/
+// https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s04.html
+// https://whackur.tistory.com/148
+
+// https://velog.io/@leyuri/TIL-input-%EC%97%90%EC%84%9C-%EC%9E%85%EB%A0%A5-%EA%B8%80%EC%9E%90%EC%88%98-%EC%A0%9C%ED%95%9C%ED%95%98%EB%8A%94-2%EA%B0%80%EC%A7%80-%EB%B0%A9%EB%B2%95
+// https://bobbyhadz.com/blog/react-input-character-limit
+// https://www.daleseo.com/react-forward-ref/

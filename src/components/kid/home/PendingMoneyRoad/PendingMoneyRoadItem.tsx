@@ -25,8 +25,8 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
     comment,
   } = pendingMoneyRoad;
 
-  function openSenaryModal() {
-    openModal(modals.senaryModal, {
+  function openQuinaryModal() {
+    openModal(modals.quinaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -42,8 +42,8 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
     });
   }
 
-  function openQuinaryModal() {
-    openModal(modals.quinaryModal, {
+  function openSenaryModal() {
+    openModal(modals.senaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -55,7 +55,7 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      comment: comment,
+      // comment: comment,
     });
   }
 

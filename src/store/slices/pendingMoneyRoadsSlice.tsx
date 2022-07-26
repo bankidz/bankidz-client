@@ -11,30 +11,31 @@ export type TPendingMoneyRoadsState = {
 };
 
 const initialState: TPendingMoneyRoadsState = {
-  pendingMoneyRoads: [
-    {
-      id: 8,
-      isMom: true,
-      title: 'FE Mock) 아이패드 사기',
-      itemName: '전자제품',
-      challengeCategoryName: '이자율 받기',
-      isAchieved: false,
-      interestRate: 10,
-      totalPrice: 150000,
-      weekPrice: 10000,
-      weeks: 15,
-      createdAt: '2022-07-14 03:28:29',
-      status: EMoneyRoadStatus.REJECTED,
-      progressList: [
-        {
-          challengeId: 8,
-          weeks: 1,
-          isAchieved: false,
-        },
-      ],
-      comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
-    },
-  ],
+  pendingMoneyRoads: null,
+  // [
+  //   {
+  //     id: 1,
+  //     isMom: true,
+  //     title: 'FE Mock) 아이패드 사기',
+  //     itemName: '전자제품',
+  //     challengeCategoryName: '이자율 받기',
+  //     isAchieved: false,
+  //     interestRate: 10,
+  //     totalPrice: 150000,
+  //     weekPrice: 10000,
+  //     weeks: 15,
+  //     createdAt: '2022-07-14 03:28:29',
+  //     status: EMoneyRoadStatus.REJECTED,
+  //     progressList: [
+  //       {
+  //         challengeId: 8,
+  //         weeks: 1,
+  //         isAchieved: false,
+  //       },
+  //     ],
+  //     comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
+  //   },
+  // ],
   pendingMoneyRoadsStatus: 'idle',
 };
 
@@ -59,9 +60,7 @@ export const PendingMoneyRoadsSlice = createSlice({
       })
       .addCase(fetchPendingMoneyRoads.fulfilled, (state, action) => {
         state.pendingMoneyRoadsStatus = 'succeeded';
-        state.pendingMoneyRoads = state.pendingMoneyRoads!.concat(
-          action.payload.data,
-        );
+        state.pendingMoneyRoads = action.payload.data;
       })
       .addCase(fetchPendingMoneyRoads.rejected, (state, action) => {
         state.pendingMoneyRoadsStatus = 'failed';

@@ -38,30 +38,33 @@ export type TWalkingMoneyRoadsState = {
 };
 
 const initialState: TWalkingMoneyRoadsState = {
-  walkingMoneyRoads: [
-    {
-      id: 8,
-      isMom: true,
-      title: 'FE Mock) 아이패드 사기',
-      itemName: '전자제품',
-      challengeCategoryName: '이자율 받기',
-      isAchieved: false,
-      interestRate: 10,
-      totalPrice: 150000,
-      weekPrice: 10000,
-      weeks: 15,
-      createdAt: '2022-07-14 03:28:29',
-      status: 2,
-      progressList: [
-        {
-          challengeId: 8,
-          weeks: 1,
-          isAchieved: false,
-        },
-      ],
-      comment: null,
-    },
-  ],
+  walkingMoneyRoads: null,
+  // [
+  //   {
+  //     // 배열 자체가 null인 경우 (걷고있는 돈길이 없는 경우 null을 response) 와 구분하기 위해
+  //     // 배열의 초기상태의 첫번째 유일한 원소의 id를 -1로 초기화 합니다.
+  //     id: 1,
+  //     isMom: true,
+  //     title: 'FE Mock) 아이패드 사기',
+  //     itemName: '전자제품',
+  //     challengeCategoryName: '이자율 받기',
+  //     isAchieved: false,
+  //     interestRate: 10,
+  //     totalPrice: 150000,
+  //     weekPrice: 10000,
+  //     weeks: 15,
+  //     createdAt: '2022-07-14 03:28:29',
+  //     status: 2,
+  //     progressList: [
+  //       {
+  //         challengeId: 8,
+  //         weeks: 1,
+  //         isAchieved: false,
+  //       },
+  //     ],
+  //     comment: null,
+  //   },
+  // ],
   walkingMoneyRoadsStatus: 'idle',
 };
 
@@ -86,9 +89,7 @@ export const walkingMoneyRoadsSlice = createSlice({
       })
       .addCase(fetchWalkingMoneyRoads.fulfilled, (state, action) => {
         state.walkingMoneyRoadsStatus = 'succeeded';
-        state.walkingMoneyRoads = state.walkingMoneyRoads!.concat(
-          action.payload.data,
-        );
+        state.walkingMoneyRoads = action.payload.data;
       })
       .addCase(fetchWalkingMoneyRoads.rejected, (state, action) => {
         state.walkingMoneyRoadsStatus = 'failed';

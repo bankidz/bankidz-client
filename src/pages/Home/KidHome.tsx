@@ -35,21 +35,30 @@ import Modals from '@components/common/modal/Modals';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
-  const dispatch = useAppDispatch();
 
+  const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
+  const weeklyProgress = useAppSelector(selectWeeklyProgress);
+  const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
+  const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
+  const pendingMoneyRoadsStatus = useAppSelector(selectPendingMoneyRoadsStatus);
+  const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
+
+  const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
-      await dispatch(fetchWeeklyProgress({ axiosPrivate }));
-      await dispatch(fetchWalkingMoneyRoads({ axiosPrivate }));
-      await dispatch(fetchPendingMoneyRoads({ axiosPrivate }));
+      // TODO: 초기상태 undefined로 두고, 초기상태 아닌 경우만 API fetch 하도록 한다.
+      weeklyProgressStatus === 'idle' &&
+        (await dispatch(fetchWeeklyProgress({ axiosPrivate })));
+      walkingMoneyRoadsStatus === 'idle' &&
+        (await dispatch(fetchWalkingMoneyRoads({ axiosPrivate })));
+      pendingMoneyRoadsStatus === 'idle' &&
+        (await dispatch(fetchPendingMoneyRoads({ axiosPrivate })));
     }
     hydrate();
   }, []);
 
   // 주간 진행상황
-  const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
-  const weeklyProgress = useAppSelector(selectWeeklyProgress);
   let weeklyProgressContent;
   if (weeklyProgressStatus === 'loading') {
     weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
@@ -69,9 +78,10 @@ function KidHome() {
   }
 
   // 걷고있는 돈길
-  const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
-  const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
-  const disable = walkingMoneyRoads!.length === 5 ? 'true' : 'false'; // expected string type
+  let disable = 'false';
+  if (walkingMoneyRoads !== null && walkingMoneyRoads.length === 5) {
+    disable = 'true';
+  }
   const navigate = useNavigate();
   function handleContractNewMoneyRoadButtonClick() {
     navigate('/create/1');
@@ -99,8 +109,6 @@ function KidHome() {
   }
 
   // 대기중인 돈길
-  const pendingMoneyRoadsStatus = useAppSelector(selectPendingMoneyRoadsStatus);
-  const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
   let pendingMoneyRoadsContent;
   if (pendingMoneyRoadsStatus === 'loading') {
     pendingMoneyRoadsContent = <p>Loading...</p>;
