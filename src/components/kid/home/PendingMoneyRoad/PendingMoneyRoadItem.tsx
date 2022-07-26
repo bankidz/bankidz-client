@@ -3,13 +3,17 @@ import { TMoneyRoadStatus } from '@lib/types/kid';
 import { getDate } from '@lib/utils/common/getDate';
 import styled from 'styled-components';
 
-interface ChallengeItemProps {
+interface PendingMoneyRoadItemProps {
   title: string | null;
   createdAt: string | null;
   status: TMoneyRoadStatus;
 }
 
-function ChallengeItem({ title, createdAt, status }: ChallengeItemProps) {
+function PendingMoneyRoadItem({
+  title,
+  createdAt,
+  status,
+}: PendingMoneyRoadItemProps) {
   return (
     <Wrapper>
       <div className="text-wrapper">
@@ -23,7 +27,7 @@ function ChallengeItem({ title, createdAt, status }: ChallengeItemProps) {
   );
 }
 
-export default ChallengeItem;
+export default PendingMoneyRoadItem;
 
 const Wrapper = styled.div`
   width: 100%;

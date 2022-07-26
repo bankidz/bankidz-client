@@ -2,15 +2,17 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
 import challengePayloadReducer from '../slices/challengePayloadSlice';
-import walkingMoneyRoadReducer from '../slices/walkingMoneyRoadSlice';
-import pendingMoneyRoadReducer from '../slices/pendingMoneyRoadSlice';
+import walkingMoneyRoadsReducer from '../slices/walkingMoneyRoadsSlice';
+import pendingMoneyRoadsReducer from '../slices/pendingMoneyRoadsSlice';
+import weeklyProgressReducer from '../slices/weeklyProgressSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     challengePayload: challengePayloadReducer,
-    walkingMoneyRoad: walkingMoneyRoadReducer,
-    pendingMoneyRoad: pendingMoneyRoadReducer,
+    walkingMoneyRoads: walkingMoneyRoadsReducer,
+    pendingMoneyRoads: pendingMoneyRoadsReducer,
+    weeklyProgress: weeklyProgressReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

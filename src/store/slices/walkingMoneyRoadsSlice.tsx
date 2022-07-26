@@ -1,4 +1,3 @@
-import { axiosPublic } from '@lib/api/axios';
 import { TFetchStatus } from '@lib/types/api';
 import { TChallengeCategory, TInterestRate } from '@lib/types/common';
 import { TItemName, TMoneyRoadStatus } from '@lib/types/kid';
@@ -29,17 +28,17 @@ export interface IMoneyRoad {
   comment: string | null;
 }
 
-export type TWalkingMoneyRoadState = {
-  walkingMoneyRoad: IMoneyRoad[];
-  walkingMoneyRoadStatus?: TFetchStatus;
+export type TWalkingMoneyRoadsState = {
+  walkingMoneyRoads: IMoneyRoad[] | null;
+  walkingMoneyRoadsStatus?: TFetchStatus;
 };
 
-const initialState: TWalkingMoneyRoadState = {
-  walkingMoneyRoad: [
+const initialState: TWalkingMoneyRoadsState = {
+  walkingMoneyRoads: [
     {
       id: 8,
       isMom: true,
-      title: '아이패드 사기',
+      title: 'FE Mock) 아이패드 사기',
       targetItemName: '전자제품',
       challengeCategoryName: '이자율 받기',
       isAchieved: false,
@@ -59,42 +58,43 @@ const initialState: TWalkingMoneyRoadState = {
       comment: null,
     },
   ],
-  walkingMoneyRoadStatus: 'idle',
+  walkingMoneyRoadsStatus: 'idle',
 };
 
 // GET: 걷고있는 돈길 데이터 fetch
-export const fetchWalkingMoneyRoad = createAsyncThunk(
-  'walkingMoneyRoad/fetch',
+export const fetchWalkingMoneyRoads = createAsyncThunk(
+  'walkingMoneyRoads/fetchWalkingMoneyRoads',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/?status=accept');
-    console.log(response.data);
     return response.data;
   },
 );
 
-export const walkingMoneyRoadSlice = createSlice({
-  name: 'walkingMoneyRoad',
+export const walkingMoneyRoadsSlice = createSlice({
+  name: 'walkingMoneyRoads',
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(fetchWalkingMoneyRoad.pending, (state) => {
-        state.walkingMoneyRoadStatus = 'loading';
+      .addCase(fetchWalkingMoneyRoads.pending, (state) => {
+        state.walkingMoneyRoadsStatus = 'loading';
       })
-      .addCase(fetchWalkingMoneyRoad.fulfilled, (state, action) => {
-        state.walkingMoneyRoadStatus = 'succeeded';
-        state.walkingMoneyRoad.concat(action.payload.data);
+      .addCase(fetchWalkingMoneyRoads.fulfilled, (state, action) => {
+        state.walkingMoneyRoadsStatus = 'succeeded';
+        state.walkingMoneyRoads = state.walkingMoneyRoads!.concat(
+          action.payload.data,
+        );
       })
-      .addCase(fetchWalkingMoneyRoad.rejected, (state, action) => {
-        state.walkingMoneyRoadStatus = 'failed';
+      .addCase(fetchWalkingMoneyRoads.rejected, (state, action) => {
+        state.walkingMoneyRoadsStatus = 'failed';
         console.error(action.error.message);
       });
   },
 });
 
-export const selectWalkingMoneyRoadStatus = (state: RootState) =>
-  state.walkingMoneyRoad.walkingMoneyRoadStatus;
-export const selectWalkingMoneyRoad = (state: RootState) =>
-  state.walkingMoneyRoad.walkingMoneyRoad;
-export default walkingMoneyRoadSlice.reducer;
+export const selectWalkingMoneyRoadsStatus = (state: RootState) =>
+  state.walkingMoneyRoads.walkingMoneyRoadsStatus;
+export const selectWalkingMoneyRoads = (state: RootState) =>
+  state.walkingMoneyRoads.walkingMoneyRoads;
+export default walkingMoneyRoadsSlice.reducer;

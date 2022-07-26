@@ -10,22 +10,27 @@ import { TLevel } from '@lib/types/common';
 import { selectLevel } from '@store/slices/authSlice';
 import { renderHomeBackground } from '@lib/utils/common/renderHomeBackground';
 import { renderHomeBanki } from '@lib/utils/common/renderHomeBanki';
+import EmptyPendingMoneyRoad from '@components/kid/home/PendingMoneyRoad/EmptyPendingMoneyRoad';
+import PendingMoneyRoadList from '@components/kid/home/PendingMoneyRoad/PendingMoneyRoadList';
+import { useEffect } from 'react';
+import {
+  fetchWeeklyProgress,
+  selectWeeklyProgress,
+  selectWeeklyProgressStatus,
+} from '@store/slices/weeklyProgressSlice';
+import {
+  fetchWalkingMoneyRoads,
+  selectWalkingMoneyRoads,
+  selectWalkingMoneyRoadsStatus,
+} from '@store/slices/walkingMoneyRoadsSlice';
+import {
+  fetchPendingMoneyRoads,
+  selectPendingMoneyRoads,
+  selectPendingMoneyRoadsStatus,
+} from '@store/slices/pendingMoneyRoadsSlice';
 import EmptyWalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/EmptyWalkingMoneyRoad';
 import WalkingMoneyRoadList from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoadList';
 import ContractNewMoneyRoadButton from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadButton';
-import EmptyWaitingMoneyRoad from '@components/kid/home/WaitingMoneyRoad/EmptyWaitingMoneyRoad';
-import WaitingMoneyRoadList from '@components/kid/home/WaitingMoneyRoad/WaitingMoneyRoadList';
-import {
-  fetchWalkingMoneyRoad,
-  selectWalkingMoneyRoad,
-  selectWalkingMoneyRoadStatus,
-} from '@store/slices/walkingMoneyRoadSlice';
-import {
-  fetchPendingMoneyRoad,
-  selectPendingMoneyRoad,
-  selectPendingMoneyRoadStatus,
-} from '@store/slices/pendingMoneyRoadSlice';
-import { useEffect } from 'react';
 
 function HomeKid() {
   const navigate = useNavigate();
@@ -34,66 +39,79 @@ function HomeKid() {
 
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
-    async function fetchData() {
-      try {
-        await dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
-        // await dispatch(fetchPendingMoneyRoad({ axiosPrivate }));
-      } catch (error: any) {
-        console.log(error.message);
-      }
+    async function hydrate() {
+      await dispatch(fetchWeeklyProgress({ axiosPrivate }));
+      await dispatch(fetchWalkingMoneyRoads({ axiosPrivate }));
+      await dispatch(fetchPendingMoneyRoads({ axiosPrivate }));
     }
-    fetchData();
+    hydrate();
   }, []);
 
-  // TODO: fetch summary
-
-  // 요약
+  // 주간 진행상황
+  const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
+  const weeklyProgress = useAppSelector(selectWeeklyProgress);
+  let weeklyProgressContent;
+  if (weeklyProgressStatus === 'loading') {
+    weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
+  } else if (weeklyProgressStatus === 'succeeded') {
+    weeklyProgressContent = (
+      // TODO: to 규진) Summary 컴포넌트 확장성을 위해 weeklyProgress 객체 자체를 컴포넌트에 prop으로 넘겨주도록 props 수정하면 좋겠음
+      // month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
+      // 재사용 컴포넌트의 props는 최대한 간결하게!
+      <Summary
+        current={weeklyProgress.currentSavings}
+        goal={weeklyProgress.totalPrice}
+        month={6}
+        week={4}
+      />
+    );
+  } else if (weeklyProgressStatus === 'failed') {
+    weeklyProgressContent = <p>Failed</p>;
+  }
 
   // 걷고있는 돈길
-  const walkingMoneyRoadStatus = useAppSelector(selectWalkingMoneyRoadStatus);
-  const walkingMoneyRoad = useAppSelector(selectWalkingMoneyRoad);
-  let walkingMoneyRoadContent;
-  if (walkingMoneyRoadStatus === 'loading') {
-    walkingMoneyRoadContent = <p>Loading...</p>;
-  } else if (walkingMoneyRoadStatus === 'succeeded') {
-    if (walkingMoneyRoad === null) {
-      walkingMoneyRoadContent = <EmptyWalkingMoneyRoad />;
+  const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
+  const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
+  let walkingMoneyRoadsContent;
+  if (walkingMoneyRoadsStatus === 'loading') {
+    walkingMoneyRoadsContent = <p>Loading...</p>;
+  } else if (walkingMoneyRoadsStatus === 'succeeded') {
+    if (walkingMoneyRoads === null) {
+      walkingMoneyRoadsContent = <EmptyWalkingMoneyRoad />;
     } else {
-      walkingMoneyRoadContent = (
+      walkingMoneyRoadsContent = (
         <>
-          <WalkingMoneyRoadList walkingMoneyRoad={walkingMoneyRoad} />
+          <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads} />
           <ContractNewMoneyRoadButton disable={false} />
         </>
       );
     }
-  } else if (walkingMoneyRoadStatus === 'failed') {
-    walkingMoneyRoadContent = <p>Failed</p>;
+  } else if (walkingMoneyRoadsStatus === 'failed') {
+    walkingMoneyRoadsContent = <p>Failed</p>;
   }
 
   // 대기중인 돈길
-  const pendingMoneyRoadStatus = useAppSelector(selectPendingMoneyRoadStatus);
-  const pendingMoneyRoad = useAppSelector(selectPendingMoneyRoad);
-  let pendingMoneyRoadContent;
-  if (pendingMoneyRoadStatus === 'loading') {
-    pendingMoneyRoadContent = <p>Loading...</p>;
-  } else if (pendingMoneyRoadStatus === 'succeeded') {
-    if (pendingMoneyRoad === null) {
-      pendingMoneyRoadContent = <EmptyWaitingMoneyRoad />;
+  const pendingMoneyRoadsStatus = useAppSelector(selectPendingMoneyRoadsStatus);
+  const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
+  let pendingMoneyRoadsContent;
+  if (pendingMoneyRoadsStatus === 'loading') {
+    pendingMoneyRoadsContent = <p>Loading...</p>;
+  } else if (pendingMoneyRoadsStatus === 'succeeded') {
+    if (pendingMoneyRoads === null) {
+      pendingMoneyRoadsContent = <EmptyPendingMoneyRoad />;
     } else {
-      pendingMoneyRoadContent = (
-        <WaitingMoneyRoadList pendingMoneyRoad={pendingMoneyRoad} />
+      pendingMoneyRoadsContent = (
+        <PendingMoneyRoadList pendingMoneyRoads={pendingMoneyRoads} />
       );
     }
-  } else if (pendingMoneyRoadStatus === 'failed') {
-    pendingMoneyRoadContent = <p>Failed</p>;
+  } else if (pendingMoneyRoadsStatus === 'failed') {
+    pendingMoneyRoadsContent = <p>Failed</p>;
   }
 
   return (
     <Wrapper>
       <Content>
         <MarginTemplate>
-          {/* TODO: delete test code */}
-          {/* <button onClick={handleTest}>fetch test</button> */}
           <div className="logo-positioner">
             <BANKIDZ />
           </div>
@@ -101,17 +119,15 @@ function HomeKid() {
           <div className="level-badge-positioner">
             <LevelBadge level={level} />
           </div>
-          <div className="summary-positioner">
-            <Summary current={1000} goal={5000} month={6} week={4} />
-          </div>
+          <div className="summary-positioner">{weeklyProgressContent}</div>
 
-          <WalkingMoneyRoadWrapper>
+          <WalkingMoneyRoadsWrapper>
             <header>걷고있는 돈길</header>
-            {walkingMoneyRoadContent}
-          </WalkingMoneyRoadWrapper>
+            {walkingMoneyRoadsContent}
+          </WalkingMoneyRoadsWrapper>
           <WaitingMoneyRoadWrapper>
             <header>대기중인 돈길</header>
-            {pendingMoneyRoadContent}
+            {pendingMoneyRoadsContent}
           </WaitingMoneyRoadWrapper>
           <Spaceholder />
         </MarginTemplate>
@@ -178,7 +194,7 @@ const StyledHeader = styled.header`
   line-height: 150%;
 `;
 
-const WalkingMoneyRoadWrapper = styled.div`
+const WalkingMoneyRoadsWrapper = styled.div`
   margin-top: 48px;
 
   header {
