@@ -1,24 +1,39 @@
 import { TItemName } from '@lib/types/kid';
 import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface WalkingMoneyRoadItemProps {
   itemName: TItemName;
   title: string | null;
+  to: any;
 }
 
-function WalkingMoneyRoadItem({ itemName, title }: WalkingMoneyRoadItemProps) {
+function WalkingMoneyRoadItem({
+  itemName,
+  title,
+  to,
+}: WalkingMoneyRoadItemProps) {
   return (
-    <Wrapper>
+    <Wrapper to={to}>
       <div>{renderItemIllust(itemName)}</div>
       <span>{title}</span>
     </Wrapper>
   );
 }
 
+// function Button(props: any) {
+//   return props.to ? (
+//     <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
+//   ) : (
+//     <StyledButton {...props} />
+//   );
+// }
+// export default Button;
+
 export default WalkingMoneyRoadItem;
 
-const Wrapper = styled.div`
+const Wrapper = styled(Link)`
   width: 100%;
   height: 54px;
   background: ${({ theme }) => theme.palette.greyScale.white};

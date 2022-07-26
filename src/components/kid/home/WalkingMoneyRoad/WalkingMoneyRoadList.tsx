@@ -11,6 +11,7 @@ function WalkingMoneyRoadList({ walkingMoneyRoads }: TWalkingMoneyRoadsState) {
           key={walkingMoneyRoad.id}
           itemName={walkingMoneyRoad.targetItemName as TItemName}
           title={walkingMoneyRoad.title}
+          to={'/sungwoo'}
         />
       ))}
     </Wrapper>
