@@ -9,8 +9,8 @@ import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import { renderItemIllust } from '@lib/utils/kid';
-import { getContractEndDate } from '@lib/utils/common';
+import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 
 interface QuaternaryModalProps {
   /**
@@ -54,7 +54,9 @@ function QuaternaryModal({
       content: {
         height: '554px',
         position: 'absolute',
-        top: '14vh',
+        // top: '14vh',
+        top: '50vh',
+        transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

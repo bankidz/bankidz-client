@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Button from '@components/common/button/Button';
-import { TRoleDependency } from '@lib/types/kid';
-import { renderRoleIllust, renderRoleText } from '@lib/utils/kid';
+import { IRoleDependency } from '@lib/types/kid';
 import { HTMLAttributes } from 'react';
+import { renderRoleText } from '@lib/utils/common/renderRoleText';
+import { renderRoleIllust } from '@lib/utils/common/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean | null;

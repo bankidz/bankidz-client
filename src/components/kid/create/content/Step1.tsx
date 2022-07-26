@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { kidMock } from '@lib/mocks/kid';
-import { TFamilyState } from '@lib/types/family';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';
 import RoleButton from '@components/common/button/RoleButton';

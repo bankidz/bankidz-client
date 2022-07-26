@@ -15,16 +15,6 @@ function RegisterPage() {
     }
   }
   const currentStep = getValidCurrentStep(parseInt(step!));
-
-  async function handleClick() {
-    try {
-      const response = await axiosPublic.patch('/user/refresh');
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   return (
     <>
       <ForegroundTemplate label="">
@@ -33,8 +23,6 @@ function RegisterPage() {
           {currentStep === 2 && <RegisterRole />}
         </MarginTemplate>
       </ForegroundTemplate>
-      {/* TODO: test code */}
-      <button onClick={handleClick}>토큰 리프레시 테스트</button>
     </>
   );
 }

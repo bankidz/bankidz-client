@@ -1,51 +1,55 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import HomeParent from './parent/HomeParent';
-import PendingKid from './kid/PendingKid';
+import ParentHome from './parent/ParentHome';
+import KidPendingMoneyRoad from './kid/KidPendingMoneyRoad';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import HomeKid from './kid/HomeKid';
-import PendingParent from './parent/PendingParent';
+import KidHome from './kid/KidHome';
+import ParentPendingMoneyRoad from './parent/ParentPendingMoneyRoad';
 import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import CheckStepParams from '@components/kid/create/CheckStepParams';
-import ProceedingChallenge from './ProceedingChallenge';
+import CommonWalkingMoneyRoad from './Common/CommonWalkingMoneyRoad';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
   const level = useAppSelector(selectLevel);
   return (
     <Routes>
+      {/* 홈 */}
       <Route
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid ? <HomeKid /> : <HomeParent />}
+            {isKid ? <KidHome /> : <ParentHome />}
           </BackgroundTemplate>
         }
       />
+      {/* 걷고있는 돈길 */}
+      <Route
+        path="/walking/:challengeId"
+        element={
+          <ForegroundTemplate label="걷고있는 돈길">
+            <CommonWalkingMoneyRoad/>
+          </ForegroundTemplate>
+        }
+      />
+      {/* 대기중인 돈길 */}
       <Route
         path="pending/:challengeId"
         element={
           isKid ? (
             <ForegroundTemplate label="대기중인 돈길">
-              <PendingKid />
+              <KidPendingMoneyRoad />
             </ForegroundTemplate>
           ) : (
             <ForegroundTemplate label="제안받은 돈길">
-              <PendingParent />
+              <ParentPendingMoneyRoad />
             </ForegroundTemplate>
           )
         }
       />
-      <Route
-        path="/proceeding/:challengeId"
-        element={
-          <ForegroundTemplate label="걷고있는 돈길" level={level}>
-            <ProceedingChallenge level={level} />
-          </ForegroundTemplate>
-        }
-      />
+      {/* 새로운 돈길 계약하기 */}
       <Route
         path="/create/:step"
         element={
@@ -56,6 +60,7 @@ function HomeRouter() {
           </CheckStepParams>
         }
       />
+      {/* ??? */}
       <Route
         path="/create/*"
         element={

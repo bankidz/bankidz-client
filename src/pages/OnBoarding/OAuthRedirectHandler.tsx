@@ -17,7 +17,7 @@ function OAuthRedirectHandler() {
     async function processLogin() {
       try {
         await dispatch(login({ code })).unwrap();
-        navigate('/');
+        navigate('/sungwoo'); // TODO: replace with '/'
       } catch (error: any) {
         console.error(error.message);
       }

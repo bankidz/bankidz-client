@@ -1,4 +1,4 @@
-import { TRequestStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -21,7 +21,7 @@ type TPostChallengeResponseState = {
 };
 
 type TChallengePayloadState = {
-  status: TRequestStatus;
+  status: TFetchStatus;
   error: string | undefined;
   challenge: {
     category: string;

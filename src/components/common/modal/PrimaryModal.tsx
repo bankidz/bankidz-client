@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
-import { renderCongratsIllust } from '@lib/utils/kid';
+import { renderCongratsIllust } from '@lib/utils/common/renderCongratsIllust';
 
 interface PrimaryModalProps {
   /**
@@ -39,7 +39,9 @@ function PrimaryModal({
       content: {
         height: '488px',
         position: 'absolute',
-        top: '19vh',
+        // top: '19vh',
+        top: '50vh',
+        transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

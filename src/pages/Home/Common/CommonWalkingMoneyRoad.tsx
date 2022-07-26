@@ -1,24 +1,23 @@
 import { calcRatio } from '@lib/styles/theme';
-import getColorByLevel from '@lib/utils/home/getColorByLevel';
+import getColorByLevel from '@lib/utils/common/getColorByLevel';
+import { useAppSelector } from '@store/app/hooks';
+import { selectLevel } from '@store/slices/authSlice';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-type ProceedingChallengeProps = {
-  level: 1 | 2 | 3 | 4 | 5 | null;
-};
-
-function ProceedingChallenge({ level }: ProceedingChallengeProps) {
+function CommonWalkingMoneyRoad() {
   const { challengeId } = useParams();
-  const colorByLevel = getColorByLevel(level);
+  const level = useAppSelector(selectLevel);
+  const colorByLevel = getColorByLevel(level!);
   return (
     <>
       <Header colorByLevel={colorByLevel}></Header>
-      <Content></Content>
+      <Content>걷고있는 돈길 상세</Content>
     </>
   );
 }
 
-export default ProceedingChallenge;
+export default CommonWalkingMoneyRoad;
 
 const Header = styled.div<{ colorByLevel: string }>`
   position: relative;

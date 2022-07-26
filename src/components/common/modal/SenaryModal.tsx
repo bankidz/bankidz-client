@@ -6,12 +6,12 @@ import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-
 import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
-import { renderItemIllust } from '@lib/utils/kid';
 import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import Button from '../button/Button';
-import { getContractEndDate } from '@lib/utils/common';
+import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 
 interface SenaryModalProps {
   /**
@@ -55,9 +55,11 @@ function SenaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '670px',
+        height: '645px',
         position: 'absolute',
-        top: '5vh',
+        // top: '5vh',
+        top: '50vh',
+        transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
         background: 'rgba(36, 39, 41, 0)',

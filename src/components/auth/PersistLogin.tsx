@@ -24,7 +24,7 @@ function PersistLogin() {
       }
     };
     // verify only on refresh
-    accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
+    !accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
     return () => (isMounted = false);
   }, []);
 
@@ -33,7 +33,7 @@ function PersistLogin() {
       {!persist ? (
         <Outlet />
       ) : isLoading ? (
-        <p>Loading...</p>
+        <p>자동 로그인 처리중입니다...</p>
       ) : (
         <Outlet />
       )}

@@ -26,7 +26,6 @@ function useAxiosPrivate() {
       (response) => response,
       async (error) => {
         const prevRequest = error?.config;
-        // TODO: status 401 확인
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           // access token expired (401) -> refresh access token -> request prevRequest
           prevRequest.sent = true;

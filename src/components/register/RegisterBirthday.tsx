@@ -73,7 +73,7 @@ function RegisterBirthday() {
     const temp2 = MONTH_REGEX.test(month);
     const temp3 = DAY_REGEX.test(day);
     if (!temp1 || !temp2 || !temp3) {
-      console.error('자바스크립트 해킹이 감지되었습니다.');
+      console.error('부적절한 접근입니다.');
       return;
     }
     setYear('');

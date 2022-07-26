@@ -2,7 +2,8 @@ import { HTMLAttributes, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as RoleButtonBorder } from '@assets/border/role-button-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
-import { renderRoleIllust, renderRoleText } from '@lib/utils/kid';
+import { renderRoleIllust } from '@lib/utils/common/renderRoleIllust';
+import { renderRoleText } from '@lib/utils/common/renderRoleText';
 
 interface RoleButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;
@@ -109,8 +110,8 @@ const StyledButton = styled.button<{
         `}
       // 딸
       ${({ isKid, isFemale }) =>
-        isKid == true &&
-        isFemale == true &&
+        isKid === true &&
+        isFemale === true &&
         css`
           margin-left: ${calcRatio(23.02, 146)};
           width: ${calcRatio(101.1, 146)};
@@ -119,8 +120,8 @@ const StyledButton = styled.button<{
 
     span {
       width: 100%;
-      ${({ theme }) => theme.typo.button.InnerText_T_15_EB}
-      color: ${({ theme }) => theme.palette.greyScale.grey700}
+      ${({ theme }) => theme.typo.button.InnerText_T_15_EB};
+      color: ${({ theme }) => theme.palette.greyScale.grey700};
     }
   }
 `;
