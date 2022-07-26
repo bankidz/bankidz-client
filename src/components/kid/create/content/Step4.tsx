@@ -19,9 +19,9 @@ import { ReactComponent as Alert } from '@assets/icon/alert.svg';
 import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
 import useModals from '@hooks/useModals';
 import Modals, { modals } from '@components/common/modal/Modals';
-import getChallengeStep4Prices from '@lib/utils/createChallenge/getChallengeStep4Prices';
-import getChallengeStep4Weeks from '@lib/utils/createChallenge/getChallengeStep4Weeks';
-import getCommaThreeDigits from '@lib/utils/createChallenge/getCommaThreeDigits';
+import getChallengeStep4Prices from '@lib/utils/kid/getChallengeStep4Prices';
+import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';
+import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 
 export type TStep4Form = {
   weekPrice: number;

@@ -4,7 +4,7 @@ import { ReactComponent as WalkingBanki } from '@assets/illust/banki/banki_walki
 import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import getCommaThreeDigits from '@lib/utils/createChallenge/getCommaThreeDigits';
+import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 
 interface RangeInputProps extends TSetStep4Form {
   totalPrice: number;

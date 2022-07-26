@@ -30,7 +30,7 @@ function HomeRouter() {
         path="/walking/:challengeId"
         element={
           <ForegroundTemplate label="걷고있는 돈길">
-            <CommonWalkingMoneyRoad/>
+            <CommonWalkingMoneyRoad />
           </ForegroundTemplate>
         }
       />
