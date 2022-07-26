@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-function HomeParent() {
+function ParentHome() {
   const navigate = useNavigate();
   return (
     <>
@@ -23,4 +23,4 @@ function HomeParent() {
   );
 }
 
-export default HomeParent;
+export default ParentHome;

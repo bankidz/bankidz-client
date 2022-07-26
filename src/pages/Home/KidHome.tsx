@@ -32,7 +32,7 @@ import EmptyWalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/EmptyWa
 import WalkingMoneyRoadList from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoadList';
 import ContractNewMoneyRoadLink from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadLink';
 
-function HomeKid() {
+function KidHome() {
   const level = useAppSelector(selectLevel);
   const dispatch = useAppDispatch();
 
@@ -152,7 +152,7 @@ function HomeKid() {
   );
 }
 
-export default HomeKid;
+export default KidHome;
 
 const Wrapper = styled.div`
   width: 100%;

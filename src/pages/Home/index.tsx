@@ -1,15 +1,15 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import ParentHome from './parent/ParentHome';
-import KidPendingMoneyRoad from './kid/KidPendingMoneyRoad';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import KidHome from './kid/KidHome';
-import ParentPendingMoneyRoad from './parent/ParentPendingMoneyRoad';
-import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { selectIsKid } from '@store/slices/authSlice';
 import CheckStepParams from '@components/kid/create/CheckStepParams';
-import CommonWalkingMoneyRoad from './Common/CommonWalkingMoneyRoad';
+import CommonWalkingMoneyRoad from './CommonWalkingMoneyRoad';
+import KidHome from './KidHome';
+import ParentHome from './ParentHome';
+import KidPendingMoneyRoad from './KidPendingMoneyRoad';
+import ParentPendingMoneyRoad from './ParentPendingMoneyRoad';
+import KidCreate from './KidCreate';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -26,7 +26,7 @@ function HomeRouter() {
       />
       {/* 걷고있는 돈길 */}
       <Route
-        path="/walking/:id"
+        path="/walking/:challengeId"
         element={
           <ForegroundTemplate label="걷고있는 돈길">
             <CommonWalkingMoneyRoad />
@@ -35,13 +35,13 @@ function HomeRouter() {
       />
       {/* 대기중인 돈길 */}
       <Route
-        path="pending/:id"
+        path="pending/:challengeId"
         element={
           isKid === true ? (
-            <ForegroundTemplate label="대기중인 돈길">
-              <KidPendingMoneyRoad />
-            </ForegroundTemplate>
+            // <ForegroundTemplate label="대기중인 돈길">
+            <KidPendingMoneyRoad />
           ) : (
+            // </ForegroundTemplate>
             <ForegroundTemplate label="제안받은 돈길">
               <ParentPendingMoneyRoad />
             </ForegroundTemplate>
@@ -54,7 +54,7 @@ function HomeRouter() {
         element={
           <CheckStepParams>
             <ForegroundTemplate label="돈길 계약하기">
-              <CreateKid />
+              <KidCreate />
             </ForegroundTemplate>
           </CheckStepParams>
         }
