@@ -1,21 +1,24 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
 import { TMoneyRoadStatus } from '@lib/types/kid';
 import { getDate } from '@lib/utils/common/getDate';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
   title: string | null;
   createdAt: string | null;
   status: TMoneyRoadStatus;
+  to: string;
 }
 
 function PendingMoneyRoadItem({
   title,
   createdAt,
   status,
+  to,
 }: PendingMoneyRoadItemProps) {
   return (
-    <Wrapper>
+    <StyledLink to={to}>
       <div className="text-wrapper">
         <span className="title">{title}</span>
         <span className="createdAt">{getDate(createdAt)}</span>
@@ -23,13 +26,13 @@ function PendingMoneyRoadItem({
       <SuggestBadgeWrapper>
         <SuggestBadge isSuggesting={status === 0 ? true : false} />
       </SuggestBadgeWrapper>
-    </Wrapper>
+    </StyledLink>
   );
 }
 
 export default PendingMoneyRoadItem;
 
-const Wrapper = styled.div`
+const StyledLink = styled(Link)`
   width: 100%;
   height: 68px;
   background: ${({ theme }) => theme.palette.greyScale.white};

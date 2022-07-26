@@ -30,10 +30,9 @@ import {
 } from '@store/slices/pendingMoneyRoadsSlice';
 import EmptyWalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/EmptyWalkingMoneyRoad';
 import WalkingMoneyRoadList from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoadList';
-import ContractNewMoneyRoadButton from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadButton';
+import ContractNewMoneyRoadLink from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadLink';
 
 function HomeKid() {
-  const navigate = useNavigate();
   const level = useAppSelector(selectLevel);
   const dispatch = useAppDispatch();
 
@@ -57,7 +56,7 @@ function HomeKid() {
     weeklyProgressContent = (
       // TODO: to 규진) Summary 컴포넌트 확장성을 위해 weeklyProgress 객체 자체를 컴포넌트에 prop으로 넘겨주도록 props 수정하면 좋겠음
       // month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
-      // 재사용 컴포넌트의 props는 최대한 간결하게!
+      // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
       <Summary
         current={weeklyProgress.currentSavings}
         goal={weeklyProgress.totalPrice}
@@ -72,17 +71,26 @@ function HomeKid() {
   // 걷고있는 돈길
   const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
+  const disable = walkingMoneyRoads!.length === 5 ? 'true' : 'false'; // expected string type
+  const navigate = useNavigate();
+  function handleContractNewMoneyRoadButtonClick() {
+    navigate('/create/1');
+  }
   let walkingMoneyRoadsContent;
   if (walkingMoneyRoadsStatus === 'loading') {
     walkingMoneyRoadsContent = <p>Loading...</p>;
   } else if (walkingMoneyRoadsStatus === 'succeeded') {
     if (walkingMoneyRoads === null) {
-      walkingMoneyRoadsContent = <EmptyWalkingMoneyRoad />;
+      walkingMoneyRoadsContent = (
+        <EmptyWalkingMoneyRoad
+          onClick={handleContractNewMoneyRoadButtonClick}
+        />
+      );
     } else {
       walkingMoneyRoadsContent = (
         <>
           <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads} />
-          <ContractNewMoneyRoadButton disable={false} />
+          <ContractNewMoneyRoadLink disable={disable} to={'/create/1'} />
         </>
       );
     }
@@ -313,19 +321,3 @@ const Spaceholder = styled.div`
   height: 80px;
   width: 100%;
 `;
-
-// 자식 - 홈 페이지
-//         <button
-//           onClick={() => {
-//             navigate('/create/1', { state: { from: 'home' } });
-//           }}
-//         >
-//           새로운 돈길 계약하기
-//         </button>
-//         <button
-//           onClick={() => {
-//             navigate('/pending/1');
-//           }}
-//         >
-//           대기중인 돈길
-//         </button>

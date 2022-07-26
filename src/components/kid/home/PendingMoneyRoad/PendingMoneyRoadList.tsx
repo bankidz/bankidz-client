@@ -12,6 +12,7 @@ function PendingMoneyRoadList({ pendingMoneyRoads }: TPendingMoneyRoadsState) {
           title={pendingMoneyRoad.title}
           createdAt={pendingMoneyRoad.createdAt}
           status={pendingMoneyRoad.status as TMoneyRoadStatus}
+          to={`/pending/${pendingMoneyRoad.id}`}
         />
       ))}
     </Wrapper>

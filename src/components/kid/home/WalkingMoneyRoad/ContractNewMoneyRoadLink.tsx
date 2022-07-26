@@ -1,34 +1,37 @@
 import { ReactComponent as Plus } from '@assets/icon/plus.svg';
 import { theme } from '@lib/styles/theme';
+import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-interface ContractNewMoneyRoadButtonProps {
-  disable: boolean;
+interface ContractNewMoneyRoadLinkProps {
+  disable: string;
+  to: string;
 }
 
-function ContractNewMoneyRoadButton({
+function ContractNewMoneyRoadLink({
   disable,
-}: ContractNewMoneyRoadButtonProps) {
+  to,
+}: ContractNewMoneyRoadLinkProps) {
   return (
-    <Wrapper disable={disable}>
+    <StyledLink disable={disable} to={to}>
       <Plus
         stroke={
-          disable === true
+          disable === 'true'
             ? theme.palette.greyScale.grey200
             : theme.palette.main.yellow400
         }
       />
       새로운 돈길 계약하기
-    </Wrapper>
+    </StyledLink>
   );
 }
 
-export default ContractNewMoneyRoadButton;
+export default ContractNewMoneyRoadLink;
 
-const Wrapper = styled.button<{ disable: boolean }>`
+const StyledLink = styled(Link)<{ disable: string }>`
   ${({ theme }) => theme.typo.button.Text_T_14_EB};
   ${({ disable }) =>
-    disable === true
+    disable === 'true'
       ? css`
           color: ${({ theme }) => theme.palette.greyScale.grey200};
         `
@@ -54,3 +57,5 @@ const Wrapper = styled.button<{ disable: boolean }>`
     top: 50%;
   }
 `;
+
+// https://mygumi.tistory.com/382

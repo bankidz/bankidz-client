@@ -13,7 +13,6 @@ import CommonWalkingMoneyRoad from './Common/CommonWalkingMoneyRoad';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
-  const level = useAppSelector(selectLevel);
   return (
     <Routes>
       {/* 홈 */}
@@ -21,13 +20,13 @@ function HomeRouter() {
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid ? <KidHome /> : <ParentHome />}
+            {isKid === true ? <KidHome /> : <ParentHome />}
           </BackgroundTemplate>
         }
       />
       {/* 걷고있는 돈길 */}
       <Route
-        path="/walking/:challengeId"
+        path="/walking/:id"
         element={
           <ForegroundTemplate label="걷고있는 돈길">
             <CommonWalkingMoneyRoad />
@@ -36,9 +35,9 @@ function HomeRouter() {
       />
       {/* 대기중인 돈길 */}
       <Route
-        path="pending/:challengeId"
+        path="pending/:id"
         element={
-          isKid ? (
+          isKid === true ? (
             <ForegroundTemplate label="대기중인 돈길">
               <KidPendingMoneyRoad />
             </ForegroundTemplate>

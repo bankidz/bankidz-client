@@ -6,7 +6,7 @@ import styled from 'styled-components';
 interface WalkingMoneyRoadItemProps {
   itemName: TItemName;
   title: string | null;
-  to: any;
+  to: string;
 }
 
 function WalkingMoneyRoadItem({
@@ -15,25 +15,16 @@ function WalkingMoneyRoadItem({
   to,
 }: WalkingMoneyRoadItemProps) {
   return (
-    <Wrapper to={to}>
+    <StyledLink to={to}>
       <div>{renderItemIllust(itemName)}</div>
       <span>{title}</span>
-    </Wrapper>
+    </StyledLink>
   );
 }
 
-// function Button(props: any) {
-//   return props.to ? (
-//     <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
-//   ) : (
-//     <StyledButton {...props} />
-//   );
-// }
-// export default Button;
-
 export default WalkingMoneyRoadItem;
 
-const Wrapper = styled(Link)`
+const StyledLink = styled(Link)`
   width: 100%;
   height: 54px;
   background: ${({ theme }) => theme.palette.greyScale.white};

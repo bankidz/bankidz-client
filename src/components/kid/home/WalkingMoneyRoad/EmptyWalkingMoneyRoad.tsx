@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import { ReactComponent as PlusCircle } from '@assets/icon/plus-circle.svg';
+import { HTMLAttributes } from 'react';
 
-function EmptyWalkingMoneyRoad() {
+interface EmptyWalkingMoneyRoadProps
+  extends HTMLAttributes<HTMLButtonElement> {}
+
+function EmptyWalkingMoneyRoad({ ...props }: EmptyWalkingMoneyRoadProps) {
   return (
     <Wrapper>
-      <button>
+      <button {...props}>
         <PlusCircle />
       </button>
       <span>새로운 돈길 계약하기</span>
