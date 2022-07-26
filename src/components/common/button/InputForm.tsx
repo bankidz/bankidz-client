@@ -2,7 +2,7 @@ import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
-  //placeholder: string;
+  placeholder: string;
   value: string | number;
   //onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   /* 유효성 검사 후 조건에 따라 빨간색 테두리로 나타납니다  */
@@ -47,6 +47,7 @@ function InputForm(
         autoFocus={autoFocus}
         bigFontSize={bigFontSize}
         {...props}
+        placeholder={placeholder}
       />
       {postfix && <p>{postfix}</p>}
     </Wrapper>

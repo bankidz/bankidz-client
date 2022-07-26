@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icon/arrow-left.svg';
+import getColorByLevel from '@lib/utils/common/getColorByLevel';
 
 interface AppBarProps {
   /**
@@ -10,7 +11,7 @@ interface AppBarProps {
   /**
    * 레벨
    */
-  level?: 1 | 2 | 3 | 4 | 5;
+  level?: 1 | 2 | 3 | 4 | 5 | null;
 }
 
 function AppBar({ label, level }: AppBarProps) {
@@ -19,8 +20,10 @@ function AppBar({ label, level }: AppBarProps) {
     navigate(-1);
   };
 
+  const colorByLevel = level && getColorByLevel(level);
+
   return (
-    <Wrapper>
+    <Wrapper colorByLevel={colorByLevel ? colorByLevel : null}>
       <div onClick={onClickAppBar}>
         {level ? <Arrow fill={'#FFFFFF'} /> : <Arrow fill={'#2E3234'} />}
       </div>
@@ -31,7 +34,7 @@ function AppBar({ label, level }: AppBarProps) {
 
 export default AppBar;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ colorByLevel: string | null }>`
   width: 100%;
   height: 48px;
   padding: 0px 18px;
@@ -40,6 +43,14 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  ${({ colorByLevel }) =>
+    colorByLevel &&
+    css`
+      background-color: ${colorByLevel};
+    `}
+
+  z-index: 3;
 
   & > :first-child {
     width: 48px;

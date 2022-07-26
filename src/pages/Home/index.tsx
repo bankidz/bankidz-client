@@ -7,12 +7,13 @@ import KidHome from './kid/KidHome';
 import ParentPendingMoneyRoad from './parent/ParentPendingMoneyRoad';
 import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import CheckStepParams from '@components/kid/create/CheckStepParams';
-import WalkingMoneyRoad from './CommonWalkingMoneyRoad';
+import CommonWalkingMoneyRoad from './Common/CommonWalkingMoneyRoad';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
+  const level = useAppSelector(selectLevel);
   return (
     <Routes>
       {/* 홈 */}
@@ -29,7 +30,7 @@ function HomeRouter() {
         path="/walking/:challengeId"
         element={
           <ForegroundTemplate label="걷고있는 돈길">
-            <WalkingMoneyRoad />
+            <CommonWalkingMoneyRoad />
           </ForegroundTemplate>
         }
       />
