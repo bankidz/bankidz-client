@@ -1,3 +1,14 @@
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+// TODO: 이중작업된 컴포넌트
+
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import SuggestBadge from '@components/common/badges/SuggestBadge';
