@@ -14,7 +14,7 @@ const initialState: TPendingMoneyRoadState = {
     {
       id: 8,
       isMom: true,
-      title: '아이패드 사기',
+      title: 'FE Mock) 아이패드 사기',
       targetItemName: '전자제품',
       challengeCategoryName: '이자율 받기',
       isAchieved: false,
@@ -43,7 +43,6 @@ export const fetchPendingMoneyRoad = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/?status=pending');
-    console.log(response.data);
     return response.data;
   },
 );
@@ -59,7 +58,9 @@ export const PendingMoneyRoadSlice = createSlice({
       })
       .addCase(fetchPendingMoneyRoad.fulfilled, (state, action) => {
         state.pendingMoneyRoadStatus = 'succeeded';
-        state.pendingMoneyRoad.concat(action.payload.data);
+        state.pendingMoneyRoad = state.pendingMoneyRoad.concat(
+          action.payload.data,
+        );
       })
       .addCase(fetchPendingMoneyRoad.rejected, (state, action) => {
         state.pendingMoneyRoadStatus = 'failed';

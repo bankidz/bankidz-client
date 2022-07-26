@@ -37,7 +37,7 @@ function HomeKid() {
     async function fetchData() {
       try {
         await dispatch(fetchWalkingMoneyRoad({ axiosPrivate }));
-        // await dispatch(fetchPendingMoneyRoad({ axiosPrivate }));
+        await dispatch(fetchPendingMoneyRoad({ axiosPrivate }));
       } catch (error: any) {
         console.log(error.message);
       }

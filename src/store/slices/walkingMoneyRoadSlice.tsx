@@ -39,7 +39,7 @@ const initialState: TWalkingMoneyRoadState = {
     {
       id: 8,
       isMom: true,
-      title: '아이패드 사기',
+      title: 'FE Mock) 아이패드 사기',
       targetItemName: '전자제품',
       challengeCategoryName: '이자율 받기',
       isAchieved: false,
@@ -68,7 +68,6 @@ export const fetchWalkingMoneyRoad = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/?status=accept');
-    console.log(response.data);
     return response.data;
   },
 );
@@ -84,7 +83,9 @@ export const walkingMoneyRoadSlice = createSlice({
       })
       .addCase(fetchWalkingMoneyRoad.fulfilled, (state, action) => {
         state.walkingMoneyRoadStatus = 'succeeded';
-        state.walkingMoneyRoad.concat(action.payload.data);
+        state.walkingMoneyRoad = state.walkingMoneyRoad.concat(
+          action.payload.data,
+        );
       })
       .addCase(fetchWalkingMoneyRoad.rejected, (state, action) => {
         state.walkingMoneyRoadStatus = 'failed';

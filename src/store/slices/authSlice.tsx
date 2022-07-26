@@ -17,17 +17,17 @@ export type TAuthState = {
   };
 };
 
-// 주어진 딸
-// 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzI3NzkxLCJzdWIiOiI2IiwiZXhwIjoxNjU4NzI3ODIxLCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.G9UwEE7nBmsYka3XT-HQ0AWWDOs3y47O3kZEmr1-b64',
+// 주어진 (딸)
+// 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzYyMjA0LCJzdWIiOiIyIiwiZXhwIjoxNjYxMTgxNDA0LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.lCXdxi5-q4jP_-XWYL5jkAeSVy1nxJ99SWJRcNWlULE',
 const initialState: TAuthState = {
   auth: {
-    accessToken: null,
-    // accessToken:
-    //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzI3NzkxLCJzdWIiOiI2IiwiZXhwIjoxNjU4NzI3ODIxLCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.G9UwEE7nBmsYka3XT-HQ0AWWDOs3y47O3kZEmr1-b64',
-    isKid: null,
-    // isKid: true,
-    // level: 3,
-    level: null,
+    // accessToken: null,
+    accessToken:
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzYyMjA0LCJzdWIiOiIyIiwiZXhwIjoxNjYxMTgxNDA0LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.lCXdxi5-q4jP_-XWYL5jkAeSVy1nxJ99SWJRcNWlULE',
+    // isKid: null,
+    isKid: true,
+    // level: null,
+    level: 3,
     birthday: null,
     isFemale: null,
     phone: null,
