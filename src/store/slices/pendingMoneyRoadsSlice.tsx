@@ -24,7 +24,7 @@ const initialState: TPendingMoneyRoadsState = {
       weekPrice: 10000,
       weeks: 15,
       createdAt: '2022-07-14 03:28:29',
-      status: 0,
+      status: EMoneyRoadStatus.REJECTED,
       progressList: [
         {
           challengeId: 8,

@@ -9,10 +9,7 @@ function PendingMoneyRoadList({ pendingMoneyRoads }: TPendingMoneyRoadsState) {
       {pendingMoneyRoads!.map((pendingMoneyRoad) => (
         <PendingMoneyRoadItem
           key={pendingMoneyRoad.id}
-          title={pendingMoneyRoad.title}
-          createdAt={pendingMoneyRoad.createdAt}
-          status={pendingMoneyRoad.status as TMoneyRoadStatus}
-          to={`/pending/${pendingMoneyRoad.id}`}
+          pendingMoneyRoad={pendingMoneyRoad}
         />
       ))}
     </Wrapper>

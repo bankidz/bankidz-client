@@ -31,6 +31,7 @@ import {
 import EmptyWalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/EmptyWalkingMoneyRoad';
 import WalkingMoneyRoadList from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoadList';
 import ContractNewMoneyRoadLink from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadLink';
+import Modals from '@components/common/modal/Modals';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
@@ -117,6 +118,9 @@ function KidHome() {
 
   return (
     <Wrapper>
+      {/* 다음 모달은 대기중인 돈길 Item을 통해 열리며,
+      click에 대한 action은 PendingMoneyRoadItem에서 trigger된다. */}
+      <Modals />
       <Content>
         <MarginTemplate>
           <div className="logo-positioner">

@@ -1,35 +1,87 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
+import Modals, { modals } from '@components/common/modal/Modals';
+import useModals from '@hooks/useModals';
+import { EMoneyRoadStatus } from '@lib/types/common';
 import { TMoneyRoadStatus } from '@lib/types/kid';
 import { getDate } from '@lib/utils/common/getDate';
-import { Link } from 'react-router-dom';
+import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
 import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
-  title: string | null;
-  createdAt: string | null;
-  status: TMoneyRoadStatus;
-  to: string;
+  pendingMoneyRoad: IMoneyRoad;
 }
 
-function PendingMoneyRoadItem({
-  title,
-  createdAt,
-  status,
-  to,
-}: PendingMoneyRoadItemProps) {
-  function handleClick() {
-    console.log('click!');
+function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
+  const { openModal } = useModals();
+  const {
+    status,
+    createdAt,
+    interestRate,
+    isMom,
+    itemName,
+    title,
+    totalPrice,
+    weekPrice,
+    weeks,
+    comment,
+  } = pendingMoneyRoad;
+
+  function openSenaryModal() {
+    openModal(modals.senaryModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+      createdAt: createdAt,
+      interestRate: interestRate,
+      isMom: isMom,
+      itemName: itemName,
+      title: title,
+      totalPrice: totalPrice,
+      weekPrice: weekPrice,
+      weeks: weeks,
+      comment: comment,
+    });
   }
+
+  function openQuinaryModal() {
+    openModal(modals.quinaryModal, {
+      onSubmit: () => {
+        console.log('비즈니스 로직 처리...');
+      },
+      createdAt: createdAt,
+      interestRate: interestRate,
+      isMom: isMom,
+      itemName: itemName,
+      title: title,
+      totalPrice: totalPrice,
+      weekPrice: weekPrice,
+      weeks: weeks,
+      comment: comment,
+    });
+  }
+
+  function handleClick() {
+    if (status === EMoneyRoadStatus.PENDING) {
+      openQuinaryModal();
+    } else if (status === EMoneyRoadStatus.REJECTED) {
+      openSenaryModal();
+    }
+  }
+
   return (
-    <StyledButton onClick={handleClick}>
-      <div className="text-wrapper">
-        <span className="title">{title}</span>
-        <span className="createdAt">{getDate(createdAt)}</span>
-      </div>
-      <SuggestBadgeWrapper>
-        <SuggestBadge isSuggesting={status === 0 ? true : false} />
-      </SuggestBadgeWrapper>
-    </StyledButton>
+    <>
+      <StyledButton onClick={handleClick}>
+        <div className="text-wrapper">
+          <span className="title">{title}</span>
+          <span className="createdAt">{getDate(createdAt)}</span>
+        </div>
+        <SuggestBadgeWrapper>
+          <SuggestBadge
+            isSuggesting={status === EMoneyRoadStatus.PENDING ? true : false}
+          />
+        </SuggestBadgeWrapper>
+      </StyledButton>
+    </>
   );
 }
 
