@@ -1,4 +1,5 @@
 import { TFetchStatus } from '@lib/types/api';
+import { EMoneyRoadStatus } from '@lib/types/common';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -15,7 +16,7 @@ const initialState: TPendingMoneyRoadsState = {
       id: 8,
       isMom: true,
       title: 'FE Mock) 아이패드 사기',
-      targetItemName: '전자제품',
+      itemName: '전자제품',
       challengeCategoryName: '이자율 받기',
       isAchieved: false,
       interestRate: 10,
@@ -23,7 +24,7 @@ const initialState: TPendingMoneyRoadsState = {
       weekPrice: 10000,
       weeks: 15,
       createdAt: '2022-07-14 03:28:29',
-      status: 2,
+      status: 0,
       progressList: [
         {
           challengeId: 8,
@@ -31,7 +32,7 @@ const initialState: TPendingMoneyRoadsState = {
           isAchieved: false,
         },
       ],
-      comment: null,
+      comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
     },
   ],
   pendingMoneyRoadsStatus: 'idle',

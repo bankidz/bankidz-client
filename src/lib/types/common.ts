@@ -4,3 +4,9 @@ export type TLevel = 1 | 2 | 3 | 4 | 5 | 6;
 export type TInterestRate = 10 | 20 | 30;
 
 export type TChallengeCategory = '이자율 받기';
+
+export enum EMoneyRoadStatus {
+  REJECTED,
+  PENDING,
+  SUCCEEDED,
+}

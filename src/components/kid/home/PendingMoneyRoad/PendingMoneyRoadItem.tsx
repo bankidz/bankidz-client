@@ -17,8 +17,11 @@ function PendingMoneyRoadItem({
   status,
   to,
 }: PendingMoneyRoadItemProps) {
+  function handleClick() {
+    console.log('click!');
+  }
   return (
-    <StyledLink to={to}>
+    <StyledButton onClick={handleClick}>
       <div className="text-wrapper">
         <span className="title">{title}</span>
         <span className="createdAt">{getDate(createdAt)}</span>
@@ -26,13 +29,13 @@ function PendingMoneyRoadItem({
       <SuggestBadgeWrapper>
         <SuggestBadge isSuggesting={status === 0 ? true : false} />
       </SuggestBadgeWrapper>
-    </StyledLink>
+    </StyledButton>
   );
 }
 
 export default PendingMoneyRoadItem;
 
-const StyledLink = styled(Link)`
+const StyledButton = styled.button`
   width: 100%;
   height: 68px;
   background: ${({ theme }) => theme.palette.greyScale.white};

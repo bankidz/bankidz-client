@@ -54,8 +54,7 @@ function KidHome() {
     weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
-      // TODO: to 규진) Summary 컴포넌트 확장성을 위해 weeklyProgress 객체 자체를 컴포넌트에 prop으로 넘겨주도록 props 수정하면 좋겠음
-      // month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
+      // TODO: to 규진) month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
       // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
       <Summary
         current={weeklyProgress.currentSavings}

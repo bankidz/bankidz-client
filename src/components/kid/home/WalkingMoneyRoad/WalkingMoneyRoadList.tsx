@@ -9,7 +9,7 @@ function WalkingMoneyRoadList({ walkingMoneyRoads }: TWalkingMoneyRoadsState) {
       {walkingMoneyRoads!.map((walkingMoneyRoad) => (
         <WalkingMoneyRoadItem
           key={walkingMoneyRoad.id}
-          itemName={walkingMoneyRoad.targetItemName as TItemName}
+          itemName={walkingMoneyRoad.itemName as TItemName}
           title={walkingMoneyRoad.title}
           to={`/walking/${walkingMoneyRoad.id}`}
         />

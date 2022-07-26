@@ -9,7 +9,7 @@ export interface IMoneyRoad {
   id: number | null;
   isMom: boolean | null;
   title: string | null;
-  targetItemName: TItemName | null;
+  itemName: TItemName | null;
   challengeCategoryName: TChallengeCategory | null;
   isAchieved: boolean | null;
   interestRate: TInterestRate | null;
@@ -39,7 +39,7 @@ const initialState: TWalkingMoneyRoadsState = {
       id: 8,
       isMom: true,
       title: 'FE Mock) 아이패드 사기',
-      targetItemName: '전자제품',
+      itemName: '전자제품',
       challengeCategoryName: '이자율 받기',
       isAchieved: false,
       interestRate: 10,
