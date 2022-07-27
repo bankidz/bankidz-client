@@ -1,6 +1,6 @@
 import { TSetStep4Form } from '@components/kid/create/content/Step4';
 import styled, { css } from 'styled-components';
-import { ReactComponent as WalkingBanki } from '@assets/illust/banki/banki_walking.svg';
+import { ReactComponent as WalkingBanki } from '@assets/illusts/banki/banki_walking.svg';
 import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';

@@ -14,8 +14,8 @@ import {
   selectStep4InitData,
   selectTotalPrice,
 } from '@store/slices/challengePayloadSlice';
-import { ReactComponent as Divider } from '@assets/border/create-challenge-dashed-divider.svg';
-import { ReactComponent as Alert } from '@assets/icon/alert.svg';
+import { ReactComponent as Divider } from '@assets/borders/create-challenge-dashed-divider.svg';
+import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheet/sheetContent/RangeInput';
 import useModals from '@hooks/useModals';
 import Modals, { modals } from '@components/common/modal/Modals';

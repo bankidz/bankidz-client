@@ -1,7 +1,7 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { ReactComponent as BANKIDZ } from '@assets/icon/BANKIDZ.svg';
+import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
 import Summary from '@components/kid/home/Summary';

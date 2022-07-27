@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as PerforatedLineShapeBottom } from '@assets/border/perforated-line-shape-bottom.svg';
+import { ReactComponent as PerforatedLineShapeBottom } from '@assets/borders/perforated-line-shape-bottom.svg';
 
 interface PerforatedLineBottomProps {
   fill: string;

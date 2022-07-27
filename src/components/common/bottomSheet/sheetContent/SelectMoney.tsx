@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as Money_500 } from '@assets/illust/selectMoney/money_500.svg';
-import { ReactComponent as Money_1000 } from '@assets/illust/selectMoney/money_1000.svg';
-import { ReactComponent as Money_5000 } from '@assets/illust/selectMoney/money_5000.svg';
-import { ReactComponent as Money_10000 } from '@assets/illust/selectMoney/money_10000.svg';
-import { ReactComponent as Money_50000 } from '@assets/illust/selectMoney/money_50000.svg';
-import { ReactComponent as Backspace } from '@assets/icon/backspace.svg';
-import { ReactComponent as Refresh } from '@assets/icon/refresh.svg';
+import { ReactComponent as Money_500 } from '@assets/illusts/selectMoney/money_500.svg';
+import { ReactComponent as Money_1000 } from '@assets/illusts/selectMoney/money_1000.svg';
+import { ReactComponent as Money_5000 } from '@assets/illusts/selectMoney/money_5000.svg';
+import { ReactComponent as Money_10000 } from '@assets/illusts/selectMoney/money_10000.svg';
+import { ReactComponent as Money_50000 } from '@assets/illusts/selectMoney/money_50000.svg';
+import { ReactComponent as Backspace } from '@assets/icons/backspace.svg';
+import { ReactComponent as Refresh } from '@assets/icons/refresh.svg';
 import { calcRatio } from '@lib/styles/theme';
 import { darken } from 'polished';
 

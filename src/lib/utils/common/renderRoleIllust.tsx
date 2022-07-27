@@ -1,7 +1,7 @@
-import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
-import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import { ReactComponent as BankiSon } from '@assets/illust/banki/banki_son.svg';
-import { ReactComponent as BankiDaughter } from '@assets/illust/banki/banki_daughter.svg';
+import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
+import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
+import { ReactComponent as BankiSon } from '@assets/illusts/banki/banki_son.svg';
+import { ReactComponent as BankiDaughter } from '@assets/illusts/banki/banki_daughter.svg';
 
 function renderRoleIllust(isKid: boolean, isFemale: boolean) {
   if (isKid === false && isFemale === false) {

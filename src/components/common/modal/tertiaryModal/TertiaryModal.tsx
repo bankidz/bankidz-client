@@ -3,8 +3,8 @@ import { useState } from 'react';
 import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CloseButton from '../../button/CloseButton';
-import { ReactComponent as ModalContentMoney } from '@assets/illust/congrats/coins.svg';
-import { ReactComponent as ModalContentSaving } from '@assets/illust/congrats/congrats_banki_with_coins.svg';
+import { ReactComponent as ModalContentMoney } from '@assets/illusts/congrats/coins.svg';
+import { ReactComponent as ModalContentSaving } from '@assets/illusts/congrats/congrats_banki_with_coins.svg';
 import InstructionCard from './InstructionCard';
 import 'swiper/swiper.min.css';
 

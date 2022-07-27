@@ -1,12 +1,12 @@
-import { ReactComponent as A1 } from '@assets/illust/contractItemNames/general/a1.svg';
-import { ReactComponent as A2 } from '@assets/illust/contractItemNames/general/a2.svg';
-import { ReactComponent as A3 } from '@assets/illust/contractItemNames/general/a3.svg';
-import { ReactComponent as B1 } from '@assets/illust/contractItemNames/general/b1.svg';
-import { ReactComponent as B2 } from '@assets/illust/contractItemNames/general/b2.svg';
-import { ReactComponent as B3 } from '@assets/illust/contractItemNames/general/b3.svg';
-import { ReactComponent as C1 } from '@assets/illust/contractItemNames/general/c1.svg';
-import { ReactComponent as C2 } from '@assets/illust/contractItemNames/general/c2.svg';
-import { ReactComponent as C3 } from '@assets/illust/contractItemNames/general/c3.svg';
+import { ReactComponent as A1 } from '@assets/illusts/contractItemNames/general/a1.svg';
+import { ReactComponent as A2 } from '@assets/illusts/contractItemNames/general/a2.svg';
+import { ReactComponent as A3 } from '@assets/illusts/contractItemNames/general/a3.svg';
+import { ReactComponent as B1 } from '@assets/illusts/contractItemNames/general/b1.svg';
+import { ReactComponent as B2 } from '@assets/illusts/contractItemNames/general/b2.svg';
+import { ReactComponent as B3 } from '@assets/illusts/contractItemNames/general/b3.svg';
+import { ReactComponent as C1 } from '@assets/illusts/contractItemNames/general/c1.svg';
+import { ReactComponent as C2 } from '@assets/illusts/contractItemNames/general/c2.svg';
+import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/general/c3.svg';
 import { TItemName } from '@lib/types/kid';
 
 function renderItemIllust(itemName: TItemName) {

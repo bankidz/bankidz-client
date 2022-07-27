@@ -1,8 +1,8 @@
-import { ReactComponent as Level1 } from '@assets/illust/banki/Home_Banki-1.svg';
-import { ReactComponent as Level2 } from '@assets/illust/banki/Home_Banki-2.svg';
-import { ReactComponent as Level3 } from '@assets/illust/banki/Home_Banki-3.svg';
-import { ReactComponent as Level4 } from '@assets/illust/banki/Home_Banki-4.svg';
-import { ReactComponent as Level5 } from '@assets/illust/banki/Home_Banki-5.svg';
+import { ReactComponent as Level1 } from '@assets/illusts/banki/Home_Banki-1.svg';
+import { ReactComponent as Level2 } from '@assets/illusts/banki/Home_Banki-2.svg';
+import { ReactComponent as Level3 } from '@assets/illusts/banki/Home_Banki-3.svg';
+import { ReactComponent as Level4 } from '@assets/illusts/banki/Home_Banki-4.svg';
+import { ReactComponent as Level5 } from '@assets/illusts/banki/Home_Banki-5.svg';
 import { TLevel } from '@lib/types/common';
 
 function renderHomeBanki(level: TLevel) {

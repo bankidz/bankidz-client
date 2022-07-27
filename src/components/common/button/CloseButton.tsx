@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as Close } from '@assets/icon/close.svg';
+import { ReactComponent as Close } from '@assets/icons/close.svg';
 import { HTMLAttributes } from 'react';
 import { darken } from 'polished';
 

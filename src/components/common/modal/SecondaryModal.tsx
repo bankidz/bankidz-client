@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as CongratsGoal } from '@assets/illust/congrats/congrats_goal.svg';
+import { ReactComponent as CongratsGoal } from '@assets/illusts/congrats/congrats_goal.svg';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as BankiSad } from '@assets/illust/banki/banki_sad.svg';
+import { ReactComponent as BankiSad } from '@assets/illusts/banki/banki_sad.svg';
 
 function EmptyPendingMoneyRoad() {
   return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ReactComponent as PlusCircle } from '@assets/icon/plus-circle.svg';
+import { ReactComponent as PlusCircle } from '@assets/icons/plus-circle.svg';
 import { HTMLAttributes } from 'react';
 
 interface EmptyWalkingMoneyRoadProps

@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as Check } from '@assets/icon/check.svg';
+import { ReactComponent as Check } from '@assets/icons/check.svg';
 import { HTMLAttributes } from 'react';
 import { darken } from 'polished';
 

@@ -1,10 +1,10 @@
 import styled, { ThemeProvider } from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio, theme } from '@lib/styles/theme';
-import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
-import { ReactComponent as VerticalDashedBorder } from '@assets/border/vertical-dashed-border.svg';
-import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
-import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
+import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizontal-dashed-border.svg';
+import { ReactComponent as VerticalDashedBorder } from '@assets/borders/vertical-dashed-border.svg';
+import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
+import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
 import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';

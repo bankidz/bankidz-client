@@ -1,6 +1,6 @@
 import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as SelectItemNameButtonBorder } from '@assets/border/itemName-border.svg';
+import { ReactComponent as SelectItemNameButtonBorder } from '@assets/borders/itemName-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
 
 interface SelectItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {

@@ -1,4 +1,4 @@
-import { ReactComponent as Plus } from '@assets/icon/plus.svg';
+import { ReactComponent as Plus } from '@assets/icons/plus.svg';
 import { theme } from '@lib/styles/theme';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
