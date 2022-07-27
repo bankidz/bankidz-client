@@ -10,7 +10,7 @@ import FinancialRouter from './pages/Financial/FinancialRouter';
 import NotFound from './pages/Etc/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
-import SungwooTestPage from './pages/SungwooTestPage';
+import SungwooTestPage from './pages/Etc/SungwooTestPage';
 
 function App() {
   return (

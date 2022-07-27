@@ -4,14 +4,13 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
-import Summary from '@components/kid/home/Summary';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import { TLevel } from '@lib/types/common';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import EmptyPendingMoneyRoad from '@components/kid/home/PendingMoneyRoad/EmptyPendingMoneyRoad';
-import PendingMoneyRoadList from '@components/kid/home/PendingMoneyRoad/PendingMoneyRoadList';
+import EmptyPendingMoneyRoad from '@components/home/kid/pendingMoneyRoad/EmptyPendingMoneyRoad';
+import PendingMoneyRoadList from '@components/home/kid/pendingMoneyRoad/PendingMoneyRoadList';
 import { useEffect } from 'react';
 import {
   fetchWeeklyProgress,
@@ -28,10 +27,11 @@ import {
   selectPendingMoneyRoads,
   selectPendingMoneyRoadsStatus,
 } from '@store/slices/pendingMoneyRoadsSlice';
-import EmptyWalkingMoneyRoad from '@components/kid/home/WalkingMoneyRoad/EmptyWalkingMoneyRoad';
-import WalkingMoneyRoadList from '@components/kid/home/WalkingMoneyRoad/WalkingMoneyRoadList';
-import ContractNewMoneyRoadLink from '@components/kid/home/WalkingMoneyRoad/ContractNewMoneyRoadLink';
-import Modals from '@components/common/modal/Modals';
+import Modals from '@components/common/modals/Modals';
+import Summary from '@components/home/kid/Summary';
+import EmptyWalkingMoneyRoad from '@components/home/kid/walkingMoneyRoad/EmptyWalkingMoneyRoad';
+import WalkingMoneyRoadList from '@components/home/kid/walkingMoneyRoad/WalkingMoneyRoadList';
+import ContractNewMoneyRoadLink from '@components/home/kid/walkingMoneyRoad/ContractNewMoneyRoadLink';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);

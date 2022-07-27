@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
-import RoleButton from '../common/button/RoleButton';
-import CommonSheet from '../common/bottomSheet/CommonSheet';
+import RoleButton from '../common/buttons/RoleButton';
+import CommonSheet from '../common/bottomSheets/CommonSheet';
 import useBottomSheet from '@hooks/useBottomSheet';
-import SelectProfile from '../common/bottomSheet/sheetContent/SelectProfile';
+import SelectProfile from '../common/bottomSheets/sheetContents/SelectProfile';
 import useModals from '../../hooks/useModals';
-import { modals } from '../common/modal/Modals';
-import Modals from '../common/modal/Modals';
+import { modals } from '../common/modals/Modals';
+import Modals from '../common/modals/Modals';
 import { useState } from 'react';
 import { TFetchStatus } from '@lib/types/api';
 

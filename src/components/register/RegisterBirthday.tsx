@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import InputForm from '../common/button/InputForm';
 import { useNavigate } from 'react-router-dom';
-import Button from '@components/common/button/Button';
+import Button from '@components/common/buttons/Button';
+import InputForm from '@components/common/inputs/InputForm';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
