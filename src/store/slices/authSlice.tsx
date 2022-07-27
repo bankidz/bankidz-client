@@ -16,13 +16,12 @@ export type TAuthState = {
   };
 };
 
-// 주어진 (딸)
-// 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzYyMjA0LCJzdWIiOiIyIiwiZXhwIjoxNjYxMTgxNDA0LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.lCXdxi5-q4jP_-XWYL5jkAeSVy1nxJ99SWJRcNWlULE',
 const initialState: TAuthState = {
   auth: {
     // accessToken: null,
+    // 현재 aT: 한규진
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4NzYyMjA0LCJzdWIiOiIyIiwiZXhwIjoxNjYxMTgxNDA0LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.lCXdxi5-q4jP_-XWYL5jkAeSVy1nxJ99SWJRcNWlULE',
+      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwMzU5NzIsInN1YiI6IjIiLCJleHAiOjE2NTkyNDU1NzIsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.O0sAZCuR_oIJg8tIWIGueTN3OyTWNeN0ZGDUkJpeyEs',
     // isKid: null,
     isKid: true,
     // level: null,
@@ -116,6 +115,7 @@ export const authSlice = createSlice({
 
 export const { setCredentials, resetCredentials, setBirthday } =
   authSlice.actions;
+export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
   state.auth.auth.accessToken;
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;

@@ -42,7 +42,7 @@ export const 제안중 = Template.bind({});
         isAchieved: false,
       },
     ],
-    comment: null,
+    comment: '코멘트 테스트',
   },
 };
 

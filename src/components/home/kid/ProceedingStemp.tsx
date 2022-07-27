@@ -1,6 +1,6 @@
-import { ReactComponent as Fail } from '@assets/illust/pigCoin/pigcoin_fail.svg';
-import { ReactComponent as None } from '@assets/illust/pigCoin/pigcoin_none.svg';
-import { ReactComponent as Success } from '@assets/illust/pigCoin/pigcoin_success.svg';
+import { ReactComponent as Fail } from '@assets/illusts/pigCoin/pigcoin_fail.svg';
+import { ReactComponent as None } from '@assets/illusts/pigCoin/pigcoin_none.svg';
+import { ReactComponent as Success } from '@assets/illusts/pigCoin/pigcoin_success.svg';
 import styled from 'styled-components';
 
 type TStempTypes = { challengeId: number; weeks: number; isAchieved: boolean };

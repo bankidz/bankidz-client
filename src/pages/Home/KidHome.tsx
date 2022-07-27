@@ -5,7 +5,6 @@ import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
-import { TLevel } from '@lib/types/common';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
@@ -32,6 +31,8 @@ import Summary from '@components/home/kid/Summary';
 import EmptyWalkingMoneyRoad from '@components/home/kid/walkingMoneyRoad/EmptyWalkingMoneyRoad';
 import WalkingMoneyRoadList from '@components/home/kid/walkingMoneyRoad/WalkingMoneyRoadList';
 import ContractNewMoneyRoadLink from '@components/home/kid/walkingMoneyRoad/ContractNewMoneyRoadLink';
+import getColorByLevel from '@lib/utils/common/getColorByLevel';
+import Spaceholder from '@components/layout/Spaceholder';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
@@ -41,6 +42,8 @@ function KidHome() {
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
   const pendingMoneyRoadsStatus = useAppSelector(selectPendingMoneyRoadsStatus);
   const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
+
+  const colorByLevel = getColorByLevel(level!);
 
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
@@ -65,8 +68,8 @@ function KidHome() {
       // TODO: to 규진) month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
       // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
       <Summary
-        current={weeklyProgress.currentSavings!}
-        goal={weeklyProgress.totalPrice!}
+        current={weeklyProgress!.currentSavings!}
+        goal={weeklyProgress!.totalPrice!}
         month={6}
         week={4}
       />
@@ -150,8 +153,8 @@ function KidHome() {
       </Content>
 
       {/* absolutely positioned background components */}
-      <BackgroundBox level={level} />
-      <BackgroundEllipse level={level} />
+      <BackgroundBox colorByLevel={colorByLevel} />
+      <BackgroundEllipse colorByLevel={colorByLevel} />
       <HomeBackgroundPositioner>
         {renderHomeBackground(level!)}
       </HomeBackgroundPositioner>
@@ -235,7 +238,7 @@ const WaitingMoneyRoadWrapper = styled.div`
 `;
 
 // absolutely positioned background components
-const BackgroundBox = styled.div<{ level: TLevel | null }>`
+const BackgroundBox = styled.div<{ colorByLevel: string }>`
   position: absolute;
   top: 0;
   left: 50%;
@@ -244,35 +247,10 @@ const BackgroundBox = styled.div<{ level: TLevel | null }>`
   width: 100%;
   height: 393px;
   z-index: 1;
-
-  ${({ level }) =>
-    level === 1 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.grey100};
-    `}
-  ${({ level }) =>
-    level === 2 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.blue100};
-    `}
-  ${({ level }) =>
-    level === 3 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.red100};
-    `}
-  ${({ level }) =>
-    level === 4 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.green100};
-    `}
-  ${({ level }) =>
-    level === 5 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.yellow100};
-    `}
+  background-color: ${({ colorByLevel }) => colorByLevel};
 `;
 
-const BackgroundEllipse = styled.div<{ level: TLevel | null }>`
+const BackgroundEllipse = styled.div<{ colorByLevel: string }>`
   position: absolute;
   top: 337px;
   left: 50%;
@@ -282,32 +260,7 @@ const BackgroundEllipse = styled.div<{ level: TLevel | null }>`
   height: 230px;
   border-radius: 265px / 115px;
   z-index: 2;
-
-  ${({ level }) =>
-    level === 1 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.grey100};
-    `}
-  ${({ level }) =>
-    level === 2 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.blue100};
-    `}
-  ${({ level }) =>
-    level === 3 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.red100};
-    `}
-  ${({ level }) =>
-    level === 4 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.green100};
-    `}
-  ${({ level }) =>
-    level === 5 &&
-    css`
-      background: ${({ theme }) => theme.palette.level.yellow100};
-    `}
+  background-color: ${({ colorByLevel }) => colorByLevel};
 `;
 
 const HomeBackgroundPositioner = styled.div`
@@ -322,10 +275,4 @@ const HomeBankiPositioner = styled.div`
   position: absolute;
   top: 146px;
   right: 0;
-`;
-
-// TabBar height: 47px;
-const Spaceholder = styled.div`
-  height: 80px;
-  width: 100%;
 `;

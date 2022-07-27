@@ -44,7 +44,7 @@ function HomeRouter() {
         }
       />
       {/* 부모 - 대기중인 돈길 */}
-      {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달/바텀시트 팝업으로 처리 */}
+      {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
         path="pending/:challengeId"
         element={

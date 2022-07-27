@@ -5,17 +5,14 @@ import { RootState } from '../app/store';
 
 export type TWeeklyProgressState = {
   weeklyProgress: {
-    currentSavings: number | null;
-    totalPrice: number | null;
-  };
+    currentSavings: number;
+    totalPrice: number;
+  } | null;
   weeklyProgressStatus?: TFetchStatus;
 };
 
 const initialState: TWeeklyProgressState = {
-  weeklyProgress: {
-    currentSavings: null,
-    totalPrice: null,
-  },
+  weeklyProgress: null,
   weeklyProgressStatus: 'idle',
 };
 
@@ -40,9 +37,10 @@ export const weeklyProgressSlice = createSlice({
       })
       .addCase(fetchWeeklyProgress.fulfilled, (state, action) => {
         state.weeklyProgressStatus = 'succeeded';
-        const { currentSavings, totalPrice } = action.payload.data;
-        state.weeklyProgress.currentSavings = currentSavings;
-        state.weeklyProgress.totalPrice = totalPrice;
+        state.weeklyProgress = action.payload.data;
+        // const { currentSavings, totalPrice } = action.payload.data;
+        // state.weeklyProgress.currentSavings = currentSavings;
+        // state.weeklyProgress.totalPrice = totalPrice;
       })
       .addCase(fetchWeeklyProgress.rejected, (state, action) => {
         state.weeklyProgressStatus = 'failed';
