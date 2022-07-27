@@ -6,7 +6,7 @@ import { ReactComponent as Level5 } from '@assets/illust/homeBackground/Home_Bac
 import { ReactComponent as Level6 } from '@assets/illust/homeBackground/Home_Background-6.svg';
 import { TLevel } from '@lib/types/common';
 
-export function renderHomeBackground(level: TLevel) {
+function renderHomeBackground(level: TLevel) {
   if (level === 1) {
     return <Level1 />;
   } else if (level === 2) {
@@ -21,3 +21,5 @@ export function renderHomeBackground(level: TLevel) {
     return <Level6 />;
   }
 }
+
+export default renderHomeBackground;

@@ -1,5 +1,5 @@
 import { TItemName } from '@lib/types/kid';
-import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 

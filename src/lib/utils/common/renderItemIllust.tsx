@@ -9,7 +9,7 @@ import { ReactComponent as C2 } from '@assets/illust/contractItemNames/general/c
 import { ReactComponent as C3 } from '@assets/illust/contractItemNames/general/c3.svg';
 import { TItemName } from '@lib/types/kid';
 
-export function renderItemIllust(itemName: TItemName) {
+function renderItemIllust(itemName: TItemName) {
   if (itemName === '학용품') {
     return <A1 />;
   } else if (itemName === '생활용품') {
@@ -30,3 +30,5 @@ export function renderItemIllust(itemName: TItemName) {
     return <C3 />;
   }
 }
+
+export default renderItemIllust;

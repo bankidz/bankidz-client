@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import Button from '@components/common/button/Button';
-import { IRoleDependency } from '@lib/types/kid';
 import { HTMLAttributes } from 'react';
-import { renderRoleText } from '@lib/utils/common/renderRoleText';
-import { renderRoleIllust } from '@lib/utils/common/renderRoleIllust';
+import renderRoleText from '@lib/utils/common/renderRoleText';
+import renderRoleIllust from '@lib/utils/common/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean | null;
@@ -15,11 +14,11 @@ function SelectProfile({ isKid, isFemale, ...props }: SelectProfileProps) {
     <Wrapper>
       <Container>
         <p>
-          {renderRoleText(isKid, isFemale)}
+          {renderRoleText(isKid!, isFemale!)}
           {isKid ? '이' : '가'} 맞나요?
         </p>
         <p>한 번 설정한 프로필은 변경하기 어려워요</p>
-        <BankiWrapper>{renderRoleIllust(isKid, isFemale)}</BankiWrapper>
+        <BankiWrapper>{renderRoleIllust(isKid!, isFemale!)}</BankiWrapper>
       </Container>
       {/* @ts-expect-error */}
       <Button label="확인" {...props} />

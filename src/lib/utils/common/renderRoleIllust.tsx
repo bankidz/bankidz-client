@@ -3,10 +3,7 @@ import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { ReactComponent as BankiSon } from '@assets/illust/banki/banki_son.svg';
 import { ReactComponent as BankiDaughter } from '@assets/illust/banki/banki_daughter.svg';
 
-export function renderRoleIllust(
-  isKid: boolean | null,
-  isFemale: boolean | null,
-) {
+function renderRoleIllust(isKid: boolean, isFemale: boolean) {
   if (isKid === false && isFemale === false) {
     return <BankiDad />;
   } else if (isKid === false && isFemale === true) {
@@ -17,3 +14,5 @@ export function renderRoleIllust(
     return <BankiDaughter />;
   }
 }
+
+export default renderRoleIllust;

@@ -5,7 +5,7 @@ import { ReactComponent as Level4 } from '@assets/illust/banki/Home_Banki-4.svg'
 import { ReactComponent as Level5 } from '@assets/illust/banki/Home_Banki-5.svg';
 import { TLevel } from '@lib/types/common';
 
-export function renderHomeBanki(level: TLevel) {
+function renderHomeBanki(level: TLevel) {
   if (level === 1) {
     return <Level1 />;
   } else if (level === 2) {
@@ -18,3 +18,5 @@ export function renderHomeBanki(level: TLevel) {
     return <Level5 />;
   }
 }
+
+export default renderHomeBanki;

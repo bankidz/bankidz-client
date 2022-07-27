@@ -9,7 +9,7 @@ import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
 import { TItemName } from '@lib/types/kid';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 
 interface QuaternaryModalProps {

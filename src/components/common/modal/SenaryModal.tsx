@@ -10,7 +10,7 @@ import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import Button from '../button/Button';
-import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 
 interface SenaryModalProps {

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import CheckButton from '../button/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
-import { renderCongratsIllust } from '@lib/utils/common/renderCongratsIllust';
+import renderCongratsIllust from '@lib/utils/common/renderCongratsIllust';
 
 interface PrimaryModalProps {
   /**

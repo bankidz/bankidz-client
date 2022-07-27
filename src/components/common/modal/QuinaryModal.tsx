@@ -11,7 +11,7 @@ import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import CheckButton from '../button/CheckButton';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
-import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
 
 interface QuinaryModalProps {
   /**

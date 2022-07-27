@@ -8,8 +8,8 @@ import Summary from '@components/kid/home/Summary';
 import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import { TLevel } from '@lib/types/common';
 import { selectLevel } from '@store/slices/authSlice';
-import { renderHomeBackground } from '@lib/utils/common/renderHomeBackground';
-import { renderHomeBanki } from '@lib/utils/common/renderHomeBanki';
+import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
+import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import EmptyPendingMoneyRoad from '@components/kid/home/PendingMoneyRoad/EmptyPendingMoneyRoad';
 import PendingMoneyRoadList from '@components/kid/home/PendingMoneyRoad/PendingMoneyRoadList';
 import { useEffect } from 'react';
@@ -35,7 +35,6 @@ import Modals from '@components/common/modal/Modals';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
-
   const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
   const weeklyProgress = useAppSelector(selectWeeklyProgress);
   const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
@@ -47,7 +46,6 @@ function KidHome() {
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
-      // TODO: 초기상태 undefined로 두고, 초기상태 아닌 경우만 API fetch 하도록 한다.
       weeklyProgressStatus === 'idle' &&
         (await dispatch(fetchWeeklyProgress({ axiosPrivate })));
       walkingMoneyRoadsStatus === 'idle' &&
@@ -137,8 +135,8 @@ function KidHome() {
           <div className="level-badge-positioner">
             <LevelBadge level={level} />
           </div>
-          <div className="summary-positioner">{weeklyProgressContent}</div>
 
+          <div className="summary-positioner">{weeklyProgressContent}</div>
           <WalkingMoneyRoadsWrapper>
             <header>걷고있는 돈길</header>
             {walkingMoneyRoadsContent}
