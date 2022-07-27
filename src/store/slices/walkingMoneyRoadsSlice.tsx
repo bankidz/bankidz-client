@@ -5,7 +5,7 @@ import {
   TMoneyRoadStatus,
 } from '@lib/types/common';
 import { TItemName } from '@lib/types/kid';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
@@ -41,8 +41,6 @@ const initialState: TWalkingMoneyRoadsState = {
   walkingMoneyRoads: null,
   // [
   //   {
-  //     // 배열 자체가 null인 경우 (걷고있는 돈길이 없는 경우 null을 response) 와 구분하기 위해
-  //     // 배열의 초기상태의 첫번째 유일한 원소의 id를 -1로 초기화 합니다.
   //     id: 1,
   //     isMom: true,
   //     title: 'FE Mock) 아이패드 사기',

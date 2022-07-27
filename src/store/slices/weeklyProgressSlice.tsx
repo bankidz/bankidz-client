@@ -5,16 +5,16 @@ import { RootState } from '../app/store';
 
 export type TWeeklyProgressState = {
   weeklyProgress: {
-    currentSavings: number;
-    totalPrice: number;
+    currentSavings: number | null;
+    totalPrice: number | null;
   };
   weeklyProgressStatus?: TFetchStatus;
 };
 
 const initialState: TWeeklyProgressState = {
   weeklyProgress: {
-    currentSavings: 55555,
-    totalPrice: 55555,
+    currentSavings: null,
+    totalPrice: null,
   },
   weeklyProgressStatus: 'idle',
 };

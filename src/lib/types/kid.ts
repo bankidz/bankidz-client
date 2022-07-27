@@ -1,14 +1,3 @@
-export interface IRoleDependency {
-  isKid: boolean | null;
-  isFemale: boolean | null;
-}
-
-export interface IFamilyState {
-  username: string;
-  isFemale: boolean;
-  isKid: boolean;
-}
-
 export type TItemName =
   | '학용품'
   | '생활용품'
@@ -19,3 +8,9 @@ export type TItemName =
   | '선물'
   | '비상금'
   | '기타';
+
+export interface IFamilyState {
+  username: string;
+  isFemale: boolean;
+  isKid: boolean;
+}

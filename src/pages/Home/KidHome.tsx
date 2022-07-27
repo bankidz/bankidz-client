@@ -65,8 +65,8 @@ function KidHome() {
       // TODO: to 규진) month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
       // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
       <Summary
-        current={weeklyProgress.currentSavings}
-        goal={weeklyProgress.totalPrice}
+        current={weeklyProgress.currentSavings!}
+        goal={weeklyProgress.totalPrice!}
         month={6}
         week={4}
       />

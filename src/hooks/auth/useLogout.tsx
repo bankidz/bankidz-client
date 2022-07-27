@@ -2,7 +2,7 @@ import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import { resetCredentials } from '@store/slices/authSlice';
 import { useDispatch } from 'react-redux';
 
-// 로그아웃 기능 추후 구현
+// TODO: 로그아웃 기능 추후 구현 예정
 function useLogout() {
   const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();

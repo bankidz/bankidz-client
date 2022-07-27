@@ -1,9 +1,9 @@
 import { TFetchStatus } from '@lib/types/api';
-import { EMoneyRoadStatus } from '@lib/types/common';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IMoneyRoad } from './walkingMoneyRoadsSlice';
+import { EMoneyRoadStatus } from '@lib/types/common';
 
 export type TPendingMoneyRoadsState = {
   pendingMoneyRoads: IMoneyRoad[] | null;
