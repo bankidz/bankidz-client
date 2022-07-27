@@ -5,7 +5,7 @@ import { selectLevel } from '@store/slices/authSlice';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-function CommonWalkingMoneyRoad() {
+function KidWalking() {
   const { challengeId } = useParams();
   const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
@@ -17,7 +17,7 @@ function CommonWalkingMoneyRoad() {
   );
 }
 
-export default CommonWalkingMoneyRoad;
+export default KidWalking;
 
 const Header = styled.div<{ colorByLevel: string }>`
   position: relative;

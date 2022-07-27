@@ -124,8 +124,8 @@ function KidHome() {
 
   return (
     <Wrapper>
-      {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 처리됩니다. */}
       <Content>
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 처리됩니다. */}
         <Modals />
         <MarginTemplate>
           <div className="logo-positioner">

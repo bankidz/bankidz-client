@@ -2,18 +2,18 @@ import { Routes, Route } from 'react-router-dom';
 import BackgroundTemplate from '../../components/layout/BackgroundTemplate';
 import ForegroundTemplate from '../../components/layout/ForegroundTemplate';
 import Article from './Article';
-import Contents from './Contents';
+import Home from './Home';
 import Edu from './Edu';
 import Life from './Life';
 
-function ContentsRouter() {
+function FinancialRouter() {
   return (
     <Routes>
       <Route
         path="/"
         element={
           <BackgroundTemplate>
-            <Contents />
+            <Home />
           </BackgroundTemplate>
         }
       />
@@ -54,4 +54,4 @@ function ContentsRouter() {
   );
 }
 
-export default ContentsRouter;
+export default FinancialRouter;

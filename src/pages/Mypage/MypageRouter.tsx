@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
-import MypageKid from './MypageKid';
-import MypageParent from './MypageParent';
-import Info from './Info';
-import Code from './Code';
+import KidMypage from './KidMypage';
+import ParentMypage from './ParentMypage';
+import CommonInfo from './CommonInfo';
+import CommonCode from './CommonCode';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
@@ -15,12 +15,12 @@ function MypageRouter() {
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid ? <MypageKid /> : <MypageParent />}
+            {isKid ? <KidMypage /> : <ParentMypage />}
           </BackgroundTemplate>
         }
       />
-      <Route path="/info" element={<Info />} />
-      <Route path="/code" element={<Code />} />
+      <Route path="/info" element={<CommonInfo />} />
+      <Route path="/code" element={<CommonCode />} />
     </Routes>
   );
 }

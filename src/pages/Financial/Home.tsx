@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-function Contents() {
+function Home() {
   const navigate = useNavigate();
   return (
     <>
@@ -37,6 +37,6 @@ function Contents() {
   );
 }
 
-export default Contents;
+export default Home;
 
 //https://stackoverflow.com/questions/70671988/difference-in-the-navigation-react-router-v6

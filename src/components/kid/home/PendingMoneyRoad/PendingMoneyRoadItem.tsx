@@ -25,6 +25,7 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
     comment,
   } = pendingMoneyRoad;
 
+  // 제안중
   function openQuinaryModal() {
     openModal(modals.quinaryModal, {
       onSubmit: () => {
@@ -42,6 +43,7 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
     });
   }
 
+  // 거절됨
   function openSenaryModal() {
     openModal(modals.senaryModal, {
       onSubmit: () => {

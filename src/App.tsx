@@ -3,11 +3,11 @@ import Layout from './components/layout/Layout';
 import LoginPage from './pages/OnBoarding/LoginPage';
 import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
 import RegisterPage from './pages/OnBoarding/RegisterPage';
-import HomeRouter from './pages/Home';
-import ChallengeRouter from './pages/Challenge';
-import ContentsRouter from './pages/Contents';
-import MypageRouter from './pages/Mypage';
-import NotFound from './pages/Common/NotFound';
+import HomeRouter from './pages/Home/HomeRouter';
+import Walk from './pages/Walk';
+import MypageRouter from './pages/Mypage/MypageRouter';
+import FinancialRouter from './pages/Financial/FinancialRouter';
+import NotFound from './pages/Etc/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import SungwooTestPage from './pages/SungwooTestPage';
@@ -22,11 +22,11 @@ function App() {
         {/* <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}> */}
         <Route path="/*" element={<HomeRouter />} />
-        <Route path="/challenge/*" element={<ChallengeRouter />} />
-        <Route path="/contents/*" element={<ContentsRouter />} />
+        <Route path="/walk" element={<Walk />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
-        <Route path="/sungwoo" element={<SungwooTestPage />} />
+        <Route path="/financial/*" element={<FinancialRouter />} />
       </Route>
+      <Route path="/sungwoo" element={<SungwooTestPage />} />
       <Route path="*" element={<NotFound />} />
       {/* </Route>
       </Route> */}
