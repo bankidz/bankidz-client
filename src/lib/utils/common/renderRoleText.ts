@@ -1,7 +1,4 @@
-export function renderRoleText(
-  isKid: boolean | null,
-  isFemale: boolean | null,
-) {
+function renderRoleText(isKid: boolean, isFemale: boolean) {
   if (isKid === false && isFemale === false) {
     return '아빠';
   } else if (isKid === false && isFemale === true) {
@@ -12,3 +9,5 @@ export function renderRoleText(
     return '딸';
   }
 }
+
+export default renderRoleText;

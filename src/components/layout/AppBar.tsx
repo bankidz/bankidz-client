@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { ReactComponent as Arrow } from '@assets/icon/arrow-left.svg';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-left.svg';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 
 interface AppBarProps {

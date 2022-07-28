@@ -1,72 +1,60 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
-import ParentHome from './parent/ParentHome';
-import KidPendingMoneyRoad from './kid/KidPendingMoneyRoad';
+import { Route, Routes } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import KidHome from './kid/KidHome';
-import ParentPendingMoneyRoad from './parent/ParentPendingMoneyRoad';
-import CreateKid from './kid/CreateKid';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import CheckStepParams from '@components/kid/create/CheckStepParams';
-import CommonWalkingMoneyRoad from './Common/CommonWalkingMoneyRoad';
+import { selectIsKid } from '@store/slices/authSlice';
+import KidHome from './KidHome';
+import ParentHome from './ParentHome';
+import KidCreate from './KidCreate';
+import KidWalking from './KidWalking';
+import CheckStepParams from '@components/home/create/CheckStepParams';
+import ParentPending from './ParentPending';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
-  const level = useAppSelector(selectLevel);
   return (
     <Routes>
-      {/* 홈 */}
+      {/* 자녀 / 부모 - 홈 */}
       <Route
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid ? <KidHome /> : <ParentHome />}
+            {isKid === true ? <KidHome /> : <ParentHome />}
           </BackgroundTemplate>
         }
       />
-      {/* 걷고있는 돈길 */}
-      <Route
-        path="/walking/:challengeId"
-        element={
-          <ForegroundTemplate label="걷고있는 돈길">
-            <CommonWalkingMoneyRoad />
-          </ForegroundTemplate>
-        }
-      />
-      {/* 대기중인 돈길 */}
-      <Route
-        path="pending/:challengeId"
-        element={
-          isKid ? (
-            <ForegroundTemplate label="대기중인 돈길">
-              <KidPendingMoneyRoad />
-            </ForegroundTemplate>
-          ) : (
-            <ForegroundTemplate label="제안받은 돈길">
-              <ParentPendingMoneyRoad />
-            </ForegroundTemplate>
-          )
-        }
-      />
-      {/* 새로운 돈길 계약하기 */}
+      {/* 자녀 - 돈길 계약하기 */}
       <Route
         path="/create/:step"
         element={
           <CheckStepParams>
             <ForegroundTemplate label="돈길 계약하기">
-              <CreateKid />
+              <KidCreate />
             </ForegroundTemplate>
           </CheckStepParams>
         }
       />
-      {/* ??? */}
+      {/* 자녀 - 걷고있는 돈길 */}
       <Route
-        path="/create/*"
+        path="/walking/:challengeId"
         element={
-          <CheckStepParams>
-            <Navigate replace to="/create/1" />
-          </CheckStepParams>
+          <ForegroundTemplate label="걷고있는 돈길">
+            <KidWalking />
+          </ForegroundTemplate>
+        }
+      />
+      {/* 부모 - 대기중인 돈길 */}
+      {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
+      <Route
+        path="pending/:challengeId"
+        element={
+          isKid ? (
+            <>부적절한 접근입니다.</>
+          ) : (
+            <ForegroundTemplate label="제안받은 돈길">
+              <ParentPending />
+            </ForegroundTemplate>
+          )
         }
       />
     </Routes>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { calcRatio, theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/kid';
-import PerforatedLineTop from './modal/quaternaryModal/PerforatedLineTop';
-import PerforatedLineBottom from './modal/quaternaryModal/PerforatedLineBottom';
-import { ReactComponent as HorizontalDashedBorder } from '@assets/border/horizontal-dashed-border.svg';
-import { ReactComponent as BankiDad } from '@assets/illust/banki/banki_dad.svg';
-import { ReactComponent as BankiMom } from '@assets/illust/banki/banki_mom.svg';
-import { renderItemIllust } from '@lib/utils/common/renderItemIllust';
+import PerforatedLineTop from './modals/quaternaryModal/PerforatedLineTop';
+import PerforatedLineBottom from './modals/quaternaryModal/PerforatedLineBottom';
+import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizontal-dashed-border.svg';
+import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
+import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 
 interface ReceiptProps {

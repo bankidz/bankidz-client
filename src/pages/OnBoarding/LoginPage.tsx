@@ -1,4 +1,4 @@
-import Button from '@components/common/button/Button';
+import Button from '@components/common/buttons/Button';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { KAKAO_AUTH_URL } from '@lib/constants';
 import styled from 'styled-components';

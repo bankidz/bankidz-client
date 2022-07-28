@@ -1,10 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as Home } from '@assets/icon/home.svg';
-import { ReactComponent as CenterSelected } from '@assets/icon/tabbar_center_selected.svg';
-import { ReactComponent as Center } from '@assets/icon/tabbar_center.svg';
-import { ReactComponent as Content } from '@assets/icon/tabbar_contents.svg';
-import { ReactComponent as Mypage } from '@assets/icon/mypage.svg';
+import { ReactComponent as Home } from '@assets/icons/home.svg';
+import { ReactComponent as CenterSelected } from '@assets/icons/tabbar_center_selected.svg';
+import { ReactComponent as Center } from '@assets/icons/tabbar_center.svg';
+import { ReactComponent as Content } from '@assets/icons/tabbar_contents.svg';
+import { ReactComponent as Mypage } from '@assets/icons/mypage.svg';
 import { theme } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
@@ -44,7 +44,7 @@ function TabBar() {
 export default TabBar;
 
 const Wrapper = styled.div`
-  z-index: 999;
+  z-index: 600;
   /* 테두리 위에만 */
   border: 1px solid ${({ theme }) => theme.palette.greyScale.grey100};
   border-bottom: none;

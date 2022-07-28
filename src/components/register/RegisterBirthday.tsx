@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import InputForm from '../common/button/InputForm';
 import { useNavigate } from 'react-router-dom';
-import { execArgv } from 'process';
+import Button from '@components/common/buttons/Button';
+import InputForm from '@components/common/InputForm';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -105,6 +105,7 @@ function RegisterBirthday() {
             onBlur={() => setYearFocus(false)}
             autoComplete="off"
             postfix="년"
+            pattern="\d*"
           />
           <InputForm
             placeholder="01"
@@ -119,6 +120,7 @@ function RegisterBirthday() {
             autoComplete="off"
             postfix="월"
             ref={monthInputRef}
+            pattern="\d*"
           />
           <InputForm
             placeholder="01"
@@ -133,6 +135,7 @@ function RegisterBirthday() {
             autoComplete="off"
             postfix="일"
             ref={dayInputRef}
+            pattern="\d*"
           />
         </InputWrapper>
         <DummyButton type="submit" />
@@ -146,6 +149,17 @@ function RegisterBirthday() {
       {toggleDayErrorMessage && (
         <ErrorMessage>일 형식이 올바르지 않아요</ErrorMessage>
       )}
+      <ButtonPositioner>
+        <Button
+          label="다음"
+          property="default"
+          state={
+            isValidYear === true && isValidMonth === true && isValidDay === true
+          }
+          // @ts-expect-error
+          type="submit"
+        />
+      </ButtonPositioner>
     </Wrapper>
   );
 }
@@ -184,6 +198,16 @@ const ErrorMessage = styled.div`
 const DummyButton = styled.button`
   position: absolute;
   left: -9999px;
+`;
+
+const ButtonPositioner = styled.div`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 17px;
+  padding-left: 18px;
+  padding-right: 18px;
 `;
 
 // https://regexland.com/regex-dates/
