@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import QuaternaryModal from './QuaternaryModal';
 
 export default {
-  title: '모달/QuaternaryModal',
+  title: 'Common/모달/QuaternaryModal',
   component: QuaternaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },

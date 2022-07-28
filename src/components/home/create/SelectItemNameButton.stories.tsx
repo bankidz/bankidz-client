@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SelectItemNameButton from './SelectItemNameButton';
-import a1 from '@assets/illust/contractItemNames/contractSelect/a1.svg';
+import a1 from '@assets/illusts/contractItemNames/contractSelect/a1.svg';
 
 export default {
   title: '자녀/돈길 계약하기/selectItemNameButton',

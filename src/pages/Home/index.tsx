@@ -7,7 +7,6 @@ import KidHome from './KidHome';
 import ParentHome from './ParentHome';
 import KidCreate from './KidCreate';
 import KidWalking from './KidWalking';
-import CheckStepParams from '@components/home/create/CheckStepParams';
 import ParentPending from './ParentPending';
 
 function HomeRouter() {
