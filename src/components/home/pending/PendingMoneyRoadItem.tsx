@@ -1,9 +1,13 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
 import { modals } from '@components/common/modals/Modals';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useModals from '@lib/hooks/useModals';
+import { TFetchStatus } from '@lib/types/api';
 import { EMoneyRoadStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
+import { useAppDispatch } from '@store/app/hooks';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
@@ -13,6 +17,7 @@ interface PendingMoneyRoadItemProps {
 function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
   const { openModal } = useModals();
   const {
+    id,
     status,
     createdAt,
     interestRate,
@@ -28,9 +33,6 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
   // 제안중
   function openQuinaryModal() {
     openModal(modals.quinaryModal, {
-      onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
-      },
       createdAt: createdAt,
       interestRate: interestRate,
       isMom: isMom,
@@ -42,6 +44,12 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
       comment: comment,
     });
   }
+
+  const axiosPrivate = useAxiosPrivate();
+  const [giveUpPendingMoneyRoadStatus, setGiveUpPendingMoneyRoadStatus] =
+    useState<TFetchStatus>('idle');
+  const canGiveUp = giveUpPendingMoneyRoadStatus === 'idle';
+  const dispatch = useAppDispatch();
 
   // 거절됨
   function openSenaryModal() {
