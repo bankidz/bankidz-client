@@ -18,7 +18,7 @@ const initialState: TWeeklyProgressState = {
 
 // GET: 주간 진행상황 fetch
 export const fetchWeeklyProgress = createAsyncThunk(
-  'weeklyProgress/fetchWeeklyProgress',
+  'weeklyProgress/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/progress');

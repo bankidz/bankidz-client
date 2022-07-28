@@ -44,10 +44,24 @@ const initialState: TWalkingMoneyRoadsState = {
 
 // GET: 걷고있는 돈길 데이터 fetch
 export const fetchWalkingMoneyRoads = createAsyncThunk(
-  'walkingMoneyRoads/fetchWalkingMoneyRoads',
+  'walkingMoneyRoads/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/?status=accept');
+    return response.data;
+  },
+);
+
+// DELETE: 걷고있는 돈길 중도 포기
+export const giveUpWalkingMoneyRoad = createAsyncThunk(
+  'walkingMoneyRoads/giveUp',
+  async (thunkPayload: {
+    axiosPrivate: AxiosInstance;
+    challengeId: number;
+  }) => {
+    const { axiosPrivate, challengeId } = thunkPayload;
+    const response = await axiosPrivate.delete(`/challenge/${challengeId}`);
+    console.log('response.data', response.data);
     return response.data;
   },
 );
@@ -68,6 +82,19 @@ export const walkingMoneyRoadsSlice = createSlice({
       .addCase(fetchWalkingMoneyRoads.rejected, (state, action) => {
         state.walkingMoneyRoadsStatus = 'failed';
         console.error(action.error.message);
+      })
+      .addCase(giveUpWalkingMoneyRoad.fulfilled, (state, action) => {
+        const { id } = action.payload.data;
+        if (state.walkingMoneyRoads!.length === 1) {
+          // 기존 걷고있는 돈길 1개만 남아있던 경우
+          state.walkingMoneyRoads = null;
+        } else {
+          // 기존 걷고있는 돈길 2 ~ 5개 남아있던 경우
+          const temp = state.walkingMoneyRoads!.filter(
+            (walkingMoneyRoad) => walkingMoneyRoad.id !== id,
+          );
+          state.walkingMoneyRoads = temp;
+        }
       });
   },
 });

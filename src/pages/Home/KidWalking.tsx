@@ -1,5 +1,7 @@
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import GiveUpMoneyRoadSheetContent from '@components/common/bottomSheets/sheetContents/GiveUpMoneyRoadSheetContent';
+import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUpExceeded';
+import GiveUp from '@components/common/bottomSheets/sheetContents/GiveUp';
+import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetComplete';
 import Receipt from '@components/common/Receipt';
 import ProceedingStemp from '@components/home/walking/ProceedingStemp';
 import WalkingMoneyRoadSummary from '@components/home/walking/WalkingMoneyRoadSummary';
@@ -10,12 +12,18 @@ import { calcRatio } from '@lib/styles/theme';
 import { TPercent } from '@lib/types/kid';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
-import { useAppSelector } from '@store/app/hooks';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
-import { selectWalkingMoneyRoads } from '@store/slices/walkingMoneyRoadsSlice';
+import {
+  giveUpWalkingMoneyRoad,
+  selectWalkingMoneyRoads,
+} from '@store/slices/walkingMoneyRoadsSlice';
 import { selectWeeklyProgress } from '@store/slices/weeklyProgressSlice';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useState } from 'react';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { TFetchStatus } from '@lib/types/api';
 
 function KidWalking() {
   const { challengeId } = useParams();
@@ -42,24 +50,53 @@ function KidWalking() {
   const { currentSavings } = weeklyProgress!;
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
 
-  const [open, onOpen, onDismiss] = useBottomSheet(false);
-  // 걷고있는 돈길 페이지 하단 돈길 포기하기 버튼
-  function handleGiveUpMoneyRoadButtonClick() {
-    console.log('handle give up money road button click');
-    onOpen();
+  const [openGiveUp, setOpenGiveUp] = useState(false);
+  const [openCompleteGiveUp, setOpenCompleteGiveUp] = useState(false);
+  const [openExceeded, setOpenExceeded] = useState(false);
+  const [openCancel, setOpenCancel] = useState(false);
+
+  const axiosPrivate = useAxiosPrivate();
+  const [giveUpWalkingMoneyRoadStatus, setGiveUpWalkingMoneyRoadStatus] =
+    useState<TFetchStatus>('idle');
+  const canGiveUp =
+    walkingMoneyRoads !== null && giveUpWalkingMoneyRoadStatus === 'idle';
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  // '정말 포기할거예요?' 바텀시트 하단 왼쪽 회색 버튼
+  async function handleGiveUpButtonClick() {
+    if (canGiveUp) {
+      try {
+        setGiveUpWalkingMoneyRoadStatus('pending');
+        await dispatch(
+          giveUpWalkingMoneyRoad({
+            axiosPrivate,
+            challengeId: parseInt(challengeId!),
+          }),
+        ).unwrap();
+        setOpenGiveUp(false);
+        setOpenCompleteGiveUp(true);
+        navigate(-1);
+      } catch (error: any) {
+        // TODO: 포기 횟수 초과 시 API response 확인
+        console.log('error.message', error.message);
+        console.log('error.status', error.status);
+        setOpenGiveUp(false);
+        setOpenExceeded(true);
+      } finally {
+        setGiveUpWalkingMoneyRoadStatus('idle');
+      }
+    }
   }
-  // 모달 내부 왼쪽 회색 버튼
-  function handleGiveUpButtonClick() {
-    console.log('handle give up button click');
+
+  // '정말 포기할거예요?' 바텀시트 하단 오른쪽 노란색 버튼
+  function handleCancelDismiss() {
+    setOpenGiveUp(false);
+    setOpenCancel(true);
   }
+
   return (
     <Wrapper>
-      <CommonSheet open={open} onDismiss={onDismiss}>
-        <GiveUpMoneyRoadSheetContent
-          onGiveUpButtonClick={handleGiveUpButtonClick}
-          onDismiss={onDismiss}
-        />
-      </CommonSheet>
       <Content>
         <MarginTemplate>
           <FlexContainer>
@@ -99,14 +136,39 @@ function KidWalking() {
                 />
               </div>
             </MoneyRoadContractContent>
-            <GiveUpMoneyRoadButton onClick={handleGiveUpMoneyRoadButtonClick}>
+            <GiveUpMoneyRoadButton onClick={() => setOpenGiveUp(true)}>
               돈길 포기하기
             </GiveUpMoneyRoadButton>
             <Spacer />
           </FlexContainer>
         </MarginTemplate>
       </Content>
+
       <Background colorByLevel={colorByLevel}></Background>
+
+      {/* bottom sheets */}
+      <CommonSheet open={openGiveUp} onDismiss={handleCancelDismiss}>
+        <GiveUp
+          onGiveUpButtonClick={handleGiveUpButtonClick}
+          onDismiss={handleCancelDismiss}
+        />
+      </CommonSheet>
+      <CommonSheet
+        open={openCompleteGiveUp}
+        onDismiss={() => setOpenCompleteGiveUp(false)}
+      >
+        <SheetComplete
+          type="giveUp"
+          title={title}
+          onDismiss={() => setOpenCompleteGiveUp(false)}
+        />
+      </CommonSheet>
+      <CommonSheet open={openExceeded} onDismiss={() => setOpenExceeded(false)}>
+        <GiveUpExceeded onDismiss={() => setOpenExceeded(false)} />
+      </CommonSheet>
+      <CommonSheet open={openCancel} onDismiss={() => setOpenCancel(false)}>
+        <SheetComplete type="cancel" onDismiss={() => setOpenCancel(false)} />
+      </CommonSheet>
     </Wrapper>
   );
 }

@@ -3,7 +3,7 @@ import { ReactComponent as Complete } from '@assets/icons/complete.svg';
 import Button from '@components/common/buttons/Button';
 
 interface SheetCompleteProps {
-  type: 'delete' | 'cancle' | 'giveUp';
+  type: 'delete' | 'cancel' | 'giveUp';
   title?: string;
   onDismiss: () => void;
 }
@@ -14,7 +14,7 @@ function SheetComplete({ type, title, onDismiss }: SheetCompleteProps) {
       <Container>
         <Complete />
         {type === 'delete' && <p>삭제되었어요!</p>}
-        {type === 'cancle' && <p>'포기하기'가 취소되었어요</p>}
+        {type === 'cancel' && <p>'포기하기'가 취소되었어요</p>}
         {type === 'giveUp' && (
           <p>
             <div>'{title}' 돈길이</div>

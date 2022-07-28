@@ -2,15 +2,12 @@ import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_giveup.svg';
 import Button from '@components/common/buttons/Button';
 
-interface GiveUpMoneyRoadSheetContentProps {
+interface GiveUpProps {
   onGiveUpButtonClick: () => void;
   onDismiss: () => void;
 }
 
-function GiveUpMoneyRoadSheetContent({
-  onGiveUpButtonClick,
-  onDismiss,
-}: GiveUpMoneyRoadSheetContentProps) {
+function GiveUp({ onGiveUpButtonClick, onDismiss }: GiveUpProps) {
   return (
     <Wrapper>
       <Container>
@@ -35,7 +32,7 @@ function GiveUpMoneyRoadSheetContent({
   );
 }
 
-export default GiveUpMoneyRoadSheetContent;
+export default GiveUp;
 
 const Wrapper = styled.div``;
 

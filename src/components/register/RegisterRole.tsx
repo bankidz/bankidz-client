@@ -58,15 +58,14 @@ function RegisterRole() {
   }
 
   const axiosPrivate = useAxiosPrivate();
-  const [registerRequestStatus, setRegisterRequestStatus] =
-    useState<TFetchStatus>('idle');
+  const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
   const canRegister =
-    isKid !== null && isFemale !== null && registerRequestStatus === 'idle';
+    isKid !== null && isFemale !== null && registerStatus === 'idle';
 
   async function handleSubmit() {
     if (canRegister) {
       try {
-        setRegisterRequestStatus('pending');
+        setRegisterStatus('pending');
         await dispatch(
           register({
             axiosPrivate,
@@ -80,7 +79,7 @@ function RegisterRole() {
       } catch (error: any) {
         console.error(error.message);
       } finally {
-        setRegisterRequestStatus('idle');
+        setRegisterStatus('idle');
       }
     }
   }

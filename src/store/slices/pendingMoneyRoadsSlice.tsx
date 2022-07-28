@@ -16,7 +16,7 @@ const initialState: TPendingMoneyRoadsState = {
 
 // GET: 대기중인 돈길 데이터 fetch
 export const fetchPendingMoneyRoads = createAsyncThunk(
-  'PendingMoneyRoads/fetchPendingMoneyRoads',
+  'PendingMoneyRoads/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/challenge/?status=pending');
