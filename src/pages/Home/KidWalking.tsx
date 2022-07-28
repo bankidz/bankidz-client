@@ -26,13 +26,13 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { TFetchStatus } from '@lib/types/api';
 
 function KidWalking() {
-  const { challengeId } = useParams();
+  const { id } = useParams();
   const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
 
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
   const targetWalkingMoneyRoad = walkingMoneyRoads?.find(
-    (walkingMoneyRoad) => walkingMoneyRoad.id === parseInt(challengeId!),
+    (walkingMoneyRoad) => walkingMoneyRoad.id === parseInt(id!),
   );
   const {
     isMom,
@@ -71,7 +71,7 @@ function KidWalking() {
         await dispatch(
           giveUpWalkingMoneyRoad({
             axiosPrivate,
-            challengeId: parseInt(challengeId!),
+            id: parseInt(id!),
           }),
         ).unwrap();
         setOpenGiveUp(false);

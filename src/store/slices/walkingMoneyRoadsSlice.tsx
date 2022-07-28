@@ -55,12 +55,9 @@ export const fetchWalkingMoneyRoads = createAsyncThunk(
 // DELETE: 걷고있는 돈길 중도 포기
 export const giveUpWalkingMoneyRoad = createAsyncThunk(
   'walkingMoneyRoads/giveUp',
-  async (thunkPayload: {
-    axiosPrivate: AxiosInstance;
-    challengeId: number;
-  }) => {
-    const { axiosPrivate, challengeId } = thunkPayload;
-    const response = await axiosPrivate.delete(`/challenge/${challengeId}`);
+  async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
+    const { axiosPrivate, id } = thunkPayload;
+    const response = await axiosPrivate.delete(`/challenge/${id}`);
     console.log('response.data', response.data);
     return response.data;
   },
