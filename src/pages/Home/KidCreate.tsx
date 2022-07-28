@@ -7,7 +7,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
 import { useEffect, useState } from 'react';
-import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import Step5 from '@components/home/create/steps/Step5';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/challengePayloadSlice';

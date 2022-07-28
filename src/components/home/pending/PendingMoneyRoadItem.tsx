@@ -1,6 +1,6 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
 import { modals } from '@components/common/modals/Modals';
-import useModals from '@hooks/useModals';
+import useModals from '@lib/hooks/useModals';
 import { EMoneyRoadStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';

@@ -27,11 +27,9 @@ function HomeRouter() {
       <Route
         path="/create/:step"
         element={
-          <CheckStepParams>
-            <ForegroundTemplate label="돈길 계약하기">
-              <KidCreate />
-            </ForegroundTemplate>
-          </CheckStepParams>
+          <ForegroundTemplate label="돈길 계약하기">
+            <KidCreate />
+          </ForegroundTemplate>
         }
       />
       {/* 자녀 - 걷고있는 돈길 */}

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import useModals from '@hooks/useModals';
+import useModals from '@lib/hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useAppSelector } from '@store/app/hooks';
-import useRefreshToken from '@hooks/auth/useRefreshToken';
-import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
+import useRefreshToken from '@lib/hooks/auth/useRefreshToken';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectAuth } from '@store/slices/authSlice';
 
 function SungwooTestPage() {

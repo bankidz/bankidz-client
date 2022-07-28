@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
-import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
@@ -65,7 +65,6 @@ function KidHome() {
     weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
-      // TODO: to 규진) month, week은 props로 받지 말고, 컴포넌트 내부에서 자체 로직을 통해 산정하도록 수정하면 좋겠음
       // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
       <Summary
         current={weeklyProgress!.currentSavings!}
