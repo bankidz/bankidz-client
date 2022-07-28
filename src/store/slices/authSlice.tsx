@@ -19,9 +19,9 @@ export type TAuthState = {
 const initialState: TAuthState = {
   auth: {
     // accessToken: null,
-    // 현재 aT: 한규진
+    // 현재 aT: 주어진
     accessToken:
-      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NTgwMzU5NzIsInN1YiI6IjIiLCJleHAiOjE2NTkyNDU1NzIsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.O0sAZCuR_oIJg8tIWIGueTN3OyTWNeN0ZGDUkJpeyEs',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU',
     // isKid: null,
     isKid: true,
     // level: null,

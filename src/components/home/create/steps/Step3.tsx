@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
-import useBottomSheet from '@hooks/useBottomSheet';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
 import ContractSheet from '@components/common/bottomSheets/ContractSheet';
 import SelectMoney from '@components/common/bottomSheets/sheetContents/SelectMoney';
 import styled from 'styled-components';
-import useValidation, { TValidationResult } from '@hooks/useValidation';
+import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
 import { useNavigate } from 'react-router-dom';
-import useStackAmount from '@hooks/useStackAmount';
+import useStackAmount from '@lib/hooks/useStackAmount';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchTitle,

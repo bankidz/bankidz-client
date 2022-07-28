@@ -1,8 +1,9 @@
+import { TLevel } from '@lib/types/common';
 import styled from 'styled-components';
 import AppBar from './AppBar';
 
 interface ForegroundTemplateProps {
-  level?: 1 | 2 | 3 | 4 | 5 | null;
+  level?: TLevel;
   label: string;
   children: JSX.Element;
 }
