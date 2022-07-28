@@ -66,8 +66,8 @@ function KidHome() {
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
       <Summary
-        current={weeklyProgress!.currentSavings!}
-        goal={weeklyProgress!.totalPrice!}
+        current={weeklyProgress?.currentSavings!}
+        goal={weeklyProgress?.totalPrice!}
         month={6}
         week={4}
       />
@@ -89,7 +89,7 @@ function KidHome() {
   if (walkingMoneyRoadsStatus === 'loading') {
     walkingMoneyRoadsContent = <p>Loading...</p>;
   } else if (walkingMoneyRoadsStatus === 'succeeded') {
-    if (walkingMoneyRoads === null) {
+    if (walkingMoneyRoads === []) {
       walkingMoneyRoadsContent = (
         <EmptyWalkingMoneyRoad
           onClick={handleContractNewMoneyRoadButtonClick}
@@ -112,7 +112,7 @@ function KidHome() {
   if (pendingMoneyRoadsStatus === 'loading') {
     pendingMoneyRoadsContent = <p>Loading...</p>;
   } else if (pendingMoneyRoadsStatus === 'succeeded') {
-    if (pendingMoneyRoads === null) {
+    if (pendingMoneyRoads === []) {
       pendingMoneyRoadsContent = <EmptyPendingMoneyRoad />;
     } else {
       pendingMoneyRoadsContent = (

@@ -105,7 +105,7 @@ function KidWalking() {
               {renderGraph(percent as TPercent)}
             </div>
             <span className="challenging">
-              {progressList!.length}주차 도전중
+              {progressList?.length}주차 도전중
             </span>
             <div className="title">{title}</div>
             <WalkingMoneyRoadSummary

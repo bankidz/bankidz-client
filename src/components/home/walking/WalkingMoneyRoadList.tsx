@@ -6,7 +6,7 @@ import WalkingMoneyRoadItem from './WalkingMoneyRoadItem';
 function WalkingMoneyRoadList({ walkingMoneyRoads }: TWalkingMoneyRoadsState) {
   return (
     <Wrapper>
-      {walkingMoneyRoads!.map((walkingMoneyRoad) => (
+      {walkingMoneyRoads?.map((walkingMoneyRoad) => (
         <WalkingMoneyRoadItem
           key={walkingMoneyRoad.id}
           itemName={walkingMoneyRoad.itemName as TItemName}

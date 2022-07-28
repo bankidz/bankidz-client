@@ -5,7 +5,7 @@ import PendingMoneyRoadItem from './PendingMoneyRoadItem';
 function PendingMoneyRoadList({ pendingMoneyRoads }: TPendingMoneyRoadsState) {
   return (
     <Wrapper>
-      {pendingMoneyRoads!.map((pendingMoneyRoad) => (
+      {pendingMoneyRoads?.map((pendingMoneyRoad) => (
         <PendingMoneyRoadItem
           key={pendingMoneyRoad.id}
           pendingMoneyRoad={pendingMoneyRoad}

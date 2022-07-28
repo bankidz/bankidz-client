@@ -29,7 +29,10 @@ export interface IMoneyRoad {
         isAchieved: boolean;
       }[]
     | null;
-  comment: string | null;
+  comment: {
+    content: string;
+    id: number;
+  } | null;
 }
 
 export type TWalkingMoneyRoadsState = {

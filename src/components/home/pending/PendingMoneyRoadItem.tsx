@@ -45,7 +45,7 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      comment: comment,
+      comment: comment?.content,
     });
   }
 
