@@ -1,7 +1,11 @@
+import CommonSheet from '@components/common/bottomSheets/CommonSheet';
+import GiveUpMoneyRoadSheetContent from '@components/common/bottomSheets/sheetContents/GiveUpMoneyRoadSheetContent';
 import Receipt from '@components/common/Receipt';
 import ProceedingStemp from '@components/home/walking/ProceedingStemp';
+import WalkingMoneyRoadSummary from '@components/home/walking/WalkingMoneyRoadSummary';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import Spaceholder from '@components/layout/Spaceholder';
+import Spacer from '@components/layout/Spaceholder';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { calcRatio } from '@lib/styles/theme';
 import { TPercent } from '@lib/types/kid';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
@@ -13,42 +17,6 @@ import { selectWeeklyProgress } from '@store/slices/weeklyProgressSlice';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
-// {
-//   "message": null,
-//   "data": {
-//     "currentSavings": 10000,
-//     "totalPrice": 10000
-//   }
-// }
-
-// {
-//   "message": null,
-//   "data": [
-//     {
-//       "id": 8,
-//       "isMom": true,
-//       "title": "아이패드 사기",
-//       "targetItemName": "전자제품",
-//       "challengeCategoryName": "이자율 받기",
-//       "isAchieved": false,
-//       "interestRate": 10,
-//       "totalPrice": 150000,
-//       "weekPrice": 10000,
-//       "weeks": 15,
-//       "createdAt": "2022-07-14 03:28:29",
-//       "status": 2,
-//       "progressList": [
-//         {                       // 해당 주차에 맞는 progress까지만 보내줌
-//           "challengeId": 8,
-//           "weeks": 1,
-//           "isAchieved": false
-//         }
-//       ],
-//       "comment": null
-//     }
-//   ]
-// }
-
 function KidWalking() {
   const { challengeId } = useParams();
   const level = useAppSelector(selectLevel);
@@ -58,34 +26,43 @@ function KidWalking() {
   const targetWalkingMoneyRoad = walkingMoneyRoads?.find(
     (walkingMoneyRoad) => walkingMoneyRoad.id === parseInt(challengeId!),
   );
-  console.log(targetWalkingMoneyRoad);
   const {
-    id,
     isMom,
     title,
     itemName,
-    challengeCategoryName,
-    isAchieved,
     interestRate,
     totalPrice,
     weekPrice,
     weeks,
     createdAt,
-    status,
     progressList,
-    comment,
   } = targetWalkingMoneyRoad!;
 
   const weeklyProgress = useAppSelector(selectWeeklyProgress);
   const { currentSavings } = weeklyProgress!;
-
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
-  const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
+
+  const [open, onOpen, onDismiss] = useBottomSheet(false);
+  // 걷고있는 돈길 페이지 하단 돈길 포기하기 버튼
+  function handleGiveUpMoneyRoadButtonClick() {
+    console.log('handle give up money road button click');
+    onOpen();
+  }
+  // 모달 내부 왼쪽 회색 버튼
+  function handleGiveUpButtonClick() {
+    console.log('handle give up button click');
+  }
   return (
     <Wrapper>
+      <CommonSheet open={open} onDismiss={onDismiss}>
+        <GiveUpMoneyRoadSheetContent
+          onGiveUpButtonClick={handleGiveUpButtonClick}
+          onDismiss={onDismiss}
+        />
+      </CommonSheet>
       <Content>
         <MarginTemplate>
-          <FlexBox>
+          <FlexContainer>
             <div className="graph-wrapper">
               {renderGraph(percent as TPercent)}
             </div>
@@ -93,8 +70,10 @@ function KidWalking() {
               {progressList!.length}주차 도전중
             </span>
             <div className="title">{title}</div>
-            <div>현재 저금액: {currentSavings}</div>
-            <div>현재 완주율: {currentCompletionRate}</div>
+            <WalkingMoneyRoadSummary
+              currentSavings={currentSavings}
+              totalPrice={totalPrice}
+            />
 
             <InterestStamp>
               <div className="text-wrapper">
@@ -106,27 +85,25 @@ function KidWalking() {
               </div>
             </InterestStamp>
 
-            <div>
-              <span>1주마다 3,000원</span>
-              <span>15주 걷기 성공해서</span>
-              <span>이자가 90,000원 쌓였어요</span>
-              <span>별도 API 제작 예정</span>
-            </div>
-
             <MoneyRoadContractContent>
               <span>돈길 계약 내용</span>
-              <Receipt
-                createdAt={createdAt}
-                interestRate={interestRate}
-                isMom={isMom}
-                itemName={itemName}
-                totalPrice={totalPrice}
-                weekPrice={weekPrice}
-                weeks={weeks}
-              />
+              <div className="receipt-positioner">
+                <Receipt
+                  createdAt={createdAt}
+                  interestRate={interestRate}
+                  isMom={isMom}
+                  itemName={itemName}
+                  totalPrice={totalPrice}
+                  weekPrice={weekPrice}
+                  weeks={weeks}
+                />
+              </div>
             </MoneyRoadContractContent>
-            <Spaceholder />
-          </FlexBox>
+            <GiveUpMoneyRoadButton onClick={handleGiveUpMoneyRoadButtonClick}>
+              돈길 포기하기
+            </GiveUpMoneyRoadButton>
+            <Spacer />
+          </FlexContainer>
         </MarginTemplate>
       </Content>
       <Background colorByLevel={colorByLevel}></Background>
@@ -139,23 +116,23 @@ export default KidWalking;
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
-
   overflow-y: auto;
   overflow-x: hidden;
   height: 100vh;
+  background: ${({ theme }) => theme.palette.greyScale.white};
 `;
 
 const Content = styled.div`
   width: 100%;
-
+  top: 0;
+  left: 0;
   position: absolute;
-  z-index: 100;
+  z-index: 2;
 
   .graph-wrapper {
     margin-top: 56px;
     height: 240px;
     width: 250px;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -172,12 +149,13 @@ const Content = styled.div`
   }
   .title {
     margin-top: 16px;
+    margin-bottom: 32px;
     ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
 `;
 
-const FlexBox = styled.div`
+const FlexContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -209,23 +187,35 @@ const MoneyRoadContractContent = styled.div`
   margin-top: 80px;
   width: 100%;
   span {
+    height: 16px;
     ${({ theme }) => theme.typo.text.T_16_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+  .receipt-positioner {
+    margin-top: 20px;
+  }
+`;
+
+const GiveUpMoneyRoadButton = styled.button`
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
+  margin-top: 48px;
+  width: 100%;
+  text-align: center;
+  ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
+  color: ${({ theme }) => theme.palette.greyScale.grey500};
 `;
 
 const Background = styled.div<{ colorByLevel: string }>`
   position: absolute;
   top: 0;
   left: 50%;
+  z-index: 1;
   transform: translate3d(-50%, 0, 0);
 
   height: 337px;
   width: 100%;
-  z-index: 1;
-
   background-color: ${({ colorByLevel }) => colorByLevel};
-  /* margin-top: -17px; */
 
   &:after {
     width: ${calcRatio(530, 360)};
@@ -239,42 +229,3 @@ const Background = styled.div<{ colorByLevel: string }>`
     content: '';
   }
 `;
-
-// const Positioner = styled.div`
-//   position: absolute;
-//   z-index: 100;
-
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: flex-start;
-//   align-items: center;
-
-//   .graph-wrapper {
-//     margin-top: 56px;
-//     height: 240px;
-//     width: 250px;
-
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     svg {
-//       background: skyblue;
-//       height: 208.1px;
-//       margin-top: 32px;
-//       margin-left: ${calcRatio(13, 250)};
-//     }
-//   }
-//   .challenging {
-//     margin-top: 32px;
-//     background: pink;
-//     width: 100%;
-//     text-align: center;
-//     ${({ theme }) => theme.typo.text.T_16_EB};
-//     color: ${({ theme }) => theme.palette.greyScale.grey500};
-//   }
-//   .title {
-//     margin-top: 16px;
-//     ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
-//     color: ${({ theme }) => theme.palette.greyScale.black};
-//   }
-// `;

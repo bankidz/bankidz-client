@@ -25,7 +25,7 @@ import {
   selectPendingMoneyRoadsStatus,
 } from '@store/slices/pendingMoneyRoadsSlice';
 import Modals from '@components/common/modals/Modals';
-import Spaceholder from '@components/layout/Spaceholder';
+import Spacer from '@components/layout/Spaceholder';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import Summary from '@components/home/Summary';
 import EmptyWalkingMoneyRoad from '@components/home/walking/EmptyWalkingMoneyRoad';
@@ -65,7 +65,10 @@ function KidHome() {
     weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
+<<<<<<< HEAD
       // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
+=======
+>>>>>>> 9e78eb7b075bec666185783d38777c3561a12881
       <Summary
         current={weeklyProgress!.currentSavings!}
         goal={weeklyProgress!.totalPrice!}
@@ -147,7 +150,7 @@ function KidHome() {
             <header>대기중인 돈길</header>
             {pendingMoneyRoadsContent}
           </WaitingMoneyRoadWrapper>
-          <Spaceholder />
+          <Spacer />
         </MarginTemplate>
       </Content>
 

@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left.svg';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
+import { TLevel } from '@lib/types/common';
 
 interface AppBarProps {
   /**
@@ -11,7 +12,7 @@ interface AppBarProps {
   /**
    * 레벨
    */
-  level?: 1 | 2 | 3 | 4 | 5 | null;
+  level?: TLevel;
 }
 
 function AppBar({ label, level }: AppBarProps) {
