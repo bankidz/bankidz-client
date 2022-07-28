@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import QuinaryModal from './QuinaryModal';
 
 export default {
-  title: '모달/QuinaryModal',
+  title: 'Common/모달/QuinaryModal',
   component: QuinaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },

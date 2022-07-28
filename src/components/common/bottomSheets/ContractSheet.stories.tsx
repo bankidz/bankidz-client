@@ -5,6 +5,9 @@ import ContractSheet from './ContractSheet';
 // import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './sheetContents/SelectMoney';
 import SelectInterestButton from '@components/home/create/SelectInterestButton';
+import SelectInterest from './sheetContents/SelectInterest';
+import Signature from './sheetContents/Signature';
+import RangeInput from './sheetContents/RangeInput';
 
 export default {
   title: 'Common/바텀 시트/ContractSheet',
@@ -16,8 +19,8 @@ const Template: ComponentStory<typeof ContractSheet> = (args) => (
   <ContractSheet {...args} />
 );
 
-export const 모을_금액_입력 = Template.bind({});
-모을_금액_입력.args = {
+export const 목표_금액_입력 = Template.bind({});
+목표_금액_입력.args = {
   children: (
     <SelectMoney
       pushAmount={() => {}}
@@ -31,7 +34,23 @@ export const 모을_금액_입력 = Template.bind({});
 
 export const 이자율_선택 = Template.bind({});
 이자율_선택.args = {
-  // children: <SelectInterestButton />,
+  children: <SelectInterest />,
+  open: true,
+  label: '다음',
+};
+
+export const 매주_저금액_입력 = Template.bind({});
+매주_저금액_입력.args = {
+  children: (
+    <RangeInput totalPrice={100000} min={1500} max={30000} step={500} />
+  ),
+  open: true,
+  label: '다음',
+};
+
+export const 사인하기 = Template.bind({});
+사인하기.args = {
+  children: <Signature setDisabledNext={() => {}} setSign={() => {}} />,
   open: true,
   label: '다음',
 };

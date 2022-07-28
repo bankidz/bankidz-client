@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PrimaryModal from './PrimaryModal';
 
 export default {
-  title: '모달/PrimaryModal',
+  title: 'Common/모달/PrimaryModal',
   component: PrimaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SenaryModal from './SenaryModal';
 
 export default {
-  title: '모달/SenaryModal',
+  title: 'Common/모달/SenaryModal',
   component: SenaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },

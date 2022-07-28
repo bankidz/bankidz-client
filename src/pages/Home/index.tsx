@@ -7,7 +7,6 @@ import KidHome from './KidHome';
 import ParentHome from './ParentHome';
 import KidCreate from './KidCreate';
 import KidWalking from './KidWalking';
-import CheckStepParams from '@components/home/create/CheckStepParams';
 import ParentPending from './ParentPending';
 
 function HomeRouter() {
@@ -27,11 +26,9 @@ function HomeRouter() {
       <Route
         path="/create/:step"
         element={
-          <CheckStepParams>
-            <ForegroundTemplate label="돈길 계약하기">
-              <KidCreate />
-            </ForegroundTemplate>
-          </CheckStepParams>
+          <ForegroundTemplate label="돈길 계약하기">
+            <KidCreate />
+          </ForegroundTemplate>
         }
       />
       {/* 자녀 - 걷고있는 돈길 */}
