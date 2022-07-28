@@ -8,8 +8,6 @@ import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import EmptyPendingMoneyRoad from '@components/home/kid/pendingMoneyRoad/EmptyPendingMoneyRoad';
-import PendingMoneyRoadList from '@components/home/kid/pendingMoneyRoad/PendingMoneyRoadList';
 import { useEffect } from 'react';
 import {
   fetchWeeklyProgress,
@@ -27,23 +25,25 @@ import {
   selectPendingMoneyRoadsStatus,
 } from '@store/slices/pendingMoneyRoadsSlice';
 import Modals from '@components/common/modals/Modals';
-import Summary from '@components/home/kid/Summary';
-import EmptyWalkingMoneyRoad from '@components/home/kid/walkingMoneyRoad/EmptyWalkingMoneyRoad';
-import WalkingMoneyRoadList from '@components/home/kid/walkingMoneyRoad/WalkingMoneyRoadList';
-import ContractNewMoneyRoadLink from '@components/home/kid/walkingMoneyRoad/ContractNewMoneyRoadLink';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import Spaceholder from '@components/layout/Spaceholder';
+import getColorByLevel from '@lib/utils/common/getColorByLevel';
+import Summary from '@components/home/Summary';
+import EmptyWalkingMoneyRoad from '@components/home/walking/EmptyWalkingMoneyRoad';
+import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList';
+import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
+import EmptyPendingMoneyRoad from '@components/home/pending/EmptyPendingMoneyRoad';
+import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
+  const colorByLevel = getColorByLevel(level!);
+
   const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
   const weeklyProgress = useAppSelector(selectWeeklyProgress);
   const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
   const pendingMoneyRoadsStatus = useAppSelector(selectPendingMoneyRoadsStatus);
   const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
-
-  const colorByLevel = getColorByLevel(level!);
 
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();

@@ -1,5 +1,5 @@
 import Receipt from '@components/common/Receipt';
-import ProceedingStemp from '@components/home/kid/ProceedingStemp';
+import ProceedingStemp from '@components/home/walking/ProceedingStemp';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Spaceholder from '@components/layout/Spaceholder';
 import { calcRatio } from '@lib/styles/theme';

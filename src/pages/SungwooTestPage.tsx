@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Modals, { modals } from '../../components/common/modals/Modals';
 import useModals from '@hooks/useModals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useAppSelector } from '@store/app/hooks';

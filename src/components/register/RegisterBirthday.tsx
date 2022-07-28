@@ -4,7 +4,7 @@ import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/buttons/Button';
-import InputForm from '@components/common/inputs/InputForm';
+import InputForm from '@components/common/InputForm';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month

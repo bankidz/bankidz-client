@@ -1,4 +1,4 @@
-import { TSetStep4Form } from '@components/home/kid/create/steps/Step4';
+import { TSetStep4Form } from '@components/home/create/steps/Step4';
 import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingBanki } from '@assets/illusts/banki/banki_walking.svg';
 import { useEffect, useState } from 'react';

@@ -3,14 +3,14 @@ import Layout from './components/layout/Layout';
 import LoginPage from './pages/OnBoarding/LoginPage';
 import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
 import RegisterPage from './pages/OnBoarding/RegisterPage';
-import HomeRouter from './pages/Home/HomeRouter';
+import HomeRouter from './pages/Home';
 import Walk from './pages/Walk';
-import MypageRouter from './pages/Mypage/MypageRouter';
-import FinancialRouter from './pages/Financial/FinancialRouter';
-import NotFound from './pages/Etc/NotFound';
+import MypageRouter from './pages/Mypage';
+import FinancialRouter from './pages/Financial';
+import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
-import SungwooTestPage from './pages/Etc/SungwooTestPage';
+import SungwooTestPage from './pages/SungwooTestPage';
 
 function App() {
   return (

@@ -21,7 +21,7 @@ import Modals, { modals } from '@components/common/modals/Modals';
 import getChallengeStep4Prices from '@lib/utils/kid/getChallengeStep4Prices';
 import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
-import InputForm from '@components/common/inputs/InputForm';
+import InputForm from '@components/common/InputForm';
 
 export type TStep4Form = {
   weekPrice: number;

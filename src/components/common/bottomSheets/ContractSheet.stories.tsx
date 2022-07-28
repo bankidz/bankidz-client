@@ -4,7 +4,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import ContractSheet from './ContractSheet';
 // import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './sheetContents/SelectMoney';
-import SelectInterestButton from '@components/home/kid/create/SelectInterestButton';
+import SelectInterestButton from '@components/home/create/SelectInterestButton';
 
 export default {
   title: 'Common/바텀 시트/ContractSheet',

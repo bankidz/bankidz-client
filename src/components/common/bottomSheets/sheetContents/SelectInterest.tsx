@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SelectInterestButton from '@components/home/kid/create/SelectInterestButton';
-import { TSetStep4Form } from '@components/home/kid/create/steps/Step4';
+import SelectInterestButton from '@components/home/create/SelectInterestButton';
+import { TSetStep4Form } from '@components/home/create/steps/Step4';
 
 const notifications = {
   null: {
