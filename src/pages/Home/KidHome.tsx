@@ -65,10 +65,6 @@ function KidHome() {
     weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
-<<<<<<< HEAD
-      // 재사용 컴포넌트의 props는 최대한 간결하게! (커플링 최소화)
-=======
->>>>>>> 9e78eb7b075bec666185783d38777c3561a12881
       <Summary
         current={weeklyProgress!.currentSavings!}
         goal={weeklyProgress!.totalPrice!}
