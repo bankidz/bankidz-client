@@ -82,16 +82,9 @@ export const walkingMoneyRoadsSlice = createSlice({
       })
       .addCase(giveUpWalkingMoneyRoad.fulfilled, (state, action) => {
         const { id } = action.payload.data;
-        if (state.walkingMoneyRoads!.length === 1) {
-          // 기존 걷고있는 돈길 1개만 남아있던 경우
-          state.walkingMoneyRoads = null;
-        } else {
-          // 기존 걷고있는 돈길 2 ~ 5개 남아있던 경우
-          const temp = state.walkingMoneyRoads!.filter(
-            (walkingMoneyRoad) => walkingMoneyRoad.id !== id,
-          );
-          state.walkingMoneyRoads = temp;
-        }
+        state.walkingMoneyRoads = state.walkingMoneyRoads!.filter(
+          (walkingMoneyRoad) => walkingMoneyRoad.id !== id,
+        );
       });
   },
 });

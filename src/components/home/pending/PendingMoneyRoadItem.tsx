@@ -5,7 +5,11 @@ import useModals from '@lib/hooks/useModals';
 import { TFetchStatus } from '@lib/types/api';
 import { EMoneyRoadStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
-import { useAppDispatch } from '@store/app/hooks';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import {
+  deletePendingMoneyRoad,
+  selectPendingMoneyRoads,
+} from '@store/slices/pendingMoneyRoadsSlice';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -46,16 +50,32 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
   }
 
   const axiosPrivate = useAxiosPrivate();
-  const [giveUpPendingMoneyRoadStatus, setGiveUpPendingMoneyRoadStatus] =
+  const [deletePendingMoneyRoadStatus, setDeletePendingMoneyRoadStatus] =
     useState<TFetchStatus>('idle');
-  const canGiveUp = giveUpPendingMoneyRoadStatus === 'idle';
+  const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
+  const canDelete =
+    pendingMoneyRoads !== [] && deletePendingMoneyRoadStatus === 'idle';
   const dispatch = useAppDispatch();
 
   // 거절됨
   function openSenaryModal() {
     openModal(modals.senaryModal, {
-      onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
+      onSubmit: async () => {
+        if (canDelete) {
+          try {
+            setDeletePendingMoneyRoadStatus('pending');
+            await dispatch(
+              deletePendingMoneyRoad({
+                axiosPrivate,
+                id,
+              }),
+            ).unwrap();
+          } catch (error: any) {
+            console.log(error.message);
+          } finally {
+            setDeletePendingMoneyRoadStatus('idle');
+          }
+        }
       },
       createdAt: createdAt,
       interestRate: interestRate,

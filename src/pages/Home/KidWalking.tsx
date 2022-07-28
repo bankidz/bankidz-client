@@ -59,7 +59,7 @@ function KidWalking() {
   const [giveUpWalkingMoneyRoadStatus, setGiveUpWalkingMoneyRoadStatus] =
     useState<TFetchStatus>('idle');
   const canGiveUp =
-    walkingMoneyRoads !== null && giveUpWalkingMoneyRoadStatus === 'idle';
+    walkingMoneyRoads !== [] && giveUpWalkingMoneyRoadStatus === 'idle';
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -81,6 +81,7 @@ function KidWalking() {
         // TODO: 포기 횟수 초과 시 API response 확인
         console.log('error.message', error.message);
         console.log('error.status', error.status);
+        console.log(error.message);
         setOpenGiveUp(false);
         setOpenExceeded(true);
       } finally {

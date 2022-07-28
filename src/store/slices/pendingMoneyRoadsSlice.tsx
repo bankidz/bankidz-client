@@ -24,6 +24,17 @@ export const fetchPendingMoneyRoads = createAsyncThunk(
   },
 );
 
+// DELETE: 대기중인 돈길 삭제
+export const deletePendingMoneyRoad = createAsyncThunk(
+  'pendingMoneyRoads/delete',
+  async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
+    const { axiosPrivate, id } = thunkPayload;
+    const response = await axiosPrivate.delete(`/challenge/${id}`);
+    console.log('response.data', response.data);
+    return response.data;
+  },
+);
+
 export const PendingMoneyRoadsSlice = createSlice({
   name: 'PendingMoneyRoads',
   initialState,
@@ -40,6 +51,12 @@ export const PendingMoneyRoadsSlice = createSlice({
       .addCase(fetchPendingMoneyRoads.rejected, (state, action) => {
         state.pendingMoneyRoadsStatus = 'failed';
         console.error(action.error.message);
+      })
+      .addCase(deletePendingMoneyRoad.fulfilled, (state, action) => {
+        const { id } = action.payload.data;
+        state.pendingMoneyRoads = state.pendingMoneyRoads!.filter(
+          (pendingMoneyRoad) => pendingMoneyRoad.id !== id,
+        );
       });
   },
 });
