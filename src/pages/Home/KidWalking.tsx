@@ -27,20 +27,15 @@ function KidWalking() {
     (walkingMoneyRoad) => walkingMoneyRoad.id === parseInt(challengeId!),
   );
   const {
-    id,
     isMom,
     title,
     itemName,
-    challengeCategoryName,
-    isAchieved,
     interestRate,
     totalPrice,
     weekPrice,
     weeks,
     createdAt,
-    status,
     progressList,
-    comment,
   } = targetWalkingMoneyRoad!;
 
   const weeklyProgress = useAppSelector(selectWeeklyProgress);
@@ -48,7 +43,6 @@ function KidWalking() {
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
 
   const [open, onOpen, onDismiss] = useBottomSheet(false);
-
   // 걷고있는 돈길 페이지 하단 돈길 포기하기 버튼
   function handleGiveUpMoneyRoadButtonClick() {
     console.log('handle give up money road button click');
@@ -76,41 +70,39 @@ function KidWalking() {
               {progressList!.length}주차 도전중
             </span>
             <div className="title">{title}</div>
-            <WhiteBox>
-              <WalkingMoneyRoadSummary
-                currentSavings={currentSavings}
-                totalPrice={totalPrice}
-              />
+            <WalkingMoneyRoadSummary
+              currentSavings={currentSavings}
+              totalPrice={totalPrice}
+            />
 
-              <InterestStamp>
-                <div className="text-wrapper">
-                  <span className="header">이자 스탬프</span>
-                  <span className="body">
-                    돈길 걷기를 완료한 주차에 해당하는 만큼 이자를 받아요
-                  </span>
-                  <ProceedingStemp weeks={weeks} stemp={progressList!} />
-                </div>
-              </InterestStamp>
+            <InterestStamp>
+              <div className="text-wrapper">
+                <span className="header">이자 스탬프</span>
+                <span className="body">
+                  돈길 걷기를 완료한 주차에 해당하는 만큼 이자를 받아요
+                </span>
+                <ProceedingStemp weeks={weeks} stemp={progressList!} />
+              </div>
+            </InterestStamp>
 
-              <MoneyRoadContractContent>
-                <span>돈길 계약 내용</span>
-                <div className="receipt-positioner">
-                  <Receipt
-                    createdAt={createdAt}
-                    interestRate={interestRate}
-                    isMom={isMom}
-                    itemName={itemName}
-                    totalPrice={totalPrice}
-                    weekPrice={weekPrice}
-                    weeks={weeks}
-                  />
-                </div>
-              </MoneyRoadContractContent>
-              <GiveUpMoneyRoadButton onClick={handleGiveUpMoneyRoadButtonClick}>
-                돈길 포기하기
-              </GiveUpMoneyRoadButton>
-              <Spacer />
-            </WhiteBox>
+            <MoneyRoadContractContent>
+              <span>돈길 계약 내용</span>
+              <div className="receipt-positioner">
+                <Receipt
+                  createdAt={createdAt}
+                  interestRate={interestRate}
+                  isMom={isMom}
+                  itemName={itemName}
+                  totalPrice={totalPrice}
+                  weekPrice={weekPrice}
+                  weeks={weeks}
+                />
+              </div>
+            </MoneyRoadContractContent>
+            <GiveUpMoneyRoadButton onClick={handleGiveUpMoneyRoadButtonClick}>
+              돈길 포기하기
+            </GiveUpMoneyRoadButton>
+            <Spacer />
           </FlexContainer>
         </MarginTemplate>
       </Content>
@@ -124,16 +116,18 @@ export default KidWalking;
 const Wrapper = styled.div`
   width: 100%;
   position: relative;
-
   overflow-y: auto;
   overflow-x: hidden;
   height: 100vh;
+  background: ${({ theme }) => theme.palette.greyScale.white};
 `;
 
 const Content = styled.div`
   width: 100%;
+  top: 0;
+  left: 0;
   position: absolute;
-  z-index: 100;
+  z-index: 2;
 
   .graph-wrapper {
     margin-top: 56px;
@@ -166,11 +160,6 @@ const FlexContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const WhiteBox = styled.div`
-  background: ${({ theme }) => theme.palette.greyScale.white};
-  z-index: 100;
 `;
 
 const InterestStamp = styled.div`
@@ -207,15 +196,25 @@ const MoneyRoadContractContent = styled.div`
   }
 `;
 
+const GiveUpMoneyRoadButton = styled.button`
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
+  margin-top: 48px;
+  width: 100%;
+  text-align: center;
+  ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
+  color: ${({ theme }) => theme.palette.greyScale.grey500};
+`;
+
 const Background = styled.div<{ colorByLevel: string }>`
   position: absolute;
   top: 0;
   left: 50%;
+  z-index: 1;
   transform: translate3d(-50%, 0, 0);
 
   height: 337px;
   width: 100%;
-  z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
 
   &:after {
@@ -229,14 +228,4 @@ const Background = styled.div<{ colorByLevel: string }>`
     left: calc(-${calcRatio(530, 360)} / 2 + 50%);
     content: '';
   }
-`;
-
-const GiveUpMoneyRoadButton = styled.button`
-  text-decoration: underline;
-  text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
-  margin-top: 48px;
-  width: 100%;
-  text-align: center;
-  ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
-  color: ${({ theme }) => theme.palette.greyScale.grey500};
 `;
