@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '@store/app/hooks';
-import useRefreshToken from '@hooks/auth/useRefreshToken';
+import useRefreshToken from '@lib/hooks/auth/useRefreshToken';
 import { selectAccessToken } from '@store/slices/authSlice';
 import { axiosPrivateInstance } from '@lib/api/axios';
 

@@ -1,9 +1,9 @@
 import ContractSheet from '@components/common/bottomSheets/ContractSheet';
 import Signature from '@components/common/bottomSheets/sheetContents/Signature';
 import Modals, { modals } from '@components/common/modals/Modals';
-import useAxiosPrivate from '@hooks/auth/useAxiosPrivate';
-import useBottomSheet from '@hooks/useBottomSheet';
-import useModals from '@hooks/useModals';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
+import useModals from '@lib/hooks/useModals';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchResetChallengePayload,

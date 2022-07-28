@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import useRefreshToken from '@hooks/auth/useRefreshToken';
+import useRefreshToken from '@lib/hooks/auth/useRefreshToken';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAccessToken } from '@store/slices/authSlice';
-import useLocalStorage from '@hooks/auth/useLocalStorage';
+import useLocalStorage from '@lib/hooks/auth/useLocalStorage';
 
 function PersistLogin() {
   const [isLoading, setIsLoading] = useState(true);

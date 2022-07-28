@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
-import DeleteChallenge from './sheetContents/DeleteChallenge';
+import GiveUpMoneyRoadSheetContent from './sheetContents/GiveUpMoneyRoadSheetContent';
 import SelectProfile from './sheetContents/SelectProfile';
 
 export default {
@@ -22,6 +22,11 @@ export const 프로필_선택_확인 = Template.bind({});
 
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
-  children: <DeleteChallenge onClickDelete={() => {}} onDismiss={() => {}} />,
+  children: (
+    <GiveUpMoneyRoadSheetContent
+      onGiveUpButtonClick={() => {}}
+      onDismiss={() => {}}
+    />
+  ),
   open: true,
 };

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import ContractSheet from '@components/common/bottomSheets/ContractSheet';
 import SelectInterest from '@components/common/bottomSheets/sheetContents/SelectInterest';
 import SheetButton from '@components/common/buttons/SheetButton';
-import useBottomSheet from '@hooks/useBottomSheet';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchInterestRate,
@@ -16,7 +16,7 @@ import {
 import { ReactComponent as Divider } from '@assets/borders/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/sheetContents/RangeInput';
-import useModals from '@hooks/useModals';
+import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import getChallengeStep4Prices from '@lib/utils/kid/getChallengeStep4Prices';
 import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';

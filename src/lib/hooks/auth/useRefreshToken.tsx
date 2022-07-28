@@ -1,5 +1,5 @@
-import { useAppDispatch } from '../../store/app/hooks';
-import { axiosPublic } from '../../lib/api/axios';
+import { useAppDispatch } from '../../../store/app/hooks';
+import { axiosPublic } from '../../api/axios';
 import { setCredentials } from '@store/slices/authSlice';
 
 function useRefreshToken() {

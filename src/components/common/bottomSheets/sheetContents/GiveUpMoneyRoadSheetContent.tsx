@@ -1,13 +1,16 @@
 import styled from 'styled-components';
-import { ReactComponent as Banki } from '@assets/illust/banki/banki_giveup.svg';
+import { ReactComponent as Banki } from '@assets/illusts/banki/banki_giveup.svg';
 import Button from '@components/common/buttons/Button';
 
-interface DeleteChallengeProps {
-  onClickDelete: () => void;
+interface GiveUpMoneyRoadSheetContentProps {
+  onGiveUpButtonClick: () => void;
   onDismiss: () => void;
 }
 
-function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
+function GiveUpMoneyRoadSheetContent({
+  onGiveUpButtonClick,
+  onDismiss,
+}: GiveUpMoneyRoadSheetContentProps) {
   return (
     <Wrapper>
       <Container>
@@ -25,14 +28,14 @@ function DeleteChallenge({ onClickDelete, onDismiss }: DeleteChallengeProps) {
         </Rule>
       </Container>
       <ButtonContainer>
-        <Button label="포기하기" property="sub" onClick={onClickDelete} />
+        <Button label="포기하기" property="sub" onClick={onGiveUpButtonClick} />
         <Button label="다시 도전해볼게요" onClick={onDismiss} />
       </ButtonContainer>
     </Wrapper>
   );
 }
 
-export default DeleteChallenge;
+export default GiveUpMoneyRoadSheetContent;
 
 const Wrapper = styled.div``;
 
