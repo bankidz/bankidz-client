@@ -34,7 +34,7 @@ function HomeRouter() {
       />
       {/* 자녀 - 걷고있는 돈길 */}
       <Route
-        path="/walking/:challengeId"
+        path="/walking/:id"
         element={
           <ForegroundTemplate label="걷고있는 돈길" level={level}>
             <KidWalking />
@@ -44,7 +44,7 @@ function HomeRouter() {
       {/* 부모 - 대기중인 돈길 */}
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
-        path="pending/:challengeId"
+        path="pending/:id"
         element={
           isKid ? (
             <>부적절한 접근입니다.</>

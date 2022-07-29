@@ -3,9 +3,9 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
 import DeleteCheck from './sheetContents/DeleteCheck';
 import GiveUpExceeded from './sheetContents/GiveUpExceeded';
-import GiveUpMoneyRoadSheetContent from './sheetContents/GiveUpMoneyRoadSheetContent';
+import GiveUp from './sheetContents/GiveUpCheck';
 import SelectProfile from './sheetContents/SelectProfile';
-import SheetComplete from './sheetContents/SheetComplete';
+import SheetCompleted from './sheetContents/SheetCompleted';
 
 export default {
   title: 'Common/바텀 시트/CommonSheet',
@@ -25,12 +25,7 @@ export const 프로필_선택_확인 = Template.bind({});
 
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
-  children: (
-    <GiveUpMoneyRoadSheetContent
-      onGiveUpButtonClick={() => {}}
-      onDismiss={() => {}}
-    />
-  ),
+  children: <GiveUp onGiveUpButtonClick={() => {}} onDismiss={() => {}} />,
   open: true,
 };
 
@@ -42,20 +37,24 @@ export const 삭제_확인 = Template.bind({});
 
 export const 삭제_완료 = Template.bind({});
 삭제_완료.args = {
-  children: <SheetComplete type="delete" onDismiss={() => {}} />,
+  children: <SheetCompleted type="delete" onDismiss={() => {}} />,
   open: true,
 };
 
 export const 포기_취소 = Template.bind({});
 포기_취소.args = {
-  children: <SheetComplete type="cancle" onDismiss={() => {}} />,
+  children: <SheetCompleted type="cancel" onDismiss={() => {}} />,
   open: true,
 };
 
 export const 돈길_포기_완료 = Template.bind({});
 돈길_포기_완료.args = {
   children: (
-    <SheetComplete type="giveUp" title="에어팟 구매하기" onDismiss={() => {}} />
+    <SheetCompleted
+      type="giveUp"
+      title="에어팟 구매하기"
+      onDismiss={() => {}}
+    />
   ),
   open: true,
 };

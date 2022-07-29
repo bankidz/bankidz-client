@@ -4,7 +4,7 @@ import LoginPage from './pages/OnBoarding/LoginPage';
 import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
 import RegisterPage from './pages/OnBoarding/RegisterPage';
 import HomeRouter from './pages/Home';
-import Walk from './pages/Walk';
+import Walk from './pages/Walk/Walk';
 import MypageRouter from './pages/Mypage';
 import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';

@@ -4,15 +4,23 @@ import useModals from '@lib/hooks/useModals';
 import { EMoneyRoadStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
   pendingMoneyRoad: IMoneyRoad;
+  onDeleteCheckOpen: () => void;
+  setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
+function PendingMoneyRoadItem({
+  pendingMoneyRoad,
+  onDeleteCheckOpen,
+  setIdToDelete,
+}: PendingMoneyRoadItemProps) {
   const { openModal } = useModals();
   const {
+    id,
     status,
     createdAt,
     interestRate,
@@ -28,9 +36,6 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
   // 제안중
   function openQuinaryModal() {
     openModal(modals.quinaryModal, {
-      onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
-      },
       createdAt: createdAt,
       interestRate: interestRate,
       isMom: isMom,
@@ -39,7 +44,6 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      comment: comment,
     });
   }
 
@@ -47,7 +51,8 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
   function openSenaryModal() {
     openModal(modals.senaryModal, {
       onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
+        onDeleteCheckOpen();
+        setIdToDelete(id);
       },
       createdAt: createdAt,
       interestRate: interestRate,
@@ -57,7 +62,7 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      // comment: comment,
+      comment: comment?.content,
     });
   }
 
