@@ -3,16 +3,18 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingItemNameButtonBorder } from '@assets/borders/walking-itemName-border.svg';
 import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { TItemName } from '@lib/types/kid';
-import { theme } from '@lib/styles/theme';
+import { calcRatio, theme } from '@lib/styles/theme';
 
 interface WalkingItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {
   itemName: TItemName;
   isSelected: boolean;
+  isNoticed: boolean;
 }
 
 function WalkingItemNameButton({
   itemName,
   isSelected = false,
+  isNoticed = false,
   ...props
 }: WalkingItemNameButtonProps) {
   return (
@@ -25,6 +27,7 @@ function WalkingItemNameButton({
         }
       />
       <Content>{renderItemIllust(itemName)}</Content>
+      {isNoticed && <Dot />}
     </Wrapper>
   );
 }
@@ -51,9 +54,19 @@ const Content = styled.div`
   align-items: center;
   flex-direction: column;
   padding: 8px;
-
+  box-sizing: border-box;
   svg {
     width: 100%;
     box-sizing: border-box;
   }
+`;
+
+const Dot = styled.div`
+  width: 8px;
+  height: 8px;
+  background-color: ${({ theme }) => theme.palette.sementic.red300};
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  right: ${calcRatio(3, 48)};
 `;

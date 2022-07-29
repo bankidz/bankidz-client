@@ -27,4 +27,5 @@ export const 돈길_계약하기 = Template.bind({});
 export const 걷고있는_돈길 = Template.bind({});
 걷고있는_돈길.args = {
   label: '내정보 수정',
+  level: 2,
 };

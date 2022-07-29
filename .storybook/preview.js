@@ -13,7 +13,6 @@ export const decorators = [
         <GlobalStyle />
         <div
           style={{
-            backgroundColor: '#F7F7F8',
             width: '100%',
           }}
         >

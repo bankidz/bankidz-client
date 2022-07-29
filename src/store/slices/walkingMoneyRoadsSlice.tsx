@@ -67,7 +67,7 @@ export const walkingMoneyRoadsSlice = createSlice({
       })
       .addCase(fetchWalkingMoneyRoads.rejected, (state, action) => {
         state.walkingMoneyRoadsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });
