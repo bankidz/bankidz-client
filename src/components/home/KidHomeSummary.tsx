@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface SummaryProps {
+interface KidHomeSummaryProps {
   /**
    * 내 저금통
    */
@@ -19,7 +19,7 @@ interface SummaryProps {
   week: number;
 }
 
-function Summary({ current, goal, month, week }: SummaryProps) {
+function KidHomeSummary({ current, goal, month, week }: KidHomeSummaryProps) {
   // 일단은 크기 고정
   return (
     <Wrapper>
@@ -41,7 +41,7 @@ function Summary({ current, goal, month, week }: SummaryProps) {
   );
 }
 
-export default Summary;
+export default KidHomeSummary;
 
 const Wrapper = styled.div`
   height: 120px;

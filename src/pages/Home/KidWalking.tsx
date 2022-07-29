@@ -4,7 +4,7 @@ import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpChe
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import Receipt from '@components/common/Receipt';
 import ProceedingStemp from '@components/home/walking/ProceedingStemp';
-import WalkingMoneyRoadSummary from '@components/home/walking/WalkingMoneyRoadSummary';
+import WalkingSummary from '@components/home/walking/WalkingSummary';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Spacer from '@components/layout/Spaceholder';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -116,7 +116,7 @@ function KidWalking() {
               {progressList?.length}주차 도전중
             </span>
             <div className="title">{title}</div>
-            <WalkingMoneyRoadSummary
+            <WalkingSummary
               currentSavings={currentSavings}
               totalPrice={totalPrice}
             />

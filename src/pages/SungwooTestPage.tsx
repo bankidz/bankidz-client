@@ -19,7 +19,7 @@ function SungwooTestPage() {
       onExtraSubmit: () => {
         console.log('handle accept button click');
       },
-      isKid: true,
+      isKid: false,
     });
   }
 

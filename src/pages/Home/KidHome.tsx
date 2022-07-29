@@ -27,7 +27,7 @@ import {
 import Modals from '@components/common/modals/Modals';
 import Spacer from '@components/layout/Spaceholder';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import Summary from '@components/home/Summary';
+import KidHomeSummary from '@components/home/KidHomeSummary';
 import EmptyWalkingMoneyRoad from '@components/home/walking/EmptyWalkingMoneyRoad';
 import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList';
 import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
@@ -67,10 +67,12 @@ function KidHome() {
   // 주간 진행상황
   let weeklyProgressContent;
   if (weeklyProgressStatus === 'loading') {
-    weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
+    weeklyProgressContent = (
+      <KidHomeSummary current={0} goal={0} month={0} week={0} />
+    );
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
-      <Summary
+      <KidHomeSummary
         current={weeklyProgress?.currentSavings!}
         goal={weeklyProgress?.totalPrice!}
         month={6}
