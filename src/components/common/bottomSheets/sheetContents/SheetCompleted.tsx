@@ -8,7 +8,7 @@ interface SheetCompleteProps {
   onDismiss: () => void;
 }
 
-function SheetComplete({ type, title, onDismiss }: SheetCompleteProps) {
+function SheetCompleted({ type, title, onDismiss }: SheetCompleteProps) {
   return (
     <Wrapper>
       <Container>
@@ -27,7 +27,7 @@ function SheetComplete({ type, title, onDismiss }: SheetCompleteProps) {
   );
 }
 
-export default SheetComplete;
+export default SheetCompleted;
 
 const Wrapper = styled.div``;
 
