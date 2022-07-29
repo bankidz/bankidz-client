@@ -42,7 +42,10 @@ export const 제안중 = Template.bind({});
         isAchieved: false,
       },
     ],
-    comment: '코멘트 테스트',
+    comment: {
+      content: '큰 이자를 줄만한 목표가 아닌것 같다~',
+      id: 0,
+    },
   },
 };
 
@@ -68,6 +71,9 @@ export const 거절됨 = Template.bind({});
         isAchieved: false,
       },
     ],
-    comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
+    comment: {
+      content: '큰 이자를 줄만한 목표가 아닌것 같다~',
+      id: 0,
+    },
   },
 };

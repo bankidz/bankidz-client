@@ -3,7 +3,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
 import DeleteCheck from './sheetContents/DeleteCheck';
 import GiveUpExceeded from './sheetContents/GiveUpExceeded';
-import GiveUpMoneyRoadSheetContent from './sheetContents/GiveUpMoneyRoadSheetContent';
+import GiveUp from './sheetContents/GiveUpCheck';
 import SelectProfile from './sheetContents/SelectProfile';
 import SheetComplete from './sheetContents/SheetComplete';
 
@@ -25,12 +25,7 @@ export const 프로필_선택_확인 = Template.bind({});
 
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
-  children: (
-    <GiveUpMoneyRoadSheetContent
-      onGiveUpButtonClick={() => {}}
-      onDismiss={() => {}}
-    />
-  ),
+  children: <GiveUp onGiveUpButtonClick={() => {}} onDismiss={() => {}} />,
   open: true,
 };
 
@@ -48,7 +43,7 @@ export const 삭제_완료 = Template.bind({});
 
 export const 포기_취소 = Template.bind({});
 포기_취소.args = {
-  children: <SheetComplete type="cancle" onDismiss={() => {}} />,
+  children: <SheetComplete type="cancel" onDismiss={() => {}} />,
   open: true,
 };
 

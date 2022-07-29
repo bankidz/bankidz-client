@@ -8,7 +8,7 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   fetchWeeklyProgress,
   selectWeeklyProgress,
@@ -33,6 +33,11 @@ import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList'
 import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
 import EmptyPendingMoneyRoad from '@components/home/pending/EmptyPendingMoneyRoad';
 import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList';
+import CommonSheet from '@components/common/bottomSheets/CommonSheet';
+import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
+import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetComplete';
+import { TFetchStatus } from '@lib/types/api';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
@@ -66,8 +71,8 @@ function KidHome() {
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
       <Summary
-        current={weeklyProgress!.currentSavings!}
-        goal={weeklyProgress!.totalPrice!}
+        current={weeklyProgress?.currentSavings!}
+        goal={weeklyProgress?.totalPrice!}
         month={6}
         week={4}
       />
@@ -89,7 +94,7 @@ function KidHome() {
   if (walkingMoneyRoadsStatus === 'loading') {
     walkingMoneyRoadsContent = <p>Loading...</p>;
   } else if (walkingMoneyRoadsStatus === 'succeeded') {
-    if (walkingMoneyRoads === null) {
+    if (walkingMoneyRoads === []) {
       walkingMoneyRoadsContent = (
         <EmptyWalkingMoneyRoad
           onClick={handleContractNewMoneyRoadButtonClick}
@@ -98,7 +103,7 @@ function KidHome() {
     } else {
       walkingMoneyRoadsContent = (
         <>
-          <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads} />
+          <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads!} />
           <ContractNewMoneyRoadLink disable={disable} to={'/create/1'} />
         </>
       );
@@ -107,16 +112,55 @@ function KidHome() {
     walkingMoneyRoadsContent = <p>Failed</p>;
   }
 
+  // 대기중인 돈길 삭제
+  const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
+  const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const canDelete =
+    idToDelete !== null &&
+    pendingMoneyRoads !== null &&
+    pendingMoneyRoads !== [] &&
+    deleteStatus === 'idle';
+  const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
+    useBottomSheet(false);
+  const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
+    useBottomSheet(false);
+  async function handleDeleteButtonClick() {
+    if (canDelete) {
+      try {
+        setDeleteStatus('pending');
+        // await dispatch(
+        //   deletePendingMoneyRoad({
+        //     axiosPrivate,
+        //     id: idToDelete,
+        //   }),
+        // ).unwrap();
+        // setOpenDeleteCheck(false);
+        // setOpenDeletedCompleted(true);
+        onDeleteCheckOpen();
+      } catch (error: any) {
+        console.log(error.message);
+      } finally {
+        setDeleteStatus('idle');
+      }
+    }
+    onDeleteCheckDismiss();
+    onDeleteCompletedOpen();
+  }
+
   // 대기중인 돈길
   let pendingMoneyRoadsContent;
   if (pendingMoneyRoadsStatus === 'loading') {
     pendingMoneyRoadsContent = <p>Loading...</p>;
   } else if (pendingMoneyRoadsStatus === 'succeeded') {
-    if (pendingMoneyRoads === null) {
+    if (pendingMoneyRoads === []) {
       pendingMoneyRoadsContent = <EmptyPendingMoneyRoad />;
     } else {
       pendingMoneyRoadsContent = (
-        <PendingMoneyRoadList pendingMoneyRoads={pendingMoneyRoads} />
+        <PendingMoneyRoadList
+          pendingMoneyRoads={pendingMoneyRoads!}
+          onDeleteCheckOpen={onDeleteCheckOpen}
+          setIdToDelete={setIdToDelete}
+        />
       );
     }
   } else if (pendingMoneyRoadsStatus === 'failed') {
@@ -126,8 +170,6 @@ function KidHome() {
   return (
     <Wrapper>
       <Content>
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 처리됩니다. */}
-        <Modals />
         <MarginTemplate>
           <div className="logo-positioner">
             <BANKIDZ />
@@ -148,6 +190,22 @@ function KidHome() {
           </WaitingMoneyRoadWrapper>
           <Spacer />
         </MarginTemplate>
+
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 실행됩니다. */}
+        <Modals />
+        {/* 다음 바텀시트를 열고 닫는 로직은 pendingMoneyRoadItem에서 실행됩니다. */}
+        <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
+          <DeleteCheck
+            onClickDelete={handleDeleteButtonClick}
+            onDismiss={onDeleteCheckDismiss}
+          />
+        </CommonSheet>
+        <CommonSheet
+          open={openDeleteCompleted}
+          onDismiss={onDeleteCompletedDismiss}
+        >
+          <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
+        </CommonSheet>
       </Content>
 
       {/* absolutely positioned background components */}
@@ -180,7 +238,7 @@ const Content = styled.div`
   align-items: flex-start;
 
   position: absolute;
-  z-index: 100;
+  z-index: 2;
 
   .logo-positioner {
     width: 100.24px;
@@ -257,19 +315,19 @@ const BackgroundEllipse = styled.div<{ colorByLevel: string }>`
   width: 530px;
   height: 230px;
   border-radius: 265px / 115px;
-  z-index: 2;
+  z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
 `;
 
 const HomeBackgroundPositioner = styled.div`
-  z-index: 3;
+  z-index: 1;
   position: absolute;
   top: 48px;
   right: 0;
 `;
 
 const HomeBankiPositioner = styled.div`
-  z-index: 101;
+  z-index: 3;
   position: absolute;
   top: 146px;
   right: 0;
