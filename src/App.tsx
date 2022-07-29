@@ -25,9 +25,9 @@ function App() {
         <Route path="/walk" element={<Walk />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
+        <Route path="/sungwoo" element={<SungwooTestPage />} />
+        <Route path="*" element={<NotFound />} />
       </Route>
-      <Route path="/sungwoo" element={<SungwooTestPage />} />
-      <Route path="*" element={<NotFound />} />
       {/* </Route>
       </Route> */}
     </Routes>
