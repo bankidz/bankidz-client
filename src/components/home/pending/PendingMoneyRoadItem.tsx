@@ -1,17 +1,9 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
 import { modals } from '@components/common/modals/Modals';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useModals from '@lib/hooks/useModals';
-import { TFetchStatus } from '@lib/types/api';
 import { EMoneyRoadStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  deletePendingMoneyRoad,
-  selectPendingMoneyRoads,
-} from '@store/slices/pendingMoneyRoadsSlice';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
-import { useState } from 'react';
 import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
@@ -49,42 +41,14 @@ function PendingMoneyRoadItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      comment: comment?.content,
     });
   }
-
-  const axiosPrivate = useAxiosPrivate();
-  const [deletePendingMoneyRoadStatus, setDeleteStatus] =
-    useState<TFetchStatus>('idle');
-  const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
-  const canDelete =
-    pendingMoneyRoads !== null &&
-    pendingMoneyRoads !== [] &&
-    deletePendingMoneyRoadStatus === 'idle';
-  const dispatch = useAppDispatch();
 
   // 거절됨
   function openSenaryModal() {
     openModal(modals.senaryModal, {
-      onSubmit: async () => {
-        if (canDelete) {
-          try {
-            setDeleteStatus('pending');
-            // await dispatch(
-            //   deletePendingMoneyRoad({
-            //     axiosPrivate,
-            //     id,
-            //   }),
-            // ).unwrap();
-            // setOpenDeleteCheck(false);
-            // setOpenDeletedCompleted(true);
-            onDeleteCheckOpen();
-          } catch (error: any) {
-            console.log(error.message);
-          } finally {
-            setDeleteStatus('idle');
-          }
-        }
+      onSubmit: () => {
+        onDeleteCheckOpen();
       },
       createdAt: createdAt,
       interestRate: interestRate,
@@ -94,7 +58,7 @@ function PendingMoneyRoadItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      // comment: comment,
+      comment: comment?.content,
     });
   }
 

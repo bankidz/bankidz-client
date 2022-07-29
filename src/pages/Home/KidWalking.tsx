@@ -50,10 +50,14 @@ function KidWalking() {
   const { currentSavings } = weeklyProgress!;
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
 
-  const [openGiveUp, setOpenGiveUp] = useState(false);
-  const [openGiveUpCompleted, setOpenGiveUpCompleted] = useState(false);
-  const [openExceeded, setOpenExceeded] = useState(false);
-  const [openCancelCompleted, setOpenCancelCompleted] = useState(false);
+  const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
+    useBottomSheet(false);
+  const [openGiveUpCompleted, onGiveUpCompletedOpen, onGiveUpCompletedDismiss] =
+    useBottomSheet(false);
+  const [openExceeded, onExceededOpen, onExceededDismiss] =
+    useBottomSheet(false);
+  const [openCancelCompleted, onCancelCompletedOpen, onCancelCompletedDismiss] =
+    useBottomSheet(false);
 
   const axiosPrivate = useAxiosPrivate();
   const [giveUpWalkingMoneyRoadStatus, setGiveUStatus] =
@@ -76,15 +80,15 @@ function KidWalking() {
         //     id: parseInt(id!),
         //   }),
         // ).unwrap();
-        setOpenGiveUp(false);
-        setOpenGiveUpCompleted(true);
+        onGiveUpCheckDismiss();
+        onGiveUpCompletedOpen();
       } catch (error: any) {
         // TODO: 포기 횟수 초과 시 API response 확인
         console.log('error.message', error.message);
         console.log('error.status', error.status);
         if (error.status === 403) {
-          setOpenGiveUp(false);
-          setOpenExceeded(true);
+          onGiveUpCheckDismiss();
+          onExceededOpen();
         } else {
           console.log(error.message);
         }
@@ -95,9 +99,9 @@ function KidWalking() {
   }
 
   // '정말 포기할거예요?' 바텀시트 하단 오른쪽 노란색 버튼
-  function handleCancelDismiss() {
-    setOpenGiveUp(false);
-    setOpenCancelCompleted(true);
+  function handleRetryButtonClick() {
+    onGiveUpCheckDismiss();
+    onCancelCompletedOpen();
   }
 
   return (
@@ -141,7 +145,7 @@ function KidWalking() {
                 />
               </div>
             </MoneyRoadContractContent>
-            <GiveUpMoneyRoadButton onClick={() => setOpenGiveUp(true)}>
+            <GiveUpMoneyRoadButton onClick={onGiveUpCheckOpen}>
               돈길 포기하기
             </GiveUpMoneyRoadButton>
             <Spacer />
@@ -152,12 +156,14 @@ function KidWalking() {
       <Background colorByLevel={colorByLevel}></Background>
 
       {/* bottom sheets */}
-      <CommonSheet open={openGiveUp} onDismiss={handleCancelDismiss}>
+      {/* 정말 포기할거에요? */}
+      <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
         <GiveUpCheck
           onGiveUpButtonClick={handleGiveUpButtonClick}
-          onDismiss={handleCancelDismiss}
+          onDismiss={handleRetryButtonClick}
         />
       </CommonSheet>
+      {/* 돈길이 포기되었어요 */}
       <CommonSheet
         open={openGiveUpCompleted}
         onDismiss={() => {
@@ -172,17 +178,16 @@ function KidWalking() {
           }}
         />
       </CommonSheet>
-      <CommonSheet open={openExceeded} onDismiss={() => setOpenExceeded(false)}>
-        <GiveUpExceeded onDismiss={() => setOpenExceeded(false)} />
+      {/* 포기횟수 초과 */}
+      <CommonSheet open={openExceeded} onDismiss={onExceededDismiss}>
+        <GiveUpExceeded onDismiss={onExceededDismiss} />
       </CommonSheet>
+      {/* '포기하기'가 취소되었어요 */}
       <CommonSheet
         open={openCancelCompleted}
-        onDismiss={() => setOpenCancelCompleted(false)}
+        onDismiss={onCancelCompletedDismiss}
       >
-        <SheetComplete
-          type="cancel"
-          onDismiss={() => setOpenCancelCompleted(false)}
-        />
+        <SheetComplete type="cancel" onDismiss={onCancelCompletedDismiss} />
       </CommonSheet>
     </Wrapper>
   );

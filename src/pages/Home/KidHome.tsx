@@ -37,6 +37,7 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetComplete';
+import { TFetchStatus } from '@lib/types/api';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
@@ -112,13 +113,36 @@ function KidHome() {
   }
 
   // 대기중인 돈길 삭제
+  const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
+  const canDelete =
+    pendingMoneyRoads !== null &&
+    pendingMoneyRoads !== [] &&
+    deleteStatus === 'idle';
   const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
     useBottomSheet(false);
   const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
     useBottomSheet(false);
-  function handleDeleteButtonClick() {
-    // 삭제 API code
-    onDeleteCompletedDismiss();
+  async function handleDeleteButtonClick() {
+    if (canDelete) {
+      try {
+        setDeleteStatus('pending');
+        // await dispatch(
+        //   deletePendingMoneyRoad({
+        //     axiosPrivate,
+        //     id,
+        //   }),
+        // ).unwrap();
+        // setOpenDeleteCheck(false);
+        // setOpenDeletedCompleted(true);
+        onDeleteCheckOpen();
+      } catch (error: any) {
+        console.log(error.message);
+      } finally {
+        setDeleteStatus('idle');
+      }
+    }
+    onDeleteCheckDismiss();
+    onDeleteCompletedOpen();
   }
 
   // 대기중인 돈길
@@ -143,22 +167,6 @@ function KidHome() {
   return (
     <Wrapper>
       <Content>
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 실행됩니다. */}
-        <Modals />
-        {/* 다음 바텀시트를 열고 닫는 로직은 pendingMoneyRoadItem에서 실행됩니다. */}
-        <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
-          <DeleteCheck
-            onClickDelete={handleDeleteButtonClick}
-            onDismiss={onDeleteCompletedDismiss}
-          />
-        </CommonSheet>
-        <CommonSheet
-          open={openDeleteCompleted}
-          onDismiss={onDeleteCompletedDismiss}
-        >
-          <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
-        </CommonSheet>
-
         <MarginTemplate>
           <div className="logo-positioner">
             <BANKIDZ />
@@ -179,6 +187,22 @@ function KidHome() {
           </WaitingMoneyRoadWrapper>
           <Spacer />
         </MarginTemplate>
+
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 실행됩니다. */}
+        <Modals />
+        {/* 다음 바텀시트를 열고 닫는 로직은 pendingMoneyRoadItem에서 실행됩니다. */}
+        <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
+          <DeleteCheck
+            onClickDelete={handleDeleteButtonClick}
+            onDismiss={onDeleteCheckDismiss}
+          />
+        </CommonSheet>
+        <CommonSheet
+          open={openDeleteCompleted}
+          onDismiss={onDeleteCompletedDismiss}
+        >
+          <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
+        </CommonSheet>
       </Content>
 
       {/* absolutely positioned background components */}
