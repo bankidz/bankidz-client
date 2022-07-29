@@ -154,7 +154,7 @@ function QuaternaryModal({
             </div>
           </div>
 
-          <SignatureWrapper>대충 서명</SignatureWrapper>
+          <SignatureWrapper>Signature</SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <CheckButtonPositioner>

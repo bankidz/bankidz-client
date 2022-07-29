@@ -4,16 +4,19 @@ import useModals from '@lib/hooks/useModals';
 import { EMoneyRoadStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
   pendingMoneyRoad: IMoneyRoad;
   onDeleteCheckOpen: () => void;
+  setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
 function PendingMoneyRoadItem({
   pendingMoneyRoad,
   onDeleteCheckOpen,
+  setIdToDelete,
 }: PendingMoneyRoadItemProps) {
   const { openModal } = useModals();
   const {
@@ -49,6 +52,7 @@ function PendingMoneyRoadItem({
     openModal(modals.senaryModal, {
       onSubmit: () => {
         onDeleteCheckOpen();
+        setIdToDelete(id);
       },
       createdAt: createdAt,
       interestRate: interestRate,

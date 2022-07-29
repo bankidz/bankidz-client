@@ -159,7 +159,7 @@ function SenaryModal({
             </div>
           </div>
 
-          <SignatureWrapper>대충 서명</SignatureWrapper>
+          <SignatureWrapper>Signature</SignatureWrapper>
         </Bottom>
         <Comment>
           <div className="header">부모님의 한줄평</div>

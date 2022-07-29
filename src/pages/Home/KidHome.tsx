@@ -114,7 +114,9 @@ function KidHome() {
 
   // 대기중인 돈길 삭제
   const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
+  const [idToDelete, setIdToDelete] = useState<number | null>(null);
   const canDelete =
+    idToDelete !== null &&
     pendingMoneyRoads !== null &&
     pendingMoneyRoads !== [] &&
     deleteStatus === 'idle';
@@ -129,7 +131,7 @@ function KidHome() {
         // await dispatch(
         //   deletePendingMoneyRoad({
         //     axiosPrivate,
-        //     id,
+        //     id: idToDelete,
         //   }),
         // ).unwrap();
         // setOpenDeleteCheck(false);
@@ -157,6 +159,7 @@ function KidHome() {
         <PendingMoneyRoadList
           pendingMoneyRoads={pendingMoneyRoads!}
           onDeleteCheckOpen={onDeleteCheckOpen}
+          setIdToDelete={setIdToDelete}
         />
       );
     }
