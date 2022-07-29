@@ -33,9 +33,10 @@ import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList'
 import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
 import EmptyPendingMoneyRoad from '@components/home/pending/EmptyPendingMoneyRoad';
 import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList';
+import { TLevel } from '@lib/types/common';
 
-function KidHome() {
-  const level = useAppSelector(selectLevel);
+function KidHome({ level }: { level: TLevel | null }) {
+  //const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
 
   const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
