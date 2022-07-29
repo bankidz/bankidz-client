@@ -1,38 +1,47 @@
-import styled from 'styled-components';
+import { TInterestRate } from '@lib/types/common';
+import styled, { css } from 'styled-components';
 
 interface InterestBadgeProps {
   /** 이자율을 입력합니다. */
-  interestRate: number;
+  interestRate: TInterestRate;
 }
 
 function InterestBadge({ interestRate }: InterestBadgeProps) {
-  const label = '이자율 ' + interestRate.toString() + '%';
+  const label = '이자부스터 ' + interestRate.toString() + '%';
   return (
-    <Wrapper>
-      <StyledSpan>{label}</StyledSpan>
+    <Wrapper interestRate={interestRate}>
+      <span>{label}</span>
     </Wrapper>
   );
 }
 
 export default InterestBadge;
 
-const Wrapper = styled.div`
-  height: 27px;
-`;
+const Wrapper = styled.div<{ interestRate: TInterestRate }>`
+  ${({ interestRate, theme }) =>
+    interestRate === 10 &&
+    css`
+      background-color: ${theme.palette.sementic.green300};
+    `}
+  ${({ interestRate, theme }) =>
+    interestRate === 20 &&
+    css`
+      background-color: ${theme.palette.main.yellow300};
+    `}
+    ${({ interestRate, theme }) =>
+    interestRate === 30 &&
+    css`
+      background-color: ${theme.palette.sementic.red300};
+    `}
 
-const StyledSpan = styled.span`
-  width: 90px;
-  height: 27px;
-
-  background: ${({ theme }) => theme.palette.main.yellow200};
-  border-radius: ${({ theme }) => theme.radius.medium};
-
-  line-height: 27px;
-  vertical-align: center;
-  display: inline-block;
-  text-align: center;
-
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
+    & > span {
+    ${({ theme }) => theme.typo.tag.T_12_EB}
+    color: ${({ theme }) => theme.palette.greyScale.white};
+  }
+  height: 26px;
+  width: 112px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: ${({ theme }) => theme.radius.large};
 `;
