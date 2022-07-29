@@ -12,7 +12,7 @@ import {
   dispatchWeeks,
   selectStep4InitData,
   selectTotalPrice,
-} from '@store/slices/challengePayloadSlice';
+} from '@store/slices/createChallenge';
 import { ReactComponent as Divider } from '@assets/borders/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/sheetContents/RangeInput';

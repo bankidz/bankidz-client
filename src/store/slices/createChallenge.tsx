@@ -20,7 +20,7 @@ type TPostChallengeResponseState = {
   weeks: number;
 };
 
-type TChallengePayloadState = {
+type TCreateChallengeState = {
   status: TFetchStatus;
   error: string | undefined;
   challenge: {
@@ -36,7 +36,7 @@ type TChallengePayloadState = {
   response: TPostChallengeResponseState | null;
 };
 
-const initialState: TChallengePayloadState = {
+const initialState: TCreateChallengeState = {
   status: 'idle',
   error: undefined,
   challenge: {
@@ -54,13 +54,13 @@ const initialState: TChallengePayloadState = {
 
 // POST: 프로필 정보가 없는 회원에 대해 입력받은 프로필 정보 전송
 export const postChallenge = createAsyncThunk(
-  'challengePayload/postChallenge',
+  'CreateChallenge/postChallenge',
   async (axiosPrivate: AxiosInstance, { getState, rejectWithValue }) => {
     try {
-      const { challengePayload } = getState() as RootState;
+      const { CreateChallenge } = getState() as RootState;
       const response = await axiosPrivate.post(
         '/challenge',
-        challengePayload.challenge,
+        CreateChallenge.challenge,
       );
       return response.data;
     } catch (err) {
@@ -71,8 +71,8 @@ export const postChallenge = createAsyncThunk(
   },
 );
 
-export const challengePayloadSlice = createSlice({
-  name: 'challengePayload',
+export const CreateChallengeSlice = createSlice({
+  name: 'CreateChallenge',
   initialState,
   reducers: {
     dispatchParent(state, action: PayloadAction<boolean>) {
@@ -125,31 +125,31 @@ export const {
   dispatchInterestRate,
   dispatchWeeks,
   dispatchResetChallengePayload,
-} = challengePayloadSlice.actions;
+} = CreateChallengeSlice.actions;
 
 export const selectChallengePayload = (state: RootState) =>
-  state.challengePayload;
+  state.CreateChallenge;
 export const selectStep3InitData = (state: RootState) => {
   return {
-    contractName: state.challengePayload.challenge.title,
-    contractAmount: state.challengePayload.challenge.totalPrice,
+    contractName: state.CreateChallenge.challenge.title,
+    contractAmount: state.CreateChallenge.challenge.totalPrice,
   };
 };
 export const selectStep4InitData = (state: RootState) => {
   return {
-    weekPrice: state.challengePayload.challenge.weekPrice,
-    interestRate: state.challengePayload.challenge.interestRate,
-    weeks: state.challengePayload.challenge.weeks,
+    weekPrice: state.CreateChallenge.challenge.weekPrice,
+    interestRate: state.CreateChallenge.challenge.interestRate,
+    weeks: state.CreateChallenge.challenge.weeks,
   };
 };
 export const selectTotalPrice = (state: RootState) =>
-  state.challengePayload.challenge.totalPrice;
+  state.CreateChallenge.challenge.totalPrice;
 
 export const selectPostChallengeResponse = (state: RootState) => {
   return {
-    responseData: state.challengePayload.response,
-    status: state.challengePayload.status,
+    responseData: state.CreateChallenge.response,
+    status: state.CreateChallenge.status,
   };
 };
 
-export default challengePayloadSlice.reducer;
+export default CreateChallengeSlice.reducer;

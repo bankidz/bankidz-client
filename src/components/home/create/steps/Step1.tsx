@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { kidMock } from '@lib/mocks/kid';
 import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/challengePayloadSlice';
+import { dispatchParent } from '@store/slices/createChallenge';
 import RoleButton from '@components/common/buttons/RoleButton';
 
 function Step1({ currentStep }: { currentStep: number }) {

@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
-import { dispatchItemName } from '@store/slices/challengePayloadSlice';
+import { dispatchItemName } from '@store/slices/createChallenge';
 import SelectItemNameButton from '../SelectItemNameButton';
 import { ReactComponent as A1 } from '@assets/illusts/contractItemNames/contractSelect/a1.svg';
 import { ReactComponent as A2 } from '@assets/illusts/contractItemNames/contractSelect/a2.svg';
