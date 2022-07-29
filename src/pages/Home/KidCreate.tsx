@@ -120,6 +120,8 @@ function KidCreate() {
 export default KidCreate;
 
 const Wrapper = styled.div`
+  margin-top: 16px;
+
   & > :first-child {
     margin: 0px auto;
   }
