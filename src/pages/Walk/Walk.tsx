@@ -1,3 +1,4 @@
+import moment from 'moment';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
@@ -10,12 +11,14 @@ import {
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
+import renderItemIllustWalk from '@lib/utils/kid/renderItemIllustWalk';
+import InterestBadge from '@components/common/badges/InterestBadge';
 
 function Walk() {
   const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
-  const dDayLeft = 3;
+  const dDayLeft = 7 - moment().day();
   const [selected, setSelected] = useState<IMoneyRoad | null>(() =>
     walkingMoneyRoads ? walkingMoneyRoads[0] : null,
   );
@@ -36,19 +39,30 @@ function Walk() {
         </Title>
         <MoneyRoadList>
           {walkingMoneyRoads?.map((v) => (
-            <div onClick={() => onClickWalkingItemNameButton(v)}>
+            <div onClick={() => onClickWalkingItemNameButton(v)} key={v.id}>
               <WalkingItemNameButton
                 itemName={v.itemName}
                 isSelected={selected?.id === v.id}
-                isNoticed={false}
-                key={v.id}
+                isNoticed={
+                  v.progressList !== null
+                    ? v.progressList[v.progressList.length]?.isAchieved
+                    : false
+                }
               />
               {selected?.id === v.id && <Polygon />}
             </div>
           ))}
         </MoneyRoadList>
       </Header>
-      <Content></Content>
+      <Content>
+        {selected && (
+          <>
+            {renderItemIllustWalk(selected.itemName)}
+            <InterestBadge interestRate={selected.interestRate} />
+            <p>{selected.title}</p>
+          </>
+        )}
+      </Content>
     </Wrapper>
   );
 }
@@ -56,6 +70,7 @@ function Walk() {
 export default Walk;
 
 const Wrapper = styled.div`
+  position: relative;
   background-color: ${({ theme }) => theme.palette.greyScale.white};
   height: calc(var(--vh, 1vh) * 100);
 `;
@@ -63,7 +78,6 @@ const Header = styled.div<{ colorByLevel: string }>`
   width: 100%;
   height: 185px;
   background-color: ${({ colorByLevel }) => colorByLevel};
-
   &:after {
     width: ${calcRatio(530, 360)};
     margin: 0 auto;
@@ -98,10 +112,14 @@ const Title = styled.div<{ dDayLeft: number }>`
     & > p:last-child {
       ${({ theme }) => theme.typo.text.T_21_EB}
       margin-top: 8px;
-      color: ${({ theme, dDayLeft }) =>
+      ${({ theme, dDayLeft }) =>
         dDayLeft <= 2
-          ? theme.palette.sementic.red300
-          : theme.palette.greyScale.white};
+          ? css`
+              color: ${theme.palette.sementic.red300};
+            `
+          : css`
+              color: ${theme.palette.greyScale.white};
+            `};
     }
   }
 `;
@@ -128,4 +146,19 @@ const MoneyRoadList = styled.div`
 
 const Content = styled.div`
   width: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  & > svg {
+    z-index: 1;
+    margin-top: 31px;
+    margin-bottom: 32px;
+  }
+  & > p {
+    ${({ theme }) => theme.typo.text.T_21_EB}
+    color: ${({ theme }) => theme.palette.greyScale.black};
+    margin-top: 16px;
+  }
 `;

@@ -22,7 +22,7 @@ function App() {
         {/* <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}> */}
         <Route path="/*" element={<HomeRouter />} />
-        <Route path="/walk" element={<Walk />} />
+        <Route path="/walk/*" element={<Walk />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
       </Route>
