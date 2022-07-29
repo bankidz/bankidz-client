@@ -3,7 +3,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
 import DeleteCheck from './sheetContents/DeleteCheck';
 import GiveUpExceeded from './sheetContents/GiveUpExceeded';
-import GiveUp from './sheetContents/GiveUp';
+import GiveUp from './sheetContents/GiveUpCheck';
 import SelectProfile from './sheetContents/SelectProfile';
 import SheetComplete from './sheetContents/SheetComplete';
 

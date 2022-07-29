@@ -1,6 +1,6 @@
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUpExceeded';
-import GiveUp from '@components/common/bottomSheets/sheetContents/GiveUp';
+import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetComplete';
 import Receipt from '@components/common/Receipt';
 import ProceedingStemp from '@components/home/walking/ProceedingStemp';
@@ -51,15 +51,17 @@ function KidWalking() {
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
 
   const [openGiveUp, setOpenGiveUp] = useState(false);
-  const [openCompleteGiveUp, setOpenCompleteGiveUp] = useState(false);
+  const [openGiveUpCompleted, setOpenGiveUpCompleted] = useState(false);
   const [openExceeded, setOpenExceeded] = useState(false);
-  const [openCancel, setOpenCancel] = useState(false);
+  const [openCancelCompleted, setOpenCancelCompleted] = useState(false);
 
   const axiosPrivate = useAxiosPrivate();
-  const [giveUpWalkingMoneyRoadStatus, setGiveUpWalkingMoneyRoadStatus] =
+  const [giveUpWalkingMoneyRoadStatus, setGiveUStatus] =
     useState<TFetchStatus>('idle');
   const canGiveUp =
-    walkingMoneyRoads !== [] && giveUpWalkingMoneyRoadStatus === 'idle';
+    walkingMoneyRoads !== null &&
+    walkingMoneyRoads !== [] &&
+    giveUpWalkingMoneyRoadStatus === 'idle';
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -67,25 +69,27 @@ function KidWalking() {
   async function handleGiveUpButtonClick() {
     if (canGiveUp) {
       try {
-        setGiveUpWalkingMoneyRoadStatus('pending');
-        await dispatch(
-          giveUpWalkingMoneyRoad({
-            axiosPrivate,
-            id: parseInt(id!),
-          }),
-        ).unwrap();
+        setGiveUStatus('pending');
+        // await dispatch(
+        //   giveUpWalkingMoneyRoad({
+        //     axiosPrivate,
+        //     id: parseInt(id!),
+        //   }),
+        // ).unwrap();
         setOpenGiveUp(false);
-        setOpenCompleteGiveUp(true);
-        navigate(-1);
+        setOpenGiveUpCompleted(true);
       } catch (error: any) {
         // TODO: 포기 횟수 초과 시 API response 확인
         console.log('error.message', error.message);
         console.log('error.status', error.status);
-        console.log(error.message);
-        setOpenGiveUp(false);
-        setOpenExceeded(true);
+        if (error.status === 403) {
+          setOpenGiveUp(false);
+          setOpenExceeded(true);
+        } else {
+          console.log(error.message);
+        }
       } finally {
-        setGiveUpWalkingMoneyRoadStatus('idle');
+        setGiveUStatus('idle');
       }
     }
   }
@@ -93,7 +97,7 @@ function KidWalking() {
   // '정말 포기할거예요?' 바텀시트 하단 오른쪽 노란색 버튼
   function handleCancelDismiss() {
     setOpenGiveUp(false);
-    setOpenCancel(true);
+    setOpenCancelCompleted(true);
   }
 
   return (
@@ -149,26 +153,36 @@ function KidWalking() {
 
       {/* bottom sheets */}
       <CommonSheet open={openGiveUp} onDismiss={handleCancelDismiss}>
-        <GiveUp
+        <GiveUpCheck
           onGiveUpButtonClick={handleGiveUpButtonClick}
           onDismiss={handleCancelDismiss}
         />
       </CommonSheet>
       <CommonSheet
-        open={openCompleteGiveUp}
-        onDismiss={() => setOpenCompleteGiveUp(false)}
+        open={openGiveUpCompleted}
+        onDismiss={() => {
+          navigate(-1);
+        }}
       >
         <SheetComplete
           type="giveUp"
           title={title}
-          onDismiss={() => setOpenCompleteGiveUp(false)}
+          onDismiss={() => {
+            navigate(-1);
+          }}
         />
       </CommonSheet>
       <CommonSheet open={openExceeded} onDismiss={() => setOpenExceeded(false)}>
         <GiveUpExceeded onDismiss={() => setOpenExceeded(false)} />
       </CommonSheet>
-      <CommonSheet open={openCancel} onDismiss={() => setOpenCancel(false)}>
-        <SheetComplete type="cancel" onDismiss={() => setOpenCancel(false)} />
+      <CommonSheet
+        open={openCancelCompleted}
+        onDismiss={() => setOpenCancelCompleted(false)}
+      >
+        <SheetComplete
+          type="cancel"
+          onDismiss={() => setOpenCancelCompleted(false)}
+        />
       </CommonSheet>
     </Wrapper>
   );

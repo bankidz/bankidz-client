@@ -16,9 +16,13 @@ import styled from 'styled-components';
 
 interface PendingMoneyRoadItemProps {
   pendingMoneyRoad: IMoneyRoad;
+  onDeleteCheckOpen: () => void;
 }
 
-function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
+function PendingMoneyRoadItem({
+  pendingMoneyRoad,
+  onDeleteCheckOpen,
+}: PendingMoneyRoadItemProps) {
   const { openModal } = useModals();
   const {
     id,
@@ -50,11 +54,13 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
   }
 
   const axiosPrivate = useAxiosPrivate();
-  const [deletePendingMoneyRoadStatus, setDeletePendingMoneyRoadStatus] =
+  const [deletePendingMoneyRoadStatus, setDeleteStatus] =
     useState<TFetchStatus>('idle');
   const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
   const canDelete =
-    pendingMoneyRoads !== [] && deletePendingMoneyRoadStatus === 'idle';
+    pendingMoneyRoads !== null &&
+    pendingMoneyRoads !== [] &&
+    deletePendingMoneyRoadStatus === 'idle';
   const dispatch = useAppDispatch();
 
   // 거절됨
@@ -63,17 +69,20 @@ function PendingMoneyRoadItem({ pendingMoneyRoad }: PendingMoneyRoadItemProps) {
       onSubmit: async () => {
         if (canDelete) {
           try {
-            setDeletePendingMoneyRoadStatus('pending');
-            await dispatch(
-              deletePendingMoneyRoad({
-                axiosPrivate,
-                id,
-              }),
-            ).unwrap();
+            setDeleteStatus('pending');
+            // await dispatch(
+            //   deletePendingMoneyRoad({
+            //     axiosPrivate,
+            //     id,
+            //   }),
+            // ).unwrap();
+            // setOpenDeleteCheck(false);
+            // setOpenDeletedCompleted(true);
+            onDeleteCheckOpen();
           } catch (error: any) {
             console.log(error.message);
           } finally {
-            setDeletePendingMoneyRoadStatus('idle');
+            setDeleteStatus('idle');
           }
         }
       },

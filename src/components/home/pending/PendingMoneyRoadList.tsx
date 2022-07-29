@@ -1,14 +1,23 @@
-import { TPendingMoneyRoadsState } from '@store/slices/pendingMoneyRoadsSlice';
+import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
 import styled from 'styled-components';
 import PendingMoneyRoadItem from './PendingMoneyRoadItem';
 
-function PendingMoneyRoadList({ pendingMoneyRoads }: TPendingMoneyRoadsState) {
+interface PendingMoneyRoadListProps {
+  pendingMoneyRoads: IMoneyRoad[];
+  onDeleteCheckOpen: () => void;
+}
+
+function PendingMoneyRoadList({
+  pendingMoneyRoads,
+  onDeleteCheckOpen,
+}: PendingMoneyRoadListProps) {
   return (
     <Wrapper>
       {pendingMoneyRoads?.map((pendingMoneyRoad) => (
         <PendingMoneyRoadItem
           key={pendingMoneyRoad.id}
           pendingMoneyRoad={pendingMoneyRoad}
+          onDeleteCheckOpen={onDeleteCheckOpen}
         />
       ))}
     </Wrapper>

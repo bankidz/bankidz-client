@@ -7,7 +7,7 @@ interface GiveUpProps {
   onDismiss: () => void;
 }
 
-function GiveUp({ onGiveUpButtonClick, onDismiss }: GiveUpProps) {
+function GiveUpCheck({ onGiveUpButtonClick, onDismiss }: GiveUpProps) {
   return (
     <Wrapper>
       <Container>
@@ -32,7 +32,7 @@ function GiveUp({ onGiveUpButtonClick, onDismiss }: GiveUpProps) {
   );
 }
 
-export default GiveUp;
+export default GiveUpCheck;
 
 const Wrapper = styled.div``;
 

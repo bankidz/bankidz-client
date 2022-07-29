@@ -8,7 +8,7 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   fetchWeeklyProgress,
   selectWeeklyProgress,
@@ -33,6 +33,10 @@ import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList'
 import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
 import EmptyPendingMoneyRoad from '@components/home/pending/EmptyPendingMoneyRoad';
 import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList';
+import CommonSheet from '@components/common/bottomSheets/CommonSheet';
+import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
+import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetComplete';
 
 function KidHome() {
   const level = useAppSelector(selectLevel);
@@ -98,13 +102,23 @@ function KidHome() {
     } else {
       walkingMoneyRoadsContent = (
         <>
-          <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads} />
+          <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads!} />
           <ContractNewMoneyRoadLink disable={disable} to={'/create/1'} />
         </>
       );
     }
   } else if (walkingMoneyRoadsStatus === 'failed') {
     walkingMoneyRoadsContent = <p>Failed</p>;
+  }
+
+  // 대기중인 돈길 삭제
+  const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
+    useBottomSheet(false);
+  const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
+    useBottomSheet(false);
+  function handleDeleteButtonClick() {
+    // 삭제 API code
+    onDeleteCompletedDismiss();
   }
 
   // 대기중인 돈길
@@ -116,7 +130,10 @@ function KidHome() {
       pendingMoneyRoadsContent = <EmptyPendingMoneyRoad />;
     } else {
       pendingMoneyRoadsContent = (
-        <PendingMoneyRoadList pendingMoneyRoads={pendingMoneyRoads} />
+        <PendingMoneyRoadList
+          pendingMoneyRoads={pendingMoneyRoads!}
+          onDeleteCheckOpen={onDeleteCheckOpen}
+        />
       );
     }
   } else if (pendingMoneyRoadsStatus === 'failed') {
@@ -126,8 +143,22 @@ function KidHome() {
   return (
     <Wrapper>
       <Content>
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 처리됩니다. */}
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 실행됩니다. */}
         <Modals />
+        {/* 다음 바텀시트를 열고 닫는 로직은 pendingMoneyRoadItem에서 실행됩니다. */}
+        <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
+          <DeleteCheck
+            onClickDelete={handleDeleteButtonClick}
+            onDismiss={onDeleteCompletedDismiss}
+          />
+        </CommonSheet>
+        <CommonSheet
+          open={openDeleteCompleted}
+          onDismiss={onDeleteCompletedDismiss}
+        >
+          <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
+        </CommonSheet>
+
         <MarginTemplate>
           <div className="logo-positioner">
             <BANKIDZ />
@@ -180,7 +211,7 @@ const Content = styled.div`
   align-items: flex-start;
 
   position: absolute;
-  z-index: 100;
+  z-index: 2;
 
   .logo-positioner {
     width: 100.24px;
@@ -257,19 +288,19 @@ const BackgroundEllipse = styled.div<{ colorByLevel: string }>`
   width: 530px;
   height: 230px;
   border-radius: 265px / 115px;
-  z-index: 2;
+  z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
 `;
 
 const HomeBackgroundPositioner = styled.div`
-  z-index: 3;
+  z-index: 1;
   position: absolute;
   top: 48px;
   right: 0;
 `;
 
 const HomeBankiPositioner = styled.div`
-  z-index: 101;
+  z-index: 3;
   position: absolute;
   top: 146px;
   right: 0;
