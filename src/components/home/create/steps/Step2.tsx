@@ -3,26 +3,18 @@ import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/createChallenge';
 import SelectItemNameButton from '../SelectItemNameButton';
-import { ReactComponent as A1 } from '@assets/illusts/contractItemNames/contractSelect/a1.svg';
-import { ReactComponent as A2 } from '@assets/illusts/contractItemNames/contractSelect/a2.svg';
-import { ReactComponent as A3 } from '@assets/illusts/contractItemNames/contractSelect/a3.svg';
-import { ReactComponent as B1 } from '@assets/illusts/contractItemNames/contractSelect/b1.svg';
-import { ReactComponent as B2 } from '@assets/illusts/contractItemNames/contractSelect/b2.svg';
-import { ReactComponent as B3 } from '@assets/illusts/contractItemNames/contractSelect/b3.svg';
-import { ReactComponent as C1 } from '@assets/illusts/contractItemNames/contractSelect/c1.svg';
-import { ReactComponent as C2 } from '@assets/illusts/contractItemNames/contractSelect/c2.svg';
-import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/contractSelect/c3.svg';
+import { TItemName } from '@lib/types/kid';
 
-const itemNames = [
-  { name: '학용품', image: <A1 /> },
-  { name: '생활용품', image: <A2 /> },
-  { name: '전자제품', image: <A3 /> },
-  { name: '식품', image: <B1 /> },
-  { name: '문화생활', image: <B2 /> },
-  { name: '패션뷰티', image: <B3 /> },
-  { name: '선물', image: <C1 /> },
-  { name: '비상금', image: <C2 /> },
-  { name: '기타', image: <C3 /> },
+const itemNames: TItemName[] = [
+  '학용품',
+  '생활용품',
+  '전자제품',
+  '식품',
+  '문화생활',
+  '패션뷰티',
+  '선물',
+  '비상금',
+  '기타',
 ];
 
 function Step2({ currentStep }: { currentStep: number }) {
@@ -39,12 +31,11 @@ function Step2({ currentStep }: { currentStep: number }) {
 
   return (
     <Wrapper>
-      {itemNames.map((v) => (
+      {itemNames.map((v, i) => (
         <SelectItemNameButton
-          name={v.name}
-          image={v.image}
-          key={v.name}
-          onClick={() => onClickItemNameButton(v.name)}
+          itemName={v}
+          key={i}
+          onClick={() => onClickItemNameButton(v)}
         />
       ))}
     </Wrapper>

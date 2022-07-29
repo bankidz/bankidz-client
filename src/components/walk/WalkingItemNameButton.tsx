@@ -1,38 +1,23 @@
 import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as WalkingItemNameButtonBorder } from '@assets/borders/walking-itemName-border.svg';
-import { calcRatio, theme } from '@lib/styles/theme';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
+import { TItemName } from '@lib/types/kid';
 
 interface WalkingItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  name: string;
-  image: JSX.Element;
+  itemName: TItemName;
+  isSelected: boolean;
 }
 
 function WalkingItemNameButton({
-  name,
-  image,
+  itemName,
+  isSelected = false,
   ...props
 }: WalkingItemNameButtonProps) {
-  const [isSelected, setIsSelected] = useState(false);
-
   return (
-    <Wrapper
-      onMouseOver={() => setIsSelected(true)}
-      onMouseLeave={() => setIsSelected(false)}
-      {...props}
-    >
-      <WalkingItemNameButtonBorder
-        fill={isSelected ? theme.palette.main.yellow100 : 'white'}
-        stroke={
-          isSelected
-            ? theme.palette.main.yellow300
-            : theme.palette.main.yellow100
-        }
-      />
-      <Content>
-        {image}
-        <p>{name}</p>
-      </Content>
+    <Wrapper {...props}>
+      <WalkingItemNameButtonBorder />
+      <Content>{renderItemIllust(itemName)}</Content>
     </Wrapper>
   );
 }
@@ -53,15 +38,11 @@ const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+
+  padding: 8px;
+
   svg {
-    padding: 0px ${calcRatio(9, 92)};
-    padding-top: ${calcRatio(7, 92)};
     width: 100%;
     box-sizing: border-box;
-  }
-  p {
-    ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
-    color: ${({ theme }) => theme.palette.greyScale.grey600};
-    padding-bottom: ${calcRatio(17, 92)};
   }
 `;

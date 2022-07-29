@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SelectItemNameButton from './SelectItemNameButton';
-import a1 from '@assets/illusts/contractItemNames/contractSelect/a1.svg';
 
 export default {
   title: '자녀/돈길 계약하기/selectItemNameButton',
@@ -20,6 +19,5 @@ const Template: ComponentStory<typeof SelectItemNameButton> = (args) => (
 
 export const 예시 = Template.bind({});
 예시.args = {
-  name: '학용품',
-  image: <img src={a1} />,
+  itemName: '학용품',
 };
