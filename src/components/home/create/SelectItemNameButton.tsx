@@ -59,7 +59,7 @@ const Content = styled.div`
     width: 100%;
     box-sizing: border-box;
   }
-  p {
+  3 p {
     ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
