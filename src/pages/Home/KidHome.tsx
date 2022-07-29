@@ -36,7 +36,7 @@ import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList'
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetComplete';
+import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TFetchStatus } from '@lib/types/api';
 
 function KidHome() {
