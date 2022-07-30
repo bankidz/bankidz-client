@@ -1,5 +1,4 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -56,14 +55,19 @@ function ParentHome() {
   if (kidsStatus === 'loading') {
     kidsContent = <p>Loading</p>;
   } else if (kidsStatus === 'succeeded') {
-    kidsContent = <KidList kids={kids!} />;
+    kidsContent = (
+      <KidList
+        kids={kids!}
+        selectedKid={selectedKid!}
+        setSelectedKid={setSelectedKid}
+      />
+    );
   } else if (kidsContent === 'failed') {
     kidsContent = <p>Failed</p>;
   }
 
   return (
     <Wrapper>
-      {/* <button onClick={handleClick}>print</button> */}
       <Content>
         <MarginTemplate>
           <div className="logo-positioner">
@@ -74,34 +78,8 @@ function ParentHome() {
           <div className="level-badge-positioner">
             <LevelBadge level={selectedLevel} />
           </div>
-
-          {/* <div className="summary-positioner">{weeklyProgressContent}</div>
-          <WalkingDongilsWrapper>
-            <header>걷고있는 돈길</header>
-            {walkingDongilsContent}
-          </WalkingDongilsWrapper>
-          <WaitingDongilWrapper>
-            <header>대기중인 돈길</header>
-            {pendingDongilsContent}
-          </WaitingDongilWrapper> */}
           <Spacer />
         </MarginTemplate>
-
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
-        {/* <Modals /> */}
-        {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
-        {/* <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
-          <DeleteCheck
-            onClickDelete={handleDeleteButtonClick}
-            onDismiss={onDeleteCheckDismiss}
-          />
-        </CommonSheet>
-        <CommonSheet
-          open={openDeleteCompleted}
-          onDismiss={onDeleteCompletedDismiss}
-        >
-          <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
-        </CommonSheet> */}
       </Content>
 
       {/* absolutely positioned background components */}
@@ -156,7 +134,7 @@ const Content = styled.div`
 `;
 
 const StyledHeader = styled.header`
-  margin-top: 30.44px;
+  margin-top: 46px;
   margin-left: 10px;
   width: 308px;
   height: 58px;
