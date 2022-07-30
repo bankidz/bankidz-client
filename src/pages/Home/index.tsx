@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import KidHome from './KidHome';
 import ParentHome from './ParentHome';
 import KidCreate from './KidCreate';
@@ -11,6 +11,7 @@ import ParentPending from './ParentPending';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
+  const level = useAppSelector(selectLevel);
   return (
     <Routes>
       {/* 자녀 / 부모 - 홈 */}
@@ -18,7 +19,7 @@ function HomeRouter() {
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid === true ? <KidHome /> : <ParentHome />}
+            {isKid === true ? <KidHome level={level} /> : <ParentHome />}
           </BackgroundTemplate>
         }
       />
@@ -35,7 +36,7 @@ function HomeRouter() {
       <Route
         path="/walking/:id"
         element={
-          <ForegroundTemplate label="걷고있는 돈길">
+          <ForegroundTemplate label="걷고있는 돈길" level={level}>
             <KidWalking />
           </ForegroundTemplate>
         }

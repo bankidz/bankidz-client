@@ -9,7 +9,7 @@ import {
   dispatchResetChallengePayload,
   postChallenge,
   selectPostChallengeResponse,
-} from '@store/slices/challengePayloadSlice';
+} from '@store/slices/createChallenge';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

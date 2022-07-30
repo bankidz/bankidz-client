@@ -2,15 +2,15 @@ import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SelectItemNameButtonBorder } from '@assets/borders/itemName-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
+import { TItemName } from '@lib/types/kid';
+import renderItemIllust from '@lib/utils/common/renderItemIllust';
 
 interface SelectItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  name: string;
-  image: JSX.Element;
+  itemName: TItemName;
 }
 
 function SelectItemNameButton({
-  name,
-  image,
+  itemName,
   ...props
 }: SelectItemNameButtonProps) {
   const [isSelected, setIsSelected] = useState(false);
@@ -30,8 +30,8 @@ function SelectItemNameButton({
         }
       />
       <Content>
-        {image}
-        <p>{name}</p>
+        {renderItemIllust(itemName)}
+        <p>{itemName}</p>
       </Content>
     </Wrapper>
   );
@@ -49,19 +49,18 @@ const Content = styled.div`
   top: 0px;
   transform: translate3d(-50%, 0, 0);
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
+
+  display: grid;
+  grid-template-rows: 63fr 29fr;
+
   svg {
-    padding: 0px ${calcRatio(9, 92)};
-    padding-top: ${calcRatio(7, 92)};
+    padding: ${calcRatio(10, 92)} ${calcRatio(22, 92)} ${calcRatio(5, 92)}
+      ${calcRatio(22, 92)};
     width: 100%;
     box-sizing: border-box;
   }
   p {
     ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
-    padding-bottom: ${calcRatio(17, 92)};
   }
 `;

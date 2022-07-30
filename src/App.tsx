@@ -4,13 +4,13 @@ import LoginPage from './pages/OnBoarding/LoginPage';
 import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
 import RegisterPage from './pages/OnBoarding/RegisterPage';
 import HomeRouter from './pages/Home';
-import Walk from './pages/Walk/Walk';
 import MypageRouter from './pages/Mypage';
 import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import SungwooTestPage from './pages/SungwooTestPage';
+import WalkRouter from './pages/Walk';
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         {/* <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}> */}
         <Route path="/*" element={<HomeRouter />} />
-        <Route path="/walk" element={<Walk />} />
+        <Route path="/walk/*" element={<WalkRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
         <Route path="/sungwoo" element={<SungwooTestPage />} />

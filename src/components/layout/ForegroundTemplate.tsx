@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import AppBar from './AppBar';
 
 interface ForegroundTemplateProps {
-  level?: TLevel;
+  level?: TLevel | null;
   label: string;
   children: JSX.Element;
 }

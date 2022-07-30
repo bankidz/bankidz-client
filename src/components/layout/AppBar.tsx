@@ -12,7 +12,7 @@ interface AppBarProps {
   /**
    * 레벨
    */
-  level?: TLevel;
+  level?: TLevel | null;
 }
 
 function AppBar({ label, level }: AppBarProps) {
@@ -39,7 +39,6 @@ const Wrapper = styled.div<{ colorByLevel: string | null }>`
   width: 100%;
   height: 48px;
   padding: 0px 18px;
-  margin-bottom: 16px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
