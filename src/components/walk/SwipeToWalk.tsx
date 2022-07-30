@@ -9,8 +9,8 @@ import 'rc-slider/assets/index.css';
 import { TInterestRate } from '@lib/types/common';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import { useAppDispatch } from '@store/app/hooks';
-import { walkMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { walkDongil } from '@store/slices/walkingDongilSlice';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;
@@ -42,7 +42,7 @@ function SwipeToWalk({
       setValue(id, 0);
     } else {
       setValue(id, 100);
-      dispatch(walkMoneyRoad({ axiosPrivate, id }));
+      dispatch(walkDongil({ axiosPrivate, id }));
       setIsAchieved(id, true);
     }
   };

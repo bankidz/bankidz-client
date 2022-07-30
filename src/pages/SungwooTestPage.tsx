@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 //   console.log(auth);
 //   console.log('=======================');
 // }
-// async function handleFetchWalkingMoneyRoads() {
+// async function handleFetchWalkingDongils() {
 //   const response = await axiosPrivate.get('/challenge/?status=accept');
 //   console.log('response in fetch walking roads: ', response);
 //   console.log('response.data in fetch walking roads: ', response.data);
@@ -74,6 +74,6 @@ const Wrapper = styled.div`
 // <button onClick={handleRefresh}>refresh test</button>
 //       <button onClick={handleRequestWithAT}>request with aT test</button>
 //       <button onClick={handlePrint}>print auth</button>
-//       <button onClick={handleFetchWalkingMoneyRoads}>
+//       <button onClick={handleFetchWalkingDongils}>
 //         Fetch Walking Money Roads
 //       </button>

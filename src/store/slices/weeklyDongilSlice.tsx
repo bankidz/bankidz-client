@@ -38,9 +38,6 @@ export const weeklyProgressSlice = createSlice({
       .addCase(fetchWeeklyProgress.fulfilled, (state, action) => {
         state.weeklyProgressStatus = 'succeeded';
         state.weeklyProgress = action.payload.data;
-        // const { currentSavings, totalPrice } = action.payload.data;
-        // state.weeklyProgress.currentSavings = currentSavings;
-        // state.weeklyProgress.totalPrice = totalPrice;
       })
       .addCase(fetchWeeklyProgress.rejected, (state, action) => {
         state.weeklyProgressStatus = 'failed';

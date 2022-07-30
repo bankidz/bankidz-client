@@ -6,9 +6,9 @@ export type TChallengeCategory = '이자율 받기';
 export type TLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 // 0: rejected / 1: pending / 2: succeeded
-export type TMoneyRoadStatus = 0 | 1 | 2;
+export type TDongilStatus = 0 | 1 | 2;
 
-export enum EMoneyRoadStatus {
+export enum EDongilStatus {
   REJECTED,
   PENDING,
   SUCCEEDED,

@@ -2,10 +2,9 @@ import styled from 'styled-components';
 import { ReactComponent as PlusCircle } from '@assets/icons/plus-circle.svg';
 import { HTMLAttributes } from 'react';
 
-interface EmptyWalkingMoneyRoadProps
-  extends HTMLAttributes<HTMLButtonElement> {}
+interface EmptyWalkingDongilProps extends HTMLAttributes<HTMLButtonElement> {}
 
-function EmptyWalkingMoneyRoad({ ...props }: EmptyWalkingMoneyRoadProps) {
+function EmptyWalkingDongil({ ...props }: EmptyWalkingDongilProps) {
   return (
     <Wrapper>
       <button {...props}>
@@ -16,7 +15,7 @@ function EmptyWalkingMoneyRoad({ ...props }: EmptyWalkingMoneyRoadProps) {
   );
 }
 
-export default EmptyWalkingMoneyRoad;
+export default EmptyWalkingDongil;
 
 const Wrapper = styled.div`
   width: 100%;

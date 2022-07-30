@@ -1,43 +1,15 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import { useEffect, useState } from 'react';
-import {
-  fetchWeeklyProgress,
-  selectWeeklyProgress,
-  selectWeeklyProgressStatus,
-} from '@store/slices/weeklyProgressSlice';
-import {
-  fetchWalkingMoneyRoads,
-  selectWalkingMoneyRoads,
-  selectWalkingMoneyRoadsStatus,
-} from '@store/slices/walkingMoneyRoadsSlice';
-import {
-  fetchPendingMoneyRoads,
-  selectPendingMoneyRoads,
-  selectPendingMoneyRoadsStatus,
-} from '@store/slices/pendingMoneyRoadsSlice';
-import Modals from '@components/common/modals/Modals';
 import Spacer from '@components/layout/Spaceholder';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import KidHomeSummary from '@components/home/KidHomeSummary';
-import EmptyWalkingMoneyRoad from '@components/home/walking/EmptyWalkingMoneyRoad';
-import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList';
-import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
-import EmptyPendingMoneyRoad from '@components/home/pending/EmptyPendingMoneyRoad';
-import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import { TFetchStatus } from '@lib/types/api';
 import {
   fetchKids,
   IKid,
@@ -89,37 +61,6 @@ function ParentHome() {
     kidsContent = <p>Failed</p>;
   }
 
-  // // 걷고있는 돈길
-  // let disable = 'false';
-  // if (walkingMoneyRoads !== null && walkingMoneyRoads.length === 5) {
-  //   disable = 'true';
-  // }
-  // const navigate = useNavigate();
-  // function handleContractNewMoneyRoadButtonClick() {
-  //   navigate('/create/1');
-  // }
-  // let walkingMoneyRoadsContent;
-  // if (walkingMoneyRoadsStatus === 'loading') {
-  //   walkingMoneyRoadsContent = <p>Loading...</p>;
-  // } else if (walkingMoneyRoadsStatus === 'succeeded') {
-  //   if (walkingMoneyRoads === []) {
-  //     walkingMoneyRoadsContent = (
-  //       <EmptyWalkingMoneyRoad
-  //         onClick={handleContractNewMoneyRoadButtonClick}
-  //       />
-  //     );
-  //   } else {
-  //     walkingMoneyRoadsContent = (
-  //       <>
-  //         <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads!} />
-  //         <ContractNewMoneyRoadLink disable={disable} to={'/create/1'} />
-  //       </>
-  //     );
-  //   }
-  // } else if (walkingMoneyRoadsStatus === 'failed') {
-  //   walkingMoneyRoadsContent = <p>Failed</p>;
-  // }
-
   return (
     <Wrapper>
       {/* <button onClick={handleClick}>print</button> */}
@@ -135,20 +76,20 @@ function ParentHome() {
           </div>
 
           {/* <div className="summary-positioner">{weeklyProgressContent}</div>
-          <WalkingMoneyRoadsWrapper>
+          <WalkingDongilsWrapper>
             <header>걷고있는 돈길</header>
-            {walkingMoneyRoadsContent}
-          </WalkingMoneyRoadsWrapper>
-          <WaitingMoneyRoadWrapper>
+            {walkingDongilsContent}
+          </WalkingDongilsWrapper>
+          <WaitingDongilWrapper>
             <header>대기중인 돈길</header>
-            {pendingMoneyRoadsContent}
-          </WaitingMoneyRoadWrapper> */}
+            {pendingDongilsContent}
+          </WaitingDongilWrapper> */}
           <Spacer />
         </MarginTemplate>
 
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 실행됩니다. */}
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
         {/* <Modals /> */}
-        {/* 다음 바텀시트를 열고 닫는 로직은 pendingMoneyRoadItem에서 실행됩니다. */}
+        {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
         {/* <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
           <DeleteCheck
             onClickDelete={handleDeleteButtonClick}
@@ -226,7 +167,7 @@ const StyledHeader = styled.header`
   line-height: 150%;
 `;
 
-const WalkingMoneyRoadsWrapper = styled.div`
+const WalkingDongilsWrapper = styled.div`
   margin-top: 48px;
 
   header {
@@ -238,7 +179,7 @@ const WalkingMoneyRoadsWrapper = styled.div`
   }
 `;
 
-const WaitingMoneyRoadWrapper = styled.div`
+const WaitingDongilWrapper = styled.div`
   margin-top: 48px;
 
   header {

@@ -1,25 +1,25 @@
-import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
+import { IDongil } from '@store/slices/walkingDongilSlice';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import PendingMoneyRoadItem from './PendingMoneyRoadItem';
+import PendingDongilItem from './PendingDongilItem';
 
-interface PendingMoneyRoadListProps {
-  pendingMoneyRoads: IMoneyRoad[];
+interface PendingDongilListProps {
+  pendingDongils: IDongil[];
   onDeleteCheckOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function PendingMoneyRoadList({
-  pendingMoneyRoads,
+function PendingDongilList({
+  pendingDongils,
   onDeleteCheckOpen,
   setIdToDelete,
-}: PendingMoneyRoadListProps) {
+}: PendingDongilListProps) {
   return (
     <Wrapper>
-      {pendingMoneyRoads?.map((pendingMoneyRoad) => (
-        <PendingMoneyRoadItem
-          key={pendingMoneyRoad.id}
-          pendingMoneyRoad={pendingMoneyRoad}
+      {pendingDongils?.map((pendingDongil) => (
+        <PendingDongilItem
+          key={pendingDongil.id}
+          pendingDongil={pendingDongil}
           onDeleteCheckOpen={onDeleteCheckOpen}
           setIdToDelete={setIdToDelete}
         />
@@ -28,7 +28,7 @@ function PendingMoneyRoadList({
   );
 }
 
-export default PendingMoneyRoadList;
+export default PendingDongilList;
 
 const Wrapper = styled.div`
   display: flex;

@@ -5,9 +5,9 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth, selectLevel } from '@store/slices/authSlice';
 import {
-  IMoneyRoad,
-  selectIsWalkingMoneyRoadsPatched,
-} from '@store/slices/walkingMoneyRoadsSlice';
+  IDongil,
+  selectIsWalkingDongilsPatched,
+} from '@store/slices/walkingDongilSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
@@ -17,27 +17,23 @@ import { ReactComponent as DDay } from '@assets/illusts/walk/d-day.svg';
 import renderItemIllustForWalkPage from '@lib/utils/kid/renderItemIllustForWalkPage';
 import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
-import useWalkMoneyRoad from '@lib/hooks/useWalkMoneyRoad';
+import useWalkDongil from '@lib/hooks/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 
-function WalkDefault({
-  walkingMoneyRoads,
-}: {
-  walkingMoneyRoads: IMoneyRoad[];
-}) {
+function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
   const level = useAppSelector(selectLevel);
-  const patched = useAppSelector(selectIsWalkingMoneyRoadsPatched);
+  const patched = useAppSelector(selectIsWalkingDongilsPatched);
   const { username, isKid, isFemale } = useAppSelector(selectAuth);
   const colorByLevel = getColorByLevel(level!);
-  const { getWeeklySuccess } = useWalkMoneyRoad(walkingMoneyRoads);
+  const { getWeeklySuccess } = useWalkDongil(walkingDongils);
   const dDayLeft = 7 - moment().day();
-  const [selected, setSelected] = useState<IMoneyRoad>(walkingMoneyRoads[0]);
+  const [selected, setSelected] = useState<IDongil>(walkingDongils[0]);
   const { openModal } = useModals();
   const { getValue, setValue, getIsAchieved, setIsAchieved } =
-    useWalkMoneyRoad(walkingMoneyRoads);
+    useWalkDongil(walkingDongils);
 
-  const onWalkingItemNameButtonClick = (v: IMoneyRoad) => {
+  const onWalkingItemNameButtonClick = (v: IDongil) => {
     setSelected(v);
   };
 
@@ -51,7 +47,7 @@ function WalkDefault({
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }
-  }, [walkingMoneyRoads]);
+  }, [walkingDongils]);
 
   return (
     <Wrapper>
@@ -67,8 +63,8 @@ function WalkDefault({
             {dDayLeft === 0 && <DDay />}
           </div>
         </Title>
-        <MoneyRoadList>
-          {walkingMoneyRoads.map((v) => (
+        <DongilList>
+          {walkingDongils.map((v) => (
             <div onClick={() => onWalkingItemNameButtonClick(v)} key={v.id}>
               <WalkingItemNameButton
                 itemName={v.itemName}
@@ -78,7 +74,7 @@ function WalkDefault({
               {selected?.id === v.id && <Polygon />}
             </div>
           ))}
-        </MoneyRoadList>
+        </DongilList>
       </Header>
       <Content>
         {renderItemIllustForWalkPage(selected.itemName)}
@@ -156,7 +152,7 @@ const Title = styled.div<{ dDayLeft: number }>`
   }
 `;
 
-const MoneyRoadList = styled.div`
+const DongilList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

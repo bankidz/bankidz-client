@@ -19,7 +19,7 @@ function HomeRouter() {
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid === true ? <KidHome level={level} /> : <ParentHome />}
+            {isKid === true ? <KidHome level={level!} /> : <ParentHome />}
           </BackgroundTemplate>
         }
       />

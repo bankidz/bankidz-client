@@ -2,24 +2,25 @@ import WalkDefault from '@components/walk/WalkDefault';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchResetIsPatched,
-  selectWalkingMoneyRoads,
-} from '@store/slices/walkingMoneyRoadsSlice';
+  selectWalkingDongils,
+} from '@store/slices/walkingDongilSlice';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
 function Walk() {
-  const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
+  const walkingDongils = useAppSelector(selectWalkingDongils);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    // @ts-expect-error
     dispatch(dispatchResetIsPatched({}));
-  }, [walkingMoneyRoads]);
+  }, [walkingDongils]);
 
   return (
     <Wrapper>
-      {walkingMoneyRoads ? (
+      {walkingDongils ? (
         <>
-          <WalkDefault walkingMoneyRoads={walkingMoneyRoads} />
+          <WalkDefault walkingDongils={walkingDongils} />
         </>
       ) : (
         '돈길 없음'

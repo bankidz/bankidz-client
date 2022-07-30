@@ -2,17 +2,17 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
 import createChallengeReducer from '../slices/createChallenge';
-import walkingMoneyRoadsReducer from '../slices/walkingMoneyRoadsSlice';
-import pendingMoneyRoadsReducer from '../slices/pendingMoneyRoadsSlice';
-import weeklyProgressReducer from '../slices/weeklyProgressSlice';
+import walkingDongilsReducer from '../slices/walkingDongilSlice';
+import pendingDongilsReducer from '../slices/pendingDongilSlice';
+import weeklyProgressReducer from '../slices/weeklyDongilSlice';
 import kidsReducer from '../slices/kidsSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     createChallenge: createChallengeReducer,
-    walkingMoneyRoads: walkingMoneyRoadsReducer,
-    pendingMoneyRoads: pendingMoneyRoadsReducer,
+    walkingDongils: walkingDongilsReducer,
+    pendingDongils: pendingDongilsReducer,
     weeklyProgress: weeklyProgressReducer,
     kids: kidsReducer,
   },

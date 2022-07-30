@@ -3,7 +3,7 @@ import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUp
 import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import Receipt from '@components/common/Receipt';
-import ProceedingStemp from '@components/home/walking/ProceedingStemp';
+import ProceedingStemp from '@components/home/walking/InterestStampList';
 import WalkingSummary from '@components/home/walking/WalkingSummary';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Spacer from '@components/layout/Spaceholder';
@@ -14,25 +14,22 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
-import {
-  giveUpWalkingMoneyRoad,
-  selectWalkingMoneyRoads,
-} from '@store/slices/walkingMoneyRoadsSlice';
-import { selectWeeklyProgress } from '@store/slices/weeklyProgressSlice';
+import { selectWeeklyProgress } from '@store/slices/weeklyDongilSlice';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { TFetchStatus } from '@lib/types/api';
+import { selectWalkingDongils } from '@store/slices/walkingDongilSlice';
 
 function KidWalking() {
   const { id } = useParams();
   const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
 
-  const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
-  const targetWalkingMoneyRoad = walkingMoneyRoads?.find(
-    (walkingMoneyRoad) => walkingMoneyRoad.id === parseInt(id!),
+  const walkingDongils = useAppSelector(selectWalkingDongils);
+  const targetWalkingDongil = walkingDongils?.find(
+    (walkingDongil) => walkingDongil.id === parseInt(id!),
   );
   const {
     isMom,
@@ -44,7 +41,7 @@ function KidWalking() {
     weeks,
     createdAt,
     progressList,
-  } = targetWalkingMoneyRoad!;
+  } = targetWalkingDongil!;
 
   const weeklyProgress = useAppSelector(selectWeeklyProgress);
   const { currentSavings } = weeklyProgress!;
@@ -60,12 +57,12 @@ function KidWalking() {
     useBottomSheet(false);
 
   const axiosPrivate = useAxiosPrivate();
-  const [giveUpWalkingMoneyRoadStatus, setGiveUStatus] =
+  const [giveUpWalkingDongilStatus, setGiveUStatus] =
     useState<TFetchStatus>('idle');
   const canGiveUp =
-    walkingMoneyRoads !== null &&
-    walkingMoneyRoads !== [] &&
-    giveUpWalkingMoneyRoadStatus === 'idle';
+    walkingDongils !== null &&
+    walkingDongils !== [] &&
+    giveUpWalkingDongilStatus === 'idle';
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -75,7 +72,7 @@ function KidWalking() {
       try {
         setGiveUStatus('pending');
         // await dispatch(
-        //   giveUpWalkingMoneyRoad({
+        //   giveUpWalkingDongil({
         //     axiosPrivate,
         //     id: parseInt(id!),
         //   }),
@@ -131,7 +128,7 @@ function KidWalking() {
               </div>
             </InterestStamp>
 
-            <MoneyRoadContractContent>
+            <DongilContractContent>
               <span>돈길 계약 내용</span>
               <div className="receipt-positioner">
                 <Receipt
@@ -144,10 +141,10 @@ function KidWalking() {
                   weeks={weeks}
                 />
               </div>
-            </MoneyRoadContractContent>
-            <GiveUpMoneyRoadButton onClick={onGiveUpCheckOpen}>
+            </DongilContractContent>
+            <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
               돈길 포기하기
-            </GiveUpMoneyRoadButton>
+            </GiveUpDongilButton>
             <Spacer />
           </FlexContainer>
         </MarginTemplate>
@@ -265,7 +262,7 @@ const InterestStamp = styled.div`
   }
 `;
 
-const MoneyRoadContractContent = styled.div`
+const DongilContractContent = styled.div`
   margin-top: 80px;
   width: 100%;
   span {
@@ -278,7 +275,7 @@ const MoneyRoadContractContent = styled.div`
   }
 `;
 
-const GiveUpMoneyRoadButton = styled.button`
+const GiveUpDongilButton = styled.button`
   text-decoration: underline;
   text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
   margin-top: 48px;
