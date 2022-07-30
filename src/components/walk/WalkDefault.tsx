@@ -3,7 +3,7 @@ import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { useAppSelector } from '@store/app/hooks';
-import { selectLevel } from '@store/slices/authSlice';
+import { selectAuth, selectLevel } from '@store/slices/authSlice';
 import {
   IMoneyRoad,
   selectisWalkingMoneyRoadsPatched,
@@ -28,6 +28,7 @@ function WalkDefault({
 }) {
   const level = useAppSelector(selectLevel);
   const patched = useAppSelector(selectisWalkingMoneyRoadsPatched);
+  const { username, isKid, isFemale } = useAppSelector(selectAuth);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkMoneyRoad(walkingMoneyRoads);
   const dDayLeft = 7 - moment().day();
@@ -47,10 +48,10 @@ function WalkDefault({
         onSubmit: () => {
           closeModal(modals.primaryModal);
         },
-        isKid: true,
-        isFemale: true,
-        headerText: '뱅키즈 첫 가입을 축하해요',
-        bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
+        isKid: isKid,
+        isFemale: isFemale,
+        headerText: `${username} 이번주 저금 성공`,
+        bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }
   }, [walkingMoneyRoads]);
