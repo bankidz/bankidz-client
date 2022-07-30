@@ -7,6 +7,7 @@ import {
 import { TItemName } from '@lib/types/kid';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import produce from 'immer';
 import { RootState } from '../app/store';
 
 export interface IMoneyRoad {
@@ -66,6 +67,17 @@ export const giveUpWalkingMoneyRoad = createAsyncThunk(
   },
 );
 
+// PATCH: 돈길 걷기
+export const walkMoneyRoad = createAsyncThunk(
+  'walkingMoneyRoads/walk',
+  async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
+    const { axiosPrivate, id } = thunkPayload;
+    const response = await axiosPrivate.patch(`/progress/${id}`);
+    console.log('response.data', response.data);
+    return response.data;
+  },
+);
+
 export const walkingMoneyRoadsSlice = createSlice({
   name: 'walkingMoneyRoads',
   initialState,
@@ -88,6 +100,30 @@ export const walkingMoneyRoadsSlice = createSlice({
         state.walkingMoneyRoads = state.walkingMoneyRoads!.filter(
           (walkingMoneyRoad) => walkingMoneyRoad.id !== id,
         );
+      })
+      .addCase(walkMoneyRoad.fulfilled, (state, action) => {
+        const { id } = action.payload.data;
+        // immer
+        const achievedMoneyRoad = state.walkingMoneyRoads!.find(
+          (moneyRoad) => moneyRoad.id === id,
+        );
+        if (achievedMoneyRoad?.progressList) {
+          achievedMoneyRoad.progressList[
+            achievedMoneyRoad.progressList?.length - 1
+          ].isAchieved = true;
+        }
+      })
+      .addCase(walkMoneyRoad.rejected, (state, action) => {
+        // api 수정하는동안 일단 테스트용!!
+        const { id } = action.meta.arg;
+        const achievedMoneyRoad = state.walkingMoneyRoads!.find(
+          (moneyRoad) => moneyRoad.id === id,
+        );
+        if (achievedMoneyRoad?.progressList) {
+          achievedMoneyRoad.progressList[
+            achievedMoneyRoad.progressList?.length - 1
+          ].isAchieved = true;
+        }
       });
   },
 });

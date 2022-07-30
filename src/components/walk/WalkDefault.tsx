@@ -15,6 +15,8 @@ import renderItemIllustWalk from '@lib/utils/kid/renderItemIllustWalk';
 import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkMoneyRoad from '@lib/hooks/useWalkMoneyRoad';
+import useModals from '@lib/hooks/useModals';
+import Modals from '@components/common/modals/Modals';
 
 function WalkDefault({
   walkingMoneyRoads,
@@ -25,7 +27,9 @@ function WalkDefault({
   const colorByLevel = getColorByLevel(level!);
   const dDayLeft = 7 - moment().day();
   const [selected, setSelected] = useState<IMoneyRoad>(walkingMoneyRoads[0]);
-  const { getValue, setValue } = useWalkMoneyRoad(walkingMoneyRoads);
+  const { getValue, setValue, getIsAchieved, setIsAchieved } =
+    useWalkMoneyRoad(walkingMoneyRoads);
+
   const onClickWalkingItemNameButton = (v: IMoneyRoad) => {
     setSelected(v);
   };
@@ -50,11 +54,7 @@ function WalkDefault({
               <WalkingItemNameButton
                 itemName={v.itemName}
                 isSelected={selected?.id === v.id}
-                isNoticed={
-                  v.progressList !== null
-                    ? !v.progressList[v.progressList.length]?.isAchieved
-                    : false
-                }
+                isNoticed={!getIsAchieved(v.id)}
               />
               {selected?.id === v.id && <Polygon />}
             </div>
@@ -71,6 +71,8 @@ function WalkDefault({
           value={getValue(selected.id)}
           setValue={setValue}
           id={selected.id}
+          isAchieved={getIsAchieved(selected.id)}
+          setIsAchieved={setIsAchieved}
         />
       </Content>
     </Wrapper>

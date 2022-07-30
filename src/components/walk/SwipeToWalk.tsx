@@ -3,12 +3,14 @@ import { ReactComponent as BankiInterest10 } from '@assets/illusts/banki/banki_w
 import { ReactComponent as BankiInterest20 } from '@assets/illusts/banki/banki_walk_20.svg';
 import { ReactComponent as BankiInterest30 } from '@assets/illusts/banki/banki_walk_30.svg';
 import { ReactComponent as Flag } from '@assets/illusts/walk/flag.svg';
-import { useEffect, useState } from 'react';
+import { ReactComponent as Stamp } from '@assets/illusts/walk/achieved-stamp.svg';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { TInterestRate } from '@lib/types/common';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
-import { TWalkMoneyRoadType } from '@lib/hooks/useWalkMoneyRoad';
+import { useAppDispatch } from '@store/app/hooks';
+import { walkMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;
@@ -16,6 +18,8 @@ interface SwipeToWalkProps {
   value: number;
   setValue: (id: number, newValue: number) => void;
   id: number;
+  isAchieved: boolean;
+  setIsAchieved: (id: number, newValue: boolean) => void;
 }
 function SwipeToWalk({
   interestRate,
@@ -23,18 +27,23 @@ function SwipeToWalk({
   value,
   setValue,
   id,
+  isAchieved,
+  setIsAchieved,
 }: SwipeToWalkProps) {
+  const dispatch = useAppDispatch();
+  const axiosPrivate = useAxiosPrivate();
   const BankiByInterest = {
     10: <BankiInterest10 />,
     20: <BankiInterest20 />,
     30: <BankiInterest30 />,
   };
-
   const onAfterChange = (v: number) => {
     if (v < 90) {
       setValue(id, 0);
     } else {
       setValue(id, 100);
+      dispatch(walkMoneyRoad({ axiosPrivate, id }));
+      setIsAchieved(id, true);
     }
   };
 
@@ -50,6 +59,7 @@ function SwipeToWalk({
           trackStyle={RcSliderTrackStyle}
           handleStyle={RcSliderHandleStyle}
           onAfterChange={(v) => onAfterChange(v as number)}
+          disabled={value === 100 ? true : false}
         />
         <Selector value={value}>{BankiByInterest[interestRate]}</Selector>
         <ProgressBar value={value} />
@@ -61,7 +71,8 @@ function SwipeToWalk({
             </>
           )}
         </p>
-        {value < 90 && <Flag />}
+        {value < 90 && <Flag className="flag" />}
+        {isAchieved && <Stamp className="stamp" />}
       </RangeInputForm>
     </Wrapper>
   );
@@ -87,10 +98,18 @@ const RangeInputForm = styled.div`
       color: ${({ theme }) => theme.palette.greyScale.grey700};
     }
   }
-  & > svg {
+  /* 깃발 */
+  .flag {
     position: absolute;
     top: -22px;
     right: 0px;
+  }
+  /*완주 성공 */
+  .stamp {
+    position: absolute;
+    left: -1px;
+    top: -65px;
+    z-index: 5;
   }
 `;
 
@@ -112,10 +131,10 @@ const RcSliderTrackStyle = {
   borderRadius: '8px',
 };
 const RcSliderHandleStyle = {
-  top: '-11px',
+  top: '-28px',
   border: 'none',
-  width: '44px',
-  height: '40px',
+  width: '72px',
+  height: '72px',
   zIndex: '4',
   boxShadow: 'none',
   opacity: 0,
