@@ -55,11 +55,11 @@ function KidHome() {
   useEffect(() => {
     async function hydrate() {
       weeklyProgressStatus === 'idle' &&
-        (await dispatch(fetchWeeklyProgress({ axiosPrivate })));
+        (await dispatch(fetchWeeklyProgress({ axiosPrivate })).unwrap());
       walkingMoneyRoadsStatus === 'idle' &&
-        (await dispatch(fetchWalkingMoneyRoads({ axiosPrivate })));
+        (await dispatch(fetchWalkingMoneyRoads({ axiosPrivate })).unwrap());
       pendingMoneyRoadsStatus === 'idle' &&
-        (await dispatch(fetchPendingMoneyRoads({ axiosPrivate })));
+        (await dispatch(fetchPendingMoneyRoads({ axiosPrivate })).unwrap());
     }
     hydrate();
   }, []);

@@ -5,6 +5,7 @@ import challengePayloadReducer from '../slices/challengePayloadSlice';
 import walkingMoneyRoadsReducer from '../slices/walkingMoneyRoadsSlice';
 import pendingMoneyRoadsReducer from '../slices/pendingMoneyRoadsSlice';
 import weeklyProgressReducer from '../slices/weeklyProgressSlice';
+import kidsReducer from '../slices/kidsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     walkingMoneyRoads: walkingMoneyRoadsReducer,
     pendingMoneyRoads: pendingMoneyRoadsReducer,
     weeklyProgress: weeklyProgressReducer,
+    kids: kidsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
