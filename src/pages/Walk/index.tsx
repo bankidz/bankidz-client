@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import Walk from './Walk';
 
-function ChallengeRouter() {
+function WalkRouter() {
   return (
     <Routes>
       <Route
@@ -17,4 +17,4 @@ function ChallengeRouter() {
   );
 }
 
-export default ChallengeRouter;
+export default WalkRouter;

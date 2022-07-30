@@ -295,7 +295,7 @@ const Background = styled.div<{ colorByLevel: string }>`
   z-index: 1;
   transform: translate3d(-50%, 0, 0);
 
-  height: 337px;
+  height: 288px;
   width: 100%;
   background-color: ${({ colorByLevel }) => colorByLevel};
 
@@ -306,7 +306,7 @@ const Background = styled.div<{ colorByLevel: string }>`
     background-color: ${({ theme }) => theme.palette.greyScale.white};
     border-radius: 50%;
     position: absolute;
-    top: 305px;
+    top: 257px;
     left: calc(-${calcRatio(530, 360)} / 2 + 50%);
     content: '';
   }

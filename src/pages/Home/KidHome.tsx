@@ -38,9 +38,10 @@ import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteChe
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TFetchStatus } from '@lib/types/api';
+import { TLevel } from '@lib/types/common';
 
-function KidHome() {
-  const level = useAppSelector(selectLevel);
+function KidHome({ level }: { level: TLevel | null }) {
+  //const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
 
   const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);

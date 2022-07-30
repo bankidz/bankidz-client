@@ -13,9 +13,7 @@ export const decorators = [
         <GlobalStyle />
         <div
           style={{
-            backgroundColor: '#F7F7F8',
             width: '100%',
-            height: 'calc(var(--vh, 1vh) * 100)',
           }}
         >
           <Story />

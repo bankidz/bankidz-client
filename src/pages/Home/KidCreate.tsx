@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import Step5 from '@components/home/create/steps/Step5';
 import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/challengePayloadSlice';
+import { dispatchParent } from '@store/slices/createChallenge';
 import { kidMock } from '@lib/mocks/kid';
 import { IFamilyState } from '@lib/types/kid';
 
@@ -120,6 +120,8 @@ function KidCreate() {
 export default KidCreate;
 
 const Wrapper = styled.div`
+  margin-top: 16px;
+
   & > :first-child {
     margin: 0px auto;
   }
