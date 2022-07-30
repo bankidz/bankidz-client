@@ -5,7 +5,7 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
 import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
 import { ReactComponent as D1 } from '@assets/illusts/walk/d-1.svg';
@@ -16,7 +16,7 @@ import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkMoneyRoad from '@lib/hooks/useWalkMoneyRoad';
 import useModals from '@lib/hooks/useModals';
-import Modals from '@components/common/modals/Modals';
+import Modals, { modals } from '@components/common/modals/Modals';
 
 function WalkDefault({
   walkingMoneyRoads,
@@ -25,14 +25,31 @@ function WalkDefault({
 }) {
   const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
+  const { getWeeklySuccess } = useWalkMoneyRoad(walkingMoneyRoads);
   const dDayLeft = 7 - moment().day();
   const [selected, setSelected] = useState<IMoneyRoad>(walkingMoneyRoads[0]);
+  const { openModal, closeModal } = useModals();
   const { getValue, setValue, getIsAchieved, setIsAchieved } =
     useWalkMoneyRoad(walkingMoneyRoads);
 
   const onClickWalkingItemNameButton = (v: IMoneyRoad) => {
     setSelected(v);
   };
+
+  useEffect(() => {
+    console.log('asdf');
+    if (getWeeklySuccess().every((v) => v === true)) {
+      openModal(modals.primaryModal, {
+        onSubmit: () => {
+          closeModal(modals.primaryModal);
+        },
+        isKid: true,
+        isFemale: true,
+        headerText: '뱅키즈 첫 가입을 축하해요',
+        bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
+      });
+    }
+  }, [walkingMoneyRoads]);
 
   return (
     <Wrapper>
@@ -75,6 +92,7 @@ function WalkDefault({
           setIsAchieved={setIsAchieved}
         />
       </Content>
+      <Modals />
     </Wrapper>
   );
 }

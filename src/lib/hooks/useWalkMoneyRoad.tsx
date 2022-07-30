@@ -23,11 +23,11 @@ const useWalkMoneyRoad = (walkingMoneyRoads: IMoneyRoad[]) => {
     }),
   );
 
+  // 해당 돈길 value 게터 세터. 0~100
   const getValue = (id: number) => {
     const [value] = walkMoneyRoads.filter((v) => v.id === id);
     return value.value;
   };
-
   const setValue = (id: number, newValue: number) => {
     const newWalkMoneyRoads = walkMoneyRoads.map((v) =>
       v.id === id ? { ...v, value: newValue } : v,
@@ -40,7 +40,6 @@ const useWalkMoneyRoad = (walkingMoneyRoads: IMoneyRoad[]) => {
     const [value] = walkMoneyRoads.filter((v) => v.id === id);
     return value.isAchieved;
   };
-
   const setIsAchieved = (id: number, newValue: boolean) => {
     const newWalkMoneyRoads = walkMoneyRoads.map((v) =>
       v.id === id ? { id: id, value: 100, isAchieved: newValue } : v,
@@ -48,7 +47,17 @@ const useWalkMoneyRoad = (walkingMoneyRoads: IMoneyRoad[]) => {
     return setWalkMoneyRoads(newWalkMoneyRoads);
   };
 
-  return { getValue, setValue, getIsAchieved, setIsAchieved };
+  // 이번주 저금 완료 여부
+  const getWeeklySuccess = () => {
+    const isAchievedList = walkingMoneyRoads.map((v) =>
+      v.progressList
+        ? v.progressList[v.progressList?.length - 1].isAchieved
+        : false,
+    );
+    return isAchievedList;
+  };
+
+  return { getValue, setValue, getIsAchieved, setIsAchieved, getWeeklySuccess };
 };
 
 export default useWalkMoneyRoad;

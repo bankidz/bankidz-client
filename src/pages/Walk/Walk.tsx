@@ -19,14 +19,19 @@ import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkMoneyRoad from '@lib/hooks/useWalkMoneyRoad';
 import WalkDefault from '@components/walk/WalkDefault';
+import Modals from '@components/common/modals/Modals';
+import useModals from '@lib/hooks/useModals';
 
 function Walk() {
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
+  const { openModal } = useModals();
 
   return (
     <Wrapper>
       {walkingMoneyRoads ? (
-        <WalkDefault walkingMoneyRoads={walkingMoneyRoads} />
+        <>
+          <WalkDefault walkingMoneyRoads={walkingMoneyRoads} />
+        </>
       ) : (
         '돈길 없음'
       )}
