@@ -142,6 +142,6 @@ export const selectWalkingMoneyRoadsStatus = (state: RootState) =>
   state.walkingMoneyRoads.walkingMoneyRoadsStatus;
 export const selectWalkingMoneyRoads = (state: RootState) =>
   state.walkingMoneyRoads.walkingMoneyRoads;
-export const selectisWalkingMoneyRoadsPatched = (state: RootState) =>
+export const selectIsWalkingMoneyRoadsPatched = (state: RootState) =>
   state.walkingMoneyRoads.isWalkingMoneyRoadsPatched;
 export default walkingMoneyRoadsSlice.reducer;

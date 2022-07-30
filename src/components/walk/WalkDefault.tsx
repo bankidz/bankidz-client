@@ -6,7 +6,7 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectAuth, selectLevel } from '@store/slices/authSlice';
 import {
   IMoneyRoad,
-  selectisWalkingMoneyRoadsPatched,
+  selectIsWalkingMoneyRoadsPatched,
 } from '@store/slices/walkingMoneyRoadsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -14,7 +14,7 @@ import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygo
 import { ReactComponent as D1 } from '@assets/illusts/walk/d-1.svg';
 import { ReactComponent as D2 } from '@assets/illusts/walk/d-2.svg';
 import { ReactComponent as DDay } from '@assets/illusts/walk/d-day.svg';
-import renderItemIllustWalk from '@lib/utils/kid/renderItemIllustWalk';
+import renderItemIllustForWalkPage from '@lib/utils/kid/renderItemIllustForWalkPage';
 import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkMoneyRoad from '@lib/hooks/useWalkMoneyRoad';
@@ -27,27 +27,24 @@ function WalkDefault({
   walkingMoneyRoads: IMoneyRoad[];
 }) {
   const level = useAppSelector(selectLevel);
-  const patched = useAppSelector(selectisWalkingMoneyRoadsPatched);
+  const patched = useAppSelector(selectIsWalkingMoneyRoadsPatched);
   const { username, isKid, isFemale } = useAppSelector(selectAuth);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkMoneyRoad(walkingMoneyRoads);
   const dDayLeft = 7 - moment().day();
   const [selected, setSelected] = useState<IMoneyRoad>(walkingMoneyRoads[0]);
-  const { openModal, closeModal } = useModals();
+  const { openModal } = useModals();
   const { getValue, setValue, getIsAchieved, setIsAchieved } =
     useWalkMoneyRoad(walkingMoneyRoads);
 
-  const onClickWalkingItemNameButton = (v: IMoneyRoad) => {
+  const onWalkingItemNameButtonClick = (v: IMoneyRoad) => {
     setSelected(v);
   };
 
   useEffect(() => {
-    console.log(patched);
     if (getWeeklySuccess() && patched) {
       openModal(modals.primaryModal, {
-        onSubmit: () => {
-          closeModal(modals.primaryModal);
-        },
+        onSubmit: () => {},
         isKid: isKid,
         isFemale: isFemale,
         headerText: `${username} 이번주 저금 성공`,
@@ -72,7 +69,7 @@ function WalkDefault({
         </Title>
         <MoneyRoadList>
           {walkingMoneyRoads.map((v) => (
-            <div onClick={() => onClickWalkingItemNameButton(v)} key={v.id}>
+            <div onClick={() => onWalkingItemNameButtonClick(v)} key={v.id}>
               <WalkingItemNameButton
                 itemName={v.itemName}
                 isSelected={selected?.id === v.id}
@@ -84,7 +81,7 @@ function WalkDefault({
         </MoneyRoadList>
       </Header>
       <Content>
-        {renderItemIllustWalk(selected.itemName)}
+        {renderItemIllustForWalkPage(selected.itemName)}
         <InterestBadge interestRate={selected.interestRate} />
         <p>{selected.title}</p>
         <SwipeToWalk
