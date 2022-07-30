@@ -65,7 +65,6 @@ function QuaternaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        zIndex: '700',
         height: '554px',
         position: 'absolute',
         // top: '14vh',
