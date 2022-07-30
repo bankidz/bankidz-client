@@ -4,7 +4,10 @@ import { calcRatio } from '@lib/styles/theme';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
-import { IMoneyRoad } from '@store/slices/walkingMoneyRoadsSlice';
+import {
+  IMoneyRoad,
+  selectisWalkingMoneyRoadsPatched,
+} from '@store/slices/walkingMoneyRoadsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
@@ -24,6 +27,7 @@ function WalkDefault({
   walkingMoneyRoads: IMoneyRoad[];
 }) {
   const level = useAppSelector(selectLevel);
+  const patched = useAppSelector(selectisWalkingMoneyRoadsPatched);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkMoneyRoad(walkingMoneyRoads);
   const dDayLeft = 7 - moment().day();
@@ -37,8 +41,8 @@ function WalkDefault({
   };
 
   useEffect(() => {
-    console.log('asdf');
-    if (getWeeklySuccess().every((v) => v === true)) {
+    console.log(patched);
+    if (getWeeklySuccess() && patched) {
       openModal(modals.primaryModal, {
         onSubmit: () => {
           closeModal(modals.primaryModal);

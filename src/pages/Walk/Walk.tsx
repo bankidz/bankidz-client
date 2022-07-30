@@ -1,30 +1,19 @@
-import moment from 'moment';
-import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
-import { calcRatio } from '@lib/styles/theme';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import { useAppSelector } from '@store/app/hooks';
-import { selectLevel } from '@store/slices/authSlice';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  IMoneyRoad,
+  dispatchResetIsPatched,
   selectWalkingMoneyRoads,
 } from '@store/slices/walkingMoneyRoadsSlice';
-import { useState } from 'react';
-import styled, { css } from 'styled-components';
-import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
-import { ReactComponent as D1 } from '@assets/illusts/walk/d-1.svg';
-import { ReactComponent as D2 } from '@assets/illusts/walk/d-2.svg';
-import { ReactComponent as DDay } from '@assets/illusts/walk/d-day.svg';
-import renderItemIllustWalk from '@lib/utils/kid/renderItemIllustWalk';
-import InterestBadge from '@components/common/badges/InterestBadge';
-import SwipeToWalk from '@components/walk/SwipeToWalk';
-import useWalkMoneyRoad from '@lib/hooks/useWalkMoneyRoad';
+import { useEffect } from 'react';
+import styled from 'styled-components';
 import WalkDefault from '@components/walk/WalkDefault';
-import Modals from '@components/common/modals/Modals';
-import useModals from '@lib/hooks/useModals';
 
 function Walk() {
   const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
-  const { openModal } = useModals();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(dispatchResetIsPatched({}));
+  }, [walkingMoneyRoads]);
 
   return (
     <Wrapper>

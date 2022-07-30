@@ -54,7 +54,7 @@ const useWalkMoneyRoad = (walkingMoneyRoads: IMoneyRoad[]) => {
         ? v.progressList[v.progressList?.length - 1].isAchieved
         : false,
     );
-    return isAchievedList;
+    return isAchievedList.every((v) => v === true);
   };
 
   return { getValue, setValue, getIsAchieved, setIsAchieved, getWeeklySuccess };
