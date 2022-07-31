@@ -17,6 +17,7 @@ import {
 } from '@store/slices/kidsSlice';
 import { TLevel } from '@lib/types/common';
 import KidList from '@components/home/KidList';
+import { fetchKidsDongils } from '@store/slices/kidsDongilsSlice';
 
 function ParentHome() {
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
@@ -31,6 +32,7 @@ function ParentHome() {
         } else {
           setSelectedKid(response.data[0]); // init with first-child
         }
+        await dispatch(fetchKidsDongils({ axiosPrivate })).unwrap();
       } catch (error: any) {
         console.log(error.message);
       }
@@ -66,6 +68,24 @@ function ParentHome() {
     kidsContent = <p>Failed</p>;
   }
 
+  // 자녀의 돈길
+  // let suggestedDongilsContent;
+  // if (suggestedDongilsStatus === 'loading') {
+  //   suggestedDongilsContent = <p>Loading...</p>;
+  // } else if (suggestedDongilsStatus === 'succeeded') {
+  //   if (walkingDongils === []) {
+  //     suggestedDongilsContent = (
+  //       <EmptyDongil onClick={handleContractNewDongilButtonClick} />
+  //     );
+  //   } else {
+  //     suggestedDongilsContent = (
+  //       <SuggestedDongilList walkingDongils={walkingDongils!} />
+  //     );
+  //   }
+  // } else if (suggestedDongilsStatus === 'failed') {
+  //   suggestedDongilsContent = <p>Failed</p>;
+  // }
+
   return (
     <Wrapper>
       <Content>
@@ -78,6 +98,12 @@ function ParentHome() {
           <div className="level-badge-positioner">
             <LevelBadge level={selectedLevel} />
           </div>
+          {/* TODO: ParentSummary */}
+
+          <SuggestedDongilsWrapper>
+            <header>제안받은 돈길</header>
+            {/* {suggestedDongilsContent} */}
+          </SuggestedDongilsWrapper>
           <Spacer />
         </MarginTemplate>
       </Content>
@@ -145,7 +171,7 @@ const StyledHeader = styled.header`
   line-height: 150%;
 `;
 
-const WalkingDongilsWrapper = styled.div`
+const SuggestedDongilsWrapper = styled.div`
   margin-top: 48px;
 
   header {

@@ -5,7 +5,7 @@ import {
   TDongilStatus,
 } from '@lib/types/common';
 import { TItemName } from '@lib/types/kid';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
