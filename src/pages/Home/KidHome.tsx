@@ -10,10 +10,10 @@ import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import { useEffect, useState } from 'react';
 import {
-  fetchWeeklyProgress,
-  selectWeeklyProgress,
-  selectWeeklyProgressStatus,
-} from '@store/slices/weeklyDongilSlice';
+  fetchKidWeeklyProgress,
+  selectKidWeeklyProgress,
+  selectKidWeeklyProgressStatus,
+} from '@store/slices/kidWeeklyProgressSlice';
 import {
   fetchWalkingDongils,
   selectWalkingDongils,
@@ -33,19 +33,18 @@ import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TFetchStatus } from '@lib/types/api';
 import { TLevel } from '@lib/types/common';
-import KidHomeSummary from '@components/home/KidHomeSummary';
 import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
 import WalkingDongilList from '@components/home/walking/WalkingDongilList';
 import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';
 import EmptyPendingDongil from '@components/home/pending/EmptyPendingDongil';
 import PendingDongilList from '@components/home/pending/PendingDongilList';
+import Summary from '@components/home/Summary';
 
 function KidHome({ level }: { level: TLevel }) {
-  // const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
 
-  const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
-  const weeklyProgress = useAppSelector(selectWeeklyProgress);
+  const kidWeeklyProgress = useAppSelector(selectKidWeeklyProgress);
+  const kidWeeklyProgressStatus = useAppSelector(selectKidWeeklyProgressStatus);
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
@@ -55,8 +54,8 @@ function KidHome({ level }: { level: TLevel }) {
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
-      weeklyProgressStatus === 'idle' &&
-        (await dispatch(fetchWeeklyProgress({ axiosPrivate })).unwrap());
+      kidWeeklyProgressStatus === 'idle' &&
+        (await dispatch(fetchKidWeeklyProgress({ axiosPrivate })).unwrap());
       walkingDongilsStatus === 'idle' &&
         (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
       pendingDongilsStatus === 'idle' &&
@@ -66,22 +65,22 @@ function KidHome({ level }: { level: TLevel }) {
   }, []);
 
   // 주간 진행상황;
-  let weeklyProgressContent;
-  if (weeklyProgressStatus === 'loading') {
-    weeklyProgressContent = (
-      <KidHomeSummary current={0} goal={0} month={0} week={0} />
+  let kidWeeklyProgressContent;
+  if (kidWeeklyProgressStatus === 'loading') {
+    kidWeeklyProgressContent = (
+      <Summary usage="KidHome" currentSavings={0} totalPrice={0} />
     );
-  } else if (weeklyProgressStatus === 'succeeded') {
-    weeklyProgressContent = (
-      <KidHomeSummary
-        current={weeklyProgress?.currentSavings!}
-        goal={weeklyProgress?.totalPrice!}
-        month={6}
-        week={4}
+  } else if (kidWeeklyProgressStatus === 'succeeded') {
+    const { currentSavings, totalPrice } = kidWeeklyProgress!;
+    kidWeeklyProgressContent = (
+      <Summary
+        usage="KidHome"
+        currentSavings={currentSavings!}
+        totalPrice={totalPrice!}
       />
     );
-  } else if (weeklyProgressStatus === 'failed') {
-    weeklyProgressContent = <p>Failed</p>;
+  } else if (kidWeeklyProgressStatus === 'failed') {
+    kidWeeklyProgressContent = <p>Failed</p>;
   }
 
   // 걷고있는 돈길
@@ -182,7 +181,7 @@ function KidHome({ level }: { level: TLevel }) {
             <LevelBadge level={level} />
           </div>
 
-          <div className="summary-positioner">{weeklyProgressContent}</div>
+          <div className="summary-positioner">{kidWeeklyProgressContent}</div>
           <WalkingDongilsWrapper>
             <header>걷고있는 돈길</header>
             {walkingDongilsContent}

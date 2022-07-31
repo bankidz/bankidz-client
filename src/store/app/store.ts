@@ -4,9 +4,8 @@ import authReducer from '../slices/authSlice';
 import createChallengeReducer from '../slices/createChallenge';
 import walkingDongilsReducer from '../slices/walkingDongilSlice';
 import pendingDongilsReducer from '../slices/pendingDongilSlice';
-import weeklyProgressReducer from '../slices/weeklyDongilSlice';
+import kidWeeklyProgressReducer from '../slices/kidWeeklyProgressSlice';
 import kidsReducer from '../slices/kidsSlice';
-import kidsDongilsReducer from '../slices/kidsDongilsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,9 +13,8 @@ export const store = configureStore({
     createChallenge: createChallengeReducer,
     walkingDongils: walkingDongilsReducer,
     pendingDongils: pendingDongilsReducer,
-    weeklyProgress: weeklyProgressReducer,
+    kidWeeklyProgress: kidWeeklyProgressReducer,
     kids: kidsReducer,
-    kidsDongils: kidsDongilsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

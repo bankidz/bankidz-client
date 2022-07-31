@@ -4,7 +4,6 @@ import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpChe
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import Receipt from '@components/common/Receipt';
 import ProceedingStemp from '@components/home/walking/InterestStampList';
-import WalkingSummary from '@components/home/walking/WalkingSummary';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import SmallSpacer from '@components/layout/SmallSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -14,13 +13,14 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
-import { selectWeeklyProgress } from '@store/slices/weeklyDongilSlice';
+import { selectKidWeeklyProgress } from '@store/slices/kidWeeklyProgressSlice';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { TFetchStatus } from '@lib/types/api';
 import { selectWalkingDongils } from '@store/slices/walkingDongilSlice';
+import Summary from '@components/home/Summary';
 
 function KidWalking() {
   const { id } = useParams();
@@ -43,8 +43,8 @@ function KidWalking() {
     progressList,
   } = targetWalkingDongil!;
 
-  const weeklyProgress = useAppSelector(selectWeeklyProgress);
-  const { currentSavings } = weeklyProgress!;
+  const kidWeeklyProgress = useAppSelector(selectKidWeeklyProgress);
+  const { currentSavings } = kidWeeklyProgress!;
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
@@ -113,7 +113,8 @@ function KidWalking() {
               {progressList?.length}주차 도전중
             </span>
             <div className="title">{title}</div>
-            <WalkingSummary
+            <Summary
+              usage="Walking"
               currentSavings={currentSavings}
               totalPrice={totalPrice}
             />

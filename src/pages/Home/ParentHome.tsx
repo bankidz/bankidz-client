@@ -17,7 +17,7 @@ import {
 } from '@store/slices/kidsSlice';
 import { TLevel } from '@lib/types/common';
 import KidList from '@components/home/KidList';
-import { fetchKidsDongils } from '@store/slices/kidsDongilsSlice';
+import Summary from '@components/home/Summary';
 
 function ParentHome() {
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
@@ -32,7 +32,6 @@ function ParentHome() {
         } else {
           setSelectedKid(response.data[0]); // init with first-child
         }
-        await dispatch(fetchKidsDongils({ axiosPrivate })).unwrap();
       } catch (error: any) {
         console.log(error.message);
       }
@@ -98,7 +97,13 @@ function ParentHome() {
           <div className="level-badge-positioner">
             <LevelBadge level={selectedLevel} />
           </div>
-          {/* TODO: ParentSummary */}
+          <Summary usage="KidHome" currentSavings={1000} totalPrice={10000} />
+          <Summary usage="Walking" currentSavings={1000} totalPrice={10000} />
+          <Summary
+            usage="ParentHome"
+            currentSavings={1000}
+            totalPrice={10000}
+          />
 
           <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
@@ -114,9 +119,9 @@ function ParentHome() {
       <HomeBackgroundPositioner>
         {renderHomeBackground(selectedLevel!)}
       </HomeBackgroundPositioner>
-      <HomeBankiPositioner>
+      {/* <HomeBankiPositioner>
         {renderHomeBanki(selectedLevel!)}
-      </HomeBankiPositioner>
+      </HomeBankiPositioner> */}
     </Wrapper>
   );
 }
