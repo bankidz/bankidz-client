@@ -61,10 +61,10 @@ function WalkDefault({
 
           <div>
             <p>이번주 리셋까지</p>
-            {dDayLeft > 2 && <p>D-{dDayLeft}</p>}
+            {dDayLeft > 2 && dDayLeft < 7 && <p>D-{dDayLeft}</p>}
             {dDayLeft === 2 && <D2 />}
             {dDayLeft === 1 && <D1 />}
-            {dDayLeft === 0 && <DDay />}
+            {dDayLeft === 7 && <DDay />}
           </div>
         </Title>
         <MoneyRoadList>
