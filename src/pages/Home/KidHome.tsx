@@ -171,11 +171,11 @@ function KidHome({ level }: { level: TLevel }) {
 
   return (
     <Wrapper>
+      <LogoWrapper colorByLevel={colorByLevel}>
+        <BANKIDZ />
+      </LogoWrapper>
       <Content>
         <MarginTemplate>
-          <div className="logo-positioner">
-            <BANKIDZ />
-          </div>
           <StyledHeader>{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
           <div className="level-badge-positioner">
             <LevelBadge level={level} />
@@ -232,6 +232,22 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
+const LogoWrapper = styled.div<{ colorByLevel: string }>`
+  z-index: 3;
+  background: ${({ colorByLevel }) => colorByLevel};
+  position: fixed;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  svg {
+    height: 15.82px;
+    margin-left: 19.79px;
+    margin-bottom: 14.44px;
+  }
+`;
+
 const Content = styled.div`
   width: 100%;
   display: flex;
@@ -242,12 +258,6 @@ const Content = styled.div`
   position: absolute;
   z-index: 2;
 
-  .logo-positioner {
-    width: 100.24px;
-    height: 15.82px;
-    margin-top: 17.73px;
-    margin-left: 3.79px;
-  }
   .level-badge-positioner {
     margin-top: 24px;
     margin-left: 10px;
@@ -260,7 +270,7 @@ const Content = styled.div`
 `;
 
 const StyledHeader = styled.header`
-  margin-top: 30.44px;
+  margin-top: 64px;
   margin-left: 10px;
   width: 308px;
   height: 58px;
@@ -329,7 +339,7 @@ const HomeBackgroundPositioner = styled.div`
 `;
 
 const HomeBankiPositioner = styled.div`
-  z-index: 3;
+  z-index: 2;
   position: absolute;
   top: 146px;
   right: 0;

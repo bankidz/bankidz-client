@@ -130,12 +130,11 @@ function ParentHome() {
           <div className="logo-positioner">
             <BANKIDZ />
           </div>
-          {/* {kidsContent} */}
+          <div className="kids-list-positioner">{kidsContent}</div>
           <StyledHeader>{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
           <div className="level-badge-positioner">
             <LevelBadge level={selectedLevel} />
           </div>
-
           <div className="summary-positioner">
             {parentWeeklyProgressContent}
           </div>
@@ -187,6 +186,8 @@ const Content = styled.div`
     height: 15.82px;
     margin-top: 17.73px;
     margin-left: 3.79px;
+  }
+  .kids-list-positioner {
   }
   .level-badge-positioner {
     margin-top: 24px;
