@@ -4,7 +4,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import { EDongilStatus } from '@lib/types/common';
 
 export default {
-  title: '자녀/홈/PendingDongilItem',
+  title: 'home/pending/PendingDongilItem',
   component: PendingDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [

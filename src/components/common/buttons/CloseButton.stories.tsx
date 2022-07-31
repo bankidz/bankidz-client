@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CloseButton from './CloseButton';
 
 export default {
-  title: 'Common/버튼/CloseButton',
+  title: 'common/buttons/CloseButton',
   component: CloseButton,
   argTypes: {
     onClick: { action: 'handle click' },

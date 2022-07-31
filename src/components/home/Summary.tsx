@@ -10,6 +10,7 @@ interface SummaryProps {
   usage: TUsage;
   currentSavings: number;
   totalPrice: number;
+  /** usage: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다. */
   username?: string;
 }
 

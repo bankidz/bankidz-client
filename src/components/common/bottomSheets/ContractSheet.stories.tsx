@@ -10,7 +10,7 @@ import Signature from './sheetContents/Signature';
 import RangeInput from './sheetContents/RangeInput';
 
 export default {
-  title: 'Common/바텀 시트/ContractSheet',
+  title: 'common/bottomSheets/ContractSheet',
   component: ContractSheet,
   argTypes: {},
 } as ComponentMeta<typeof ContractSheet>;
