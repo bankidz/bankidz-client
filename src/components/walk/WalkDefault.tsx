@@ -38,6 +38,7 @@ function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
   };
 
   useEffect(() => {
+    console.log('asdf', getWeeklySuccess(), patched);
     if (getWeeklySuccess() && patched) {
       openModal(modals.primaryModal, {
         onSubmit: () => {},
@@ -47,7 +48,7 @@ function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }
-  }, [walkingDongils]);
+  }, [walkingDongils, patched]);
 
   return (
     <Wrapper>
@@ -98,6 +99,7 @@ function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
 export default WalkDefault;
 
 const Wrapper = styled.div`
+  overflow-x: hidden;
   position: relative;
   background-color: ${({ theme }) => theme.palette.greyScale.white};
   height: calc(var(--vh, 1vh) * 100);
@@ -159,7 +161,7 @@ const DongilList = styled.div`
   margin-top: 23px;
 
   height: 56px;
-  gap: 8px;
+  gap: 12px;
 
   & > div {
     position: relative;

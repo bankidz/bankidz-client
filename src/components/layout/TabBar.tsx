@@ -52,10 +52,8 @@ const Wrapper = styled.div`
   height: 47px;
   background-color: white;
   border-radius: 12px 12px 28px 28px;
-
   display: flex;
   justify-content: space-around;
-
   width: calc(100% + 1px);
   bottom: 0px;
   left: -1px;

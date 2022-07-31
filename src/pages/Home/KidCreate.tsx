@@ -15,10 +15,13 @@ import { kidMock } from '@lib/mocks/kid';
 import { IFamilyState } from '@lib/types/kid';
 
 const title = [
-  '누구와 계약하나요?',
-  '계약 상품이 무엇인가요?',
-  '이름과 목표 금액을 정해요',
-  '매주 얼마를 모을까요?',
+  <h1>누구와 계약하나요?</h1>,
+  <h1>계약 상품이 무엇인가요?</h1>,
+  <h1>이름과 목표 금액을 정해요</h1>,
+  <h1 style={{ marginBottom: '22px' }}>
+    <p>총 얼마 보상받고,</p>
+    <p>매주 얼마 모을래요?</p>
+  </h1>,
   <>
     <p>멋진 사인으로</p>
     <p>부모님께 계약서를 보내요</p>
@@ -100,11 +103,9 @@ function KidCreate() {
                 skipSelectParents={parents?.length === 1 ? true : false}
               />
               <MarginTemplate>
-                <h1>
-                  {parents.length === 1
-                    ? title[parseInt(step)]
-                    : title[parseInt(step) - 1]}
-                </h1>
+                {parents.length === 1
+                  ? title[parseInt(step)]
+                  : title[parseInt(step) - 1]}
                 {renderContent(getTypedStep(parseInt(step)))}
               </MarginTemplate>
             </>

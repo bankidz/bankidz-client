@@ -37,13 +37,18 @@ function SwipeToWalk({
     20: <BankiInterest20 />,
     30: <BankiInterest30 />,
   };
-  const onAfterChange = (v: number) => {
+
+  const onAfterChange = async (v: number) => {
     if (v < 90) {
       setValue(id, 0);
     } else {
       setValue(id, 100);
-      dispatch(walkDongil({ axiosPrivate, id }));
-      setIsAchieved(id, true);
+      try {
+        await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
+        setIsAchieved(id, true);
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 

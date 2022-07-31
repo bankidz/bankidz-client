@@ -1,8 +1,8 @@
 import { TFetchStatus } from '@lib/types/api';
 import {
   TChallengeCategory,
-  TInterestRate,
   TDongilStatus,
+  TInterestRate,
 } from '@lib/types/common';
 import { TItemName } from '@lib/types/kid';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -107,24 +107,12 @@ export const walkingDongilsSlice = createSlice({
         );
       })
       .addCase(walkDongil.fulfilled, (state, action) => {
-        const { id } = action.payload.data;
+        const { id } = action.meta.arg;
         // immer
         const achievedDongil = state.walkingDongils!.find(
           (dongil) => dongil.id === id,
         );
-        if (achievedDongil?.progressList) {
-          achievedDongil.progressList[
-            achievedDongil.progressList?.length - 1
-          ].isAchieved = true;
-        }
-        state.isWalkingDongilsPatched = true;
-      })
-      .addCase(walkDongil.rejected, (state, action) => {
-        // api 수정하는동안 일단 테스트용!!
-        const { id } = action.meta.arg;
-        const achievedDongil = state.walkingDongils!.find(
-          (dongil) => dongil.id === id,
-        );
+
         if (achievedDongil?.progressList) {
           achievedDongil.progressList[
             achievedDongil.progressList?.length - 1
