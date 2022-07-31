@@ -22,8 +22,8 @@ const initialState = {
 
 const kid_create_content_step3_validateResult = {
   contractName: {
-    default: { error: false, message: '특수문자 제외 15자 이하로 부탁해요!' },
-    outOfForm: { error: true, message: '특수문자 제외 15자 이하로 부탁해요!' },
+    default: { error: false, message: '특수문자 제외 12자 이하로 부탁해요!' },
+    outOfForm: { error: true, message: '특수문자 제외 12자 이하로 부탁해요!' },
     duplicate: {
       error: true,
       message: '기존 돈길과 동일한 이름이에요. 새롭게 지어줄래요?',
@@ -36,7 +36,7 @@ const kid_create_content_step3_validateResult = {
       message: '최소 1500원에서 최대 50만원까지 설정할 수 있어요!',
     },
     under: { error: true, message: '1,500원 이상으로 부탁해요!' },
-    over: { error: true, message: '50만원 이하로 부탁해요!' },
+    over: { error: true, message: '30만원 이하로 부탁해요!' },
     pass: { error: false, message: '적절한 금액이에요!' },
   },
 };
@@ -56,7 +56,7 @@ function useValidation() {
           kid_create_content_step3_validateResult.contractName.default,
         );
       } else if (
-        value.length > 15 ||
+        value.length > 12 ||
         value.match(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g)
       )
         setValidateResult(
@@ -85,7 +85,7 @@ function useValidation() {
         setValidateResult(
           kid_create_content_step3_validateResult.contractAmount.under,
         );
-      else if (value > 500000)
+      else if (value > 300000)
         setValidateResult(
           kid_create_content_step3_validateResult.contractAmount.over,
         );
