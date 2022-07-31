@@ -13,65 +13,67 @@ import {
   fetchWeeklyProgress,
   selectWeeklyProgress,
   selectWeeklyProgressStatus,
-} from '@store/slices/weeklyProgressSlice';
+} from '@store/slices/weeklyDongilSlice';
 import {
-  fetchWalkingMoneyRoads,
-  selectWalkingMoneyRoads,
-  selectWalkingMoneyRoadsStatus,
-} from '@store/slices/walkingMoneyRoadsSlice';
+  fetchWalkingDongils,
+  selectWalkingDongils,
+  selectWalkingDongilsStatus,
+} from '@store/slices/walkingDongilSlice';
 import {
-  fetchPendingMoneyRoads,
-  selectPendingMoneyRoads,
-  selectPendingMoneyRoadsStatus,
-} from '@store/slices/pendingMoneyRoadsSlice';
+  fetchPendingDongils,
+  selectPendingDongils,
+  selectPendingDongilsStatus,
+} from '@store/slices/pendingDongilSlice';
 import Modals from '@components/common/modals/Modals';
 import Spacer from '@components/layout/Spaceholder';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import Summary from '@components/home/Summary';
-import EmptyWalkingMoneyRoad from '@components/home/walking/EmptyWalkingMoneyRoad';
-import WalkingMoneyRoadList from '@components/home/walking/WalkingMoneyRoadList';
-import ContractNewMoneyRoadLink from '@components/home/walking/ContractNewMoneyRoadLink';
-import EmptyPendingMoneyRoad from '@components/home/pending/EmptyPendingMoneyRoad';
-import PendingMoneyRoadList from '@components/home/pending/PendingMoneyRoadList';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TFetchStatus } from '@lib/types/api';
 import { TLevel } from '@lib/types/common';
+import KidHomeSummary from '@components/home/KidHomeSummary';
+import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
+import WalkingDongilList from '@components/home/walking/WalkingDongilList';
+import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';
+import EmptyPendingDongil from '@components/home/pending/EmptyPendingDongil';
+import PendingDongilList from '@components/home/pending/PendingDongilList';
 
-function KidHome({ level }: { level: TLevel | null }) {
-  //const level = useAppSelector(selectLevel);
+function KidHome({ level }: { level: TLevel }) {
+  // const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
 
   const weeklyProgressStatus = useAppSelector(selectWeeklyProgressStatus);
   const weeklyProgress = useAppSelector(selectWeeklyProgress);
-  const walkingMoneyRoadsStatus = useAppSelector(selectWalkingMoneyRoadsStatus);
-  const walkingMoneyRoads = useAppSelector(selectWalkingMoneyRoads);
-  const pendingMoneyRoadsStatus = useAppSelector(selectPendingMoneyRoadsStatus);
-  const pendingMoneyRoads = useAppSelector(selectPendingMoneyRoads);
+  const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
+  const walkingDongils = useAppSelector(selectWalkingDongils);
+  const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
+  const pendingDongils = useAppSelector(selectPendingDongils);
 
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
       weeklyProgressStatus === 'idle' &&
-        (await dispatch(fetchWeeklyProgress({ axiosPrivate })));
-      walkingMoneyRoadsStatus === 'idle' &&
-        (await dispatch(fetchWalkingMoneyRoads({ axiosPrivate })));
-      pendingMoneyRoadsStatus === 'idle' &&
-        (await dispatch(fetchPendingMoneyRoads({ axiosPrivate })));
+        (await dispatch(fetchWeeklyProgress({ axiosPrivate })).unwrap());
+      walkingDongilsStatus === 'idle' &&
+        (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
+      pendingDongilsStatus === 'idle' &&
+        (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
     }
     hydrate();
   }, []);
 
-  // 주간 진행상황
+  // 주간 진행상황;
   let weeklyProgressContent;
   if (weeklyProgressStatus === 'loading') {
-    weeklyProgressContent = <Summary current={0} goal={0} month={0} week={0} />;
+    weeklyProgressContent = (
+      <KidHomeSummary current={0} goal={0} month={0} week={0} />
+    );
   } else if (weeklyProgressStatus === 'succeeded') {
     weeklyProgressContent = (
-      <Summary
+      <KidHomeSummary
         current={weeklyProgress?.currentSavings!}
         goal={weeklyProgress?.totalPrice!}
         month={6}
@@ -84,33 +86,31 @@ function KidHome({ level }: { level: TLevel | null }) {
 
   // 걷고있는 돈길
   let disable = 'false';
-  if (walkingMoneyRoads !== null && walkingMoneyRoads.length === 5) {
+  if (walkingDongils !== null && walkingDongils.length === 5) {
     disable = 'true';
   }
   const navigate = useNavigate();
-  function handleContractNewMoneyRoadButtonClick() {
+  function handleContractNewDongilButtonClick() {
     navigate('/create/1');
   }
-  let walkingMoneyRoadsContent;
-  if (walkingMoneyRoadsStatus === 'loading') {
-    walkingMoneyRoadsContent = <p>Loading...</p>;
-  } else if (walkingMoneyRoadsStatus === 'succeeded') {
-    if (walkingMoneyRoads === []) {
-      walkingMoneyRoadsContent = (
-        <EmptyWalkingMoneyRoad
-          onClick={handleContractNewMoneyRoadButtonClick}
-        />
+  let walkingDongilsContent;
+  if (walkingDongilsStatus === 'loading') {
+    walkingDongilsContent = <p>Loading...</p>;
+  } else if (walkingDongilsStatus === 'succeeded') {
+    if (walkingDongils === []) {
+      walkingDongilsContent = (
+        <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
       );
     } else {
-      walkingMoneyRoadsContent = (
+      walkingDongilsContent = (
         <>
-          <WalkingMoneyRoadList walkingMoneyRoads={walkingMoneyRoads!} />
-          <ContractNewMoneyRoadLink disable={disable} to={'/create/1'} />
+          <WalkingDongilList walkingDongils={walkingDongils!} />
+          <ContractNewDongilLink disable={disable} to={'/create/1'} />
         </>
       );
     }
-  } else if (walkingMoneyRoadsStatus === 'failed') {
-    walkingMoneyRoadsContent = <p>Failed</p>;
+  } else if (walkingDongilsStatus === 'failed') {
+    walkingDongilsContent = <p>Failed</p>;
   }
 
   // 대기중인 돈길 삭제
@@ -118,19 +118,21 @@ function KidHome({ level }: { level: TLevel | null }) {
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
   const canDelete =
     idToDelete !== null &&
-    pendingMoneyRoads !== null &&
-    pendingMoneyRoads !== [] &&
+    pendingDongils !== null &&
+    pendingDongils !== [] &&
     deleteStatus === 'idle';
+
   const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
     useBottomSheet(false);
   const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
     useBottomSheet(false);
+
   async function handleDeleteButtonClick() {
     if (canDelete) {
       try {
         setDeleteStatus('pending');
         // await dispatch(
-        //   deletePendingMoneyRoad({
+        //   deletePendingDongil({
         //     axiosPrivate,
         //     id: idToDelete,
         //   }),
@@ -149,23 +151,23 @@ function KidHome({ level }: { level: TLevel | null }) {
   }
 
   // 대기중인 돈길
-  let pendingMoneyRoadsContent;
-  if (pendingMoneyRoadsStatus === 'loading') {
-    pendingMoneyRoadsContent = <p>Loading...</p>;
-  } else if (pendingMoneyRoadsStatus === 'succeeded') {
-    if (pendingMoneyRoads === []) {
-      pendingMoneyRoadsContent = <EmptyPendingMoneyRoad />;
+  let pendingDongilsContent;
+  if (pendingDongilsStatus === 'loading') {
+    pendingDongilsContent = <p>Loading...</p>;
+  } else if (pendingDongilsStatus === 'succeeded') {
+    if (pendingDongils === []) {
+      pendingDongilsContent = <EmptyPendingDongil />;
     } else {
-      pendingMoneyRoadsContent = (
-        <PendingMoneyRoadList
-          pendingMoneyRoads={pendingMoneyRoads!}
+      pendingDongilsContent = (
+        <PendingDongilList
+          pendingDongils={pendingDongils!}
           onDeleteCheckOpen={onDeleteCheckOpen}
           setIdToDelete={setIdToDelete}
         />
       );
     }
-  } else if (pendingMoneyRoadsStatus === 'failed') {
-    pendingMoneyRoadsContent = <p>Failed</p>;
+  } else if (pendingDongilsStatus === 'failed') {
+    pendingDongilsContent = <p>Failed</p>;
   }
 
   return (
@@ -181,20 +183,20 @@ function KidHome({ level }: { level: TLevel | null }) {
           </div>
 
           <div className="summary-positioner">{weeklyProgressContent}</div>
-          <WalkingMoneyRoadsWrapper>
+          <WalkingDongilsWrapper>
             <header>걷고있는 돈길</header>
-            {walkingMoneyRoadsContent}
-          </WalkingMoneyRoadsWrapper>
-          <WaitingMoneyRoadWrapper>
+            {walkingDongilsContent}
+          </WalkingDongilsWrapper>
+          <WaitingDongilWrapper>
             <header>대기중인 돈길</header>
-            {pendingMoneyRoadsContent}
-          </WaitingMoneyRoadWrapper>
+            {pendingDongilsContent}
+          </WaitingDongilWrapper>
           <Spacer />
         </MarginTemplate>
 
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingMoneyRoadItem에서 실행됩니다. */}
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
         <Modals />
-        {/* 다음 바텀시트를 열고 닫는 로직은 pendingMoneyRoadItem에서 실행됩니다. */}
+        {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
         <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
           <DeleteCheck
             onClickDelete={handleDeleteButtonClick}
@@ -270,7 +272,7 @@ const StyledHeader = styled.header`
   line-height: 150%;
 `;
 
-const WalkingMoneyRoadsWrapper = styled.div`
+const WalkingDongilsWrapper = styled.div`
   margin-top: 48px;
 
   header {
@@ -282,7 +284,7 @@ const WalkingMoneyRoadsWrapper = styled.div`
   }
 `;
 
-const WaitingMoneyRoadWrapper = styled.div`
+const WaitingDongilWrapper = styled.div`
   margin-top: 48px;
 
   header {

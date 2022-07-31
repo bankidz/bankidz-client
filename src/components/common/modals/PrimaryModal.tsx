@@ -29,6 +29,7 @@ function PrimaryModal({
     isOpen: true,
     style: {
       overlay: {
+        zIndex: '700',
         position: 'fixed',
         top: 0,
         left: 0,

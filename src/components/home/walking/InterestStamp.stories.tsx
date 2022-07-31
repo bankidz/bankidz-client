@@ -1,13 +1,13 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import ProceedingStemp from './ProceedingStemp';
+import InterestStamp from './InterestStampList';
 
 export default {
-  title: 'Home/ProceedingStemp',
-  component: ProceedingStemp,
-} as ComponentMeta<typeof ProceedingStemp>;
+  title: 'Home/InterestStamp',
+  component: InterestStamp,
+} as ComponentMeta<typeof InterestStamp>;
 
-const Template: ComponentStory<typeof ProceedingStemp> = (args) => (
-  <ProceedingStemp {...args} />
+const Template: ComponentStory<typeof InterestStamp> = (args) => (
+  <InterestStamp {...args} />
 );
 
 export const 에어팟_사기 = Template.bind({});

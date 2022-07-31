@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import EmptyPendingMoneyRoad from './EmptyPendingMoneyRoad';
 import MarginTemplate from '@components/layout/MarginTemplate';
+import EmptyWalkingDongil from './EmptyWalkingDongil';
 
 export default {
-  title: '자녀/홈/EmptyPendingMoneyRoad',
-  component: EmptyPendingMoneyRoad,
+  title: '자녀/홈/EmptyWalkingDongil',
+  component: EmptyWalkingDongil,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [
     (Story) => (
@@ -13,10 +13,10 @@ export default {
       </MarginTemplate>
     ),
   ],
-} as ComponentMeta<typeof EmptyPendingMoneyRoad>;
+} as ComponentMeta<typeof EmptyWalkingDongil>;
 
-const Template: ComponentStory<typeof EmptyPendingMoneyRoad> = (args) => (
-  <EmptyPendingMoneyRoad />
+const Template: ComponentStory<typeof EmptyWalkingDongil> = (args) => (
+  <EmptyWalkingDongil {...args} />
 );
 
 export const 예시 = Template.bind({});

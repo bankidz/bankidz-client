@@ -2,14 +2,13 @@ import React, {
   Component,
   createContext,
   Dispatch,
-  HTMLAttributes,
   useContext,
   useReducer,
 } from 'react';
 
 export interface IModal {
   Component: Component;
-  props: HTMLAttributes<HTMLElement>;
+  props: any;
 }
 
 type TState = {

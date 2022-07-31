@@ -3,15 +3,12 @@ import { theme } from '@lib/styles/theme';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-interface ContractNewMoneyRoadLinkProps {
+interface ContractNewDongilLinkProps {
   disable: string;
   to: string;
 }
 
-function ContractNewMoneyRoadLink({
-  disable,
-  to,
-}: ContractNewMoneyRoadLinkProps) {
+function ContractNewDongilLink({ disable, to }: ContractNewDongilLinkProps) {
   return (
     <StyledLink disable={disable} to={to}>
       <Plus
@@ -26,7 +23,7 @@ function ContractNewMoneyRoadLink({
   );
 }
 
-export default ContractNewMoneyRoadLink;
+export default ContractNewDongilLink;
 
 const StyledLink = styled(Link)<{ disable: string }>`
   ${({ theme }) => theme.typo.button.Text_T_14_EB};

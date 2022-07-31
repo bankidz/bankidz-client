@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import PendingMoneyRoadItem from './PendingMoneyRoadItem';
+import PendingDongilItem from './PendingDongilItem';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { EMoneyRoadStatus } from '@lib/types/common';
+import { EDongilStatus } from '@lib/types/common';
 
 export default {
-  title: '자녀/홈/PendingMoneyRoadItem',
-  component: PendingMoneyRoadItem,
+  title: '자녀/홈/PendingDongilItem',
+  component: PendingDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [
     (Story) => (
@@ -14,15 +14,15 @@ export default {
       </MarginTemplate>
     ),
   ],
-} as ComponentMeta<typeof PendingMoneyRoadItem>;
+} as ComponentMeta<typeof PendingDongilItem>;
 
-const Template: ComponentStory<typeof PendingMoneyRoadItem> = (args) => (
-  <PendingMoneyRoadItem {...args} />
+const Template: ComponentStory<typeof PendingDongilItem> = (args) => (
+  <PendingDongilItem {...args} />
 );
 
 export const 제안중 = Template.bind({});
 제안중.args = {
-  pendingMoneyRoad: {
+  pendingDongil: {
     id: 8,
     isMom: true,
     title: 'FE Mock) 아이패드 사기',
@@ -34,7 +34,7 @@ export const 제안중 = Template.bind({});
     weekPrice: 10000,
     weeks: 15,
     createdAt: '2022-07-14 03:28:29',
-    status: EMoneyRoadStatus.REJECTED,
+    status: EDongilStatus.REJECTED,
     progressList: [
       {
         challengeId: 8,
@@ -51,7 +51,7 @@ export const 제안중 = Template.bind({});
 
 export const 거절됨 = Template.bind({});
 거절됨.args = {
-  pendingMoneyRoad: {
+  pendingDongil: {
     id: 8,
     isMom: true,
     title: 'FE Mock) 아이패드 사기',
@@ -63,7 +63,7 @@ export const 거절됨 = Template.bind({});
     weekPrice: 10000,
     weeks: 15,
     createdAt: '2022-07-14 03:28:29',
-    status: EMoneyRoadStatus.REJECTED,
+    status: EDongilStatus.REJECTED,
     progressList: [
       {
         challengeId: 8,

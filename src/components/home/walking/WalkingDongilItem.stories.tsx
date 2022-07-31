@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import WalkingMoneyRoadItem from './WalkingMoneyRoadItem';
+import WalkingDongilItem from './WalkingDongilItem';
 
 export default {
-  title: '자녀/홈/WalkingMoneyRoadItem',
-  component: WalkingMoneyRoadItem,
+  title: '자녀/홈/WalkingDongilItem',
+  component: WalkingDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [
     (Story) => (
@@ -13,10 +13,10 @@ export default {
       </MarginTemplate>
     ),
   ],
-} as ComponentMeta<typeof WalkingMoneyRoadItem>;
+} as ComponentMeta<typeof WalkingDongilItem>;
 
-const Template: ComponentStory<typeof WalkingMoneyRoadItem> = (args) => (
-  <WalkingMoneyRoadItem {...args} />
+const Template: ComponentStory<typeof WalkingDongilItem> = (args) => (
+  <WalkingDongilItem {...args} />
 );
 
 export const 핸드폰_케이스_사기 = Template.bind({});
