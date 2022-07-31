@@ -25,7 +25,7 @@ const title = [
   </>,
 ];
 
-function KidCreate() {
+function Create() {
   const { step } = useParams();
   const [parents, setParents] = useState<IFamilyState[]>();
   const axiosPrivate = useAxiosPrivate();
@@ -117,7 +117,7 @@ function KidCreate() {
   );
 }
 
-export default KidCreate;
+export default Create;
 
 const Wrapper = styled.div`
   margin-top: 16px;
