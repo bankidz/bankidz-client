@@ -8,13 +8,6 @@ export default {
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: { onClick: { action: 'event' } },
-  decorators: [
-    (Story) => (
-      <MarginTemplate>
-        <Story />
-      </MarginTemplate>
-    ),
-  ],
 } as ComponentMeta<typeof Button>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

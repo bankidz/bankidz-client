@@ -33,7 +33,7 @@ function KidCreate() {
   const [parents, setParents] = useState<IFamilyState[]>();
   const axiosPrivate = useAxiosPrivate();
   const dispatch = useAppDispatch();
-  const { getFamily } = kidMock(1);
+  //const { getFamily } = kidMock(1);
 
   const getTypedStep = (parsedStep: number) => {
     if (step && parsedStep > 0 && parsedStep <= 5) {
@@ -47,9 +47,9 @@ function KidCreate() {
   useEffect(() => {
     async function fetchData() {
       try {
-        //const response = await axiosPrivate.get('/family');
-        //const responseData: TFamilyState[] = response.data.data.familyUserList;
-        const responseData = await getFamily();
+        const response = await axiosPrivate.get('/family');
+        const responseData: IFamilyState[] = response.data.data.familyUserList;
+        //const responseData = await getFamily();
         const parents = responseData.filter((v) => v.isKid === false);
         if (parents.length === 1) {
           dispatch(dispatchParent(parents[0].isFemale));

@@ -6,7 +6,7 @@ import { theme } from '@lib/styles/theme';
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
-   * 기본, 카카오로그인, 삭제, 강조되지 않은 버튼
+   * 기본, 카카오로그인, 삭제, 강조되지 않은 버튼, 아웃라인
    */
   property?: 'default' | 'kakao' | 'delete' | 'sub';
   /**
@@ -27,14 +27,15 @@ function Button({
   property = 'default',
   label,
   state = true,
+  fixed = false,
   ...props
 }: ButtonProps) {
   return (
     <Wrapper
       property={property}
       state={state}
-      fixed={false}
       disabled={!state}
+      fixed={fixed}
       {...props}
     >
       {property == 'kakao' && <img src={kakao} />}
@@ -60,8 +61,6 @@ const handleColorType = (property: 'default' | 'kakao' | 'delete' | 'sub') => {
       return deleteColor;
     case 'kakao':
       return kakaoColor;
-    default:
-      return subColor;
   }
 };
 
