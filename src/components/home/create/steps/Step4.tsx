@@ -22,6 +22,9 @@ import getChallengeStep4Prices from '@lib/utils/kid/getChallengeStep4Prices';
 import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import InputForm from '@components/common/InputForm';
+import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
+import moment from 'moment';
+import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -51,19 +54,20 @@ function Step4({ currentStep }: { currentStep: number }) {
     overPrice: 0,
   });
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
-  const weekPriceSheetRef = useRef<HTMLDivElement>(null);
-  const interestRateSheetRef = useRef<HTMLDivElement>(null);
-  const weekPriceInputRef = useRef<HTMLDivElement>(null);
-  const interestRateInputRef = useRef<HTMLDivElement>(null);
+  const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] =
+    useBottomSheet(false);
+  const [openInterestRate, onOpenInterestRate, onDismissInterestRate] =
+    useBottomSheet(false);
+  const [weekPriceSheetDivRef, weekPriceInputDivRef] =
+    useBottomSheetOutSideRef(onDismissWeekPrice);
+  const [interestRateSheetDivRef, interestRateInputDivRef] =
+    useBottomSheetOutSideRef(onDismissInterestRate);
 
   const { minPrice, maxPrice, middlePrice } = getChallengeStep4Prices(
     totalPrice,
     form.interestRate,
   );
-  const [openWeekPrice, onOpenWeekPrice, onDismissWeekPrice] =
-    useBottomSheet(false);
-  const [openInterestRate, onOpenInterestRate, onDismissInterestRate] =
-    useBottomSheet(false);
+
   const { openModal } = useModals();
 
   // 모달 여는 함수
@@ -83,32 +87,6 @@ function Step4({ currentStep }: { currentStep: number }) {
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
-  // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent): void => {
-      if (
-        weekPriceSheetRef.current &&
-        weekPriceInputRef.current &&
-        !weekPriceSheetRef.current.contains(e.target as Node) &&
-        !weekPriceInputRef.current.contains(e.target as Node)
-      ) {
-        onDismissWeekPrice();
-      }
-      if (
-        interestRateSheetRef.current &&
-        interestRateInputRef.current &&
-        !interestRateSheetRef.current.contains(e.target as Node) &&
-        !interestRateInputRef.current.contains(e.target as Node)
-      ) {
-        onDismissInterestRate();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [weekPriceInputRef, interestRateInputRef]);
-
   // 다음으로 버튼 활성화,비활성화 처리
   useEffect(() => {
     form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
@@ -122,9 +100,14 @@ function Step4({ currentStep }: { currentStep: number }) {
         form.weekPrice,
         form.interestRate,
       );
+      const endDate = moment()
+        .day(7)
+        .add(7 * weekCost, 'day');
+      const { month, weekNo } = getWeekNumberByMonth(endDate.toDate());
+      console.log(month, weekNo);
       setContractInfo({
         weekCost: weekCost,
-        contractEndWeek: '0월 0주', //TODO
+        contractEndWeek: `${month}월 ${weekNo}주`, //TODO
         overPrice: totalPriceWithInterest - totalPrice,
       });
     }
@@ -144,7 +127,7 @@ function Step4({ currentStep }: { currentStep: number }) {
             <Alert />
           </span>
         </p>
-        <div onClick={onOpenInterestRate} ref={interestRateInputRef}>
+        <div onClick={onOpenInterestRate} ref={interestRateInputDivRef}>
           <InputForm
             placeholder={getCommaThreeDigits(totalPrice * 0.2) + ' 원'}
             value={
@@ -168,7 +151,7 @@ function Step4({ currentStep }: { currentStep: number }) {
           onClick={() => {
             form.interestRate ? onOpenWeekPrice() : null;
           }}
-          ref={weekPriceInputRef}
+          ref={weekPriceInputDivRef}
         >
           <InputForm
             placeholder={getCommaThreeDigits(middlePrice) + ' 원'}
@@ -215,10 +198,10 @@ function Step4({ currentStep }: { currentStep: number }) {
         onDismiss={onDismissInterestRate}
         label={'다음'}
         onClickNext={onClickNextButton}
-        sheetRef={interestRateSheetRef}
+        sheetRef={interestRateSheetDivRef}
         disabledNext={disabledNext}
       >
-        <div ref={interestRateSheetRef}>
+        <div ref={interestRateSheetDivRef}>
           <SelectInterest form={form} setForm={setForm} />
         </div>
       </ContractSheet>
@@ -227,10 +210,10 @@ function Step4({ currentStep }: { currentStep: number }) {
         onDismiss={onDismissWeekPrice}
         label={'다음'}
         onClickNext={onClickNextButton}
-        sheetRef={weekPriceSheetRef}
+        sheetRef={weekPriceSheetDivRef}
         disabledNext={disabledNext}
       >
-        <div ref={weekPriceSheetRef}>
+        <div ref={weekPriceSheetDivRef}>
           <RangeInput
             totalPrice={totalPrice}
             min={minPrice}

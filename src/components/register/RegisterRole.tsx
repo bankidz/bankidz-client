@@ -12,6 +12,7 @@ import { modals } from '../common/modals/Modals';
 import Modals from '../common/modals/Modals';
 import { useState } from 'react';
 import { TFetchStatus } from '@lib/types/api';
+import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -21,26 +22,35 @@ function RegisterRole() {
   const birthday = useAppSelector(selectBirthday);
 
   const [open, onOpen, onDismiss] = useBottomSheet(false);
+  const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
 
   function handleDadButtonClick() {
-    setIsKid(false);
-    setIsFemale(false);
-    onOpen();
+    if (!open) {
+      setIsKid(false);
+      setIsFemale(false);
+      onOpen();
+    }
   }
   function handleMomButtonClick() {
-    setIsKid(false);
-    setIsFemale(true);
-    onOpen();
+    if (!open) {
+      setIsKid(false);
+      setIsFemale(true);
+      onOpen();
+    }
   }
   function handleSonButtonClick() {
-    setIsKid(true);
-    setIsFemale(false);
-    onOpen();
+    if (!open) {
+      setIsKid(true);
+      setIsFemale(false);
+      onOpen();
+    }
   }
   function handleDaughterButtonClick() {
-    setIsKid(true);
-    setIsFemale(true);
-    onOpen();
+    if (!open) {
+      setIsKid(true);
+      setIsFemale(true);
+      onOpen();
+    }
   }
 
   const { openModal } = useModals();
@@ -117,7 +127,8 @@ function RegisterRole() {
           isSelected={isKid === true && isFemale === true}
         />
       </div>
-      <CommonSheet open={open} onDismiss={onDismiss}>
+      <div ref={inputDivRef}></div>
+      <CommonSheet open={open} onDismiss={onDismiss} sheetRef={sheetDivRef}>
         <SelectProfile
           isKid={isKid}
           isFemale={isFemale}
