@@ -25,7 +25,7 @@ import {
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilSlice';
 import Modals from '@components/common/modals/Modals';
-import Spacer from '@components/layout/Spaceholder';
+import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
@@ -191,7 +191,7 @@ function KidHome({ level }: { level: TLevel }) {
             <header>대기중인 돈길</header>
             {pendingDongilsContent}
           </WaitingDongilWrapper>
-          <Spacer />
+          <LargeSpacer />
         </MarginTemplate>
 
         {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}

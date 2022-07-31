@@ -7,7 +7,7 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import { useEffect, useState } from 'react';
-import Spacer from '@components/layout/Spaceholder';
+import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import {
   fetchKids,
@@ -104,7 +104,7 @@ function ParentHome() {
             <header>제안받은 돈길</header>
             {/* {suggestedDongilsContent} */}
           </SuggestedDongilsWrapper>
-          <Spacer />
+          <LargeSpacer />
         </MarginTemplate>
       </Content>
 

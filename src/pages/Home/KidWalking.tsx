@@ -6,7 +6,7 @@ import Receipt from '@components/common/Receipt';
 import ProceedingStemp from '@components/home/walking/InterestStampList';
 import WalkingSummary from '@components/home/walking/WalkingSummary';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import Spacer from '@components/layout/Spaceholder';
+import SmallSpacer from '@components/layout/SmallSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { calcRatio } from '@lib/styles/theme';
 import { TPercent } from '@lib/types/kid';
@@ -145,7 +145,7 @@ function KidWalking() {
             <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
               돈길 포기하기
             </GiveUpDongilButton>
-            <Spacer />
+            <SmallSpacer />
           </FlexContainer>
         </MarginTemplate>
       </Content>
