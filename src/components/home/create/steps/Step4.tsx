@@ -23,6 +23,8 @@ import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import InputForm from '@components/common/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
+import moment from 'moment';
+import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -98,9 +100,14 @@ function Step4({ currentStep }: { currentStep: number }) {
         form.weekPrice,
         form.interestRate,
       );
+      const endDate = moment()
+        .day(7)
+        .add(7 * weekCost, 'day');
+      const { month, weekNo } = getWeekNumberByMonth(endDate.toDate());
+      console.log(month, weekNo);
       setContractInfo({
         weekCost: weekCost,
-        contractEndWeek: '0월 0주', //TODO
+        contractEndWeek: `${month}월 ${weekNo}주`, //TODO
         overPrice: totalPriceWithInterest - totalPrice,
       });
     }
