@@ -11,13 +11,23 @@ import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
 import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
+import Button from '@components/common/buttons/Button';
 
 interface QuaternaryModalProps {
   /**
+   * isKid prop에 따라 모달 컨텐츠 하단에 표시되는 버튼의 종류가 다릅니다.
+   * 자녀의 경우 체크버튼만, 부모의 경우 '거절하기', '수락하기' 버튼이 표시됩니다.
+   * 자녀 홈 개발완료 후 본 모달 컴포넌트를 수정하기에 isKid prop은 true를 default로 합니다.
+   * */
+  isKid?: boolean;
+  /**
    * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
+   * 부모의 경우 '수락하기' 버튼 선택 시 처리된 비즈니스 로직을 포함하는 함수 입니다.
    * */
   onSubmit?: any;
+  /** 부모의 경우 '거절하기' 버튼 선택 시 처리될 비즈니스 로직을 포함하는 함수 입니다. */
+  onExtraSubmit?: any;
   createdAt: string;
   interestRate: number;
   isMom: boolean;
@@ -39,6 +49,8 @@ function QuaternaryModal({
   totalPrice = 150000,
   weekPrice = 10000,
   weeks = 15,
+  isKid = true,
+  onExtraSubmit,
 }: QuaternaryModalProps) {
   const reactModalParams = {
     isOpen: true,
@@ -53,7 +65,6 @@ function QuaternaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        zIndex: '700',
         height: '554px',
         position: 'absolute',
         // top: '14vh',
@@ -74,20 +85,24 @@ function QuaternaryModal({
     },
   };
 
-  function handleSubmit() {
+  function handleCheckButtonClick() {
     onSubmit();
   }
-
+  function handleRejectButtonClick() {
+    onSubmit();
+  }
+  function handleAcceptButtonClick() {
+    onExtraSubmit();
+  }
   return (
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
       <Content>
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top>
-          <span className="header">계약서 전송 성공!</span>
+          {isKid === true && <span className="header">계약서 전송 성공!</span>}
           <span className="body">{title}</span>
         </Top>
-
         {/* background border (vertical, horizontal) */}
         <div className="vertical-dashed-border-wrapper">
           <VerticalDashedBorder />
@@ -101,7 +116,6 @@ function QuaternaryModal({
         <div className="third-horizontal-dashed-border-wrapper">
           <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
         </div>
-
         <Bottom>
           <div className="first-row">
             <div className="계약대상">
@@ -157,9 +171,25 @@ function QuaternaryModal({
           <SignatureWrapper>Signature</SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
-        <CheckButtonPositioner>
-          <CheckButton onClick={handleSubmit} />
-        </CheckButtonPositioner>
+        <ButtonPositioner>
+          {isKid === true ? (
+            <CheckButton onClick={handleCheckButtonClick} />
+          ) : (
+            <DoubleButtonWrapper>
+              <Button
+                property="delete"
+                label="거절하기"
+                onClick={() => handleRejectButtonClick()}
+              />
+              <Button
+                property="default"
+                label="수락하기"
+                onClick={() => handleAcceptButtonClick()}
+              />
+            </DoubleButtonWrapper>
+          )}
+        </ButtonPositioner>
+        width: 100%; ;
       </Content>
     </ReactModal>
   );
@@ -257,9 +287,9 @@ const Top = styled.div`
   .header {
     ${({ theme }) => theme.typo.text.S_14_M};
     color: ${({ theme }) => theme.palette.greyScale.grey500};
+    margin-bottom: 12px;
   }
   .body {
-    margin-top: 12px;
     ${({ theme }) => theme.typo.popup.T_24_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
   }
@@ -454,8 +484,19 @@ const SignatureWrapper = styled.div`
   align-items: center;
 `;
 
-const CheckButtonPositioner = styled.div`
+const ButtonPositioner = styled.div`
+  width: 100%;
   margin-top: 16px;
+  display: flex;
+  justify-content: center;
+`;
+
+const DoubleButtonWrapper = styled.div`
+  width: 100%;
+  height: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
 `;
 
 // http://jsfiddle.net/dineshranawat/Ls95n95L/

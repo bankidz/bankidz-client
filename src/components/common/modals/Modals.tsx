@@ -26,7 +26,7 @@ const Modals = () => {
       {openedModals.map((modal, i) => {
         const { Component, props } = modal;
         // obSubmit을 제외한 나머지를 restProps로 재정의한다.
-        const { onSubmit, ...restProps } = props;
+        const { onSubmit, onExtraSubmit, ...restProps } = props;
 
         const handleCancel = () => {
           dispatch({
@@ -41,10 +41,17 @@ const Modals = () => {
           if (typeof onSubmit === 'function') {
             // onSubmit 동작이 비동기일지 동기일지 모르기 때문에
             // async/await를 사용하여 obSubmit 동작이 끝난 후에 닫히도록 처리한다.
-            // @ts-expect-error
             await onSubmit();
           }
           handleCancel(); // 비즈니스 로직이 진행된 뒤 닫힌다.
+        };
+
+        // 부모 파트를 위해 QuaternaryModal 수정 작업중 추가된 코드
+        const handleExtraSubmit = async () => {
+          if (typeof onExtraSubmit === 'function') {
+            await onExtraSubmit();
+          }
+          handleCancel();
         };
 
         return (
@@ -54,6 +61,7 @@ const Modals = () => {
             {...props}
             {...restProps}
             onSubmit={handleSubmit}
+            onExtraSubmit={handleExtraSubmit}
             onClose={handleCancel}
           />
         );

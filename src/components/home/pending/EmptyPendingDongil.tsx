@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as BankiSad } from '@assets/illusts/banki/banki_sad.svg';
 
-function EmptyPendingMoneyRoad() {
+function EmptyPendingDongil() {
   return (
     <Wrapper>
       <button>
@@ -12,7 +12,7 @@ function EmptyPendingMoneyRoad() {
   );
 }
 
-export default EmptyPendingMoneyRoad;
+export default EmptyPendingDongil;
 
 const Wrapper = styled.div`
   width: 100%;

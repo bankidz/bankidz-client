@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 
-interface WalkingMoneyRoadSummaryProps {
+interface WalkingSummaryProps {
   currentSavings: number;
   totalPrice: number;
 }
 
-function WalkingMoneyRoadSummary({
-  currentSavings,
-  totalPrice,
-}: WalkingMoneyRoadSummaryProps) {
+function WalkingSummary({ currentSavings, totalPrice }: WalkingSummaryProps) {
   const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
   return (
     <Wrapper>
@@ -27,7 +24,7 @@ function WalkingMoneyRoadSummary({
   );
 }
 
-export default WalkingMoneyRoadSummary;
+export default WalkingSummary;
 
 const Wrapper = styled.div`
   height: 89px;

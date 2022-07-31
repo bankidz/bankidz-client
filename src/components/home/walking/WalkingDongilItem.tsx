@@ -3,17 +3,13 @@ import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface WalkingMoneyRoadItemProps {
+interface WalkingDongilItemProps {
   itemName: TItemName;
   title: string | null;
   to: string;
 }
 
-function WalkingMoneyRoadItem({
-  itemName,
-  title,
-  to,
-}: WalkingMoneyRoadItemProps) {
+function WalkingDongilItem({ itemName, title, to }: WalkingDongilItemProps) {
   return (
     <StyledLink to={to}>
       <div>{renderItemIllust(itemName)}</div>
@@ -22,7 +18,7 @@ function WalkingMoneyRoadItem({
   );
 }
 
-export default WalkingMoneyRoadItem;
+export default WalkingDongilItem;
 
 const StyledLink = styled(Link)`
   width: 100%;

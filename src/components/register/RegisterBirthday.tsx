@@ -8,7 +8,7 @@ import InputForm from '@components/common/InputForm';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
-const YEAR_REGEX = /^(19[2-9][3-9]|20[0-2][0-2])$/; // 1923 ~ 2022
+const YEAR_REGEX = /^(19[2-9][3-9]|20[0-1][0-9]|202[0-2])$/; // 1923 ~ 2022
 const MONTH_REGEX = /^(0[1-9]|[1-9]|1[0-2])$/; // 1 ~ 12
 const DAY_REGEX = /^(0[1-9]|[1-9]|[1-2][0-9]|3[01])$/; // 1 ~ 31
 

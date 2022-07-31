@@ -5,11 +5,11 @@ import styled from 'styled-components';
 
 type TStempTypes = { challengeId: number; weeks: number; isAchieved: boolean };
 
-interface ProceedingStempProps {
+interface InterestStampProps {
   weeks: number;
   stemp: TStempTypes[];
 }
-function ProceedingStemp({ weeks, stemp }: ProceedingStempProps) {
+function InterestStampList({ weeks, stemp }: InterestStampProps) {
   return (
     <Wrapper>
       {stemp.map((v, i) => (
@@ -28,7 +28,7 @@ function ProceedingStemp({ weeks, stemp }: ProceedingStempProps) {
   );
 }
 
-export default ProceedingStemp;
+export default InterestStampList;
 
 const Wrapper = styled.div`
   display: grid;
