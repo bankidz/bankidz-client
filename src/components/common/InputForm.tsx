@@ -111,6 +111,7 @@ const InputBox = styled.input<{
     color: ${({ theme }) => theme.palette.greyScale.grey300};
   }
   border: 3px solid ${({ theme }) => theme.palette.main.yellow100};
+
   border-color: ${({ theme, error, sheetOpen }) =>
     error
       ? theme.palette.sementic.red200
@@ -118,9 +119,11 @@ const InputBox = styled.input<{
       ? theme.palette.main.yellow300
       : theme.palette.main.yellow100};
   &:focus {
+    transition: ${({ theme }) => theme.transition.onFocus};
     border-color: ${({ theme, error }) =>
       error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
   }
+
   &:disabled {
     background-color: ${({ theme }) => theme.palette.greyScale.white};
     border-color: ${({ theme }) => theme.palette.greyScale.grey200};

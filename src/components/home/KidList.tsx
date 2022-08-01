@@ -51,7 +51,7 @@ const UsernameButton = styled.button`
     margin-left: 8px;
   }
   &.active {
-    transition: 0.125s all ease-in;
+    transition: ${({ theme }) => theme.transition.onFocus};
     color: ${({ theme }) => theme.palette.greyScale.grey700};
   }
   .username-underline-wrapper {
