@@ -166,14 +166,14 @@ function SenaryModal({
           <div className="body">{comment}</div>
         </Comment>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
-        <CheckButtonPositioner>
+        <CheckButtonWrapper>
           <Button
             onClick={handleSubmit}
             property="default"
             label="삭제하기"
             fixed
           />
-        </CheckButtonPositioner>
+        </CheckButtonWrapper>
       </Content>
     </ReactModal>
   );
@@ -513,7 +513,7 @@ const Comment = styled.div`
   }
 `;
 
-const CheckButtonPositioner = styled.div`
+const CheckButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 

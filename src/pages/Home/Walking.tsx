@@ -131,7 +131,7 @@ function KidWalking() {
 
             <DongilContractContent>
               <span>돈길 계약 내용</span>
-              <div className="receipt-positioner">
+              <div className="receipt-wrapper">
                 <Receipt
                   createdAt={createdAt}
                   interestRate={interestRate}
@@ -271,7 +271,7 @@ const DongilContractContent = styled.div`
     ${({ theme }) => theme.typo.text.T_16_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
-  .receipt-positioner {
+  .receipt-wrapper {
     margin-top: 20px;
   }
 `;

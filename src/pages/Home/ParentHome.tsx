@@ -23,6 +23,7 @@ import {
   selectParentWeeklyProgress,
   selectParentWeeklyProgressStatus,
 } from '@store/slices/parentWeeklyProgressSlice';
+import HomeTemplate from '@components/home/HomeTemplate';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -33,6 +34,7 @@ function ParentHome() {
   const parentWeeklyProgress = useAppSelector(selectParentWeeklyProgress);
 
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
+  const [hasMultipleKids, setHasMultipleKids] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
@@ -47,6 +49,9 @@ function ParentHome() {
           setSelectedKid(null);
         } else {
           setSelectedKid(response.data[0]); // init with first-child
+        }
+        if (response.data.length >= 2) {
+          setHasMultipleKids(true);
         }
 
         // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
@@ -124,23 +129,19 @@ function ParentHome() {
   }
 
   return (
-    <Wrapper>
-      <FixedBar colorByLevel={colorByLevel} kids={kids}>
-        <BANKIDZ className="logo" />
-        <div className="kids-list-wrapper">{kidsContent}</div>
-      </FixedBar>
-      <Content colorByLevel={colorByLevel}>
+    <>
+      {hasMultipleKids === true && (
+        <KidListWrapper colorByLevel={colorByLevel}>
+          {kidsContent}
+        </KidListWrapper>
+      )}
+      <HomeTemplate
+        usage="ParentHome"
+        hasMultipleKids={hasMultipleKids}
+        selectedLevel={selectedLevel}
+      >
         <MarginTemplate>
-          <StyledHeader
-            kids={kids}
-          >{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
-          <div className="level-badge-positioner">
-            <LevelBadge level={selectedLevel} />
-          </div>
-          <div className="summary-positioner">
-            {parentWeeklyProgressContent}
-          </div>
-
+          <SummaryWrapper>{parentWeeklyProgressContent}</SummaryWrapper>
           {/* <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
           </SuggestedDongilsWrapper> */}
@@ -152,165 +153,26 @@ function ParentHome() {
           <LargeSpacer />
           <LargeSpacer />
         </MarginTemplate>
-      </Content>
-
-      {/* absolutely positioned background components */}
-      <BackgroundBox colorByLevel={colorByLevel} />
-      <BackgroundEllipse colorByLevel={colorByLevel} />
-      <HomeBackgroundPositioner>
-        {renderHomeBackground(selectedLevel!)}
-      </HomeBackgroundPositioner>
-      <HomeBankiPositioner>
-        {renderHomeBanki(selectedLevel!)}
-      </HomeBankiPositioner>
-    </Wrapper>
+      </HomeTemplate>
+    </>
   );
 }
 
 export default ParentHome;
 
-const Wrapper = styled.div`
-  width: 100%;
-  position: relative;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
+const SummaryWrapper = styled.div`
+  margin-top: 198px;
 `;
 
-const FixedBar = styled.div<{ colorByLevel: string; kids: IKid[] | null }>`
+const KidListWrapper = styled.div<{ colorByLevel: string }>`
+  margin-top: 47px; // overlaps 1px
+  height: 47px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
   z-index: 3;
+  width: 100%;
   background: ${({ colorByLevel }) => colorByLevel};
   position: fixed;
-  width: 100%;
-  ${({ kids }) =>
-    kids !== null && kids.length >= 2
-      ? css`
-          height: 95px;
-        `
-      : css`
-          height: 48px;
-        `}
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  .logo {
-    height: 15.82px;
-    margin-left: 19.79px;
-    margin-top: 17.73px;
-  }
-`;
-
-const Content = styled.div<{ colorByLevel: string }>`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  position: absolute;
-  z-index: 2;
-
-  .kids-list-wrapper {
-    margin-top: 47px; // overlaps 1px
-    background: pink;
-    z-index: 3;
-    height: 47px;
-    width: 100%;
-    background: ${({ colorByLevel }) => colorByLevel};
-    position: fixed;
-  }
-  .level-badge-positioner {
-    margin-top: 24px;
-    margin-left: 10px;
-  }
-  .summary-positioner {
-    height: 120px;
-    margin-top: 198px;
-    width: 100%;
-  }
-`;
-
-const StyledHeader = styled.header<{ kids: IKid[] | null }>`
-  ${({ kids }) =>
-    kids !== null && kids.length >= 2
-      ? css`
-          margin-top: 141px;
-        `
-      : css`
-          margin-top: 64px;
-        `}
-  margin-left: 10px;
-  width: 308px;
-  height: 58px;
-  white-space: pre-line;
-
-  ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
-  color: ${({ theme }) => theme.palette.greyScale.white};
-  line-height: 150%;
-`;
-
-// const WalkingDongilsWrapper = styled.div`
-//   margin-top: 48px;
-
-//   header {
-//     width: 100%;
-//     height: 16px;
-//     margin-bottom: 24px;
-//     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-//     ${({ theme }) => theme.palette.greyScale.black};
-//   }
-// `;
-
-// const WaitingDongilWrapper = styled.div`
-//   margin-top: 48px;
-
-//   header {
-//     width: 100%;
-//     height: 16px;
-//     margin-bottom: 24px;
-//     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-//     ${({ theme }) => theme.palette.greyScale.black};
-//   }
-// `;
-
-// absolutely positioned background components
-const BackgroundBox = styled.div<{ colorByLevel: string }>`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
-
-  width: 100%;
-  height: 393px;
-  z-index: 1;
-  background-color: ${({ colorByLevel }) => colorByLevel};
-`;
-
-const BackgroundEllipse = styled.div<{ colorByLevel: string }>`
-  position: absolute;
-  top: 337px;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-
-  width: 530px;
-  height: 230px;
-  border-radius: 265px / 115px;
-  z-index: 1;
-  background-color: ${({ colorByLevel }) => colorByLevel};
-`;
-
-const HomeBackgroundPositioner = styled.div`
-  z-index: 1;
-  position: absolute;
-  top: 48px;
-  right: 0;
-`;
-
-const HomeBankiPositioner = styled.div`
-  z-index: 2;
-  position: absolute;
-  top: 146px;
-  right: 0;
 `;

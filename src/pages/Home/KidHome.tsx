@@ -8,7 +8,7 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 import {
   fetchKidWeeklyProgress,
   selectKidWeeklyProgress,
@@ -39,10 +39,9 @@ import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLin
 import EmptyPendingDongil from '@components/home/pending/EmptyPendingDongil';
 import PendingDongilList from '@components/home/pending/PendingDongilList';
 import Summary from '@components/home/Summary';
+import HomeTemplate from '@components/home/HomeTemplate';
 
-function KidHome({ level }: { level: TLevel }) {
-  const colorByLevel = getColorByLevel(level!);
-
+function KidHome() {
   const kidWeeklyProgress = useAppSelector(selectKidWeeklyProgress);
   const kidWeeklyProgressStatus = useAppSelector(selectKidWeeklyProgressStatus);
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
@@ -170,116 +169,40 @@ function KidHome({ level }: { level: TLevel }) {
   }
 
   return (
-    <Wrapper>
-      <FixedBar colorByLevel={colorByLevel}>
-        <BANKIDZ />
-      </FixedBar>
-      <Content>
-        <MarginTemplate>
-          <StyledHeader>{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
-          <div className="level-badge-positioner">
-            <LevelBadge level={level} />
-          </div>
+    <HomeTemplate usage="KidHome">
+      <MarginTemplate>
+        <SummaryWrapper>{kidWeeklyProgressContent}</SummaryWrapper>
+        <WalkingDongilsWrapper>
+          <header>걷고있는 돈길</header>
+          {walkingDongilsContent}
+        </WalkingDongilsWrapper>
+        <WaitingDongilWrapper>
+          <header>대기중인 돈길</header>
+          {pendingDongilsContent}
+        </WaitingDongilWrapper>
+        <LargeSpacer />
+      </MarginTemplate>
 
-          <div className="summary-positioner">{kidWeeklyProgressContent}</div>
-          <WalkingDongilsWrapper>
-            <header>걷고있는 돈길</header>
-            {walkingDongilsContent}
-          </WalkingDongilsWrapper>
-          <WaitingDongilWrapper>
-            <header>대기중인 돈길</header>
-            {pendingDongilsContent}
-          </WaitingDongilWrapper>
-          <LargeSpacer />
-        </MarginTemplate>
-
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
-        <Modals />
-        {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
-        <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
-          <DeleteCheck
-            onClickDelete={handleDeleteButtonClick}
-            onDismiss={onDeleteCheckDismiss}
-          />
-        </CommonSheet>
-        <CommonSheet
-          open={openDeleteCompleted}
-          onDismiss={onDeleteCompletedDismiss}
-        >
-          <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
-        </CommonSheet>
-      </Content>
-
-      {/* absolutely positioned background components */}
-      <BackgroundBox colorByLevel={colorByLevel} />
-      <BackgroundEllipse colorByLevel={colorByLevel} />
-      <HomeBackgroundPositioner>
-        {renderHomeBackground(level!)}
-      </HomeBackgroundPositioner>
-      <HomeBankiPositioner>{renderHomeBanki(level!)}</HomeBankiPositioner>
-    </Wrapper>
+      {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
+      <Modals />
+      {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
+      <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
+        <DeleteCheck
+          onClickDelete={handleDeleteButtonClick}
+          onDismiss={onDeleteCheckDismiss}
+        />
+      </CommonSheet>
+      <CommonSheet
+        open={openDeleteCompleted}
+        onDismiss={onDeleteCompletedDismiss}
+      >
+        <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
+      </CommonSheet>
+    </HomeTemplate>
   );
 }
 
 export default KidHome;
-
-const Wrapper = styled.div`
-  width: 100%;
-  position: relative;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 100vh;
-`;
-
-const FixedBar = styled.div<{ colorByLevel: string }>`
-  z-index: 3;
-  background: ${({ colorByLevel }) => colorByLevel};
-  position: fixed;
-  width: 100%;
-  height: 48px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-  svg {
-    height: 15.82px;
-    margin-left: 19.79px;
-    margin-bottom: 14.44px;
-  }
-`;
-
-const Content = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  position: absolute;
-  z-index: 2;
-
-  .level-badge-positioner {
-    margin-top: 24px;
-    margin-left: 10px;
-  }
-  .summary-positioner {
-    height: 120px;
-    margin-top: 198px;
-    width: 100%;
-  }
-`;
-
-const StyledHeader = styled.header`
-  margin-top: 64px;
-  margin-left: 10px;
-  width: 308px;
-  height: 58px;
-  white-space: pre-line;
-
-  ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
-  color: ${({ theme }) => theme.palette.greyScale.white};
-  line-height: 150%;
-`;
 
 const WalkingDongilsWrapper = styled.div`
   margin-top: 48px;
@@ -305,42 +228,6 @@ const WaitingDongilWrapper = styled.div`
   }
 `;
 
-// absolutely positioned background components
-const BackgroundBox = styled.div<{ colorByLevel: string }>`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
-
-  width: 100%;
-  height: 393px;
-  z-index: 1;
-  background-color: ${({ colorByLevel }) => colorByLevel};
-`;
-
-const BackgroundEllipse = styled.div<{ colorByLevel: string }>`
-  position: absolute;
-  top: 337px;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-
-  width: 530px;
-  height: 230px;
-  border-radius: 265px / 115px;
-  z-index: 1;
-  background-color: ${({ colorByLevel }) => colorByLevel};
-`;
-
-const HomeBackgroundPositioner = styled.div`
-  z-index: 1;
-  position: absolute;
-  top: 48px;
-  right: 0;
-`;
-
-const HomeBankiPositioner = styled.div`
-  z-index: 2;
-  position: absolute;
-  top: 146px;
-  right: 0;
+const SummaryWrapper = styled.div`
+  margin-top: 198px;
 `;
