@@ -5,6 +5,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/buttons/Button';
 import InputForm from '@components/common/InputForm';
+import MarginTemplate from '@components/layout/MarginTemplate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -87,6 +88,10 @@ function RegisterBirthday() {
   const toggleMonthErrorMessage = monthFocus && month && !isValidMonth;
   const toggleDayErrorMessage = dayFocus && day && !isValidDay;
 
+  // TODO: for demo day
+  function handleNextButtonClick() {
+    navigate('/register/2');
+  }
   return (
     <Wrapper>
       <span>생년월일을 입력해요</span>
@@ -151,6 +156,7 @@ function RegisterBirthday() {
       )}
       <ButtonWrapper>
         <Button
+          onClick={handleNextButtonClick}
           label="다음"
           property="default"
           state={
