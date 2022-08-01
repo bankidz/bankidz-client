@@ -7,10 +7,10 @@ function FamilyItem({ user }: { user: IFamilyState }) {
   return (
     <Wrapper>
       <div>
-        {renderMypageRoleIllust(isFemale, isKid)}
+        {renderMypageRoleIllust(isKid, isFemale)}
         <p>{username}</p>
       </div>
-      <div>{renderRoleText(isFemale, isKid)}</div>
+      <div>{renderRoleText(isKid, isFemale)}</div>
     </Wrapper>
   );
 }
