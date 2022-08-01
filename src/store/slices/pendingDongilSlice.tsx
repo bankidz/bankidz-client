@@ -14,7 +14,7 @@ const initialState: TPendingDongilsState = {
   pendingDongilsStatus: 'idle',
 };
 
-// GET: 대기중인 돈길 데이터
+// GET: 대기중인 돈길 조회
 export const fetchPendingDongils = createAsyncThunk(
   'pendingDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {

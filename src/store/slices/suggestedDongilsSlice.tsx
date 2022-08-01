@@ -14,13 +14,13 @@ const initialState: TSuggestedDongilsState = {
   suggestedDongilsStatus: 'idle',
 };
 
-// GET: 제안받은 돈길
+// GET: 제안받은 돈길 조회
 export const fetchSuggestedDongils = createAsyncThunk(
   'suggestedDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
-      `/challenge/kid/?status=pending/${kidId}`,
+      `/challenge/kid/${kidId}?status=pending`,
     );
     return response.data;
   },

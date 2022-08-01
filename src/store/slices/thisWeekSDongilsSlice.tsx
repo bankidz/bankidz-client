@@ -14,13 +14,13 @@ const initialState: TThisWeekSDongilsState = {
   thisWeekSDongilsStatus: 'idle',
 };
 
-// GET: 금주의 돈길
+// GET: 금주의 돈길 조회
 export const fetchThisWeekSDongils = createAsyncThunk(
   'thisWeekSDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
-      `/challenge/kid/?status=accept/${kidId}`,
+      `/challenge/kid/${kidId}?status=accept`,
     );
     return response.data;
   },

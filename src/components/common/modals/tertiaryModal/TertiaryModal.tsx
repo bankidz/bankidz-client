@@ -127,7 +127,7 @@ const Background = styled.div`
 
     position: absolute;
     left: 50%;
-    top: 116px; // overlap 1px
+    top: 116px; // overlaps 1px
     transform: translate3d(-50%, -50%, 0);
 
     background: ${({ theme }) => theme.palette.main.yellow100};

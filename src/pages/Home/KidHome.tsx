@@ -34,7 +34,6 @@ import { TFetchStatus } from '@lib/types/api';
 import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
 import WalkingDongilList from '@components/home/walking/WalkingDongilList';
 import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';
-import EmptyPendingDongil from '@components/home/pending/EmptyPendingDongil';
 import PendingDongilList from '@components/home/pending/PendingDongilList';
 import Summary from '@components/home/Summary';
 import HomeTemplate from '@components/home/HomeTemplate';
@@ -43,6 +42,7 @@ import {
   selectParents,
   selectParentsStatus,
 } from '@store/slices/familySlice';
+import EmptyDongil from '@components/home/EmptyDongil';
 
 function KidHome() {
   const kidSummary = useAppSelector(selectKidSummary);
@@ -73,7 +73,7 @@ function KidHome() {
     hydrate();
   }, []);
 
-  // 주간 진행상황;
+  // 주간 진행상황
   let kidSummaryContent;
   if (kidSummaryStatus === 'loading') {
     kidSummaryContent = (
@@ -164,7 +164,7 @@ function KidHome() {
     pendingDongilsContent = <p>Loading...</p>;
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils === []) {
-      pendingDongilsContent = <EmptyPendingDongil />;
+      pendingDongilsContent = <EmptyDongil property="pending" />;
     } else {
       pendingDongilsContent = (
         <PendingDongilList
@@ -214,9 +214,12 @@ function KidHome() {
 
 export default KidHome;
 
+const SummaryWrapper = styled.div`
+  margin-top: 198px;
+`;
+
 const WalkingDongilsWrapper = styled.div`
   margin-top: 48px;
-
   header {
     width: 100%;
     height: 16px;
@@ -228,7 +231,6 @@ const WalkingDongilsWrapper = styled.div`
 
 const WaitingDongilWrapper = styled.div`
   margin-top: 48px;
-
   header {
     width: 100%;
     height: 16px;
@@ -236,8 +238,4 @@ const WaitingDongilWrapper = styled.div`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
     ${({ theme }) => theme.palette.greyScale.black};
   }
-`;
-
-const SummaryWrapper = styled.div`
-  margin-top: 198px;
 `;

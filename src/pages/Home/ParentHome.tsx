@@ -34,52 +34,68 @@ import {
   selectThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
+import EmptyDongil from '@components/home/EmptyDongil';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
   const kids = useAppSelector(selectKids);
   const parentSummaryStatus = useAppSelector(selectParentSummaryStatus);
   const parentSummary = useAppSelector(selectParentSummary);
+  const suggestedDongilsStatus = useAppSelector(selectSuggestedDongilsStatus);
+  const suggestedDongils = useAppSelector(selectSuggestedDongils);
+  const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
 
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
   const [hasMultipleKids, setHasMultipleKids] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
+  const [selectedLevel, setSelectedLevel] = useState<TLevel>(1);
+
   useEffect(() => {
     async function hydrate() {
       try {
-        // GET: 연결된 자녀 목록 fetch
         let response;
+        // GET: 연결된 자녀 목록 조회
         if (kidsStatus === 'idle') {
           response = await dispatch(fetchKids({ axiosPrivate })).unwrap();
         }
+
         if (response.data === []) {
           setSelectedKid(null);
         } else {
-          setSelectedKid(response.data[0]); // init with first-child
+          setSelectedKid(response.data[0]); // init with the first kid
+          setSelectedLevel(response.data[0].level); // init with the first kid's level
         }
+
         if (response.data.length >= 2) {
           setHasMultipleKids(true);
         }
 
-        // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
-        if (parentSummaryStatus === 'idle' && selectedKid === null) {
-          // 자녀를 선택하지 않은 초기 상태
-          await dispatch(
+        // GET: 첫번째 자녀의 Summary 데이터 조회
+        parentSummaryStatus === 'idle' &&
+          (await dispatch(
             fetchParentSummary({
               axiosPrivate,
               kidId: response.data[0].kidId,
             }),
-          ).unwrap();
-        } else if (parentSummaryStatus === 'idle' && selectedKid !== null) {
-          // 초기 조건이 아닌 특정 자녀를 선택한 상태
-          await dispatch(
-            fetchParentSummary({
+          ).unwrap());
+        // GET: 첫번째 자녀의 제안받은 돈길 조회
+        suggestedDongilsStatus === 'idle' &&
+          (await dispatch(
+            fetchSuggestedDongils({
               axiosPrivate,
-              kidId: selectedKid!.kidId,
+              kidId: response.data[0].kidId,
             }),
-          ).unwrap();
-        }
+          ).unwrap());
+        // GET: 첫번째 자녀의 금주의 돈길 조희
+        thisWeekSDongilsStatus === 'idle' &&
+          (await dispatch(
+            fetchThisWeekSDongils({
+              axiosPrivate,
+              kidId: response.data[0].kidId,
+            }),
+          ).unwrap());
       } catch (error: any) {
         console.log(error.message);
       }
@@ -87,17 +103,7 @@ function ParentHome() {
     hydrate();
   }, []);
 
-  // 선택된 자녀에 따른 Level 업데이트
-  const [selectedLevel, setSelectedLevel] = useState<TLevel>(1);
-  useEffect(() => {
-    if (selectedKid === null) {
-      setSelectedLevel(1);
-    } else {
-      setSelectedLevel(selectedKid.level);
-    }
-  }, [selectedKid]);
-  const colorByLevel = getColorByLevel(selectedLevel);
-
+  // 자녀 목록
   let kidsContent;
   if (kidsStatus === 'loading') {
     kidsContent = <p>Loading</p>;
@@ -112,6 +118,39 @@ function ParentHome() {
   } else if (kidsContent === 'failed') {
     kidsContent = <p>Failed</p>;
   }
+
+  // 선택한 자녀에 따라 Level 업데이트
+  useEffect(() => {
+    selectedKid && setSelectedLevel(selectedKid.level);
+  }, [selectedKid]);
+  const colorByLevel = getColorByLevel(selectedLevel);
+
+  // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
+  // useEffect(() => {
+  //   async function hydrate() {
+  //     try {
+  //       if (parentSummaryStatus === 'idle' && selectedKid === null) {
+  //         // 자녀를 선택하지 않은 초기 상태
+  //         await dispatch(
+  //           fetchParentSummary({
+  //             axiosPrivate,
+  //             kidId: response.data[0].kidId,
+  //           }),
+  //         ).unwrap();
+  //       } else if (parentSummaryStatus === 'idle' && selectedKid !== null) {
+  //         // 초기 조건이 아닌 특정 자녀를 선택한 상태
+  //         await dispatch(
+  //           fetchParentSummary({
+  //             axiosPrivate,
+  //             kidId: selectedKid!.kidId,
+  //           }),
+  //         ).unwrap();
+  //       }
+  //     } catch (error: any) {
+  //       console.log(error.message);
+  //     }
+  //   }
+  // }, [selectedKid]);
 
   // 주간 진행상황
   let parentSummaryContent;
@@ -133,37 +172,34 @@ function ParentHome() {
     parentSummaryContent = <p>Failed</p>;
   }
 
-  // GET: 제안받은 돈길, 금주의 돈길
-  // const suggestedDongilsStatus = useAppSelector(selectSuggestedDongilsStatus);
-  // const suggestedDongils = useAppSelector(selectSuggestedDongils);
-  // const canFetchSuggestedDongils =
-  //   suggestedDongilsStatus === 'idle' && selectedKid !== null;
-  // const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
-  // const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-  // const canFetchThisWeekSDongils =
-  //   thisWeekSDongilsStatus === 'idle' && selectedKid !== null;
-  // useEffect(() => {
-  //   async function fetchSelectedKidSDongils() {
-  //     try {
-  //       if (canFetchSuggestedDongils) {
-  //         await dispatch(
-  //           fetchSuggestedDongils({ axiosPrivate, kidId: selectedKid?.kidId }),
-  //         ).unwrap();
-  //       }
-  //       if (canFetchThisWeekSDongils) {
-  //         await dispatch(
-  //           fetchThisWeekSDongils({ axiosPrivate, kidId: selectedKid?.kidId }),
-  //         ).unwrap();
-  //       }
-  //     } catch (error: any) {
-  //       console.log(error.message);
-  //     }
+  // 제안받은 돈길
+  // let suggestedDongilsContent;
+  // if (suggestedDongilsStatus === 'loading') {
+  //   suggestedDongilsContent = <p>Loading...</p>;
+  // } else if (suggestedDongilsStatus === 'succeeded') {
+  //   if (suggestedDongils === []) {
+  //     suggestedDongilsContent = (
+  //       <EmptyDongil property='suggested' />
+  //     );
+  //   } else {
+  //     suggestedDongilsContent = (
+  //       <>
+  //         <WalkingDongilList suggestedDongils={suggestedDongils!} />
+  //         <ContractNewDongilLink disable={disable} to={'/create/1'} />
+  //       </>
+  //     );
   //   }
-  //   fetchSelectedKidSDongils();
-  // }, [selectedKid]);
+  // } else if (suggestedDongilsStatus === 'failed') {
+  //   suggestedDongilsContent = <p>Failed</p>;
+  // }
 
+  function handleClick() {
+    console.log('selectedKid: ', selectedKid);
+    console.log('selectedLevel: ', selectedLevel);
+  }
   return (
     <>
+      <button onClick={handleClick}>Test</button>
       {hasMultipleKids === true && (
         <KidListWrapper colorByLevel={colorByLevel}>
           {kidsContent}
@@ -178,13 +214,12 @@ function ParentHome() {
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
           {/* <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
+            {suggestedDongilsContent}
           </SuggestedDongilsWrapper> */}
-          <LargeSpacer />
-          <LargeSpacer />
-          <LargeSpacer />
-          <LargeSpacer />
-          <LargeSpacer />
-          <LargeSpacer />
+          {/* <ThisWeekSDongilWrapper>
+            <header>금주의 돈길</header>
+            {thisWeekSDongilsContent}
+          </ThisWeekSDongilWrapper> */}
           <LargeSpacer />
         </MarginTemplate>
       </HomeTemplate>
@@ -209,4 +244,26 @@ const KidListWrapper = styled.div<{ colorByLevel: string }>`
   width: 100%;
   background: ${({ colorByLevel }) => colorByLevel};
   position: fixed;
+`;
+
+const SuggestedDongilsWrapper = styled.div`
+  margin-top: 48px;
+  header {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;
+
+const ThisWeekSDongilWrapper = styled.div`
+  margin-top: 48px;
+  header {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
 `;
