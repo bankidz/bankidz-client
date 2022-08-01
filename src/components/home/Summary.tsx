@@ -1,3 +1,4 @@
+import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
 import styled, { css } from 'styled-components';
 
 type TUsage = 'KidHome' | 'Walking' | 'ParentHome';
@@ -20,12 +21,14 @@ function Summary({
   totalPrice,
   username,
 }: SummaryProps) {
+  const today = new Date();
+  const { month, weekNo } = getWeekNumberByMonth(today);
   const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
   return (
     <Wrapper usage={usage}>
       <TitleWrapper usage={usage}>
         {(usage === 'KidHome' || usage === 'ParentHome') && (
-          <span className="date">12월 4주차</span>
+          <span className="date">{`${month}월 ${weekNo}주`}</span>
         )}
         {usage === 'ParentHome' && (
           <span className="username">{`${username} 저금통`}</span>

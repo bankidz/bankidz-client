@@ -26,13 +26,11 @@ import {
 } from '@store/slices/pendingDongilSlice';
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TFetchStatus } from '@lib/types/api';
-import { TLevel } from '@lib/types/common';
 import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
 import WalkingDongilList from '@components/home/walking/WalkingDongilList';
 import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';
