@@ -171,9 +171,9 @@ function KidHome({ level }: { level: TLevel }) {
 
   return (
     <Wrapper>
-      <LogoWrapper colorByLevel={colorByLevel}>
+      <FixedBar colorByLevel={colorByLevel}>
         <BANKIDZ />
-      </LogoWrapper>
+      </FixedBar>
       <Content>
         <MarginTemplate>
           <StyledHeader>{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
@@ -232,7 +232,7 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-const LogoWrapper = styled.div<{ colorByLevel: string }>`
+const FixedBar = styled.div<{ colorByLevel: string }>`
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
   position: fixed;

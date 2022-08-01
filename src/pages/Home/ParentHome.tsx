@@ -1,5 +1,5 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
@@ -125,13 +125,15 @@ function ParentHome() {
 
   return (
     <Wrapper>
-      <Content>
+      <FixedBar colorByLevel={colorByLevel} kids={kids}>
+        <BANKIDZ className="logo" />
+        <div className="kids-list-wrapper">{kidsContent}</div>
+      </FixedBar>
+      <Content colorByLevel={colorByLevel}>
         <MarginTemplate>
-          <div className="logo-positioner">
-            <BANKIDZ />
-          </div>
-          <div className="kids-list-positioner">{kidsContent}</div>
-          <StyledHeader>{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
+          <StyledHeader
+            kids={kids}
+          >{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
           <div className="level-badge-positioner">
             <LevelBadge level={selectedLevel} />
           </div>
@@ -139,10 +141,15 @@ function ParentHome() {
             {parentWeeklyProgressContent}
           </div>
 
-          <SuggestedDongilsWrapper>
+          {/* <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
-            {/* {suggestedDongilsContent} */}
-          </SuggestedDongilsWrapper>
+          </SuggestedDongilsWrapper> */}
+          <LargeSpacer />
+          <LargeSpacer />
+          <LargeSpacer />
+          <LargeSpacer />
+          <LargeSpacer />
+          <LargeSpacer />
           <LargeSpacer />
         </MarginTemplate>
       </Content>
@@ -171,7 +178,31 @@ const Wrapper = styled.div`
   height: 100vh;
 `;
 
-const Content = styled.div`
+const FixedBar = styled.div<{ colorByLevel: string; kids: IKid[] | null }>`
+  z-index: 3;
+  background: ${({ colorByLevel }) => colorByLevel};
+  position: fixed;
+  width: 100%;
+  ${({ kids }) =>
+    kids !== null && kids.length >= 2
+      ? css`
+          height: 95px;
+        `
+      : css`
+          height: 48px;
+        `}
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  .logo {
+    height: 15.82px;
+    margin-left: 19.79px;
+    margin-top: 17.73px;
+  }
+`;
+
+const Content = styled.div<{ colorByLevel: string }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -181,13 +212,14 @@ const Content = styled.div`
   position: absolute;
   z-index: 2;
 
-  .logo-positioner {
-    width: 100.24px;
-    height: 15.82px;
-    margin-top: 17.73px;
-    margin-left: 3.79px;
-  }
-  .kids-list-positioner {
+  .kids-list-wrapper {
+    margin-top: 47px; // overlaps 1px
+    background: pink;
+    z-index: 3;
+    height: 47px;
+    width: 100%;
+    background: ${({ colorByLevel }) => colorByLevel};
+    position: fixed;
   }
   .level-badge-positioner {
     margin-top: 24px;
@@ -200,8 +232,15 @@ const Content = styled.div`
   }
 `;
 
-const StyledHeader = styled.header`
-  margin-top: 46px;
+const StyledHeader = styled.header<{ kids: IKid[] | null }>`
+  ${({ kids }) =>
+    kids !== null && kids.length >= 2
+      ? css`
+          margin-top: 141px;
+        `
+      : css`
+          margin-top: 64px;
+        `}
   margin-left: 10px;
   width: 308px;
   height: 58px;
@@ -212,29 +251,29 @@ const StyledHeader = styled.header`
   line-height: 150%;
 `;
 
-const SuggestedDongilsWrapper = styled.div`
-  margin-top: 48px;
+// const WalkingDongilsWrapper = styled.div`
+//   margin-top: 48px;
 
-  header {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;
+//   header {
+//     width: 100%;
+//     height: 16px;
+//     margin-bottom: 24px;
+//     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+//     ${({ theme }) => theme.palette.greyScale.black};
+//   }
+// `;
 
-const WaitingDongilWrapper = styled.div`
-  margin-top: 48px;
+// const WaitingDongilWrapper = styled.div`
+//   margin-top: 48px;
 
-  header {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;
+//   header {
+//     width: 100%;
+//     height: 16px;
+//     margin-bottom: 24px;
+//     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+//     ${({ theme }) => theme.palette.greyScale.black};
+//   }
+// `;
 
 // absolutely positioned background components
 const BackgroundBox = styled.div<{ colorByLevel: string }>`
@@ -270,7 +309,7 @@ const HomeBackgroundPositioner = styled.div`
 `;
 
 const HomeBankiPositioner = styled.div`
-  z-index: 3;
+  z-index: 2;
   position: absolute;
   top: 146px;
   right: 0;

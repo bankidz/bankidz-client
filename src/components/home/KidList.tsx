@@ -35,12 +35,13 @@ function KidList({ kids, selectedKid, setSelectedKid }: KidListProps) {
 export default KidList;
 
 const Wrapper = styled.div`
-  margin-top: 38px;
-  width: 250px;
+  width: 100%;
   height: 24px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-left: 16px;
+  margin-top: 38.44px;
 `;
 
 const UsernameButton = styled.button`
@@ -57,8 +58,7 @@ const UsernameButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8px;
-    height: 2px;
+    margin-top: 6px;
   }
 `;
 
