@@ -6,19 +6,18 @@ import Progress from '@components/home/create/Progress';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
-import { useEffect, useState } from 'react';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import Step5 from '@components/home/create/steps/Step5';
-import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/createChallenge';
-import { kidMock } from '@lib/mocks/kid';
-import { IFamilyState } from '@lib/types/kid';
+import { useAppSelector } from '@store/app/hooks';
+import { selectParents } from '@store/slices/familySlice';
 
 const title = [
-  '누구와 계약하나요?',
-  '계약 상품이 무엇인가요?',
-  '이름과 목표 금액을 정해요',
-  '매주 얼마를 모을까요?',
+  <h1>누구와 계약하나요?</h1>,
+  <h1>계약 상품이 무엇인가요?</h1>,
+  <h1>이름과 목표 금액을 정해요</h1>,
+  <h1 style={{ marginBottom: '22px' }}>
+    <p>총 얼마 보상받고,</p>
+    <p>매주 얼마 모을래요?</p>
+  </h1>,
   <>
     <p>멋진 사인으로</p>
     <p>부모님께 계약서를 보내요</p>
@@ -27,10 +26,7 @@ const title = [
 
 function Create() {
   const { step } = useParams();
-  const [parents, setParents] = useState<IFamilyState[]>();
-  const axiosPrivate = useAxiosPrivate();
-  const dispatch = useAppDispatch();
-  const { getFamily } = kidMock(1);
+  const parents = useAppSelector(selectParents)!;
 
   const getTypedStep = (parsedStep: number) => {
     if (step && parsedStep > 0 && parsedStep <= 5) {
@@ -39,25 +35,6 @@ function Create() {
       throw 'step error';
     }
   };
-
-  // 부모 정보 가져오기
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        //const response = await axiosPrivate.get('/family');
-        //const responseData: TFamilyState[] = response.data.data.familyUserList;
-        const responseData = await getFamily();
-        const parents = responseData.filter((v) => v.isKid === false);
-        if (parents.length === 1) {
-          dispatch(dispatchParent(parents[0].isFemale));
-        }
-        setParents(parents);
-      } catch (e) {
-        alert('서버 통신 오류');
-      }
-    }
-    fetchData();
-  }, []);
 
   const renderContent = (typedStep: 1 | 2 | 3 | 4 | 5) => {
     if (parents?.length === 1) {
@@ -91,27 +68,19 @@ function Create() {
 
   return (
     <Wrapper>
-      {parents ? (
+      {step && (
         <>
-          {step && (
-            <>
-              <Progress
-                step={getTypedStep(parseInt(step))}
-                skipSelectParents={parents?.length === 1 ? true : false}
-              />
-              <MarginTemplate>
-                <h1>
-                  {parents.length === 1
-                    ? title[parseInt(step)]
-                    : title[parseInt(step) - 1]}
-                </h1>
-                {renderContent(getTypedStep(parseInt(step)))}
-              </MarginTemplate>
-            </>
-          )}
+          <Progress
+            step={getTypedStep(parseInt(step))}
+            skipSelectParents={parents?.length === 1 ? true : false}
+          />
+          <MarginTemplate>
+            {parents.length === 1
+              ? title[parseInt(step)]
+              : title[parseInt(step) - 1]}
+            {renderContent(getTypedStep(parseInt(step)))}
+          </MarginTemplate>
         </>
-      ) : (
-        <>가족정보 가져오는중</>
       )}
     </Wrapper>
   );

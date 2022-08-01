@@ -14,6 +14,9 @@ export const decorators = [
         <div
           style={{
             width: '100%',
+            backgroundColor: '#FAFAFC',
+            padding: '18px',
+            boxSizing: 'border-box',
           }}
         >
           <Story />
@@ -58,7 +61,6 @@ export const parameters = {
         type: 'tablet',
       },
     },
-    defaultViewport: 'mobile2',
   },
   paddings: {
     values: [

@@ -1,4 +1,5 @@
 import WalkDefault from '@components/walk/WalkDefault';
+import WalkError from '@components/walk/WalkError';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchResetIsPatched,
@@ -23,7 +24,7 @@ function Walk() {
           <WalkDefault walkingDongils={walkingDongils} />
         </>
       ) : (
-        '돈길 없음'
+        <WalkError />
       )}
     </Wrapper>
   );

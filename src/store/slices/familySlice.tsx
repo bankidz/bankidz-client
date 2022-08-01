@@ -9,6 +9,7 @@ export interface IKid {
   username: string;
   isFemale: boolean;
   level: TLevel;
+  kidId: number;
 }
 
 export type TFamilyState = {
