@@ -52,6 +52,10 @@ function RegisterBirthday() {
   }, [month, isValidMonth]);
   useEffect(() => {
     setIsValidDay(DAY_REGEX.test(day));
+    // TODO: for demo day
+    if (DAY_REGEX.test(day) === true && parseInt(day) >= 4) {
+      dayInputRef.current!.blur();
+    }
   }, [day]);
 
   // 서버에서 요구하는 spec으로 birthday 가공
@@ -145,14 +149,22 @@ function RegisterBirthday() {
         </InputWrapper>
         <DummyButton type="submit" />
       </form>
-      {toggleYearErrorMessage && (
-        <ErrorMessage>연도 형식이 올바르지 않아요</ErrorMessage>
+      {yearFocus === true && (
+        <ErrorMessage className={toggleYearErrorMessage ? 'active' : undefined}>
+          연도 형식이 올바르지 않아요
+        </ErrorMessage>
       )}
-      {toggleMonthErrorMessage && (
-        <ErrorMessage>월 형식이 올바르지 않아요</ErrorMessage>
+      {monthFocus === true && (
+        <ErrorMessage
+          className={toggleMonthErrorMessage ? 'active' : undefined}
+        >
+          월 형식이 올바르지 않아요
+        </ErrorMessage>
       )}
-      {toggleDayErrorMessage && (
-        <ErrorMessage>일 형식이 올바르지 않아요</ErrorMessage>
+      {dayFocus === true && (
+        <ErrorMessage className={toggleDayErrorMessage ? 'active' : undefined}>
+          일 형식이 올바르지 않아요
+        </ErrorMessage>
       )}
       <ButtonWrapper>
         <Button
@@ -193,10 +205,15 @@ const InputWrapper = styled.div`
 `;
 
 const ErrorMessage = styled.div`
+  position: absolute;
   margin-top: 12px;
   width: 100%;
   ${({ theme }) => theme.typo.input.TextMessage_S_12_M}
-  color: ${({ theme }) => theme.palette.sementic.red300};
+  color: ${({ theme }) => theme.palette.greyScale.grey100};
+  &.active {
+    transition: 0.125s all ease-in;
+    color: ${({ theme }) => theme.palette.sementic.red300};
+  }
 `;
 
 // 다수의 input을 submit 하기 위한 dummy button
