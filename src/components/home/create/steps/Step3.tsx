@@ -15,6 +15,7 @@ import {
 import SheetButton from '@components/common/buttons/SheetButton';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import InputForm from '@components/common/InputForm';
+import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 
 type TStep3Form = {
   contractName: string;
@@ -33,8 +34,7 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [validateAmount, checkValidateAmount] = useValidation();
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
-  const moneyRef = useRef<HTMLDivElement>(null);
-  const sheetRef = useRef<HTMLDivElement>(null);
+  const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
 
   //TODO : api fetching
   const testDuplicate = ['중복된 이름'];
@@ -45,24 +45,6 @@ function Step3({ currentStep }: { currentStep: number }) {
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
-  // 관련된 이외 부분 터치 시 바텀시트 내려가도록 이벤트 등록
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent): void => {
-      if (
-        sheetRef.current &&
-        moneyRef.current &&
-        !moneyRef.current.contains(e.target as Node) &&
-        !sheetRef.current.contains(e.target as Node)
-      ) {
-        onDismiss();
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [moneyRef, open]);
-
   // stack에 있는 숫자들 더해서 form state에 저장
   useEffect(() => {
     const amount = amountStack.reduce((acc, cur) => {
@@ -70,12 +52,6 @@ function Step3({ currentStep }: { currentStep: number }) {
     }, 0);
     setForm({ ...form, contractAmount: amount });
   }, [amountStack]);
-
-  // 첫 렌더링시에 스토어에 있는 값 가져와서 초기화??? (for 뒤로가기해서 온 경우)
-  // 코어타임때 물어보기
-  /*  useEffect(() => {
-    pushAmount(form.contractAmount);
-  }, []); */
 
   //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
@@ -109,7 +85,7 @@ function Step3({ currentStep }: { currentStep: number }) {
       </InputSection>
 
       <InputSection validate={validateAmount}>
-        <div onClick={onOpen} ref={moneyRef}>
+        <div onClick={onOpen} ref={inputDivRef}>
           <InputForm
             placeholder="부모님과 함께 모을 금액"
             value={
@@ -140,10 +116,10 @@ function Step3({ currentStep }: { currentStep: number }) {
         onDismiss={onDismiss}
         label={'다음'}
         onClickNext={onClickNextButton}
-        sheetRef={sheetRef}
+        sheetRef={sheetDivRef}
         disabledNext={disabledNext}
       >
-        <div ref={sheetRef}>
+        <div ref={sheetDivRef}>
           <SelectMoney
             pushAmount={pushAmount}
             popAmount={popAmount}
