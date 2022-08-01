@@ -38,6 +38,11 @@ import EmptyPendingDongil from '@components/home/pending/EmptyPendingDongil';
 import PendingDongilList from '@components/home/pending/PendingDongilList';
 import Summary from '@components/home/Summary';
 import HomeTemplate from '@components/home/HomeTemplate';
+import {
+  fetchParents,
+  selectParents,
+  selectParentsStatus,
+} from '@store/slices/familySlice';
 
 function KidHome() {
   const kidSummary = useAppSelector(selectKidSummary);
@@ -46,6 +51,7 @@ function KidHome() {
   const walkingDongils = useAppSelector(selectWalkingDongils);
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
+  const parentsStatus = useAppSelector(selectParentsStatus);
 
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
@@ -57,6 +63,8 @@ function KidHome() {
         (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
       pendingDongilsStatus === 'idle' &&
         (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
+      parentsStatus === 'idle' &&
+        (await dispatch(fetchParents({ axiosPrivate })).unwrap());
     }
     hydrate();
   }, []);
