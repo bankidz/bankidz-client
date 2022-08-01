@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SwipeToWalk from './SwipeToWalk';
 
 export default {
-  title: '돈길 걷기/WalkingItemNameButton',
+  title: 'walk/WalkingItemNameButton',
   component: SwipeToWalk,
   decorators: [
     (Story) => (

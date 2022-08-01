@@ -6,6 +6,7 @@ interface CommonSheetProps {
   open: boolean;
   onDismiss: () => void;
   blocking?: boolean;
+  sheetRef?: React.RefObject<HTMLDivElement>;
 }
 
 function CommonSheet({
@@ -13,6 +14,7 @@ function CommonSheet({
   open,
   onDismiss,
   blocking = true,
+  sheetRef,
 }: CommonSheetProps) {
   document.documentElement.style.setProperty(
     '--rsbs-backdrop-bg',
@@ -27,7 +29,9 @@ function CommonSheet({
       snapPoints={({ minHeight }) => minHeight}
       blocking={blocking}
     >
-      <SheetContainer>{children}</SheetContainer>
+      <div ref={sheetRef}>
+        <SheetContainer>{children}</SheetContainer>
+      </div>
     </StyledBottomSheet>
   );
 }

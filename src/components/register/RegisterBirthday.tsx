@@ -149,7 +149,7 @@ function RegisterBirthday() {
       {toggleDayErrorMessage && (
         <ErrorMessage>일 형식이 올바르지 않아요</ErrorMessage>
       )}
-      <ButtonPositioner>
+      <ButtonWrapper>
         <Button
           label="다음"
           property="default"
@@ -159,7 +159,7 @@ function RegisterBirthday() {
           // @ts-expect-error
           type="submit"
         />
-      </ButtonPositioner>
+      </ButtonWrapper>
     </Wrapper>
   );
 }
@@ -200,7 +200,7 @@ const DummyButton = styled.button`
   left: -9999px;
 `;
 
-const ButtonPositioner = styled.div`
+const ButtonWrapper = styled.div`
   position: absolute;
   width: 100%;
   bottom: 0;

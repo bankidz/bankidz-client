@@ -3,7 +3,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import WalkingDongilItem from './WalkingDongilItem';
 
 export default {
-  title: '자녀/홈/WalkingDongilItem',
+  title: 'home/walking/WalkingDongilItem',
   component: WalkingDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [

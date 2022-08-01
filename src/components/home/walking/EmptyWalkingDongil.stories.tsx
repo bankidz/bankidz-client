@@ -3,7 +3,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 
 export default {
-  title: '자녀/홈/EmptyWalkingDongil',
+  title: 'home/walking/EmptyWalkingDongil',
   component: EmptyWalkingDongil,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [

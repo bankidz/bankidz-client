@@ -8,7 +8,7 @@ import SelectProfile from './sheetContents/SelectProfile';
 import SheetCompleted from './sheetContents/SheetCompleted';
 
 export default {
-  title: 'Common/바텀 시트/CommonSheet',
+  title: 'common/bottomSheets/CommonSheet',
   component: CommonSheet,
   argTypes: {},
 } as ComponentMeta<typeof CommonSheet>;

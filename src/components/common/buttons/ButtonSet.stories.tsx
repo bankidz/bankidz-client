@@ -3,7 +3,7 @@ import Button from './Button';
 import ButtonSet from './ButtonSet';
 
 export default {
-  title: 'Common/버튼 셋/ButtonSet',
+  title: 'common/buttons/ButtonSet',
   component: ButtonSet,
   argTypes: {},
 } as ComponentMeta<typeof ButtonSet>;

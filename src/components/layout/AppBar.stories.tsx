@@ -3,7 +3,7 @@ import AppBar from './AppBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default {
-  title: '레이아웃/AppBar',
+  title: 'layout/AppBar',
   component: AppBar,
   argTypes: {},
   decorators: [

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SelectItemNameButton from './SelectItemNameButton';
 
 export default {
-  title: '자녀/돈길 계약하기/selectItemNameButton',
+  title: 'home/create/selectItemNameButton',
   component: SelectItemNameButton,
   decorators: [
     (Story) => (

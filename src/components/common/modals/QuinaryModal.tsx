@@ -157,9 +157,9 @@ function QuinaryModal({
           <SignatureWrapper>Signature</SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
-        <CheckButtonPositioner>
+        <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
-        </CheckButtonPositioner>
+        </CheckButtonWrapper>
       </Content>
     </ReactModal>
   );
@@ -450,7 +450,7 @@ const SignatureWrapper = styled.div`
   align-items: center;
 `;
 
-const CheckButtonPositioner = styled.div`
+const CheckButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 
