@@ -1,7 +1,6 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
 import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
-import Button from '@components/common/buttons/Button';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { useNavigate } from 'react-router-dom';
 
