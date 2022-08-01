@@ -1,11 +1,7 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
-import styled, { css } from 'styled-components';
-import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import LevelBadge from '@components/common/badges/LevelBadge';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
-import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import { useEffect, useState } from 'react';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
@@ -35,6 +31,7 @@ import {
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
 import EmptyDongil from '@components/home/EmptyDongil';
+import SuggestedDongilList from '@components/home/suggested/SuggestedDongilList';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -42,9 +39,7 @@ function ParentHome() {
   const parentSummaryStatus = useAppSelector(selectParentSummaryStatus);
   const parentSummary = useAppSelector(selectParentSummary);
   const suggestedDongilsStatus = useAppSelector(selectSuggestedDongilsStatus);
-  const suggestedDongils = useAppSelector(selectSuggestedDongils);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
 
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
   const [hasMultipleKids, setHasMultipleKids] = useState<boolean>(false);
@@ -172,26 +167,27 @@ function ParentHome() {
     parentSummaryContent = <p>Failed</p>;
   }
 
+  // slice 안에서는 배열로 관리되지만 사용할때는 자녀에 맞게 다시 가져오도록 수정
+  const suggestedDongils = useAppSelector(selectSuggestedDongils);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
+
   // 제안받은 돈길
-  // let suggestedDongilsContent;
-  // if (suggestedDongilsStatus === 'loading') {
-  //   suggestedDongilsContent = <p>Loading...</p>;
-  // } else if (suggestedDongilsStatus === 'succeeded') {
-  //   if (suggestedDongils === []) {
-  //     suggestedDongilsContent = (
-  //       <EmptyDongil property='suggested' />
-  //     );
-  //   } else {
-  //     suggestedDongilsContent = (
-  //       <>
-  //         <WalkingDongilList suggestedDongils={suggestedDongils!} />
-  //         <ContractNewDongilLink disable={disable} to={'/create/1'} />
-  //       </>
-  //     );
-  //   }
-  // } else if (suggestedDongilsStatus === 'failed') {
-  //   suggestedDongilsContent = <p>Failed</p>;
-  // }
+  let suggestedDongilsContent;
+  if (suggestedDongilsStatus === 'loading') {
+    suggestedDongilsContent = <p>Loading...</p>;
+  } else if (suggestedDongilsStatus === 'succeeded') {
+    if (suggestedDongils === []) {
+      suggestedDongilsContent = <EmptyDongil property="suggested" />;
+    } else {
+      suggestedDongilsContent = suggestedDongils && (
+        <SuggestedDongilList
+          suggestedDongils={suggestedDongils[0].challengeList}
+        />
+      );
+    }
+  } else if (suggestedDongilsStatus === 'failed') {
+    suggestedDongilsContent = <p>Failed</p>;
+  }
 
   function handleClick() {
     console.log('selectedKid: ', selectedKid);
@@ -212,10 +208,10 @@ function ParentHome() {
       >
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
-          {/* <SuggestedDongilsWrapper>
+          <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
             {suggestedDongilsContent}
-          </SuggestedDongilsWrapper> */}
+          </SuggestedDongilsWrapper>
           {/* <ThisWeekSDongilWrapper>
             <header>금주의 돈길</header>
             {thisWeekSDongilsContent}

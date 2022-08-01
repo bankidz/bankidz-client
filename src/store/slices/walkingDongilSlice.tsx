@@ -19,6 +19,7 @@ export interface IDongil {
   interestRate: TInterestRate;
   totalPrice: number;
   weekPrice: number;
+  successWeeks: number;
   weeks: number;
   createdAt: string;
   status: TDongilStatus;

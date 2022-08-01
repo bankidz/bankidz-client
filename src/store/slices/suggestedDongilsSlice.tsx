@@ -4,8 +4,14 @@ import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IDongil } from './walkingDongilSlice';
 
+interface ISuggestedDongil {
+  username: string;
+  isFemale: boolean;
+  challengeList: IDongil[];
+}
+
 export type TSuggestedDongilsState = {
-  suggestedDongils: IDongil[] | null;
+  suggestedDongils: ISuggestedDongil[] | null;
   suggestedDongilsStatus?: TFetchStatus;
 };
 
@@ -37,7 +43,15 @@ export const suggestedDongilsSlice = createSlice({
       })
       .addCase(fetchSuggestedDongils.fulfilled, (state, action) => {
         state.suggestedDongilsStatus = 'succeeded';
-        state.suggestedDongils = action.payload.data;
+        if (state.suggestedDongils === null) {
+          state.suggestedDongils = [];
+          state.suggestedDongils[0] = action.payload.data;
+        } else {
+          state.suggestedDongils = state.suggestedDongils.concat(
+            action.payload.data,
+          );
+        }
+        console.log(state.suggestedDongils);
       })
       .addCase(fetchSuggestedDongils.rejected, (state, action) => {
         state.suggestedDongilsStatus = 'failed';

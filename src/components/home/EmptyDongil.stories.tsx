@@ -19,8 +19,6 @@ const Template: ComponentStory<typeof EmptyDongil> = (args) => (
   <EmptyDongil {...args} />
 );
 
-export const 예시 = Template.bind({});
-
 export const 대기중인_돈길이_없어요 = Template.bind({});
 대기중인_돈길이_없어요.args = {
   property: 'pending',

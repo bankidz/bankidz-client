@@ -1,14 +1,9 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import LevelBadge from '@components/common/badges/LevelBadge';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectLevel } from '@store/slices/authSlice';
-import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
-import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import { Children, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   fetchKidSummary,
   selectKidSummary,
@@ -37,11 +32,7 @@ import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLin
 import PendingDongilList from '@components/home/pending/PendingDongilList';
 import Summary from '@components/home/Summary';
 import HomeTemplate from '@components/home/HomeTemplate';
-import {
-  fetchParents,
-  selectParents,
-  selectParentsStatus,
-} from '@store/slices/familySlice';
+import { fetchParents, selectParentsStatus } from '@store/slices/familySlice';
 import EmptyDongil from '@components/home/EmptyDongil';
 
 function KidHome() {
