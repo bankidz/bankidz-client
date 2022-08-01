@@ -4,7 +4,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import { EDongilStatus } from '@lib/types/common';
 
 export default {
-  title: '자녀/홈/PendingDongilItem',
+  title: 'home/pending/PendingDongilItem',
   component: PendingDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [
@@ -28,7 +28,7 @@ export const 제안중 = Template.bind({});
     title: 'FE Mock) 아이패드 사기',
     itemName: '전자제품',
     challengeCategoryName: '이자율 받기',
-    isAchieved: false,
+    isAchieved: 1,
     interestRate: 10,
     totalPrice: 150000,
     weekPrice: 10000,
@@ -57,7 +57,7 @@ export const 거절됨 = Template.bind({});
     title: 'FE Mock) 아이패드 사기',
     itemName: '전자제품',
     challengeCategoryName: '이자율 받기',
-    isAchieved: false,
+    isAchieved: 1,
     interestRate: 10,
     totalPrice: 150000,
     weekPrice: 10000,

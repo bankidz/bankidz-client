@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import WalkingItemNameButton from './WalkingItemNameButton';
 
 export default {
-  title: '돈길 걷기/WalkingItemNameButton',
+  title: 'walk/WalkingItemNameButton',
   component: WalkingItemNameButton,
   decorators: [
     (Story) => (

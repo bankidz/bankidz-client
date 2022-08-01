@@ -3,7 +3,7 @@ import EmptyPendingDongil from './EmptyPendingDongil';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
 export default {
-  title: '자녀/홈/EmptyPendingDongil',
+  title: 'home/pending/EmptyPendingDongil',
   component: EmptyPendingDongil,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [

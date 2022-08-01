@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SuggestBadge from './SuggestBadge';
 
 export default {
-  title: 'Common/뱃지/SuggestBadge',
+  title: 'common/badges/SuggestBadge',
   component: SuggestBadge,
 } as ComponentMeta<typeof SuggestBadge>;
 

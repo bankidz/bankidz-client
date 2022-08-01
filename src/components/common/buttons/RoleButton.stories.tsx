@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import RoleButton from './RoleButton';
 
 export default {
-  title: 'Common/버튼/RoleButton',
+  title: 'common/buttons/RoleButton',
   component: RoleButton,
   argTypes: {
     onClick: { action: 'handle click' },

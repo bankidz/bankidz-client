@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Progress from './Progress';
 
 export default {
-  title: '자녀/돈길 계약하기/progress',
+  title: 'home/create/progress',
   component: Progress,
 } as ComponentMeta<typeof Progress>;
 

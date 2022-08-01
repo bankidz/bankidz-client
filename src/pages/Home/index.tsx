@@ -5,9 +5,9 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import KidHome from './KidHome';
 import ParentHome from './ParentHome';
-import KidCreate from './KidCreate';
-import KidWalking from './KidWalking';
-import ParentPending from './ParentPending';
+import Create from './Create';
+import Walking from './Walking';
+import Pending from './Pending';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -19,7 +19,7 @@ function HomeRouter() {
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid === true ? <KidHome level={level!} /> : <ParentHome />}
+            {isKid === true ? <KidHome /> : <ParentHome />}
           </BackgroundTemplate>
         }
       />
@@ -28,7 +28,7 @@ function HomeRouter() {
         path="/create/:step"
         element={
           <ForegroundTemplate label="돈길 계약하기">
-            <KidCreate />
+            <Create />
           </ForegroundTemplate>
         }
       />
@@ -37,7 +37,7 @@ function HomeRouter() {
         path="/walking/:id"
         element={
           <ForegroundTemplate label="걷고있는 돈길" level={level}>
-            <KidWalking />
+            <Walking />
           </ForegroundTemplate>
         }
       />
@@ -50,7 +50,7 @@ function HomeRouter() {
             <>부적절한 접근입니다.</>
           ) : (
             <ForegroundTemplate label="제안받은 돈길">
-              <ParentPending />
+              <Pending />
             </ForegroundTemplate>
           )
         }

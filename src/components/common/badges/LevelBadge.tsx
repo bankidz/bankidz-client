@@ -3,11 +3,11 @@ import styled, { css } from 'styled-components';
 
 interface LevelBadgeProps {
   /** 레벨을 입력합니다. */
-  level: TLevel | null;
+  level: TLevel;
 }
 
 function LevelBadge({ level }: LevelBadgeProps) {
-  function renderText(level: TLevel) {
+  function renderTextByLevel(level: TLevel) {
     if (level === 1) {
       return 'Lv.1 뱅키학';
     } else if (level === 2) {
@@ -22,7 +22,9 @@ function LevelBadge({ level }: LevelBadgeProps) {
   }
   return (
     <Wrapper>
-      <StyledSpan level={level as TLevel}>{renderText(level!)}</StyledSpan>
+      <StyledSpan level={level as TLevel}>
+        {renderTextByLevel(level!)}
+      </StyledSpan>
     </Wrapper>
   );
 }

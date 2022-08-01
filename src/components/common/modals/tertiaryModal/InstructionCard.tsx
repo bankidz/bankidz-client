@@ -20,7 +20,7 @@ function InstructionCard({
     <>
       <YellowBox currentCardIdx={currentCardIdx}>{children}</YellowBox>
       <WhiteBox>
-        <div className="text-positioner">
+        <div className="text-wrapper">
           <span className="header">{headerText}</span>
           <p className="body">{bodyText}</p>
         </div>
@@ -60,7 +60,7 @@ const WhiteBox = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  .text-positioner {
+  .text-wrapper {
     margin-top: 24px;
     gap: 24px;
     padding: 0px;

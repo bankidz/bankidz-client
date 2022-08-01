@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import InterestStamp from './InterestStampList';
 
 export default {
-  title: 'Home/InterestStamp',
+  title: 'home/walking/InterestStamp',
   component: InterestStamp,
 } as ComponentMeta<typeof InterestStamp>;
 
