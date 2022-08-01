@@ -171,7 +171,7 @@ function QuaternaryModal({
           <SignatureWrapper>Signature</SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
-        <ButtonPositioner>
+        <ButtonWrapper>
           {isKid === true ? (
             <CheckButton onClick={handleCheckButtonClick} />
           ) : (
@@ -188,7 +188,7 @@ function QuaternaryModal({
               />
             </DoubleButtonWrapper>
           )}
-        </ButtonPositioner>
+        </ButtonWrapper>
         width: 100%; ;
       </Content>
     </ReactModal>
@@ -484,7 +484,7 @@ const SignatureWrapper = styled.div`
   align-items: center;
 `;
 
-const ButtonPositioner = styled.div`
+const ButtonWrapper = styled.div`
   width: 100%;
   margin-top: 16px;
   display: flex;

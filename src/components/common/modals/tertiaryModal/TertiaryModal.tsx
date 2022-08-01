@@ -106,9 +106,9 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
             </InstructionCard>
           </SwiperSlide>
         </StyledSwiper>
-        <CloseButtonPositioner>
+        <CloseButtonWrapper>
           <CloseButton onClick={handleSubmit} />
-        </CloseButtonPositioner>
+        </CloseButtonWrapper>
       </Content>
     </ReactModal>
   );
@@ -199,6 +199,6 @@ const StyledSwiper = styled(Swiper)`
   height: 504px;
 `;
 
-const CloseButtonPositioner = styled.div`
+const CloseButtonWrapper = styled.div`
   margin-top: 16px;
 `;

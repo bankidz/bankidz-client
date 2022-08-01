@@ -6,6 +6,7 @@ import useRefreshToken from '@lib/hooks/auth/useRefreshToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectAuth } from '@store/slices/authSlice';
 import Modals, { modals } from '@components/common/modals/Modals';
+import Summary from '@components/home/Summary';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -25,8 +26,13 @@ function SungwooTestPage() {
 
   return (
     <Wrapper>
-      <button onClick={handleClick}>모달 열기</button>
-      <Modals />
+      {/* <button onClick={handleClick}>모달 열기</button>
+      <Modals /> */}
+      <MarginTemplate>
+        <Summary usage="KidHome" currentSavings={1000} totalPrice={5000} />
+        <Summary usage="Walking" currentSavings={1000} totalPrice={5000} />
+        <Summary usage="ParentHome" currentSavings={1000} totalPrice={5000} />
+      </MarginTemplate>
     </Wrapper>
   );
 }
@@ -34,6 +40,7 @@ function SungwooTestPage() {
 export default SungwooTestPage;
 
 const Wrapper = styled.div`
+  height: 1000px;
   /* display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -41,7 +48,7 @@ const Wrapper = styled.div`
   button + button {
     margin-top: 10px;
   } */
-  /* background: grey; */
+  background: grey;
 `;
 
 // https://joyful-development.tistory.com/35

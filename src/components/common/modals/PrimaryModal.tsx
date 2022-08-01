@@ -73,9 +73,9 @@ function PrimaryModal({
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
         </WhiteBox>
-        <CheckButtonPositioner>
+        <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
-        </CheckButtonPositioner>
+        </CheckButtonWrapper>
       </Content>
     </ReactModal>
   );
@@ -136,7 +136,7 @@ const WhiteBox = styled.div`
   }
 `;
 
-const CheckButtonPositioner = styled.div`
+const CheckButtonWrapper = styled.div`
   margin-top: 16px;
 `;
 

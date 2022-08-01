@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TertiaryModal from './TertiaryModal';
 
 export default {
-  title: 'Common/모달/TertiaryModal',
+  title: 'common/modals/TertiaryModal',
   component: TertiaryModal,
   argTypes: {
     onSubmit: { action: 'handle click' },
