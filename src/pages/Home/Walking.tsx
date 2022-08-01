@@ -13,7 +13,7 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
-import { selectKidWeeklyProgress } from '@store/slices/kidWeeklyProgressSlice';
+import { selectKidSummary } from '@store/slices/kidSummarySlice';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -43,8 +43,8 @@ function KidWalking() {
     progressList,
   } = targetWalkingDongil!;
 
-  const kidWeeklyProgress = useAppSelector(selectKidWeeklyProgress);
-  const { currentSavings } = kidWeeklyProgress!;
+  const kidSummary = useAppSelector(selectKidSummary);
+  const { currentSavings } = kidSummary!;
   const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =

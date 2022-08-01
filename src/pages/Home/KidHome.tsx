@@ -10,10 +10,10 @@ import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import { Children, useEffect, useState } from 'react';
 import {
-  fetchKidWeeklyProgress,
-  selectKidWeeklyProgress,
-  selectKidWeeklyProgressStatus,
-} from '@store/slices/kidWeeklyProgressSlice';
+  fetchKidSummary,
+  selectKidSummary,
+  selectKidSummaryStatus,
+} from '@store/slices/kidSummarySlice';
 import {
   fetchWalkingDongils,
   selectWalkingDongils,
@@ -40,8 +40,8 @@ import Summary from '@components/home/Summary';
 import HomeTemplate from '@components/home/HomeTemplate';
 
 function KidHome() {
-  const kidWeeklyProgress = useAppSelector(selectKidWeeklyProgress);
-  const kidWeeklyProgressStatus = useAppSelector(selectKidWeeklyProgressStatus);
+  const kidSummary = useAppSelector(selectKidSummary);
+  const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
@@ -51,8 +51,8 @@ function KidHome() {
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
-      kidWeeklyProgressStatus === 'idle' &&
-        (await dispatch(fetchKidWeeklyProgress({ axiosPrivate })).unwrap());
+      kidSummaryStatus === 'idle' &&
+        (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
       walkingDongilsStatus === 'idle' &&
         (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
       pendingDongilsStatus === 'idle' &&
@@ -62,22 +62,22 @@ function KidHome() {
   }, []);
 
   // 주간 진행상황;
-  let kidWeeklyProgressContent;
-  if (kidWeeklyProgressStatus === 'loading') {
-    kidWeeklyProgressContent = (
+  let kidSummaryContent;
+  if (kidSummaryStatus === 'loading') {
+    kidSummaryContent = (
       <Summary usage="KidHome" currentSavings={0} totalPrice={0} />
     );
-  } else if (kidWeeklyProgressStatus === 'succeeded') {
-    const { currentSavings, totalPrice } = kidWeeklyProgress!;
-    kidWeeklyProgressContent = (
+  } else if (kidSummaryStatus === 'succeeded') {
+    const { currentSavings, totalPrice } = kidSummary!;
+    kidSummaryContent = (
       <Summary
         usage="KidHome"
         currentSavings={currentSavings!}
         totalPrice={totalPrice!}
       />
     );
-  } else if (kidWeeklyProgressStatus === 'failed') {
-    kidWeeklyProgressContent = <p>Failed</p>;
+  } else if (kidSummaryStatus === 'failed') {
+    kidSummaryContent = <p>Failed</p>;
   }
 
   // 걷고있는 돈길
@@ -169,7 +169,7 @@ function KidHome() {
   return (
     <HomeTemplate usage="KidHome">
       <MarginTemplate>
-        <SummaryWrapper>{kidWeeklyProgressContent}</SummaryWrapper>
+        <SummaryWrapper>{kidSummaryContent}</SummaryWrapper>
         <WalkingDongilsWrapper>
           <header>걷고있는 돈길</header>
           {walkingDongilsContent}

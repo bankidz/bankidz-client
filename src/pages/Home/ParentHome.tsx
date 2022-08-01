@@ -19,19 +19,17 @@ import { TLevel } from '@lib/types/common';
 import KidList from '@components/home/KidList';
 import Summary from '@components/home/Summary';
 import {
-  fetchParentWeeklyProgress,
-  selectParentWeeklyProgress,
-  selectParentWeeklyProgressStatus,
-} from '@store/slices/parentWeeklyProgressSlice';
+  fetchParentSummary,
+  selectParentSummary,
+  selectParentSummaryStatus,
+} from '@store/slices/parentSummarySlice';
 import HomeTemplate from '@components/home/HomeTemplate';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
   const kids = useAppSelector(selectKids);
-  const parentWeeklyProgressStatus = useAppSelector(
-    selectParentWeeklyProgressStatus,
-  );
-  const parentWeeklyProgress = useAppSelector(selectParentWeeklyProgress);
+  const parentSummaryStatus = useAppSelector(selectParentSummaryStatus);
+  const parentSummary = useAppSelector(selectParentSummary);
 
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
   const [hasMultipleKids, setHasMultipleKids] = useState<boolean>(false);
@@ -55,21 +53,18 @@ function ParentHome() {
         }
 
         // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
-        if (parentWeeklyProgressStatus === 'idle' && selectedKid === null) {
+        if (parentSummaryStatus === 'idle' && selectedKid === null) {
           // 자녀를 선택하지 않은 초기 상태
           await dispatch(
-            fetchParentWeeklyProgress({
+            fetchParentSummary({
               axiosPrivate,
               username: response.data[0].username,
             }),
           ).unwrap();
-        } else if (
-          parentWeeklyProgressStatus === 'idle' &&
-          selectedKid !== null
-        ) {
+        } else if (parentSummaryStatus === 'idle' && selectedKid !== null) {
           // 초기 조건이 아닌 특정 자녀를 선택한 상태
           await dispatch(
-            fetchParentWeeklyProgress({
+            fetchParentSummary({
               axiosPrivate,
               username: selectedKid!.username,
             }),
@@ -109,14 +104,14 @@ function ParentHome() {
   }
 
   // 주간 진행상황
-  let parentWeeklyProgressContent;
-  if (parentWeeklyProgressStatus === 'loading') {
-    parentWeeklyProgressContent = (
+  let parentSummaryContent;
+  if (parentSummaryStatus === 'loading') {
+    parentSummaryContent = (
       <Summary usage="ParentHome" currentSavings={0} totalPrice={0} />
     );
-  } else if (parentWeeklyProgressStatus === 'succeeded') {
-    const { currentSavings, totalPrice } = parentWeeklyProgress!;
-    parentWeeklyProgressContent = (
+  } else if (parentSummaryStatus === 'succeeded') {
+    const { currentSavings, totalPrice } = parentSummary!;
+    parentSummaryContent = (
       <Summary
         usage="ParentHome"
         currentSavings={currentSavings!}
@@ -124,8 +119,8 @@ function ParentHome() {
         username={selectedKid?.username}
       />
     );
-  } else if (parentWeeklyProgressStatus === 'failed') {
-    parentWeeklyProgressContent = <p>Failed</p>;
+  } else if (parentSummaryStatus === 'failed') {
+    parentSummaryContent = <p>Failed</p>;
   }
 
   return (
@@ -141,7 +136,7 @@ function ParentHome() {
         selectedLevel={selectedLevel}
       >
         <MarginTemplate>
-          <SummaryWrapper>{parentWeeklyProgressContent}</SummaryWrapper>
+          <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
           {/* <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
           </SuggestedDongilsWrapper> */}
