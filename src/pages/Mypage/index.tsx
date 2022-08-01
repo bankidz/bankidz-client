@@ -1,21 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
-import KidMypage from './KidMypage';
-import ParentMypage from './ParentMypage';
 import Info from './Info';
 import Code from './Code';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
-import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
+import Mypage from './Mypage';
 
 function MypageRouter() {
-  const isKid = useAppSelector(selectIsKid);
   return (
     <Routes>
       <Route
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid ? <KidMypage /> : <ParentMypage />}
+            <Mypage />
           </BackgroundTemplate>
         }
       />

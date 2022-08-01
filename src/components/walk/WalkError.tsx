@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   h1 {
     ${({ theme }) => theme.typo.fixed.TabName_T_21_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
-    margin-top: 16px;
+    padding-top: 16px;
   }
 `;
 
