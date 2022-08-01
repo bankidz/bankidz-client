@@ -5,7 +5,7 @@ import createChallengeReducer from '../slices/createChallenge';
 import kidSummaryReducer from '../slices/kidSummarySlice';
 import walkingDongilsReducer from '../slices/walkingDongilSlice';
 import pendingDongilsReducer from '../slices/pendingDongilSlice';
-import kidsReducer from '../slices/kidsSlice';
+import familyReducer from '../slices/familySlice';
 import parentSummaryReducer from '../slices/parentSummarySlice';
 
 export const store = configureStore({
@@ -15,7 +15,7 @@ export const store = configureStore({
     kidSummary: kidSummaryReducer,
     walkingDongils: walkingDongilsReducer,
     pendingDongils: pendingDongilsReducer,
-    kids: kidsReducer,
+    family: familyReducer,
     parentSummary: parentSummaryReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
