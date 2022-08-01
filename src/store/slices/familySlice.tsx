@@ -26,7 +26,7 @@ const initialState: TFamilyState = {
   parentsStatus: 'idle',
 };
 
-// GET: 연결된 자녀 목록 fetch
+// GET: 연결된 자녀 목록
 export const fetchKids = createAsyncThunk(
   'family/fetchKids',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
@@ -37,7 +37,7 @@ export const fetchKids = createAsyncThunk(
   },
 );
 
-// GET: 연결된 부모 목록 fetch
+// GET: 연결된 부모 목록
 export const fetchParents = createAsyncThunk(
   'family/fetchParents',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {

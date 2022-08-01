@@ -57,14 +57,18 @@ function KidHome() {
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
-      kidSummaryStatus === 'idle' &&
-        (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
-      walkingDongilsStatus === 'idle' &&
-        (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
-      pendingDongilsStatus === 'idle' &&
-        (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
-      parentsStatus === 'idle' &&
-        (await dispatch(fetchParents({ axiosPrivate })).unwrap());
+      try {
+        kidSummaryStatus === 'idle' &&
+          (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
+        walkingDongilsStatus === 'idle' &&
+          (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
+        pendingDongilsStatus === 'idle' &&
+          (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
+        parentsStatus === 'idle' &&
+          (await dispatch(fetchParents({ axiosPrivate })).unwrap());
+      } catch (error: any) {
+        console.log(error.message);
+      }
     }
     hydrate();
   }, []);

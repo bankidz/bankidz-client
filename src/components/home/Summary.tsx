@@ -45,7 +45,7 @@ function Summary({
         <Divider />
         <TextWrapper>
           {(usage === 'KidHome' || usage === 'ParentHome') && (
-            <div>{totalPrice}원</div>
+            <div>{totalPrice.toLocaleString('ko-KR')}원</div>
           )}
           {usage === 'Walking' && <div>{currentCompletionRate}%</div>}
           {usage === 'KidHome' && <div>목표 저금액</div>}

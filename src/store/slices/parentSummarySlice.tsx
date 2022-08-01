@@ -16,13 +16,13 @@ const initialState: TParentSummaryState = {
   parentSummaryStatus: 'idle',
 };
 
-// GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
+// GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황
 export const fetchParentSummary = createAsyncThunk(
   'parentSummary/fetch',
-  async (thunkPayload: { axiosPrivate: AxiosInstance; username: string }) => {
-    const { axiosPrivate, username } = thunkPayload;
+  async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
+    const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
-      `/challenge/kid/progress/?kidName=${encodeURI(`${username}`)}`,
+      `/challenge/kid/progress/${kidId}}`,
     );
     return response.data;
   },

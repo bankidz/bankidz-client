@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 서비스 배포 환경
 const BASE_URL = 'https://api.bankidz.com';
-// 클라이언트 테스트 환경
+// 테스트 환경
 //const BASE_URL = 'https://bankids.click';
 
 export const axiosPublic = axios.create({

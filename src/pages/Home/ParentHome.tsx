@@ -24,6 +24,16 @@ import {
   selectParentSummaryStatus,
 } from '@store/slices/parentSummarySlice';
 import HomeTemplate from '@components/home/HomeTemplate';
+import {
+  fetchSuggestedDongils,
+  selectSuggestedDongils,
+  selectSuggestedDongilsStatus,
+} from '@store/slices/suggestedDongilsSlice';
+import {
+  fetchThisWeekSDongils,
+  selectThisWeekSDongils,
+  selectThisWeekSDongilsStatus,
+} from '@store/slices/thisWeekSDongilsSlice';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -58,7 +68,7 @@ function ParentHome() {
           await dispatch(
             fetchParentSummary({
               axiosPrivate,
-              username: response.data[0].username,
+              kidId: response.data[0].kidId,
             }),
           ).unwrap();
         } else if (parentSummaryStatus === 'idle' && selectedKid !== null) {
@@ -66,7 +76,7 @@ function ParentHome() {
           await dispatch(
             fetchParentSummary({
               axiosPrivate,
-              username: selectedKid!.username,
+              kidId: selectedKid!.kidId,
             }),
           ).unwrap();
         }
@@ -122,6 +132,35 @@ function ParentHome() {
   } else if (parentSummaryStatus === 'failed') {
     parentSummaryContent = <p>Failed</p>;
   }
+
+  // GET: 제안받은 돈길, 금주의 돈길
+  const suggestedDongilsStatus = useAppSelector(selectSuggestedDongilsStatus);
+  const suggestedDongils = useAppSelector(selectSuggestedDongils);
+  const canFetchSuggestedDongils =
+    suggestedDongilsStatus === 'idle' && selectedKid !== null;
+  const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
+  const canFetchThisWeekSDongils =
+    thisWeekSDongilsStatus === 'idle' && selectedKid !== null;
+  useEffect(() => {
+    async function fetchSelectedKidSDongils() {
+      try {
+        if (canFetchSuggestedDongils) {
+          await dispatch(
+            fetchSuggestedDongils({ axiosPrivate, kidId: selectedKid?.kidId }),
+          ).unwrap();
+        }
+        if (canFetchThisWeekSDongils) {
+          await dispatch(
+            fetchThisWeekSDongils({ axiosPrivate, kidId: selectedKid?.kidId }),
+          ).unwrap();
+        }
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+    fetchSelectedKidSDongils();
+  }, [selectedKid]);
 
   return (
     <>

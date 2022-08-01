@@ -3,7 +3,7 @@ import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUp
 import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import Receipt from '@components/common/Receipt';
-import ProceedingStemp from '@components/home/walking/InterestStampList';
+import InterestStampList from '@components/home/walking/InterestStampList';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import SmallSpacer from '@components/layout/SmallSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -14,7 +14,7 @@ import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
 import { selectKidSummary } from '@store/slices/kidSummarySlice';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
@@ -119,15 +119,15 @@ function KidWalking() {
               totalPrice={totalPrice}
             />
 
-            <InterestStamp>
+            <InterestStampListWrapper>
               <div className="text-wrapper">
                 <span className="header">이자 스탬프</span>
                 <span className="body">
                   돈길 걷기를 완료한 주차에 해당하는 만큼 이자를 받아요
                 </span>
-                <ProceedingStemp weeks={weeks} stemp={progressList!} />
+                <InterestStampList weeks={weeks} stamps={progressList!} />
               </div>
-            </InterestStamp>
+            </InterestStampListWrapper>
 
             <DongilContractContent>
               <span>돈길 계약 내용</span>
@@ -242,7 +242,7 @@ const FlexContainer = styled.div`
   align-items: center;
 `;
 
-const InterestStamp = styled.div`
+const InterestStampListWrapper = styled.div`
   margin-top: 80px;
   width: 100%;
   .text-wrapper {

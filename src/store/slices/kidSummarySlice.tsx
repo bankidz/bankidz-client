@@ -16,7 +16,7 @@ const initialState: TKidSummaryState = {
   kidSummaryStatus: 'idle',
 };
 
-// GET: 자녀 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
+// GET: 자녀 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황
 export const fetchKidSummary = createAsyncThunk(
   'kidSummary/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {

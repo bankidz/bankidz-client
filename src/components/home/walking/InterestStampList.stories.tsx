@@ -1,19 +1,19 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import InterestStamp from './InterestStampList';
+import InterestStampList from './InterestStampList';
 
 export default {
-  title: 'home/walking/InterestStamp',
-  component: InterestStamp,
-} as ComponentMeta<typeof InterestStamp>;
+  title: 'home/walking/InterestStampList',
+  component: InterestStampList,
+} as ComponentMeta<typeof InterestStampList>;
 
-const Template: ComponentStory<typeof InterestStamp> = (args) => (
-  <InterestStamp {...args} />
+const Template: ComponentStory<typeof InterestStampList> = (args) => (
+  <InterestStampList {...args} />
 );
 
 export const 에어팟_사기 = Template.bind({});
 에어팟_사기.args = {
   weeks: 13,
-  stemp: [
+  stamps: [
     {
       challengeId: 8,
       weeks: 1,

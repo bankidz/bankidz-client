@@ -47,7 +47,7 @@ const initialState: TWalkingDongilsState = {
   isWalkingDongilsPatched: false,
 };
 
-// GET: 걷고있는 돈길 데이터 fetch
+// GET: 걷고있는 돈길 데이터
 export const fetchWalkingDongils = createAsyncThunk(
   'walkingDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
