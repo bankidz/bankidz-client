@@ -21,9 +21,8 @@ export const fetchParentSummary = createAsyncThunk(
   'parentSummary/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
     const { axiosPrivate, kidId } = thunkPayload;
-    const response = await axiosPrivate.get(
-      `/challenge/kid/progress/${kidId}}`,
-    );
+    console.log('kidId: ', kidId);
+    const response = await axiosPrivate.get(`/challenge/kid/progress/${kidId}`);
     return response.data;
   },
 );
