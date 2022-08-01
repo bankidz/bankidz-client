@@ -14,7 +14,7 @@ import {
   IKid,
   selectKids,
   selectKidsStatus,
-} from '@store/slices/kidsSlice';
+} from '@store/slices/familySlice';
 import { TLevel } from '@lib/types/common';
 import KidList from '@components/home/KidList';
 

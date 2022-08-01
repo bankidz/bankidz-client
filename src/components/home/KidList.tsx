@@ -1,4 +1,4 @@
-import { IKid } from '@store/slices/kidsSlice';
+import { IKid } from '@store/slices/familySlice';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
