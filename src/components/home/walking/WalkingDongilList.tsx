@@ -11,7 +11,9 @@ function WalkingDongilList({ walkingDongils }: { walkingDongils: IDongil[] }) {
           key={walkingDongil.id}
           itemName={walkingDongil.itemName as TItemName}
           title={walkingDongil.title}
+          isFailed={!walkingDongil.isAchieved && !walkingDongil.status}
           to={`/walking/${walkingDongil.id}`}
+          interestRate={walkingDongil.interestRate}
         />
       ))}
     </Wrapper>

@@ -6,6 +6,7 @@ import GiveUpExceeded from './sheetContents/GiveUpExceeded';
 import GiveUpCheck from './sheetContents/GiveUpCheck';
 import SelectProfile from './sheetContents/SelectProfile';
 import SheetCompleted from './sheetContents/SheetCompleted';
+import DongilFailed from './sheetContents/DongilFailed';
 
 export default {
   title: 'common/bottomSheets/CommonSheet',
@@ -62,5 +63,18 @@ export const 돈길_포기_완료 = Template.bind({});
 export const 포기_횟수_초과 = Template.bind({});
 포기_횟수_초과.args = {
   children: <GiveUpExceeded onDismiss={() => {}} />,
+  open: true,
+};
+
+export const 돈길_실패 = Template.bind({});
+돈길_실패.args = {
+  children: (
+    <DongilFailed
+      onLeftButtonClick={() => {}}
+      onRightButtonClick={() => {}}
+      title={'핸드폰 케이스 사기'}
+      interestRate={20}
+    />
+  ),
   open: true,
 };
