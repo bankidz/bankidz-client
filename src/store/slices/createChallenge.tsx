@@ -97,7 +97,7 @@ export const createChallengeSlice = createSlice({
       state.challenge.weeks = action.payload;
     },
     dispatchResetChallengePayload(state) {
-      state = initialState;
+      return initialState;
     },
   },
   extraReducers: (builder) => {
