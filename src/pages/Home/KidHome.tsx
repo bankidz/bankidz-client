@@ -100,7 +100,7 @@ function KidHome() {
   if (walkingDongilsStatus === 'loading') {
     walkingDongilsContent = <p>Loading...</p>;
   } else if (walkingDongilsStatus === 'succeeded') {
-    if (walkingDongils === []) {
+    if (walkingDongils?.length === 0) {
       walkingDongilsContent = (
         <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
       );
@@ -122,7 +122,7 @@ function KidHome() {
   const canDelete =
     idToDelete !== null &&
     pendingDongils !== null &&
-    pendingDongils !== [] &&
+    pendingDongils.length !== 0 &&
     deleteStatus === 'idle';
 
   const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
@@ -158,7 +158,7 @@ function KidHome() {
   if (pendingDongilsStatus === 'loading') {
     pendingDongilsContent = <p>Loading...</p>;
   } else if (pendingDongilsStatus === 'succeeded') {
-    if (pendingDongils === []) {
+    if (pendingDongils?.length === 0) {
       pendingDongilsContent = <EmptyDongil property="pending" />;
     } else {
       pendingDongilsContent = (

@@ -36,6 +36,7 @@ import {
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
 import { theme } from '@lib/styles/theme';
+import { findAllByAltText } from '@testing-library/react';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -113,33 +114,6 @@ function ParentHome() {
     setColorByLevel(getColorByLevel(selectedKid?.level!));
   }, [selectedKid]);
 
-  // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
-  // useEffect(() => {
-  //   async function hydrate() {
-  //     try {
-  //       if (parentSummaryStatus === 'idle' && selectedKid === null) {
-  //         // 자녀를 선택하지 않은 초기 상태
-  //         await dispatch(
-  //           fetchParentSummary({
-  //             axiosPrivate,
-  //             kidId: response.data[0].kidId,
-  //           }),
-  //         ).unwrap();
-  //       } else if (parentSummaryStatus === 'idle' && selectedKid !== null) {
-  //         // 초기 조건이 아닌 특정 자녀를 선택한 상태
-  //         await dispatch(
-  //           fetchParentSummary({
-  //             axiosPrivate,
-  //             kidId: selectedKid!.kidId,
-  //           }),
-  //         ).unwrap();
-  //       }
-  //     } catch (error: any) {
-  //       console.log(error.message);
-  //     }
-  //   }
-  // }, [selectedKid]);
-
   // 주간 진행상황
   let parentSummaryContent;
   if (parentSummaryStatus === 'loading') {
@@ -169,7 +143,7 @@ function ParentHome() {
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
     );
-    if (proposedDongils === []) {
+    if (selectedKidSProposedDongils?.length === 0) {
       proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
       proposedDongilsContent = (
@@ -196,7 +170,7 @@ function ParentHome() {
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
-    if (proposedDongils === []) {
+    if (proposedDongils?.length === 0) {
       thisWeekSDongilsContent = <EmptyDongil property="thisWeekS" />;
     } else {
       thisWeekSDongilsContent = (
@@ -212,6 +186,76 @@ function ParentHome() {
       (thisWeekSDongil) => thisWeekSDongil.userName === username,
     );
     return found?.challengeList;
+  }
+
+  // 다자녀의 경우 자녀 선택에 따라 추가 조회
+  const canFetchParentSummary = selectedKid !== null;
+  const canFetchProposedDongils =
+    selectedKid !== null &&
+    proposedDongils !== null &&
+    !hasProposedDongilsAlreadyBeenFetched();
+  const canFetchThisWeekSDongils =
+    selectedKid !== null &&
+    thisWeekSDongils !== null &&
+    !hasThisWeekSDongilsAlreadyBeenFetched();
+  useEffect(() => {
+    async function hydrate() {
+      try {
+        // GET: 선택한 자녀의 Summary 데이터 조회
+        canFetchParentSummary &&
+          (await dispatch(
+            fetchParentSummary({
+              axiosPrivate,
+              kidId: selectedKid.kidId,
+            }),
+          ).unwrap());
+        // GET: 선택한 자녀의 제안받은 돈길 조회
+        canFetchProposedDongils &&
+          (await dispatch(
+            fetchProposedDongils({
+              axiosPrivate,
+              kidId: selectedKid.kidId,
+            }),
+          ).unwrap());
+        // GET: 선택한 자녀의 금주의 돈길 조희
+        canFetchThisWeekSDongils &&
+          (await dispatch(
+            fetchThisWeekSDongils({
+              axiosPrivate,
+              kidId: selectedKid.kidId,
+            }),
+          ).unwrap());
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+    hydrate();
+  }, [selectedKid]);
+
+  function hasProposedDongilsAlreadyBeenFetched() {
+    console.log('selectedKid: ', selectedKid);
+    console.log('proposedDongils: ', proposedDongils);
+    const found = proposedDongils?.find(
+      (proposedDongil) => proposedDongil.userName === selectedKid?.username,
+    );
+    console.log('found: ', found);
+    if (found === undefined) {
+      console.log('아직 없어');
+      return false;
+    } else {
+      console.log('이미 반입했어');
+      return true;
+    }
+  }
+  function hasThisWeekSDongilsAlreadyBeenFetched() {
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === selectedKid?.username,
+    );
+    if (found === undefined) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   return (
