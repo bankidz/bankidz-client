@@ -4,8 +4,14 @@ import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IDongil } from './walkingDongilSlice';
 
+interface IThisWeekSDongil {
+  userName: string;
+  isFemale: boolean;
+  challengeList: IDongil[];
+}
+
 export type TThisWeekSDongilsState = {
-  thisWeekSDongils: IDongil[] | null;
+  thisWeekSDongils: IThisWeekSDongil[] | null;
   thisWeekSDongilsStatus?: TFetchStatus;
 };
 
@@ -37,7 +43,15 @@ export const thisWeekSDongilsSlice = createSlice({
       })
       .addCase(fetchThisWeekSDongils.fulfilled, (state, action) => {
         state.thisWeekSDongilsStatus = 'succeeded';
-        state.thisWeekSDongils = action.payload.data;
+        if (state.thisWeekSDongils === null) {
+          state.thisWeekSDongils = [];
+          state.thisWeekSDongils[0] = action.payload.data;
+        } else {
+          state.thisWeekSDongils = state.thisWeekSDongils.concat(
+            action.payload.data,
+          );
+        }
+        console.log(state.thisWeekSDongils);
       })
       .addCase(fetchThisWeekSDongils.rejected, (state, action) => {
         state.thisWeekSDongilsStatus = 'failed';

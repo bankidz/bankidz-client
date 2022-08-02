@@ -1,10 +1,7 @@
-import SuggestBadge from '@components/common/badges/SuggestBadge';
+import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
-import { EDongilStatus } from '@lib/types/common';
-import { getDate } from '@lib/utils/common/getDate';
 import { IDongil } from '@store/slices/walkingDongilSlice';
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface SuggestedDongilItemProps {
@@ -79,13 +76,13 @@ SuggestedDongilItemProps) {
       <StyledButton onClick={handleClick}>
         <div className="text-wrapper">
           <span className="title">{title}</span>
-          <span className="createdAt">{getDate(createdAt)}</span>
+          <span className="totalPrice">
+            {totalPrice.toLocaleString('ko-KR')}원
+          </span>
         </div>
-        <SuggestBadgeWrapper>
-          <SuggestBadge
-            isSuggesting={status === EDongilStatus.PENDING ? true : false}
-          />
-        </SuggestBadgeWrapper>
+        <InterestBadgeWrapper>
+          <InterestBadge interestRate={interestRate} />
+        </InterestBadgeWrapper>
       </StyledButton>
     </>
   );
@@ -112,20 +109,22 @@ const StyledButton = styled.button`
     margin-left: 16px;
 
     .title {
-      margin-left: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
 
-    .createdAt {
-      margin-left: 12px;
-      ${({ theme }) => theme.typo.text.S_12_M};
+    .totalPrice {
       color: ${({ theme }) => theme.palette.greyScale.grey500};
+      /* TODO: type 시스템 미적용 */
+      font-family: 'Tmoney RoundWind';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 13px;
     }
   }
 `;
 
-const SuggestBadgeWrapper = styled.div`
+const InterestBadgeWrapper = styled.div`
   margin-right: 16px;
 `;

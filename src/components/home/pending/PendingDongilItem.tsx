@@ -112,14 +112,12 @@ const StyledButton = styled.button`
     margin-left: 16px;
 
     .title {
-      margin-left: 12px;
       margin-bottom: 8px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
 
     .createdAt {
-      margin-left: 12px;
       ${({ theme }) => theme.typo.text.S_12_M};
       color: ${({ theme }) => theme.palette.greyScale.grey500};
     }

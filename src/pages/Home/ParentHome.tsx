@@ -33,6 +33,7 @@ import {
 import EmptyDongil from '@components/home/EmptyDongil';
 import SuggestedDongilList from '@components/home/suggested/SuggestedDongilList';
 import { useSelector } from 'react-redux';
+import ThisWeekSDongilList from '@components/home/thisWeekS/ThisWeekSDongilList';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -169,8 +170,6 @@ function ParentHome() {
   }
 
   const suggestedDongils = useAppSelector(selectSuggestedDongils);
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-
   function getSelectedKidSSuggestedDongils(username: string) {
     console.log('username: ', username);
     const found = suggestedDongils?.find(
@@ -184,24 +183,12 @@ function ParentHome() {
   if (suggestedDongilsStatus === 'loading') {
     suggestedDongilsContent = <p>Loading...</p>;
   } else if (suggestedDongilsStatus === 'succeeded') {
-    // console.log('selectedKid: ', selectedKid);
-    // console.log('suggestedDongils: ', suggestedDongils);
     const selectedKidSSuggestedDongils = getSelectedKidSSuggestedDongils(
       selectedKid?.username!,
     );
-    // console.log(
-    //   'selectedKidSSuggestedDongils: ',
-    //   selectedKidSSuggestedDongils?.challengeList,
-    // );
-
     if (suggestedDongils === []) {
       suggestedDongilsContent = <EmptyDongil property="suggested" />;
     } else {
-      // suggestedDongilsContent = suggestedDongils && (
-      //   <SuggestedDongilList
-      //     suggestedDongils={suggestedDongils[0].challengeList}
-      //   />
-      // );
       suggestedDongilsContent = (
         <SuggestedDongilList suggestedDongils={selectedKidSSuggestedDongils!} />
       );
@@ -210,13 +197,42 @@ function ParentHome() {
     suggestedDongilsContent = <p>Failed</p>;
   }
 
-  function handleClick() {
-    console.log('selectedKid: ', selectedKid);
-    console.log('selectedLevel: ', selectedLevel);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
+  function getSelectedKidSThisWeekSDongils(username: string) {
+    console.log('username: ', username);
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+    );
+    return found?.challengeList;
   }
+
+  // 금주의 돈길
+  let thisWeekSDongilsContent;
+  if (suggestedDongilsStatus === 'loading') {
+    thisWeekSDongilsContent = <p>Loading...</p>;
+  } else if (suggestedDongilsStatus === 'succeeded') {
+    const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
+      selectedKid?.username!,
+    );
+    if (suggestedDongils === []) {
+      thisWeekSDongilsContent = <EmptyDongil property="thisWeekS" />;
+    } else {
+      thisWeekSDongilsContent = (
+        <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
+      );
+    }
+  } else if (suggestedDongilsStatus === 'failed') {
+    thisWeekSDongilsContent = <p>Failed</p>;
+  }
+
+  // function handleClick() {
+  //   console.log('selectedKid: ', selectedKid);
+  //   console.log('selectedLevel: ', selectedLevel);
+  // }
+
   return (
     <>
-      <button onClick={handleClick}>Test</button>
+      {/* <button onClick={handleClick}>Test</button> */}
       {hasMultipleKids === true && (
         <KidListWrapper colorByLevel={colorByLevel}>
           {kidsContent}
@@ -233,10 +249,10 @@ function ParentHome() {
             <header>제안받은 돈길</header>
             {suggestedDongilsContent}
           </SuggestedDongilsWrapper>
-          {/* <ThisWeekSDongilWrapper>
+          <ThisWeekSDongilWrapper>
             <header>금주의 돈길</header>
             {thisWeekSDongilsContent}
-          </ThisWeekSDongilWrapper> */}
+          </ThisWeekSDongilWrapper>
           <LargeSpacer />
         </MarginTemplate>
       </HomeTemplate>

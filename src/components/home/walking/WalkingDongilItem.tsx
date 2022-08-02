@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 interface WalkingDongilItemProps {
   itemName: TItemName;
-  title: string | null;
+  title: string;
   to: string;
 }
 

@@ -28,7 +28,7 @@ function KidWalking() {
   const colorByLevel = getColorByLevel(level!);
 
   const walkingDongils = useAppSelector(selectWalkingDongils);
-  const targetWalkingDongil = walkingDongils?.find(
+  let targetDongil = walkingDongils?.find(
     (walkingDongil) => walkingDongil.id === parseInt(id!),
   );
   const {
@@ -41,7 +41,7 @@ function KidWalking() {
     weeks,
     createdAt,
     progressList,
-  } = targetWalkingDongil!;
+  } = targetDongil!;
 
   const kidSummary = useAppSelector(selectKidSummary);
   const { currentSavings } = kidSummary!;
