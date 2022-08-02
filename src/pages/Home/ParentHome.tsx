@@ -7,11 +7,11 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import {
   fetchKids,
-  IKid,
+  selectHasMultipleKids,
   selectKids,
   selectKidsStatus,
-} from '@store/slices/familySlice';
-import { TLevel } from '@lib/types/common';
+  selectSelectedKid,
+} from '@store/slices/kidsSlice';
 import KidList from '@components/home/KidList';
 import Summary from '@components/home/Summary';
 import {
@@ -21,34 +21,37 @@ import {
 } from '@store/slices/parentSummarySlice';
 import HomeTemplate from '@components/home/HomeTemplate';
 import {
-  fetchSuggestedDongils,
-  selectSuggestedDongils,
-  selectSuggestedDongilsStatus,
-} from '@store/slices/suggestedDongilsSlice';
-import {
   fetchThisWeekSDongils,
   selectThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
 import EmptyDongil from '@components/home/EmptyDongil';
-import SuggestedDongilList from '@components/home/suggested/SuggestedDongilList';
-import { useSelector } from 'react-redux';
+import ProposedDongilList from '@components/home/proposed/ProposedDongilList';
 import ThisWeekSDongilList from '@components/home/thisWeekS/ThisWeekSDongilList';
+import {
+  fetchProposedDongils,
+  selectProposedDongils,
+  selectProposedDongilsStatus,
+} from '@store/slices/proposedDongilsSlice';
+import { theme } from '@lib/styles/theme';
+import Modals from '@components/common/modals/Modals';
+import CommonSheet from '@components/common/bottomSheets/CommonSheet';
+import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
+import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
   const kids = useAppSelector(selectKids);
   const parentSummaryStatus = useAppSelector(selectParentSummaryStatus);
   const parentSummary = useAppSelector(selectParentSummary);
-  const suggestedDongilsStatus = useAppSelector(selectSuggestedDongilsStatus);
+  const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
 
-  const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
-  const [hasMultipleKids, setHasMultipleKids] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
-  const [selectedLevel, setSelectedLevel] = useState<TLevel>(1);
 
+  // when mounted
   useEffect(() => {
     async function hydrate() {
       try {
@@ -57,18 +60,6 @@ function ParentHome() {
         if (kidsStatus === 'idle') {
           response = await dispatch(fetchKids({ axiosPrivate })).unwrap();
         }
-
-        if (response.data === []) {
-          setSelectedKid(null);
-        } else {
-          setSelectedKid(response.data[0]); // init with the first kid
-          setSelectedLevel(response.data[0].level); // init with the first kid's level
-        }
-
-        if (response.data.length >= 2) {
-          setHasMultipleKids(true);
-        }
-
         // GET: 첫번째 자녀의 Summary 데이터 조회
         parentSummaryStatus === 'idle' &&
           (await dispatch(
@@ -78,9 +69,9 @@ function ParentHome() {
             }),
           ).unwrap());
         // GET: 첫번째 자녀의 제안받은 돈길 조회
-        suggestedDongilsStatus === 'idle' &&
+        proposedDongilsStatus === 'idle' &&
           (await dispatch(
-            fetchSuggestedDongils({
+            fetchProposedDongils({
               axiosPrivate,
               kidId: response.data[0].kidId,
             }),
@@ -100,54 +91,26 @@ function ParentHome() {
     hydrate();
   }, []);
 
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
+
   // 자녀 목록
   let kidsContent;
   if (kidsStatus === 'loading') {
     kidsContent = <p>Loading</p>;
   } else if (kidsStatus === 'succeeded') {
-    kidsContent = (
-      <KidList
-        kids={kids!}
-        selectedKid={selectedKid!}
-        setSelectedKid={setSelectedKid}
-      />
-    );
+    kidsContent = <KidList />;
   } else if (kidsContent === 'failed') {
     kidsContent = <p>Failed</p>;
   }
 
   // 선택한 자녀에 따라 Level 업데이트
+  const [colorByLevel, setColorByLevel] = useState<string>(
+    theme.palette.greyScale.grey100,
+  );
   useEffect(() => {
-    selectedKid && setSelectedLevel(selectedKid.level);
+    setColorByLevel(getColorByLevel(selectedKid?.level!));
   }, [selectedKid]);
-  const colorByLevel = getColorByLevel(selectedLevel);
-
-  // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
-  // useEffect(() => {
-  //   async function hydrate() {
-  //     try {
-  //       if (parentSummaryStatus === 'idle' && selectedKid === null) {
-  //         // 자녀를 선택하지 않은 초기 상태
-  //         await dispatch(
-  //           fetchParentSummary({
-  //             axiosPrivate,
-  //             kidId: response.data[0].kidId,
-  //           }),
-  //         ).unwrap();
-  //       } else if (parentSummaryStatus === 'idle' && selectedKid !== null) {
-  //         // 초기 조건이 아닌 특정 자녀를 선택한 상태
-  //         await dispatch(
-  //           fetchParentSummary({
-  //             axiosPrivate,
-  //             kidId: selectedKid!.kidId,
-  //           }),
-  //         ).unwrap();
-  //       }
-  //     } catch (error: any) {
-  //       console.log(error.message);
-  //     }
-  //   }
-  // }, [selectedKid]);
 
   // 주간 진행상황
   let parentSummaryContent;
@@ -169,92 +132,183 @@ function ParentHome() {
     parentSummaryContent = <p>Failed</p>;
   }
 
-  const suggestedDongils = useAppSelector(selectSuggestedDongils);
-  function getSelectedKidSSuggestedDongils(username: string) {
-    console.log('username: ', username);
-    const found = suggestedDongils?.find(
-      (suggestedDongil) => suggestedDongil.userName === username,
-    );
-    return found?.challengeList;
+  // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
+  const [idToApprove, setIdToApprove] = useState<number | null>(null);
+  const [openApproveCheck, onApproveCheckOpen, onApproveCheckDismiss] =
+    useBottomSheet(false);
+  const [
+    openApproveCompleted,
+    onApproveCompletedOpen,
+    onApproveCompletedDismiss,
+  ] = useBottomSheet(false);
+
+  async function handleApproveButtonClick() {
+    // Approve API fetch code goes here
+    onApproveCheckDismiss();
+    onApproveCompletedOpen();
   }
 
   // 제안받은 돈길
-  let suggestedDongilsContent;
-  if (suggestedDongilsStatus === 'loading') {
-    suggestedDongilsContent = <p>Loading...</p>;
-  } else if (suggestedDongilsStatus === 'succeeded') {
-    const selectedKidSSuggestedDongils = getSelectedKidSSuggestedDongils(
+  const proposedDongils = useAppSelector(selectProposedDongils);
+  let proposedDongilsContent;
+  if (proposedDongilsStatus === 'loading') {
+    proposedDongilsContent = <p>Loading...</p>;
+  } else if (proposedDongilsStatus === 'succeeded') {
+    const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
     );
-    if (suggestedDongils === []) {
-      suggestedDongilsContent = <EmptyDongil property="suggested" />;
+    if (selectedKidSProposedDongils?.length === 0) {
+      proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
-      suggestedDongilsContent = (
-        <SuggestedDongilList suggestedDongils={selectedKidSSuggestedDongils!} />
+      proposedDongilsContent = (
+        <ProposedDongilList
+          proposedDongils={selectedKidSProposedDongils!}
+          onApproveCheckOpen={onApproveCheckOpen}
+          setIdToApprove={setIdToApprove}
+        />
       );
     }
-  } else if (suggestedDongilsStatus === 'failed') {
-    suggestedDongilsContent = <p>Failed</p>;
+  } else if (proposedDongilsStatus === 'failed') {
+    proposedDongilsContent = <p>Failed</p>;
   }
 
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-  function getSelectedKidSThisWeekSDongils(username: string) {
-    console.log('username: ', username);
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+  function getSelectedKidSProposedDongils(username: string) {
+    const found = proposedDongils?.find(
+      (proposedDongil) => proposedDongil.userName === username,
     );
     return found?.challengeList;
   }
 
   // 금주의 돈길
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
   let thisWeekSDongilsContent;
-  if (suggestedDongilsStatus === 'loading') {
+  if (proposedDongilsStatus === 'loading') {
     thisWeekSDongilsContent = <p>Loading...</p>;
-  } else if (suggestedDongilsStatus === 'succeeded') {
+  } else if (proposedDongilsStatus === 'succeeded') {
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
-    if (suggestedDongils === []) {
+    if (proposedDongils?.length === 0) {
       thisWeekSDongilsContent = <EmptyDongil property="thisWeekS" />;
     } else {
       thisWeekSDongilsContent = (
         <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
       );
     }
-  } else if (suggestedDongilsStatus === 'failed') {
+  } else if (proposedDongilsStatus === 'failed') {
     thisWeekSDongilsContent = <p>Failed</p>;
   }
 
-  // function handleClick() {
-  //   console.log('selectedKid: ', selectedKid);
-  //   console.log('selectedLevel: ', selectedLevel);
-  // }
+  function getSelectedKidSThisWeekSDongils(username: string) {
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+    );
+    return found?.challengeList;
+  }
+
+  // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
+  const canFetchParentSummary = selectedKid !== null;
+  const canFetchProposedDongils =
+    selectedKid !== null &&
+    proposedDongils !== null &&
+    !hasProposedDongilsAlreadyBeenFetched();
+  const canFetchThisWeekSDongils =
+    selectedKid !== null &&
+    thisWeekSDongils !== null &&
+    !hasThisWeekSDongilsAlreadyBeenFetched();
+  useEffect(() => {
+    async function hydrate() {
+      try {
+        // GET: 선택한 자녀의 Summary 데이터 조회
+        canFetchParentSummary &&
+          (await dispatch(
+            fetchParentSummary({
+              axiosPrivate,
+              kidId: selectedKid.kidId,
+            }),
+          ).unwrap());
+        // GET: 선택한 자녀의 제안받은 돈길 조회
+        canFetchProposedDongils &&
+          (await dispatch(
+            fetchProposedDongils({
+              axiosPrivate,
+              kidId: selectedKid.kidId,
+            }),
+          ).unwrap());
+        // GET: 선택한 자녀의 금주의 돈길 조희
+        canFetchThisWeekSDongils &&
+          (await dispatch(
+            fetchThisWeekSDongils({
+              axiosPrivate,
+              kidId: selectedKid.kidId,
+            }),
+          ).unwrap());
+      } catch (error: any) {
+        console.log(error.message);
+      }
+    }
+    hydrate();
+  }, [selectedKid]);
+
+  function hasProposedDongilsAlreadyBeenFetched() {
+    console.log('selectedKid: ', selectedKid);
+    console.log('proposedDongils: ', proposedDongils);
+    const found = proposedDongils?.find(
+      (proposedDongil) => proposedDongil.userName === selectedKid?.username,
+    );
+    if (found === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+  function hasThisWeekSDongilsAlreadyBeenFetched() {
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === selectedKid?.username,
+    );
+    if (found === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   return (
     <>
-      {/* <button onClick={handleClick}>Test</button> */}
       {hasMultipleKids === true && (
         <KidListWrapper colorByLevel={colorByLevel}>
           {kidsContent}
         </KidListWrapper>
       )}
-      <HomeTemplate
-        usage="ParentHome"
-        hasMultipleKids={hasMultipleKids}
-        selectedLevel={selectedLevel}
-      >
+      <HomeTemplate usage="ParentHome">
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
-          <SuggestedDongilsWrapper>
+          <ProposedDongilsWrapper>
             <header>제안받은 돈길</header>
-            {suggestedDongilsContent}
-          </SuggestedDongilsWrapper>
+            {proposedDongilsContent}
+          </ProposedDongilsWrapper>
           <ThisWeekSDongilWrapper>
             <header>금주의 돈길</header>
             {thisWeekSDongilsContent}
           </ThisWeekSDongilWrapper>
           <LargeSpacer />
         </MarginTemplate>
+
+        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
+        <Modals />
+        {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
+        <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
+          <DeleteCheck
+            onClickDelete={handleApproveButtonClick}
+            onDismiss={onApproveCheckDismiss}
+          />
+        </CommonSheet>
+        <CommonSheet
+          open={openApproveCompleted}
+          onDismiss={onApproveCompletedDismiss}
+        >
+          <SheetCompleted type="delete" onDismiss={onApproveCompletedDismiss} />
+        </CommonSheet>
       </HomeTemplate>
     </>
   );
@@ -279,7 +333,7 @@ const KidListWrapper = styled.div<{ colorByLevel: string }>`
   position: fixed;
 `;
 
-const SuggestedDongilsWrapper = styled.div`
+const ProposedDongilsWrapper = styled.div`
   margin-top: 48px;
   header {
     width: 100%;

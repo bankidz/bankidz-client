@@ -29,9 +29,9 @@ function SungwooTestPage() {
       {/* <button onClick={handleClick}>모달 열기</button>
       <Modals /> */}
       <MarginTemplate>
-        <Summary usage="KidHome" currentSavings={1000} totalPrice={5000} />
+        {/* <Summary usage="KidHome" currentSavings={1000} totalPrice={5000} />
         <Summary usage="Walking" currentSavings={1000} totalPrice={5000} />
-        <Summary usage="ParentHome" currentSavings={1000} totalPrice={5000} />
+        <Summary usage="ParentHome" currentSavings={1000} totalPrice={5000} /> */}
       </MarginTemplate>
     </Wrapper>
   );

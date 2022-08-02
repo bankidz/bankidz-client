@@ -2,23 +2,24 @@ import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@store/slices/walkingDongilSlice';
+import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface SuggestedDongilItemProps {
-  suggestedDongil: IDongil;
-  // onDeleteCheckOpen: () => void;
-  // setIdToDelete: Dispatch<SetStateAction<number | null>>;
+interface ProposedDongilItemProps {
+  proposedDongil: IDongil;
+  onApproveCheckOpen: () => void;
+  setIdToApprove: Dispatch<SetStateAction<number | null>>;
 }
 
-function SuggestedDongilItem({
-  suggestedDongil,
-}: // onDeleteCheckOpen,
-// setIdToDelete,
-SuggestedDongilItemProps) {
+function ProposedDongilItem({
+  proposedDongil,
+  onApproveCheckOpen,
+  setIdToApprove,
+}: ProposedDongilItemProps) {
   const { openModal } = useModals();
   const {
     id,
-    status,
     createdAt,
     interestRate,
     isMom,
@@ -27,12 +28,19 @@ SuggestedDongilItemProps) {
     totalPrice,
     weekPrice,
     weeks,
-    comment,
-  } = suggestedDongil;
+  } = proposedDongil;
 
-  // 제안중
-  function openQuinaryModal() {
-    openModal(modals.quinaryModal, {
+  const navigate = useNavigate();
+  function openQuaternaryModal() {
+    openModal(modals.quaternaryModal, {
+      onSubmit: () => {
+        navigate(`/reject/${id}`);
+      },
+      onExtraSubmit: () => {
+        setIdToApprove(id);
+        onApproveCheckOpen();
+      },
+      isKid: false,
       createdAt: createdAt,
       interestRate: interestRate,
       isMom: isMom,
@@ -44,36 +52,13 @@ SuggestedDongilItemProps) {
     });
   }
 
-  // 거절됨
-  // function openSenaryModal() {
-  //   openModal(modals.senaryModal, {
-  //     onSubmit: () => {
-  //       onDeleteCheckOpen();
-  //       setIdToDelete(id);
-  //     },
-  //     createdAt: createdAt,
-  //     interestRate: interestRate,
-  //     isMom: isMom,
-  //     itemName: itemName,
-  //     title: title,
-  //     totalPrice: totalPrice,
-  //     weekPrice: weekPrice,
-  //     weeks: weeks,
-  //     comment: comment?.content,
-  //   });
-  // }
-
-  function handleClick() {
-    // if (status === EDongilStatus.PENDING) {
-    //   openQuinaryModal();
-    // } else if (status === EDongilStatus.REJECTED) {
-    //   openSenaryModal();
-    // }
-  }
-
   return (
     <>
-      <StyledButton onClick={handleClick}>
+      <StyledButton
+        onClick={() => {
+          openQuaternaryModal();
+        }}
+      >
         <div className="text-wrapper">
           <span className="title">{title}</span>
           <span className="totalPrice">
@@ -88,7 +73,7 @@ SuggestedDongilItemProps) {
   );
 }
 
-export default SuggestedDongilItem;
+export default ProposedDongilItem;
 
 const StyledButton = styled.button`
   width: 100%;

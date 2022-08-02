@@ -100,7 +100,7 @@ function KidHome() {
   if (walkingDongilsStatus === 'loading') {
     walkingDongilsContent = <p>Loading...</p>;
   } else if (walkingDongilsStatus === 'succeeded') {
-    if (walkingDongils === []) {
+    if (walkingDongils?.length === 0) {
       walkingDongilsContent = (
         <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
       );
@@ -116,13 +116,13 @@ function KidHome() {
     walkingDongilsContent = <p>Failed</p>;
   }
 
-  // 대기중인 돈길 삭제
+  // 대기중인 돈길 삭제 (바텀시트, 모달)
   const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
   const canDelete =
     idToDelete !== null &&
     pendingDongils !== null &&
-    pendingDongils !== [] &&
+    pendingDongils.length !== 0 &&
     deleteStatus === 'idle';
 
   const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
@@ -158,7 +158,7 @@ function KidHome() {
   if (pendingDongilsStatus === 'loading') {
     pendingDongilsContent = <p>Loading...</p>;
   } else if (pendingDongilsStatus === 'succeeded') {
-    if (pendingDongils === []) {
+    if (pendingDongils?.length === 0) {
       pendingDongilsContent = <EmptyDongil property="pending" />;
     } else {
       pendingDongilsContent = (

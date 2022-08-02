@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import SuggestedDongilItem from './SuggestedDongilItem';
+import ProposedDongilItem from './ProposedDongilItem';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { EDongilStatus } from '@lib/types/common';
 
 export default {
-  title: 'home/suggested/SuggestedDongilItem',
-  component: SuggestedDongilItem,
+  title: 'home/proposed/ProposedDongilItem',
+  component: ProposedDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [
     (Story) => (
@@ -14,20 +14,20 @@ export default {
       </MarginTemplate>
     ),
   ],
-} as ComponentMeta<typeof SuggestedDongilItem>;
+} as ComponentMeta<typeof ProposedDongilItem>;
 
-const Template: ComponentStory<typeof SuggestedDongilItem> = (args) => (
-  <SuggestedDongilItem {...args} />
+const Template: ComponentStory<typeof ProposedDongilItem> = (args) => (
+  <ProposedDongilItem {...args} />
 );
 
 export const 제안중 = Template.bind({});
 제안중.args = {
-  suggestedDongil: {
+  proposedDongil: {
     id: 8,
     isMom: true,
     title: 'FE Mock) 아이패드 사기',
     itemName: '전자제품',
-    challengeCategoryName: '이자율 받기',
+    challengeCategory: '이자율 받기',
     isAchieved: 1,
     interestRate: 10,
     totalPrice: 150000,
@@ -52,12 +52,12 @@ export const 제안중 = Template.bind({});
 
 export const 거절됨 = Template.bind({});
 거절됨.args = {
-  suggestedDongil: {
+  proposedDongil: {
     id: 8,
     isMom: true,
     title: 'FE Mock) 아이패드 사기',
     itemName: '전자제품',
-    challengeCategoryName: '이자율 받기',
+    challengeCategory: '이자율 받기',
     isAchieved: 1,
     interestRate: 10,
     totalPrice: 150000,

@@ -14,7 +14,7 @@ export interface IDongil {
   isMom: boolean;
   title: string;
   itemName: TItemName;
-  challengeCategoryName: TChallengeCategory;
+  challengeCategory: TChallengeCategory;
   isAchieved: number;
   interestRate: TInterestRate;
   totalPrice: number;
@@ -132,4 +132,5 @@ export const selectWalkingDongils = (state: RootState) =>
   state.walkingDongils.walkingDongils;
 export const selectIsWalkingDongilsPatched = (state: RootState) =>
   state.walkingDongils.isWalkingDongilsPatched;
+
 export default walkingDongilsSlice.reducer;

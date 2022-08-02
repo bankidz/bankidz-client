@@ -6,8 +6,8 @@ import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import KidHome from './KidHome';
 import ParentHome from './ParentHome';
 import Create from './Create';
-import Walking from './Walking';
-import Pending from './Pending';
+import Detail from './Detail';
+import Reject from './Reject';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -32,25 +32,28 @@ function HomeRouter() {
           </ForegroundTemplate>
         }
       />
-      {/* 자녀 - 걷고있는 돈길 */}
+      {/* 자녀 / 부모 - 걷고있는 돈길 / 금주의 돈길 */}
       <Route
-        path="/walking/:id"
+        path="/detail/:id"
         element={
-          <ForegroundTemplate label="걷고있는 돈길" level={level}>
-            <Walking />
+          <ForegroundTemplate
+            label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
+            level={level}
+          >
+            <Detail />
           </ForegroundTemplate>
         }
       />
       {/* 부모 - 대기중인 돈길 */}
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
-        path="pending/:id"
+        path="reject/:id"
         element={
           isKid ? (
             <>부적절한 접근입니다.</>
           ) : (
             <ForegroundTemplate label="제안받은 돈길">
-              <Pending />
+              <Reject />
             </ForegroundTemplate>
           )
         }

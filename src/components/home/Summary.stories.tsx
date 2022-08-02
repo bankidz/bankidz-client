@@ -27,7 +27,7 @@ export const 자녀_홈 = Template.bind({});
 
 export const 걷고있는_돈길 = Template.bind({});
 걷고있는_돈길.args = {
-  usage: 'Walking',
+  usage: 'Detail',
   currentSavings: 10000,
   totalPrice: 150000,
 };

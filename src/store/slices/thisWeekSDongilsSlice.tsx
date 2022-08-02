@@ -51,7 +51,6 @@ export const thisWeekSDongilsSlice = createSlice({
             action.payload.data,
           );
         }
-        console.log(state.thisWeekSDongils);
       })
       .addCase(fetchThisWeekSDongils.rejected, (state, action) => {
         state.thisWeekSDongilsStatus = 'failed';
@@ -62,6 +61,8 @@ export const thisWeekSDongilsSlice = createSlice({
 
 export const selectThisWeekSDongilsStatus = (state: RootState) =>
   state.thisWeekSDongils.thisWeekSDongilsStatus;
+
 export const selectThisWeekSDongils = (state: RootState) =>
   state.thisWeekSDongils.thisWeekSDongils;
+
 export default thisWeekSDongilsSlice.reducer;

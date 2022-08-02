@@ -5,32 +5,69 @@ import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCo
 import Receipt from '@components/common/Receipt';
 import InterestStampList from '@components/home/walking/InterestStampList';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import SmallSpacer from '@components/layout/SmallSpacer';
+import LargeSpacer from '@components/layout/LargeSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { calcRatio } from '@lib/styles/theme';
 import { TPercent } from '@lib/types/kid';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectLevel } from '@store/slices/authSlice';
-import { selectKidSummary } from '@store/slices/kidSummarySlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { ISummary, selectKidSummary } from '@store/slices/kidSummarySlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { TFetchStatus } from '@lib/types/api';
-import { selectWalkingDongils } from '@store/slices/walkingDongilSlice';
+import {
+  IDongil,
+  selectWalkingDongils,
+} from '@store/slices/walkingDongilSlice';
 import Summary from '@components/home/Summary';
+import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
+import { TLevel } from '@lib/types/common';
+import { selectParentSummary } from '@store/slices/parentSummarySlice';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
 
-function KidWalking() {
+function Detail() {
   const { id } = useParams();
-  const level = useAppSelector(selectLevel);
+  const isKid = useAppSelector(selectIsKid);
+  const selectedKid = useAppSelector(selectSelectedKid);
+
+  let level: TLevel;
+  if (isKid === true) {
+    level = useAppSelector(selectLevel)!;
+  } else if (isKid === false) {
+    level = selectedKid?.level!;
+  }
   const colorByLevel = getColorByLevel(level!);
 
+  // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const walkingDongils = useAppSelector(selectWalkingDongils);
-  let targetDongil = walkingDongils?.find(
-    (walkingDongil) => walkingDongil.id === parseInt(id!),
-  );
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
+
+  let targetDongil: IDongil;
+  if (isKid === true) {
+    targetDongil = walkingDongils?.find(
+      (walkingDongil) => walkingDongil.id === parseInt(id!),
+    )!;
+  } else if (isKid === false) {
+    const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
+      selectedKid?.username!,
+    );
+    targetDongil = selectedKidSThisWeekSDongils?.find(
+      (selectedKidSThisWeekSDongil) =>
+        selectedKidSThisWeekSDongil.id === parseInt(id!),
+    )!;
+  }
+
+  function getSelectedKidSThisWeekSDongils(username: string) {
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+    );
+    return found?.challengeList;
+  }
+
   const {
     isMom,
     title,
@@ -43,9 +80,20 @@ function KidWalking() {
     progressList,
   } = targetDongil!;
 
-  const kidSummary = useAppSelector(selectKidSummary);
-  const { currentSavings } = kidSummary!;
-  const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
+  const { percent, currentSavings } = getSummaryData();
+  function getSummaryData() {
+    let Summary: ISummary;
+    if (isKid === true) {
+      Summary = useAppSelector(selectKidSummary)!;
+    } else if (isKid === false) {
+      Summary = useAppSelector(selectParentSummary)!;
+    }
+    return {
+      percent:
+        Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
+      currentSavings: Summary!.currentSavings,
+    };
+  }
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
@@ -114,7 +162,7 @@ function KidWalking() {
             </span>
             <div className="title">{title}</div>
             <Summary
-              usage="Walking"
+              usage="Detail"
               currentSavings={currentSavings}
               totalPrice={totalPrice}
             />
@@ -143,10 +191,12 @@ function KidWalking() {
                 />
               </div>
             </DongilContractContent>
-            <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
-              돈길 포기하기
-            </GiveUpDongilButton>
-            <SmallSpacer />
+            {isKid === true && (
+              <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
+                돈길 포기하기
+              </GiveUpDongilButton>
+            )}
+            <LargeSpacer />
           </FlexContainer>
         </MarginTemplate>
       </Content>
@@ -191,7 +241,7 @@ function KidWalking() {
   );
 }
 
-export default KidWalking;
+export default Detail;
 
 const Wrapper = styled.div`
   width: 100%;

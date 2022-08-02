@@ -2,20 +2,23 @@ import { IKid } from '@store/slices/familySlice';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as UsernameUnderline } from '@assets/borders/username-underline.svg';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import {
+  selectKids,
+  selectSelectedKid,
+  setSelectedKid,
+} from '@store/slices/kidsSlice';
 
-interface KidListProps {
-  kids: IKid[];
-  selectedKid: IKid;
-  setSelectedKid: Dispatch<SetStateAction<IKid | null>>;
-}
-
-function KidList({ kids, selectedKid, setSelectedKid }: KidListProps) {
+function KidList() {
+  const dispatch = useAppDispatch();
+  const kids = useAppSelector(selectKids);
+  const selectedKid = useAppSelector(selectSelectedKid);
   return (
     <Wrapper>
       {kids?.map((kid) => (
         <UsernameButton
           onClick={() => {
-            setSelectedKid(kid);
+            dispatch(setSelectedKid(kid));
           }}
           key={kid.username}
           className={kid === selectedKid ? 'active' : undefined}
