@@ -124,4 +124,5 @@ export const selectAccessToken = (state: RootState) =>
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
 export const selectLevel = (state: RootState) => state.auth.auth.level;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
+
 export default authSlice.reducer;

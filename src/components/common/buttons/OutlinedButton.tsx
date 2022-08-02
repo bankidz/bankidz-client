@@ -38,14 +38,16 @@ const Wrapper = styled.button<{
   width: 154px;
   height: 40px;
   border-radius: ${({ theme }) => theme.radius.medium};
-  border: 2px solid ${({ theme }) => theme.palette.main.yellow300};
+  border: 2px solid
+    ${({ theme, state }) =>
+      state ? theme.palette.main.yellow300 : theme.palette.greyScale.grey300};
 
   cursor: pointer;
   p {
     ${({ theme }) => theme.typo.button.Secondary_T_13_EB};
-    color: ${({ theme }) => theme.palette.main.yellow400};
+    color: ${({ theme, state }) =>
+      state ? theme.palette.main.yellow400 : theme.palette.greyScale.grey400};
   }
-  color: ${({ theme }) => theme.palette.greyScale.white};
 
   background-color: transparent;
 

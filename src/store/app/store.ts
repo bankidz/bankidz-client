@@ -7,6 +7,7 @@ import walkingDongilsReducer from '../slices/walkingDongilSlice';
 import pendingDongilsReducer from '../slices/pendingDongilSlice';
 import familyReducer from '../slices/familySlice';
 import parentSummaryReducer from '../slices/parentSummarySlice';
+import kidOverViewReducer from '@store/slices/kidOverViewSlice';
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     pendingDongils: pendingDongilsReducer,
     family: familyReducer,
     parentSummary: parentSummaryReducer,
+    kidOverView: kidOverViewReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
