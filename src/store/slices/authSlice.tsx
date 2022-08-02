@@ -118,6 +118,7 @@ export const authSlice = createSlice({
 
 export const { setCredentials, resetCredentials, setBirthday } =
   authSlice.actions;
+
 export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
   state.auth.auth.accessToken;

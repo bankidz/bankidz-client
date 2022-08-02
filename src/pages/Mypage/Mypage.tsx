@@ -10,7 +10,6 @@ import { selectIsKid } from '@store/slices/authSlice';
 import {
   fetchKids,
   fetchFamily,
-  selectKidsStatus,
   selectFamilyStatus,
   selectFamily,
 } from '@store/slices/familySlice';

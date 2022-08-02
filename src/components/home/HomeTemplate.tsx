@@ -8,27 +8,27 @@ import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { TLevel } from '@lib/types/common';
+import {
+  selectHasMultipleKids,
+  selectSelectedKid,
+} from '@store/slices/kidsSlice';
 
 type TUsage = 'KidHome' | 'ParentHome';
 
 interface KidHomeProps {
   children: React.ReactNode;
   usage: TUsage;
-  hasMultipleKids?: boolean | undefined;
-  selectedLevel?: TLevel;
 }
 
-function HomeTemplate({
-  children,
-  usage,
-  hasMultipleKids,
-  selectedLevel,
-}: KidHomeProps) {
+function HomeTemplate({ children, usage }: KidHomeProps) {
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
+
   let level: TLevel = 1;
   if (usage === 'KidHome') {
     level = useAppSelector(selectLevel)!;
   } else if (usage === 'ParentHome') {
-    level = selectedLevel!;
+    level = selectedKid?.level!;
   }
   const colorByLevel = getColorByLevel(level!);
   return (

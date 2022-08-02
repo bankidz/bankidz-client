@@ -1,5 +1,5 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
-import styled from 'styled-components';
+import styled, { ThemeContext } from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useEffect, useState } from 'react';
@@ -7,10 +7,11 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import {
   fetchKids,
-  IKid,
+  selectHasMultipleKids,
   selectKids,
   selectKidsStatus,
-} from '@store/slices/familySlice';
+  selectSelectedKid,
+} from '@store/slices/kidsSlice';
 import { TLevel } from '@lib/types/common';
 import KidList from '@components/home/KidList';
 import Summary from '@components/home/Summary';
@@ -34,6 +35,7 @@ import {
   selectProposedDongils,
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
+import { theme } from '@lib/styles/theme';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -43,12 +45,10 @@ function ParentHome() {
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
 
-  const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
-  const [hasMultipleKids, setHasMultipleKids] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
-  const [selectedLevel, setSelectedLevel] = useState<TLevel>(1);
 
+  // when mounted
   useEffect(() => {
     async function hydrate() {
       try {
@@ -57,18 +57,6 @@ function ParentHome() {
         if (kidsStatus === 'idle') {
           response = await dispatch(fetchKids({ axiosPrivate })).unwrap();
         }
-
-        if (response.data === []) {
-          setSelectedKid(null);
-        } else {
-          setSelectedKid(response.data[0]); // init with the first kid
-          setSelectedLevel(response.data[0].level); // init with the first kid's level
-        }
-
-        if (response.data.length >= 2) {
-          setHasMultipleKids(true);
-        }
-
         // GET: 첫번째 자녀의 Summary 데이터 조회
         parentSummaryStatus === 'idle' &&
           (await dispatch(
@@ -100,27 +88,30 @@ function ParentHome() {
     hydrate();
   }, []);
 
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
+  function handleClick() {
+    console.log('selectedKid: ', selectedKid);
+    console.log('hasMultipleKids: ', hasMultipleKids);
+  }
+
   // 자녀 목록
   let kidsContent;
   if (kidsStatus === 'loading') {
     kidsContent = <p>Loading</p>;
   } else if (kidsStatus === 'succeeded') {
-    kidsContent = (
-      <KidList
-        kids={kids!}
-        selectedKid={selectedKid!}
-        setSelectedKid={setSelectedKid}
-      />
-    );
+    kidsContent = <KidList />;
   } else if (kidsContent === 'failed') {
     kidsContent = <p>Failed</p>;
   }
 
   // 선택한 자녀에 따라 Level 업데이트
+  const [colorByLevel, setColorByLevel] = useState<string>(
+    theme.palette.greyScale.grey100,
+  );
   useEffect(() => {
-    selectedKid && setSelectedLevel(selectedKid.level);
+    setColorByLevel(getColorByLevel(selectedKid?.level!));
   }, [selectedKid]);
-  const colorByLevel = getColorByLevel(selectedLevel);
 
   // GET: 부모 홈 페이지 Summary 컴포넌트를 위한 주간 진행상황 fetch
   // useEffect(() => {
@@ -169,21 +160,13 @@ function ParentHome() {
     parentSummaryContent = <p>Failed</p>;
   }
 
-  const proposedDongils = useAppSelector(selectProposedDongils);
-  function getKidSProposedDongils(username: string) {
-    console.log('username: ', username);
-    const found = proposedDongils?.find(
-      (proposedDongil) => proposedDongil.userName === username,
-    );
-    return found?.challengeList;
-  }
-
   // 제안받은 돈길
+  const proposedDongils = useAppSelector(selectProposedDongils);
   let proposedDongilsContent;
   if (proposedDongilsStatus === 'loading') {
     proposedDongilsContent = <p>Loading...</p>;
   } else if (proposedDongilsStatus === 'succeeded') {
-    const selectedKidSProposedDongils = getKidSProposedDongils(
+    const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
     );
     if (proposedDongils === []) {
@@ -197,16 +180,15 @@ function ParentHome() {
     proposedDongilsContent = <p>Failed</p>;
   }
 
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-  function getSelectedKidSThisWeekSDongils(username: string) {
-    console.log('username: ', username);
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+  function getSelectedKidSProposedDongils(username: string) {
+    const found = proposedDongils?.find(
+      (proposedDongil) => proposedDongil.userName === username,
     );
     return found?.challengeList;
   }
 
   // 금주의 돈길
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
   let thisWeekSDongilsContent;
   if (proposedDongilsStatus === 'loading') {
     thisWeekSDongilsContent = <p>Loading...</p>;
@@ -225,24 +207,22 @@ function ParentHome() {
     thisWeekSDongilsContent = <p>Failed</p>;
   }
 
-  // function handleClick() {
-  //   console.log('selectedKid: ', selectedKid);
-  //   console.log('selectedLevel: ', selectedLevel);
-  // }
+  function getSelectedKidSThisWeekSDongils(username: string) {
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+    );
+    return found?.challengeList;
+  }
 
   return (
     <>
-      {/* <button onClick={handleClick}>Test</button> */}
+      <button onClick={handleClick}>Test</button>
       {hasMultipleKids === true && (
         <KidListWrapper colorByLevel={colorByLevel}>
           {kidsContent}
         </KidListWrapper>
       )}
-      <HomeTemplate
-        usage="ParentHome"
-        hasMultipleKids={hasMultipleKids}
-        selectedLevel={selectedLevel}
-      >
+      <HomeTemplate usage="ParentHome">
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
           <ProposedDongilsWrapper>

@@ -25,28 +25,26 @@ import {
 } from '@store/slices/walkingDongilSlice';
 import Summary from '@components/home/Summary';
 import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
-import { selectKids } from '@store/slices/familySlice';
 import { TLevel } from '@lib/types/common';
 import { selectParentSummary } from '@store/slices/parentSummarySlice';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
 
 function Walking() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
+  const selectedKid = useAppSelector(selectSelectedKid);
 
   let level: TLevel;
   if (isKid === true) {
     level = useAppSelector(selectLevel)!;
   } else if (isKid === false) {
-    // TODO: API 추가?
-    // 선택한 돈길을 생성한 자녀의 레벨
-    level = 4;
+    level = selectedKid?.level!;
   }
   const colorByLevel = getColorByLevel(level!);
 
-  // 자녀 - 걷고있는 돈길
+  // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const walkingDongils = useAppSelector(selectWalkingDongils);
-  // 부모 - 금주의 돈길
-  const thisWeeksDongils = useAppSelector(selectThisWeekSDongils);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
 
   let targetDongil: IDongil;
   if (isKid === true) {
@@ -54,27 +52,20 @@ function Walking() {
       (walkingDongil) => walkingDongil.id === parseInt(id!),
     )!;
   } else if (isKid === false) {
-    targetDongil = getTargetDongil();
+    const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
+      selectedKid?.username!,
+    );
+    targetDongil = selectedKidSThisWeekSDongils?.find(
+      (selectedKidSThisWeekSDongil) =>
+        selectedKidSThisWeekSDongil.id === parseInt(id!),
+    )!;
   }
 
-  function getTargetDongil(): IDongil {
-    let i;
-    let j;
-    let targetDongil: IDongil;
-    if (thisWeeksDongils) {
-      i = 0;
-      while (thisWeeksDongils[i]) {
-        j = 0;
-        while (thisWeeksDongils[i].challengeList[j]) {
-          if (thisWeeksDongils[i].challengeList[j].id === parseInt(id!)) {
-            targetDongil = thisWeeksDongils[i].challengeList[j];
-          }
-          ++j;
-        }
-        ++i;
-      }
-    }
-    return targetDongil!;
+  function getSelectedKidSThisWeekSDongils(username: string) {
+    const found = thisWeekSDongils?.find(
+      (thisWeekSDongil) => thisWeekSDongil.userName === username,
+    );
+    return found?.challengeList;
   }
 
   const {
@@ -89,16 +80,19 @@ function Walking() {
     progressList,
   } = targetDongil!;
 
-  const percent = getPercent();
-  function getPercent() {
+  const { percent, currentSavings } = getSummaryData();
+  function getSummaryData() {
     let Summary: ISummary;
-    let currentSavings;
     if (isKid === true) {
       Summary = useAppSelector(selectKidSummary)!;
     } else if (isKid === false) {
       Summary = useAppSelector(selectParentSummary)!;
     }
-    return Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10;
+    return {
+      percent:
+        Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
+      currentSavings: Summary!.currentSavings,
+    };
   }
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
@@ -167,11 +161,11 @@ function Walking() {
               {progressList?.length}주차 도전중
             </span>
             <div className="title">{title}</div>
-            {/* <Summary
+            <Summary
               usage="Walking"
               currentSavings={currentSavings}
               totalPrice={totalPrice}
-            /> */}
+            />
 
             <InterestStampListWrapper>
               <div className="text-wrapper">

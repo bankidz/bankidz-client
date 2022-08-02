@@ -63,6 +63,8 @@ export const pendingDongilsSlice = createSlice({
 
 export const selectPendingDongilsStatus = (state: RootState) =>
   state.pendingDongils.pendingDongilsStatus;
+
 export const selectPendingDongils = (state: RootState) =>
   state.pendingDongils.pendingDongils;
+
 export default pendingDongilsSlice.reducer;

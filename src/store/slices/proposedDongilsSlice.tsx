@@ -132,7 +132,6 @@ export const proposedDongilsSlice = createSlice({
             action.payload.data,
           );
         }
-        console.log(state.proposedDongils);
       })
       .addCase(fetchProposedDongils.rejected, (state, action) => {
         state.proposedDongilsStatus = 'failed';
@@ -143,8 +142,10 @@ export const proposedDongilsSlice = createSlice({
 
 export const selectProposedDongilsStatus = (state: RootState) =>
   state.proposedDongils.proposedDongilsStatus;
+
 export const selectProposedDongils = (state: RootState) =>
   state.proposedDongils.proposedDongils;
+
 export default proposedDongilsSlice.reducer;
 
 // https://github.com/reduxjs/reselect#q-how-do-i-create-a-selector-that-takes-an-argument

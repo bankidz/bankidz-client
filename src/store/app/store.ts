@@ -10,6 +10,7 @@ import parentSummaryReducer from '../slices/parentSummarySlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
 import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
 import kidOverViewReducer from '@store/slices/kidOverViewSlice';
+import kidsReducer from '../slices/kidsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     proposedDongils: proposedDongilsReducer,
     thisWeekSDongils: thisWeekSDongilsReducer,
     kidOverView: kidOverViewReducer,
+    kids: kidsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',

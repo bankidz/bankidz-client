@@ -47,6 +47,8 @@ export const parentSummarySlice = createSlice({
 
 export const selectParentSummaryStatus = (state: RootState) =>
   state.parentSummary.parentSummaryStatus;
+
 export const selectParentSummary = (state: RootState) =>
   state.parentSummary.parentSummary;
+
 export default parentSummarySlice.reducer;
