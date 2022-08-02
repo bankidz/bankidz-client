@@ -1,25 +1,25 @@
 import { IDongil } from '@store/slices/walkingDongilSlice';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import PendingDongilItem from './SuggestedDongilItem';
+import PendingDongilItem from './ProposedDongilItem';
 
 interface PendingDongilListProps {
-  suggestedDongils: IDongil[];
+  proposedDongils: IDongil[];
   // onDeleteCheckOpen?: () => void;
   // setIdToDelete?: Dispatch<SetStateAction<number | null>>;
 }
 
-function SuggestedDongilList({
-  suggestedDongils,
+function ProposedDongilList({
+  proposedDongils,
 }: // onDeleteCheckOpen,
 // setIdToDelete,
 PendingDongilListProps) {
   return (
     <Wrapper>
-      {suggestedDongils?.map((suggestedDongil) => (
+      {proposedDongils?.map((proposedDongil) => (
         <PendingDongilItem
-          key={suggestedDongil.id}
-          suggestedDongil={suggestedDongil}
+          key={proposedDongil.id}
+          proposedDongil={proposedDongil}
           // onDeleteCheckOpen={onDeleteCheckOpen}
           // setIdToDelete={setIdToDelete}
         />
@@ -28,7 +28,7 @@ PendingDongilListProps) {
   );
 }
 
-export default SuggestedDongilList;
+export default ProposedDongilList;
 
 const Wrapper = styled.div`
   display: flex;

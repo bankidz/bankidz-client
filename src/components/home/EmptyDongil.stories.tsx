@@ -26,7 +26,7 @@ export const 대기중인_돈길이_없어요 = Template.bind({});
 
 export const 제안받은_돈길이_없어요 = Template.bind({});
 제안받은_돈길이_없어요.args = {
-  property: 'suggested',
+  property: 'proposed',
 };
 
 export const 걷고있는_돈길이_없어요 = Template.bind({});

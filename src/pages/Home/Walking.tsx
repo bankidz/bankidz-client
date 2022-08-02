@@ -12,25 +12,35 @@ import { TPercent } from '@lib/types/kid';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectLevel } from '@store/slices/authSlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import { selectKidSummary } from '@store/slices/kidSummarySlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { TFetchStatus } from '@lib/types/api';
-import { selectWalkingDongils } from '@store/slices/walkingDongilSlice';
+import {
+  IDongil,
+  selectWalkingDongils,
+} from '@store/slices/walkingDongilSlice';
 import Summary from '@components/home/Summary';
 
 function KidWalking() {
   const { id } = useParams();
   const level = useAppSelector(selectLevel);
   const colorByLevel = getColorByLevel(level!);
-
   const walkingDongils = useAppSelector(selectWalkingDongils);
-  let targetDongil = walkingDongils?.find(
-    (walkingDongil) => walkingDongil.id === parseInt(id!),
-  );
+  const isKid = useAppSelector(selectIsKid);
+
+  let targetDongil: IDongil;
+  if (isKid === true) {
+    targetDongil = walkingDongils?.find(
+      (walkingDongil) => walkingDongil.id === parseInt(id!),
+    )!;
+  } else if (isKid === false) {
+    // 금주의 돈길에서
+  }
+
   const {
     isMom,
     title,

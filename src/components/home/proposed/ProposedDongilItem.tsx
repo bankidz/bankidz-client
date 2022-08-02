@@ -4,17 +4,17 @@ import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@store/slices/walkingDongilSlice';
 import styled from 'styled-components';
 
-interface SuggestedDongilItemProps {
-  suggestedDongil: IDongil;
+interface ProposedDongilItemProps {
+  proposedDongil: IDongil;
   // onDeleteCheckOpen: () => void;
   // setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function SuggestedDongilItem({
-  suggestedDongil,
+function ProposedDongilItem({
+  proposedDongil,
 }: // onDeleteCheckOpen,
 // setIdToDelete,
-SuggestedDongilItemProps) {
+ProposedDongilItemProps) {
   const { openModal } = useModals();
   const {
     id,
@@ -28,7 +28,7 @@ SuggestedDongilItemProps) {
     weekPrice,
     weeks,
     comment,
-  } = suggestedDongil;
+  } = proposedDongil;
 
   // 제안중
   function openQuinaryModal() {
@@ -88,7 +88,7 @@ SuggestedDongilItemProps) {
   );
 }
 
-export default SuggestedDongilItem;
+export default ProposedDongilItem;
 
 const StyledButton = styled.button`
   width: 100%;

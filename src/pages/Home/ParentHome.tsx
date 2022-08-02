@@ -21,26 +21,26 @@ import {
 } from '@store/slices/parentSummarySlice';
 import HomeTemplate from '@components/home/HomeTemplate';
 import {
-  fetchSuggestedDongils,
-  selectSuggestedDongils,
-  selectSuggestedDongilsStatus,
-} from '@store/slices/suggestedDongilsSlice';
-import {
   fetchThisWeekSDongils,
   selectThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
 import EmptyDongil from '@components/home/EmptyDongil';
-import SuggestedDongilList from '@components/home/suggested/SuggestedDongilList';
+import ProposedDongilList from '@components/home/proposed/ProposedDongilList';
 import { useSelector } from 'react-redux';
 import ThisWeekSDongilList from '@components/home/thisWeekS/ThisWeekSDongilList';
+import {
+  fetchProposedDongils,
+  selectProposedDongils,
+  selectProposedDongilsStatus,
+} from '@store/slices/proposedDongilsSlice';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
   const kids = useAppSelector(selectKids);
   const parentSummaryStatus = useAppSelector(selectParentSummaryStatus);
   const parentSummary = useAppSelector(selectParentSummary);
-  const suggestedDongilsStatus = useAppSelector(selectSuggestedDongilsStatus);
+  const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
 
   const [selectedKid, setSelectedKid] = useState<IKid | null>(null);
@@ -78,9 +78,9 @@ function ParentHome() {
             }),
           ).unwrap());
         // GET: 첫번째 자녀의 제안받은 돈길 조회
-        suggestedDongilsStatus === 'idle' &&
+        proposedDongilsStatus === 'idle' &&
           (await dispatch(
-            fetchSuggestedDongils({
+            fetchProposedDongils({
               axiosPrivate,
               kidId: response.data[0].kidId,
             }),
@@ -169,32 +169,32 @@ function ParentHome() {
     parentSummaryContent = <p>Failed</p>;
   }
 
-  const suggestedDongils = useAppSelector(selectSuggestedDongils);
-  function getSelectedKidSSuggestedDongils(username: string) {
+  const proposedDongils = useAppSelector(selectProposedDongils);
+  function getProposedKidSSuggestedDongils(username: string) {
     console.log('username: ', username);
-    const found = suggestedDongils?.find(
-      (suggestedDongil) => suggestedDongil.userName === username,
+    const found = proposedDongils?.find(
+      (proposedDongil) => proposedDongil.userName === username,
     );
     return found?.challengeList;
   }
 
   // 제안받은 돈길
-  let suggestedDongilsContent;
-  if (suggestedDongilsStatus === 'loading') {
-    suggestedDongilsContent = <p>Loading...</p>;
-  } else if (suggestedDongilsStatus === 'succeeded') {
-    const selectedKidSSuggestedDongils = getSelectedKidSSuggestedDongils(
+  let proposedDongilsContent;
+  if (proposedDongilsStatus === 'loading') {
+    proposedDongilsContent = <p>Loading...</p>;
+  } else if (proposedDongilsStatus === 'succeeded') {
+    const selectedKidSSuggestedDongils = getProposedKidSSuggestedDongils(
       selectedKid?.username!,
     );
-    if (suggestedDongils === []) {
-      suggestedDongilsContent = <EmptyDongil property="suggested" />;
+    if (proposedDongils === []) {
+      proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
-      suggestedDongilsContent = (
-        <SuggestedDongilList suggestedDongils={selectedKidSSuggestedDongils!} />
+      proposedDongilsContent = (
+        <ProposedDongilList proposedDongils={selectedKidSSuggestedDongils!} />
       );
     }
-  } else if (suggestedDongilsStatus === 'failed') {
-    suggestedDongilsContent = <p>Failed</p>;
+  } else if (proposedDongilsStatus === 'failed') {
+    proposedDongilsContent = <p>Failed</p>;
   }
 
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
@@ -208,20 +208,20 @@ function ParentHome() {
 
   // 금주의 돈길
   let thisWeekSDongilsContent;
-  if (suggestedDongilsStatus === 'loading') {
+  if (proposedDongilsStatus === 'loading') {
     thisWeekSDongilsContent = <p>Loading...</p>;
-  } else if (suggestedDongilsStatus === 'succeeded') {
+  } else if (proposedDongilsStatus === 'succeeded') {
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
-    if (suggestedDongils === []) {
+    if (proposedDongils === []) {
       thisWeekSDongilsContent = <EmptyDongil property="thisWeekS" />;
     } else {
       thisWeekSDongilsContent = (
         <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
       );
     }
-  } else if (suggestedDongilsStatus === 'failed') {
+  } else if (proposedDongilsStatus === 'failed') {
     thisWeekSDongilsContent = <p>Failed</p>;
   }
 
@@ -247,7 +247,7 @@ function ParentHome() {
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
           <SuggestedDongilsWrapper>
             <header>제안받은 돈길</header>
-            {suggestedDongilsContent}
+            {proposedDongilsContent}
           </SuggestedDongilsWrapper>
           <ThisWeekSDongilWrapper>
             <header>금주의 돈길</header>
