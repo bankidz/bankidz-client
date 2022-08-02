@@ -27,7 +27,7 @@ function Mypage() {
   const isKid = useAppSelector(selectIsKid)!;
   const familyStatus = useAppSelector(selectFamilyStatus);
   const family = useAppSelector(selectFamily);
-  const kidOverView = useAppSelector(selectKidOverView);
+  const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
   useEffect(() => {
     const fetch = async () => {
       try {
