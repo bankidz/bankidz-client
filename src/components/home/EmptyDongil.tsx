@@ -1,18 +1,30 @@
 import styled from 'styled-components';
 import { ReactComponent as BankiSad } from '@assets/illusts/banki/banki_sad.svg';
 
-function EmptyPendingDongil() {
+interface EmptyDongilProps {
+  property: 'pending' | 'suggested' | 'thisWeekS';
+}
+
+function EmptyDongil({ property }: EmptyDongilProps) {
+  let subject;
+  if (property === 'pending') {
+    subject = '대기중인';
+  } else if (property === 'suggested') {
+    subject = '제안받은';
+  } else if (property === 'thisWeekS') {
+    subject = '걷고있는';
+  }
   return (
     <Wrapper>
       <button>
         <BankiSad />
       </button>
-      <span>대기중인 돈길이 없어요</span>
+      <span>{`${subject} 돈길이 없어요`}</span>
     </Wrapper>
   );
 }
 
-export default EmptyPendingDongil;
+export default EmptyDongil;
 
 const Wrapper = styled.div`
   width: 100%;

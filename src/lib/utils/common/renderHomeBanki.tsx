@@ -12,7 +12,7 @@ function renderHomeBanki(level: TLevel) {
     return <Level2 />;
   } else if (level === 3) {
     return <Level3 />;
-  } else if (level === 4 || level === 6) {
+  } else if (level === 0 || level === 4) {
     return <Level4 />;
   } else if (level === 5) {
     return <Level5 />;

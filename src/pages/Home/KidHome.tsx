@@ -1,14 +1,9 @@
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useNavigate } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
+import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import LevelBadge from '@components/common/badges/LevelBadge';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectLevel } from '@store/slices/authSlice';
-import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
-import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import { Children, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   fetchKidSummary,
   selectKidSummary,
@@ -34,10 +29,10 @@ import { TFetchStatus } from '@lib/types/api';
 import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
 import WalkingDongilList from '@components/home/walking/WalkingDongilList';
 import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';
-import EmptyPendingDongil from '@components/home/pending/EmptyPendingDongil';
 import PendingDongilList from '@components/home/pending/PendingDongilList';
 import Summary from '@components/home/Summary';
 import HomeTemplate from '@components/home/HomeTemplate';
+import EmptyDongil from '@components/home/EmptyDongil';
 import {
   fetchFamily,
   selectParents,
@@ -57,19 +52,23 @@ function KidHome() {
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function hydrate() {
-      kidSummaryStatus === 'idle' &&
-        (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
-      walkingDongilsStatus === 'idle' &&
-        (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
-      pendingDongilsStatus === 'idle' &&
-        (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
-      familyStatus === 'idle' &&
-        (await dispatch(fetchFamily({ axiosPrivate })).unwrap());
+      try {
+        kidSummaryStatus === 'idle' &&
+          (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
+        walkingDongilsStatus === 'idle' &&
+          (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
+        pendingDongilsStatus === 'idle' &&
+          (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
+        familyStatus === 'idle' &&
+          (await dispatch(fetchFamily({ axiosPrivate })).unwrap());
+      } catch (error: any) {
+        console.log(error.message);
+      }
     }
     hydrate();
   }, []);
 
-  // 주간 진행상황;
+  // 주간 진행상황
   let kidSummaryContent;
   if (kidSummaryStatus === 'loading') {
     kidSummaryContent = (
@@ -160,7 +159,7 @@ function KidHome() {
     pendingDongilsContent = <p>Loading...</p>;
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils === []) {
-      pendingDongilsContent = <EmptyPendingDongil />;
+      pendingDongilsContent = <EmptyDongil property="pending" />;
     } else {
       pendingDongilsContent = (
         <PendingDongilList
@@ -210,9 +209,12 @@ function KidHome() {
 
 export default KidHome;
 
+const SummaryWrapper = styled.div`
+  margin-top: 198px;
+`;
+
 const WalkingDongilsWrapper = styled.div`
   margin-top: 48px;
-
   header {
     width: 100%;
     height: 16px;
@@ -224,7 +226,6 @@ const WalkingDongilsWrapper = styled.div`
 
 const WaitingDongilWrapper = styled.div`
   margin-top: 48px;
-
   header {
     width: 100%;
     height: 16px;
@@ -232,8 +233,4 @@ const WaitingDongilWrapper = styled.div`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
     ${({ theme }) => theme.palette.greyScale.black};
   }
-`;
-
-const SummaryWrapper = styled.div`
-  margin-top: 198px;
 `;
