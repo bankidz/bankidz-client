@@ -1,3 +1,4 @@
+import LargeSpacer from '@components/layout/LargeSpacer';
 import WalkDefault from '@components/walk/WalkDefault';
 import WalkError from '@components/walk/WalkError';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -35,5 +36,7 @@ export default Walk;
 const Wrapper = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.palette.greyScale.white};
-  height: calc(var(--vh, 1vh) * 100);
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
 `;
