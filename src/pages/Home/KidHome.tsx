@@ -116,7 +116,7 @@ function KidHome() {
     walkingDongilsContent = <p>Failed</p>;
   }
 
-  // 대기중인 돈길 삭제
+  // 대기중인 돈길 삭제 (바텀시트, 모달)
   const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
   const canDelete =

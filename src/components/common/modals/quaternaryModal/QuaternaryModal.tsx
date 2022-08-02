@@ -21,12 +21,12 @@ interface QuaternaryModalProps {
    * */
   isKid?: boolean;
   /**
-   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * submit (자녀의 경우 제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
-   * 부모의 경우 '수락하기' 버튼 선택 시 처리된 비즈니스 로직을 포함하는 함수 입니다.
+   * 부모의 경우 '거절하기' 버튼 선택 시 처리될 비즈니스 로직을 포함하는 함수 입니다.
    * */
   onSubmit?: any;
-  /** 부모의 경우 '거절하기' 버튼 선택 시 처리될 비즈니스 로직을 포함하는 함수 입니다. */
+  /** 부모의 경우 '수락하기' 버튼 선택 시 처리된 비즈니스 로직을 포함하는 함수 입니다. */
   onExtraSubmit?: any;
   createdAt: string;
   interestRate: number;

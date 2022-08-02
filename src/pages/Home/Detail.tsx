@@ -29,7 +29,7 @@ import { TLevel } from '@lib/types/common';
 import { selectParentSummary } from '@store/slices/parentSummarySlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 
-function Walking() {
+function Detail() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -162,7 +162,7 @@ function Walking() {
             </span>
             <div className="title">{title}</div>
             <Summary
-              usage="Walking"
+              usage="Detail"
               currentSavings={currentSavings}
               totalPrice={totalPrice}
             />
@@ -241,7 +241,7 @@ function Walking() {
   );
 }
 
-export default Walking;
+export default Detail;
 
 const Wrapper = styled.div`
   width: 100%;

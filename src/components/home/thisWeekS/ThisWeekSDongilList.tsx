@@ -1,13 +1,14 @@
 import { TItemName } from '@lib/types/kid';
 import { IDongil } from '@store/slices/walkingDongilSlice';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';
 
-function ThisWeekSDongilList({
-  thisWeekSDongils,
-}: {
+interface ThisWeekSDongilListProps {
   thisWeekSDongils: IDongil[];
-}) {
+}
+
+function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
   return (
     <Wrapper>
       {thisWeekSDongils?.map((thisWeekSDongil) => (

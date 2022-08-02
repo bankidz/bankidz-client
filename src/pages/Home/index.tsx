@@ -7,7 +7,7 @@ import KidHome from './KidHome';
 import ParentHome from './ParentHome';
 import Create from './Create';
 import Detail from './Detail';
-import Pending from './Pending';
+import Reject from './Reject';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -47,13 +47,13 @@ function HomeRouter() {
       {/* 부모 - 대기중인 돈길 */}
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
-        path="pending/:id"
+        path="reject/:id"
         element={
           isKid ? (
             <>부적절한 접근입니다.</>
           ) : (
             <ForegroundTemplate label="제안받은 돈길">
-              <Pending />
+              <Reject />
             </ForegroundTemplate>
           )
         }
