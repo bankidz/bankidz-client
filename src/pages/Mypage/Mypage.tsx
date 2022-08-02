@@ -21,7 +21,7 @@ import {
 } from '@store/slices/kidOverViewSlice';
 import { selectKids } from '@store/slices/kidsSlice';
 import { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const DemoKidsRecordData = [
   {
@@ -70,7 +70,7 @@ function Mypage() {
             <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
           </Section>
         ) : (
-          <Section>
+          <Section smallGap={true}>
             <h2>자녀기록</h2>
             {/* {kids.map((kids) => (
               <></>
@@ -111,8 +111,13 @@ const Header = styled.div`
   z-index: 5;
 `;
 
-const Section = styled.div`
+const Section = styled.div<{ smallGap?: boolean }>`
   margin-top: 80px;
+  ${({ smallGap }) =>
+    smallGap &&
+    css`
+      margin-top: 48px;
+    `}
   & > h2 {
     ${({ theme }) => theme.typo.text.T_16_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
