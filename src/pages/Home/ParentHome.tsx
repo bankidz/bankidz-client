@@ -32,6 +32,7 @@ import {
 } from '@store/slices/thisWeekSDongilsSlice';
 import EmptyDongil from '@components/home/EmptyDongil';
 import SuggestedDongilList from '@components/home/suggested/SuggestedDongilList';
+import { useSelector } from 'react-redux';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -167,22 +168,42 @@ function ParentHome() {
     parentSummaryContent = <p>Failed</p>;
   }
 
-  // slice 안에서는 배열로 관리되지만 사용할때는 자녀에 맞게 다시 가져오도록 수정
   const suggestedDongils = useAppSelector(selectSuggestedDongils);
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
+
+  function getSelectedKidSSuggestedDongils(username: string) {
+    console.log('username: ', username);
+    const found = suggestedDongils?.find(
+      (suggestedDongil) => suggestedDongil.userName === username,
+    );
+    return found?.challengeList;
+  }
 
   // 제안받은 돈길
   let suggestedDongilsContent;
   if (suggestedDongilsStatus === 'loading') {
     suggestedDongilsContent = <p>Loading...</p>;
   } else if (suggestedDongilsStatus === 'succeeded') {
+    // console.log('selectedKid: ', selectedKid);
+    // console.log('suggestedDongils: ', suggestedDongils);
+    const selectedKidSSuggestedDongils = getSelectedKidSSuggestedDongils(
+      selectedKid?.username!,
+    );
+    // console.log(
+    //   'selectedKidSSuggestedDongils: ',
+    //   selectedKidSSuggestedDongils?.challengeList,
+    // );
+
     if (suggestedDongils === []) {
       suggestedDongilsContent = <EmptyDongil property="suggested" />;
     } else {
-      suggestedDongilsContent = suggestedDongils && (
-        <SuggestedDongilList
-          suggestedDongils={suggestedDongils[0].challengeList}
-        />
+      // suggestedDongilsContent = suggestedDongils && (
+      //   <SuggestedDongilList
+      //     suggestedDongils={suggestedDongils[0].challengeList}
+      //   />
+      // );
+      suggestedDongilsContent = (
+        <SuggestedDongilList suggestedDongils={selectedKidSSuggestedDongils!} />
       );
     }
   } else if (suggestedDongilsStatus === 'failed') {

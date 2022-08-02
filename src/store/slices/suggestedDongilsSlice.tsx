@@ -1,11 +1,16 @@
 import { TFetchStatus } from '@lib/types/api';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSelector,
+  createSlice,
+} from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { any } from 'prop-types';
 import { RootState } from '../app/store';
 import { IDongil } from './walkingDongilSlice';
 
 interface ISuggestedDongil {
-  username: string;
+  userName: string;
   isFemale: boolean;
   challengeList: IDongil[];
 }
@@ -65,3 +70,7 @@ export const selectSuggestedDongilsStatus = (state: RootState) =>
 export const selectSuggestedDongils = (state: RootState) =>
   state.suggestedDongils.suggestedDongils;
 export default suggestedDongilsSlice.reducer;
+
+// https://github.com/reduxjs/reselect#q-how-do-i-create-a-selector-that-takes-an-argument
+// https://kyounghwan01.github.io/blog/React/redux/redux-toolkit/#createslice
+// https://velog.io/@vvvvwvvvv/React-21.-Redux-Saga-createSlicecreateSelector-%EC%A0%81%EC%9A%A9

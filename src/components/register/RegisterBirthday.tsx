@@ -228,7 +228,7 @@ const ButtonWrapper = styled.div`
   width: 100%;
   bottom: 0;
   left: 0;
-  margin-bottom: 17px;
+  margin-bottom: 18px;
   padding-left: 18px;
   padding-right: 18px;
 `;
