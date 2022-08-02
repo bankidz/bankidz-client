@@ -170,7 +170,7 @@ function ParentHome() {
   }
 
   const proposedDongils = useAppSelector(selectProposedDongils);
-  function getProposedKidSSuggestedDongils(username: string) {
+  function getKidSProposedDongils(username: string) {
     console.log('username: ', username);
     const found = proposedDongils?.find(
       (proposedDongil) => proposedDongil.userName === username,
@@ -183,14 +183,14 @@ function ParentHome() {
   if (proposedDongilsStatus === 'loading') {
     proposedDongilsContent = <p>Loading...</p>;
   } else if (proposedDongilsStatus === 'succeeded') {
-    const selectedKidSSuggestedDongils = getProposedKidSSuggestedDongils(
+    const selectedKidSProposedDongils = getKidSProposedDongils(
       selectedKid?.username!,
     );
     if (proposedDongils === []) {
       proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
       proposedDongilsContent = (
-        <ProposedDongilList proposedDongils={selectedKidSSuggestedDongils!} />
+        <ProposedDongilList proposedDongils={selectedKidSProposedDongils!} />
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
@@ -245,10 +245,10 @@ function ParentHome() {
       >
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
-          <SuggestedDongilsWrapper>
+          <ProposedDongilsWrapper>
             <header>제안받은 돈길</header>
             {proposedDongilsContent}
-          </SuggestedDongilsWrapper>
+          </ProposedDongilsWrapper>
           <ThisWeekSDongilWrapper>
             <header>금주의 돈길</header>
             {thisWeekSDongilsContent}
@@ -279,7 +279,7 @@ const KidListWrapper = styled.div<{ colorByLevel: string }>`
   position: fixed;
 `;
 
-const SuggestedDongilsWrapper = styled.div`
+const ProposedDongilsWrapper = styled.div`
   margin-top: 48px;
   header {
     width: 100%;

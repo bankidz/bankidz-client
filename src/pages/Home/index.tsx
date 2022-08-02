@@ -6,7 +6,7 @@ import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import KidHome from './KidHome';
 import ParentHome from './ParentHome';
 import Create from './Create';
-import Walking from './Walking';
+import Detail from './Detail';
 import Pending from './Pending';
 
 function HomeRouter() {
@@ -32,12 +32,15 @@ function HomeRouter() {
           </ForegroundTemplate>
         }
       />
-      {/* 자녀 - 걷고있는 돈길 */}
+      {/* 자녀 / 부모 - 걷고있는 돈길 / 금주의 돈길 */}
       <Route
-        path="/walking/:id"
+        path="/detail/:id"
         element={
-          <ForegroundTemplate label="걷고있는 돈길" level={level}>
-            <Walking />
+          <ForegroundTemplate
+            label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
+            level={level}
+          >
+            <Detail />
           </ForegroundTemplate>
         }
       />

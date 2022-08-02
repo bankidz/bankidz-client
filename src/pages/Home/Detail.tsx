@@ -5,7 +5,7 @@ import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCo
 import Receipt from '@components/common/Receipt';
 import InterestStampList from '@components/home/walking/InterestStampList';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import SmallSpacer from '@components/layout/SmallSpacer';
+import LargeSpacer from '@components/layout/LargeSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { calcRatio } from '@lib/styles/theme';
 import { TPercent } from '@lib/types/kid';
@@ -13,7 +13,7 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import { selectKidSummary } from '@store/slices/kidSummarySlice';
+import { ISummary, selectKidSummary } from '@store/slices/kidSummarySlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -24,13 +24,29 @@ import {
   selectWalkingDongils,
 } from '@store/slices/walkingDongilSlice';
 import Summary from '@components/home/Summary';
+import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
+import { selectKids } from '@store/slices/familySlice';
+import { TLevel } from '@lib/types/common';
+import { selectParentSummary } from '@store/slices/parentSummarySlice';
 
-function KidWalking() {
+function Walking() {
   const { id } = useParams();
-  const level = useAppSelector(selectLevel);
-  const colorByLevel = getColorByLevel(level!);
-  const walkingDongils = useAppSelector(selectWalkingDongils);
   const isKid = useAppSelector(selectIsKid);
+
+  let level: TLevel;
+  if (isKid === true) {
+    level = useAppSelector(selectLevel)!;
+  } else if (isKid === false) {
+    // TODO: API 추가?
+    // 선택한 돈길을 생성한 자녀의 레벨
+    level = 4;
+  }
+  const colorByLevel = getColorByLevel(level!);
+
+  // 자녀 - 걷고있는 돈길
+  const walkingDongils = useAppSelector(selectWalkingDongils);
+  // 부모 - 금주의 돈길
+  const thisWeeksDongils = useAppSelector(selectThisWeekSDongils);
 
   let targetDongil: IDongil;
   if (isKid === true) {
@@ -38,7 +54,27 @@ function KidWalking() {
       (walkingDongil) => walkingDongil.id === parseInt(id!),
     )!;
   } else if (isKid === false) {
-    // 금주의 돈길에서
+    targetDongil = getTargetDongil();
+  }
+
+  function getTargetDongil(): IDongil {
+    let i;
+    let j;
+    let targetDongil: IDongil;
+    if (thisWeeksDongils) {
+      i = 0;
+      while (thisWeeksDongils[i]) {
+        j = 0;
+        while (thisWeeksDongils[i].challengeList[j]) {
+          if (thisWeeksDongils[i].challengeList[j].id === parseInt(id!)) {
+            targetDongil = thisWeeksDongils[i].challengeList[j];
+          }
+          ++j;
+        }
+        ++i;
+      }
+    }
+    return targetDongil!;
   }
 
   const {
@@ -53,9 +89,17 @@ function KidWalking() {
     progressList,
   } = targetDongil!;
 
-  const kidSummary = useAppSelector(selectKidSummary);
-  const { currentSavings } = kidSummary!;
-  const percent = Math.ceil((currentSavings / totalPrice / 10) * 100) * 10;
+  const percent = getPercent();
+  function getPercent() {
+    let Summary: ISummary;
+    let currentSavings;
+    if (isKid === true) {
+      Summary = useAppSelector(selectKidSummary)!;
+    } else if (isKid === false) {
+      Summary = useAppSelector(selectParentSummary)!;
+    }
+    return Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10;
+  }
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
@@ -123,11 +167,11 @@ function KidWalking() {
               {progressList?.length}주차 도전중
             </span>
             <div className="title">{title}</div>
-            <Summary
+            {/* <Summary
               usage="Walking"
               currentSavings={currentSavings}
               totalPrice={totalPrice}
-            />
+            /> */}
 
             <InterestStampListWrapper>
               <div className="text-wrapper">
@@ -153,10 +197,12 @@ function KidWalking() {
                 />
               </div>
             </DongilContractContent>
-            <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
-              돈길 포기하기
-            </GiveUpDongilButton>
-            <SmallSpacer />
+            {isKid === true && (
+              <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
+                돈길 포기하기
+              </GiveUpDongilButton>
+            )}
+            <LargeSpacer />
           </FlexContainer>
         </MarginTemplate>
       </Content>
@@ -201,7 +247,7 @@ function KidWalking() {
   );
 }
 
-export default KidWalking;
+export default Walking;
 
 const Wrapper = styled.div`
   width: 100%;

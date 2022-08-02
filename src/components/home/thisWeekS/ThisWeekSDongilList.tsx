@@ -16,7 +16,7 @@ function ThisWeekSDongilList({
           itemName={thisWeekSDongil.itemName as TItemName}
           title={thisWeekSDongil.title}
           status={thisWeekSDongil.status}
-          to={`/walking/${thisWeekSDongil.id}`}
+          to={`/detail/${thisWeekSDongil.id}`}
         />
       ))}
     </Wrapper>

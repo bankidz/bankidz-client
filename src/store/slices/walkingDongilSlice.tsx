@@ -14,7 +14,7 @@ export interface IDongil {
   isMom: boolean;
   title: string;
   itemName: TItemName;
-  challengeCategoryName: TChallengeCategory;
+  challengeCategory: TChallengeCategory;
   isAchieved: number;
   interestRate: TInterestRate;
   totalPrice: number;

@@ -2,12 +2,10 @@ import { TFetchStatus } from '@lib/types/api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
+import { ISummary } from './kidSummarySlice';
 
 export type TParentSummaryState = {
-  parentSummary: {
-    currentSavings: number;
-    totalPrice: number;
-  } | null;
+  parentSummary: ISummary | null;
   parentSummaryStatus?: TFetchStatus;
 };
 
