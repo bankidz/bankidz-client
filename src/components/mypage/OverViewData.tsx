@@ -1,40 +1,65 @@
 import { useAppSelector } from '@store/app/hooks';
-import { selectKidOverView } from '@store/slices/kidOverViewSlice';
+import {
+  selectKidOverView,
+  TKidOverView,
+} from '@store/slices/kidOverViewSlice';
 import styled from 'styled-components';
 
 type OverViewDataProps = {
   isKid: boolean;
-  achievedChallenge: number;
-  totalChallenge: number;
+  kid?: TKidOverView;
+  forParent?: {
+    username: string;
+    acceptRate: number;
+    acceptRequest: number;
+    achieveRate: number;
+  };
 };
 
-function OverViewData({
-  isKid,
-  achievedChallenge,
-  totalChallenge,
-}: OverViewDataProps) {
-  const kid = [
-    <>
-      <p>{achievedChallenge}</p>
-      <p>완주한 돈길</p>
-    </>,
-    <>
-      <p>{totalChallenge}</p>
-      <p>총 돈길</p>
-    </>,
-    <>
-      <p>{Math.ceil((achievedChallenge / totalChallenge) * 100)}%</p>
-      <p>평균 완주율</p>
-    </>,
-  ];
-  const parent = [<></>, <></>, <></>];
+// 추후 리팩토링 예정...
+function OverViewData({ isKid, kid, forParent }: OverViewDataProps) {
+  const kidContent = kid
+    ? [
+        <>
+          <p>{kid.achievedChallenge}</p>
+          <p>완주한 돈길</p>
+        </>,
+        <>
+          <p>{kid.totalChallenge}</p>
+          <p>총 돈길</p>
+        </>,
+        <>
+          <p>
+            {Math.ceil((kid!.achievedChallenge / kid!.totalChallenge) * 100)}%
+          </p>
+          <p>평균 완주율</p>
+        </>,
+      ]
+    : [];
+  const parentContent = forParent
+    ? [
+        <>
+          <p>{forParent.acceptRate}%</p>
+          <p>돈길 수락률</p>
+        </>,
+        <>
+          <p>{forParent.acceptRequest}</p>
+          <p>아이의 돈길</p>
+        </>,
+        <>
+          <p>{forParent.achieveRate}%</p>
+          <p>아이의 완주율</p>
+        </>,
+      ]
+    : [];
+  console.log(forParent);
   return (
     <Wrapper>
-      <Item>{isKid ? kid[0] : parent[0]}</Item>
+      <Item>{isKid ? kidContent[0] : parentContent[0]}</Item>
       <Divider />
-      <Item>{isKid ? kid[1] : parent[1]}</Item>
+      <Item>{isKid ? kidContent[1] : parentContent[1]}</Item>
       <Divider />
-      <Item>{isKid ? kid[2] : parent[2]}</Item>
+      <Item>{isKid ? kidContent[2] : parentContent[2]}</Item>
     </Wrapper>
   );
 }

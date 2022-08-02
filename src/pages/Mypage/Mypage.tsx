@@ -2,6 +2,7 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import SmallSpacer from '@components/layout/SmallSpacer';
 import FamilyList from '@components/mypage/FamilyList';
+import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
@@ -18,8 +19,24 @@ import {
   selectKidOverView,
   selectKidOverViewStatus,
 } from '@store/slices/kidOverViewSlice';
+import { selectKids } from '@store/slices/kidsSlice';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+
+const DemoKidsRecordData = [
+  {
+    username: '주어진사랑',
+    acceptRate: 80,
+    acceptRequest: 5,
+    achieveRate: 90,
+  },
+  {
+    username: '김수빈',
+    acceptRate: 70,
+    acceptRequest: 22,
+    achieveRate: 80,
+  },
+];
 
 function Mypage() {
   const dispatch = useAppDispatch();
@@ -28,6 +45,7 @@ function Mypage() {
   const familyStatus = useAppSelector(selectFamilyStatus);
   const family = useAppSelector(selectFamily);
   const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
+  // const kids = isKid ? useAppSelector(selectKids) : null;
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -46,14 +64,18 @@ function Mypage() {
       <Header>마이페이지</Header>
       <MarginTemplate>
         <OverView isKid={isKid} kidOverView={kidOverView} />
-        {isKid && (
+        {isKid && kidOverView ? (
           <Section>
             <h2>MY 레벨</h2>
-            {kidOverView ? (
-              <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
-            ) : (
-              'loading...'
-            )}
+            <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
+          </Section>
+        ) : (
+          <Section>
+            <h2>자녀기록</h2>
+            {/* {kids.map((kids) => (
+              <></>
+            ))} */}
+            <KidsRecordList kidsRecordData={DemoKidsRecordData} />
           </Section>
         )}
         <Section>

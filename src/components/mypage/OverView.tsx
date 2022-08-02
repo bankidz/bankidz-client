@@ -23,13 +23,7 @@ function OverView({ isKid, kidOverView }: OverViewProps) {
         <p>
           {auth.username} {isKid && '뱅키'}
         </p>
-        {kidOverView && (
-          <OverViewData
-            isKid={isKid}
-            achievedChallenge={kidOverView.achievedChallenge}
-            totalChallenge={kidOverView.totalChallenge}
-          />
-        )}
+        {kidOverView && <OverViewData isKid={isKid} kid={kidOverView} />}
       </Container>
     </Wrapper>
   );
