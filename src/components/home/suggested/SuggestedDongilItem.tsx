@@ -1,23 +1,20 @@
-import SuggestBadge from '@components/common/badges/SuggestBadge';
+import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
-import { EDongilStatus } from '@lib/types/common';
-import { getDate } from '@lib/utils/common/getDate';
 import { IDongil } from '@store/slices/walkingDongilSlice';
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-interface PendingDongilItemProps {
-  pendingDongil: IDongil;
-  onDeleteCheckOpen: () => void;
-  setIdToDelete: Dispatch<SetStateAction<number | null>>;
+interface SuggestedDongilItemProps {
+  suggestedDongil: IDongil;
+  // onDeleteCheckOpen: () => void;
+  // setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function PendingDongilItem({
-  pendingDongil,
-  onDeleteCheckOpen,
-  setIdToDelete,
-}: PendingDongilItemProps) {
+function SuggestedDongilItem({
+  suggestedDongil,
+}: // onDeleteCheckOpen,
+// setIdToDelete,
+SuggestedDongilItemProps) {
   const { openModal } = useModals();
   const {
     id,
@@ -31,7 +28,7 @@ function PendingDongilItem({
     weekPrice,
     weeks,
     comment,
-  } = pendingDongil;
+  } = suggestedDongil;
 
   // 제안중
   function openQuinaryModal() {
@@ -48,30 +45,30 @@ function PendingDongilItem({
   }
 
   // 거절됨
-  function openSenaryModal() {
-    openModal(modals.senaryModal, {
-      onSubmit: () => {
-        onDeleteCheckOpen();
-        setIdToDelete(id);
-      },
-      createdAt: createdAt,
-      interestRate: interestRate,
-      isMom: isMom,
-      itemName: itemName,
-      title: title,
-      totalPrice: totalPrice,
-      weekPrice: weekPrice,
-      weeks: weeks,
-      comment: comment?.content,
-    });
-  }
+  // function openSenaryModal() {
+  //   openModal(modals.senaryModal, {
+  //     onSubmit: () => {
+  //       onDeleteCheckOpen();
+  //       setIdToDelete(id);
+  //     },
+  //     createdAt: createdAt,
+  //     interestRate: interestRate,
+  //     isMom: isMom,
+  //     itemName: itemName,
+  //     title: title,
+  //     totalPrice: totalPrice,
+  //     weekPrice: weekPrice,
+  //     weeks: weeks,
+  //     comment: comment?.content,
+  //   });
+  // }
 
   function handleClick() {
-    if (status === EDongilStatus.PENDING) {
-      openQuinaryModal();
-    } else if (status === EDongilStatus.REJECTED) {
-      openSenaryModal();
-    }
+    // if (status === EDongilStatus.PENDING) {
+    //   openQuinaryModal();
+    // } else if (status === EDongilStatus.REJECTED) {
+    //   openSenaryModal();
+    // }
   }
 
   return (
@@ -79,19 +76,19 @@ function PendingDongilItem({
       <StyledButton onClick={handleClick}>
         <div className="text-wrapper">
           <span className="title">{title}</span>
-          <span className="createdAt">{getDate(createdAt)}</span>
+          <span className="totalPrice">
+            {totalPrice.toLocaleString('ko-KR')}원
+          </span>
         </div>
-        <SuggestBadgeWrapper>
-          <SuggestBadge
-            isSuggesting={status === EDongilStatus.PENDING ? true : false}
-          />
-        </SuggestBadgeWrapper>
+        <InterestBadgeWrapper>
+          <InterestBadge interestRate={interestRate} />
+        </InterestBadgeWrapper>
       </StyledButton>
     </>
   );
 }
 
-export default PendingDongilItem;
+export default SuggestedDongilItem;
 
 const StyledButton = styled.button`
   width: 100%;
@@ -112,18 +109,22 @@ const StyledButton = styled.button`
     margin-left: 16px;
 
     .title {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
 
-    .createdAt {
-      ${({ theme }) => theme.typo.text.S_12_M};
+    .totalPrice {
       color: ${({ theme }) => theme.palette.greyScale.grey500};
+      /* TODO: type 시스템 미적용 */
+      font-family: 'Tmoney RoundWind';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 13px;
     }
   }
 `;
 
-const SuggestBadgeWrapper = styled.div`
+const InterestBadgeWrapper = styled.div`
   margin-right: 16px;
 `;

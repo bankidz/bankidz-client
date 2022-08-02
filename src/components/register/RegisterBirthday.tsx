@@ -5,6 +5,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/buttons/Button';
 import InputForm from '@components/common/InputForm';
+import MarginTemplate from '@components/layout/MarginTemplate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -51,6 +52,10 @@ function RegisterBirthday() {
   }, [month, isValidMonth]);
   useEffect(() => {
     setIsValidDay(DAY_REGEX.test(day));
+    // TODO: for demo day
+    if (DAY_REGEX.test(day) === true && parseInt(day) >= 4) {
+      dayInputRef.current!.blur();
+    }
   }, [day]);
 
   // 서버에서 요구하는 spec으로 birthday 가공
@@ -87,6 +92,10 @@ function RegisterBirthday() {
   const toggleMonthErrorMessage = monthFocus && month && !isValidMonth;
   const toggleDayErrorMessage = dayFocus && day && !isValidDay;
 
+  // TODO: for demo day
+  function handleNextButtonClick() {
+    navigate('/register/2');
+  }
   return (
     <Wrapper>
       <span>생년월일을 입력해요</span>
@@ -140,17 +149,26 @@ function RegisterBirthday() {
         </InputWrapper>
         <DummyButton type="submit" />
       </form>
-      {toggleYearErrorMessage && (
-        <ErrorMessage>연도 형식이 올바르지 않아요</ErrorMessage>
+      {yearFocus === true && (
+        <ErrorMessage className={toggleYearErrorMessage ? 'active' : undefined}>
+          연도 형식이 올바르지 않아요
+        </ErrorMessage>
       )}
-      {toggleMonthErrorMessage && (
-        <ErrorMessage>월 형식이 올바르지 않아요</ErrorMessage>
+      {monthFocus === true && (
+        <ErrorMessage
+          className={toggleMonthErrorMessage ? 'active' : undefined}
+        >
+          월 형식이 올바르지 않아요
+        </ErrorMessage>
       )}
-      {toggleDayErrorMessage && (
-        <ErrorMessage>일 형식이 올바르지 않아요</ErrorMessage>
+      {dayFocus === true && (
+        <ErrorMessage className={toggleDayErrorMessage ? 'active' : undefined}>
+          일 형식이 올바르지 않아요
+        </ErrorMessage>
       )}
       <ButtonWrapper>
         <Button
+          onClick={handleNextButtonClick}
           label="다음"
           property="default"
           state={
@@ -187,10 +205,15 @@ const InputWrapper = styled.div`
 `;
 
 const ErrorMessage = styled.div`
+  position: absolute;
   margin-top: 12px;
   width: 100%;
   ${({ theme }) => theme.typo.input.TextMessage_S_12_M}
-  color: ${({ theme }) => theme.palette.sementic.red300};
+  color: ${({ theme }) => theme.palette.greyScale.grey100};
+  &.active {
+    transition: ${({ theme }) => theme.transition.onFocus};
+    color: ${({ theme }) => theme.palette.sementic.red300};
+  }
 `;
 
 // 다수의 input을 submit 하기 위한 dummy button
@@ -205,7 +228,7 @@ const ButtonWrapper = styled.div`
   width: 100%;
   bottom: 0;
   left: 0;
-  margin-bottom: 17px;
+  margin-bottom: 18px;
   padding-left: 18px;
   padding-right: 18px;
 `;

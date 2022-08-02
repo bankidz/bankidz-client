@@ -53,6 +53,9 @@ export const theme: DefaultTheme = {
     medium: '12px',
     large: '24px',
   },
+  transition: {
+    onFocus: '0.2s all ease-in',
+  },
   typo: {
     fixed: {
       Navbar_T_17_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(

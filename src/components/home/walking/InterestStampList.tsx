@@ -3,26 +3,30 @@ import { ReactComponent as None } from '@assets/illusts/pigCoin/pigcoin_none.svg
 import { ReactComponent as Success } from '@assets/illusts/pigCoin/pigcoin_success.svg';
 import styled from 'styled-components';
 
-type TStempTypes = { challengeId: number; weeks: number; isAchieved: boolean };
+interface IStamp {
+  challengeId: number;
+  weeks: number;
+  isAchieved: boolean;
+}
 
 interface InterestStampProps {
   weeks: number;
-  stemp: TStempTypes[];
+  stamps: IStamp[];
 }
-function InterestStampList({ weeks, stemp }: InterestStampProps) {
+function InterestStampList({ weeks, stamps }: InterestStampProps) {
   return (
     <Wrapper>
-      {stemp.map((v, i) => (
-        <Stemp>
+      {stamps.map((v, i) => (
+        <StampItem>
           {v.isAchieved ? <Success /> : <Fail />}
           <p>{i + 1}주차</p>
-        </Stemp>
+        </StampItem>
       ))}
-      {[...new Array(weeks - stemp.length)].map((v, i) => (
-        <Stemp>
+      {[...new Array(weeks - stamps.length)].map((v, i) => (
+        <StampItem>
           <None />
-          <p>{i + stemp.length + 1}주차</p>
-        </Stemp>
+          <p>{i + stamps.length + 1}주차</p>
+        </StampItem>
       ))}
     </Wrapper>
   );
@@ -37,7 +41,7 @@ const Wrapper = styled.div`
   padding: 0px 8px;
 `;
 
-const Stemp = styled.div`
+const StampItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

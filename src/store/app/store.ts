@@ -7,6 +7,8 @@ import walkingDongilsReducer from '../slices/walkingDongilSlice';
 import pendingDongilsReducer from '../slices/pendingDongilSlice';
 import familyReducer from '../slices/familySlice';
 import parentSummaryReducer from '../slices/parentSummarySlice';
+import suggestedDongilsReducer from '../slices/suggestedDongilsSlice';
+import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
 import kidOverViewReducer from '@store/slices/kidOverViewSlice';
 
 export const store = configureStore({
@@ -18,6 +20,8 @@ export const store = configureStore({
     pendingDongils: pendingDongilsReducer,
     family: familyReducer,
     parentSummary: parentSummaryReducer,
+    suggestedDongils: suggestedDongilsReducer,
+    thisWeekSDongils: thisWeekSDongilsReducer,
     kidOverView: kidOverViewReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),

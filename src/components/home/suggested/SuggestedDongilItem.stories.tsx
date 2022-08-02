@@ -1,11 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import PendingDongilItem from './PendingDongilItem';
+import SuggestedDongilItem from './SuggestedDongilItem';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { EDongilStatus } from '@lib/types/common';
 
 export default {
-  title: 'home/pending/PendingDongilItem',
-  component: PendingDongilItem,
+  title: 'home/suggested/SuggestedDongilItem',
+  component: SuggestedDongilItem,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [
     (Story) => (
@@ -14,15 +14,15 @@ export default {
       </MarginTemplate>
     ),
   ],
-} as ComponentMeta<typeof PendingDongilItem>;
+} as ComponentMeta<typeof SuggestedDongilItem>;
 
-const Template: ComponentStory<typeof PendingDongilItem> = (args) => (
-  <PendingDongilItem {...args} />
+const Template: ComponentStory<typeof SuggestedDongilItem> = (args) => (
+  <SuggestedDongilItem {...args} />
 );
 
 export const 제안중 = Template.bind({});
 제안중.args = {
-  pendingDongil: {
+  suggestedDongil: {
     id: 8,
     isMom: true,
     title: 'FE Mock) 아이패드 사기',
@@ -52,7 +52,7 @@ export const 제안중 = Template.bind({});
 
 export const 거절됨 = Template.bind({});
 거절됨.args = {
-  pendingDongil: {
+  suggestedDongil: {
     id: 8,
     isMom: true,
     title: 'FE Mock) 아이패드 사기',

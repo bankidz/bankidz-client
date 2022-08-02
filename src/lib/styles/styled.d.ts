@@ -41,6 +41,9 @@ declare module 'styled-components' {
       medium: '12px';
       large: '24px';
     };
+    transition: {
+      onFocus: string;
+    };
     typo: {
       fixed: {
         Navbar_T_17_EB: string;

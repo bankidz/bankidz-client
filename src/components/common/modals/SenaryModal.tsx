@@ -271,7 +271,7 @@ const Content = styled.div`
 `;
 
 const Top = styled.div`
-  margin: -1px 0; // overlap 1px
+  margin: -1px 0; // overlaps 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   height: 116px; // 10px decreased
   width: 100%;
@@ -292,7 +292,7 @@ const Top = styled.div`
 `;
 
 const Bottom = styled.div`
-  margin-bottom: -1px; // overlap 1px
+  margin-bottom: -1px; // overlaps 1px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
   height: 350px; // 10px decreased

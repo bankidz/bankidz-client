@@ -19,6 +19,7 @@ export interface IDongil {
   interestRate: TInterestRate;
   totalPrice: number;
   weekPrice: number;
+  successWeeks: number;
   weeks: number;
   createdAt: string;
   status: TDongilStatus;
@@ -47,7 +48,7 @@ const initialState: TWalkingDongilsState = {
   isWalkingDongilsPatched: false,
 };
 
-// GET: 걷고있는 돈길 데이터 fetch
+// GET: 걷고있는 돈길 조회
 export const fetchWalkingDongils = createAsyncThunk(
   'walkingDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
