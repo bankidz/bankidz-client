@@ -87,6 +87,19 @@ export const walkingDongilsSlice = createSlice({
     dispatchResetIsPatched(state) {
       state.isWalkingDongilsPatched = false;
     },
+    //데모데이 시연용
+    dispatchSetPatched(state, action) {
+      const id = action.payload.id;
+      const achievedDongil = state.walkingDongils!.find(
+        (dongil) => dongil.id === id,
+      );
+      if (achievedDongil?.progressList) {
+        achievedDongil.progressList[
+          achievedDongil.progressList?.length - 1
+        ].isAchieved = true;
+      }
+      state.isWalkingDongilsPatched = true;
+    },
   },
   extraReducers(builder) {
     builder
@@ -124,7 +137,8 @@ export const walkingDongilsSlice = createSlice({
   },
 });
 
-export const { dispatchResetIsPatched } = walkingDongilsSlice.actions;
+export const { dispatchResetIsPatched, dispatchSetPatched } =
+  walkingDongilsSlice.actions;
 
 export const selectWalkingDongilsStatus = (state: RootState) =>
   state.walkingDongils.walkingDongilsStatus;
