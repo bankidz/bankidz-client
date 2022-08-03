@@ -36,6 +36,7 @@ export const 제안중 = Template.bind({});
     weeks: 15,
     createdAt: '2022-07-14 03:28:29',
     status: EDongilStatus.REJECTED,
+    fileName: 'example',
     progressList: [
       {
         challengeId: 8,
@@ -66,6 +67,7 @@ export const 거절됨 = Template.bind({});
     weeks: 15,
     createdAt: '2022-07-14 03:28:29',
     status: EDongilStatus.REJECTED,
+    fileName: 'example',
     progressList: [
       {
         challengeId: 8,

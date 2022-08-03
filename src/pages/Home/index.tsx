@@ -48,15 +48,7 @@ function HomeRouter() {
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
         path="reject/:id"
-        element={
-          isKid ? (
-            <>부적절한 접근입니다.</>
-          ) : (
-            <ForegroundTemplate>
-              <Reject />
-            </ForegroundTemplate>
-          )
-        }
+        element={isKid ? <>부적절한 접근입니다.</> : <Reject />}
       />
     </Routes>
   );

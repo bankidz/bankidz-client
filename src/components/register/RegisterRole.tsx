@@ -19,6 +19,7 @@ import { TFetchStatus } from '@lib/types/api';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import { getAllJSDocTagsOfKind } from 'typescript';
 import { TLevel } from '@lib/types/common';
+import GoBackHeader from '@components/common/buttons/GoBackHeader';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -130,7 +131,7 @@ function RegisterRole() {
 
   return (
     <Wrapper>
-      <span className="header">프로필을 선택해요</span>
+      <span>프로필을 선택해요</span>
       <div className="button-wrapper">
         {/* 아빠 */}
         <RoleButton
@@ -178,13 +179,11 @@ export default RegisterRole;
 
 const Wrapper = styled.div`
   width: 100%;
-
-  .header {
+  margin-top: 16px;
+  & > span {
     width: 100%;
     height: 24px;
-
-    margin-top: 64px;
-    margin-left: 10px;
+    margin-left: 8px;
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }

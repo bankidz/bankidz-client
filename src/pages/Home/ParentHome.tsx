@@ -39,6 +39,7 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
+import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -298,8 +299,8 @@ function ParentHome() {
         <Modals />
         {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
         <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
-          <DeleteCheck
-            onClickDelete={handleApproveButtonClick}
+          <ApproveCheck
+            onApproveButtonClick={handleApproveButtonClick}
             onDismiss={onApproveCheckDismiss}
           />
         </CommonSheet>
@@ -307,7 +308,10 @@ function ParentHome() {
           open={openApproveCompleted}
           onDismiss={onApproveCompletedDismiss}
         >
-          <SheetCompleted type="delete" onDismiss={onApproveCompletedDismiss} />
+          <SheetCompleted
+            type="approve"
+            onDismiss={onApproveCompletedDismiss}
+          />
         </CommonSheet>
       </HomeTemplate>
     </>

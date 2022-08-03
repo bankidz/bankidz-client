@@ -60,6 +60,7 @@ const Wrapper = styled.div<{
   value: string | number;
   postfix: '년' | '월' | '일' | undefined;
 }>`
+  box-sizing: border-box;
   position: relative;
   & > p {
     position: absolute;

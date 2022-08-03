@@ -23,6 +23,7 @@ export interface IDongil {
   weeks: number;
   createdAt: string;
   status: TDongilStatus;
+  fileName: string;
   progressList:
     | {
         challengeId: number;
