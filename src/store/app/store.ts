@@ -1,11 +1,30 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../counter/counterSlice';
 import logger from 'redux-logger';
+import authReducer from '../slices/authSlice';
+import createChallengeReducer from '../slices/createChallenge';
+import kidSummaryReducer from '../slices/kidSummarySlice';
+import walkingDongilsReducer from '../slices/walkingDongilSlice';
+import pendingDongilsReducer from '../slices/pendingDongilsSlice';
+import familyReducer from '../slices/familySlice';
+import parentSummaryReducer from '../slices/parentSummarySlice';
+import proposedDongilsReducer from '../slices/proposedDongilsSlice';
+import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
+import kidOverViewReducer from '@store/slices/kidOverViewSlice';
+import kidsReducer from '../slices/kidsSlice';
 
-// configureStore는 리덕스 코어 라이브러리의 표준 함수인 createStore를 추상화한 것이다.
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    auth: authReducer,
+    createChallenge: createChallengeReducer,
+    kidSummary: kidSummaryReducer,
+    walkingDongils: walkingDongilsReducer,
+    pendingDongils: pendingDongilsReducer,
+    family: familyReducer,
+    parentSummary: parentSummaryReducer,
+    proposedDongils: proposedDongilsReducer,
+    thisWeekSDongils: thisWeekSDongilsReducer,
+    kidOverView: kidOverViewReducer,
+    kids: kidsReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
