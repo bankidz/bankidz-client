@@ -18,21 +18,21 @@ function getContentsForMyLevel(achievedChallenge: number) {
         goal: 1,
         require: 1,
       };
-    case achievedChallenge < 3:
+    case achievedChallenge < 5:
       return {
         previousIllust: <Prev_2 />,
         nextIllust: <Next_3 />,
         goal: 3,
         require: 2,
       };
-    case achievedChallenge < 5:
+    case achievedChallenge < 10:
       return {
         previousIllust: <Prev_3 />,
         nextIllust: <Next_4 />,
         goal: 5,
         require: 2,
       };
-    case achievedChallenge < 15:
+    case achievedChallenge < 20:
       return {
         previousIllust: <Prev_4 />,
         nextIllust: <Next_5 />,
