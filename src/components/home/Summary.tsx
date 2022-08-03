@@ -85,7 +85,7 @@ const Wrapper = styled.div<{ usage: TUsage }>`
   flex-direction: column;
   align-items: center;
 
-  padding: 25px 0px;
+  padding: 16px 0px;
   & > p {
     ${({ theme }) => theme.typo.text.T_14_EB}
     color: ${({ theme }) => theme.palette.greyScale.grey500}
@@ -126,7 +126,7 @@ const TitleWrapper = styled.div<{
 `;
 
 const Info = styled.div`
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
 
@@ -156,5 +156,5 @@ const Divider = styled.div`
   width: 2px;
   height: 53px;
   border-radius: 1px;
-  background-color: ${({ theme }) => theme.palette.greyScale.grey200};
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
 `;
