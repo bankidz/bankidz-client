@@ -146,7 +146,7 @@ function Step4({ currentStep }: { currentStep: number }) {
         </div>
       </InputSection>
       <InputSection>
-        <p>저금액</p>
+        <p>매주 저금액</p>
         <div
           onClick={() => {
             form.interestRate ? onOpenWeekPrice() : null;

@@ -20,8 +20,13 @@ import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkDongil from '@lib/hooks/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
+import { TUser } from '@store/slices/overViewSlice';
 
-function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
+type TWalkDefaultProps = {
+  walkingDongils: IDongil[];
+  user: TUser;
+};
+function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
   const level = useAppSelector(selectLevel);
   const patched = useAppSelector(selectIsWalkingDongilsPatched);
   const { username, isKid, isFemale } = useAppSelector(selectAuth);
@@ -45,7 +50,7 @@ function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
         onSubmit: () => {},
         isKid: isKid,
         isFemale: isFemale,
-        headerText: `${username} 뱅키 이번주 저금 성공`,
+        headerText: `${user.username} 뱅키 이번주 저금 성공`,
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }

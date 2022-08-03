@@ -1,13 +1,10 @@
 import { useAppSelector } from '@store/app/hooks';
-import {
-  selectKidOverView,
-  TKidOverView,
-} from '@store/slices/kidOverViewSlice';
+import { TOverView } from '@store/slices/overViewSlice';
 import styled from 'styled-components';
 
 type OverViewDataProps = {
   isKid: boolean;
-  kid?: TKidOverView;
+  kid?: TOverView;
   forParent?: {
     username: string;
     acceptRate: number;
