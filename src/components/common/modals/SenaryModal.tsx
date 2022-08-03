@@ -12,6 +12,7 @@ import SuggestBadge from '../badges/SuggestBadge';
 import Button from '../buttons/Button';
 import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
+import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
 
 interface SenaryModalProps {
   /**
@@ -80,6 +81,8 @@ function SenaryModal({
     onSubmit();
   }
 
+  const contractEndDate = getContractEndDate(createdAt, weeks);
+  const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
   return (
     // @ts-expect-error
     <ReactModal {...reactModalParams}>
@@ -149,11 +152,11 @@ function SenaryModal({
               <div className="title">총 소요기간</div>
               <div className="content">{weeks}주</div>
             </div>
-            <div className="계약종료일">
+            <div className="계약종료주차">
               <div className="text-wrapper">
-                <div className="title">계약종료일</div>
+                <div className="title">계약 종료 주차</div>
                 <div className="content">
-                  {getContractEndDate(createdAt, weeks)}
+                  {`${year}년 ${month}월 ${weekNo}주`}
                 </div>
               </div>
             </div>
@@ -439,7 +442,7 @@ const Bottom = styled.div`
       }
     }
 
-    .계약종료일 {
+    .계약종료주차 {
       width: 66.6%;
       height: 100%;
       display: flex;
