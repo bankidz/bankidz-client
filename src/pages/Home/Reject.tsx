@@ -54,7 +54,7 @@ function Reject() {
       </MarginTemplate>
       <CommonSheet open={openFeedBack} onDismiss={onFeedBackDismiss}>
         <SheetCompleted
-          type="approve"
+          type="feedback"
           onDismiss={() => {
             navigate('/');
           }}
