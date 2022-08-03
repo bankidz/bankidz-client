@@ -28,7 +28,7 @@ function Summary({
     <Wrapper usage={usage}>
       <TitleWrapper usage={usage}>
         {(usage === 'KidHome' || usage === 'ParentHome') && (
-          <span className="date">{`${month}월 ${weekNo}주`}</span>
+          <span className="date">{`${month}월 ${weekNo}주차`}</span>
         )}
         {usage === 'ParentHome' && (
           <span className="username">{`${username} 저금통`}</span>
