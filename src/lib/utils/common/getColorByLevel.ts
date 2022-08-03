@@ -3,6 +3,8 @@ import { TLevel } from '@lib/types/common';
 
 function getColorByLevel(level: TLevel): string {
   switch (level) {
+    case 0:
+      return theme.palette.level.green100;
     case 1:
       return theme.palette.level.grey100;
     case 2:
