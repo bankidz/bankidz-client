@@ -13,14 +13,14 @@ export type TValidationResult = {
   ) => void,
 ]; */
 // 유효성 검사 로직 추가할때마다 타입도 같이 추가
-type TFormType = 'contractName' | 'contractAmount';
+type TFormType = 'contractName' | 'contractAmount' | 'comment';
 
 const initialState = {
   error: false,
   message: '',
 };
 
-const kid_create_content_step3_validateResult = {
+const validateResultContent = {
   contractName: {
     default: { error: false, message: '특수문자 제외 12자 이하로 부탁해요!' },
     outOfForm: { error: true, message: '특수문자 제외 12자 이하로 부탁해요!' },
@@ -39,6 +39,14 @@ const kid_create_content_step3_validateResult = {
     over: { error: true, message: '30만원 이하로 부탁해요!' },
     pass: { error: false, message: '적절한 금액이에요!' },
   },
+  comment: {
+    default: {
+      error: false,
+      message: '공백 포함 15자 이하로 부탁해요!',
+    },
+    outOfForm: { error: true, message: '공백 포함 15자 이하로 부탁해요!' },
+    pass: { error: false, message: '좋은 피드백을 작성하셨네요!' },
+  },
 };
 
 function useValidation() {
@@ -52,47 +60,35 @@ function useValidation() {
   ) => {
     if (formType === 'contractName' && typeof value === 'string') {
       if (!value) {
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractName.default,
-        );
+        setValidateResult(validateResultContent.contractName.default);
       } else if (
         value.length > 12 ||
         value.match(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g)
       )
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractName.outOfForm,
-        );
+        setValidateResult(validateResultContent.contractName.outOfForm);
       else if (
         existChallengeNames &&
         existChallengeNames.filter(
           (existChallengeName) => existChallengeName === value,
         ).length > 0
       )
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractName.duplicate,
-        );
-      else
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractName.pass,
-        );
+        setValidateResult(validateResultContent.contractName.duplicate);
+      else setValidateResult(validateResultContent.contractName.pass);
     }
     if (formType === 'contractAmount') {
       if (!value)
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractAmount.default,
-        );
+        setValidateResult(validateResultContent.contractAmount.default);
       else if (value < 1500)
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractAmount.under,
-        );
+        setValidateResult(validateResultContent.contractAmount.under);
       else if (value > 300000)
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractAmount.over,
-        );
-      else
-        setValidateResult(
-          kid_create_content_step3_validateResult.contractAmount.pass,
-        );
+        setValidateResult(validateResultContent.contractAmount.over);
+      else setValidateResult(validateResultContent.contractAmount.pass);
+    }
+    if (formType === 'comment' && typeof value === 'string') {
+      if (!value) setValidateResult(validateResultContent.comment.default);
+      else if (value.length > 15)
+        setValidateResult(validateResultContent.comment.outOfForm);
+      else setValidateResult(validateResultContent.comment.pass);
     }
   };
 
