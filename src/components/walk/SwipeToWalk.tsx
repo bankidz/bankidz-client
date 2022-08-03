@@ -92,7 +92,7 @@ export default SwipeToWalk;
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 0px 18px;
+  padding: 65px 18px 65px 18px;
   box-sizing: border-box;
 `;
 
@@ -100,6 +100,8 @@ const RangeInputForm = styled.div`
   position: relative;
   /* 얼마 모았으면 걷기 */
   & > p {
+    position: absolute;
+    right: 0px;
     text-align: right;
     ${({ theme }) => theme.typo.text.T_12_EB}
     color: ${({ theme }) => theme.palette.greyScale.grey500};
@@ -119,7 +121,7 @@ const RangeInputForm = styled.div`
     position: absolute;
     left: -1px;
     top: -65px;
-    z-index: 5;
+    z-index: 2;
   }
 `;
 

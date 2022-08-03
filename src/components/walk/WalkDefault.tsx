@@ -21,6 +21,7 @@ import useWalkDongil from '@lib/hooks/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import { TUser } from '@store/slices/overViewSlice';
+import LargeSpacer from '@components/layout/LargeSpacer';
 
 type TWalkDefaultProps = {
   walkingDongils: IDongil[];
@@ -83,20 +84,25 @@ function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
           ))}
         </DongilList>
       </Header>
-      <Content>
-        {renderItemIllustForWalkPage(selected.itemName)}
-        <InterestBadge interestRate={selected.interestRate} />
-        <p>{selected.title}</p>
-        <SwipeToWalk
-          interestRate={selected.interestRate}
-          weekPrice={selected.weekPrice}
-          value={getValue(selected.id)}
-          setValue={setValue}
-          id={selected.id}
-          isAchieved={getIsAchieved(selected.id)}
-          setIsAchieved={setIsAchieved}
-        />
-      </Content>
+      <ContentWrapper>
+        <Content>
+          <IllustWrapper>
+            {renderItemIllustForWalkPage(selected.itemName)}
+          </IllustWrapper>
+          <InterestBadge interestRate={selected.interestRate} />
+          <p>{selected.title}</p>
+          <SwipeToWalk
+            interestRate={selected.interestRate}
+            weekPrice={selected.weekPrice}
+            value={getValue(selected.id)}
+            setValue={setValue}
+            id={selected.id}
+            isAchieved={getIsAchieved(selected.id)}
+            setIsAchieved={setIsAchieved}
+          />
+          <LargeSpacer isWhite={true} />
+        </Content>
+      </ContentWrapper>
       <Modals />
     </Wrapper>
   );
@@ -111,6 +117,7 @@ const Wrapper = styled.div`
   height: calc(var(--vh, 1vh) * 100);
 `;
 const Header = styled.div<{ colorByLevel: string }>`
+  z-index: -1;
   width: 100%;
   height: 185px;
   background-color: ${({ colorByLevel }) => colorByLevel};
@@ -180,23 +187,39 @@ const DongilList = styled.div`
   }
 `;
 
+const IllustWrapper = styled.div`
+  //background-color: red;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100 - 517px);
+  max-height: 199px;
+  padding-top: min(31px, calc((var(--vh, 1vh) * 100 - 517px) * 0.15));
+  padding-bottom: min(32px, calc((var(--vh, 1vh) * 100 - 517px) * 0.15));
+  & > svg {
+    margin: 0 auto;
+  }
+  box-sizing: border-box;
+`;
+
+const ContentWrapper = styled.div`
+  height: calc(var(--vh, 1vh) * 100 - 185px);
+`;
 const Content = styled.div`
   width: 100%;
-
+  overflow-y: scroll;
   position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   & > svg {
-    z-index: 1;
-    margin-top: 31px;
-    margin-bottom: 32px;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
   }
   & > p {
     ${({ theme }) => theme.typo.text.T_21_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
     margin-top: 16px;
-    margin-bottom: 92px;
+    margin-bottom: 27px;
   }
 `;
