@@ -1,5 +1,6 @@
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import GoBackHeader from '@components/common/buttons/GoBackHeader';
 import InputForm from '@components/common/InputForm';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useEffect, useState } from 'react';
@@ -36,7 +37,8 @@ function Reject() {
   }
   return (
     <Wrapper>
-      <header>거절 사유를 입력해요</header>
+      <GoBackHeader />
+      {/* <header>거절 사유를 입력해요</header>
       <form onSubmit={handleSubmit}>
         <InputForm
           placeholder="금융 성장에 도움될 피드백을 작성해요"
@@ -62,7 +64,7 @@ function Reject() {
         <ValidMessage className={toggleValidMessage ? 'active' : undefined}>
           좋은 피드백을 작성하셨네요!
         </ValidMessage>
-      )}
+      )} */}
 
       <CommonSheet
         open={openFeedBack}

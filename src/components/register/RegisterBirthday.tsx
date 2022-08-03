@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/buttons/Button';
 import InputForm from '@components/common/InputForm';
 import MarginTemplate from '@components/layout/MarginTemplate';
+import GoBackHeader from '@components/common/buttons/GoBackHeader';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -187,7 +188,7 @@ export default RegisterBirthday;
 const Wrapper = styled.div`
   header {
     margin-top: 16px;
-    margin-left: 26px;
+    margin-left: 8px;
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }

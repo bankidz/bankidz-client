@@ -4,6 +4,7 @@ import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { axiosPublic } from '@lib/api/axios';
 import { useParams } from 'react-router-dom';
+import GoBackHeader from '@components/common/buttons/GoBackHeader';
 
 function RegisterPage() {
   const { step } = useParams();
@@ -17,12 +18,11 @@ function RegisterPage() {
   const currentStep = getValidCurrentStep(parseInt(step!));
   return (
     <>
-      <ForegroundTemplate label="">
-        <MarginTemplate>
-          {currentStep === 1 && <RegisterBirth />}
-          {currentStep === 2 && <RegisterRole />}
-        </MarginTemplate>
-      </ForegroundTemplate>
+      <GoBackHeader />
+      <MarginTemplate>
+        {currentStep === 1 && <RegisterBirth />}
+        {currentStep === 2 && <RegisterRole />}
+      </MarginTemplate>
     </>
   );
 }
