@@ -15,10 +15,10 @@ import {
   selectFamily,
 } from '@store/slices/familySlice';
 import {
-  fetchKidOverView,
+  fetchOverView,
   selectKidOverView,
-  selectKidOverViewStatus,
-} from '@store/slices/kidOverViewSlice';
+  selectUserOverView,
+} from '@store/slices/overViewSlice';
 import { selectKids } from '@store/slices/kidsSlice';
 import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
@@ -44,12 +44,12 @@ function Mypage() {
   const isKid = useAppSelector(selectIsKid)!;
   const familyStatus = useAppSelector(selectFamilyStatus);
   const family = useAppSelector(selectFamily);
+  const user = useAppSelector(selectUserOverView);
   const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
-  // const kids = isKid ? useAppSelector(selectKids) : null;
   useEffect(() => {
     const fetch = async () => {
       try {
-        await dispatch(fetchKidOverView({ axiosPrivate })).unwrap();
+        await dispatch(fetchOverView({ axiosPrivate })).unwrap();
         if (familyStatus === 'idle')
           await dispatch(fetchFamily({ axiosPrivate })).unwrap();
       } catch (err) {
@@ -63,7 +63,7 @@ function Mypage() {
     <Wrapper>
       <Header>마이페이지</Header>
       <MarginTemplate>
-        <OverView isKid={isKid} kidOverView={kidOverView} />
+        <OverView user={user} overView={kidOverView} />
         {isKid && kidOverView ? (
           <Section>
             <h2>MY 레벨</h2>
