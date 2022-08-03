@@ -40,9 +40,15 @@ function RegisterBirthday() {
 
   // 형식에 맞는 input이 입려되면 바로 focus 이동
   useEffect(() => {
-    setIsValidYear(YEAR_REGEX.test(year));
-    if (YEAR_REGEX.test(year) === true) {
-      monthInputRef.current!.focus();
+    // setIsValidYear(YEAR_REGEX.test(year));
+    // if (YEAR_REGEX.test(year) === true) {
+    //   monthInputRef.current!.focus();
+    // }
+    const parsedInt = parseInt(year);
+    if (1923 <= parsedInt && parsedInt <= 2022) {
+      setIsValidYear(true);
+    } else {
+      setIsValidYear(false);
     }
   }, [year, isValidYear]);
   useEffect(() => {

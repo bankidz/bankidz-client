@@ -26,7 +26,10 @@ export type TAuthState = {
 const initialState: TAuthState = {
   auth: {
     accessToken: null,
+    // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0',
+    // isKid: true,
     isKid: null,
+    // level: 3,
     level: null,
     birthday: null,
     isFemale: null,
