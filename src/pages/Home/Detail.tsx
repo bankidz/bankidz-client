@@ -78,9 +78,11 @@ function Detail() {
     weeks,
     createdAt,
     progressList,
+    successWeeks,
   } = targetDongil!;
 
-  const { percent, currentSavings } = getSummaryData();
+  const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
+  // const { percent, currentSavings } = getSummaryData();
   function getSummaryData() {
     let Summary: ISummary;
     if (isKid === true) {
@@ -89,9 +91,9 @@ function Detail() {
       Summary = useAppSelector(selectParentSummary)!;
     }
     return {
-      percent:
-        Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
-      currentSavings: Summary!.currentSavings,
+      // percent:
+      //   Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
+      // currentSavings: Summary!.currentSavings,
     };
   }
 
@@ -163,7 +165,7 @@ function Detail() {
             <div className="title">{title}</div>
             <Summary
               usage="Detail"
-              currentSavings={currentSavings}
+              currentSavings={weekPrice * successWeeks}
               totalPrice={totalPrice}
             />
 

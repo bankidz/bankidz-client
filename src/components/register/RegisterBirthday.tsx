@@ -103,13 +103,8 @@ function RegisterBirthday() {
   function handleNextButtonClick() {
     navigate('/register/2');
   }
-  function handleTest() {
-    console.log(year);
-    console.log(typeof year);
-  }
   return (
     <Wrapper>
-      <button onClick={handleTest}>Test</button>
       <header>생년월일을 입력해요</header>
       <form onSubmit={handleSubmit}>
         <InputFormWrapper>
