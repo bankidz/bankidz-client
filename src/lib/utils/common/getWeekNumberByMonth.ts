@@ -60,7 +60,7 @@ function getWeekNumberByMonth(dateFormat: Date) {
     month = month === 12 ? 1 : month + 1;
     weekNo = 1;
   }
-
+  year = year - 2000;
   return { year, month, weekNo };
 }
 export default getWeekNumberByMonth;
