@@ -33,7 +33,7 @@ const validateResultContent = {
   contractAmount: {
     default: {
       error: false,
-      message: '최소 1500원에서 최대 50만원까지 설정할 수 있어요!',
+      message: '최소 1500원에서 최대 30만원까지 설정할 수 있어요!',
     },
     under: { error: true, message: '1,500원 이상으로 부탁해요!' },
     over: { error: true, message: '30만원 이하로 부탁해요!' },
