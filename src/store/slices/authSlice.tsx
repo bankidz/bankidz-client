@@ -29,7 +29,7 @@ const initialState: TAuthState = {
     isKid: null,
     level: null,
     birthday: null,
-    isFemale: true,
+    isFemale: null,
     phone: null,
     username: null,
   },

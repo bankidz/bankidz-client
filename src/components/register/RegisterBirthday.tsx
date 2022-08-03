@@ -207,7 +207,7 @@ const InputFormWrapper = styled.div`
 const ErrorMessage = styled.div`
   position: absolute;
   margin-top: 12px;
-  width: 100%;
+  // width: 100%;
   ${({ theme }) => theme.typo.input.TextMessage_S_12_M}
   color: ${({ theme }) => theme.palette.greyScale.grey100};
   &.active {
