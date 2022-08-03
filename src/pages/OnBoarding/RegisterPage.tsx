@@ -1,8 +1,6 @@
 import RegisterBirth from '@components/register/RegisterBirthday';
 import RegisterRole from '@components/register/RegisterRole';
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { axiosPublic } from '@lib/api/axios';
 import { useParams } from 'react-router-dom';
 import GoBackHeader from '@components/common/buttons/GoBackHeader';
 
