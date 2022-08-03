@@ -4,7 +4,7 @@ import authReducer from '../slices/authSlice';
 import createChallengeReducer from '../slices/createChallenge';
 import kidSummaryReducer from '../slices/kidSummarySlice';
 import walkingDongilsReducer from '../slices/walkingDongilSlice';
-import pendingDongilsReducer from '../slices/pendingDongilSlice';
+import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import familyReducer from '../slices/familySlice';
 import parentSummaryReducer from '../slices/parentSummarySlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
