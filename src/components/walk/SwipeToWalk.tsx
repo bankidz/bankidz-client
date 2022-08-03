@@ -10,7 +10,10 @@ import { TInterestRate } from '@lib/types/common';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import { useAppDispatch } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { walkDongil } from '@store/slices/walkingDongilSlice';
+import {
+  dispatchSetPatched,
+  walkDongil,
+} from '@store/slices/walkingDongilSlice';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;
@@ -44,7 +47,9 @@ function SwipeToWalk({
     } else {
       setValue(id, 100);
       try {
-        await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
+        // 데모데이 시연용
+        //await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
+        dispatch(dispatchSetPatched({ id }));
         setIsAchieved(id, true);
       } catch (err) {
         console.error(err);

@@ -32,7 +32,7 @@ const initialState: TAuthState = {
     birthday: null,
     isFemale: false,
     phone: null,
-    username: null,
+    username: '한규진',
   },
 };
 

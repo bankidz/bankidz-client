@@ -40,11 +40,12 @@ function WalkDefault({ walkingDongils }: { walkingDongils: IDongil[] }) {
   useEffect(() => {
     console.log('asdf', getWeeklySuccess(), patched);
     if (getWeeklySuccess() && patched) {
+      //if (getWeeklySuccess()) {
       openModal(modals.primaryModal, {
         onSubmit: () => {},
         isKid: isKid,
         isFemale: isFemale,
-        headerText: `${username} 이번주 저금 성공`,
+        headerText: `${username} 뱅키 이번주 저금 성공`,
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }

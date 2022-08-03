@@ -25,10 +25,20 @@ function Step5({ currentStep }: { currentStep: number }) {
 
   // 다음으로 버튼 클릭
   const onClickNextButton = () => {
-    dispatch(postChallenge(axiosPrivate));
+    // 데모데이 시연용으로 주석처리
+    // dispatch(postChallenge(axiosPrivate));
+    dispatch(dispatchResetChallengePayload());
+    onDismiss(); // 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
+    openModal(modals.quaternaryModal, {
+      onSubmit: () => {
+        closeModal(modals.quaternaryModal);
+        navigate('/', { replace: true });
+      },
+    });
   };
 
-  useEffect(() => {
+  // 데모데이 시연용으로 주석처리
+  /*   useEffect(() => {
     if (status === 'succeeded') {
       // 스토어 초기화
       dispatch(dispatchResetChallengePayload());
@@ -42,7 +52,7 @@ function Step5({ currentStep }: { currentStep: number }) {
     } else if (status === 'failed') {
       console.log('err');
     }
-  }, [status]);
+  }, [status]); */
 
   return (
     <>

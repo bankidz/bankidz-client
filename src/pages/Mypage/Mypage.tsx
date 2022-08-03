@@ -2,6 +2,7 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import SmallSpacer from '@components/layout/SmallSpacer';
 import FamilyList from '@components/mypage/FamilyList';
+import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
@@ -18,8 +19,24 @@ import {
   selectKidOverView,
   selectKidOverViewStatus,
 } from '@store/slices/kidOverViewSlice';
+import { selectKids } from '@store/slices/kidsSlice';
 import { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const DemoKidsRecordData = [
+  {
+    username: '주어진사랑',
+    acceptRate: 80,
+    acceptRequest: 5,
+    achieveRate: 90,
+  },
+  {
+    username: '김수빈',
+    acceptRate: 70,
+    acceptRequest: 22,
+    achieveRate: 80,
+  },
+];
 
 function Mypage() {
   const dispatch = useAppDispatch();
@@ -27,7 +44,8 @@ function Mypage() {
   const isKid = useAppSelector(selectIsKid)!;
   const familyStatus = useAppSelector(selectFamilyStatus);
   const family = useAppSelector(selectFamily);
-  const kidOverView = useAppSelector(selectKidOverView);
+  const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
+  // const kids = isKid ? useAppSelector(selectKids) : null;
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -46,14 +64,18 @@ function Mypage() {
       <Header>마이페이지</Header>
       <MarginTemplate>
         <OverView isKid={isKid} kidOverView={kidOverView} />
-        {isKid && (
+        {isKid && kidOverView ? (
           <Section>
             <h2>MY 레벨</h2>
-            {kidOverView ? (
-              <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
-            ) : (
-              'loading...'
-            )}
+            <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
+          </Section>
+        ) : (
+          <Section smallGap={true}>
+            <h2>자녀기록</h2>
+            {/* {kids.map((kids) => (
+              <></>
+            ))} */}
+            <KidsRecordList kidsRecordData={DemoKidsRecordData} />
           </Section>
         )}
         <Section>
@@ -89,8 +111,13 @@ const Header = styled.div`
   z-index: 5;
 `;
 
-const Section = styled.div`
+const Section = styled.div<{ smallGap?: boolean }>`
   margin-top: 80px;
+  ${({ smallGap }) =>
+    smallGap &&
+    css`
+      margin-top: 48px;
+    `}
   & > h2 {
     ${({ theme }) => theme.typo.text.T_16_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
