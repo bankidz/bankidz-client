@@ -11,5 +11,5 @@ export default SmallSpacer;
 const StyledDiv = styled.div`
   height: 48px;
   width: 100%;
-  background: palegreen;
+  background: ${({ theme }) => theme.palette.greyScale.grey100};
 `;

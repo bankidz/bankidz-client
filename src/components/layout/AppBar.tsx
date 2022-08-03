@@ -8,7 +8,7 @@ interface AppBarProps {
   /**
    * 이전 페이지명
    */
-  label: string;
+  label?: string;
   /**
    * 레벨
    */

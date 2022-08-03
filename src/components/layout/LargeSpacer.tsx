@@ -11,5 +11,5 @@ export default LargeSpacer;
 const StyledDiv = styled.div`
   height: 96px;
   width: 100%;
-  background: palegreen;
+  background: ${({ theme }) => theme.palette.greyScale.grey100};
 `;

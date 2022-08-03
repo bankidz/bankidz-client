@@ -52,7 +52,7 @@ function HomeRouter() {
           isKid ? (
             <>부적절한 접근입니다.</>
           ) : (
-            <ForegroundTemplate label="제안받은 돈길">
+            <ForegroundTemplate>
               <Reject />
             </ForegroundTemplate>
           )

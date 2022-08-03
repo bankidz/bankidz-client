@@ -251,8 +251,8 @@ function ParentHome() {
   }, [selectedKid]);
 
   function hasProposedDongilsAlreadyBeenFetched() {
-    console.log('selectedKid: ', selectedKid);
-    console.log('proposedDongils: ', proposedDongils);
+    // console.log('selectedKid: ', selectedKid);
+    // console.log('proposedDongils: ', proposedDongils);
     const found = proposedDongils?.find(
       (proposedDongil) => proposedDongil.userName === selectedKid?.username,
     );

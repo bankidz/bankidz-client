@@ -4,7 +4,7 @@ import AppBar from './AppBar';
 
 interface ForegroundTemplateProps {
   level?: TLevel | null;
-  label: string;
+  label?: string;
   children: JSX.Element;
 }
 

@@ -98,9 +98,9 @@ function RegisterBirthday() {
   }
   return (
     <Wrapper>
-      <span>생년월일을 입력해요</span>
+      <header>생년월일을 입력해요</header>
       <form onSubmit={handleSubmit}>
-        <InputWrapper>
+        <InputFormWrapper>
           <InputForm
             placeholder="2000"
             onChange={handleYearChange}
@@ -146,7 +146,7 @@ function RegisterBirthday() {
             ref={dayInputRef}
             pattern="\d*"
           />
-        </InputWrapper>
+        </InputFormWrapper>
         <DummyButton type="submit" />
       </form>
       {yearFocus === true && (
@@ -185,19 +185,18 @@ function RegisterBirthday() {
 export default RegisterBirthday;
 
 const Wrapper = styled.div`
-  span {
-    margin-top: 64px;
-    margin-left: 10px;
+  header {
+    margin-top: 16px;
+    margin-left: 26px;
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
-
   form {
     margin-top: 96px;
   }
 `;
 
-const InputWrapper = styled.div`
+const InputFormWrapper = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 128fr 90fr 90fr;

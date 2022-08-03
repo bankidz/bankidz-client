@@ -18,13 +18,13 @@ import {
   fetchPendingDongils,
   selectPendingDongils,
   selectPendingDongilsStatus,
-} from '@store/slices/pendingDongilSlice';
+} from '@store/slices/pendingDongilsSlice';
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TFetchStatus } from '@lib/types/api';
 import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
 import WalkingDongilList from '@components/home/walking/WalkingDongilList';
@@ -201,7 +201,7 @@ function KidHome() {
         open={openDeleteCompleted}
         onDismiss={onDeleteCompletedDismiss}
       >
-        <SheetComplete type="delete" onDismiss={onDeleteCompletedDismiss} />
+        <SheetCompleted type="delete" onDismiss={onDeleteCompletedDismiss} />
       </CommonSheet>
     </HomeTemplate>
   );
