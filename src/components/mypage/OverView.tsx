@@ -2,28 +2,24 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectAuth } from '@store/slices/authSlice';
 import styled, { css } from 'styled-components';
 import renderRoleIllust from '@lib/utils/common/renderRoleIllust';
-import { useEffect } from 'react';
-import { fetchKidOverView, TKidOverView } from '@store/slices/kidOverViewSlice';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { TOverView, TUser } from '@store/slices/overViewSlice';
 import OverViewData from './OverViewData';
-import { calcRatio } from '@lib/styles/theme';
 export type OverViewProps = {
-  isKid: boolean;
-  kidOverView: TKidOverView | null;
+  user: TUser;
+  overView: TOverView | null;
 };
 
-function OverView({ isKid, kidOverView }: OverViewProps) {
-  const auth = useAppSelector(selectAuth);
+function OverView({ user, overView }: OverViewProps) {
   return (
     <Wrapper>
-      <Container isKid={isKid}>
-        <Banki isKid={auth.isKid!} isFemale={auth.isFemale!}>
-          {renderRoleIllust(auth.isKid!, auth.isFemale!)}
+      <Container isKid={user.isKid}>
+        <Banki isKid={user.isKid} isFemale={user.isFemale!}>
+          {renderRoleIllust(user.isKid, user.isFemale)}
         </Banki>
         <p>
-          {auth.username} {isKid && '뱅키'}
+          {user.username} {user.isKid && '뱅키'}
         </p>
-        {kidOverView && <OverViewData isKid={isKid} kid={kidOverView} />}
+        {overView && <OverViewData isKid={user.isKid} kid={overView} />}
       </Container>
     </Wrapper>
   );

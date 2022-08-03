@@ -3,7 +3,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import { KAKAO_AUTH_URL } from '@lib/constants';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 function LoginPage() {
   function handleClick() {
     window.location.href = KAKAO_AUTH_URL;
@@ -18,8 +18,8 @@ function LoginPage() {
     <Wrapper>
       <MarginTemplate>
         <TextWrapper>
-          <span className="title">BANKIDZ</span>
-          <span className="congrats">뱅키즈에 오신 것을 환영합니다!</span>
+          <Logo />
+          <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
         <ButtonWithMarginBottom
           label="시연 체험해보기"
@@ -53,26 +53,15 @@ const TextWrapper = styled.div`
   /* margin-bottom: 50vh; */
   margin-bottom: 42vh;
   width: 100%;
-  height: 62px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .title {
-    // typo exception
-    font-family: 'Tmoney RoundWind';
-    font-style: normal;
-    font-weight: 800;
-    font-size: 36px;
-    line-height: 36px;
-    color: ${({ theme }) => theme.palette.main.yellow400};
-  }
-
-  .congrats {
+  & > p {
     margin-top: 16px;
-    ${({ theme }) => theme.typo.text.T_16_EB};
+    ${({ theme }) => theme.typo.text.T_16_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
 `;

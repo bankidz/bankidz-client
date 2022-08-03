@@ -62,9 +62,6 @@ function RegisterRole() {
       setIsFemale(true);
       onOpen();
     }
-    dispatch(
-      setCredentials({ accessToken: 'asdf', isKid: false, level: null }),
-    );
   }
 
   const { openModal } = useModals();
@@ -111,11 +108,11 @@ function RegisterRole() {
         } else if (isKid === true && isFemale === false) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0';
-          level = 3;
+          level = 0;
         } else if (isKid === true && isFemale === true) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU';
-          level = 4;
+          level = 1;
         }
         accessToken && dispatch(setCredentials({ accessToken, isKid, level }));
 

@@ -38,7 +38,7 @@ function Reject() {
         <InputSection validate={validateComment}>
           <form onSubmit={handleSubmit}>
             <InputForm
-              placeholder="돈길 이름을 입력하세요"
+              placeholder="금융 성장에 도움될 피드백을 작성해요"
               value={comment}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setComment(e.target.value);
