@@ -25,14 +25,13 @@ export type TAuthState = {
 
 const initialState: TAuthState = {
   auth: {
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzY1LCJzdWIiOiIyIiwiZXhwIjoxNjYxMzMzOTY1LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.f2B_gezGmD6uKh2Js3Y_blrLJGOFyWXzqva5MAXmbqc',
-    isKid: false,
-    level: 2,
+    accessToken: null,
+    isKid: null,
+    level: null,
     birthday: null,
     isFemale: true,
     phone: null,
-    username: '한규진',
+    username: null,
   },
 };
 
