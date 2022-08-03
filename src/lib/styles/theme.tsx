@@ -54,7 +54,7 @@ export const theme: DefaultTheme = {
     large: '24px',
   },
   transition: {
-    onFocus: '0.2s all ease-in',
+    onFocus: '0.125s all ease-in',
   },
   typo: {
     fixed: {

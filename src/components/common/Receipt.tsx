@@ -21,16 +21,24 @@ interface ReceiptProps {
 }
 
 function Receipt({
-  createdAt = '2022-07-05 05:05:05',
-  interestRate = 30,
-  isMom = true,
-  itemName = '전자제품',
-  totalPrice = 150000,
-  weekPrice = 10000,
-  weeks = 15,
-}: ReceiptProps) {
+  createdAt,
+  interestRate,
+  isMom,
+  itemName,
+  totalPrice,
+  weekPrice,
+  weeks,
+}: // createdAt = '2022-07-05 05:05:05',
+// interestRate = 30,
+// isMom = true,
+// itemName = '전자제품',
+// totalPrice = 150000,
+// weekPrice = 10000,
+// weeks = 15,
+ReceiptProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);
   const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
+  console.log(itemName);
   return (
     <Wrapper>
       <PerforatedLineTop fill={theme.palette.greyScale.grey100} />
@@ -83,7 +91,7 @@ function Receipt({
           </div>
           <div className="계약종료주차">
             <div className="text-wrapper">
-              <div className="title">계약 종료 주차</div>
+              <div className="title">계약종료 주차</div>
               <div className="content">
                 {`${year}년 ${month}월 ${weekNo}주`}
               </div>
