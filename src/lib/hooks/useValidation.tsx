@@ -22,8 +22,8 @@ const initialState = {
 
 const validateResultContent = {
   contractName: {
-    default: { error: false, message: '특수문자 제외 12자 이하로 부탁해요!' },
-    outOfForm: { error: true, message: '특수문자 제외 12자 이하로 부탁해요!' },
+    default: { error: false, message: '공백 포함 12자 이하로 부탁해요!' },
+    outOfForm: { error: true, message: '공백 포함 12자 이하로 부탁해요!' },
     duplicate: {
       error: true,
       message: '기존 돈길과 동일한 이름이에요. 새롭게 지어줄래요?',
@@ -61,10 +61,7 @@ function useValidation() {
     if (formType === 'contractName' && typeof value === 'string') {
       if (!value) {
         setValidateResult(validateResultContent.contractName.default);
-      } else if (
-        value.length > 12 ||
-        value.match(/[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g)
-      )
+      } else if (value.length > 12)
         setValidateResult(validateResultContent.contractName.outOfForm);
       else if (
         existChallengeNames &&
