@@ -308,7 +308,10 @@ function ParentHome() {
           open={openApproveCompleted}
           onDismiss={onApproveCompletedDismiss}
         >
-          <SheetCompleted type="delete" onDismiss={onApproveCompletedDismiss} />
+          <SheetCompleted
+            type="approve"
+            onDismiss={onApproveCompletedDismiss}
+          />
         </CommonSheet>
       </HomeTemplate>
     </>
