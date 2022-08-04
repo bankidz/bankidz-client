@@ -3,13 +3,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export interface ISummary {
+export interface IKidSummary {
   currentSavings: number;
   totalPrice: number;
 }
 
 export type TKidSummaryState = {
-  kidSummary: ISummary | null;
+  kidSummary: IKidSummary | null;
   kidSummaryStatus?: TFetchStatus;
 };
 

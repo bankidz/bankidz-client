@@ -8,8 +8,8 @@ import styled from 'styled-components';
 
 interface ProposedDongilItemProps {
   proposedDongil: IDongil;
-  onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number | null>>;
+  onApproveCheckOpen?: () => void;
+  setIdToApprove?: Dispatch<SetStateAction<number | null>>;
 }
 
 function ProposedDongilItem({
@@ -38,8 +38,8 @@ function ProposedDongilItem({
         navigate(`/reject/${id}`);
       },
       onExtraSubmit: () => {
-        setIdToApprove(id);
-        onApproveCheckOpen();
+        setIdToApprove!(id);
+        onApproveCheckOpen!();
       },
       isKid: false,
       createdAt: createdAt,
@@ -80,7 +80,8 @@ const StyledButton = styled.button`
   height: 75px;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
-  margin-bottom: 12px;
+
+  margin-bottom: 8px;
   padding: 20px 16px 18px 16px;
   display: flex;
   justify-content: space-between;

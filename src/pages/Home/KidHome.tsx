@@ -38,6 +38,7 @@ import {
   selectParents,
   selectFamilyStatus,
 } from '@store/slices/familySlice';
+import SkeletonDongilList from '@components/home/SkeletonDongilList';
 
 function KidHome() {
   const kidSummary = useAppSelector(selectKidSummary);
@@ -98,15 +99,24 @@ function KidHome() {
   }
   let walkingDongilsContent;
   if (walkingDongilsStatus === 'loading') {
-    walkingDongilsContent = <p>Loading...</p>;
+    walkingDongilsContent = (
+      <>
+        <header>걷고있는 돈길</header>
+        <SkeletonDongilList usage="walking" />
+      </>
+    );
   } else if (walkingDongilsStatus === 'succeeded') {
     if (walkingDongils?.length === 0) {
       walkingDongilsContent = (
-        <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
+        <>
+          <header>걷고있는 돈길</header>
+          <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
+        </>
       );
     } else {
       walkingDongilsContent = (
         <>
+          <header>걷고있는 돈길</header>
           <WalkingDongilList walkingDongils={walkingDongils!} />
           <ContractNewDongilLink disable={disable} to={'/create/1'} />
         </>
@@ -156,17 +166,30 @@ function KidHome() {
   // 대기중인 돈길
   let pendingDongilsContent;
   if (pendingDongilsStatus === 'loading') {
-    pendingDongilsContent = <p>Loading...</p>;
+    pendingDongilsContent = (
+      <>
+        <header>대기중인 돈길</header>
+        <SkeletonDongilList usage="pending" />
+      </>
+    );
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils?.length === 0) {
-      pendingDongilsContent = <EmptyDongil property="pending" />;
+      pendingDongilsContent = (
+        <>
+          <header>대기중인 돈길</header>
+          <EmptyDongil property="pending" />
+        </>
+      );
     } else {
       pendingDongilsContent = (
-        <PendingDongilList
-          pendingDongils={pendingDongils!}
-          onDeleteCheckOpen={onDeleteCheckOpen}
-          setIdToDelete={setIdToDelete}
-        />
+        <>
+          <header>대기중인 돈길</header>
+          <PendingDongilList
+            pendingDongils={pendingDongils!}
+            onDeleteCheckOpen={onDeleteCheckOpen}
+            setIdToDelete={setIdToDelete}
+          />
+        </>
       );
     }
   } else if (pendingDongilsStatus === 'failed') {
@@ -177,14 +200,8 @@ function KidHome() {
     <HomeTemplate usage="KidHome">
       <MarginTemplate>
         <SummaryWrapper>{kidSummaryContent}</SummaryWrapper>
-        <WalkingDongilsWrapper>
-          <header>걷고있는 돈길</header>
-          {walkingDongilsContent}
-        </WalkingDongilsWrapper>
-        <WaitingDongilWrapper>
-          <header>대기중인 돈길</header>
-          {pendingDongilsContent}
-        </WaitingDongilWrapper>
+        <WalkingDongilsWrapper>{walkingDongilsContent}</WalkingDongilsWrapper>
+        <WaitingDongilWrapper>{pendingDongilsContent}</WaitingDongilWrapper>
         <LargeSpacer />
       </MarginTemplate>
 

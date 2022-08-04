@@ -1,4 +1,5 @@
 import { TLevel } from '@lib/types/common';
+import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import styled, { css } from 'styled-components';
 
 interface LevelBadgeProps {
@@ -20,9 +21,10 @@ function LevelBadge({ level }: LevelBadgeProps) {
       return 'Lv.5 뱅키임당';
     }
   }
+  const colorByLevel = getColorByLevel(level);
   return (
     <Wrapper>
-      <StyledSpan level={level as TLevel}>
+      <StyledSpan colorByLevel={colorByLevel}>
         {renderTextByLevel(level!)}
       </StyledSpan>
     </Wrapper>
@@ -35,7 +37,7 @@ const Wrapper = styled.div`
   height: 28px;
 `;
 
-const StyledSpan = styled.span<{ level: TLevel }>`
+const StyledSpan = styled.span<{ colorByLevel: string }>`
   width: 100px;
   padding: 8px 12px;
   gap: 8px;
@@ -47,33 +49,8 @@ const StyledSpan = styled.span<{ level: TLevel }>`
 
   background: ${({ theme }) => theme.palette.greyScale.grey100};
   border-radius: ${({ theme }) => theme.radius.small};
-
   ${({ theme }) => theme.typo.tag.T_12_EB};
 
   transition: ${({ theme }) => theme.transition.onFocus};
-  ${({ level }) =>
-    level === 1 &&
-    css`
-      color: ${({ theme }) => theme.palette.level.grey100};
-    `}
-  ${({ level }) =>
-    level === 2 &&
-    css`
-      color: ${({ theme }) => theme.palette.level.blue100};
-    `}
-    ${({ level }) =>
-    level === 3 &&
-    css`
-      color: ${({ theme }) => theme.palette.level.red100};
-    `}
-    ${({ level }) =>
-    (level === 4 || level === 0) &&
-    css`
-      color: ${({ theme }) => theme.palette.level.green100};
-    `}
-    ${({ level }) =>
-    level === 5 &&
-    css`
-      color: ${({ theme }) => theme.palette.level.yellow100};
-    `};
+  color: ${({ colorByLevel }) => colorByLevel};
 `;
