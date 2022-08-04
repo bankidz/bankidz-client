@@ -9,27 +9,27 @@ interface SummaryProps {
    * 'KidHome', 'Detail', 'ParentHome' 중 하나를 선택합니다.
    */
   usage: TUsage;
-  currentSavings: number;
-  weekPrice?: number;
-  successWeeks?: number;
-  weeks?: number;
+  currentSavings?: number;
   totalPrice?: number;
   /** usage: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다. */
   username?: string;
+  /** usage: 다음은 'Detail'인 경우 필요한 props 입니다. */
+  weekPrice?: number;
+  weeks?: number;
+  successWeeks?: number;
 }
 
 function Summary({
   usage,
   currentSavings,
   weekPrice,
-  successWeeks,
   weeks,
+  successWeeks,
   totalPrice,
   username,
 }: SummaryProps) {
   const today = new Date();
   const { month, weekNo } = getWeekNumberByMonth(today);
-  // const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
 
   // Detail
   let currentSavingsForDetailPage: number;
@@ -38,48 +38,63 @@ function Summary({
     currentSavingsForDetailPage = weekPrice! * successWeeks!;
     currentCompletionRate = Math.ceil((successWeeks! / weeks!) * 100);
   }
-  return (
-    <Wrapper usage={usage}>
-      {/* KidHome, ParentHome */}
-      <TitleWrapper usage={usage}>
-        {(usage === 'KidHome' || usage === 'ParentHome') && (
+
+  let content;
+  if (usage === 'KidHome') {
+    content = (
+      <>
+        <TitleWrapper usage={usage}>
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
-        )}
-        {/* KidHome */}
-        {usage === 'ParentHome' && username !== 'loading' && (
+        </TitleWrapper>
+        <InfoWrapper>
+          <TextWrapper>
+            <div>{currentSavings!.toLocaleString('ko-KR')}원</div>
+            {<div>내 저금통</div>}
+          </TextWrapper>
+          <Divider />
+          <TextWrapper>
+            <div>{totalPrice!.toLocaleString('ko-KR')}원</div>
+            <div>목표 저금액</div>
+          </TextWrapper>
+        </InfoWrapper>
+      </>
+    );
+  } else if (usage === 'ParentHome') {
+    content = (
+      <>
+        <TitleWrapper usage={usage}>
+          <span className="date">{`${month}월 ${weekNo}주차`}</span>
           <span className="username">{`${username} 저금통`}</span>
-        )}
-      </TitleWrapper>
-      <Info>
-        <TextWrapper>
-          {/* KidHome, ParentHome */}
-          {usage === 'KidHome' ||
-            (usage === 'ParentHome' && (
-              <div>{currentSavings!.toLocaleString('ko-KR')}원</div>
-            ))}
-          {usage === 'Detail' && (
-            <div>{currentSavingsForDetailPage!.toLocaleString('ko-KR')}원</div>
-          )}
-          {/* KidHome */}
-          {usage === 'KidHome' && <div>내 저금통</div>}
-          {/* ParentHome, Detail */}
-          {(usage === 'ParentHome' || usage === 'Detail') && (
+        </TitleWrapper>
+        <InfoWrapper>
+          <TextWrapper>
+            <div>{currentSavings!.toLocaleString('ko-KR')}원</div>
             <div>현재 저금액</div>
-          )}
+          </TextWrapper>
+          <Divider />
+          <TextWrapper>
+            <div>{totalPrice!.toLocaleString('ko-KR')}원</div>
+            <div>목표 저금액</div>
+          </TextWrapper>
+        </InfoWrapper>
+      </>
+    );
+  } else if (usage === 'Detail') {
+    content = (
+      <InfoWrapper>
+        <TextWrapper>
+          <div>{currentSavingsForDetailPage!.toLocaleString('ko-KR')}원</div>
+          <div>현재 저금액</div>
         </TextWrapper>
         <Divider />
         <TextWrapper>
-          {(usage === 'KidHome' || usage === 'ParentHome') && (
-            <div>{totalPrice!.toLocaleString('ko-KR')}원</div>
-          )}
-          {usage === 'KidHome' && <div>목표 저금액</div>}
-          {usage === 'Detail' && <div>{currentCompletionRate!}%</div>}
-          {usage === 'Detail' && <div>현재 완주율</div>}
-          {usage === 'ParentHome' && <div>목표 저금액</div>}
+          <div>{currentCompletionRate!}%</div>
+          <div>현재 완주율</div>
         </TextWrapper>
-      </Info>
-    </Wrapper>
-  );
+      </InfoWrapper>
+    );
+  }
+  return <Wrapper usage={usage}>{content}</Wrapper>;
 }
 
 export default Summary;
@@ -91,14 +106,14 @@ const Wrapper = styled.div<{ usage: TUsage }>`
       height: 120px;
     `}
   ${({ usage }) =>
-    usage === 'Detail' &&
-    css`
-      height: 89px;
-    `}
-  ${({ usage }) =>
     usage === 'ParentHome' &&
     css`
       height: 160px;
+    `}
+  ${({ usage }) =>
+    usage === 'Detail' &&
+    css`
+      height: 89px;
     `}
 
   width: 100%;
@@ -108,9 +123,11 @@ const Wrapper = styled.div<{ usage: TUsage }>`
 
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 
-  padding: 16px 0px;
+  padding-top: 16px;
+  padding-bottom: 16px;
   & > p {
     ${({ theme }) => theme.typo.text.T_14_EB}
     color: ${({ theme }) => theme.palette.greyScale.grey500}
@@ -145,12 +162,12 @@ const TitleWrapper = styled.div<{
     ${({ usage }) =>
       usage === 'ParentHome' &&
       css`
-        margin-bottom: 10px;
+        margin-bottom: 16px;
       `}
   }
 `;
 
-const Info = styled.div`
+const InfoWrapper = styled.div`
   display: grid;
   justify-content: center;
   align-items: center;

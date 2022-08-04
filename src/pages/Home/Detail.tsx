@@ -165,10 +165,9 @@ function Detail() {
             <div className="title">{title}</div>
             <Summary
               usage="Detail"
-              currentSavings={currentSavings}
               weekPrice={weekPrice}
-              successWeeks={successWeeks}
               weeks={weeks}
+              successWeeks={successWeeks}
             />
 
             <InterestStampListWrapper>
