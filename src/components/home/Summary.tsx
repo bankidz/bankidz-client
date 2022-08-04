@@ -39,7 +39,6 @@ function Summary({
     currentCompletionRate = Math.ceil((successWeeks! / weeks!) * 100);
   }
 
-  console.log(username);
   let content;
   if (usage === 'KidHome') {
     content = (
