@@ -1,7 +1,7 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
-import { IDongil } from '@store/slices/walkingDongilSlice';
+import { IDongil } from '@store/slices/walkingDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';

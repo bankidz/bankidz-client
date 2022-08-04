@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof QuaternaryModal> = (args) => (
 
 export const 자녀 = Template.bind({});
 자녀.args = {
-  createdAt: '2022-07-05 05:05:05',
+  createdAt: '2022/07/05 05:05:05',
   interestRate: 30,
   isMom: true,
   itemName: '전자제품',
@@ -27,7 +27,7 @@ export const 자녀 = Template.bind({});
 
 export const 부모 = Template.bind({});
 부모.args = {
-  createdAt: '2022-07-05 05:05:05',
+  createdAt: '2022/07/05 05:05:05',
   interestRate: 30,
   isMom: true,
   itemName: '전자제품',

@@ -34,7 +34,7 @@ interface SenaryModalProps {
 // 모달 내부에 표시될 UI 작성
 function SenaryModal({
   onSubmit,
-  createdAt = '2022-07-05 05:05:05',
+  createdAt = '2022/07/05 05:05:05',
   interestRate = 30,
   isMom = true,
   itemName = '전자제품',

@@ -7,7 +7,7 @@ import { selectAuth, selectLevel } from '@store/slices/authSlice';
 import {
   IDongil,
   selectIsWalkingDongilsPatched,
-} from '@store/slices/walkingDongilSlice';
+} from '@store/slices/walkingDongilsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';

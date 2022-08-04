@@ -3,7 +3,7 @@ import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { EDongilStatus } from '@lib/types/common';
 import { getDate } from '@lib/utils/common/getDate';
-import { IDongil } from '@store/slices/walkingDongilSlice';
+import { IDongil } from '@store/slices/walkingDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 

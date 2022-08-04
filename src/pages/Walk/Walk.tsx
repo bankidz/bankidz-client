@@ -11,7 +11,7 @@ import {
 import {
   dispatchResetIsPatched,
   selectWalkingDongils,
-} from '@store/slices/walkingDongilSlice';
+} from '@store/slices/walkingDongilsSlice';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
