@@ -77,26 +77,21 @@ function Detail() {
     totalPrice,
     weekPrice,
     weeks,
-    createdAt,
     progressList,
     successWeeks,
   } = targetDongil!;
 
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
-  // const { percent, currentSavings } = getSummaryData();
-  // function getSummaryData() {
-  //   let Summary: ISummary;
-  //   if (isKid === true) {
-  //     Summary = useAppSelector(selectKidSummary)!;
-  //   } else if (isKid === false) {
-  //     Summary = useAppSelector(selectParentSummary)!;
-  //   }
-  //   return {
-  //     // percent:
-  //     //   Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
-  //     // currentSavings: Summary!.currentSavings,
-  //   };
-  // }
+  const currentSavings = getCurrentSavings();
+  function getCurrentSavings() {
+    let Summary: ISummary;
+    if (isKid === true) {
+      Summary = useAppSelector(selectKidSummary)!;
+    } else if (isKid === false) {
+      Summary = useAppSelector(selectParentSummary)!;
+    }
+    return Summary!.currentSavings;
+  }
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
@@ -153,6 +148,9 @@ function Detail() {
   }
   console.log('weekPrice * successWeeks: ', weekPrice * successWeeks);
   console.log('totalPrice: ', totalPrice);
+  console.log('target dongil: ', targetDongil!);
+  console.log('new: ', successWeeks / weeks);
+  console.log('target: ', Math.ceil((successWeeks / weeks) * 100));
   return (
     <Wrapper>
       <Content>
@@ -167,8 +165,10 @@ function Detail() {
             <div className="title">{title}</div>
             <Summary
               usage="Detail"
-              currentSavings={weekPrice * successWeeks}
-              totalPrice={totalPrice}
+              currentSavings={currentSavings}
+              weekPrice={weekPrice}
+              successWeeks={successWeeks}
+              weeks={weeks}
             />
 
             <InterestStampListWrapper>

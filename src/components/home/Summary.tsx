@@ -10,7 +10,10 @@ interface SummaryProps {
    */
   usage: TUsage;
   currentSavings: number;
-  totalPrice: number;
+  weekPrice?: number;
+  successWeeks?: number;
+  weeks?: number;
+  totalPrice?: number;
   /** usage: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다. */
   username?: string;
 }
@@ -18,38 +21,59 @@ interface SummaryProps {
 function Summary({
   usage,
   currentSavings,
+  weekPrice,
+  successWeeks,
+  weeks,
   totalPrice,
   username,
 }: SummaryProps) {
   const today = new Date();
   const { month, weekNo } = getWeekNumberByMonth(today);
-  const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
-  console.log('username: ', username);
+  // const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
+
+  // Detail
+  let currentSavingsForDetailPage: number;
+  let currentCompletionRate: number;
+  if (usage === 'Detail') {
+    currentSavingsForDetailPage = weekPrice! * successWeeks!;
+    currentCompletionRate = Math.ceil((successWeeks! / weeks!) * 100);
+  }
   return (
     <Wrapper usage={usage}>
+      {/* KidHome, ParentHome */}
       <TitleWrapper usage={usage}>
         {(usage === 'KidHome' || usage === 'ParentHome') && (
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
         )}
+        {/* KidHome */}
         {usage === 'ParentHome' && username !== 'loading' && (
           <span className="username">{`${username} 저금통`}</span>
         )}
       </TitleWrapper>
       <Info>
         <TextWrapper>
-          <div>{currentSavings.toLocaleString('ko-KR')}원</div>
+          {/* KidHome, ParentHome */}
+          {usage === 'KidHome' ||
+            (usage === 'ParentHome' && (
+              <div>{currentSavings!.toLocaleString('ko-KR')}원</div>
+            ))}
+          {usage === 'Detail' && (
+            <div>{currentSavingsForDetailPage!.toLocaleString('ko-KR')}원</div>
+          )}
+          {/* KidHome */}
           {usage === 'KidHome' && <div>내 저금통</div>}
-          {(usage === 'Detail' || usage === 'ParentHome') && (
+          {/* ParentHome, Detail */}
+          {(usage === 'ParentHome' || usage === 'Detail') && (
             <div>현재 저금액</div>
           )}
         </TextWrapper>
         <Divider />
         <TextWrapper>
           {(usage === 'KidHome' || usage === 'ParentHome') && (
-            <div>{totalPrice.toLocaleString('ko-KR')}원</div>
+            <div>{totalPrice!.toLocaleString('ko-KR')}원</div>
           )}
-          {usage === 'Detail' && <div>{currentCompletionRate}%</div>}
           {usage === 'KidHome' && <div>목표 저금액</div>}
+          {usage === 'Detail' && <div>{currentCompletionRate!}%</div>}
           {usage === 'Detail' && <div>현재 완주율</div>}
           {usage === 'ParentHome' && <div>목표 저금액</div>}
         </TextWrapper>
