@@ -26,9 +26,8 @@ function DongilFailed({
         </BankiWrapper>
         <Rule>
           <p>돈길 '{title}'</p>
+          <p>이자부스터 {interestRate}%</p>
           <p>
-            이자부스터 {interestRate}%
-            <br />
             {interestRate === 20
               ? '저금을 3번 넘게 하지 않아 챌린지가 실패했어요.'
               : '저금을 1번 넘게 하지 않아 챌린지가 실패했어요.'}
@@ -71,15 +70,17 @@ const Rule = styled.div`
   background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   padding: 16px;
   border-radius: ${({ theme }) => theme.radius.medium};
+  & > p {
+    ${({ theme }) => theme.typo.bottomSheet.S_12_R}
+    color: ${({ theme }) => theme.palette.greyScale.grey600};
+    &:last-child {
+      margin-top: 6px;
+    }
+  }
   & > p:first-child {
     ${({ theme }) => theme.typo.bottomSheet.T_14_EB}
-    line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.grey600};
-  }
-  & > p:nth-child(2) {
-    ${({ theme }) => theme.typo.bottomSheet.S_12_R}
-    line-height: 150%;
-    color: ${({ theme }) => theme.palette.greyScale.grey600};
+    margin-bottom: 8px;
   }
 `;
 
