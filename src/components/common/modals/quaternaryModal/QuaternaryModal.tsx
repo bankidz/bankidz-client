@@ -37,20 +37,22 @@ interface QuaternaryModalProps {
   totalPrice: number;
   weekPrice: number;
   weeks: number;
+  sign: string;
 }
 
 // 모달 내부에 표시될 UI 작성
 function QuaternaryModal({
   onSubmit,
-  createdAt = '2022/07/05 05:05:05',
-  interestRate = 30,
-  isMom = true,
-  itemName = '전자제품',
-  title = '에어팟 사기',
-  totalPrice = 150000,
-  weekPrice = 10000,
-  weeks = 15,
-  isKid = true,
+  createdAt,
+  interestRate,
+  isMom,
+  itemName,
+  title,
+  totalPrice,
+  weekPrice,
+  weeks,
+  isKid,
+  sign,
   onExtraSubmit,
 }: QuaternaryModalProps) {
   const reactModalParams = {
@@ -173,7 +175,9 @@ function QuaternaryModal({
             </div>
           </div>
 
-          <SignatureWrapper>Signature</SignatureWrapper>
+          <SignatureWrapper>
+            <img src={sign} />
+          </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <ButtonWrapper>
@@ -481,8 +485,11 @@ const SignatureWrapper = styled.div`
 
   width: ${calcRatio(146, 324)};
   height: 173px; // TODO: delete height (temporary)
-  background: rgba(36, 39, 41, 0.1);
-
+  & > img {
+    max-width: 100%;
+    margin-top: 50px;
+    height: 120px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
