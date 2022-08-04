@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
-import { dispatchItemName } from '@store/slices/createChallenge';
+import { dispatchItemName } from '@store/slices/createChallengeSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
 import { TItemName } from '@lib/types/kid';
 

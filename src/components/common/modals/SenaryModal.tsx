@@ -13,6 +13,7 @@ import Button from '../buttons/Button';
 import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import { AWS_S3_URL } from '@lib/constants';
 
 interface SenaryModalProps {
   /**
@@ -29,6 +30,7 @@ interface SenaryModalProps {
   weekPrice: number;
   weeks: number;
   comment: string;
+  fileName: string;
 }
 
 // 모달 내부에 표시될 UI 작성
@@ -43,6 +45,7 @@ function SenaryModal({
   weekPrice = 10000,
   weeks = 15,
   comment = '큰 이자를 줄만한 목표가 아닌것 같다~',
+  fileName,
 }: SenaryModalProps) {
   const reactModalParams = {
     isOpen: true,
@@ -163,7 +166,11 @@ function SenaryModal({
             </div>
           </div>
 
-          <SignatureWrapper>Signature</SignatureWrapper>
+          <SignatureWrapper>
+            <img
+              src={`https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
+            />
+          </SignatureWrapper>
         </Bottom>
         <Comment>
           <div className="header">부모님의 한줄평</div>
@@ -479,8 +486,11 @@ const SignatureWrapper = styled.div`
 
   width: ${calcRatio(146, 324)};
   height: 173px; // TODO: delete height (temporary)
-  background: rgba(36, 39, 41, 0.1);
-
+  & > img {
+    max-width: 100%;
+    margin-top: 50px;
+    height: 120px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;

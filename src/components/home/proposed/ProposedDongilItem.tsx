@@ -28,6 +28,7 @@ function ProposedDongilItem({
     totalPrice,
     weekPrice,
     weeks,
+    fileName,
   } = proposedDongil;
 
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ function ProposedDongilItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
+      fileName,
     });
   }
 
