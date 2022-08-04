@@ -129,7 +129,7 @@ function QuaternaryModal({
                 {isMom ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
-                <div className="title">계약대상</div>
+                <div className="title">계약 대상</div>
                 <div className="content">
                   {isMom === true ? '엄마' : '아빠'}
                 </div>
