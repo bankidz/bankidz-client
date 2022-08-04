@@ -42,7 +42,7 @@ interface QuaternaryModalProps {
 // 모달 내부에 표시될 UI 작성
 function QuaternaryModal({
   onSubmit,
-  createdAt = '2022-07-05 05:05:05',
+  createdAt = '2022/07/05 05:05:05',
   interestRate = 30,
   isMom = true,
   itemName = '전자제품',
@@ -69,10 +69,12 @@ function QuaternaryModal({
         height: '554px',
         position: 'absolute',
         // top: '14vh',
-        top: '50vh',
-        transform: 'translate3d(0, -50%, 0)',
+        // top: '50vh',
+        // transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
+        // TODO: 데모데이 이후 정렬 수정 예정
+        top: '10vh',
         background: 'rgba(36, 39, 41, 0)',
         overflow: 'hidden',
         WebkitOverflowScrolling: 'touch',
@@ -127,7 +129,7 @@ function QuaternaryModal({
                 {isMom ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
-                <div className="title">계약대상</div>
+                <div className="title">계약 대상</div>
                 <div className="content">
                   {isMom === true ? '엄마' : '아빠'}
                 </div>
@@ -164,7 +166,7 @@ function QuaternaryModal({
             </div>
             <div className="계약종료주차">
               <div className="text-wrapper">
-                <div className="title"></div>
+                <div className="title">계약종료 주차</div>
                 <div className="content">
                   {`${year}년 ${month}월 ${weekNo}주`}
                 </div>
@@ -193,7 +195,6 @@ function QuaternaryModal({
             </DoubleButtonWrapper>
           )}
         </ButtonWrapper>
-        width: 100%; ;
       </Content>
     </ReactModal>
   );

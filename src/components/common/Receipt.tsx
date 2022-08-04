@@ -58,7 +58,7 @@ ReceiptProps) {
               {isMom ? <BankiMom /> : <BankiDad />}
             </div>
             <div className="text-wrapper">
-              <div className="title">계약대상</div>
+              <div className="title">계약 대상</div>
               <div className="content">{isMom === true ? '엄마' : '아빠'}</div>
             </div>
           </div>
@@ -121,7 +121,7 @@ const Wrapper = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 110px;
+    top: 116px; // arbitrary
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -137,7 +137,7 @@ const Wrapper = styled.div`
     z-index: 10;
     position: absolute;
     left: 50%;
-    top: 186px;
+    top: 185px;
     transform: translate3d(-50%, -50%, 0);
 
     display: flex;
@@ -251,17 +251,16 @@ const Content = styled.div`
       .title {
         width: 100%;
         height: 12px;
+        margin-top: 0;
+        margin-bottom: 8px;
         ${({ theme }) => theme.typo.text.S_12_M};
         color: ${({ theme }) => theme.palette.greyScale.grey500};
-        margin-bottom: 8px;
-        padding: 0;
       }
       .content {
         width: 100%;
         height: 16px;
         ${({ theme }) => theme.typo.text.T_16_EB};
         color: ${({ theme }) => theme.palette.greyScale.grey700};
-        padding: 0;
       }
     }
   }

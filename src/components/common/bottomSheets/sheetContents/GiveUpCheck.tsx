@@ -64,6 +64,7 @@ const Rule = styled.div`
     ${({ theme }) => theme.typo.bottomSheet.T_14_EB}
     line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.grey600};
+    margin-bottom: 8px;
   }
   & > p:nth-child(2) {
     ${({ theme }) => theme.typo.bottomSheet.S_12_R}

@@ -22,7 +22,7 @@ import { TFetchStatus } from '@lib/types/api';
 import {
   IDongil,
   selectWalkingDongils,
-} from '@store/slices/walkingDongilSlice';
+} from '@store/slices/walkingDongilsSlice';
 import Summary from '@components/home/Summary';
 import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
 import { TLevel } from '@lib/types/common';
@@ -83,19 +83,19 @@ function Detail() {
 
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
   // const { percent, currentSavings } = getSummaryData();
-  function getSummaryData() {
-    let Summary: ISummary;
-    if (isKid === true) {
-      Summary = useAppSelector(selectKidSummary)!;
-    } else if (isKid === false) {
-      Summary = useAppSelector(selectParentSummary)!;
-    }
-    return {
-      // percent:
-      //   Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
-      // currentSavings: Summary!.currentSavings,
-    };
-  }
+  // function getSummaryData() {
+  //   let Summary: ISummary;
+  //   if (isKid === true) {
+  //     Summary = useAppSelector(selectKidSummary)!;
+  //   } else if (isKid === false) {
+  //     Summary = useAppSelector(selectParentSummary)!;
+  //   }
+  //   return {
+  //     // percent:
+  //     //   Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
+  //     // currentSavings: Summary!.currentSavings,
+  //   };
+  // }
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
@@ -150,7 +150,6 @@ function Detail() {
     onGiveUpCheckDismiss();
     onCancelCompletedOpen();
   }
-
   return (
     <Wrapper>
       <Content>
@@ -182,15 +181,17 @@ function Detail() {
             <DongilContractContent>
               <span>돈길 계약 내용</span>
               <div className="receipt-wrapper">
-                <Receipt
-                  createdAt={createdAt}
-                  interestRate={interestRate}
-                  isMom={isMom}
-                  itemName={itemName}
-                  totalPrice={totalPrice}
-                  weekPrice={weekPrice}
-                  weeks={weeks}
-                />
+                {progressList && (
+                  <Receipt
+                    createdAt={progressList[0].approvedAt}
+                    interestRate={interestRate}
+                    isMom={isMom}
+                    itemName={itemName}
+                    totalPrice={totalPrice}
+                    weekPrice={weekPrice}
+                    weeks={weeks}
+                  />
+                )}
               </div>
             </DongilContractContent>
             {isKid === true && (
@@ -198,7 +199,7 @@ function Detail() {
                 돈길 포기하기
               </GiveUpDongilButton>
             )}
-            <LargeSpacer />
+            <LargeSpacer isWhite={true} />
           </FlexContainer>
         </MarginTemplate>
       </Content>
@@ -250,7 +251,7 @@ const Wrapper = styled.div`
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   background: ${({ theme }) => theme.palette.greyScale.white};
 `;
 
@@ -268,11 +269,6 @@ const Content = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    svg {
-      height: 208.1px;
-      margin-top: 32px;
-      margin-left: ${calcRatio(13, 250)};
-    }
   }
   .challenging {
     margin-top: 32px;

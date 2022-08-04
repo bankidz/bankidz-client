@@ -21,14 +21,20 @@ function AppBar({ label, level }: AppBarProps) {
     navigate(-1);
   };
 
-  const colorByLevel = level && getColorByLevel(level);
+  const colorByLevel = level !== undefined && getColorByLevel(level);
 
   return (
     <Wrapper colorByLevel={colorByLevel ? colorByLevel : null}>
       <div onClick={onClickAppBar}>
-        {level ? <Arrow fill={'#FFFFFF'} /> : <Arrow fill={'#2E3234'} />}
+        {level !== null ? (
+          <Arrow fill={'#FFFFFF'} />
+        ) : (
+          <Arrow fill={'#2E3234'} />
+        )}
       </div>
-      <p style={level ? { color: '#ffffff' } : { color: '#2e3234' }}>{label}</p>
+      <p style={level !== null ? { color: '#ffffff' } : { color: '#2e3234' }}>
+        {label}
+      </p>
     </Wrapper>
   );
 }

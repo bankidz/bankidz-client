@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactComponent as SelectItemNameButtonBorder } from '@assets/borders/itemName-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/kid';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
+import renderItemIllustForCreate from '@lib/utils/kid/renderItemIllustForCreate';
 
 interface SelectItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {
   itemName: TItemName;
@@ -30,7 +30,7 @@ function SelectItemNameButton({
         }
       />
       <Content>
-        {renderItemIllust(itemName)}
+        {renderItemIllustForCreate(itemName)}
         <p>{itemName}</p>
       </Content>
     </Wrapper>
@@ -54,13 +54,13 @@ const Content = styled.div`
   grid-template-rows: 63fr 29fr;
 
   svg {
-    padding: ${calcRatio(10, 92)} ${calcRatio(22, 92)} ${calcRatio(5, 92)}
-      ${calcRatio(22, 92)};
     width: 100%;
+    padding: ${calcRatio(7, 92)} ${calcRatio(9, 92)} ${calcRatio(2, 92)}
+      ${calcRatio(9, 92)};
     box-sizing: border-box;
   }
   p {
     ${({ theme }) => theme.typo.button.InnerText_T_12_EB}
-    color: ${({ theme }) => theme.palette.greyScale.grey600};
+    color: ${({ theme }) => theme.palette.greyScale.grey700};
   }
 `;

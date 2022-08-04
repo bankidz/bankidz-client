@@ -8,10 +8,13 @@ import ParentHome from './ParentHome';
 import Create from './Create';
 import Detail from './Detail';
 import Reject from './Reject';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
-  const level = useAppSelector(selectLevel);
+  const level = isKid
+    ? useAppSelector(selectLevel)
+    : useAppSelector(selectSelectedKid)?.level!;
   return (
     <Routes>
       {/* 자녀 / 부모 - 홈 */}
