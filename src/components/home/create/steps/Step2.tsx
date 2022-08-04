@@ -24,7 +24,6 @@ function Step2({ currentStep }: { currentStep: number }) {
   console.log(location);
 
   const onClickItemNameButton = (itemName: string) => {
-    console.log(itemName);
     dispatch(dispatchItemName(itemName));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
