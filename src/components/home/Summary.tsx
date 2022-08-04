@@ -30,7 +30,7 @@ function Summary({
         {(usage === 'KidHome' || usage === 'ParentHome') && (
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
         )}
-        {usage === 'ParentHome' && (
+        {usage === 'ParentHome' && username && username !== '' && (
           <span className="username">{`${username} 저금통`}</span>
         )}
       </TitleWrapper>
