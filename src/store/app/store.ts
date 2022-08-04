@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
-import createChallengeReducer from '../slices/createChallenge';
+import createChallengeReducer from '../slices/createChallengeSlice';
 import kidSummaryReducer from '../slices/kidSummarySlice';
 import walkingDongilsReducer from '../slices/walkingDongilsSlice';
 import pendingDongilsReducer from '../slices/pendingDongilsSlice';

@@ -31,6 +31,7 @@ function PendingDongilItem({
     weekPrice,
     weeks,
     comment,
+    fileName,
   } = pendingDongil;
 
   // 제안중
@@ -44,6 +45,7 @@ function PendingDongilItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
+      fileName,
     });
   }
 
@@ -63,6 +65,7 @@ function PendingDongilItem({
       weekPrice: weekPrice,
       weeks: weeks,
       comment: comment?.content,
+      fileName,
     });
   }
 
