@@ -38,7 +38,7 @@ function HomeTemplate({ children, usage }: KidHomeProps) {
   if (isKid === true && level === 0) {
     // 자녀 - 한규진
     headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
-  } else if (isKid === true && level === 1) {
+  } else if (isKid === true && level === 2) {
     // 자녀 - 주어진
     headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
   } else if (isKid === false && level === 0) {
@@ -93,12 +93,13 @@ const Wrapper = styled.div`
 
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 `;
 
 const FixedBar = styled.div<{ colorByLevel: string }>`
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
   position: fixed;
   width: 100%;
   height: 48px;
@@ -178,6 +179,7 @@ const BackgroundBox = styled.div<{
   width: 100%;
   z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
 `;
 
 const BackgroundEllipse = styled.div<{
@@ -201,6 +203,7 @@ const BackgroundEllipse = styled.div<{
   border-radius: 265px / 115px;
   z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
 `;
 
 const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`

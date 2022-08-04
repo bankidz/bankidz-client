@@ -3,21 +3,26 @@ import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
-import { EDongilStatus } from '@lib/types/common';
 
 interface ThisWeekSDongilItemProps {
   itemName: TItemName;
   title: string;
-  status: EDongilStatus;
+  progressList: {
+    approvedAt: string;
+    challengeId: number;
+    isAchieved: boolean;
+    weeks: number;
+  }[];
   to: string;
 }
 
 function ThisWeekSDongilItem({
   itemName,
   title,
-  status,
+  progressList,
   to,
 }: ThisWeekSDongilItemProps) {
+  let lastProgress = progressList!.slice(-1)[0];
   return (
     <StyledLink to={to}>
       <div className="left-aligned-wrapper">
@@ -25,7 +30,7 @@ function ThisWeekSDongilItem({
         <span>{title}</span>
       </div>
       <div className="stamp-wrapper">
-        {status === EDongilStatus.SUCCEEDED && <AchievedStamp />}
+        {lastProgress.isAchieved && <AchievedStamp />}
       </div>
     </StyledLink>
   );

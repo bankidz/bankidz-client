@@ -112,7 +112,7 @@ function RegisterRole() {
         } else if (isKid === true && isFemale === true) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU';
-          level = 1;
+          level = 2;
         }
         accessToken && dispatch(setCredentials({ accessToken, isKid, level }));
 

@@ -117,7 +117,12 @@ function ParentHome() {
   let parentSummaryContent;
   if (parentSummaryStatus === 'loading') {
     parentSummaryContent = (
-      <Summary usage="ParentHome" currentSavings={0} totalPrice={0} />
+      <Summary
+        usage="ParentHome"
+        currentSavings={0}
+        totalPrice={0}
+        username={''}
+      />
     );
   } else if (parentSummaryStatus === 'succeeded') {
     const { currentSavings, totalPrice } = parentSummary!;
@@ -334,6 +339,7 @@ const KidListWrapper = styled.div<{ colorByLevel: string }>`
   z-index: 3;
   width: 100%;
   background: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
   position: fixed;
 `;
 

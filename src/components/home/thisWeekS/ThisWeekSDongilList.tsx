@@ -9,6 +9,7 @@ interface ThisWeekSDongilListProps {
 }
 
 function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
+  console.log('thisWeekSDongils: ', thisWeekSDongils);
   return (
     <Wrapper>
       {thisWeekSDongils?.map((thisWeekSDongil) => (
@@ -16,7 +17,7 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
           key={thisWeekSDongil.id}
           itemName={thisWeekSDongil.itemName as TItemName}
           title={thisWeekSDongil.title}
-          status={thisWeekSDongil.status}
+          progressList={thisWeekSDongil.progressList!}
           to={`/detail/${thisWeekSDongil.id}`}
         />
       ))}
