@@ -13,15 +13,16 @@ import {
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
 import { calcRatio } from '@lib/styles/theme';
+import { useEffect } from 'react';
 
 type TUsage = 'KidHome' | 'ParentHome';
 
-interface KidHomeProps {
+interface HomeTemplateProps {
   children: React.ReactNode;
   usage: TUsage;
 }
 
-function HomeTemplate({ children, usage }: KidHomeProps) {
+function HomeTemplate({ children, usage }: HomeTemplateProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
@@ -31,6 +32,10 @@ function HomeTemplate({ children, usage }: KidHomeProps) {
   } else if (usage === 'ParentHome') {
     level = selectedKid?.level!;
   }
+
+  useEffect(() => {
+    console.log('level: ', level);
+  }, [level]);
   const colorByLevel = getColorByLevel(level!);
 
   //TODO: for demo day

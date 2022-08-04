@@ -8,8 +8,8 @@ import styled from 'styled-components';
 
 interface ProposedDongilItemProps {
   proposedDongil: IDongil;
-  onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number | null>>;
+  onApproveCheckOpen?: () => void;
+  setIdToApprove?: Dispatch<SetStateAction<number | null>>;
 }
 
 function ProposedDongilItem({
@@ -38,8 +38,8 @@ function ProposedDongilItem({
         navigate(`/reject/${id}`);
       },
       onExtraSubmit: () => {
-        setIdToApprove(id);
-        onApproveCheckOpen();
+        setIdToApprove!(id);
+        onApproveCheckOpen!();
       },
       isKid: false,
       createdAt: createdAt,

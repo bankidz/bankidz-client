@@ -39,6 +39,8 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
+import { dummyDongils } from '@lib/mocks/dongils';
+import SkeletonDongilList from '@components/home/SkeletonDongilList';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -167,7 +169,12 @@ function ParentHome() {
   const proposedDongils = useAppSelector(selectProposedDongils);
   let proposedDongilsContent;
   if (proposedDongilsStatus === 'loading') {
-    proposedDongilsContent = <p>Loading...</p>;
+    proposedDongilsContent = (
+      <>
+        <header>제안받은 돈길</header>
+        <SkeletonDongilList usage={'proposed'} />
+      </>
+    );
   } else if (proposedDongilsStatus === 'succeeded') {
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
@@ -176,11 +183,14 @@ function ParentHome() {
       proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
       proposedDongilsContent = (
-        <ProposedDongilList
-          proposedDongils={selectedKidSProposedDongils!}
-          onApproveCheckOpen={onApproveCheckOpen}
-          setIdToApprove={setIdToApprove}
-        />
+        <>
+          <header>제안받은 돈길</header>
+          <ProposedDongilList
+            proposedDongils={selectedKidSProposedDongils!}
+            onApproveCheckOpen={onApproveCheckOpen}
+            setIdToApprove={setIdToApprove}
+          />
+        </>
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
@@ -198,16 +208,31 @@ function ParentHome() {
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
   let thisWeekSDongilsContent;
   if (proposedDongilsStatus === 'loading') {
-    thisWeekSDongilsContent = <p>Loading...</p>;
+    thisWeekSDongilsContent = (
+      <>
+        <header>금주의 돈길</header>
+        <SkeletonDongilList usage={'thisWeekS'} />
+      </>
+    );
   } else if (proposedDongilsStatus === 'succeeded') {
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
     if (proposedDongils?.length === 0) {
-      thisWeekSDongilsContent = <EmptyDongil property="thisWeekS" />;
+      thisWeekSDongilsContent = (
+        <>
+          <header>금주의 돈길</header>
+          <EmptyDongil property="thisWeekS" />
+        </>
+      );
     } else {
       thisWeekSDongilsContent = (
-        <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
+        <>
+          <header>금주의 돈길</header>
+          <ThisWeekSDongilList
+            thisWeekSDongils={selectedKidSThisWeekSDongils!}
+          />
+        </>
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
@@ -308,16 +333,14 @@ function ParentHome() {
       )}
       <HomeTemplate usage="ParentHome">
         <MarginTemplate>
-          {/* <SummaryWrapper>{parentSummaryContent}</SummaryWrapper> */}
-          {/* <ProposedDongilsWrapper>
-            <header>제안받은 돈길</header>
+          <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
+          <ProposedDongilsWrapper>
             {proposedDongilsContent}
           </ProposedDongilsWrapper>
           <ThisWeekSDongilWrapper>
-            <header>금주의 돈길</header>
             {thisWeekSDongilsContent}
-          </ThisWeekSDongilWrapper> */}
-          {/* <LargeSpacer /> */}
+          </ThisWeekSDongilWrapper>
+          <LargeSpacer />
         </MarginTemplate>
 
         {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
