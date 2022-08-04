@@ -150,9 +150,6 @@ function Detail() {
     onGiveUpCheckDismiss();
     onCancelCompletedOpen();
   }
-
-  console.log(progressList);
-  progressList && console.log(progressList[0].approvedAt);
   return (
     <Wrapper>
       <Content>

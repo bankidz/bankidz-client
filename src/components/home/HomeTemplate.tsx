@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
-import { selectLevel } from '@store/slices/authSlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
@@ -31,6 +31,22 @@ function HomeTemplate({ children, usage }: KidHomeProps) {
     level = selectedKid?.level!;
   }
   const colorByLevel = getColorByLevel(level!);
+
+  //TODO: for demo day
+  let headerText = '테스트';
+  // const isKid = useAppSelector(selectIsKid);
+  // console.log('isKid: ', isKid);
+  // if (isKid === true) {
+  //   // 한규진
+  //   headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
+  // } else if (isKid === true) {
+  //   // 주어진
+  //   headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
+  // } else {
+  //   // 부모
+  //   headerText = `돈길 걷는 뱅키는\n행복해요`;
+  // }
+  // console.log('headerText: ', headerText);
   return (
     <Wrapper>
       <FixedBar colorByLevel={colorByLevel}>
@@ -39,9 +55,10 @@ function HomeTemplate({ children, usage }: KidHomeProps) {
       <Content>
         <MarginTemplate>
           <FlexContainer>
-            <StyledHeader
-              hasMultipleKids={hasMultipleKids!}
-            >{`돈길 걷는 뱅키는\n행복해요`}</StyledHeader>
+            <StyledHeader hasMultipleKids={hasMultipleKids!}>
+              {/* {`돈길 걷는 뱅키는\n행복해요`} */}
+              {headerText}
+            </StyledHeader>
             <LevelBadgeWrapper>
               <LevelBadge level={level} />
             </LevelBadgeWrapper>

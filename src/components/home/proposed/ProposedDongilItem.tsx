@@ -101,11 +101,7 @@ const StyledButton = styled.button`
 
     .totalPrice {
       color: ${({ theme }) => theme.palette.greyScale.grey500};
-      /* TODO: type 시스템 미적용 */
-      font-family: 'Tmoney RoundWind';
-      font-style: normal;
-      font-weight: 800;
-      font-size: 13px;
+      ${({ theme }) => theme.typo.button.Secondary_T_13_EB};
     }
   }
 `;
