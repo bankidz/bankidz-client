@@ -82,7 +82,7 @@ const StyledButton = styled.button`
   height: 68px;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 
   display: flex;
   justify-content: space-between;

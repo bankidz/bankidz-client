@@ -172,7 +172,7 @@ function ParentHome() {
     proposedDongilsContent = (
       <>
         <header>제안받은 돈길</header>
-        <SkeletonDongilList usage={'proposed'} />
+        <SkeletonDongilList usage="proposed" />
       </>
     );
   } else if (proposedDongilsStatus === 'succeeded') {
@@ -211,7 +211,7 @@ function ParentHome() {
     thisWeekSDongilsContent = (
       <>
         <header>금주의 돈길</header>
-        <SkeletonDongilList usage={'thisWeekS'} />
+        <SkeletonDongilList usage="thisWeekS" />
       </>
     );
   } else if (proposedDongilsStatus === 'succeeded') {

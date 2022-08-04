@@ -26,31 +26,28 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  let level: TLevel = 1;
+  let level: TLevel;
   if (usage === 'KidHome') {
     level = useAppSelector(selectLevel)!;
   } else if (usage === 'ParentHome') {
     level = selectedKid?.level!;
   }
 
-  useEffect(() => {
-    console.log('level: ', level);
-  }, [level]);
   const colorByLevel = getColorByLevel(level!);
 
   //TODO: for demo day
   let headerText;
   const isKid = useAppSelector(selectIsKid);
-  if (isKid === true && level === 0) {
+  if (isKid === true && level! === 0) {
     // 자녀 - 한규진
     headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
-  } else if (isKid === true && level === 2) {
+  } else if (isKid === true && level! === 2) {
     // 자녀 - 주어진
     headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
-  } else if (isKid === false && level === 0) {
+  } else if (isKid === false && level! === 0) {
     // 부모 -> 한규진
     headerText = `자녀의 저축 레벨이\n곧 있으면 올라가요`;
-  } else if (isKid === false && level === 2) {
+  } else if (isKid === false && level! === 2) {
     // 부모 -> 주어진
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
   }
@@ -67,7 +64,7 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
               {headerText}
             </StyledHeader>
             <LevelBadgeWrapper>
-              <LevelBadge level={level} />
+              <LevelBadge level={level!} />
             </LevelBadgeWrapper>
           </FlexContainer>
         </MarginTemplate>
