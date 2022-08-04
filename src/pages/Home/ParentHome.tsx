@@ -301,7 +301,7 @@ function ParentHome() {
       (parentSummary) => parentSummary.kidId === selectedKid?.kidId,
     );
     if (found === undefined) {
-      return false;g
+      return false;
     } else {
       return true;
     }
