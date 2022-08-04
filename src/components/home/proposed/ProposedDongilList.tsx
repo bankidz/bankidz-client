@@ -5,8 +5,8 @@ import PendingDongilItem from './ProposedDongilItem';
 
 interface PendingDongilListProps {
   proposedDongils: IDongil[];
-  onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number | null>>;
+  onApproveCheckOpen?: () => void;
+  setIdToApprove?: Dispatch<SetStateAction<number | null>>;
 }
 
 function ProposedDongilList({

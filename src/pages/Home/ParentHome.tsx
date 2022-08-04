@@ -15,10 +15,10 @@ import {
 import KidList from '@components/home/KidList';
 import Summary from '@components/home/Summary';
 import {
-  fetchParentSummary,
-  selectParentSummary,
-  selectParentSummaryStatus,
-} from '@store/slices/parentSummarySlice';
+  fetchParentSummaries,
+  selectParentSummaries,
+  selectParentSummariesStatus,
+} from '@store/slices/parentSummariesSlice';
 import HomeTemplate from '@components/home/HomeTemplate';
 import {
   fetchThisWeekSDongils,
@@ -36,16 +36,17 @@ import {
 import { theme } from '@lib/styles/theme';
 import Modals from '@components/common/modals/Modals';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
+import { dummyDongils } from '@lib/mocks/dongils';
+import SkeletonDongilList from '@components/home/SkeletonDongilList';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
   const kids = useAppSelector(selectKids);
-  const parentSummaryStatus = useAppSelector(selectParentSummaryStatus);
-  const parentSummary = useAppSelector(selectParentSummary);
+  const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
+  const parentSummaries = useAppSelector(selectParentSummaries);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
 
@@ -62,9 +63,9 @@ function ParentHome() {
           response = await dispatch(fetchKids({ axiosPrivate })).unwrap();
         }
         // GET: 첫번째 자녀의 Summary 데이터 조회
-        parentSummaryStatus === 'idle' &&
+        parentSummariesStatus === 'idle' &&
           (await dispatch(
-            fetchParentSummary({
+            fetchParentSummaries({
               axiosPrivate,
               kidId: response.data[0].kidId,
             }),
@@ -115,7 +116,7 @@ function ParentHome() {
 
   // 주간 진행상황
   let parentSummaryContent;
-  if (parentSummaryStatus === 'loading') {
+  if (parentSummariesStatus === 'loading') {
     parentSummaryContent = (
       <Summary
         usage="ParentHome"
@@ -124,18 +125,31 @@ function ParentHome() {
         username={'loading'}
       />
     );
-  } else if (parentSummaryStatus === 'succeeded') {
-    const { currentSavings, totalPrice } = parentSummary!;
-    parentSummaryContent = (
-      <Summary
-        usage="ParentHome"
-        currentSavings={currentSavings!}
-        totalPrice={totalPrice!}
-        username={selectedKid?.username}
-      />
+  } else if (parentSummariesStatus === 'succeeded') {
+    const selectedKidSParentSummary = getSelectedKidSParentSummary(
+      selectedKid?.kidId!,
     );
-  } else if (parentSummaryStatus === 'failed') {
+    if (selectedKidSParentSummary) {
+      const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
+      parentSummaryContent = (
+        <Summary
+          usage="ParentHome"
+          currentSavings={currentSavings!}
+          totalPrice={totalPrice!}
+          username={selectedKid?.username}
+        />
+      );
+    }
+    // parentSummaryContent = <p>succeeded</p>;
+  } else if (parentSummariesStatus === 'failed') {
     parentSummaryContent = <p>Failed</p>;
+  }
+
+  function getSelectedKidSParentSummary(kidId: number) {
+    const found = parentSummaries?.find(
+      (parentSummary) => parentSummary.kidId === kidId,
+    );
+    return found;
   }
 
   // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
@@ -158,7 +172,12 @@ function ParentHome() {
   const proposedDongils = useAppSelector(selectProposedDongils);
   let proposedDongilsContent;
   if (proposedDongilsStatus === 'loading') {
-    proposedDongilsContent = <p>Loading...</p>;
+    proposedDongilsContent = (
+      <>
+        <header>제안받은 돈길</header>
+        <SkeletonDongilList usage="proposed" />
+      </>
+    );
   } else if (proposedDongilsStatus === 'succeeded') {
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
@@ -167,11 +186,14 @@ function ParentHome() {
       proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
       proposedDongilsContent = (
-        <ProposedDongilList
-          proposedDongils={selectedKidSProposedDongils!}
-          onApproveCheckOpen={onApproveCheckOpen}
-          setIdToApprove={setIdToApprove}
-        />
+        <>
+          <header>제안받은 돈길</header>
+          <ProposedDongilList
+            proposedDongils={selectedKidSProposedDongils!}
+            onApproveCheckOpen={onApproveCheckOpen}
+            setIdToApprove={setIdToApprove}
+          />
+        </>
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
@@ -189,16 +211,31 @@ function ParentHome() {
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
   let thisWeekSDongilsContent;
   if (proposedDongilsStatus === 'loading') {
-    thisWeekSDongilsContent = <p>Loading...</p>;
+    thisWeekSDongilsContent = (
+      <>
+        <header>금주의 돈길</header>
+        <SkeletonDongilList usage="thisWeekS" />
+      </>
+    );
   } else if (proposedDongilsStatus === 'succeeded') {
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
     if (proposedDongils?.length === 0) {
-      thisWeekSDongilsContent = <EmptyDongil property="thisWeekS" />;
+      thisWeekSDongilsContent = (
+        <>
+          <header>금주의 돈길</header>
+          <EmptyDongil property="thisWeekS" />
+        </>
+      );
     } else {
       thisWeekSDongilsContent = (
-        <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
+        <>
+          <header>금주의 돈길</header>
+          <ThisWeekSDongilList
+            thisWeekSDongils={selectedKidSThisWeekSDongils!}
+          />
+        </>
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
@@ -213,7 +250,10 @@ function ParentHome() {
   }
 
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
-  const canFetchParentSummary = selectedKid !== null;
+  const canFetchParentSummary =
+    selectedKid !== null &&
+    parentSummaries !== null &&
+    !hasParentSummaryAlreadyBeenFetched();
   const canFetchProposedDongils =
     selectedKid !== null &&
     proposedDongils !== null &&
@@ -228,7 +268,7 @@ function ParentHome() {
         // GET: 선택한 자녀의 Summary 데이터 조회
         canFetchParentSummary &&
           (await dispatch(
-            fetchParentSummary({
+            fetchParentSummaries({
               axiosPrivate,
               kidId: selectedKid.kidId,
             }),
@@ -256,9 +296,17 @@ function ParentHome() {
     hydrate();
   }, [selectedKid]);
 
+  function hasParentSummaryAlreadyBeenFetched() {
+    const found = parentSummaries?.find(
+      (parentSummary) => parentSummary.kidId === selectedKid?.kidId,
+    );
+    if (found === undefined) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   function hasProposedDongilsAlreadyBeenFetched() {
-    // console.log('selectedKid: ', selectedKid);
-    // console.log('proposedDongils: ', proposedDongils);
     const found = proposedDongils?.find(
       (proposedDongil) => proposedDongil.userName === selectedKid?.username,
     );
@@ -290,11 +338,9 @@ function ParentHome() {
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
           <ProposedDongilsWrapper>
-            <header>제안받은 돈길</header>
             {proposedDongilsContent}
           </ProposedDongilsWrapper>
           <ThisWeekSDongilWrapper>
-            <header>금주의 돈길</header>
             {thisWeekSDongilsContent}
           </ThisWeekSDongilWrapper>
           <LargeSpacer />

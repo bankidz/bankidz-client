@@ -70,7 +70,8 @@ function Mypage() {
         ) : (
           <Section smallGap={true}>
             <h2>자녀기록</h2>
-            {/* {kids.map((kids) => (
+            {/* TODO : 데모데이 시연용 수정 
+            {kids.map((kids) => (
               <></>
             ))} */}
             <KidsRecordList kidsRecordData={DemoKidsRecordData} />
@@ -78,7 +79,7 @@ function Mypage() {
         )}
         <Section>
           <h2>가족 관리</h2>
-          {family ? <FamilyList family={family} /> : 'null'}
+          {family ? <FamilyList family={family} /> : ''}
         </Section>
       </MarginTemplate>
       <LargeSpacer />

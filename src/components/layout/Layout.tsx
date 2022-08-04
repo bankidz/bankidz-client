@@ -6,7 +6,7 @@ import { useMediaQuery } from 'react-responsive';
 function Layout() {
   const { pathname } = useLocation();
 
-  const isPC = useMediaQuery({ minWidth: 768 });
+  const isPC = useMediaQuery({ minWidth: 513 });
 
   return (
     <Wrapper>
@@ -37,7 +37,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   /* 모바일 화면 */
-  ${media.tablet} {
+  ${media.custom(512)} {
     width: 100%;
     min-width: 320px;
     height: calc(var(--vh, 1vh) * 100);

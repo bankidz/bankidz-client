@@ -102,17 +102,15 @@ const StyledButton = styled.button`
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
   margin-bottom: 12px;
-
+  padding: 18px 16px 16px 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 
   .text-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    margin-left: 16px;
 
     .title {
       margin-bottom: 8px;
@@ -127,6 +125,4 @@ const StyledButton = styled.button`
   }
 `;
 
-const SuggestBadgeWrapper = styled.div`
-  margin-right: 16px;
-`;
+const SuggestBadgeWrapper = styled.div``;

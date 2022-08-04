@@ -16,7 +16,8 @@ function getColorByLevel(level: TLevel | null): string {
     case 5:
       return theme.palette.level.yellow100;
     default:
-      return theme.palette.level.grey100;
+      // level: undefined (홈화면 level fetch 직전)
+      return theme.palette.greyScale.grey100;
   }
 }
 

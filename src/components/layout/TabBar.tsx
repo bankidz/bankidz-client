@@ -68,9 +68,14 @@ const Wrapper = styled.div`
 
   & > a:not(:nth-child(2)) {
     width: 48px;
+    height: 48px;
+    border-radius: 24px;
   }
 
   & > a:nth-child(2) {
-    margin-bottom: 17px;
+    margin-top: -20px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
   }
 `;

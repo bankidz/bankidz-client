@@ -8,6 +8,11 @@ import { selectAuth } from '@store/slices/authSlice';
 import Modals, { modals } from '@components/common/modals/Modals';
 import Summary from '@components/home/Summary';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
+import ProposedDongilList from '@components/home/proposed/ProposedDongilList';
+import { dummyDongils } from '@lib/mocks/dongils';
+import SkeletonDongilList, {
+  TSkeletonDongilListUsage,
+} from '@components/home/SkeletonDongilList';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -27,37 +32,23 @@ function SungwooTestPage() {
 
   return (
     <BackgroundTemplate>
-      <Wrapper>
+      <Temp>
         {/* <button onClick={handleClick}>모달 열기</button>
         <Modals /> */}
         <MarginTemplate>
-          <Summary
-            usage="KidHome"
-            currentSavings={1000}
-            totalPrice={5000}
-            username={'신성우'}
-          />
-          <Summary
-            usage="ParentHome"
-            currentSavings={1000}
-            totalPrice={5000}
-            username={'신성우'}
-          />
-          <Summary
-            usage="Detail"
-            weekPrice={1000}
-            weeks={10}
-            successWeeks={3}
-          />
+          {/* <SkeletonDongilList usage={'walking' as TSkeletonDongilListUsage} />
+          <SkeletonDongilList usage={'pending' as TSkeletonDongilListUsage} />
+          <SkeletonDongilList usage={'proposed' as TSkeletonDongilListUsage} /> */}
+          <SkeletonDongilList usage={'thisWeekS' as TSkeletonDongilListUsage} />
         </MarginTemplate>
-      </Wrapper>
+      </Temp>
     </BackgroundTemplate>
   );
 }
 
 export default SungwooTestPage;
 
-const Wrapper = styled.div`
+const Temp = styled.div`
   height: 1000px;
   /* display: flex;
   flex-direction: column;

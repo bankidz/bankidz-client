@@ -3,6 +3,7 @@ import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DongilFailed from '@components/common/bottomSheets/sheetContents/DongilFailed';
@@ -42,14 +43,21 @@ function WalkingDongilItem({
             <div>{renderItemIllust(itemName)}</div>
             <span>{title}</span>
           </div>
-          <Failed />
+          <div>
+            <Failed />
+            <Arrow />
+          </div>
         </StyledDiv>
       ) : (
         <StyledLink to={to}>
-          <div>{renderItemIllust(itemName)}</div>
-          <span>{title}</span>
+          <div>
+            <div>{renderItemIllust(itemName)}</div>
+            <span>{title}</span>
+          </div>
+          <Arrow />
         </StyledLink>
       )}
+
       <CommonSheet open={openDongilFailed} onDismiss={onDismissDongilFailed}>
         <DongilFailed
           onLeftButtonClick={() => {
@@ -87,20 +95,24 @@ const StyledLink = styled(Link)`
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
   margin-bottom: 8px;
-
+  padding: 0 16px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 
-  div {
-    width: 30px;
-    margin-left: 16px;
-  }
+  & > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    div {
+      width: 30px;
+    }
 
-  span {
-    margin-left: 12px;
-    ${({ theme }) => theme.typo.button.Title_T_14_EB};
-    color: ${({ theme }) => theme.palette.greyScale.black};
+    span {
+      margin-left: 12px;
+      ${({ theme }) => theme.typo.button.Title_T_14_EB};
+      color: ${({ theme }) => theme.palette.greyScale.black};
+    }
   }
 `;
 
@@ -114,6 +126,8 @@ const StyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  padding: 0 16px;
 
   & > div:first-child {
     display: flex;
@@ -121,7 +135,6 @@ const StyledDiv = styled.div`
     align-items: center;
     div {
       width: 30px;
-      margin-left: 16px;
     }
 
     span {
@@ -130,7 +143,9 @@ const StyledDiv = styled.div`
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
   }
-  & > svg {
-    margin: 8px 16px;
+  & > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 `;

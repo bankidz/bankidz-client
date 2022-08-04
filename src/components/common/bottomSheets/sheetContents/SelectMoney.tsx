@@ -80,6 +80,7 @@ const ButtonContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 16px;
   button {
+    border-radius: 8px;
     height: 60px;
     &:active {
       transform: translateY(2px);

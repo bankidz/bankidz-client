@@ -42,6 +42,7 @@ export default SelectItemNameButton;
 const Wrapper = styled.button`
   position: relative;
   cursor: pointer;
+  border-radius: 40%;
 `;
 const Content = styled.div`
   position: absolute;
