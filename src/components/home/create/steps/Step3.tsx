@@ -11,7 +11,7 @@ import {
   dispatchTitle,
   dispatchTotalPrice,
   selectStep3InitData,
-} from '@store/slices/createChallenge';
+} from '@store/slices/createChallengeSlice';
 import SheetButton from '@components/common/buttons/SheetButton';
 import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import InputForm from '@components/common/InputForm';

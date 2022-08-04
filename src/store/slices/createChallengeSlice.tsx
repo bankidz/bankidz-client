@@ -127,8 +127,8 @@ export const {
   dispatchResetChallengePayload,
 } = createChallengeSlice.actions;
 
-export const selectChallengePayload = (state: RootState) =>
-  state.createChallenge;
+export const selectCreateChallenge = (state: RootState) =>
+  state.createChallenge.challenge;
 export const selectStep3InitData = (state: RootState) => {
   return {
     contractName: state.createChallenge.challenge.title,

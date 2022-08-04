@@ -8,15 +8,19 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchResetChallengePayload,
   postChallenge,
+  selectCreateChallenge,
   selectPostChallengeResponse,
-} from '@store/slices/createChallenge';
+} from '@store/slices/createChallengeSlice';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Step5({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { responseData, status } = useAppSelector(selectPostChallengeResponse);
+  //const { responseData, status } = useAppSelector(selectPostChallengeResponse);
+  const { interestRate, isMom, itemName, title, totalPrice, weekPrice, weeks } =
+    useAppSelector(selectCreateChallenge);
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [sign, setSign] = useState();
   const axiosPrivate = useAxiosPrivate();
@@ -34,6 +38,17 @@ function Step5({ currentStep }: { currentStep: number }) {
         closeModal(modals.quaternaryModal);
         navigate('/', { replace: true });
       },
+      createdAt: moment().format('YYYY/MM/DD hh:mm:ss'),
+      interestRate,
+      isMom,
+      itemName,
+      title,
+      totalPrice,
+      weekPrice,
+      weeks,
+      isKid: true,
+      filename: sign,
+      isSubmit: true,
     });
   };
 

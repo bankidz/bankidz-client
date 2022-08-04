@@ -13,6 +13,7 @@ import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 import Button from '@components/common/buttons/Button';
 import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import { AWS_S3_URL } from '@lib/constants';
 
 interface QuaternaryModalProps {
   /**
@@ -37,20 +38,25 @@ interface QuaternaryModalProps {
   totalPrice: number;
   weekPrice: number;
   weeks: number;
+  fileName: string;
+  /** (데모데이) 계약하자마자 뜨는 모달에서는 리스폰스에서 받아오는게 아닌 datauri를 바로 렌더링합니다 */
+  isSubmit?: boolean;
 }
 
 // 모달 내부에 표시될 UI 작성
 function QuaternaryModal({
   onSubmit,
-  createdAt = '2022/07/05 05:05:05',
-  interestRate = 30,
-  isMom = true,
-  itemName = '전자제품',
-  title = '에어팟 사기',
-  totalPrice = 150000,
-  weekPrice = 10000,
-  weeks = 15,
-  isKid = true,
+  createdAt,
+  interestRate,
+  isMom,
+  itemName,
+  title,
+  totalPrice,
+  weekPrice,
+  weeks,
+  isKid,
+  fileName,
+  isSubmit = false,
   onExtraSubmit,
 }: QuaternaryModalProps) {
   const reactModalParams = {
@@ -173,7 +179,9 @@ function QuaternaryModal({
             </div>
           </div>
 
-          <SignatureWrapper>Signature</SignatureWrapper>
+          <SignatureWrapper>
+            <img src={isSubmit ? fileName : `${AWS_S3_URL}${fileName}`} />
+          </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <ButtonWrapper>
@@ -481,8 +489,11 @@ const SignatureWrapper = styled.div`
 
   width: ${calcRatio(146, 324)};
   height: 173px; // TODO: delete height (temporary)
-  background: rgba(36, 39, 41, 0.1);
-
+  & > img {
+    max-width: 100%;
+    margin-top: 50px;
+    height: 120px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
