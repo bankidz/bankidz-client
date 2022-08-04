@@ -28,8 +28,8 @@ function Signature({ setDisabledNext, setSign }: SignatureProps) {
           canvasProps={{ className: 'sigCanvas' }}
           ref={canvasRef}
           onEnd={onEndSign}
-          minWidth={2.5}
-          maxWidth={4.5}
+          minWidth={1.5}
+          maxWidth={3.5}
         />
       </CanvasContainer>
       <p>이곳에 사인을 하면 계약이 진행돼요</p>
