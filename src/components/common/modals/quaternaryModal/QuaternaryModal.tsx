@@ -69,10 +69,12 @@ function QuaternaryModal({
         height: '554px',
         position: 'absolute',
         // top: '14vh',
-        top: '50vh',
-        transform: 'translate3d(0, -50%, 0)',
+        // top: '50vh',
+        // transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
+        // TODO: 데모데이 이후 정렬 수정 예정
+        top: '10vh',
         background: 'rgba(36, 39, 41, 0)',
         overflow: 'hidden',
         WebkitOverflowScrolling: 'touch',
@@ -193,7 +195,6 @@ function QuaternaryModal({
             </DoubleButtonWrapper>
           )}
         </ButtonWrapper>
-        width: 100%; ;
       </Content>
     </ReactModal>
   );
