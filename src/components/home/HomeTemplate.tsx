@@ -12,6 +12,7 @@ import {
   selectHasMultipleKids,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
+import { calcRatio } from '@lib/styles/theme';
 
 type TUsage = 'KidHome' | 'ParentHome';
 
@@ -166,10 +167,10 @@ const BackgroundBox = styled.div<{
   ${({ hasMultipleKids }) =>
     hasMultipleKids === true
       ? css`
-          height: 472px;
+          height: 415px;
         `
       : css`
-          height: 393px;
+          height: 345px;
         `}
   position: absolute;
   top: 0;
@@ -180,6 +181,31 @@ const BackgroundBox = styled.div<{
   z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.onFocus};
+`;
+
+const Background = styled.div<{ colorByLevel: string }>`
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 1;
+  transform: translate3d(-50%, 0, 0);
+
+  height: 288px;
+  width: 100%;
+  /* background-color: ${({ colorByLevel }) => colorByLevel}; */
+  background: red;
+
+  &:after {
+    width: ${calcRatio(530, 360)};
+    margin: 0 auto;
+    height: 230px;
+    background-color: ${({ theme }) => theme.palette.greyScale.white};
+    border-radius: 50%;
+    position: absolute;
+    top: 257px;
+    left: calc(-${calcRatio(530, 360)} / 2 + 50%);
+    content: '';
+  }
 `;
 
 const BackgroundEllipse = styled.div<{

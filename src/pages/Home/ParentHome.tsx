@@ -308,16 +308,16 @@ function ParentHome() {
       )}
       <HomeTemplate usage="ParentHome">
         <MarginTemplate>
-          <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
-          <ProposedDongilsWrapper>
+          {/* <SummaryWrapper>{parentSummaryContent}</SummaryWrapper> */}
+          {/* <ProposedDongilsWrapper>
             <header>제안받은 돈길</header>
             {proposedDongilsContent}
           </ProposedDongilsWrapper>
           <ThisWeekSDongilWrapper>
             <header>금주의 돈길</header>
             {thisWeekSDongilsContent}
-          </ThisWeekSDongilWrapper>
-          <LargeSpacer />
+          </ThisWeekSDongilWrapper> */}
+          {/* <LargeSpacer /> */}
         </MarginTemplate>
 
         {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}

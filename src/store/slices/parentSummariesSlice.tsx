@@ -15,7 +15,18 @@ export type TParentSummariesState = {
 };
 
 const initialState: TParentSummariesState = {
-  parentSummaries: null,
+  parentSummaries: [
+    {
+      kidId: 1,
+      currentSavings: 1111,
+      totalPrice: 11111,
+    },
+    {
+      kidId: 2,
+      currentSavings: 2222,
+      totalPrice: 22222,
+    },
+  ],
   parentSummariesStatus: 'idle',
 };
 

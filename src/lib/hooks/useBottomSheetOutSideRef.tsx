@@ -12,7 +12,6 @@ function useBottomSheetOutSideRef(handler: () => void) {
         !inputDivRef.current.contains(e.target as Node) &&
         !sheetDivRef.current.contains(e.target as Node)
       ) {
-        console.log('dismiss');
         handler();
       }
     };
