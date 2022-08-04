@@ -13,6 +13,7 @@ import CheckButton from '../buttons/CheckButton';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import { AWS_S3_URL } from '@lib/constants';
 
 interface QuinaryModalProps {
   /**
@@ -28,6 +29,7 @@ interface QuinaryModalProps {
   totalPrice: number;
   weekPrice: number;
   weeks: number;
+  fileName: string;
 }
 
 // 모달 내부에 표시될 UI 작성
@@ -41,6 +43,7 @@ function QuinaryModal({
   totalPrice = 150000,
   weekPrice = 10000,
   weeks = 15,
+  fileName,
 }: QuinaryModalProps) {
   const reactModalParams = {
     isOpen: true,
@@ -158,7 +161,9 @@ function QuinaryModal({
             </div>
           </div>
 
-          <SignatureWrapper>Signature</SignatureWrapper>
+          <SignatureWrapper>
+            <img src={`${AWS_S3_URL}${fileName}`} />
+          </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         <CheckButtonWrapper>
@@ -447,8 +452,11 @@ const SignatureWrapper = styled.div`
 
   width: ${calcRatio(146, 324)};
   height: 173px; // TODO: delete height (temporary)
-  background: rgba(36, 39, 41, 0.1);
-
+  & > img {
+    max-width: 100%;
+    margin-top: 50px;
+    height: 120px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;

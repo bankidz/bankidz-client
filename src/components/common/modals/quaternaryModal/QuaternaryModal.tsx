@@ -13,6 +13,7 @@ import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
 import Button from '@components/common/buttons/Button';
 import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import { AWS_S3_URL } from '@lib/constants';
 
 interface QuaternaryModalProps {
   /**
@@ -37,7 +38,9 @@ interface QuaternaryModalProps {
   totalPrice: number;
   weekPrice: number;
   weeks: number;
-  sign: string;
+  fileName: string;
+  /** (데모데이) 계약하자마자 뜨는 모달에서는 리스폰스에서 받아오는게 아닌 datauri를 바로 렌더링합니다 */
+  isSubmit?: boolean;
 }
 
 // 모달 내부에 표시될 UI 작성
@@ -52,7 +55,8 @@ function QuaternaryModal({
   weekPrice,
   weeks,
   isKid,
-  sign,
+  fileName,
+  isSubmit = false,
   onExtraSubmit,
 }: QuaternaryModalProps) {
   const reactModalParams = {
@@ -176,7 +180,7 @@ function QuaternaryModal({
           </div>
 
           <SignatureWrapper>
-            <img src={sign} />
+            <img src={isSubmit ? fileName : `${AWS_S3_URL}${fileName}`} />
           </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
