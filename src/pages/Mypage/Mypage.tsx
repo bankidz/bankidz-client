@@ -92,7 +92,7 @@ export default Mypage;
 const Wrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 `;
 
 const Header = styled.div`
