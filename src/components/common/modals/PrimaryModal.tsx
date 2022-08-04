@@ -42,7 +42,7 @@ function PrimaryModal({
         position: 'absolute',
         // top: '19vh',
         // top: '50vh',
-        top: 'calc(var(--vh, 1vh) * 100)',
+        top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
