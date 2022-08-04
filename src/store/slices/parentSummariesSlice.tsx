@@ -5,8 +5,10 @@ import { RootState } from '../app/store';
 
 interface IParentSummary {
   kidId: number;
-  currentSavings: number;
-  totalPrice: number;
+  weekInfo: {
+    currentSavings: number;
+    totalPrice: number;
+  };
 }
 
 export type TParentSummariesState = {
@@ -15,18 +17,7 @@ export type TParentSummariesState = {
 };
 
 const initialState: TParentSummariesState = {
-  parentSummaries: [
-    {
-      kidId: 1,
-      currentSavings: 1111,
-      totalPrice: 11111,
-    },
-    {
-      kidId: 2,
-      currentSavings: 2222,
-      totalPrice: 22222,
-    },
-  ],
+  parentSummaries: null,
   parentSummariesStatus: 'idle',
 };
 

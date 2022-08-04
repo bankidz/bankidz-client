@@ -129,15 +129,18 @@ function ParentHome() {
     const selectedKidSParentSummary = getSelectedKidSParentSummary(
       selectedKid?.kidId!,
     );
-    const { currentSavings, totalPrice } = selectedKidSParentSummary!;
-    parentSummaryContent = (
-      <Summary
-        usage="ParentHome"
-        currentSavings={currentSavings!}
-        totalPrice={totalPrice!}
-        username={selectedKid?.username}
-      />
-    );
+    if (selectedKidSParentSummary) {
+      const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
+      parentSummaryContent = (
+        <Summary
+          usage="ParentHome"
+          currentSavings={currentSavings!}
+          totalPrice={totalPrice!}
+          username={selectedKid?.username}
+        />
+      );
+    }
+    // parentSummaryContent = <p>succeeded</p>;
   } else if (parentSummariesStatus === 'failed') {
     parentSummaryContent = <p>Failed</p>;
   }
@@ -298,7 +301,7 @@ function ParentHome() {
       (parentSummary) => parentSummary.kidId === selectedKid?.kidId,
     );
     if (found === undefined) {
-      return false;
+      return false;g
     } else {
       return true;
     }
