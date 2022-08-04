@@ -8,7 +8,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     <Wrapper>
       <List>
         {family.map((user) => (
-          <FamilyItem user={user} />
+          <FamilyItem user={user} key={user.username} />
         ))}
       </List>
       <OutlinedButton label="가족코드 공유하기" state={false} />
