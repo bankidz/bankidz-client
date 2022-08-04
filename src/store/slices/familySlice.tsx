@@ -34,7 +34,6 @@ export const fetchKids = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
     const response = await axiosPrivate.get('/family/kid');
-    console.log('response.data: ', response.data);
     return response.data;
   },
 );

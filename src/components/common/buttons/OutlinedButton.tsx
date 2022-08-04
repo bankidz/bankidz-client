@@ -51,12 +51,15 @@ const Wrapper = styled.button<{
 
   background-color: transparent;
 
-  ${({ theme }) => {
+  ${({ theme, state }) => {
     const selected = theme.palette.main.yellow300;
-    return css`
-      &:active {
-        border-color: ${darken(0.1, selected)};
-      }
-    `;
+    return (
+      state &&
+      css`
+        &:active {
+          border-color: ${darken(0.1, selected)};
+        }
+      `
+    );
   }}
 `;

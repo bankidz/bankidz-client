@@ -73,9 +73,7 @@ function Step4({ currentStep }: { currentStep: number }) {
   // 모달 여는 함수
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
-      },
+      onSubmit: () => {},
     });
   };
 
@@ -89,7 +87,12 @@ function Step4({ currentStep }: { currentStep: number }) {
 
   // 다음으로 버튼 활성화,비활성화 처리
   useEffect(() => {
-    form.interestRate && form.weekPrice > 0 && setDisabledNext(false);
+    if (form.interestRate && form.weekPrice > 0) {
+      setDisabledNext(false);
+    }
+    if (!form.interestRate || form.weekPrice <= 0) {
+      setDisabledNext(true);
+    }
   }, [form]);
 
   // form 변경될때마다 필요 주 수 계산
@@ -104,7 +107,6 @@ function Step4({ currentStep }: { currentStep: number }) {
         .day(7)
         .add(7 * weekCost, 'day');
       const { month, weekNo } = getWeekNumberByMonth(endDate.toDate());
-      console.log(month, weekNo);
       setContractInfo({
         weekCost: weekCost,
         contractEndWeek: `${month}월 ${weekNo}주`, //TODO

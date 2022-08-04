@@ -12,7 +12,6 @@ function MyLevel({ achievedChallenge }: TMyLevel) {
     getContentsForMyLevel(achievedChallenge)!;
   const bankiPosition =
     (100 / require) * (require - (goal - achievedChallenge));
-  console.log(bankiPosition);
   return (
     <Wrapper bankiPosition={bankiPosition}>
       <div>
@@ -23,7 +22,7 @@ function MyLevel({ achievedChallenge }: TMyLevel) {
           <Banki />
         </div>
       </div>
-      <p>다음 레벨까지 돈길 {goal - achievedChallenge}개</p>
+      <p>다음 레벨까지 완주해야할 돈길 {goal - achievedChallenge}개</p>
     </Wrapper>
   );
 }

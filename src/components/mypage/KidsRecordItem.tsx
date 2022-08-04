@@ -16,7 +16,8 @@ const Wrapper = styled.div`
   height: 135px;
   border-radius: ${({ theme }) => theme.radius.large};
   background-color: ${({ theme }) => theme.palette.greyScale.white};
-  padding: 32px 0px;
+  padding-top: 32px;
+  padding-bottom: 28px;
   display: flex;
   flex-direction: column;
   align-items: center;

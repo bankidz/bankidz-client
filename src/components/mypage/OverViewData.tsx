@@ -41,7 +41,7 @@ function OverViewData({ isKid, kid, forParent }: OverViewDataProps) {
         </>,
         <>
           <p>{forParent.acceptRequest}</p>
-          <p>아이의 돈길</p>
+          <p>아이의 총 돈길</p>
         </>,
         <>
           <p>{forParent.achieveRate}%</p>
@@ -49,7 +49,6 @@ function OverViewData({ isKid, kid, forParent }: OverViewDataProps) {
         </>,
       ]
     : [];
-  console.log(forParent);
   return (
     <Wrapper>
       <Item>{isKid ? kidContent[0] : parentContent[0]}</Item>

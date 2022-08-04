@@ -21,7 +21,6 @@ function Step2({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
 
   const onClickItemNameButton = (itemName: string) => {
     dispatch(dispatchItemName(itemName));

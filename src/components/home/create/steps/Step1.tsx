@@ -21,13 +21,11 @@ function Step1({ currentStep }: { currentStep: number }) {
         isKid={false}
         isFemale={false}
         onClick={() => onClickRoleButton(false)}
-        key={'dad'}
       />
       <RoleButton
         isKid={false}
         isFemale={true}
         onClick={() => onClickRoleButton(true)}
-        key={'mom'}
       />
     </Wrapper>
   );
