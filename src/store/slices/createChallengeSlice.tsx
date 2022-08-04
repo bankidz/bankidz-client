@@ -111,7 +111,6 @@ export const createChallengeSlice = createSlice({
       })
       .addCase(postChallenge.rejected, (state, action) => {
         state.status = 'failed';
-        console.log(action.payload);
       });
   },
 });

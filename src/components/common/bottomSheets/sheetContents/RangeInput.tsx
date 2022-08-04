@@ -30,7 +30,7 @@ function RangeInput({
       form && setForm && setForm({ ...form, weekPrice: value });
     } else {
       const roundedValue = Math.min(max, value + (value % 1000));
-      console.log(roundedValue);
+
       form && setForm && setForm({ ...form, weekPrice: roundedValue });
     }
   }, [value]);

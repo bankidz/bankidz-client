@@ -49,7 +49,6 @@ function OverViewData({ isKid, kid, forParent }: OverViewDataProps) {
         </>,
       ]
     : [];
-  console.log(forParent);
   return (
     <Wrapper>
       <Item>{isKid ? kidContent[0] : parentContent[0]}</Item>

@@ -44,7 +44,6 @@ function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
   };
 
   useEffect(() => {
-    console.log('asdf', getWeeklySuccess(), patched);
     if (getWeeklySuccess() && patched) {
       //if (getWeeklySuccess()) {
       openModal(modals.primaryModal, {

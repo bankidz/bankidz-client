@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left.svg';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { TLevel } from '@lib/types/common';
+import { isUndefined } from 'util';
+import { text } from 'stream/consumers';
 
 interface AppBarProps {
   /**
@@ -22,19 +24,19 @@ function AppBar({ label, level }: AppBarProps) {
   };
 
   const colorByLevel = level !== undefined && getColorByLevel(level);
-
+  const textColor = (level?: TLevel | null) => {
+    if (level == null || level == undefined) {
+      return '#2E3234';
+    } else {
+      return '#fff';
+    }
+  };
   return (
     <Wrapper colorByLevel={colorByLevel ? colorByLevel : null}>
       <div onClick={onClickAppBar}>
-        {level !== null ? (
-          <Arrow fill={'#FFFFFF'} />
-        ) : (
-          <Arrow fill={'#2E3234'} />
-        )}
+        <Arrow fill={textColor(level)} />
       </div>
-      <p style={level !== null ? { color: '#ffffff' } : { color: '#2e3234' }}>
-        {label}
-      </p>
+      <p style={{ color: `${textColor(level)}` }}>{label}</p>
     </Wrapper>
   );
 }

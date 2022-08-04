@@ -12,7 +12,6 @@ function MyLevel({ achievedChallenge }: TMyLevel) {
     getContentsForMyLevel(achievedChallenge)!;
   const bankiPosition =
     (100 / require) * (require - (goal - achievedChallenge));
-  console.log(bankiPosition);
   return (
     <Wrapper bankiPosition={bankiPosition}>
       <div>
