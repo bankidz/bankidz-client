@@ -44,7 +44,7 @@ function TabBar() {
 export default TabBar;
 
 const Wrapper = styled.div`
-  z-index: 3;
+  z-index: 4;
   /* 테두리 위에만 */
   border: 1px solid ${({ theme }) => theme.palette.greyScale.grey100};
   border-bottom: none;

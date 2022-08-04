@@ -1,7 +1,7 @@
 import { theme } from '@lib/styles/theme';
 import { TLevel } from '@lib/types/common';
 
-function getColorByLevel(level: TLevel): string {
+function getColorByLevel(level: TLevel | null): string {
   switch (level) {
     case 0:
       return theme.palette.level.green100;

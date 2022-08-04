@@ -198,7 +198,7 @@ function Detail() {
                 돈길 포기하기
               </GiveUpDongilButton>
             )}
-            <LargeSpacer />
+            <LargeSpacer isWhite={true} />
           </FlexContainer>
         </MarginTemplate>
       </Content>
@@ -268,11 +268,6 @@ const Content = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    svg {
-      height: 208.1px;
-      margin-top: 32px;
-      margin-left: ${calcRatio(13, 250)};
-    }
   }
   .challenging {
     margin-top: 32px;
