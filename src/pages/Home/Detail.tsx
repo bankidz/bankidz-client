@@ -28,6 +28,7 @@ import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
 import { TLevel } from '@lib/types/common';
 import { selectParentSummary } from '@store/slices/parentSummarySlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
+import TotalInterest from '@components/home/walking/TotalInterest';
 
 function Detail() {
   const { id } = useParams();
@@ -178,6 +179,12 @@ function Detail() {
               </div>
             </InterestStampListWrapper>
 
+            <TotalInterest
+              interestRate={interestRate}
+              totalPrice={totalPrice}
+              successWeeks={successWeeks}
+            />
+
             <DongilContractContent>
               <span>돈길 계약 내용</span>
               <div className="receipt-wrapper">
@@ -292,6 +299,7 @@ const FlexContainer = styled.div`
 
 const InterestStampListWrapper = styled.div`
   margin-top: 80px;
+  margin-bottom: 40px;
   width: 100%;
   .text-wrapper {
     display: flex;
