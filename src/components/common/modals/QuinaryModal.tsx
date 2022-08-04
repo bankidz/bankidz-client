@@ -162,7 +162,9 @@ function QuinaryModal({
           </div>
 
           <SignatureWrapper>
-            <img src={`${AWS_S3_URL}${fileName}`} />
+            <img
+              src={`https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
+            />
           </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />

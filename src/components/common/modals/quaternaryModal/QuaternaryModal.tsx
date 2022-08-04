@@ -180,7 +180,13 @@ function QuaternaryModal({
           </div>
 
           <SignatureWrapper>
-            <img src={isSubmit ? fileName : `${AWS_S3_URL}${fileName}`} />
+            <img
+              src={
+                isSubmit
+                  ? fileName
+                  : `https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`
+              }
+            />
           </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
