@@ -121,7 +121,7 @@ function ParentHome() {
         usage="ParentHome"
         currentSavings={0}
         totalPrice={0}
-        username={''}
+        username={'loading'}
       />
     );
   } else if (parentSummaryStatus === 'succeeded') {

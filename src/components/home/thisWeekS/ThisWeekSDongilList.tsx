@@ -9,7 +9,6 @@ interface ThisWeekSDongilListProps {
 }
 
 function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
-  console.log('thisWeekSDongils: ', thisWeekSDongils);
   return (
     <Wrapper>
       {thisWeekSDongils?.map((thisWeekSDongil) => (

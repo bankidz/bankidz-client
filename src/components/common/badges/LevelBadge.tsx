@@ -50,6 +50,7 @@ const StyledSpan = styled.span<{ level: TLevel }>`
 
   ${({ theme }) => theme.typo.tag.T_12_EB};
 
+  transition: ${({ theme }) => theme.transition.onFocus};
   ${({ level }) =>
     level === 1 &&
     css`
@@ -60,19 +61,19 @@ const StyledSpan = styled.span<{ level: TLevel }>`
     css`
       color: ${({ theme }) => theme.palette.level.blue100};
     `}
-  ${({ level }) =>
+    ${({ level }) =>
     level === 3 &&
     css`
       color: ${({ theme }) => theme.palette.level.red100};
     `}
-  ${({ level }) =>
+    ${({ level }) =>
     (level === 4 || level === 0) &&
     css`
       color: ${({ theme }) => theme.palette.level.green100};
     `}
-  ${({ level }) =>
+    ${({ level }) =>
     level === 5 &&
     css`
       color: ${({ theme }) => theme.palette.level.yellow100};
-    `}
+    `};
 `;
