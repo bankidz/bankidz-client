@@ -484,18 +484,19 @@ const Bottom = styled.div`
 const SignatureWrapper = styled.div`
   z-index: 710;
   position: absolute;
-  right: 2px;
+  right: 16px;
   bottom: 0;
 
   width: ${calcRatio(146, 324)};
   height: 173px; // TODO: delete height (temporary)
   & > img {
     max-width: 100%;
-    margin-top: 50px;
+    margin-top: auto;
+    margin-bottom: 16px;
     height: 120px;
   }
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 `;
 

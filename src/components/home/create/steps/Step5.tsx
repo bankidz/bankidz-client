@@ -47,7 +47,7 @@ function Step5({ currentStep }: { currentStep: number }) {
       weekPrice,
       weeks,
       isKid: true,
-      filename: sign,
+      fileName: sign,
       isSubmit: true,
     });
   };
