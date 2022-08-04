@@ -80,13 +80,9 @@ const StyledButton = styled.button`
   height: 75px;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
-<<<<<<< HEAD
-  margin-bottom: 8px;
 
-=======
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   padding: 20px 16px 18px 16px;
->>>>>>> dev
   display: flex;
   justify-content: space-between;
 
