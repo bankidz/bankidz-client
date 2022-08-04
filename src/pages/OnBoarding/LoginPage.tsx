@@ -30,7 +30,7 @@ function LoginPage() {
           label="카카오로 시작하기"
           property="kakao"
           onClick={handleClick}
-          state={false}
+          state={true}
         />
       </MarginTemplate>
     </Wrapper>
