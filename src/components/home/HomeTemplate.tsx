@@ -38,7 +38,7 @@ function HomeTemplate({ children, usage }: KidHomeProps) {
   if (isKid === true && level === 0) {
     // 자녀 - 한규진
     headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
-  } else if (isKid === true && level === 1) {
+  } else if (isKid === true && level === 2) {
     // 자녀 - 주어진
     headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
   } else if (isKid === false && level === 0) {
