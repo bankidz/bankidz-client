@@ -60,7 +60,8 @@ function SenaryModal({
         height: '645px',
         position: 'absolute',
         // top: '5vh',
-        top: '50vh',
+        // top: '50vh',
+        top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
@@ -486,12 +487,11 @@ const SignatureWrapper = styled.div`
 `;
 
 const Comment = styled.div`
-  background: pink;
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};
   width: 100%;
   height: 86px;
-  /* background: ${({ theme }) => theme.palette.greyScale.white}; */
+  background: ${({ theme }) => theme.palette.greyScale.white};
   margin: -1px 0; // overlap 1px
 
   display: flex;
