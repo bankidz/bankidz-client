@@ -38,7 +38,6 @@ function Receipt({
 ReceiptProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);
   const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
-  console.log(itemName);
   return (
     <Wrapper>
       <PerforatedLineTop fill={theme.palette.greyScale.grey100} />

@@ -13,7 +13,6 @@ import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import { ISummary, selectKidSummary } from '@store/slices/kidSummarySlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -26,7 +25,6 @@ import {
 import Summary from '@components/home/Summary';
 import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
 import { TLevel } from '@lib/types/common';
-import { selectParentSummary } from '@store/slices/parentSummarySlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import TotalInterest from '@components/home/walking/TotalInterest';
 
@@ -77,26 +75,11 @@ function Detail() {
     totalPrice,
     weekPrice,
     weeks,
-    createdAt,
     progressList,
     successWeeks,
   } = targetDongil!;
 
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
-  // const { percent, currentSavings } = getSummaryData();
-  // function getSummaryData() {
-  //   let Summary: ISummary;
-  //   if (isKid === true) {
-  //     Summary = useAppSelector(selectKidSummary)!;
-  //   } else if (isKid === false) {
-  //     Summary = useAppSelector(selectParentSummary)!;
-  //   }
-  //   return {
-  //     // percent:
-  //     //   Math.ceil((Summary!.currentSavings / totalPrice / 10) * 100) * 10,
-  //     // currentSavings: Summary!.currentSavings,
-  //   };
-  // }
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
@@ -156,17 +139,16 @@ function Detail() {
       <Content>
         <MarginTemplate>
           <FlexContainer>
-            <div className="graph-wrapper">
-              {renderGraph(percent as TPercent)}
-            </div>
+            <div className="graph">{renderGraph(percent as TPercent)}</div>
             <span className="challenging">
               {progressList?.length}주차 도전중
             </span>
             <div className="title">{title}</div>
             <Summary
               usage="Detail"
-              currentSavings={weekPrice * successWeeks}
-              totalPrice={totalPrice}
+              weekPrice={weekPrice}
+              weeks={weeks}
+              successWeeks={successWeeks}
             />
 
             <InterestStampListWrapper>
@@ -269,7 +251,7 @@ const Content = styled.div`
   position: absolute;
   z-index: 2;
 
-  .graph-wrapper {
+  .graph {
     margin-top: 56px;
     height: 240px;
     width: 250px;

@@ -28,13 +28,28 @@ function SungwooTestPage() {
   return (
     <BackgroundTemplate>
       <Wrapper>
-        <button onClick={handleClick}>모달 열기</button>
-        <Modals />
-        {/* <MarginTemplate>
-        <Summary usage="KidHome" currentSavings={1000} totalPrice={5000} />
-        <Summary usage="Walking" currentSavings={1000} totalPrice={5000} />
-        <Summary usage="ParentHome" currentSavings={1000} totalPrice={5000} />
-      </MarginTemplate> */}
+        {/* <button onClick={handleClick}>모달 열기</button>
+        <Modals /> */}
+        <MarginTemplate>
+          <Summary
+            usage="KidHome"
+            currentSavings={1000}
+            totalPrice={5000}
+            username={'신성우'}
+          />
+          <Summary
+            usage="ParentHome"
+            currentSavings={1000}
+            totalPrice={5000}
+            username={'신성우'}
+          />
+          <Summary
+            usage="Detail"
+            weekPrice={1000}
+            weeks={10}
+            successWeeks={3}
+          />
+        </MarginTemplate>
       </Wrapper>
     </BackgroundTemplate>
   );
@@ -51,7 +66,7 @@ const Wrapper = styled.div`
   button + button {
     margin-top: 10px;
   } */
-  /* background: grey; */
+  background: grey;
 `;
 
 // https://joyful-development.tistory.com/35
