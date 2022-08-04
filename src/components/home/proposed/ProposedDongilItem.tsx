@@ -55,23 +55,21 @@ function ProposedDongilItem({
   }
 
   return (
-    <>
-      <StyledButton
-        onClick={() => {
-          openQuaternaryModal();
-        }}
-      >
-        <div className="text-wrapper">
-          <span className="title">{title}</span>
-          <span className="totalPrice">
-            {totalPrice.toLocaleString('ko-KR')}원
-          </span>
-        </div>
-        <InterestBadgeWrapper>
-          <InterestBadge interestRate={interestRate} />
-        </InterestBadgeWrapper>
-      </StyledButton>
-    </>
+    <StyledButton
+      onClick={() => {
+        openQuaternaryModal();
+      }}
+    >
+      <div className="text-wrapper">
+        <span className="title">{title}</span>
+        <span className="totalPrice">
+          {totalPrice.toLocaleString('ko-KR')}원
+        </span>
+      </div>
+      <InterestBadgeWrapper>
+        <InterestBadge interestRate={interestRate} />
+      </InterestBadgeWrapper>
+    </StyledButton>
   );
 }
 
@@ -79,24 +77,22 @@ export default ProposedDongilItem;
 
 const StyledButton = styled.button`
   width: 100%;
-  height: 68px;
+  height: 75px;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
   margin-bottom: 12px;
-
+  padding: 20px 16px 18px 16px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 
   .text-wrapper {
+    height: 37px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin-left: 16px;
+    align-items: start;
+    justify-content: space-between;
 
     .title {
-      margin-bottom: 10px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
@@ -108,6 +104,4 @@ const StyledButton = styled.button`
   }
 `;
 
-const InterestBadgeWrapper = styled.div`
-  margin-right: 16px;
-`;
+const InterestBadgeWrapper = styled.div``;
