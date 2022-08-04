@@ -24,13 +24,14 @@ function Summary({
   const today = new Date();
   const { month, weekNo } = getWeekNumberByMonth(today);
   const currentCompletionRate = Math.round((currentSavings / totalPrice) * 100);
+  console.log('username: ', username);
   return (
     <Wrapper usage={usage}>
       <TitleWrapper usage={usage}>
         {(usage === 'KidHome' || usage === 'ParentHome') && (
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
         )}
-        {usage === 'ParentHome' && username && username !== '' && (
+        {usage === 'ParentHome' && username !== 'loading' && (
           <span className="username">{`${username} 저금통`}</span>
         )}
       </TitleWrapper>
