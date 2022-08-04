@@ -486,11 +486,12 @@ const SignatureWrapper = styled.div`
 `;
 
 const Comment = styled.div`
+  background: pink;
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};
   width: 100%;
   height: 86px;
-  background: ${({ theme }) => theme.palette.greyScale.white};
+  /* background: ${({ theme }) => theme.palette.greyScale.white}; */
   margin: -1px 0; // overlap 1px
 
   display: flex;
@@ -513,6 +514,7 @@ const Comment = styled.div`
     color: ${({ theme }) => theme.palette.sementic.red300};
     margin-left: 24px;
     margin-top: 18px;
+    margin-bottom: 32px;
   }
 `;
 
