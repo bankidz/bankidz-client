@@ -150,6 +150,8 @@ function Detail() {
     onGiveUpCheckDismiss();
     onCancelCompletedOpen();
   }
+  console.log('weekPrice * successWeeks: ', weekPrice * successWeeks);
+  console.log('totalPrice: ', totalPrice);
   return (
     <Wrapper>
       <Content>
