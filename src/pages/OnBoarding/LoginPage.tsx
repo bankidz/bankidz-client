@@ -51,7 +51,7 @@ const Wrapper = styled.div`
 
 const TextWrapper = styled.div`
   /* margin-bottom: 50vh; */
-  margin-bottom: 42vh;
+  margin-bottom: calc(var(--vh, 1vh) * 42);
   width: 100%;
 
   display: flex;

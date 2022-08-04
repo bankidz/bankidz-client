@@ -69,7 +69,7 @@ function RegisterRole() {
   function handleModalOpen() {
     openModal(modals.primaryModal, {
       onSubmit: () => {
-        navigate('/');
+        navigate('/', { replace: true });
       },
       isKid: isKid,
       isFemale: isFemale,

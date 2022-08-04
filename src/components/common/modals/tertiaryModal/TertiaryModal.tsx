@@ -81,7 +81,7 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
           <SwiperSlide>
             <InstructionCard
               headerText="이자란?"
-              bodyText={`은행에서는 돈을 맡기면\n맡긴 돈의 일정 부분을 주는 것`}
+              bodyText={`우리가 맡긴 돈에\n추가로 은행이 주는 돈`}
               currentCardIdx={currentCardIdx}
             >
               <ModalContentMoney />
@@ -90,7 +90,7 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
           <SwiperSlide>
             <InstructionCard
               headerText="이자율이란?"
-              bodyText={`전체 맡긴 돈 중에 이자가\n얼마나 차지하는 지를 나태내는 말\n\n예를 들어 20%의 이자율을 주는\n은행이라면 내가 100만원을 저금했을 때\n20만원의 지아를 받을 수 있어요`}
+              bodyText={`돈을 밭기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
               currentCardIdx={currentCardIdx}
             >
               <ModalContentMoney />

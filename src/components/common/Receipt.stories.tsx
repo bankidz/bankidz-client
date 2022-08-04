@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof Receipt> = (args) => (
 
 export const 에어팟_사기 = Template.bind({});
 에어팟_사기.args = {
-  createdAt: '2022-07-05 05:05:05',
+  createdAt: '2022/07/05 05:05:05',
   interestRate: 30,
   isMom: true,
   itemName: '전자제품',

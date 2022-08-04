@@ -1,4 +1,4 @@
-import { IDongil } from '@store/slices/walkingDongilSlice';
+import { IDongil } from '@store/slices/walkingDongilsSlice';
 import { useState } from 'react';
 
 export type TWalkDongilType = {

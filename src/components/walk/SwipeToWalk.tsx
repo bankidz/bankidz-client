@@ -13,7 +13,7 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import {
   dispatchSetPatched,
   walkDongil,
-} from '@store/slices/walkingDongilSlice';
+} from '@store/slices/walkingDongilsSlice';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;

@@ -1,5 +1,5 @@
 import { TItemName } from '@lib/types/kid';
-import { IDongil } from '@store/slices/walkingDongilSlice';
+import { IDongil } from '@store/slices/walkingDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';

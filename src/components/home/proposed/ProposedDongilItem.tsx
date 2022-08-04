@@ -1,7 +1,7 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
-import { IDongil } from '@store/slices/walkingDongilSlice';
+import { IDongil } from '@store/slices/walkingDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -101,11 +101,7 @@ const StyledButton = styled.button`
 
     .totalPrice {
       color: ${({ theme }) => theme.palette.greyScale.grey500};
-      /* TODO: type 시스템 미적용 */
-      font-family: 'Tmoney RoundWind';
-      font-style: normal;
-      font-weight: 800;
-      font-size: 13px;
+      ${({ theme }) => theme.typo.button.Secondary_T_13_EB};
     }
   }
 `;

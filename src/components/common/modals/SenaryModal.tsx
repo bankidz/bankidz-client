@@ -34,7 +34,7 @@ interface SenaryModalProps {
 // 모달 내부에 표시될 UI 작성
 function SenaryModal({
   onSubmit,
-  createdAt = '2022-07-05 05:05:05',
+  createdAt = '2022/07/05 05:05:05',
   interestRate = 30,
   isMom = true,
   itemName = '전자제품',
@@ -117,7 +117,7 @@ function SenaryModal({
                 {isMom ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
-                <div className="title">계약대상</div>
+                <div className="title">계약 대상</div>
                 <div className="content">
                   {isMom === true ? '엄마' : '아빠'}
                 </div>
@@ -486,11 +486,12 @@ const SignatureWrapper = styled.div`
 `;
 
 const Comment = styled.div`
+  background: pink;
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};
   width: 100%;
   height: 86px;
-  background: ${({ theme }) => theme.palette.greyScale.white};
+  /* background: ${({ theme }) => theme.palette.greyScale.white}; */
   margin: -1px 0; // overlap 1px
 
   display: flex;
@@ -513,6 +514,7 @@ const Comment = styled.div`
     color: ${({ theme }) => theme.palette.sementic.red300};
     margin-left: 24px;
     margin-top: 18px;
+    margin-bottom: 32px;
   }
 `;
 
