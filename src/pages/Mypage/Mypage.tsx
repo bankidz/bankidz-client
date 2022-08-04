@@ -19,22 +19,21 @@ import {
   selectKidOverView,
   selectUserOverView,
 } from '@store/slices/overViewSlice';
-import { selectKids } from '@store/slices/kidsSlice';
 import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 const DemoKidsRecordData = [
   {
-    username: '주어진사랑',
+    username: '주어진',
     acceptRate: 80,
-    acceptRequest: 5,
-    achieveRate: 90,
+    acceptRequest: 4,
+    achieveRate: 25,
   },
   {
-    username: '김수빈',
+    username: '한규진',
     acceptRate: 70,
-    acceptRequest: 22,
-    achieveRate: 80,
+    acceptRequest: 25,
+    achieveRate: 60,
   },
 ];
 

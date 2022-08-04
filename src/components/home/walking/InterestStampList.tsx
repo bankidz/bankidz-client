@@ -17,13 +17,13 @@ function InterestStampList({ weeks, stamps }: InterestStampProps) {
   return (
     <Wrapper>
       {stamps.map((v, i) => (
-        <StampItem>
+        <StampItem key={`${v.challengeId}${i + 1}`}>
           {v.isAchieved ? <Success /> : <Fail />}
           <p>{i + 1}주차</p>
         </StampItem>
       ))}
       {[...new Array(weeks - stamps.length)].map((v, i) => (
-        <StampItem>
+        <StampItem key={`${i + stamps.length + 1}`}>
           <None />
           <p>{i + stamps.length + 1}주차</p>
         </StampItem>
