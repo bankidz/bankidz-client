@@ -117,7 +117,12 @@ function ParentHome() {
   let parentSummaryContent;
   if (parentSummaryStatus === 'loading') {
     parentSummaryContent = (
-      <Summary usage="ParentHome" currentSavings={0} totalPrice={0} />
+      <Summary
+        usage="ParentHome"
+        currentSavings={0}
+        totalPrice={0}
+        username={''}
+      />
     );
   } else if (parentSummaryStatus === 'succeeded') {
     const { currentSavings, totalPrice } = parentSummary!;

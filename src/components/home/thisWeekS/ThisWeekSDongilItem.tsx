@@ -4,20 +4,22 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
 import { EDongilStatus } from '@lib/types/common';
+import { IDongil } from '@store/slices/walkingDongilsSlice';
 
 interface ThisWeekSDongilItemProps {
   itemName: TItemName;
   title: string;
-  status: EDongilStatus;
+  progressList: any;
   to: string;
 }
 
 function ThisWeekSDongilItem({
   itemName,
   title,
-  status,
+  progressList,
   to,
 }: ThisWeekSDongilItemProps) {
+  let lastProgress = progressList!.slice(-1)[0];
   return (
     <StyledLink to={to}>
       <div className="left-aligned-wrapper">
@@ -25,7 +27,7 @@ function ThisWeekSDongilItem({
         <span>{title}</span>
       </div>
       <div className="stamp-wrapper">
-        {status === EDongilStatus.SUCCEEDED && <AchievedStamp />}
+        {lastProgress.isAchieved && <AchievedStamp />}
       </div>
     </StyledLink>
   );
