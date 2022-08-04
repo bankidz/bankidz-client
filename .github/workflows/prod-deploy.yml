@@ -16,7 +16,7 @@ jobs:
       - name: Create .env file
         run: |
           touch .env
-          echo ${{ secrets.REACT_APP_ENV }} >> .env
+          echo REACT_APP_KAKAO_REST_API_KEY=${{ secrets.REACT_APP_KAKAO_REST_API_KEY }}\ >> .env
 
       # 도커 메타데이터 가져오기
       - name: Docker meta
