@@ -1,6 +1,5 @@
 import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import SmallSpacer from '@components/layout/SmallSpacer';
 import FamilyList from '@components/mypage/FamilyList';
 import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
