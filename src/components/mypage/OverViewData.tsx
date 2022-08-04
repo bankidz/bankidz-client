@@ -41,7 +41,7 @@ function OverViewData({ isKid, kid, forParent }: OverViewDataProps) {
         </>,
         <>
           <p>{forParent.acceptRequest}</p>
-          <p>아이의 돈길</p>
+          <p>아이의 총 돈길</p>
         </>,
         <>
           <p>{forParent.achieveRate}%</p>
