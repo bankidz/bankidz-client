@@ -11,7 +11,7 @@ import {
 import {
   dispatchResetIsPatched,
   selectWalkingDongils,
-} from '@store/slices/walkingDongilSlice';
+} from '@store/slices/walkingDongilsSlice';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -53,5 +53,5 @@ const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.palette.greyScale.white};
   overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
 `;

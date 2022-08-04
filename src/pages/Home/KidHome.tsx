@@ -13,7 +13,7 @@ import {
   fetchWalkingDongils,
   selectWalkingDongils,
   selectWalkingDongilsStatus,
-} from '@store/slices/walkingDongilSlice';
+} from '@store/slices/walkingDongilsSlice';
 import {
   fetchPendingDongils,
   selectPendingDongils,

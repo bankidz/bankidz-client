@@ -3,7 +3,7 @@ import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
 import createChallengeReducer from '../slices/createChallenge';
 import kidSummaryReducer from '../slices/kidSummarySlice';
-import walkingDongilsReducer from '../slices/walkingDongilSlice';
+import walkingDongilsReducer from '../slices/walkingDongilsSlice';
 import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import familyReducer from '../slices/familySlice';
 import parentSummaryReducer from '../slices/parentSummarySlice';

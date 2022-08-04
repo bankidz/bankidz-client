@@ -34,7 +34,7 @@ export const 제안중 = Template.bind({});
     weekPrice: 10000,
     successWeeks: 0,
     weeks: 15,
-    createdAt: '2022-07-14 03:28:29',
+    createdAt: '2022/07/14 03:28:29',
     status: EDongilStatus.REJECTED,
     fileName: 'example',
     progressList: [
@@ -42,6 +42,7 @@ export const 제안중 = Template.bind({});
         challengeId: 8,
         weeks: 1,
         isAchieved: false,
+        approvedAt: '2022/07/14 03:28:29',
       },
     ],
     comment: {
@@ -65,7 +66,7 @@ export const 거절됨 = Template.bind({});
     weekPrice: 10000,
     successWeeks: 0,
     weeks: 15,
-    createdAt: '2022-07-14 03:28:29',
+    createdAt: '2022/07/14 03:28:29',
     status: EDongilStatus.REJECTED,
     fileName: 'example',
     progressList: [
@@ -73,6 +74,7 @@ export const 거절됨 = Template.bind({});
         challengeId: 8,
         weeks: 1,
         isAchieved: false,
+        approvedAt: '2022/07/14 03:28:29',
       },
     ],
     comment: {

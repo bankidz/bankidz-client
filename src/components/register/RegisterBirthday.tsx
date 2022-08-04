@@ -47,6 +47,7 @@ function RegisterBirthday() {
     const parsedInt = parseInt(year);
     if (1923 <= parsedInt && parsedInt <= 2022) {
       setIsValidYear(true);
+      monthInputRef.current!.focus();
     } else {
       setIsValidYear(false);
     }

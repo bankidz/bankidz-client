@@ -33,7 +33,7 @@ interface QuinaryModalProps {
 // 모달 내부에 표시될 UI 작성
 function QuinaryModal({
   onSubmit,
-  createdAt = '2022-07-05 05:05:05',
+  createdAt = '2022/07/05 05:05:05',
   interestRate = 30,
   isMom = true,
   itemName = '전자제품',
@@ -58,7 +58,8 @@ function QuinaryModal({
         height: '570px',
         position: 'absolute',
         // top: '13vh',
-        top: '50vh',
+        // top: '50vh',
+        top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
@@ -112,7 +113,7 @@ function QuinaryModal({
                 {isMom ? <BankiMom /> : <BankiDad />}
               </div>
               <div className="text-wrapper">
-                <div className="title">계약대상</div>
+                <div className="title">계약 대상</div>
                 <div className="content">
                   {isMom === true ? '엄마' : '아빠'}
                 </div>
