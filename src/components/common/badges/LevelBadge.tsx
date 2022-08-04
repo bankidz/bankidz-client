@@ -14,7 +14,7 @@ function LevelBadge({ level }: LevelBadgeProps) {
       return 'Lv.2 태계뱅키';
     } else if (level === 3) {
       return 'Lv.3 율곡뱅키';
-    } else if (level === 4) {
+    } else if (level === 4 || level === 0) {
       return 'Lv.4 뱅키대왕';
     } else if (level === 5) {
       return 'Lv.5 뱅키임당';
@@ -66,7 +66,7 @@ const StyledSpan = styled.span<{ level: TLevel }>`
       color: ${({ theme }) => theme.palette.level.red100};
     `}
   ${({ level }) =>
-    level === 4 &&
+    (level === 4 || level === 0) &&
     css`
       color: ${({ theme }) => theme.palette.level.green100};
     `}
