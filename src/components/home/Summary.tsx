@@ -39,6 +39,7 @@ function Summary({
     currentCompletionRate = Math.ceil((successWeeks! / weeks!) * 100);
   }
 
+  console.log(username);
   let content;
   if (usage === 'KidHome') {
     content = (
@@ -64,7 +65,11 @@ function Summary({
       <>
         <TitleWrapper usage={usage}>
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
-          <span className="username">{`${username} 저금통`}</span>
+          {username === 'loading' ? (
+            <span className="username">{``}</span>
+          ) : (
+            <span className="username">{`${username} 저금통`}</span>
+          )}
         </TitleWrapper>
         <InfoWrapper>
           <TextWrapper>
@@ -157,6 +162,9 @@ const TitleWrapper = styled.div<{
       `}
   }
   .username {
+    width: 276px;
+    height: 22px;
+    text-align: center;
     ${({ theme }) => theme.typo.text.T_21_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
     ${({ usage }) =>
