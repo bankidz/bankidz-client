@@ -99,6 +99,7 @@ const Wrapper = styled.div`
 const FixedBar = styled.div<{ colorByLevel: string }>`
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
   position: fixed;
   width: 100%;
   height: 48px;
@@ -178,6 +179,7 @@ const BackgroundBox = styled.div<{
   width: 100%;
   z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
 `;
 
 const BackgroundEllipse = styled.div<{
@@ -201,6 +203,7 @@ const BackgroundEllipse = styled.div<{
   border-radius: 265px / 115px;
   z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
 `;
 
 const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`

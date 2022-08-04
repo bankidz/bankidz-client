@@ -42,7 +42,7 @@ declare module 'styled-components' {
       large: '24px';
     };
     transition: {
-      onFocus: string;
+      onFocus: '0.125s all ease-in';
     };
     typo: {
       fixed: {

@@ -339,6 +339,7 @@ const KidListWrapper = styled.div<{ colorByLevel: string }>`
   z-index: 3;
   width: 100%;
   background: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.onFocus};
   position: fixed;
 `;
 
