@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
 import WalkingItemNameButton from './WalkingItemNameButton';
 
 export default {
@@ -6,9 +7,17 @@ export default {
   component: WalkingItemNameButton,
   decorators: [
     (Story) => (
-      <div style={{ margin: '18px' }}>
-        <Story />
-      </div>
+      <DongilList>
+        <div>
+          <Story />
+        </div>
+        <div>
+          <Story />
+        </div>
+        <div>
+          <Story />
+        </div>
+      </DongilList>
     ),
   ],
 } as ComponentMeta<typeof WalkingItemNameButton>;
@@ -41,3 +50,26 @@ noticed_selected.args = {
   isSelected: true,
   isNoticed: true,
 };
+
+const DongilList = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 23px;
+
+  height: 56px;
+  //gap: 12px;
+
+  & > div {
+    position: relative;
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+    & > svg {
+      position: absolute;
+      bottom: -40.5px;
+      left: 50%;
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+`;

@@ -173,10 +173,12 @@ const DongilList = styled.div`
   margin-top: 23px;
 
   height: 56px;
-  gap: 12px;
 
   & > div {
     position: relative;
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
     & > svg {
       position: absolute;
       bottom: -40.5px;

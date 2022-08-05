@@ -16,7 +16,7 @@ function Layout() {
     };
     const setBodyWhite = () => {
       const bodyElement = document.querySelector('body');
-      bodyElement!.style.backgroundColor = '#ffffff';
+      bodyElement!.style.backgroundColor = '#fafafc';
     };
     if (isPC) {
       setBodyYellow();

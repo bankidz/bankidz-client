@@ -73,15 +73,14 @@ const StyledButton = styled.button<{
 
   .content {
     width: 100%;
+    height: 100%;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate3d(-50%, -50%, 0);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    display: grid;
+    grid-template-rows: 115fr 31fr;
 
     svg {
       margin-bottom: 10px;
