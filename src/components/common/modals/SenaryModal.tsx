@@ -156,7 +156,7 @@ function SenaryModal({
               <div className="title">총 소요기간</div>
               <div className="content">{weeks}주</div>
             </div>
-            <div className="계약종료주차">
+            <div className="계약종료일">
               <div className="text-wrapper">
                 <div className="title">계약종료일</div>
                 <div className="content">
@@ -450,7 +450,7 @@ const Bottom = styled.div`
       }
     }
 
-    .계약종료주차 {
+    .계약종료일 {
       width: 66.6%;
       height: 100%;
       display: flex;
