@@ -2,11 +2,22 @@ import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { media } from '@lib/styles/theme';
 import { useMediaQuery } from 'react-responsive';
+import { useEffect } from 'react';
 
 function Layout() {
   const { pathname } = useLocation();
 
   const isPC = useMediaQuery({ minWidth: 513 });
+
+  useEffect(() => {
+    const setBodyYellow = () => {
+      const bodyElement = document.querySelector('body');
+      bodyElement!.style.backgroundColor = '#ffd56f';
+    };
+    if (isPC) {
+      setBodyYellow();
+    }
+  }, [isPC]);
 
   return (
     <Wrapper>
