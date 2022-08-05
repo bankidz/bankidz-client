@@ -90,7 +90,7 @@ ReceiptProps) {
           </div>
           <div className="계약종료주차">
             <div className="text-wrapper">
-              <div className="title">계약종료 주차</div>
+              <div className="title">계약종료일</div>
               <div className="content">
                 {`${year}년 ${month}월 ${weekNo}주`}
               </div>
