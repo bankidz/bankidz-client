@@ -22,6 +22,10 @@ function Walk() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
+  const walkAbledDongils = walkingDongils?.filter(
+    (dongil) => dongil.status == 2 && dongil.isAchieved === 1,
+  );
+
   useEffect(() => {
     // @ts-expect-error
     dispatch(dispatchResetIsPatched({}));
@@ -35,9 +39,9 @@ function Walk() {
 
   return (
     <Wrapper>
-      {walkingDongils ? (
+      {walkAbledDongils ? (
         <>
-          <WalkDefault walkingDongils={walkingDongils} user={user} />
+          <WalkDefault walkingDongils={walkAbledDongils} user={user} />
         </>
       ) : (
         <WalkError />

@@ -88,9 +88,9 @@ ReceiptProps) {
             <div className="title">총 소요기간</div>
             <div className="content">{weeks}주</div>
           </div>
-          <div className="계약종료주차">
+          <div className="계약종료일">
             <div className="text-wrapper">
-              <div className="title">계약종료 주차</div>
+              <div className="title">계약종료일</div>
               <div className="content">
                 {`${year}년 ${month}월 ${weekNo}주`}
               </div>
@@ -151,7 +151,7 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  margin: -1px 0; // overlaps 1px
+  margin: -2px 0; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.grey100};
   width: 100%;
   height: 360px;
@@ -283,6 +283,7 @@ const Content = styled.div`
         height: 12px;
         ${({ theme }) => theme.typo.text.S_12_M};
         color: ${({ theme }) => theme.palette.greyScale.grey500};
+        margin-top: 0;
         margin-bottom: 8px;
         padding: 0;
       }
@@ -294,7 +295,7 @@ const Content = styled.div`
       }
     }
 
-    .계약종료주차 {
+    .계약종료일 {
       width: 66.6%;
       height: 70px;
       display: flex;
@@ -307,6 +308,7 @@ const Content = styled.div`
           height: 12px;
           ${({ theme }) => theme.typo.text.S_12_M};
           color: ${({ theme }) => theme.palette.greyScale.grey500};
+          margin-top: 0;
           margin-bottom: 8px;
         }
         .content {

@@ -1,12 +1,8 @@
 import styled, { css } from 'styled-components';
 
-export type TSkeletonDongilListUsage =
-  | 'walking'
-  | 'pending'
-  | 'proposed'
-  | 'thisWeekS';
+type TUsage = 'walking' | 'pending' | 'proposed' | 'thisWeekS';
 
-function SkeletonDongilList({ usage }: { usage: TSkeletonDongilListUsage }) {
+function SkeletonDongilList({ usage }: { usage: TUsage }) {
   return (
     <Wrapper usage={usage}>
       <Item usage={usage} />
@@ -18,7 +14,7 @@ function SkeletonDongilList({ usage }: { usage: TSkeletonDongilListUsage }) {
 
 export default SkeletonDongilList;
 
-const Wrapper = styled.div<{ usage: TSkeletonDongilListUsage }>`
+const Wrapper = styled.div<{ usage: TUsage }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -26,7 +22,7 @@ const Wrapper = styled.div<{ usage: TSkeletonDongilListUsage }>`
   align-items: center;
 `;
 
-const Item = styled.div<{ usage: TSkeletonDongilListUsage }>`
+const Item = styled.div<{ usage: TUsage }>`
   width: 100%;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
@@ -41,7 +37,7 @@ const Item = styled.div<{ usage: TSkeletonDongilListUsage }>`
     usage === 'pending' &&
     css`
       height: 68px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     `}
       ${({ usage }) =>
     usage === 'proposed' &&

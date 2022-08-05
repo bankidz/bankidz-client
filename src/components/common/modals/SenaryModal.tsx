@@ -156,9 +156,9 @@ function SenaryModal({
               <div className="title">총 소요기간</div>
               <div className="content">{weeks}주</div>
             </div>
-            <div className="계약종료주차">
+            <div className="계약종료일">
               <div className="text-wrapper">
-                <div className="title">계약종료 주차</div>
+                <div className="title">계약종료일</div>
                 <div className="content">
                   {`${year}년 ${month}월 ${weekNo}주`}
                 </div>
@@ -282,7 +282,7 @@ const Content = styled.div`
 `;
 
 const Top = styled.div`
-  margin: -1px 0; // overlaps 1px
+  margin: -2px 0; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
   height: 116px; // 10px decreased
   width: 100%;
@@ -303,7 +303,7 @@ const Top = styled.div`
 `;
 
 const Bottom = styled.div`
-  margin-bottom: -1px; // overlaps 1px
+  margin-bottom: -2px; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
   height: 350px; // 10px decreased
@@ -450,7 +450,7 @@ const Bottom = styled.div`
       }
     }
 
-    .계약종료주차 {
+    .계약종료일 {
       width: 66.6%;
       height: 100%;
       display: flex;

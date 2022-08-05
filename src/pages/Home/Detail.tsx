@@ -67,6 +67,7 @@ function Detail() {
     return found?.challengeList;
   }
 
+  console.log('targetDongil: ', targetDongil!);
   const {
     isMom,
     title,
@@ -77,6 +78,8 @@ function Detail() {
     weeks,
     progressList,
     successWeeks,
+    isAchieved,
+    status,
   } = targetDongil!;
 
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
@@ -184,7 +187,7 @@ function Detail() {
                 )}
               </div>
             </DongilContractContent>
-            {isKid === true && (
+            {isKid === true && !(isAchieved === 0 && status === 0) && (
               <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
                 돈길 포기하기
               </GiveUpDongilButton>

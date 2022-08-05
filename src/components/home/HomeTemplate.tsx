@@ -51,6 +51,18 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
     // 부모 -> 주어진
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
   }
+
+  // 온보딩으로 뒤로가기 차단
+  const preventGoBack = () => {
+    history.pushState(null, '', location.href);
+  };
+  useEffect(() => {
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', preventGoBack);
+    return () => {
+      window.removeEventListener('popstate', preventGoBack);
+    };
+  }, []);
   return (
     <Wrapper>
       <FixedBar colorByLevel={colorByLevel}>
@@ -185,30 +197,29 @@ const BackgroundBox = styled.div<{
   transition: ${({ theme }) => theme.transition.onFocus};
 `;
 
-const Background = styled.div<{ colorByLevel: string }>`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 1;
-  transform: translate3d(-50%, 0, 0);
+// const Background = styled.div<{ colorByLevel: string }>`
+//   position: absolute;
+//   top: 0;
+//   left: 50%;
+//   z-index: 1;
+//   transform: translate3d(-50%, 0, 0);
 
-  height: 288px;
-  width: 100%;
-  /* background-color: ${({ colorByLevel }) => colorByLevel}; */
-  background: red;
+//   height: 288px;
+//   width: 100%;
+//   background-color: ${({ colorByLevel }) => colorByLevel};
 
-  &:after {
-    width: ${calcRatio(530, 360)};
-    margin: 0 auto;
-    height: 230px;
-    background-color: ${({ theme }) => theme.palette.greyScale.white};
-    border-radius: 50%;
-    position: absolute;
-    top: 257px;
-    left: calc(-${calcRatio(530, 360)} / 2 + 50%);
-    content: '';
-  }
-`;
+//   &:after {
+//     width: ${calcRatio(530, 360)};
+//     margin: 0 auto;
+//     height: 230px;
+//     background-color: ${({ theme }) => theme.palette.greyScale.white};
+//     border-radius: 50%;
+//     position: absolute;
+//     top: 257px;
+//     left: calc(-${calcRatio(530, 360)} / 2 + 50%);
+//     content: '';
+//   }
+// `;
 
 const BackgroundEllipse = styled.div<{
   colorByLevel: string;

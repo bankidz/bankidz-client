@@ -9,7 +9,6 @@ import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
-import SungwooTestPage from './pages/SungwooTestPage';
 import WalkRouter from './pages/Walk';
 import { useEffect } from 'react';
 
@@ -40,7 +39,6 @@ function App() {
           <Route path="/walk/*" element={<WalkRouter />} />
           <Route path="/mypage/*" element={<MypageRouter />} />
           <Route path="/financial/*" element={<FinancialRouter />} />
-          <Route path="/sungwoo" element={<SungwooTestPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* </Route> */}
