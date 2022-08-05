@@ -206,8 +206,7 @@ const Background = styled.div<{ colorByLevel: string }>`
 
   height: 288px;
   width: 100%;
-  /* background-color: ${({ colorByLevel }) => colorByLevel}; */
-  background: red;
+  background-color: ${({ colorByLevel }) => colorByLevel};
 
   &:after {
     width: ${calcRatio(530, 360)};
