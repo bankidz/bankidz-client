@@ -10,8 +10,23 @@ import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import WalkRouter from './pages/Walk';
+import { useEffect } from 'react';
 
 function App() {
+  //뷰포트 크기 바뀌는것 감지
+  useEffect(() => {
+    const setScreenSize = () => {
+      let vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    setScreenSize();
+    window.addEventListener('resize', setScreenSize);
+    return () => {
+      // cleanup
+      window.removeEventListener('resize', setScreenSize);
+    };
+  }, []);
+
   return (
     <Routes>
       <Route element={<Layout />}>

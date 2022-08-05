@@ -9,22 +9,25 @@ type TotalInterestProps = {
   interestRate: TInterestRate;
   totalPrice: number;
   successWeeks: number;
+  weeks: number;
 };
 
 function TotalInterest({
   interestRate,
   totalPrice,
   successWeeks,
+  weeks,
 }: TotalInterestProps) {
   const BankiByInterest = {
     10: <BankiInterest10 />,
     20: <BankiInterest20 />,
     30: <BankiInterest30 />,
   };
+  const weeklyInterest = (interestRate * totalPrice * 0.01) / weeks;
   return (
     <Wrapper>
       <Content>
-        <p>1주마다 {getCommaThreeDigits(interestRate * totalPrice * 0.01)}원</p>
+        <p>1주마다 {getCommaThreeDigits(Math.ceil(weeklyInterest))}원</p>
         <div>
           <p>
             <span>{successWeeks}주</span> 걷기 성공해서
@@ -32,10 +35,7 @@ function TotalInterest({
           <p>
             이자가{' '}
             <span>
-              {getCommaThreeDigits(
-                interestRate * totalPrice * 0.01 * successWeeks,
-              )}
-              원
+              {getCommaThreeDigits(Math.ceil(weeklyInterest * successWeeks))}원
             </span>{' '}
             쌓였어요
           </p>

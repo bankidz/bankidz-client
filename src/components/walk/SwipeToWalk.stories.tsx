@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
 import SwipeToWalk from './SwipeToWalk';
 
 export default {

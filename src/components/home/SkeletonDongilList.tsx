@@ -37,7 +37,7 @@ const Item = styled.div<{ usage: TUsage }>`
     usage === 'pending' &&
     css`
       height: 68px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     `}
       ${({ usage }) =>
     usage === 'proposed' &&

@@ -25,8 +25,8 @@ const DemoKidsRecordData = [
   {
     username: '주어진',
     acceptRate: 80,
-    acceptRequest: 4,
-    achieveRate: 25,
+    acceptRequest: 5,
+    achieveRate: 20,
   },
   {
     username: '한규진',

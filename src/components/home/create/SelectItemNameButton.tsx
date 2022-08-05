@@ -42,7 +42,7 @@ export default SelectItemNameButton;
 const Wrapper = styled.button`
   position: relative;
   cursor: pointer;
-  border-radius: 40%;
+  border-radius: 10%;
 `;
 const Content = styled.div`
   position: absolute;
@@ -50,7 +50,7 @@ const Content = styled.div`
   top: 0px;
   transform: translate3d(-50%, 0, 0);
   width: 100%;
-
+  height: 100%;
   display: grid;
   grid-template-rows: 63fr 29fr;
 
