@@ -162,6 +162,7 @@ function Detail() {
             </InterestStampListWrapper>
 
             <TotalInterest
+              weeks={weeks}
               interestRate={interestRate}
               totalPrice={totalPrice}
               successWeeks={successWeeks}

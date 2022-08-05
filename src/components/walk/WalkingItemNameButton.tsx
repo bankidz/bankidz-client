@@ -49,16 +49,13 @@ const Content = styled.div`
   top: 0px;
   transform: translate3d(-50%, 0, 0);
   width: 100%;
+  height: 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   padding: 8px;
   box-sizing: border-box;
-  svg {
-    width: 100%;
-    box-sizing: border-box;
-  }
 `;
 
 const Dot = styled.div`

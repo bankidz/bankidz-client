@@ -15,11 +15,6 @@ import { ModalsContextProvider } from './components/common/modals/ModalsContext'
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
-const setScreenSize = () => {
-  let vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-};
-setScreenSize();
 
 ReactModal.setAppElement('#root');
 

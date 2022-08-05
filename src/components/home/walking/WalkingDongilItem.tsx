@@ -67,7 +67,7 @@ function WalkingDongilItem({
           onRightButtonClick={() => {
             onNavigateWalkingDongilPage();
           }}
-          title={itemName}
+          title={title}
           interestRate={interestRate}
         />
       </CommonSheet>
