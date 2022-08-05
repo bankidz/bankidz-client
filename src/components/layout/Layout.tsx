@@ -14,8 +14,14 @@ function Layout() {
       const bodyElement = document.querySelector('body');
       bodyElement!.style.backgroundColor = '#ffd56f';
     };
+    const setBodyWhite = () => {
+      const bodyElement = document.querySelector('body');
+      bodyElement!.style.backgroundColor = '#ffffff';
+    };
     if (isPC) {
       setBodyYellow();
+    } else {
+      setBodyWhite();
     }
   }, [isPC]);
 

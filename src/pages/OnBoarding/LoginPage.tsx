@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-
+  background-color: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
   height: 100%;
 `;
