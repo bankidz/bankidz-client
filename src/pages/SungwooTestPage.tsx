@@ -1,18 +1,7 @@
 import styled from 'styled-components';
 import useModals from '@lib/hooks/useModals';
-import MarginTemplate from '@components/layout/MarginTemplate';
-import { useAppSelector } from '@store/app/hooks';
-import useRefreshToken from '@lib/hooks/auth/useRefreshToken';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectAuth } from '@store/slices/authSlice';
 import Modals, { modals } from '@components/common/modals/Modals';
-import Summary from '@components/home/Summary';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
-import ProposedDongilList from '@components/home/proposed/ProposedDongilList';
-import { dummyDongils } from '@lib/mocks/dongils';
-import SkeletonDongilList, {
-  TSkeletonDongilListUsage,
-} from '@components/home/SkeletonDongilList';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -23,24 +12,14 @@ function SungwooTestPage() {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
-      onExtraSubmit: () => {
-        console.log('handle accept button click');
-      },
-      isKid: false,
     });
   }
 
   return (
     <BackgroundTemplate>
       <Temp>
-        {/* <button onClick={handleClick}>모달 열기</button>
-        <Modals /> */}
-        <MarginTemplate>
-          {/* <SkeletonDongilList usage={'walking' as TSkeletonDongilListUsage} />
-          <SkeletonDongilList usage={'pending' as TSkeletonDongilListUsage} />
-          <SkeletonDongilList usage={'proposed' as TSkeletonDongilListUsage} /> */}
-          <SkeletonDongilList usage={'thisWeekS' as TSkeletonDongilListUsage} />
-        </MarginTemplate>
+        <button onClick={handleClick}>모달 열기</button>
+        <Modals />
       </Temp>
     </BackgroundTemplate>
   );
@@ -50,13 +29,6 @@ export default SungwooTestPage;
 
 const Temp = styled.div`
   height: 1000px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  button + button {
-    margin-top: 10px;
-  } */
   background: grey;
 `;
 

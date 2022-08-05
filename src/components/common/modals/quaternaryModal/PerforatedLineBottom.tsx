@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   outline: none;
 
   .shape {
-    margin: 0 -1px;
+    margin: 0 -1.5px;
     flex: 1;
     border: none;
     outline: none;

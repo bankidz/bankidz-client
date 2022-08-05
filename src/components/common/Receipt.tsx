@@ -151,7 +151,7 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  margin: -1px 0; // overlaps 1px
+  margin: -2px 0; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.grey100};
   width: 100%;
   height: 360px;
