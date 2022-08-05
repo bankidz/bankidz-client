@@ -41,7 +41,7 @@ const Item = styled.div<{ usage: TSkeletonDongilListUsage }>`
     usage === 'pending' &&
     css`
       height: 68px;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     `}
       ${({ usage }) =>
     usage === 'proposed' &&
