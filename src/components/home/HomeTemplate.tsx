@@ -51,6 +51,18 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
     // 부모 -> 주어진
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
   }
+
+  // 온보딩으로 뒤로가기 차단
+  const preventGoBack = () => {
+    history.pushState(null, '', location.href);
+  };
+  useEffect(() => {
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', preventGoBack);
+    return () => {
+      window.removeEventListener('popstate', preventGoBack);
+    };
+  }, []);
   return (
     <Wrapper>
       <FixedBar colorByLevel={colorByLevel}>
