@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectBirthday, setCredentials } from '@store/slices/authSlice';
+import {
+  register,
+  selectBirthday,
+  setCredentials,
+} from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -75,7 +79,10 @@ function RegisterRole() {
   const axiosPrivate = useAxiosPrivate();
   const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
   const canRegister =
-    isKid !== null && isFemale !== null && registerStatus === 'idle';
+    isKid !== null &&
+    isFemale !== null &&
+    birthday &&
+    registerStatus === 'idle';
 
   async function handleSubmit() {
     if (canRegister) {

@@ -158,9 +158,9 @@ function RegisterBirthday() {
       <ButtonWrapper>
         <Button
           label="다음"
-          onClick={() => navigate('/register/2')}
-          property="default"
           // @ts-expect-error
+          onClick={handleSubmit}
+          property="default"
           type="submit"
           state={
             isValidYear === true && isValidMonth === true && isValidDay === true

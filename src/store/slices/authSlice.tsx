@@ -6,6 +6,8 @@ import { RootState } from '../app/store';
 
 export type TAuthState = {
   auth: {
+    // login, refresh 시 반환되는 값: accessToken, isKid, level
+    // authSlice의 변수는 통일성을 위해 모두 초기상태를 null로 관리합니다.
     accessToken: string | null;
     isKid: boolean | null;
     level: TLevel | null;
@@ -38,7 +40,7 @@ const initialState: TAuthState = {
 // POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
 export const login = createAsyncThunk(
   'auth/login',
-  async (thunkPayload: { code: string | null }) => {
+  async (thunkPayload: { code: string }) => {
     const { code } = thunkPayload;
     const response = await axiosPublic.post('/kakao/login', {
       code,
@@ -52,9 +54,9 @@ export const register = createAsyncThunk(
   'auth/register',
   async (thunkPayload: {
     axiosPrivate: AxiosInstance;
-    birthday: string | null;
-    isFemale: boolean | null;
-    isKid: boolean | null;
+    birthday: string;
+    isFemale: boolean;
+    isKid: boolean;
   }) => {
     const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
     const response = await axiosPrivate.patch('/user', {
