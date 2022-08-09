@@ -1,31 +1,19 @@
-import { TLevel } from '@lib/types/common';
+import styled from 'styled-components';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import styled, { css } from 'styled-components';
+import getBankiNameByLevel from '@lib/utils/common/getBankiNameByLevel';
+import { TLevel } from '@lib/types/TLevel';
 
 interface LevelBadgeProps {
-  /** 레벨을 입력합니다. */
   level: TLevel;
 }
 
 function LevelBadge({ level }: LevelBadgeProps) {
-  function renderTextByLevel(level: TLevel) {
-    if (level === 1) {
-      return 'Lv.1 뱅키학';
-    } else if (level === 2) {
-      return 'Lv.2 태계뱅키';
-    } else if (level === 3) {
-      return 'Lv.3 율곡뱅키';
-    } else if (level === 4 || level === 0) {
-      return 'Lv.4 뱅키대왕';
-    } else if (level === 5) {
-      return 'Lv.5 뱅키임당';
-    }
-  }
   const colorByLevel = getColorByLevel(level);
+
   return (
     <Wrapper>
       <StyledSpan colorByLevel={colorByLevel}>
-        {renderTextByLevel(level!)}
+        {getBankiNameByLevel(level!)}
       </StyledSpan>
     </Wrapper>
   );

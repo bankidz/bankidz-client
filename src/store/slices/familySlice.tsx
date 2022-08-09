@@ -1,6 +1,6 @@
-import { TFetchStatus } from '@lib/types/api';
-import { TLevel } from '@lib/types/common';
-import { IFamilyState } from '@lib/types/kid';
+import { IFamilyState } from '@lib/types/IFamilyState';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { TLevel } from '@lib/types/TLevel';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';

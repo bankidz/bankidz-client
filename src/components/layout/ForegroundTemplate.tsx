@@ -1,4 +1,4 @@
-import { TLevel } from '@lib/types/common';
+import { TLevel } from '@lib/types/TLevel';
 import styled from 'styled-components';
 import AppBar from './AppBar';
 

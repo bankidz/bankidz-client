@@ -8,7 +8,6 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { calcRatio } from '@lib/styles/theme';
-import { TPercent } from '@lib/types/kid';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import renderGraph from '@lib/utils/kid/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -17,16 +16,17 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { TFetchStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import {
   IDongil,
   selectWalkingDongils,
 } from '@store/slices/walkingDongilsSlice';
 import Summary from '@components/home/Summary';
 import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
-import { TLevel } from '@lib/types/common';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import TotalInterest from '@components/home/walking/TotalInterest';
+import { TLevel } from '@lib/types/TLevel';
+import { TPercent } from '@lib/types/TPercent';
 
 function Detail() {
   const { id } = useParams();

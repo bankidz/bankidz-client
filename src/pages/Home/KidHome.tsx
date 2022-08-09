@@ -25,7 +25,7 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import { TFetchStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
 import WalkingDongilList from '@components/home/walking/WalkingDongilList';
 import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';

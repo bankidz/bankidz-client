@@ -3,7 +3,7 @@ import { ReactComponent as Level2 } from '@assets/illusts/banki/Home_Banki-2.svg
 import { ReactComponent as Level3 } from '@assets/illusts/banki/Home_Banki-3.svg';
 import { ReactComponent as Level4 } from '@assets/illusts/banki/Home_Banki-4.svg';
 import { ReactComponent as Level5 } from '@assets/illusts/banki/Home_Banki-5.svg';
-import { TLevel } from '@lib/types/common';
+import { TLevel } from '@lib/types/TLevel';
 
 function renderHomeBanki(level: TLevel) {
   if (level === 1) {
@@ -12,7 +12,7 @@ function renderHomeBanki(level: TLevel) {
     return <Level2 />;
   } else if (level === 3) {
     return <Level3 />;
-  } else if (level === 0 || level === 4) {
+  } else if (level === 4 || level === -4) {
     return <Level4 />;
   } else if (level === 5) {
     return <Level5 />;

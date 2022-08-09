@@ -7,7 +7,7 @@ import { ReactComponent as B3 } from '@assets/illusts/contractItemNames/walk/b3.
 import { ReactComponent as C1 } from '@assets/illusts/contractItemNames/walk/c1.svg';
 import { ReactComponent as C2 } from '@assets/illusts/contractItemNames/walk/c2.svg';
 import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/walk/c3.svg';
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 
 function renderItemIllustForWalkPage(itemName: TItemName) {
   if (itemName === '학용품') {

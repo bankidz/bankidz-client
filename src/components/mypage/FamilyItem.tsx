@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { IFamilyState } from '@lib/types/kid';
-import renderRoleText from '@lib/utils/common/renderRoleText';
+import renderRoleText from '@lib/utils/common/getRoleText';
 import renderMypageRoleIllust from '@lib/utils/common/renderMypageRoleIllust';
+import { IFamilyState } from '@lib/types/IFamilyState';
 function FamilyItem({ user }: { user: IFamilyState }) {
   const { isFemale, isKid, username } = user;
   return (

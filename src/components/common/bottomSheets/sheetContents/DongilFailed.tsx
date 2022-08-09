@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_giveup.svg';
 import Button from '@components/common/buttons/Button';
-import { TInterestRate } from '@lib/types/common';
 import { NavigateFunction } from 'react-router-dom';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 interface GiveUpProps {
   onLeftButtonClick: () => void;

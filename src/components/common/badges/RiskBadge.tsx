@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 
-interface SuggestBadgeProps {
+interface RiskBadgeProps {
   /** 위험도를 선택합니다. */
   riskLevel: '안정' | '보통' | '위험';
 }
 
-function RiskBadge({ riskLevel }: SuggestBadgeProps) {
+function RiskBadge({ riskLevel }: RiskBadgeProps) {
   return (
     <Wrapper riskLevel={riskLevel}>
       <StyledSpan>{riskLevel}</StyledSpan>

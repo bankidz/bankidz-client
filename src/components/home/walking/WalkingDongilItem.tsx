@@ -1,4 +1,4 @@
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,9 +7,9 @@ import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DongilFailed from '@components/common/bottomSheets/sheetContents/DongilFailed';
-import { TInterestRate } from '@lib/types/common';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import { TInterestRate } from '@lib/types/IInterestRate';
 interface WalkingDongilItemProps {
   itemName: TItemName;
   title: string;

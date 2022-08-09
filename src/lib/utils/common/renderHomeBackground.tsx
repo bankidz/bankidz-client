@@ -3,8 +3,8 @@ import { ReactComponent as Level2 } from '@assets/illusts/homeBackground/Home_Ba
 import { ReactComponent as Level3 } from '@assets/illusts/homeBackground/Home_Background-3.svg';
 import { ReactComponent as Level4 } from '@assets/illusts/homeBackground/Home_Background-4.svg';
 import { ReactComponent as Level5 } from '@assets/illusts/homeBackground/Home_Background-5.svg';
-import { ReactComponent as Level0 } from '@assets/illusts/homeBackground/Home_Background-4-5.svg';
-import { TLevel } from '@lib/types/common';
+import { ReactComponent as LevelMinus4 } from '@assets/illusts/homeBackground/Home_Background-4-5.svg';
+import { TLevel } from '@lib/types/TLevel';
 
 function renderHomeBackground(level: TLevel) {
   if (level === 1) {
@@ -15,8 +15,8 @@ function renderHomeBackground(level: TLevel) {
     return <Level3 />;
   } else if (level === 4) {
     return <Level4 />;
-  } else if (level === 0) {
-    return <Level0 />;
+  } else if (level === -4) {
+    return <LevelMinus4 />;
   } else if (level === 5) {
     return <Level5 />;
   }

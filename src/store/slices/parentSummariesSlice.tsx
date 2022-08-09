@@ -1,4 +1,4 @@
-import { TFetchStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';

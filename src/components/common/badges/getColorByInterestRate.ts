@@ -1,5 +1,5 @@
 import { theme } from '@lib/styles/theme';
-import { TInterestRate } from '@lib/types/common';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 function getColorByInterestRate(interestRate: TInterestRate) {
   if (interestRate === 10) {

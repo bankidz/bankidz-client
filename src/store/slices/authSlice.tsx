@@ -1,5 +1,5 @@
 import { axiosPublic } from '@lib/api/axios';
-import { TLevel } from '@lib/types/common';
+import { TLevel } from '@lib/types/TLevel';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';

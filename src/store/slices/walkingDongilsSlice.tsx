@@ -1,20 +1,18 @@
-import { TFetchStatus } from '@lib/types/api';
-import {
-  TChallengeCategory,
-  TDongilStatus,
-  TInterestRate,
-} from '@lib/types/common';
-import { TItemName } from '@lib/types/kid';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { TDongilStatus } from '@lib/types/TDongilStatus';
+import { TItemName } from '@lib/types/TItemName';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
+import { TDongilCategory } from '@lib/types/TDongilCategory';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 export interface IDongil {
   id: number;
   isMom: boolean;
   title: string;
   itemName: TItemName;
-  challengeCategory: TChallengeCategory;
+  challengeCategory: TDongilCategory;
   isAchieved: number;
   interestRate: TInterestRate;
   totalPrice: number;

@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PendingDongilItem from './PendingDongilItem';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { EDongilStatus } from '@lib/types/common';
+import { EDongilStatus } from '@lib/types/TDongilStatus';
 
 export default {
   title: 'home/pending/PendingDongilItem',

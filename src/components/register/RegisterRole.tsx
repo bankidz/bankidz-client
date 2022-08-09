@@ -12,8 +12,8 @@ import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
-import { TFetchStatus } from '@lib/types/api';
-import { TLevel } from '@lib/types/common';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { TLevel } from '@lib/types/TLevel';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -102,7 +102,7 @@ function RegisterRole() {
         } else if (isKid === true && isFemale === false) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0';
-          level = 0;
+          level = -4;
         } else if (isKid === true && isFemale === true) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU';

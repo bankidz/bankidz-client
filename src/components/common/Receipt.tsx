@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { calcRatio, theme } from '@lib/styles/theme';
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './modals/quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './modals/quaternaryModal/PerforatedLineBottom';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizontal-dashed-border.svg';

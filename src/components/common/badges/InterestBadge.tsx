@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { TInterestRate } from '@lib/types/common';
-import getColorByInterestRate from '@lib/utils/common/getColorByInterestRate';
+import getColorByInterestRate from '@components/common/badges/getColorByInterestRate';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 interface InterestBadgeProps {
   interestRate: TInterestRate;

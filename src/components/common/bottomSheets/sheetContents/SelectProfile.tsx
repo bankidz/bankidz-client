@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import { HTMLAttributes } from 'react';
-import renderRoleText from '@lib/utils/common/renderRoleText';
+import renderRoleText from '@lib/utils/common/getRoleText';
 import renderRoleIllust from '@lib/utils/common/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {

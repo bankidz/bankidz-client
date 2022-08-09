@@ -2,9 +2,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left.svg';
 import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import { TLevel } from '@lib/types/common';
 import { isUndefined } from 'util';
 import { text } from 'stream/consumers';
+import { TLevel } from '@lib/types/TLevel';
 
 interface AppBarProps {
   /**
@@ -23,7 +23,7 @@ function AppBar({ label, level }: AppBarProps) {
     navigate(-1);
   };
 
-  const colorByLevel = level !== undefined && getColorByLevel(level);
+  const colorByLevel = level !== undefined && getColorByLevel(level!);
   const textColor = (level?: TLevel | null) => {
     if (level == null || level == undefined) {
       return '#2E3234';
