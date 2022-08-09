@@ -12,7 +12,6 @@ import {
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
 import KidList from '@components/home/KidList';
-import Summary from '@components/home/Summary';
 import {
   fetchParentSummaries,
   selectParentSummaries,
@@ -41,6 +40,7 @@ import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveC
 import { dummyDongils } from '@lib/mocks/dongils';
 import SkeletonDongilList from '@components/home/SkeletonDongilList';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import Summary from '@components/home/sumary/Summary';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);

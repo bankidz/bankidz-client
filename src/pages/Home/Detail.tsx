@@ -20,13 +20,13 @@ import {
   IDongil,
   selectWalkingDongils,
 } from '@store/slices/walkingDongilsSlice';
-import Summary from '@components/home/Summary';
 import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import TotalInterest from '@components/home/walking/TotalInterest';
 import { TLevel } from '@lib/types/TLevel';
 import { TPercent } from '@lib/types/TPercent';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import Summary from '@components/home/sumary/Summary';
 
 function Detail() {
   const { id } = useParams();

@@ -1,17 +1,16 @@
-import MarginTemplate from '@components/layout/MarginTemplate';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useEffect, useState } from 'react';
+import HomeTemplate from '@components/home/HomeTemplate';
+import MarginTemplate from '@components/layout/MarginTemplate';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import {
   fetchKidSummary,
-  selectKidSummary,
   selectKidSummaryStatus,
 } from '@store/slices/kidSummarySlice';
 import {
   fetchWalkingDongils,
-  selectWalkingDongils,
   selectWalkingDongilsStatus,
 } from '@store/slices/walkingDongilsSlice';
 import {
@@ -19,35 +18,20 @@ import {
   selectPendingDongils,
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilsSlice';
+import { fetchFamily, selectFamilyStatus } from '@store/slices/familySlice';
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
-import EmptyWalkingDongil from '@components/home/walking/EmptyWalkingDongil';
-import WalkingDongilList from '@components/home/walking/WalkingDongilList';
-import ContractNewDongilLink from '@components/home/walking/ContractNewDongilLink';
-import PendingDongilList from '@components/home/pending/PendingDongilList';
-import Summary from '@components/home/Summary';
-import HomeTemplate from '@components/home/HomeTemplate';
-import EmptyDongil from '@components/home/EmptyDongil';
-import {
-  fetchFamily,
-  selectParents,
-  selectFamilyStatus,
-} from '@store/slices/familySlice';
-import SkeletonDongilList from '@components/home/SkeletonDongilList';
-import getKidSummaryContent from '@components/home/getKidSummaryContent';
-import getWalkingDongilContent from '@components/home/getWalkingDongilsContent';
-import getWalkingDongilsContent from '@components/home/getWalkingDongilsContent';
+import getKidSummaryContent from '@components/home/sumary/getKidSummaryContent';
+import getWalkingDongilsContent from '@components/home/walking/getWalkingDongilsContent';
+import getPendingDontilsContent from '@components/home/pending/getPendingDontilsContent';
 
 function KidHome() {
-  const kidSummary = useAppSelector(selectKidSummary);
   const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
-  const walkingDongils = useAppSelector(selectWalkingDongils);
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
   const familyStatus = useAppSelector(selectFamilyStatus);
@@ -71,9 +55,6 @@ function KidHome() {
     }
     hydrate();
   }, []);
-
-  let kidSummaryContent = getKidSummaryContent(); // 주간 진행상황
-  let walkingDongilsContent = getWalkingDongilsContent(); // 걷고있는 돈길
 
   // 대기중인 돈길 삭제 (바텀시트, 모달)
   const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
@@ -112,38 +93,13 @@ function KidHome() {
     onDeleteCompletedOpen();
   }
 
-  // 대기중인 돈길
-  let pendingDongilsContent;
-  if (pendingDongilsStatus === 'loading') {
-    pendingDongilsContent = (
-      <>
-        <header>대기중인 돈길</header>
-        <SkeletonDongilList variant="pending" />
-      </>
-    );
-  } else if (pendingDongilsStatus === 'succeeded') {
-    if (pendingDongils?.length === 0) {
-      pendingDongilsContent = (
-        <>
-          <header>대기중인 돈길</header>
-          <EmptyDongil property="pending" />
-        </>
-      );
-    } else {
-      pendingDongilsContent = (
-        <>
-          <header>대기중인 돈길</header>
-          <PendingDongilList
-            pendingDongils={pendingDongils!}
-            onDeleteCheckOpen={onDeleteCheckOpen}
-            setIdToDelete={setIdToDelete}
-          />
-        </>
-      );
-    }
-  } else if (pendingDongilsStatus === 'failed') {
-    pendingDongilsContent = <p>Failed</p>;
-  }
+  // 주간 진행상황, 걷고있는 돈길, 대기중인 돈길
+  let kidSummaryContent = getKidSummaryContent();
+  let walkingDongilsContent = getWalkingDongilsContent();
+  let pendingDongilsContent = getPendingDontilsContent(
+    onDeleteCheckOpen,
+    setIdToDelete,
+  );
 
   return (
     <HomeTemplate variant="KidHome">

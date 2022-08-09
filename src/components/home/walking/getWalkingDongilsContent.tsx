@@ -5,10 +5,10 @@ import {
 } from '@store/slices/walkingDongilsSlice';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SkeletonDongilList from './SkeletonDongilList';
-import ContractNewDongilLink from './walking/ContractNewDongilLink';
-import EmptyWalkingDongil from './walking/EmptyWalkingDongil';
-import WalkingDongilList from './walking/WalkingDongilList';
+import SkeletonDongilList from '../SkeletonDongilList';
+import ContractNewDongilLink from './ContractNewDongilLink';
+import EmptyWalkingDongil from './EmptyWalkingDongil';
+import WalkingDongilList from './WalkingDongilList';
 
 function getWalkingDongilsContent() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
