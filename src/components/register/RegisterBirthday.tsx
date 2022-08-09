@@ -87,7 +87,7 @@ function RegisterBirthday() {
 
   return (
     <Wrapper>
-      <h1>생년월일을 입력해요</h1>
+      <span>생년월일을 입력해요</span>
       <InputFormWrapper onSubmit={handleSubmit}>
         <InputForm
           placeholder="2000"
@@ -174,8 +174,9 @@ function RegisterBirthday() {
 export default RegisterBirthday;
 
 const Wrapper = styled.div`
-  h1 {
-    margin-top: 16px;
+  width: 100%;
+  margin-top: 16px;
+  span {
     margin-left: 8px;
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
