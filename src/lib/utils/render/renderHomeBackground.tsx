@@ -15,7 +15,8 @@ function renderHomeBackground(level: TLevel) {
     return <Level3 />;
   } else if (level === 4) {
     return <Level4 />;
-  } else if (level === -4) {
+  } else if (level === -4 || level === 0) {
+    // TODO: 백 수정 이후 level: 0인 경우 삭제
     return <LevelMinus4 />;
   } else if (level === 5) {
     return <Level5 />;

@@ -119,7 +119,7 @@ function ParentHome() {
   if (parentSummariesStatus === 'loading') {
     parentSummaryContent = (
       <Summary
-        usage="ParentHome"
+        variant="ParentHome"
         currentSavings={0}
         totalPrice={0}
         username={'loading'}
@@ -133,7 +133,7 @@ function ParentHome() {
       const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
       parentSummaryContent = (
         <Summary
-          usage="ParentHome"
+          variant="ParentHome"
           currentSavings={currentSavings!}
           totalPrice={totalPrice!}
           username={selectedKid?.username}
@@ -175,7 +175,7 @@ function ParentHome() {
     proposedDongilsContent = (
       <>
         <header>제안받은 돈길</header>
-        <SkeletonDongilList usage="proposed" />
+        <SkeletonDongilList variant="proposed" />
       </>
     );
   } else if (proposedDongilsStatus === 'succeeded') {
@@ -214,7 +214,7 @@ function ParentHome() {
     thisWeekSDongilsContent = (
       <>
         <header>금주의 돈길</header>
-        <SkeletonDongilList usage="thisWeekS" />
+        <SkeletonDongilList variant="thisWeekS" />
       </>
     );
   } else if (proposedDongilsStatus === 'succeeded') {
@@ -334,7 +334,7 @@ function ParentHome() {
           {kidsContent}
         </KidListWrapper>
       )}
-      <HomeTemplate usage="ParentHome">
+      <HomeTemplate variant="ParentHome">
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
           <ProposedDongilsWrapper>

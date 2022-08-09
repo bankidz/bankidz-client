@@ -10,49 +10,48 @@ import {
   selectHasMultipleKids,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
-import { calcRatio } from '@lib/styles/theme';
 import { useEffect } from 'react';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
-type TUsage = 'KidHome' | 'ParentHome';
+type TVariant = 'KidHome' | 'ParentHome';
 
 interface HomeTemplateProps {
   children: React.ReactNode;
-  usage: TUsage;
+  variant: TVariant;
 }
 
-function HomeTemplate({ children, usage }: HomeTemplateProps) {
+function HomeTemplate({ children, variant }: HomeTemplateProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
-
   let level: TLevel;
-  if (usage === 'KidHome') {
+  if (variant === 'KidHome') {
     level = useAppSelector(selectLevel)!;
-  } else if (usage === 'ParentHome') {
+  } else if (variant === 'ParentHome') {
     level = selectedKid?.level!;
   }
-
   const colorByLevel = getColorByLevel(level!);
 
-  //TODO: for demo day
+  //TODO: demo day
   let headerText;
   const isKid = useAppSelector(selectIsKid);
-  if (isKid === true && level! === -4) {
+  if (isKid === true && (level! === -4 || level! === 0)) {
     // 자녀 - 한규진
+    // TODO: 백 수정 이후 level: 0인 경우 삭제
     headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
   } else if (isKid === true && level! === 2) {
     // 자녀 - 주어진
     headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
-  } else if (isKid === false && level! === -4) {
-    // 부모 -> 한규진
+  } else if (isKid === false && (level! === -4 || level! === 0)) {
+    // 부모 - 한규진 선택
+    // TODO: 백 수정 이후 level: 0인 경우 삭제
     headerText = `자녀의 저축 레벨이\n곧 있으면 올라가요`;
   } else if (isKid === false && level! === 2) {
-    // 부모 -> 주어진
+    // 부모 - 주어진 선택
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
   }
 
-  // 온보딩으로 뒤로가기 차단
+  // 뒤로가기 차단
   const preventGoBack = () => {
     history.pushState(null, '', location.href);
   };
@@ -63,6 +62,7 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
       window.removeEventListener('popstate', preventGoBack);
     };
   }, []);
+
   return (
     <Wrapper>
       <FixedBar colorByLevel={colorByLevel}>
@@ -72,7 +72,6 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
         <MarginTemplate>
           <FlexContainer>
             <StyledHeader hasMultipleKids={hasMultipleKids!}>
-              {/* {`돈길 걷는 뱅키는\n행복해요`} */}
               {headerText}
             </StyledHeader>
             <LevelBadgeWrapper>
@@ -82,6 +81,7 @@ function HomeTemplate({ children, usage }: HomeTemplateProps) {
         </MarginTemplate>
         {children}
       </Content>
+
       <BackgroundBox
         colorByLevel={colorByLevel}
         hasMultipleKids={hasMultipleKids!}
@@ -154,7 +154,7 @@ const LevelBadgeWrapper = styled.div`
   margin-left: 10px;
 `;
 
-const StyledHeader = styled.header<{ hasMultipleKids: boolean }>`
+const StyledHeader = styled.h1<{ hasMultipleKids: boolean }>`
   ${({ hasMultipleKids }) =>
     hasMultipleKids === true
       ? css`
@@ -184,7 +184,7 @@ const BackgroundBox = styled.div<{
           height: 415px;
         `
       : css`
-          height: 345px;
+          height: 275px;
         `}
   position: absolute;
   top: 0;
@@ -197,42 +197,30 @@ const BackgroundBox = styled.div<{
   transition: ${({ theme }) => theme.transition.onFocus};
 `;
 
-// const Background = styled.div<{ colorByLevel: string }>`
-//   position: absolute;
-//   top: 0;
-//   left: 50%;
-//   z-index: 1;
-//   transform: translate3d(-50%, 0, 0);
-
-//   height: 288px;
-//   width: 100%;
-//   background-color: ${({ colorByLevel }) => colorByLevel};
-
-//   &:after {
-//     width: ${calcRatio(530, 360)};
-//     margin: 0 auto;
-//     height: 230px;
-//     background-color: ${({ theme }) => theme.palette.greyScale.white};
-//     border-radius: 50%;
-//     position: absolute;
-//     top: 257px;
-//     left: calc(-${calcRatio(530, 360)} / 2 + 50%);
-//     content: '';
-//   }
-// `;
-
-const BackgroundEllipse = styled.div<{
-  colorByLevel: string;
-  hasMultipleKids: boolean;
-}>`
-  ${({ hasMultipleKids }) =>
+/* ${({ hasMultipleKids }) =>
     hasMultipleKids === true
       ? css`
           top: 410px;
         `
       : css`
           top: 337px;
-        `}
+        `} */
+
+const BackgroundEllipse = styled.div<{
+  colorByLevel: string;
+  hasMultipleKids: boolean;
+}>`
+  // mount 시 slide animation 적용
+  @keyframes slide {
+    from {
+      top: 225px;
+    }
+    to {
+      top: 337px;
+    }
+  }
+  animation: slide 0.25s ease-in forwards;
+
   position: absolute;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);

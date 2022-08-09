@@ -39,6 +39,9 @@ import {
   selectFamilyStatus,
 } from '@store/slices/familySlice';
 import SkeletonDongilList from '@components/home/SkeletonDongilList';
+import getKidSummaryContent from '@components/home/getKidSummaryContent';
+import getWalkingDongilContent from '@components/home/getWalkingDongilsContent';
+import getWalkingDongilsContent from '@components/home/getWalkingDongilsContent';
 
 function KidHome() {
   const kidSummary = useAppSelector(selectKidSummary);
@@ -69,62 +72,8 @@ function KidHome() {
     hydrate();
   }, []);
 
-  // 주간 진행상황
-  let kidSummaryContent;
-  if (kidSummaryStatus === 'loading') {
-    kidSummaryContent = (
-      <Summary usage="KidHome" currentSavings={0} totalPrice={0} />
-    );
-  } else if (kidSummaryStatus === 'succeeded') {
-    const { currentSavings, totalPrice } = kidSummary!;
-    kidSummaryContent = (
-      <Summary
-        usage="KidHome"
-        currentSavings={currentSavings!}
-        totalPrice={totalPrice!}
-      />
-    );
-  } else if (kidSummaryStatus === 'failed') {
-    kidSummaryContent = <p>Failed</p>;
-  }
-
-  // 걷고있는 돈길
-  let disable = 'false';
-  if (walkingDongils !== null && walkingDongils.length === 5) {
-    disable = 'true';
-  }
-  const navigate = useNavigate();
-  function handleContractNewDongilButtonClick() {
-    navigate('/create/1');
-  }
-  let walkingDongilsContent;
-  if (walkingDongilsStatus === 'loading') {
-    walkingDongilsContent = (
-      <>
-        <header>걷고있는 돈길</header>
-        <SkeletonDongilList usage="walking" />
-      </>
-    );
-  } else if (walkingDongilsStatus === 'succeeded') {
-    if (walkingDongils?.length === 0) {
-      walkingDongilsContent = (
-        <>
-          <header>걷고있는 돈길</header>
-          <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
-        </>
-      );
-    } else {
-      walkingDongilsContent = (
-        <>
-          <header>걷고있는 돈길</header>
-          <WalkingDongilList walkingDongils={walkingDongils!} />
-          <ContractNewDongilLink disable={disable} to={'/create/1'} />
-        </>
-      );
-    }
-  } else if (walkingDongilsStatus === 'failed') {
-    walkingDongilsContent = <p>Failed</p>;
-  }
+  let kidSummaryContent = getKidSummaryContent(); // 주간 진행상황
+  let walkingDongilsContent = getWalkingDongilsContent(); // 걷고있는 돈길
 
   // 대기중인 돈길 삭제 (바텀시트, 모달)
   const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
@@ -169,7 +118,7 @@ function KidHome() {
     pendingDongilsContent = (
       <>
         <header>대기중인 돈길</header>
-        <SkeletonDongilList usage="pending" />
+        <SkeletonDongilList variant="pending" />
       </>
     );
   } else if (pendingDongilsStatus === 'succeeded') {
@@ -197,7 +146,7 @@ function KidHome() {
   }
 
   return (
-    <HomeTemplate usage="KidHome">
+    <HomeTemplate variant="KidHome">
       <MarginTemplate>
         <SummaryWrapper>{kidSummaryContent}</SummaryWrapper>
         <WalkingDongilsWrapper>{walkingDongilsContent}</WalkingDongilsWrapper>
@@ -232,7 +181,7 @@ const SummaryWrapper = styled.div`
 
 const WalkingDongilsWrapper = styled.div`
   margin-top: 48px;
-  header {
+  h1 {
     width: 100%;
     height: 16px;
     margin-bottom: 24px;
@@ -243,7 +192,7 @@ const WalkingDongilsWrapper = styled.div`
 
 const WaitingDongilWrapper = styled.div`
   margin-top: 48px;
-  header {
+  h1 {
     width: 100%;
     height: 16px;
     margin-bottom: 24px;

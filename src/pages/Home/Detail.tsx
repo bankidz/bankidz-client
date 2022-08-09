@@ -148,7 +148,7 @@ function Detail() {
             </span>
             <div className="title">{title}</div>
             <Summary
-              usage="Detail"
+              variant="Detail"
               weekPrice={weekPrice}
               weeks={weeks}
               successWeeks={successWeeks}
