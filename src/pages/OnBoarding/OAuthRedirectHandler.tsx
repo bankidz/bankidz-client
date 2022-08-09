@@ -17,7 +17,7 @@ function OAuthRedirectHandler() {
     async function processLogin() {
       try {
         await dispatch(login({ code })).unwrap();
-        navigate('/sungwoo'); // TODO: replace with '/'
+        navigate('/');
       } catch (error: any) {
         console.error(error.message);
       }
@@ -35,14 +35,3 @@ function OAuthRedirectHandler() {
 export default OAuthRedirectHandler;
 
 // https://velog.io/@he0_077/useEffect-%ED%9B%85%EC%97%90%EC%84%9C-async-await-%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
-// try {
-//   const response = await axiosPublic.post('/kakao/login', { code });
-//   console.log('response: ');
-//   console.log(response);
-//   const { accessToken, isKid } = response.data.data;
-//   dispatch(setCredentials({ accessToken, isKid }));
-//   // navigate('/register/1');
-//   navigate('/');
-// } catch (error) {
-//   console.error(error);
-// }

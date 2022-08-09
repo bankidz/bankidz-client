@@ -13,7 +13,6 @@ import WalkRouter from './pages/Walk';
 import { useEffect } from 'react';
 
 function App() {
-  //뷰포트 크기 바뀌는것 감지
   useEffect(() => {
     const setScreenSize = () => {
       let vh = window.innerHeight * 0.01;
@@ -22,7 +21,6 @@ function App() {
     setScreenSize();
     window.addEventListener('resize', setScreenSize);
     return () => {
-      // cleanup
       window.removeEventListener('resize', setScreenSize);
     };
   }, []);
