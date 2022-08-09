@@ -145,6 +145,7 @@ const FixedBar = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.onFocus};
+  transition-property: background-color;
   position: fixed;
   width: 100%;
 
@@ -223,7 +224,7 @@ const BackgroundBox = styled.div<{
   ${({ hasMultipleKids }) =>
     hasMultipleKids === true
       ? css`
-          height: 415px;
+          height: 350px;
         `
       : css`
           height: 275px;
@@ -234,34 +235,39 @@ const BackgroundBox = styled.div<{
   transform: translate3d(-50%, 0, 0);
 
   width: 100%;
-  z-index: 1;
+  z-index: 0;
   background-color: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.onFocus};
+  transition-property: background-color;
 `;
-
-/* ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          top: 410px;
-        `
-      : css`
-          top: 337px;
-        `} */
 
 const BackgroundEllipse = styled.div<{
   colorByLevel: string;
   hasMultipleKids: boolean;
 }>`
-  // mount 시 slide animation 적용
-  @keyframes slide {
-    from {
-      top: 225px;
-    }
-    to {
-      top: 337px;
-    }
-  }
-  animation: slide 0.25s ease-in forwards;
+  ${({ hasMultipleKids }) =>
+    hasMultipleKids === true
+      ? css`
+          @keyframes slide {
+            from {
+              top: 290px;
+            }
+            to {
+              top: 410px;
+            }
+          }
+        `
+      : css`
+          @keyframes slide {
+            from {
+              top: 225px;
+            }
+            to {
+              top: 337px;
+            }
+          }
+        `}
+  animation: slide 0.25s ease-in forwards; // when mounted
 
   position: absolute;
   left: 50%;
