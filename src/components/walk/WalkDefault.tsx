@@ -3,10 +3,7 @@ import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth, selectLevel } from '@store/slices/authSlice';
-import {
-  IDongil,
-  selectIsWalkingDongilsPatched,
-} from '@store/slices/walkingDongilsSlice';
+import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
@@ -22,6 +19,7 @@ import { TUser } from '@store/slices/overViewSlice';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
+import { IDongil } from '@lib/types/IDongil';
 
 type TWalkDefaultProps = {
   walkingDongils: IDongil[];

@@ -1,4 +1,4 @@
-import { IDongil } from '@store/slices/walkingDongilsSlice';
+import { IDongil } from '@lib/types/IDongil';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import PendingDongilItem from './ProposedDongilItem';

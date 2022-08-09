@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
+
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import HomeTemplate from '@components/home/HomeTemplate';
@@ -19,6 +20,7 @@ import {
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilsSlice';
 import { fetchFamily, selectFamilyStatus } from '@store/slices/familySlice';
+
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -64,7 +66,6 @@ function KidHome() {
     pendingDongils !== null &&
     pendingDongils.length !== 0 &&
     deleteStatus === 'idle';
-
   const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
     useBottomSheet(false);
   const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
@@ -110,9 +111,9 @@ function KidHome() {
         <LargeSpacer />
       </MarginTemplate>
 
-      {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
+      {/* 다음 모달과 바텀시트를 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
+      {/* 모달은 전역상태로 관리되기에 별도의 props를 전달하지 않습니다. */}
       <Modals />
-      {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
       <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
         <DeleteCheck
           onClickDelete={handleDeleteButtonClick}

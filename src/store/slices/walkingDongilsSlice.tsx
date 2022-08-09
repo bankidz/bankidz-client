@@ -4,47 +4,16 @@ import { TItemName } from '@lib/types/TItemName';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-import { TDongilCategory } from '@lib/types/TDongilCategory';
-import { TInterestRate } from '@lib/types/IInterestRate';
-
-export interface IDongil {
-  id: number;
-  isMom: boolean;
-  title: string;
-  itemName: TItemName;
-  challengeCategory: TDongilCategory;
-  isAchieved: number;
-  interestRate: TInterestRate;
-  totalPrice: number;
-  weekPrice: number;
-  successWeeks: number;
-  weeks: number;
-  createdAt: string;
-  status: TDongilStatus;
-  fileName: string;
-  progressList:
-    | {
-        challengeId: number;
-        weeks: number;
-        isAchieved: boolean;
-        // 저축 챌린지 계약 종료일, 추후 Enum으로 프백 통일 예정
-        approvedAt: string;
-      }[]
-    | null;
-  comment: {
-    content: string;
-    id: number;
-  } | null;
-}
+import { IDongil } from '@lib/types/IDongil';
 
 export type TWalkingDongilsState = {
-  walkingDongils: IDongil[] | null;
+  walkingDongils: IDongil[];
   walkingDongilsStatus?: TFetchStatus;
   isWalkingDongilsPatched: boolean;
 };
 
 const initialState: TWalkingDongilsState = {
-  walkingDongils: null,
+  walkingDongils: [],
   walkingDongilsStatus: 'idle',
   isWalkingDongilsPatched: false,
 };
