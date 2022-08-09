@@ -42,6 +42,7 @@ import SkeletonDongilList from '@components/home/SkeletonDongilList';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import Summary from '@components/home/sumary/Summary';
 import getParentSummaryContent from '@components/home/sumary/getParentSummaryContent';
+import getProposedDongilsContent from '@components/home/proposed/getProposedDongilsContent';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -126,42 +127,10 @@ function ParentHome() {
 
   // 제안받은 돈길
   const proposedDongils = useAppSelector(selectProposedDongils);
-  let proposedDongilsContent;
-  if (proposedDongilsStatus === 'loading') {
-    proposedDongilsContent = (
-      <>
-        <header>제안받은 돈길</header>
-        <SkeletonDongilList variant="proposed" />
-      </>
-    );
-  } else if (proposedDongilsStatus === 'succeeded') {
-    const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
-      selectedKid?.username!,
-    );
-    if (selectedKidSProposedDongils?.length === 0) {
-      proposedDongilsContent = <EmptyDongil property="proposed" />;
-    } else {
-      proposedDongilsContent = (
-        <>
-          <header>제안받은 돈길</header>
-          <ProposedDongilList
-            proposedDongils={selectedKidSProposedDongils!}
-            onApproveCheckOpen={onApproveCheckOpen}
-            setIdToApprove={setIdToApprove}
-          />
-        </>
-      );
-    }
-  } else if (proposedDongilsStatus === 'failed') {
-    proposedDongilsContent = <p>Failed</p>;
-  }
-
-  function getSelectedKidSProposedDongils(username: string) {
-    const found = proposedDongils?.find(
-      (proposedDongil) => proposedDongil.userName === username,
-    );
-    return found?.challengeList;
-  }
+  let proposedDongilsContent = getProposedDongilsContent(
+    onApproveCheckOpen,
+    setIdToApprove,
+  );
 
   // 금주의 돈길
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
@@ -169,7 +138,7 @@ function ParentHome() {
   if (proposedDongilsStatus === 'loading') {
     thisWeekSDongilsContent = (
       <>
-        <header>금주의 돈길</header>
+        <h1>금주의 돈길</h1>
         <SkeletonDongilList variant="thisWeekS" />
       </>
     );
@@ -180,14 +149,14 @@ function ParentHome() {
     if (proposedDongils?.length === 0) {
       thisWeekSDongilsContent = (
         <>
-          <header>금주의 돈길</header>
+          <h1>금주의 돈길</h1>
           <EmptyDongil property="thisWeekS" />
         </>
       );
     } else {
       thisWeekSDongilsContent = (
         <>
-          <header>금주의 돈길</header>
+          <h1>금주의 돈길</h1>
           <ThisWeekSDongilList
             thisWeekSDongils={selectedKidSThisWeekSDongils!}
           />
@@ -328,7 +297,7 @@ const SummaryWrapper = styled.div`
 
 const ProposedDongilsWrapper = styled.div`
   margin-top: 48px;
-  header {
+  h1 {
     width: 100%;
     height: 16px;
     margin-bottom: 24px;
@@ -339,7 +308,7 @@ const ProposedDongilsWrapper = styled.div`
 
 const ThisWeekSDongilWrapper = styled.div`
   margin-top: 48px;
-  header {
+  h1 {
     width: 100%;
     height: 16px;
     margin-bottom: 24px;
