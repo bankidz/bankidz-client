@@ -8,11 +8,14 @@ import renderHomeBackground from '@lib/utils/render/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/render/renderHomeBanki';
 import {
   selectHasMultipleKids,
+  selectKids,
+  selectKidsStatus,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
 import { useEffect } from 'react';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import KidList from './KidList';
 
 type TVariant = 'KidHome' | 'ParentHome';
 
@@ -63,10 +66,29 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
     };
   }, []);
 
+  const kidsStatus = useAppSelector(selectKidsStatus);
+  const kids = useAppSelector(selectKids);
+  // 자녀 목록
+  let kidsContent;
+  if (kidsStatus === 'loading') {
+    kidsContent = <p>Loading</p>;
+  } else if (kidsStatus === 'succeeded') {
+    kidsContent = <KidList />;
+  } else if (kidsContent === 'failed') {
+    kidsContent = <p>Failed</p>;
+  }
+
   return (
     <Wrapper>
-      <FixedBar colorByLevel={colorByLevel}>
-        <BANKIDZ className="logo" />
+      <FixedBar colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
+        <div className="logo-wrapper">
+          <BANKIDZ />
+        </div>
+        {hasMultipleKids === true && (
+          <KidListWrapper colorByLevel={colorByLevel}>
+            {kidsContent}
+          </KidListWrapper>
+        )}
       </FixedBar>
       <Content>
         <MarginTemplate>
@@ -111,24 +133,44 @@ const Wrapper = styled.div`
   height: calc(var(--vh, 1vh) * 100);
 `;
 
-const FixedBar = styled.div<{ colorByLevel: string }>`
+const FixedBar = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
+  ${({ hasMultipleKids }) =>
+    hasMultipleKids === true
+      ? css`
+          height: 95px;
+        `
+      : css`
+          height: 48px;
+        `}
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.onFocus};
   position: fixed;
   width: 100%;
-  height: 48px;
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 
-  .logo {
+  .logo-wrapper {
+    width: 100.24px;
     height: 15.82px;
     margin-left: 19.79px;
     margin-top: 17.73px;
   }
+`;
+
+const KidListWrapper = styled.div<{ colorByLevel: string }>`
+  margin-top: 38.44px;
+  width: 250px;
+  height: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  z-index: 3;
+  width: 100%;
 `;
 
 const Content = styled.div`

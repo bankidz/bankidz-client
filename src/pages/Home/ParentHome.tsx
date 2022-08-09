@@ -96,16 +96,6 @@ function ParentHome() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  // 자녀 목록
-  let kidsContent;
-  if (kidsStatus === 'loading') {
-    kidsContent = <p>Loading</p>;
-  } else if (kidsStatus === 'succeeded') {
-    kidsContent = <KidList />;
-  } else if (kidsContent === 'failed') {
-    kidsContent = <p>Failed</p>;
-  }
-
   // 선택한 자녀에 따라 Level 업데이트
   const [colorByLevel, setColorByLevel] = useState<string>(
     theme.palette.greyScale.grey100,
@@ -329,11 +319,6 @@ function ParentHome() {
 
   return (
     <>
-      {hasMultipleKids === true && (
-        <KidListWrapper colorByLevel={colorByLevel}>
-          {kidsContent}
-        </KidListWrapper>
-      )}
       <HomeTemplate variant="ParentHome">
         <MarginTemplate>
           <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
@@ -373,20 +358,6 @@ export default ParentHome;
 
 const SummaryWrapper = styled.div`
   margin-top: 198px;
-`;
-
-const KidListWrapper = styled.div<{ colorByLevel: string }>`
-  margin-top: 47px; // overlaps 1px
-  height: 47px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-
-  z-index: 3;
-  width: 100%;
-  background: ${({ colorByLevel }) => colorByLevel};
-  transition: ${({ theme }) => theme.transition.onFocus};
-  position: fixed;
 `;
 
 const ProposedDongilsWrapper = styled.div`
