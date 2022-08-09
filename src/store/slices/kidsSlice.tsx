@@ -1,15 +1,8 @@
+import { IKid } from '@lib/types/IKid';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { TLevel } from '@lib/types/TLevel';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-
-interface IKid {
-  username: string;
-  isFemale: boolean;
-  level: TLevel;
-  kidId: number;
-}
 
 export type TKidsState = {
   // kids: null - 연결된 자녀 없음

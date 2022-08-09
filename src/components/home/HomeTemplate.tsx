@@ -1,19 +1,18 @@
-import MarginTemplate from '@components/layout/MarginTemplate';
 import styled, { css } from 'styled-components';
-import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppSelector } from '@store/app/hooks';
-import LevelBadge from '@components/common/badges/LevelBadge';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import renderHomeBackground from '@lib/utils/render/renderHomeBackground';
-import renderHomeBanki from '@lib/utils/render/renderHomeBanki';
 import {
   selectHasMultipleKids,
-  selectKids,
   selectKidsStatus,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
+import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useEffect } from 'react';
 import { TLevel } from '@lib/types/TLevel';
+import MarginTemplate from '@components/layout/MarginTemplate';
+import LevelBadge from '@components/common/badges/LevelBadge';
+import renderHomeBackground from '@lib/utils/render/renderHomeBackground';
+import renderHomeBanki from '@lib/utils/render/renderHomeBanki';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import KidList from './KidList';
 
@@ -35,6 +34,29 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
   }
   const colorByLevel = getColorByLevel(level!);
 
+  // 자녀 목록
+  const kidsStatus = useAppSelector(selectKidsStatus);
+  let kidsContent;
+  if (kidsStatus === 'loading') {
+    kidsContent = <p>Loading</p>;
+  } else if (kidsStatus === 'succeeded') {
+    kidsContent = <KidList />;
+  } else if (kidsContent === 'failed') {
+    kidsContent = <p>Failed</p>;
+  }
+
+  // 뒤로가기 차단
+  const preventGoBack = () => {
+    history.pushState(null, '', location.href);
+  };
+  useEffect(() => {
+    history.pushState(null, '', location.href);
+    window.addEventListener('popstate', preventGoBack);
+    return () => {
+      window.removeEventListener('popstate', preventGoBack);
+    };
+  }, []);
+
   //TODO: demo day
   let headerText;
   const isKid = useAppSelector(selectIsKid);
@@ -52,30 +74,6 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
   } else if (isKid === false && level! === 2) {
     // 부모 - 주어진 선택
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
-  }
-
-  // 뒤로가기 차단
-  const preventGoBack = () => {
-    history.pushState(null, '', location.href);
-  };
-  useEffect(() => {
-    history.pushState(null, '', location.href);
-    window.addEventListener('popstate', preventGoBack);
-    return () => {
-      window.removeEventListener('popstate', preventGoBack);
-    };
-  }, []);
-
-  const kidsStatus = useAppSelector(selectKidsStatus);
-  const kids = useAppSelector(selectKids);
-  // 자녀 목록
-  let kidsContent;
-  if (kidsStatus === 'loading') {
-    kidsContent = <p>Loading</p>;
-  } else if (kidsStatus === 'succeeded') {
-    kidsContent = <KidList />;
-  } else if (kidsContent === 'failed') {
-    kidsContent = <p>Failed</p>;
   }
 
   return (

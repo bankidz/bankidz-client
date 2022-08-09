@@ -5,7 +5,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export interface IKid {
+interface IKid {
   username: string;
   isFemale: boolean;
   level: TLevel;

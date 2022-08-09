@@ -41,6 +41,7 @@ import { dummyDongils } from '@lib/mocks/dongils';
 import SkeletonDongilList from '@components/home/SkeletonDongilList';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import Summary from '@components/home/sumary/Summary';
+import getParentSummaryContent from '@components/home/sumary/getParentSummaryContent';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -105,42 +106,7 @@ function ParentHome() {
   }, [selectedKid]);
 
   // 주간 진행상황
-  let parentSummaryContent;
-  if (parentSummariesStatus === 'loading') {
-    parentSummaryContent = (
-      <Summary
-        variant="ParentHome"
-        currentSavings={0}
-        totalPrice={0}
-        username={'loading'}
-      />
-    );
-  } else if (parentSummariesStatus === 'succeeded') {
-    const selectedKidSParentSummary = getSelectedKidSParentSummary(
-      selectedKid?.kidId!,
-    );
-    if (selectedKidSParentSummary) {
-      const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
-      parentSummaryContent = (
-        <Summary
-          variant="ParentHome"
-          currentSavings={currentSavings!}
-          totalPrice={totalPrice!}
-          username={selectedKid?.username}
-        />
-      );
-    }
-    // parentSummaryContent = <p>succeeded</p>;
-  } else if (parentSummariesStatus === 'failed') {
-    parentSummaryContent = <p>Failed</p>;
-  }
-
-  function getSelectedKidSParentSummary(kidId: number) {
-    const found = parentSummaries?.find(
-      (parentSummary) => parentSummary.kidId === kidId,
-    );
-    return found;
-  }
+  let parentSummaryContent = getParentSummaryContent();
 
   // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
   const [idToApprove, setIdToApprove] = useState<number | null>(null);
