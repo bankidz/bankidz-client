@@ -1,7 +1,7 @@
 import { HTMLAttributes, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingItemNameButtonBorder } from '@assets/borders/walking-itemName-border.svg';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { TItemName } from '@lib/types/TItemName';
 import { calcRatio, theme } from '@lib/styles/theme';
 

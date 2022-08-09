@@ -9,7 +9,7 @@ import { ReactComponent as C2 } from '@assets/illusts/contractItemNames/walk/c2.
 import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/walk/c3.svg';
 import { TItemName } from '@lib/types/TItemName';
 
-function renderItemIllustForWalkPage(itemName: TItemName) {
+function renderItemIllustForWalkDefault(itemName: TItemName) {
   if (itemName === '학용품') {
     return <A1 />;
   } else if (itemName === '생활용품') {
@@ -31,4 +31,4 @@ function renderItemIllustForWalkPage(itemName: TItemName) {
   }
 }
 
-export default renderItemIllustForWalkPage;
+export default renderItemIllustForWalkDefault;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import { HTMLAttributes } from 'react';
-import renderRoleText from '@lib/utils/common/getRoleText';
-import renderRoleIllust from '@lib/utils/common/renderRoleIllust';
+import renderRoleText from '@lib/utils/get/getRoleText';
+import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean | null;

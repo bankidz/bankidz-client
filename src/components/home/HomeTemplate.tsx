@@ -4,9 +4,8 @@ import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { useAppSelector } from '@store/app/hooks';
 import LevelBadge from '@components/common/badges/LevelBadge';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import renderHomeBackground from '@lib/utils/common/renderHomeBackground';
-import renderHomeBanki from '@lib/utils/common/renderHomeBanki';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
+import renderHomeBackground from '@lib/utils/render/renderHomeBackground';
+import renderHomeBanki from '@lib/utils/render/renderHomeBanki';
 import {
   selectHasMultipleKids,
   selectSelectedKid,
@@ -14,6 +13,7 @@ import {
 import { calcRatio } from '@lib/styles/theme';
 import { useEffect } from 'react';
 import { TLevel } from '@lib/types/TLevel';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 type TUsage = 'KidHome' | 'ParentHome';
 

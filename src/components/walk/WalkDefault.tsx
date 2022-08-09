@@ -1,7 +1,6 @@
 import moment from 'moment';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth, selectLevel } from '@store/slices/authSlice';
 import {
@@ -14,7 +13,6 @@ import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygo
 import { ReactComponent as D1 } from '@assets/illusts/walk/d-1.svg';
 import { ReactComponent as D2 } from '@assets/illusts/walk/d-2.svg';
 import { ReactComponent as DDay } from '@assets/illusts/walk/d-day.svg';
-import renderItemIllustForWalkPage from '@lib/utils/kid/renderItemIllustForWalkPage';
 import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkDongil from '@lib/hooks/useWalkDongil';
@@ -22,6 +20,8 @@ import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import { TUser } from '@store/slices/overViewSlice';
 import LargeSpacer from '@components/layout/LargeSpacer';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
 
 type TWalkDefaultProps = {
   walkingDongils: IDongil[];
@@ -86,7 +86,7 @@ function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
       <ContentWrapper>
         <Content>
           <IllustWrapper>
-            {renderItemIllustForWalkPage(selected.itemName)}
+            {renderItemIllustForWalkDefault(selected.itemName)}
           </IllustWrapper>
           <InterestBadge interestRate={selected.interestRate} />
           <p>{selected.title}</p>

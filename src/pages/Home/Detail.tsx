@@ -8,8 +8,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { calcRatio } from '@lib/styles/theme';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import renderGraph from '@lib/utils/kid/renderGraph';
+import renderGraph from '@lib/utils/render/renderGraph';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -27,6 +26,7 @@ import { selectSelectedKid } from '@store/slices/kidsSlice';
 import TotalInterest from '@components/home/walking/TotalInterest';
 import { TLevel } from '@lib/types/TLevel';
 import { TPercent } from '@lib/types/TPercent';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 function Detail() {
   const { id } = useParams();

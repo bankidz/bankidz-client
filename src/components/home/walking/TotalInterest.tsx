@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { ReactComponent as BankiInterest10 } from '@assets/illusts/banki/banki_walk_10.svg';
 import { ReactComponent as BankiInterest20 } from '@assets/illusts/banki/banki_walk_20.svg';
 import { ReactComponent as BankiInterest30 } from '@assets/illusts/banki/banki_walk_30.svg';
-import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import { TInterestRate } from '@lib/types/IInterestRate';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
 type TotalInterestProps = {
   interestRate: TInterestRate;

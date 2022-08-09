@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import getBankiNameByLevel from '@lib/utils/common/getBankiNameByLevel';
+import getBankiNameByLevel from '@lib/utils/get/getBankiNameByLevel';
 import { TLevel } from '@lib/types/TLevel';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 interface LevelBadgeProps {
   level: TLevel;

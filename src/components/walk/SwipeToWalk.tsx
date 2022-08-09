@@ -6,7 +6,6 @@ import { ReactComponent as Flag } from '@assets/illusts/walk/flag.svg';
 import { ReactComponent as Stamp } from '@assets/illusts/walk/achieved-stamp.svg';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import { useAppDispatch } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import {
@@ -14,6 +13,7 @@ import {
   walkDongil,
 } from '@store/slices/walkingDongilsSlice';
 import { TInterestRate } from '@lib/types/IInterestRate';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;

@@ -9,11 +9,11 @@ import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg'
 import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
-import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import Button from '@components/common/buttons/Button';
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
 import { AWS_S3_URL } from '@lib/constants';
+import getContractEndDate from '@lib/utils/get/getContractEndDate';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 
 interface QuaternaryModalProps {
   /**

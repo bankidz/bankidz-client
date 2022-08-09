@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useEffect, useState } from 'react';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
 import {
   fetchKids,
   selectHasMultipleKids,
@@ -41,6 +40,7 @@ import useBottomSheet from '@lib/hooks/useBottomSheet';
 import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
 import { dummyDongils } from '@lib/mocks/dongils';
 import SkeletonDongilList from '@components/home/SkeletonDongilList';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);

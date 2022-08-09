@@ -18,13 +18,13 @@ import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/sheetContents/RangeInput';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
-import getChallengeStep4Prices from '@lib/utils/kid/getChallengeStep4Prices';
-import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';
-import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
+import getChallengeStep4Prices from '@lib/utils/get/getChallengeStep4Prices';
 import InputForm from '@components/common/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import moment from 'moment';
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
 export type TStep4Form = {
   weekPrice: number;

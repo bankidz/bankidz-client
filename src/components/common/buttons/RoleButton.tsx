@@ -2,8 +2,8 @@ import { HTMLAttributes, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as RoleButtonBorder } from '@assets/borders/role-button-border.svg';
 import { calcRatio, theme } from '@lib/styles/theme';
-import renderRoleIllust from '@lib/utils/common/renderRoleIllust';
-import renderRoleText from '@lib/utils/common/getRoleText';
+import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
+import renderRoleText from '@lib/utils/get/getRoleText';
 
 interface RoleButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;

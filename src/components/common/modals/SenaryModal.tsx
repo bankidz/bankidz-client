@@ -10,10 +10,10 @@ import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import Button from '../buttons/Button';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
-import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { AWS_S3_URL } from '@lib/constants';
+import getContractEndDate from '@lib/utils/get/getContractEndDate';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 
 interface SenaryModalProps {
   /**

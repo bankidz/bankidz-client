@@ -1,5 +1,5 @@
 import { TItemName } from '@lib/types/TItemName';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';

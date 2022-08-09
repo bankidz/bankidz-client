@@ -1,4 +1,4 @@
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled, { css } from 'styled-components';
 
 type TUsage = 'KidHome' | 'Detail' | 'ParentHome';

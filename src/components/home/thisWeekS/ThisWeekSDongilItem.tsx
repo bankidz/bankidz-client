@@ -1,5 +1,5 @@
 import { TItemName } from '@lib/types/TItemName';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
