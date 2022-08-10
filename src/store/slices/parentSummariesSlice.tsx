@@ -11,7 +11,7 @@ interface IParentSummary {
   };
 }
 
-export type TParentSummariesState = {
+type TParentSummariesState = {
   parentSummaries: IParentSummary[] | null;
   parentSummariesStatus?: TFetchStatus;
 };

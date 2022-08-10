@@ -10,7 +10,7 @@ interface IThisWeekSDongil {
   challengeList: IDongil[];
 }
 
-export type TThisWeekSDongilsState = {
+type TThisWeekSDongilsState = {
   thisWeekSDongils: IThisWeekSDongil[] | null;
   thisWeekSDongilsStatus?: TFetchStatus;
 };

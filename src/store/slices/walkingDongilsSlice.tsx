@@ -1,12 +1,10 @@
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { TDongilStatus } from '@lib/types/TDongilStatus';
-import { TItemName } from '@lib/types/TItemName';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IDongil } from '@lib/types/IDongil';
 
-export type TWalkingDongilsState = {
+type TWalkingDongilsState = {
   walkingDongils: IDongil[];
   walkingDongilsStatus?: TFetchStatus;
   isWalkingDongilsPatched: boolean;
@@ -34,7 +32,6 @@ export const giveUpWalkingDongil = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
     const { axiosPrivate, id } = thunkPayload;
     const response = await axiosPrivate.delete(`/challenge/${id}`);
-    console.log('response.data', response.data);
     return response.data;
   },
 );
@@ -45,7 +42,6 @@ export const walkDongil = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
     const { axiosPrivate, id } = thunkPayload;
     const response = await axiosPrivate.patch(`/progress/${id}`);
-    console.log('response.data', response.data);
     return response.data;
   },
 );
@@ -57,7 +53,7 @@ export const walkingDongilsSlice = createSlice({
     dispatchResetIsPatched(state) {
       state.isWalkingDongilsPatched = false;
     },
-    //데모데이 시연용
+    // TODO: demo day
     dispatchSetPatched(state, action) {
       const id = action.payload.id;
       const achievedDongil = state.walkingDongils!.find(
@@ -92,11 +88,9 @@ export const walkingDongilsSlice = createSlice({
       })
       .addCase(walkDongil.fulfilled, (state, action) => {
         const { id } = action.meta.arg;
-        // immer
         const achievedDongil = state.walkingDongils!.find(
           (dongil) => dongil.id === id,
         );
-
         if (achievedDongil?.progressList) {
           achievedDongil.progressList[
             achievedDongil.progressList?.length - 1

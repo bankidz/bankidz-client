@@ -10,7 +10,7 @@ interface IProposedDongil {
   challengeList: IDongil[];
 }
 
-export type TProposedDongilsState = {
+type TProposedDongilsState = {
   proposedDongils: IProposedDongil[] | null;
   proposedDongilsStatus?: TFetchStatus;
 };
