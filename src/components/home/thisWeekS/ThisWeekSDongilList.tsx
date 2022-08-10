@@ -14,7 +14,7 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
       {thisWeekSDongils?.map((thisWeekSDongil) => (
         <ThisWeekSDongilItem
           key={thisWeekSDongil.id}
-          itemName={thisWeekSDongil.itemName as TItemName}
+          itemName={thisWeekSDongil.itemName}
           title={thisWeekSDongil.title}
           progressList={thisWeekSDongil.progressList!}
           to={`/detail/${thisWeekSDongil.id}`}
