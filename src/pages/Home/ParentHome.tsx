@@ -44,6 +44,9 @@ import Summary from '@components/home/sumary/Summary';
 import getParentSummaryContent from '@components/home/sumary/getParentSummaryContent';
 import getProposedDongilsContent from '@components/home/proposed/getProposedDongilsContent';
 import getThisWeekSDongilsContent from '@components/home/thisWeekS/getThisWeekSDongilsContent';
+import hasParentSummaryAlreadyBeenFetched from '@components/home/sumary/hasParentSummaryAlreadyBeenFetched';
+import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
+import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -52,6 +55,10 @@ function ParentHome() {
   const parentSummaries = useAppSelector(selectParentSummaries);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
+  const proposedDongils = useAppSelector(selectProposedDongils);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
 
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
@@ -96,9 +103,6 @@ function ParentHome() {
     hydrate();
   }, []);
 
-  const selectedKid = useAppSelector(selectSelectedKid);
-  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
-
   // 선택한 자녀에 따라 Level 업데이트
   const [colorByLevel, setColorByLevel] = useState<string>(
     theme.palette.greyScale.grey100,
@@ -123,9 +127,6 @@ function ParentHome() {
     onApproveCompletedOpen();
   }
 
-  const proposedDongils = useAppSelector(selectProposedDongils);
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-
   // 제안받은 돈길, 주간 진행상황
   let parentSummaryContent = getParentSummaryContent();
   let proposedDongilsContent = getProposedDongilsContent(
@@ -135,58 +136,14 @@ function ParentHome() {
 
   // 금주의 돈길
   let thisWeekSDongilsContent = getThisWeekSDongilsContent();
-  // if (proposedDongilsStatus === 'loading') {
-  //   thisWeekSDongilsContent = (
-  //     <>
-  //       <h1>금주의 돈길</h1>
-  //       <SkeletonDongilList variant="thisWeekS" />
-  //     </>
-  //   );
-  // } else if (proposedDongilsStatus === 'succeeded') {
-  //   const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
-  //     selectedKid?.username!,
-  //   );
-  //   if (proposedDongils?.length === 0) {
-  //     thisWeekSDongilsContent = (
-  //       <>
-  //         <h1>금주의 돈길</h1>
-  //         <EmptyDongil property="thisWeekS" />
-  //       </>
-  //     );
-  //   } else {
-  //     thisWeekSDongilsContent = (
-  //       <>
-  //         <h1>금주의 돈길</h1>
-  //         <ThisWeekSDongilList
-  //           thisWeekSDongils={selectedKidSThisWeekSDongils!}
-  //         />
-  //       </>
-  //     );
-  //   }
-  // } else if (proposedDongilsStatus === 'failed') {
-  //   thisWeekSDongilsContent = <p>Failed</p>;
-  // }
-
-  // function getSelectedKidSThisWeekSDongils(username: string) {
-  //   const found = thisWeekSDongils?.find(
-  //     (thisWeekSDongil) => thisWeekSDongil.userName === username,
-  //   );
-  //   return found?.challengeList;
-  // }
 
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
   const canFetchParentSummary =
-    selectedKid !== null &&
-    parentSummaries !== null &&
-    !hasParentSummaryAlreadyBeenFetched();
+    !hasParentSummaryAlreadyBeenFetched() && selectedKid !== null;
   const canFetchProposedDongils =
-    selectedKid !== null &&
-    proposedDongils !== null &&
-    !hasProposedDongilsAlreadyBeenFetched();
+    !hasProposedDongilsAlreadyBeenFetched() && selectedKid !== null;
   const canFetchThisWeekSDongils =
-    selectedKid !== null &&
-    thisWeekSDongils !== null &&
-    !hasThisWeekSDongilsAlreadyBeenFetched();
+    !hasThisWeekSDongilsAlreadyBeenFetched() && selectedKid !== null;
   useEffect(() => {
     async function hydrate() {
       try {
@@ -221,36 +178,36 @@ function ParentHome() {
     hydrate();
   }, [selectedKid]);
 
-  function hasParentSummaryAlreadyBeenFetched() {
-    const found = parentSummaries?.find(
-      (parentSummary) => parentSummary.kidId === selectedKid?.kidId,
-    );
-    if (found === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-  function hasProposedDongilsAlreadyBeenFetched() {
-    const found = proposedDongils?.find(
-      (proposedDongil) => proposedDongil.userName === selectedKid?.username,
-    );
-    if (found === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  }
-  function hasThisWeekSDongilsAlreadyBeenFetched() {
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === selectedKid?.username,
-    );
-    if (found === undefined) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // function hasParentSummaryAlreadyBeenFetched() {
+  //   const found = parentSummaries?.find(
+  //     (parentSummary) => parentSummary.kidId === selectedKid?.kidId,
+  //   );
+  //   if (found === undefined) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+  // function hasProposedDongilsAlreadyBeenFetched() {
+  //   const found = proposedDongils?.find(
+  //     (proposedDongil) => proposedDongil.userName === selectedKid?.username,
+  //   );
+  //   if (found === undefined) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+  // function hasThisWeekSDongilsAlreadyBeenFetched() {
+  //   const found = thisWeekSDongils?.find(
+  //     (thisWeekSDongil) => thisWeekSDongil.userName === selectedKid?.username,
+  //   );
+  //   if (found === undefined) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
   return (
     <>
