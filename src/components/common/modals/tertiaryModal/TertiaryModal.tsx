@@ -1,11 +1,11 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import ReactModal from 'react-modal';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import styled from 'styled-components';
 import CloseButton from '../../buttons/CloseButton';
+import InstructionCard from './InstructionCard';
 import { ReactComponent as ModalContentMoney } from '@assets/illusts/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illusts/congrats/congrats_banki_with_coins.svg';
-import InstructionCard from './InstructionCard';
+import ReactModal from 'react-modal';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import '../styles.css';
 

@@ -9,10 +9,19 @@ function SungwooTestPage() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.tertiaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'contract',
       onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
+        console.log('left button click');
       },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
     });
   }
 

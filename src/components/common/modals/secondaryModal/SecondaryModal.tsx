@@ -1,26 +1,26 @@
-import styled from 'styled-components';
-import ReactModal from 'react-modal';
-import CheckButton from '../buttons/CheckButton';
-import { calcRatio } from '@lib/styles/theme';
-import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
-import './styles.css';
 import { useState } from 'react';
+import styled from 'styled-components';
+import { ReactComponent as CongratsGoal } from '@assets/illusts/congrats/congrats_goal.svg';
+import ReactModal from 'react-modal';
+import { calcRatio } from '@lib/styles/theme';
+import '../styles.css';
+import CheckButton from '@components/common/buttons/CheckButton';
 
-interface PrimaryModalProps {
-  isKid: boolean;
-  isFemale: boolean;
+interface SecondaryModalProps {
+  /** badge에 표시될 내용을 입력합니다. */
+  badgeText: string;
   /** header에 표시될 내용을 입력합니다. */
   headerText: string;
   /** body에 표시될 내용을 입력합니다. */
   bodyText: string;
 }
 
-function PrimaryModal({
-  isKid,
-  isFemale,
+// 모달 내부에 표시될 UI 작성
+function SecondaryModal({
+  badgeText,
   headerText,
   bodyText,
-}: PrimaryModalProps) {
+}: SecondaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
@@ -42,7 +42,7 @@ function PrimaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '488px',
+        height: '552px',
         position: 'absolute',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
@@ -67,10 +67,11 @@ function PrimaryModal({
       <Content>
         <WhiteBox>
           <div className="illust-wrapper">
-            {renderCongratsIllust(isKid, isFemale)}
+            <CongratsGoal />
           </div>
+          <span className="badge">{badgeText}</span>
           <span className="header">{headerText}</span>
-          <span className="body">{bodyText}</span>
+          <div className="body">{bodyText}</div>
         </WhiteBox>
         <CheckButtonOverlay onClick={handleSubmit} />
         <CheckButtonWrapper>
@@ -81,7 +82,7 @@ function PrimaryModal({
   );
 }
 
-export default PrimaryModal;
+export default SecondaryModal;
 
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
@@ -104,7 +105,7 @@ const Content = styled.div`
 
 const WhiteBox = styled.div`
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 424px;
+  height: 488px;
   width: 100%;
 
   display: flex;
@@ -127,20 +128,43 @@ const WhiteBox = styled.div`
     margin-top: 32px;
     margin-bottom: 8px;
   }
+
   svg {
-    width: ${calcRatio(206, 292)};
+    width: ${calcRatio(202, 292)};
   }
+
+  .badge {
+    width: 97px;
+    height: 26px;
+
+    background: ${({ theme }) => theme.palette.main.yellow100};
+    border-radius: ${({ theme }) => theme.radius.large};
+
+    ${({ theme }) => theme.typo.tag.T_12_EB};
+    color: ${({ theme }) => theme.palette.main.yellow400};
+
+    line-height: 26px;
+    vertical-align: center;
+    display: inline-block;
+    text-align: center;
+  }
+
   .header {
-    ${({ theme }) => theme.typo.popup.Title_T_21_EB}
-    height: 21px;
-    margin-top: 8px;
-    margin-bottom: 16px;
+    margin-top: 16px;
+    ${({ theme }) => theme.typo.popup.Title_T_21_EB};
+    color: ${({ theme }) => theme.palette.greyScale.black};
   }
+
   .body {
+    margin-top: 16px;
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
-    height: 14px;
-    margin-bottom: 36px;
+    line-height: 150%;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    white-space: pre-wrap;
   }
 `;
 
@@ -151,13 +175,7 @@ const CheckButtonOverlay = styled.button`
 `;
 
 const CheckButtonWrapper = styled.div`
-  margin-top: 440px;
+  margin-top: 504px;
   position: absolute;
   z-index: 701;
 `;
-
-// https://codepen.io/designcouch/pen/obvKxm
-// https://reactcommunity.org/react-modal/styles/transitions/
-// https://stackoverflow.com/questions/58355628/animate-react-modal
-// https://codesandbox.io/s/csstransition-component-forked-7jiwn
-// https://www.faqcode4u.com/faq/80486/animate-react-modal

@@ -1,7 +1,8 @@
 import { useModalsDispatch, useModalsState } from './ModalsContext';
-import PrimaryModal from './PrimaryModal';
-import SecondaryModal from './SecondaryModal';
+import PrimaryModal from './primaryModal/PrimaryModal';
+import SecondaryModal from './secondaryModal/SecondaryModal';
 import TertiaryModal from './tertiaryModal/TertiaryModal';
+import ReceiptModal from './receiptModal/ReceiptModal';
 import QuaternaryModal from './quaternaryModal/QuaternaryModal';
 import QuinaryModal from './QuinaryModal';
 import SenaryModal from './SenaryModal';
@@ -11,6 +12,7 @@ export const modals = {
   primaryModal: PrimaryModal,
   secondaryModal: SecondaryModal,
   tertiaryModal: TertiaryModal,
+  receiptModal: ReceiptModal,
   quaternaryModal: QuaternaryModal,
   quinaryModal: QuinaryModal,
   senaryModal: SenaryModal,
