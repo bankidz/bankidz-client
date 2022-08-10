@@ -7,6 +7,11 @@ import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
 
 interface SecondaryModalProps {
+  /**
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * useModals hook에 의해 반환 됩니다.
+   * */
+  onSubmit: any;
   /** badge에 표시될 내용을 입력합니다. */
   badgeText: string;
   /** header에 표시될 내용을 입력합니다. */
@@ -17,6 +22,7 @@ interface SecondaryModalProps {
 
 // 모달 내부에 표시될 UI 작성
 function SecondaryModal({
+  onSubmit,
   badgeText,
   headerText,
   bodyText,
@@ -24,11 +30,14 @@ function SecondaryModal({
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 999);
   }
 
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: handleSubmit,
+    onRequestClose: () => setIsOpen(false),
     shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 999,
     style: {
@@ -73,7 +82,7 @@ function SecondaryModal({
           <span className="header">{headerText}</span>
           <div className="body">{bodyText}</div>
         </WhiteBox>
-        <CheckButtonOverlay onClick={handleSubmit} />
+        <CheckButtonOverlay onClick={() => setIsOpen(false)} />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>

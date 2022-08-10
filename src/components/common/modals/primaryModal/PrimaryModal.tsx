@@ -7,6 +7,11 @@ import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
 
 interface PrimaryModalProps {
+  /**
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * useModals hook에 의해 반환 됩니다.
+   * */
+  onSubmit: any;
   isKid: boolean;
   isFemale: boolean;
   /** header에 표시될 내용을 입력합니다. */
@@ -16,6 +21,7 @@ interface PrimaryModalProps {
 }
 
 function PrimaryModal({
+  onSubmit,
   isKid,
   isFemale,
   headerText,
@@ -24,11 +30,14 @@ function PrimaryModal({
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 999);
   }
 
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: handleSubmit,
+    onRequestClose: () => setIsOpen(false),
     shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 999,
     style: {
@@ -72,7 +81,7 @@ function PrimaryModal({
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
         </WhiteBox>
-        <CheckButtonOverlay onClick={handleSubmit} />
+        <CheckButtonOverlay onClick={() => setIsOpen(false)} />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>

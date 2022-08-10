@@ -100,9 +100,9 @@ function ReceiptModal({
     },
   };
 
-  function handleCheckButtonClick() {
-    onSubmit();
-  }
+  // function handleCheckButtonClick() {
+  //   onSubmit();
+  // }
   function handleRejectButtonClick() {
     onSubmit();
   }
@@ -146,7 +146,7 @@ function ReceiptModal({
         <ButtonOverlay onClick={handleSubmit} />
         <ButtonWrapper>
           {variant === 'contract' ? (
-            <CheckButton onClick={handleCheckButtonClick} />
+            <CheckButton onClick={handleSubmit} />
           ) : (
             <DoubleButtonWrapper>
               <Button

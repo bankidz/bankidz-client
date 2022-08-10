@@ -9,15 +9,26 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import '../styles.css';
 
-function TertiaryModal() {
+interface TertiaryModalProps {
+  /**
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * useModals hook에 의해 반환 됩니다.
+   * */
+  onSubmit: any;
+}
+
+function TertiaryModal({ onSubmit }: TertiaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 999);
   }
 
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: handleSubmit,
+    onRequestClose: () => setIsOpen(false),
     shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 999,
     style: {
@@ -102,7 +113,7 @@ function TertiaryModal() {
             </InstructionCard>
           </SwiperSlide>
         </StyledSwiper>
-        <CloseButtonOverlay onClick={handleSubmit} />
+        <CloseButtonOverlay onClick={() => setIsOpen(false)} />
         <CloseButtonWrapper>
           <CloseButton onClick={handleSubmit} />
         </CloseButtonWrapper>
