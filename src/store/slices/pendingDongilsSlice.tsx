@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export type TPendingDongilsState = {
+type TPendingDongilsState = {
   pendingDongils: IDongil[];
   pendingDongilsStatus?: TFetchStatus;
 };

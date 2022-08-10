@@ -16,7 +16,7 @@ function PendingDongilList({
 }: PendingDongilListProps) {
   return (
     <Wrapper>
-      {pendingDongils?.map((pendingDongil) => (
+      {pendingDongils?.map((pendingDongil: IDongil) => (
         <PendingDongilItem
           key={pendingDongil.id}
           pendingDongil={pendingDongil}

@@ -43,6 +43,7 @@ import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import Summary from '@components/home/sumary/Summary';
 import getParentSummaryContent from '@components/home/sumary/getParentSummaryContent';
 import getProposedDongilsContent from '@components/home/proposed/getProposedDongilsContent';
+import getThisWeekSDongilsContent from '@components/home/thisWeekS/getThisWeekSDongilsContent';
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
@@ -106,9 +107,6 @@ function ParentHome() {
     setColorByLevel(getColorByLevel(selectedKid?.level!));
   }, [selectedKid]);
 
-  // 주간 진행상황
-  let parentSummaryContent = getParentSummaryContent();
-
   // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
   const [idToApprove, setIdToApprove] = useState<number | null>(null);
   const [openApproveCheck, onApproveCheckOpen, onApproveCheckDismiss] =
@@ -125,54 +123,56 @@ function ParentHome() {
     onApproveCompletedOpen();
   }
 
-  // 제안받은 돈길
   const proposedDongils = useAppSelector(selectProposedDongils);
+  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
+
+  // 제안받은 돈길, 주간 진행상황
+  let parentSummaryContent = getParentSummaryContent();
   let proposedDongilsContent = getProposedDongilsContent(
     onApproveCheckOpen,
     setIdToApprove,
   );
 
   // 금주의 돈길
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-  let thisWeekSDongilsContent;
-  if (proposedDongilsStatus === 'loading') {
-    thisWeekSDongilsContent = (
-      <>
-        <h1>금주의 돈길</h1>
-        <SkeletonDongilList variant="thisWeekS" />
-      </>
-    );
-  } else if (proposedDongilsStatus === 'succeeded') {
-    const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
-      selectedKid?.username!,
-    );
-    if (proposedDongils?.length === 0) {
-      thisWeekSDongilsContent = (
-        <>
-          <h1>금주의 돈길</h1>
-          <EmptyDongil property="thisWeekS" />
-        </>
-      );
-    } else {
-      thisWeekSDongilsContent = (
-        <>
-          <h1>금주의 돈길</h1>
-          <ThisWeekSDongilList
-            thisWeekSDongils={selectedKidSThisWeekSDongils!}
-          />
-        </>
-      );
-    }
-  } else if (proposedDongilsStatus === 'failed') {
-    thisWeekSDongilsContent = <p>Failed</p>;
-  }
+  let thisWeekSDongilsContent = getThisWeekSDongilsContent();
+  // if (proposedDongilsStatus === 'loading') {
+  //   thisWeekSDongilsContent = (
+  //     <>
+  //       <h1>금주의 돈길</h1>
+  //       <SkeletonDongilList variant="thisWeekS" />
+  //     </>
+  //   );
+  // } else if (proposedDongilsStatus === 'succeeded') {
+  //   const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
+  //     selectedKid?.username!,
+  //   );
+  //   if (proposedDongils?.length === 0) {
+  //     thisWeekSDongilsContent = (
+  //       <>
+  //         <h1>금주의 돈길</h1>
+  //         <EmptyDongil property="thisWeekS" />
+  //       </>
+  //     );
+  //   } else {
+  //     thisWeekSDongilsContent = (
+  //       <>
+  //         <h1>금주의 돈길</h1>
+  //         <ThisWeekSDongilList
+  //           thisWeekSDongils={selectedKidSThisWeekSDongils!}
+  //         />
+  //       </>
+  //     );
+  //   }
+  // } else if (proposedDongilsStatus === 'failed') {
+  //   thisWeekSDongilsContent = <p>Failed</p>;
+  // }
 
-  function getSelectedKidSThisWeekSDongils(username: string) {
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === username,
-    );
-    return found?.challengeList;
-  }
+  // function getSelectedKidSThisWeekSDongils(username: string) {
+  //   const found = thisWeekSDongils?.find(
+  //     (thisWeekSDongil) => thisWeekSDongil.userName === username,
+  //   );
+  //   return found?.challengeList;
+  // }
 
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
   const canFetchParentSummary =
