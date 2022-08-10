@@ -66,9 +66,7 @@ function ProposedDongilItem({
           {totalPrice.toLocaleString('ko-KR')}원
         </span>
       </div>
-      <InterestBadgeWrapper>
-        <InterestBadge interestRate={interestRate} />
-      </InterestBadgeWrapper>
+      <InterestBadge interestRate={interestRate} />
     </StyledButton>
   );
 }
@@ -92,17 +90,13 @@ const StyledButton = styled.button`
     flex-direction: column;
     align-items: start;
     justify-content: space-between;
-
     .title {
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
-
     .totalPrice {
       color: ${({ theme }) => theme.palette.greyScale.grey500};
       ${({ theme }) => theme.typo.button.Secondary_T_13_EB};
     }
   }
 `;
-
-const InterestBadgeWrapper = styled.div``;

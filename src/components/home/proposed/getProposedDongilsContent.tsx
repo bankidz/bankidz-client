@@ -5,7 +5,6 @@ import {
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
-import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ProposedDongilList from './ProposedDongilList';
@@ -56,5 +55,3 @@ function getProposedDongilsContent(
 }
 
 export default getProposedDongilsContent;
-
-const Wrapper = styled.div``;
