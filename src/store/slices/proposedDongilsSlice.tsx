@@ -11,12 +11,12 @@ interface IProposedDongil {
 }
 
 type TProposedDongilsState = {
-  proposedDongils: IProposedDongil[] | null;
+  proposedDongils: IProposedDongil[];
   proposedDongilsStatus?: TFetchStatus;
 };
 
 const initialState: TProposedDongilsState = {
-  proposedDongils: null,
+  proposedDongils: [],
   proposedDongilsStatus: 'idle',
 };
 

@@ -30,7 +30,7 @@ function PrimaryModal({
     isOpen: isOpen,
     onRequestClose: handleSubmit,
     shouldCloseOnOverlayClick: true,
-    closeTimeoutMS: 125,
+    closeTimeoutMS: 999,
     style: {
       overlay: {
         zIndex: '700',

@@ -11,12 +11,12 @@ interface IThisWeekSDongil {
 }
 
 type TThisWeekSDongilsState = {
-  thisWeekSDongils: IThisWeekSDongil[] | null;
+  thisWeekSDongils: IThisWeekSDongil[];
   thisWeekSDongilsStatus?: TFetchStatus;
 };
 
 const initialState: TThisWeekSDongilsState = {
-  thisWeekSDongils: null,
+  thisWeekSDongils: [],
   thisWeekSDongilsStatus: 'idle',
 };
 

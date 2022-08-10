@@ -7,6 +7,7 @@ import { ReactComponent as ModalContentMoney } from '@assets/illusts/congrats/co
 import { ReactComponent as ModalContentSaving } from '@assets/illusts/congrats/congrats_banki_with_coins.svg';
 import InstructionCard from './InstructionCard';
 import 'swiper/swiper.min.css';
+import '../styles.css';
 
 function TertiaryModal() {
   const [isOpen, setIsOpen] = useState(true);
@@ -18,7 +19,7 @@ function TertiaryModal() {
     isOpen: isOpen,
     onRequestClose: handleSubmit,
     shouldCloseOnOverlayClick: true,
-    closeTimeoutMS: 125,
+    closeTimeoutMS: 999,
     style: {
       overlay: {
         zIndex: '700',
