@@ -2,18 +2,16 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio, theme } from '@lib/styles/theme';
-import CheckButton from '../../buttons/CheckButton';
 import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import Button from '@components/common/buttons/Button';
-import '../styles.css';
 import getDashedBorder from './getDivider';
 import getFirstRow from './getFirstRow';
 import getSecondRow from './getSecondRow';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import getThirdRow from './getThirdRow';
 import '../styles.css';
+import getSubmitButton from './getSubmitButton';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
@@ -29,7 +27,7 @@ interface QuaternaryModalProps {
    * 모달 하단 버튼이 1개인 경우 onSubmit만 사용합니다.
    * 모달 하단 버튼이 2개인 경우 왼쪽 버튼은 onSubmit을, 오른쪽 버튼은 onExtraSubmit을 사용합니다.
    * */
-  onSubmit?: any;
+  onSubmit: any;
   onExtraSubmit?: any;
   createdAt: string;
   interestRate: TInterestRate;
@@ -63,11 +61,20 @@ function ReceiptModal({
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 999);
+  }
+  function handleExtraSubmit() {
+    setIsOpen(false);
+    setTimeout(() => {
+      onExtraSubmit();
+    }, 999);
   }
 
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: handleSubmit,
+    onRequestClose: () => setIsOpen(false),
     shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 999,
     style: {
@@ -81,7 +88,7 @@ function ReceiptModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '544px',
+        height: `${getHeightByVariant(variant)}px`,
         position: 'absolute',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
@@ -100,27 +107,31 @@ function ReceiptModal({
     },
   };
 
-  // function handleCheckButtonClick() {
-  //   onSubmit();
-  // }
-  function handleRejectButtonClick() {
-    onSubmit();
-  }
-  function handleAcceptButtonClick() {
-    onExtraSubmit();
+  function getHeightByVariant(variant: TVariant) {
+    if (variant === 'contract') {
+      return 544;
+    } else if (variant === 'proposed') {
+      return 532;
+    }
   }
 
   const dashedBorder = getDashedBorder();
   const firstRow = getFirstRow(isMom, itemName);
   const secondRow = getSecondRow(totalPrice, weekPrice, interestRate);
   const thirdRow = getThirdRow(weeks, createdAt);
+  const submitButton = getSubmitButton(
+    variant,
+    setIsOpen,
+    handleSubmit,
+    handleExtraSubmit,
+  );
 
   return (
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
-        <Top>
+        <Top variant={variant}>
           {variant === 'contract' && (
             <span className="header">계약서 전송 성공!</span>
           )}
@@ -128,7 +139,7 @@ function ReceiptModal({
         </Top>
         {dashedBorder}
 
-        <Bottom>
+        <Middle>
           {firstRow}
           {secondRow}
           {thirdRow}
@@ -141,27 +152,9 @@ function ReceiptModal({
               }
             /> */}
           </SignatureWrapper>
-        </Bottom>
+        </Middle>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
-        <ButtonOverlay onClick={handleSubmit} />
-        <ButtonWrapper>
-          {variant === 'contract' ? (
-            <CheckButton onClick={handleSubmit} />
-          ) : (
-            <DoubleButtonWrapper>
-              <Button
-                property="delete"
-                label="거절하기"
-                onClick={() => handleRejectButtonClick()}
-              />
-              <Button
-                property="default"
-                label="수락하기"
-                onClick={() => handleAcceptButtonClick()}
-              />
-            </DoubleButtonWrapper>
-          )}
-        </ButtonWrapper>
+        {submitButton}
       </Content>
     </StyledReactModal>
   );
@@ -190,10 +183,11 @@ const Content = styled.div`
   position: relative;
 `;
 
-const Top = styled.div`
+const Top = styled.div<{ variant: TVariant }>`
+  height: ${({ variant }) =>
+    variant === 'proposed' ? '88px' : '100px'}; // decreased 10px */
   margin: -2px 0; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 100px;
   width: 100%;
 
   display: flex;
@@ -215,7 +209,7 @@ const Top = styled.div`
   }
 `;
 
-const Bottom = styled.div`
+const Middle = styled.div`
   margin-bottom: -2px; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
@@ -234,13 +228,14 @@ const Bottom = styled.div`
 const SignatureWrapper = styled.div`
   z-index: 710;
   position: absolute;
-  right: 16px;
-  bottom: 0;
-
   width: ${calcRatio(146, 324)};
-  // TODO: 도영이는 뒤에 글씨 가리는게 별로라고 생각해서 기디 회의 후에 서명 크기 재조정 필요할것 같습니다.
+  // TODO: 도영이는 뒤에 글씨 가리는게 별로라고 생각해서 기디 회의 후에
+  // 서명 크기 재조정 필요할것 같습니다.
   height: 173px;
+  right: 2px;
+  bottom: 0;
   background: rgba(233, 187, 234, 0.7);
+
   & > img {
     max-width: 100%;
     margin-top: auto;
@@ -250,30 +245,6 @@ const SignatureWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-`;
-
-const ButtonOverlay = styled.button`
-  background: pink;
-  width: 100%;
-  height: 64px;
-  cursor: default;
-`;
-
-const ButtonWrapper = styled.div`
-  margin-top: 490px; // arbitrary
-  position: absolute;
-  z-index: 701;
-  /* width: 100%; */
-  display: flex;
-  justify-content: center;
-`;
-
-const DoubleButtonWrapper = styled.div`
-  width: 100%;
-  height: 48px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 16px;
 `;
 
 // http://jsfiddle.net/dineshranawat/Ls95n95L/
