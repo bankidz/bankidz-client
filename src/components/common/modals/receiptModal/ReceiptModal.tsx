@@ -12,6 +12,8 @@ import { TInterestRate } from '@lib/types/IInterestRate';
 import getThirdRow from './getThirdRow';
 import '../styles.css';
 import getSubmitButton from './getSubmitButton';
+import SuggestBadge from '@components/common/badges/SuggestBadge';
+import getHeightByVariant from './getHeightByVariant';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
@@ -38,7 +40,6 @@ interface QuaternaryModalProps {
   weekPrice: number;
   weeks: number;
   fileName?: string;
-  /** (데모데이) 계약하자마자 뜨는 모달에서는 리스폰스에서 받아오는게 아닌 datauri를 바로 렌더링합니다 */
   isSubmit?: boolean;
 }
 
@@ -107,14 +108,6 @@ function ReceiptModal({
     },
   };
 
-  function getHeightByVariant(variant: TVariant) {
-    if (variant === 'contract') {
-      return 544;
-    } else if (variant === 'proposed') {
-      return 532;
-    }
-  }
-
   const dashedBorder = getDashedBorder();
   const firstRow = getFirstRow(isMom, itemName);
   const secondRow = getSecondRow(totalPrice, weekPrice, interestRate);
@@ -135,6 +128,8 @@ function ReceiptModal({
           {variant === 'contract' && (
             <span className="header">계약서 전송 성공!</span>
           )}
+          {variant === 'proposing' && <SuggestBadge isSuggesting={true} />}
+          {variant === 'rejected' && <SuggestBadge isSuggesting={false} />}
           <span className="body">{title}</span>
         </Top>
         {dashedBorder}
@@ -153,6 +148,7 @@ function ReceiptModal({
             /> */}
           </SignatureWrapper>
         </Middle>
+
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         {submitButton}
       </Content>
@@ -185,7 +181,7 @@ const Content = styled.div`
 
 const Top = styled.div<{ variant: TVariant }>`
   height: ${({ variant }) =>
-    variant === 'proposed' ? '88px' : '100px'}; // decreased 10px */
+    variant === 'proposed' ? '88px' : '100px'}; // arbitrary decreased 10px
   margin: -2px 0; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
@@ -204,6 +200,8 @@ const Top = styled.div<{ variant: TVariant }>`
     margin-bottom: 12px;
   }
   .body {
+    margin-top: ${({ variant }) =>
+      variant === 'proposing' || variant === 'rejected' ? '16px' : '0px'};
     ${({ theme }) => theme.typo.popup.T_24_EB};
     color: ${({ theme }) => theme.palette.main.yellow400};
   }
@@ -234,7 +232,7 @@ const SignatureWrapper = styled.div`
   height: 173px;
   right: 2px;
   bottom: 0;
-  background: rgba(233, 187, 234, 0.7);
+  background: rgba(227, 171, 222, 0.7);
 
   & > img {
     max-width: 100%;

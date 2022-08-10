@@ -3,10 +3,8 @@ import CheckButton from '@components/common/buttons/CheckButton';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
-
 function getSubmitButton(
-  variant: TVariant,
+  variant: string,
   setIsOpen: Dispatch<SetStateAction<boolean>>,
   handleSubmit: () => void,
   handleExtraSubmit: () => void,
@@ -16,9 +14,13 @@ function getSubmitButton(
       {variant !== 'proposed' && (
         <ButtonOverlay onClick={() => setIsOpen(false)} />
       )}
+
       <ButtonWrapper>
-        {variant === 'contract' && <CheckButton onClick={handleSubmit} />}
+        {(variant === 'contract' || variant === 'proposing') && (
+          <CheckButton onClick={handleSubmit} />
+        )}
       </ButtonWrapper>
+
       {variant === 'proposed' && (
         <DoubleButtonWrapper>
           <Button property="delete" label="거절하기" onClick={handleSubmit} />

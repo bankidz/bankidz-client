@@ -6,9 +6,23 @@ import InterestBadge from '@components/common/badges/InterestBadge';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
-  function handleClick() {
-    // modals.myModal: 열고자 하는 모달
-    // {...}: submit 시 처리되는 비즈니스 로직
+  function openContract() {
+    openModal(modals.receiptModal, {
+      variant: 'contract',
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+    });
+  }
+  function openProposed() {
     openModal(modals.receiptModal, {
       variant: 'proposed',
       onSubmit: () => {
@@ -27,11 +41,48 @@ function SungwooTestPage() {
       weeks: 4,
     });
   }
+  function openProposing() {
+    openModal(modals.receiptModal, {
+      variant: 'proposing',
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+    });
+  }
+  function openRejected() {
+    // modals.myModal: 열고자 하는 모달
+    // {...}: submit 시 처리되는 비즈니스 로직
+    openModal(modals.receiptModal, {
+      variant: 'rejected',
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+    });
+  }
 
   return (
     <BackgroundTemplate>
       <Wrapper>
-        <button onClick={handleClick}>모달 열기</button>
+        <button onClick={openContract}>contract</button>
+        <button onClick={openProposed}>proposed</button>
+        <button onClick={openProposing}>proposing</button>
+        <button onClick={openRejected}>rejected</button>
         <Modals />
       </Wrapper>
     </BackgroundTemplate>
@@ -42,7 +93,11 @@ export default SungwooTestPage;
 
 const Wrapper = styled.div`
   height: 1000px;
-  /* background: grey; */
+  display: flex;
+  flex-direction: column;
+  button + button {
+    margin-top: 10px;
+  }
 `;
 
 // https://joyful-development.tistory.com/35
