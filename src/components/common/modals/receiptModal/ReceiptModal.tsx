@@ -13,6 +13,7 @@ import getFirstRow from './getFirstRow';
 import getSecondRow from './getSecondRow';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import getThirdRow from './getThirdRow';
+import '../styles.css';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
@@ -59,8 +60,16 @@ function ReceiptModal({
   fileName,
   isSubmit = false,
 }: QuaternaryModalProps) {
+  const [isOpen, setIsOpen] = useState(true);
+  function handleSubmit() {
+    setIsOpen(false);
+  }
+
   const reactModalParams = {
-    isOpen: true,
+    isOpen: isOpen,
+    onRequestClose: handleSubmit,
+    shouldCloseOnOverlayClick: true,
+    closeTimeoutMS: 999,
     style: {
       overlay: {
         zIndex: '700',
@@ -72,7 +81,7 @@ function ReceiptModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '554px',
+        height: '544px',
         position: 'absolute',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
@@ -108,7 +117,7 @@ function ReceiptModal({
 
   return (
     // @ts-expect-error
-    <ReactModal {...reactModalParams}>
+    <StyledReactModal {...reactModalParams}>
       <Content>
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top>
@@ -124,16 +133,17 @@ function ReceiptModal({
           {secondRow}
           {thirdRow}
           <SignatureWrapper>
-            <img
+            {/* <img
               src={
                 isSubmit
                   ? fileName
                   : `https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`
               }
-            />
+            /> */}
           </SignatureWrapper>
         </Bottom>
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
+        <ButtonOverlay onClick={handleSubmit} />
         <ButtonWrapper>
           {variant === 'contract' ? (
             <CheckButton onClick={handleCheckButtonClick} />
@@ -153,11 +163,23 @@ function ReceiptModal({
           )}
         </ButtonWrapper>
       </Content>
-    </ReactModal>
+    </StyledReactModal>
   );
 }
 
 export default ReceiptModal;
+
+const StyledReactModal = styled(ReactModal)`
+  @keyframes slide {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  animation: slide ${({ theme }) => theme.animation.modalOpen};
+`;
 
 const Content = styled.div`
   display: flex;
@@ -165,8 +187,6 @@ const Content = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-
-  // for background dashed border (vertical, horizontal)
   position: relative;
 `;
 
@@ -218,7 +238,9 @@ const SignatureWrapper = styled.div`
   bottom: 0;
 
   width: ${calcRatio(146, 324)};
-  height: 173px; // TODO: delete height (temporary)
+  // TODO: 도영이는 뒤에 글씨 가리는게 별로라고 생각해서 기디 회의 후에 서명 크기 재조정 필요할것 같습니다.
+  height: 173px;
+  background: rgba(233, 187, 234, 0.7);
   & > img {
     max-width: 100%;
     margin-top: auto;
@@ -230,9 +252,18 @@ const SignatureWrapper = styled.div`
   align-items: center;
 `;
 
-const ButtonWrapper = styled.div`
+const ButtonOverlay = styled.button`
+  background: pink;
   width: 100%;
-  margin-top: 16px;
+  height: 64px;
+  cursor: default;
+`;
+
+const ButtonWrapper = styled.div`
+  margin-top: 490px; // arbitrary
+  position: absolute;
+  z-index: 701;
+  /* width: 100%; */
   display: flex;
   justify-content: center;
 `;
