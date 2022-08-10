@@ -84,11 +84,9 @@ function PendingDongilItem({
           <span className="title">{title}</span>
           <span className="createdAt">{getDate(createdAt)}</span>
         </div>
-        <SuggestBadgeWrapper>
-          <SuggestBadge
-            isSuggesting={status === EDongilStatus.PENDING ? true : false}
-          />
-        </SuggestBadgeWrapper>
+        <SuggestBadge
+          isSuggesting={status === EDongilStatus.PENDING ? true : false}
+        />
       </StyledButton>
     </>
   );
@@ -124,5 +122,3 @@ const StyledButton = styled.button`
     }
   }
 `;
-
-const SuggestBadgeWrapper = styled.div``;

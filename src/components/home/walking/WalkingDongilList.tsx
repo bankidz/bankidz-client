@@ -1,5 +1,4 @@
 import { IDongil } from '@lib/types/IDongil';
-import { TItemName } from '@lib/types/TItemName';
 import styled from 'styled-components';
 import WalkingDongilItem from './WalkingDongilItem';
 
