@@ -9,7 +9,7 @@ function SungwooTestPage() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.secondaryModal, {
+    openModal(modals.tertiaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
