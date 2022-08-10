@@ -31,6 +31,8 @@ function SecondaryModal({
 
   const reactModalParams = {
     isOpen: true,
+    onRequestClose: onSubmit,
+    shouldCloseOnOverlayClick: true,
     style: {
       overlay: {
         zIndex: '700',

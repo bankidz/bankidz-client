@@ -19,6 +19,8 @@ interface TertiaryProps {
 function TertiaryModal({ onSubmit }: TertiaryProps) {
   const reactModalParams = {
     isOpen: true,
+    onRequestClose: onSubmit,
+    shouldCloseOnOverlayClick: true,
     style: {
       overlay: {
         zIndex: '700',

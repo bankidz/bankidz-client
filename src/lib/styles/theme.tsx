@@ -56,6 +56,10 @@ export const theme: DefaultTheme = {
   transition: {
     onFocus: '0.125s all ease-in',
   },
+  animation: {
+    homeMount: '0.25s ease-in forwards',
+    modalOpen: '0.5s ease-in forwards',
+  },
   typo: {
     fixed: {
       Navbar_T_17_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(

@@ -9,7 +9,7 @@ function SungwooTestPage() {
   function handleClick() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.quaternaryModal, {
+    openModal(modals.primaryModal, {
       onSubmit: () => {
         console.log('비즈니스 로직 처리...');
       },
@@ -18,24 +18,19 @@ function SungwooTestPage() {
 
   return (
     <BackgroundTemplate>
-      <>
-        <InterestBadge interestRate={10} />
-        <InterestBadge interestRate={20} />
-        <InterestBadge interestRate={30} />
-      </>
-      {/* <Temp>
+      <Wrapper>
         <button onClick={handleClick}>모달 열기</button>
         <Modals />
-      </Temp> */}
+      </Wrapper>
     </BackgroundTemplate>
   );
 }
 
 export default SungwooTestPage;
 
-const Temp = styled.div`
+const Wrapper = styled.div`
   height: 1000px;
-  background: grey;
+  /* background: grey; */
 `;
 
 // https://joyful-development.tistory.com/35

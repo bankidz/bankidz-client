@@ -265,7 +265,7 @@ const BackgroundEllipse = styled.div<{
             }
           }
         `}
-  animation: slide 0.25s ease-in forwards; // when mounted
+  animation: slide ${({ theme }) => theme.animation.homeMount};
 
   position: absolute;
   left: 50%;
