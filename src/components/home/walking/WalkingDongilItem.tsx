@@ -1,7 +1,8 @@
-import { TItemName } from '@lib/types/TItemName';
-import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { TItemName } from '@lib/types/TItemName';
+import { TInterestRate } from '@lib/types/IInterestRate';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -9,49 +10,51 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DongilFailed from '@components/common/bottomSheets/sheetContents/DongilFailed';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import { TInterestRate } from '@lib/types/IInterestRate';
+
 interface WalkingDongilItemProps {
   itemName: TItemName;
   title: string;
-  isFailed: boolean;
   to: string;
   interestRate: TInterestRate;
+  isFailed: boolean;
 }
 
 function WalkingDongilItem({
   itemName,
   title,
   to,
-  isFailed,
   interestRate,
+  isFailed,
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();
   const onNavigateWalkingDongilPage = () => {
     navigate(to);
   };
+
   const [openDongilFailed, onOpenDongilFailed, onDismissDongilFailed] =
     useBottomSheet(false);
   const [openDeleteCheck, onOpenDeleteCheck, onDismissDeleteCheck] =
     useBottomSheet(false);
   const [openSheetComplete, onOpenSheetComplete, onDismissSheetComplete] =
     useBottomSheet(false);
+
   return (
     <>
       {isFailed ? (
         <StyledDiv onClick={onOpenDongilFailed}>
-          <div>
-            <div>{renderItemIllust(itemName)}</div>
+          <div className="content-wrapper">
+            <div className="illust">{renderItemIllust(itemName)}</div>
             <span>{title}</span>
           </div>
-          <div>
+          <div className="icon-wrapper">
             <Failed />
             <Arrow />
           </div>
         </StyledDiv>
       ) : (
         <StyledLink to={to}>
-          <div>
-            <div>{renderItemIllust(itemName)}</div>
+          <div className="content-wrapper">
+            <div className="illust">{renderItemIllust(itemName)}</div>
             <span>{title}</span>
           </div>
           <Arrow />
@@ -100,14 +103,13 @@ const StyledLink = styled(Link)`
   justify-content: space-between;
   align-items: center;
 
-  & > div {
+  .content-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    div {
+    .illust {
       width: 30px;
     }
-
     span {
       margin-left: 12px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
@@ -129,21 +131,20 @@ const StyledDiv = styled.div`
   cursor: pointer;
   padding: 0 16px;
 
-  & > div:first-child {
+  .content-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    div {
+    .illust {
       width: 30px;
     }
-
     span {
       margin-left: 12px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
   }
-  & > div:last-child {
+  .icon-wrapper {
     display: flex;
     align-items: center;
     gap: 8px;

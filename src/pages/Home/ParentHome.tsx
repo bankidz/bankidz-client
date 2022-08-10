@@ -1,46 +1,36 @@
-import MarginTemplate from '@components/layout/MarginTemplate';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useEffect, useState } from 'react';
-import LargeSpacer from '@components/layout/LargeSpacer';
 import {
   fetchKids,
-  selectHasMultipleKids,
-  selectKids,
   selectKidsStatus,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
-import KidList from '@components/home/KidList';
 import {
   fetchParentSummaries,
-  selectParentSummaries,
   selectParentSummariesStatus,
 } from '@store/slices/parentSummariesSlice';
 import HomeTemplate from '@components/home/HomeTemplate';
 import {
   fetchThisWeekSDongils,
-  selectThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
-import EmptyDongil from '@components/home/EmptyDongil';
-import ProposedDongilList from '@components/home/proposed/ProposedDongilList';
-import ThisWeekSDongilList from '@components/home/thisWeekS/ThisWeekSDongilList';
 import {
   fetchProposedDongils,
-  selectProposedDongils,
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
+
 import { theme } from '@lib/styles/theme';
 import Modals from '@components/common/modals/Modals';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
-import { dummyDongils } from '@lib/mocks/dongils';
-import SkeletonDongilList from '@components/home/SkeletonDongilList';
+import LargeSpacer from '@components/layout/LargeSpacer';
+import MarginTemplate from '@components/layout/MarginTemplate';
+
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import Summary from '@components/home/sumary/Summary';
 import getParentSummaryContent from '@components/home/sumary/getParentSummaryContent';
 import getProposedDongilsContent from '@components/home/proposed/getProposedDongilsContent';
 import getThisWeekSDongilsContent from '@components/home/thisWeekS/getThisWeekSDongilsContent';
@@ -50,20 +40,13 @@ import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/ha
 
 function ParentHome() {
   const kidsStatus = useAppSelector(selectKidsStatus);
-  const kids = useAppSelector(selectKids);
   const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
-  const parentSummaries = useAppSelector(selectParentSummaries);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
-  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
-  const proposedDongils = useAppSelector(selectProposedDongils);
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
-  // when mounted
   useEffect(() => {
     async function hydrate() {
       try {
@@ -120,21 +103,18 @@ function ParentHome() {
     onApproveCompletedOpen,
     onApproveCompletedDismiss,
   ] = useBottomSheet(false);
-
   async function handleApproveButtonClick() {
     // Approve API fetch code goes here
     onApproveCheckDismiss();
     onApproveCompletedOpen();
   }
 
-  // 제안받은 돈길, 주간 진행상황
+  // 제안받은 돈길, 주간 진행상황, 금주의 돈길
   let parentSummaryContent = getParentSummaryContent();
   let proposedDongilsContent = getProposedDongilsContent(
     onApproveCheckOpen,
     setIdToApprove,
   );
-
-  // 금주의 돈길
   let thisWeekSDongilsContent = getThisWeekSDongilsContent();
 
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
@@ -178,37 +158,6 @@ function ParentHome() {
     hydrate();
   }, [selectedKid]);
 
-  // function hasParentSummaryAlreadyBeenFetched() {
-  //   const found = parentSummaries?.find(
-  //     (parentSummary) => parentSummary.kidId === selectedKid?.kidId,
-  //   );
-  //   if (found === undefined) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-  // function hasProposedDongilsAlreadyBeenFetched() {
-  //   const found = proposedDongils?.find(
-  //     (proposedDongil) => proposedDongil.userName === selectedKid?.username,
-  //   );
-  //   if (found === undefined) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-  // function hasThisWeekSDongilsAlreadyBeenFetched() {
-  //   const found = thisWeekSDongils?.find(
-  //     (thisWeekSDongil) => thisWeekSDongil.userName === selectedKid?.username,
-  //   );
-  //   if (found === undefined) {
-  //     return false;
-  //   } else {
-  //     return true;
-  //   }
-  // }
-
   return (
     <>
       <HomeTemplate variant="ParentHome">
@@ -223,9 +172,9 @@ function ParentHome() {
           <LargeSpacer />
         </MarginTemplate>
 
-        {/* 다음 (전역) 모달을 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
+        {/* 다음 모달과 바텀시트를 열고 닫는 로직은 ProposedDongilItem에서 실행됩니다. */}
+        {/* 모달은 전역상태로 관리되기에 별도의 props를 전달하지 않습니다. */}
         <Modals />
-        {/* 다음 바텀시트를 열고 닫는 로직은 pendingDongilItem에서 실행됩니다. */}
         <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
           <ApproveCheck
             onApproveButtonClick={handleApproveButtonClick}

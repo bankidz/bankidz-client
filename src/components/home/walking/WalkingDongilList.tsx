@@ -3,17 +3,21 @@ import { TItemName } from '@lib/types/TItemName';
 import styled from 'styled-components';
 import WalkingDongilItem from './WalkingDongilItem';
 
-function WalkingDongilList({ walkingDongils }: { walkingDongils: IDongil[] }) {
+interface WalkingDongilListProps {
+  walkingDongils: IDongil[];
+}
+
+function WalkingDongilList({ walkingDongils }: WalkingDongilListProps) {
   return (
     <Wrapper>
       {walkingDongils?.map((walkingDongil) => (
         <WalkingDongilItem
           key={walkingDongil.id}
-          itemName={walkingDongil.itemName as TItemName}
+          itemName={walkingDongil.itemName}
           title={walkingDongil.title}
-          isFailed={!walkingDongil.isAchieved && !walkingDongil.status}
           to={`/detail/${walkingDongil.id}`}
           interestRate={walkingDongil.interestRate}
+          isFailed={!walkingDongil.isAchieved && !walkingDongil.status}
         />
       ))}
     </Wrapper>

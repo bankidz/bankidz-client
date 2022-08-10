@@ -37,9 +37,9 @@ function KidHome() {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
   const familyStatus = useAppSelector(selectFamilyStatus);
-
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
+
   useEffect(() => {
     async function hydrate() {
       try {
@@ -70,7 +70,6 @@ function KidHome() {
     useBottomSheet(false);
   const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
     useBottomSheet(false);
-
   async function handleDeleteButtonClick() {
     if (canDelete) {
       try {
