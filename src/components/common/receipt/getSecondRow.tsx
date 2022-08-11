@@ -34,7 +34,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  div {
+  > div {
+    background: skyblue;
     width: 33.3%;
     height: 100%;
     display: flex;

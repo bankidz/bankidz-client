@@ -1,18 +1,12 @@
 import styled from 'styled-components';
-import { calcRatio, theme } from '@lib/styles/theme';
+import { theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/TItemName';
-
-import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
-import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
-import renderItemIllust from '@lib/utils/render/renderItemIllust';
-import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
-import getContractEndDate from '@lib/utils/get/getContractEndDate';
+import { TInterestRate } from '@lib/types/IInterestRate';
 import PerforatedLineTop from '../modals/receiptModal/PerforatedLineTop';
 import PerforatedLineBottom from '../modals/receiptModal/PerforatedLineBottom';
 import getDashedBorder from './getDashedBorder';
 import getFirstRow from './getFirstRow';
 import getSecondRow from './getSecondRow';
-import { TInterestRate } from '@lib/types/IInterestRate';
 import getThirdRow from './getThirdRow';
 
 interface ReceiptProps {
