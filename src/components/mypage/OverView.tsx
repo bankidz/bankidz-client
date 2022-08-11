@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectAuth } from '@store/slices/authSlice';
 import styled, { css } from 'styled-components';
-import renderRoleIllust from '@lib/utils/common/renderRoleIllust';
+import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 import { TOverView, TUser } from '@store/slices/overViewSlice';
 import OverViewData from './OverViewData';
 export type OverViewProps = {

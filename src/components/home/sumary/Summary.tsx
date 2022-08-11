@@ -1,26 +1,26 @@
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled, { css } from 'styled-components';
 
-type TUsage = 'KidHome' | 'Detail' | 'ParentHome';
+type TVariant = 'KidHome' | 'Detail' | 'ParentHome';
 
 interface SummaryProps {
   /**
    * 본 컴포넌트가 사용되는 Page를 선택합니다.
    * 'KidHome', 'Detail', 'ParentHome' 중 하나를 선택합니다.
    */
-  usage: TUsage;
+  variant: TVariant;
   currentSavings?: number;
   totalPrice?: number;
-  /** usage: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다. */
+  /** variant: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다. */
   username?: string;
-  /** usage: 다음은 'Detail'인 경우 필요한 props 입니다. */
+  /** variant: 다음은 'Detail'인 경우 필요한 props 입니다. */
   weekPrice?: number;
   weeks?: number;
   successWeeks?: number;
 }
 
 function Summary({
-  usage,
+  variant,
   currentSavings,
   weekPrice,
   weeks,
@@ -34,16 +34,16 @@ function Summary({
   // Detail
   let currentSavingsForDetailPage: number;
   let currentCompletionRate: number;
-  if (usage === 'Detail') {
+  if (variant === 'Detail') {
     currentSavingsForDetailPage = weekPrice! * successWeeks!;
     currentCompletionRate = Math.ceil((successWeeks! / weeks!) * 100);
   }
 
   let content;
-  if (usage === 'KidHome') {
+  if (variant === 'KidHome') {
     content = (
       <>
-        <TitleWrapper usage={usage}>
+        <TitleWrapper variant={variant}>
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
         </TitleWrapper>
         <InfoWrapper>
@@ -59,10 +59,10 @@ function Summary({
         </InfoWrapper>
       </>
     );
-  } else if (usage === 'ParentHome') {
+  } else if (variant === 'ParentHome') {
     content = (
       <>
-        <TitleWrapper usage={usage}>
+        <TitleWrapper variant={variant}>
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
           {username === 'loading' ? (
             <span className="username">{``}</span>
@@ -83,7 +83,7 @@ function Summary({
         </InfoWrapper>
       </>
     );
-  } else if (usage === 'Detail') {
+  } else if (variant === 'Detail') {
     content = (
       <InfoWrapper>
         <TextWrapper>
@@ -98,24 +98,24 @@ function Summary({
       </InfoWrapper>
     );
   }
-  return <Wrapper usage={usage}>{content}</Wrapper>;
+  return <Wrapper variant={variant}>{content}</Wrapper>;
 }
 
 export default Summary;
 
-const Wrapper = styled.div<{ usage: TUsage }>`
-  ${({ usage }) =>
-    usage === 'KidHome' &&
+const Wrapper = styled.div<{ variant: TVariant }>`
+  ${({ variant }) =>
+    variant === 'KidHome' &&
     css`
       height: 120px;
     `}
-  ${({ usage }) =>
-    usage === 'ParentHome' &&
+  ${({ variant }) =>
+    variant === 'ParentHome' &&
     css`
       height: 160px;
     `}
-  ${({ usage }) =>
-    usage === 'Detail' &&
+  ${({ variant }) =>
+    variant === 'Detail' &&
     css`
       height: 89px;
     `}
@@ -139,7 +139,7 @@ const Wrapper = styled.div<{ usage: TUsage }>`
 `;
 
 const TitleWrapper = styled.div<{
-  usage: TUsage;
+  variant: TVariant;
 }>`
   display: flex;
   flex-direction: column;
@@ -149,13 +149,13 @@ const TitleWrapper = styled.div<{
   .date {
     ${({ theme }) => theme.typo.text.T_14_EB};
     color: ${({ theme }) => theme.palette.greyScale.grey500};
-    ${({ usage }) =>
-      usage === 'KidHome' &&
+    ${({ variant }) =>
+      variant === 'KidHome' &&
       css`
         margin-bottom: 16px;
       `}
-    ${({ usage }) =>
-      usage === 'ParentHome' &&
+    ${({ variant }) =>
+      variant === 'ParentHome' &&
       css`
         margin-bottom: 10px;
       `}
@@ -166,8 +166,8 @@ const TitleWrapper = styled.div<{
     text-align: center;
     ${({ theme }) => theme.typo.text.T_21_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
-    ${({ usage }) =>
-      usage === 'ParentHome' &&
+    ${({ variant }) =>
+      variant === 'ParentHome' &&
       css`
         margin-bottom: 16px;
       `}

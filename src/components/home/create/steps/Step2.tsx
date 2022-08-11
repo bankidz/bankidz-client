@@ -3,7 +3,7 @@ import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import { dispatchItemName } from '@store/slices/createChallengeSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 
 const itemNames: TItemName[] = [
   '학용품',

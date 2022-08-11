@@ -1,15 +1,26 @@
-import { TInterestRate } from '@lib/types/common';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { TInterestRate } from '@lib/types/IInterestRate';
+import { theme } from '@lib/styles/theme';
 
 interface InterestBadgeProps {
-  /** 이자율을 입력합니다. */
   interestRate: TInterestRate;
 }
 
 function InterestBadge({ interestRate }: InterestBadgeProps) {
   const label = '이자부스터 ' + interestRate.toString() + '%';
+  const colorByInterestRate = getColorByInterestRate(interestRate);
+  function getColorByInterestRate(interestRate: TInterestRate) {
+    if (interestRate === 10) {
+      return theme.palette.sementic.green300;
+    } else if (interestRate === 20) {
+      return theme.palette.main.yellow300;
+    } else if (interestRate === 30) {
+      return theme.palette.sementic.red300;
+    }
+  }
+
   return (
-    <Wrapper interestRate={interestRate}>
+    <Wrapper colorByInterestRate={colorByInterestRate!}>
       <span>{label}</span>
     </Wrapper>
   );
@@ -17,24 +28,9 @@ function InterestBadge({ interestRate }: InterestBadgeProps) {
 
 export default InterestBadge;
 
-const Wrapper = styled.div<{ interestRate: TInterestRate }>`
-  ${({ interestRate, theme }) =>
-    interestRate === 10 &&
-    css`
-      background-color: ${theme.palette.sementic.green300};
-    `}
-  ${({ interestRate, theme }) =>
-    interestRate === 20 &&
-    css`
-      background-color: ${theme.palette.main.yellow300};
-    `}
-    ${({ interestRate, theme }) =>
-    interestRate === 30 &&
-    css`
-      background-color: ${theme.palette.sementic.red300};
-    `}
-
-    & > span {
+const Wrapper = styled.div<{ colorByInterestRate: string }>`
+  background: ${({ colorByInterestRate }) => colorByInterestRate};
+  > span {
     ${({ theme }) => theme.typo.tag.T_12_EB}
     color: ${({ theme }) => theme.palette.greyScale.white};
   }

@@ -1,38 +1,37 @@
+import { useState } from 'react';
+import styled from 'styled-components';
+import Summary from '@components/home/sumary/Summary';
+import InterestStampList from '@components/home/walking/InterestStampList';
+import TotalInterest from '@components/home/walking/TotalInterest';
+import Receipt from '@components/common/Receipt';
+import MarginTemplate from '@components/layout/MarginTemplate';
+import LargeSpacer from '@components/layout/LargeSpacer';
+
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { useNavigate, useParams } from 'react-router-dom';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
+
+import { calcRatio } from '@lib/styles/theme';
+import renderGraph from '@lib/utils/render/renderGraph';
+import { TLevel } from '@lib/types/TLevel';
+import { TPercent } from '@lib/types/TPercent';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import getTargetDongil from '@components/home/detail/getTargetDongil';
+
+import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUpExceeded';
 import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import Receipt from '@components/common/Receipt';
-import InterestStampList from '@components/home/walking/InterestStampList';
-import MarginTemplate from '@components/layout/MarginTemplate';
-import LargeSpacer from '@components/layout/LargeSpacer';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import { calcRatio } from '@lib/styles/theme';
-import { TPercent } from '@lib/types/kid';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import renderGraph from '@lib/utils/kid/renderGraph';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import { useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
-import { useState } from 'react';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { TFetchStatus } from '@lib/types/api';
-import {
-  IDongil,
-  selectWalkingDongils,
-} from '@store/slices/walkingDongilsSlice';
-import Summary from '@components/home/Summary';
-import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
-import { TLevel } from '@lib/types/common';
-import { selectSelectedKid } from '@store/slices/kidsSlice';
-import TotalInterest from '@components/home/walking/TotalInterest';
 
 function Detail() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
   const selectedKid = useAppSelector(selectSelectedKid);
-
   let level: TLevel;
   if (isKid === true) {
     level = useAppSelector(selectLevel)!;
@@ -42,32 +41,7 @@ function Detail() {
   const colorByLevel = getColorByLevel(level!);
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
-  const walkingDongils = useAppSelector(selectWalkingDongils);
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-
-  let targetDongil: IDongil;
-  if (isKid === true) {
-    targetDongil = walkingDongils?.find(
-      (walkingDongil) => walkingDongil.id === parseInt(id!),
-    )!;
-  } else if (isKid === false) {
-    const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
-      selectedKid?.username!,
-    );
-    targetDongil = selectedKidSThisWeekSDongils?.find(
-      (selectedKidSThisWeekSDongil) =>
-        selectedKidSThisWeekSDongil.id === parseInt(id!),
-    )!;
-  }
-
-  function getSelectedKidSThisWeekSDongils(username: string) {
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === username,
-    );
-    return found?.challengeList;
-  }
-
-  console.log('targetDongil: ', targetDongil!);
+  const targetDongil = getTargetDongil(id!);
   const {
     isMom,
     title,
@@ -81,7 +55,6 @@ function Detail() {
     isAchieved,
     status,
   } = targetDongil!;
-
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
@@ -96,6 +69,7 @@ function Detail() {
   const axiosPrivate = useAxiosPrivate();
   const [giveUpWalkingDongilStatus, setGiveUStatus] =
     useState<TFetchStatus>('idle');
+  const walkingDongils = useAppSelector(selectWalkingDongils);
   const canGiveUp =
     walkingDongils !== null &&
     walkingDongils !== [] &&
@@ -146,9 +120,10 @@ function Detail() {
             <span className="challenging">
               {progressList?.length}주차 도전중
             </span>
-            <div className="title">{title}</div>
+            <span className="title">{title}</span>
+
             <Summary
-              usage="Detail"
+              variant="Detail"
               weekPrice={weekPrice}
               weeks={weeks}
               successWeeks={successWeeks}
@@ -198,7 +173,6 @@ function Detail() {
       </Content>
 
       <Background colorByLevel={colorByLevel}></Background>
-
       {/* bottom sheets */}
       {/* 정말 포기할거에요? */}
       <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
@@ -211,14 +185,14 @@ function Detail() {
       <CommonSheet
         open={openGiveUpCompleted}
         onDismiss={() => {
-          navigate(-1);
+          navigate('/');
         }}
       >
         <SheetComplete
           type="giveUp"
           title={title}
           onDismiss={() => {
-            navigate(-1);
+            navigate('/');
           }}
         />
       </CommonSheet>
@@ -287,6 +261,7 @@ const InterestStampListWrapper = styled.div`
   margin-top: 80px;
   margin-bottom: 40px;
   width: 100%;
+
   .text-wrapper {
     display: flex;
     flex-direction: column;

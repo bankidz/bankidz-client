@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
@@ -8,18 +9,15 @@ import {
 } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
-import CommonSheet from '../common/bottomSheets/CommonSheet';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
+import CommonSheet from '../common/bottomSheets/CommonSheet';
 import SelectProfile from '../common/bottomSheets/sheetContents/SelectProfile';
-import useModals from '../../lib/hooks/useModals';
-import { modals } from '../common/modals/Modals';
-import Modals from '../common/modals/Modals';
-import { useState } from 'react';
-import { TFetchStatus } from '@lib/types/api';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import { getAllJSDocTagsOfKind } from 'typescript';
-import { TLevel } from '@lib/types/common';
-import GoBackHeader from '@components/common/buttons/GoBackHeader';
+import useModals from '../../lib/hooks/useModals';
+import Modals from '../common/modals/Modals';
+import { modals } from '../common/modals/Modals';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { TLevel } from '@lib/types/TLevel';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -81,7 +79,10 @@ function RegisterRole() {
   const axiosPrivate = useAxiosPrivate();
   const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
   const canRegister =
-    isKid !== null && isFemale !== null && registerStatus === 'idle';
+    isKid !== null &&
+    isFemale !== null &&
+    birthday &&
+    registerStatus === 'idle';
 
   async function handleSubmit() {
     if (canRegister) {
@@ -96,7 +97,7 @@ function RegisterRole() {
         //   }),
         // ).unwrap();
 
-        // TODO: for demo day
+        // TODO: demo day
         let accessToken;
         let level: TLevel | null = null;
         if (isKid === false && isFemale === false) {
@@ -108,7 +109,7 @@ function RegisterRole() {
         } else if (isKid === true && isFemale === false) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0';
-          level = 0;
+          level = -4;
         } else if (isKid === true && isFemale === true) {
           accessToken =
             'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU';
@@ -129,7 +130,7 @@ function RegisterRole() {
   return (
     <Wrapper>
       <span>프로필을 선택해요</span>
-      <div className="button-wrapper">
+      <RoleButtonWrapper>
         {/* 아빠 */}
         <RoleButton
           onClick={handleDadButtonClick}
@@ -158,7 +159,8 @@ function RegisterRole() {
           isFemale={true}
           isSelected={isKid === true && isFemale === true}
         />
-      </div>
+      </RoleButtonWrapper>
+
       <div ref={inputDivRef}></div>
       <CommonSheet open={open} onDismiss={onDismiss} sheetRef={sheetDivRef}>
         <SelectProfile
@@ -178,19 +180,17 @@ const Wrapper = styled.div`
   width: 100%;
   margin-top: 16px;
   & > span {
-    width: 100%;
-    height: 24px;
     margin-left: 8px;
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
 
-  .button-wrapper {
-    margin-top: 96px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 16px;
-    column-gap: 16px;
-  }
+const RoleButtonWrapper = styled.div`
+  margin-top: 96px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 16px;
+  column-gap: 16px;
 `;

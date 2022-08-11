@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { IFamilyState } from '@lib/types/kid';
-import renderRoleText from '@lib/utils/common/renderRoleText';
-import renderMypageRoleIllust from '@lib/utils/common/renderMypageRoleIllust';
+import renderMypageRoleIllust from '@lib/utils/render/renderMypageRoleIllust';
+import { IFamilyState } from '@lib/types/IFamilyState';
+import getRoleText from '@lib/utils/get/getRoleText';
 function FamilyItem({ user }: { user: IFamilyState }) {
   const { isFemale, isKid, username } = user;
   return (
@@ -10,7 +10,7 @@ function FamilyItem({ user }: { user: IFamilyState }) {
         {renderMypageRoleIllust(isKid, isFemale)}
         <p>{username}</p>
       </div>
-      <div>{renderRoleText(isKid, isFemale)}</div>
+      <div>{getRoleText(isKid, isFemale)}</div>
     </Wrapper>
   );
 }

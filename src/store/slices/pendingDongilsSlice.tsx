@@ -1,16 +1,16 @@
-import { TFetchStatus } from '@lib/types/api';
+import { IDongil } from '@lib/types/IDongil';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
-import { IDongil } from './walkingDongilsSlice';
 
-export type TPendingDongilsState = {
-  pendingDongils: IDongil[] | null;
+type TPendingDongilsState = {
+  pendingDongils: IDongil[];
   pendingDongilsStatus?: TFetchStatus;
 };
 
 const initialState: TPendingDongilsState = {
-  pendingDongils: null,
+  pendingDongils: [],
   pendingDongilsStatus: 'idle',
 };
 

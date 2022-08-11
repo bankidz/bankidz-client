@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 interface ContractNewDongilLinkProps {
-  disable: string;
+  disable: 'true' | 'false';
   to: string;
 }
 
 function ContractNewDongilLink({ disable, to }: ContractNewDongilLinkProps) {
   return (
+    // TODO: disable 처리
+    // https://bobbyhadz.com/blog/react-disable-link
     <StyledLink disable={disable} to={to}>
       <Plus
         stroke={

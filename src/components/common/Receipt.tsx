@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { calcRatio, theme } from '@lib/styles/theme';
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './modals/quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './modals/quaternaryModal/PerforatedLineBottom';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizontal-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
-import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
+import getContractEndDate from '@lib/utils/get/getContractEndDate';
 
 interface ReceiptProps {
   createdAt: string;

@@ -1,5 +1,5 @@
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
-import { IFamilyState } from '@lib/types/kid';
+import { IFamilyState } from '@lib/types/IFamilyState';
 import styled from 'styled-components';
 import FamilyItem from './FamilyItem';
 

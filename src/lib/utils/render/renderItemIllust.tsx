@@ -7,7 +7,7 @@ import { ReactComponent as B3 } from '@assets/illusts/contractItemNames/general/
 import { ReactComponent as C1 } from '@assets/illusts/contractItemNames/general/c1.svg';
 import { ReactComponent as C2 } from '@assets/illusts/contractItemNames/general/c2.svg';
 import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/general/c3.svg';
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 
 function renderItemIllust(itemName: TItemName) {
   if (itemName === '학용품') {

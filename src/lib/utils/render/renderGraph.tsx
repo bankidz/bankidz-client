@@ -9,7 +9,7 @@ import { ReactComponent as Graph70 } from '@assets/illusts/graph/graph_70.svg';
 import { ReactComponent as Graph80 } from '@assets/illusts/graph/graph_80.svg';
 import { ReactComponent as Graph90 } from '@assets/illusts/graph/graph_90.svg';
 import { ReactComponent as Graph100 } from '@assets/illusts/graph/graph_100.svg';
-import { TPercent } from '@lib/types/kid';
+import { TPercent } from '@lib/types/TPercent';
 
 function renderGraph(percent: TPercent) {
   if (percent === 0) {

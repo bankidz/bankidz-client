@@ -5,15 +5,15 @@ import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizo
 import { ReactComponent as VerticalDashedBorder } from '@assets/borders/vertical-dashed-border.svg';
 import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
-import { TItemName } from '@lib/types/kid';
+import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './quaternaryModal/PerforatedLineTop';
 import PerforatedLineBottom from './quaternaryModal/PerforatedLineBottom';
 import SuggestBadge from '../badges/SuggestBadge';
 import CheckButton from '../buttons/CheckButton';
-import { getContractEndDate } from '@lib/utils/common/getContractEndDate';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
 import { AWS_S3_URL } from '@lib/constants';
+import getContractEndDate from '@lib/utils/get/getContractEndDate';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 
 interface QuinaryModalProps {
   /**

@@ -9,10 +9,3 @@ export type TItemName =
   | '비상금'
   | '기타';
 
-export interface IFamilyState {
-  username: string;
-  isFemale: boolean;
-  isKid: boolean;
-}
-
-export type TPercent = 0 | 10 | 20 | 30 | 40 | 50 | 60 | 70 | 80 | 90 | 100;

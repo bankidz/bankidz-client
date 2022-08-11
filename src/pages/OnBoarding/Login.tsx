@@ -1,19 +1,13 @@
+import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { KAKAO_AUTH_URL } from '@lib/constants';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
-function LoginPage() {
-  function handleClick() {
-    window.location.href = KAKAO_AUTH_URL;
-  }
 
-  // TODO: for demo day
+function LoginPage() {
   const navigate = useNavigate();
-  function handleTryButtonClick() {
-    navigate('/register/1');
-  }
+
   return (
     <Wrapper>
       <MarginTemplate>
@@ -23,13 +17,14 @@ function LoginPage() {
         </TextWrapper>
         <ButtonWithMarginBottom
           label="시연 체험해보기"
+          // TODO: demo day
+          onClick={() => navigate('/register/1')}
           property="default"
-          onClick={handleTryButtonClick}
         />
         <ButtonWithMarginBottom
           label="카카오로 시작하기"
+          onClick={() => (window.location.href = KAKAO_AUTH_URL)}
           property="kakao"
-          onClick={handleClick}
           state={false}
         />
       </MarginTemplate>
@@ -44,13 +39,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+
   background-color: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
   height: 100%;
 `;
 
 const TextWrapper = styled.div`
-  /* margin-bottom: 50vh; */
   margin-bottom: calc(var(--vh, 1vh) * 42);
   width: 100%;
 

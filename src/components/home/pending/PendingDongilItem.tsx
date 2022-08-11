@@ -1,9 +1,9 @@
 import SuggestBadge from '@components/common/badges/SuggestBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
-import { EDongilStatus } from '@lib/types/common';
-import { getDate } from '@lib/utils/common/getDate';
-import { IDongil } from '@store/slices/walkingDongilsSlice';
+import { IDongil } from '@lib/types/IDongil';
+import { EDongilStatus } from '@lib/types/TDongilStatus';
+import { getDate } from '@lib/utils/get/getDate';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
@@ -84,11 +84,9 @@ function PendingDongilItem({
           <span className="title">{title}</span>
           <span className="createdAt">{getDate(createdAt)}</span>
         </div>
-        <SuggestBadgeWrapper>
-          <SuggestBadge
-            isSuggesting={status === EDongilStatus.PENDING ? true : false}
-          />
-        </SuggestBadgeWrapper>
+        <SuggestBadge
+          isSuggesting={status === EDongilStatus.PENDING ? true : false}
+        />
       </StyledButton>
     </>
   );
@@ -124,5 +122,3 @@ const StyledButton = styled.button`
     }
   }
 `;
-
-const SuggestBadgeWrapper = styled.div``;

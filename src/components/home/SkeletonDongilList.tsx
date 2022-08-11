@@ -1,20 +1,20 @@
 import styled, { css } from 'styled-components';
 
-type TUsage = 'walking' | 'pending' | 'proposed' | 'thisWeekS';
+type TVariant = 'walking' | 'pending' | 'proposed' | 'thisWeekS';
 
-function SkeletonDongilList({ usage }: { usage: TUsage }) {
+function SkeletonDongilList({ variant }: { variant: TVariant }) {
   return (
-    <Wrapper usage={usage}>
-      <Item usage={usage} />
-      <Item usage={usage} />
-      <Item usage={usage} />
+    <Wrapper variant={variant}>
+      <Item variant={variant} />
+      <Item variant={variant} />
+      <Item variant={variant} />
     </Wrapper>
   );
 }
 
 export default SkeletonDongilList;
 
-const Wrapper = styled.div<{ usage: TUsage }>`
+const Wrapper = styled.div<{ variant: TVariant }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -22,25 +22,25 @@ const Wrapper = styled.div<{ usage: TUsage }>`
   align-items: center;
 `;
 
-const Item = styled.div<{ usage: TUsage }>`
+const Item = styled.div<{ variant: TVariant }>`
   width: 100%;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
 
-  ${({ usage }) =>
-    (usage === 'walking' || usage === 'thisWeekS') &&
+  ${({ variant }) =>
+    (variant === 'walking' || variant === 'thisWeekS') &&
     css`
       height: 54px;
       margin-bottom: 8px;
     `}
-  ${({ usage }) =>
-    usage === 'pending' &&
+  ${({ variant }) =>
+    variant === 'pending' &&
     css`
       height: 68px;
       margin-bottom: 8px;
     `}
-      ${({ usage }) =>
-    usage === 'proposed' &&
+      ${({ variant }) =>
+    variant === 'proposed' &&
     css`
       height: 54px;
       margin-bottom: 8px;
