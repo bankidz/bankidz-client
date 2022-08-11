@@ -32,14 +32,14 @@ function PrimaryModal({
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, 999);
+    }, 125);
   }
 
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
     shouldCloseOnOverlayClick: true,
-    closeTimeoutMS: 999,
+    closeTimeoutMS: 125,
     style: {
       overlay: {
         zIndex: '700',

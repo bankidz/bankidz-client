@@ -39,6 +39,6 @@ const StyledSpan = styled.span<{ colorByLevel: string }>`
   border-radius: ${({ theme }) => theme.radius.small};
   ${({ theme }) => theme.typo.tag.T_12_EB};
 
-  transition: ${({ theme }) => theme.transition.onFocus};
+  transition: ${({ theme }) => theme.transition.kidSelect};
   color: ${({ colorByLevel }) => colorByLevel};
 `;

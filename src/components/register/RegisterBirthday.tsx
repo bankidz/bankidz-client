@@ -199,7 +199,7 @@ const ErrorMessage = styled.div`
   ${({ theme }) => theme.typo.input.TextMessage_S_12_M}
   color: ${({ theme }) => theme.palette.greyScale.grey100};
   &.active {
-    transition: ${({ theme }) => theme.transition.onFocus};
+    transition: ${({ theme }) => theme.transition.inputFocus};
     color: ${({ theme }) => theme.palette.sementic.red300};
   }
 `;

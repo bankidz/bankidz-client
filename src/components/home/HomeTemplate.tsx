@@ -142,7 +142,7 @@ const FixedBar = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
         `}
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
-  transition: ${({ theme }) => theme.transition.onFocus};
+  transition: ${({ theme }) => theme.transition.kidSelect};
   transition-property: background-color;
   position: fixed;
   width: 100%;
@@ -235,7 +235,7 @@ const BackgroundBox = styled.div<{
   width: 100%;
   z-index: 0;
   background-color: ${({ colorByLevel }) => colorByLevel};
-  transition: ${({ theme }) => theme.transition.onFocus};
+  transition: ${({ theme }) => theme.transition.inputFocus};
   transition-property: background-color;
 `;
 
@@ -276,7 +276,7 @@ const BackgroundEllipse = styled.div<{
   border-radius: 265px / 115px;
   z-index: 1;
   background-color: ${({ colorByLevel }) => colorByLevel};
-  transition: ${({ theme }) => theme.transition.onFocus};
+  transition: ${({ theme }) => theme.transition.inputFocus};
 `;
 
 const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`
