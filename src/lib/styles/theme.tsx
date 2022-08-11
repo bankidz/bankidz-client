@@ -59,7 +59,7 @@ export const theme: DefaultTheme = {
   },
   animation: {
     homeMount: '0.175s ease-in forwards',
-    modalOpen: '0.1s ease-in forwards',
+    modalOpen: '0.125s ease-in forwards',
   },
   typo: {
     fixed: {

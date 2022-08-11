@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Summary from '@components/home/sumary/Summary';
 import InterestStampList from '@components/home/walking/InterestStampList';
 import TotalInterest from '@components/home/walking/TotalInterest';
-import Receipt from '@components/common/Receipt';
+import Receipt from '@components/common/receipt/Receipt';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 

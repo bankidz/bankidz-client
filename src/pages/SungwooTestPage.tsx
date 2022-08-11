@@ -3,6 +3,8 @@ import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import InterestBadge from '@components/common/badges/InterestBadge';
+import MarginTemplate from '@components/layout/MarginTemplate';
+import Receipt from '@components/common/receipt/Receipt';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -78,15 +80,19 @@ function SungwooTestPage() {
   }
 
   return (
-    <BackgroundTemplate>
-      <Wrapper>
-        <button onClick={openContract}>contract</button>
-        <button onClick={openProposed}>proposed</button>
-        <button onClick={openProposing}>proposing</button>
-        <button onClick={openRejected}>rejected</button>
-        <Modals />
-      </Wrapper>
-    </BackgroundTemplate>
+    <Wrapper>
+      <MarginTemplate>
+        <Receipt
+          createdAt="2022/08/03 04:06:04"
+          interestRate={20}
+          isMom={false}
+          itemName="선물"
+          totalPrice={10000}
+          weekPrice={2000}
+          weeks={4}
+        />
+      </MarginTemplate>
+    </Wrapper>
   );
 }
 
@@ -96,6 +102,7 @@ const Wrapper = styled.div`
   height: 1000px;
   display: flex;
   flex-direction: column;
+  background: grey;
   button + button {
     margin-top: 10px;
   }
@@ -134,3 +141,13 @@ const Wrapper = styled.div`
 //       <button onClick={handleFetchWalkingDongils}>
 //         Fetch Walking Money Roads
 //       </button>
+
+{
+  /* <Wrapper>
+        <button onClick={openContract}>contract</button>
+        <button onClick={openProposed}>proposed</button>
+        <button onClick={openProposing}>proposing</button>
+        <button onClick={openRejected}>rejected</button>
+        <Modals />
+      </Wrapper> */
+}
