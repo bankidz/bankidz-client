@@ -33,7 +33,8 @@ function ProposedDongilItem({
 
   const navigate = useNavigate();
   function openQuaternaryModal() {
-    openModal(modals.quaternaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'proposed',
       onSubmit: () => {
         navigate(`/reject/${id}`);
       },

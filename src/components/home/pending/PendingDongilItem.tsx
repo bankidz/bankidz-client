@@ -36,7 +36,8 @@ function PendingDongilItem({
 
   // 제안중
   function openQuinaryModal() {
-    openModal(modals.quinaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'proposing',
       createdAt: createdAt,
       interestRate: interestRate,
       isMom: isMom,
@@ -51,7 +52,8 @@ function PendingDongilItem({
 
   // 거절됨
   function openSenaryModal() {
-    openModal(modals.senaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'rejected',
       onSubmit: () => {
         onDeleteCheckOpen();
         setIdToDelete(id);
