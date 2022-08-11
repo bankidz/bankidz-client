@@ -173,7 +173,6 @@ function Detail() {
       </Content>
 
       <Background colorByLevel={colorByLevel}></Background>
-      {/* bottom sheets */}
       {/* 정말 포기할거에요? */}
       <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
         <GiveUpCheck

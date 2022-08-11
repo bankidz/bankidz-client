@@ -1,10 +1,12 @@
 import Button from '@components/common/buttons/Button';
 import CheckButton from '@components/common/buttons/CheckButton';
 import { Dispatch, SetStateAction } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
 function getSubmitButton(
-  variant: string,
+  variant: TVariant,
   setIsOpen: Dispatch<SetStateAction<boolean>>,
   handleSubmit: () => void,
   handleExtraSubmit: () => void,
@@ -15,9 +17,17 @@ function getSubmitButton(
         <ButtonOverlay onClick={() => setIsOpen(false)} />
       )}
 
-      <ButtonWrapper>
+      <ButtonWrapper variant={variant}>
         {(variant === 'contract' || variant === 'proposing') && (
           <CheckButton onClick={handleSubmit} />
+        )}
+        {variant === 'rejected' && (
+          <Button
+            onClick={handleSubmit}
+            property="default"
+            label="삭제하기"
+            fixed
+          />
         )}
       </ButtonWrapper>
 
@@ -38,14 +48,28 @@ function getSubmitButton(
 export default getSubmitButton;
 
 const ButtonOverlay = styled.button`
-  background: pink;
   width: 100%;
   height: 64px;
   cursor: default;
 `;
 
-const ButtonWrapper = styled.div`
-  margin-top: 490px; // arbitrary
+const ButtonWrapper = styled.div<{ variant: string }>`
+  /* ButtonOverlay 하단에 접하도록 임의로 조절함 */
+  ${({ variant }) =>
+    variant === 'contract' &&
+    css`
+      margin-top: 487px;
+    `}
+  ${({ variant }) =>
+    variant === 'proposing' &&
+    css`
+      margin-top: 515px;
+    `}
+  ${({ variant }) =>
+    variant === 'rejected' &&
+    css`
+      margin-top: 597px;
+    `}
   position: absolute;
   z-index: 701;
   display: flex;
@@ -53,7 +77,7 @@ const ButtonWrapper = styled.div`
 `;
 
 const DoubleButtonWrapper = styled.div`
-  margin-top: 12px; // arbitrary
+  margin-top: 16px; // arbitrary
   width: 100%;
   height: 48px;
   display: grid;

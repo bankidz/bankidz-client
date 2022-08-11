@@ -1,12 +1,12 @@
-function getHeightByVariant(variant: string) {
-  if (variant === 'contract') {
-    return 544;
-  } else if (variant === 'proposed') {
-    return 532;
+type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+
+function getHeightByVariant(variant: TVariant) {
+  if (variant === 'contract' || variant === 'proposed') {
+    return 537;
   } else if (variant === 'proposing') {
-    return 560;
+    return 565;
   } else if (variant === 'rejected') {
-    return 656;
+    return 647;
   }
 }
 

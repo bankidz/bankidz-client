@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ReactModal from 'react-modal';
 import { calcRatio, theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import getDashedBorder from './getDivider';
+import getDashedBorder from './getDashedBorder';
 import getFirstRow from './getFirstRow';
 import getSecondRow from './getSecondRow';
 import { TInterestRate } from '@lib/types/IInterestRate';
@@ -39,11 +39,11 @@ interface QuaternaryModalProps {
   totalPrice: number;
   weekPrice: number;
   weeks: number;
+  comment?: string;
   fileName?: string;
   isSubmit?: boolean;
 }
 
-// 모달 내부에 표시될 UI 작성
 function ReceiptModal({
   variant,
   onSubmit,
@@ -56,6 +56,7 @@ function ReceiptModal({
   totalPrice,
   weekPrice,
   weeks,
+  comment,
   fileName,
   isSubmit = false,
 }: QuaternaryModalProps) {
@@ -95,7 +96,6 @@ function ReceiptModal({
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
         right: '18px',
-        background: 'rgba(36, 39, 41, 0)',
         overflow: 'hidden',
         WebkitOverflowScrolling: 'touch',
         border: 'none',
@@ -123,6 +123,13 @@ function ReceiptModal({
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
+        {dashedBorder}
+        {/* PerforatedLineTop의 height: 15px */}
+        {/* PerforatedShape의 height: 10px, width: 20px */}
+        {/* PerforatedLine과 접하는 컴포넌트의 경우 height를 10px 줄임 */}
+        {/* 컴포넌트 접합부 갈라짐으로 인해 2px 겹치도록 margin 조정함 */}
+        {/* 이로인한 오차는 모달 content의 height를 조절함으로서 보정함 */}
+        {/* 그 외에는 모두 디자인 원안을 준수함 */}
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top variant={variant}>
           {variant === 'contract' && (
@@ -132,9 +139,8 @@ function ReceiptModal({
           {variant === 'rejected' && <SuggestBadge isSuggesting={false} />}
           <span className="body">{title}</span>
         </Top>
-        {dashedBorder}
 
-        <Middle>
+        <Bottom variant={variant}>
           {firstRow}
           {secondRow}
           {thirdRow}
@@ -147,8 +153,14 @@ function ReceiptModal({
               }
             /> */}
           </SignatureWrapper>
-        </Middle>
+        </Bottom>
 
+        {variant === 'rejected' && (
+          <Comment>
+            <div className="header">부모님의 한줄평</div>
+            <div className="body">{comment}</div>
+          </Comment>
+        )}
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
         {submitButton}
       </Content>
@@ -180,8 +192,21 @@ const Content = styled.div`
 `;
 
 const Top = styled.div<{ variant: TVariant }>`
-  height: ${({ variant }) =>
-    variant === 'proposed' ? '88px' : '100px'}; // arbitrary decreased 10px
+  ${({ variant }) =>
+    variant === 'contract' &&
+    css`
+      height: 88px;
+    `}
+  ${({ variant }) =>
+    variant === 'proposed' &&
+    css`
+      height: 88px;
+    `}
+  ${({ variant }) =>
+    (variant === 'proposing' || variant === 'rejected') &&
+    css`
+      height: 116px;
+    `}
   margin: -2px 0; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
@@ -207,7 +232,7 @@ const Top = styled.div<{ variant: TVariant }>`
   }
 `;
 
-const Middle = styled.div`
+const Bottom = styled.div<{ variant: TVariant }>`
   margin-bottom: -2px; // overlaps 2px
   background: ${({ theme }) => theme.palette.greyScale.white};
   width: 100%;
@@ -215,12 +240,50 @@ const Middle = styled.div`
 
   border-top-left-radius: ${({ theme }) => theme.radius.medium};
   border-top-right-radius: ${({ theme }) => theme.radius.medium};
+  ${({ variant }) =>
+    variant === 'rejected' &&
+    css`
+      border-bottom-left-radius: ${({ theme }) => theme.radius.medium};
+      border-bottom-right-radius: ${({ theme }) => theme.radius.medium};
+    `}
 
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-between;
   position: relative;
+`;
+
+const Comment = styled.div`
+  border-top-left-radius: ${({ theme }) => theme.radius.medium};
+  border-top-right-radius: ${({ theme }) => theme.radius.medium};
+  width: 100%;
+  height: 86px;
+  background: ${({ theme }) => theme.palette.greyScale.white};
+  margin: -2px 0; // overlaps 2px
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  .header {
+    width: 80px;
+    height: 12px;
+    ${({ theme }) => theme.typo.text.S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
+    margin-left: 24px;
+    margin-top: 18px;
+  }
+  .body {
+    width: 276px;
+    height: 14px;
+    ${({ theme }) => theme.typo.text.T_16_EB}
+    color: ${({ theme }) => theme.palette.sementic.red300};
+    margin-left: 24px;
+    margin-top: 18px;
+    margin-bottom: 32px;
+  }
 `;
 
 const SignatureWrapper = styled.div`
@@ -232,7 +295,7 @@ const SignatureWrapper = styled.div`
   height: 173px;
   right: 2px;
   bottom: 0;
-  background: rgba(227, 171, 222, 0.7);
+  background: rgba(36, 39, 41, 0.7);
 
   & > img {
     max-width: 100%;

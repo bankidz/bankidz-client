@@ -73,6 +73,7 @@ function SungwooTestPage() {
       totalPrice: 10000,
       weekPrice: 2000,
       weeks: 4,
+      comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
     });
   }
 
