@@ -3,7 +3,9 @@ import { ReactComponent as VerticalDashedBorder } from '@assets/borders/vertical
 import { theme } from '@lib/styles/theme';
 import styled from 'styled-components';
 
-function getDashedBorder() {
+type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+
+function getDashedBorder(variant: TVariant) {
   return (
     <>
       <VerticalDashedBorderWrapper>
@@ -18,6 +20,11 @@ function getDashedBorder() {
       <ThirdHorizontalDashedBorderWrapper>
         <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
       </ThirdHorizontalDashedBorderWrapper>
+      {variant === 'rejected' && (
+        <FourthHorizontalDashedBorderWrapper>
+          <HorizontalDashedBorder fill={theme.palette.greyScale.grey100} />
+        </FourthHorizontalDashedBorderWrapper>
+      )}
     </>
   );
 }
@@ -78,6 +85,23 @@ const ThirdHorizontalDashedBorderWrapper = styled.div`
   position: absolute;
   left: 50%;
   top: 286px;
+  transform: translate3d(-50%, -50%, 0);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 3px;
+  padding-left: 16px;
+  padding-right: 16px;
+`;
+
+const FourthHorizontalDashedBorderWrapper = styled.div`
+  z-index: 700;
+  position: absolute;
+  left: 50%;
+  top: 478px; // decreased 10px
   transform: translate3d(-50%, -50%, 0);
 
   display: flex;

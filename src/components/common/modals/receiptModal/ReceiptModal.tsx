@@ -108,7 +108,7 @@ function ReceiptModal({
     },
   };
 
-  const dashedBorder = getDashedBorder();
+  const dashedBorder = getDashedBorder(variant);
   const firstRow = getFirstRow(isMom, itemName);
   const secondRow = getSecondRow(totalPrice, weekPrice, interestRate);
   const thirdRow = getThirdRow(weeks, createdAt);
