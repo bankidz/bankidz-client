@@ -58,7 +58,6 @@ const Wrapper = styled.div`
   }
 
   .계약종료일 {
-    background: pink;
     width: 66.6%;
     height: 70px;
     display: flex;

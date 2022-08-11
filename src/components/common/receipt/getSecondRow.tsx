@@ -35,7 +35,6 @@ const Wrapper = styled.div`
   align-items: center;
 
   > div {
-    background: skyblue;
     width: 33.3%;
     height: 100%;
     display: flex;

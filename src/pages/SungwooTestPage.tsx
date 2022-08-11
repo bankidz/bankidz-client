@@ -81,7 +81,14 @@ function SungwooTestPage() {
 
   return (
     <Wrapper>
-      <MarginTemplate>
+      <Wrapper>
+        <button onClick={openContract}>contract</button>
+        <button onClick={openProposed}>proposed</button>
+        <button onClick={openProposing}>proposing</button>
+        <button onClick={openRejected}>rejected</button>
+        <Modals />
+      </Wrapper>
+      {/* <MarginTemplate>
         <Receipt
           createdAt="2022/08/03 04:06:04"
           interestRate={20}
@@ -91,7 +98,7 @@ function SungwooTestPage() {
           weekPrice={2000}
           weeks={4}
         />
-      </MarginTemplate>
+      </MarginTemplate> */}
     </Wrapper>
   );
 }
