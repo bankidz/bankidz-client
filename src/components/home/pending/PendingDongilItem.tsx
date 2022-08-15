@@ -3,7 +3,7 @@ import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import { EDongilStatus } from '@lib/types/TDongilStatus';
-import { getDate } from '@lib/utils/get/getDate';
+import convertCreatedAtToYYYYMMDD from '@lib/utils/convertCreatedAtToYYYYMMDD';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
@@ -84,7 +84,9 @@ function PendingDongilItem({
       <StyledButton onClick={handleClick}>
         <div className="text-wrapper">
           <span className="title">{title}</span>
-          <span className="createdAt">{getDate(createdAt)}</span>
+          <span className="createdAt">
+            {convertCreatedAtToYYYYMMDD(createdAt)}
+          </span>
         </div>
         <ProposalBadge
           isProposing={status === EDongilStatus.PENDING ? true : false}

@@ -74,6 +74,7 @@ interface IAuth {
   isKid: boolean | null;
   level: TLevel | null;
 }
+
 interface IBirthDay {
   birthday: string;
 }
