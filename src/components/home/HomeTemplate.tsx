@@ -132,14 +132,7 @@ const Wrapper = styled.div`
 `;
 
 const FixedBar = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          height: 95px;
-        `
-      : css`
-          height: 48px;
-        `}
+  height: ${({ hasMultipleKids }) => (hasMultipleKids ? '95px' : '48px')};
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.kidSelect};
@@ -250,28 +243,14 @@ const BackgroundEllipse = styled.div<{
 `;
 
 const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          top: 125px;
-        `
-      : css`
-          top: 48px;
-        `}
+  top: ${({ hasMultipleKids }) => (hasMultipleKids ? '125px' : '48px')};
   z-index: 1;
   position: absolute;
   right: 0;
 `;
 
 const HomeBankiWrapper = styled.div<{ hasMultipleKids: boolean }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          top: 223px;
-        `
-      : css`
-          top: 146px;
-        `}
+  top: ${({ hasMultipleKids }) => (hasMultipleKids ? '223px' : '146px')};
   z-index: 2;
   position: absolute;
   right: 0;
