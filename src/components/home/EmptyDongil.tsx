@@ -2,16 +2,17 @@ import styled from 'styled-components';
 import { ReactComponent as BankiSad } from '@assets/illusts/banki/banki_sad.svg';
 
 interface EmptyDongilProps {
-  property: 'pending' | 'proposed' | 'thisWeekS';
+  /** 용도(메세지의 주어)를 선택합니다. */
+  variant: 'pending' | 'proposed' | 'thisWeekS';
 }
 
-function EmptyDongil({ property }: EmptyDongilProps) {
+function EmptyDongil({ variant }: EmptyDongilProps) {
   let subject;
-  if (property === 'pending') {
+  if (variant === 'pending') {
     subject = '대기중인';
-  } else if (property === 'proposed') {
+  } else if (variant === 'proposed') {
     subject = '제안받은';
-  } else if (property === 'thisWeekS') {
+  } else if (variant === 'thisWeekS') {
     subject = '걷고있는';
   }
   return (

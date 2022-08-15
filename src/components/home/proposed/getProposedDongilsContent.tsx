@@ -37,7 +37,7 @@ function getProposedDongilsContent(
       selectedKid?.username!,
     );
     if (selectedKidSProposedDongils?.length === 0) {
-      proposedDongilsContent = <EmptyDongil property="proposed" />;
+      proposedDongilsContent = <EmptyDongil variant="proposed" />;
     } else {
       proposedDongilsContent = (
         <>

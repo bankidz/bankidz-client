@@ -36,7 +36,7 @@ function getThisWeekSDongilsContent() {
       thisWeekSDongilsContent = (
         <>
           <h1>금주의 돈길</h1>
-          <EmptyDongil property="thisWeekS" />
+          <EmptyDongil variant="thisWeekS" />
         </>
       );
     } else {
@@ -52,6 +52,7 @@ function getThisWeekSDongilsContent() {
   } else if (thisWeekSDongilsStatus === 'failed') {
     thisWeekSDongilsContent = <p>Failed</p>;
   }
+  return thisWeekSDongilsContent;
 }
 
 export default getThisWeekSDongilsContent;

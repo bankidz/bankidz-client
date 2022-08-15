@@ -28,7 +28,7 @@ function getPendingDongilsContent(
       pendingDongilsContent = (
         <>
           <h1>대기중인 돈길</h1>
-          <EmptyDongil property="pending" />
+          <EmptyDongil variant="pending" />
         </>
       );
     } else {
