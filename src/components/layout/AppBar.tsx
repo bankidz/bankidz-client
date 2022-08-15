@@ -25,7 +25,7 @@ function AppBar({ label, level }: AppBarProps) {
 
   const colorByLevel = level !== undefined && getColorByLevel(level!);
   const textColor = (level?: TLevel | null) => {
-    if (level == null || level == undefined) {
+    if (level === null || level === undefined) {
       return '#2E3234';
     } else {
       return '#fff';
