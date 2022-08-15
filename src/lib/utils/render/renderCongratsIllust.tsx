@@ -4,15 +4,17 @@ import { ReactComponent as CongratsBankiSon } from '@assets/illusts/congrats/con
 import { ReactComponent as CongratsBankiDaughter } from '@assets/illusts/congrats/congrats_banki_daughter.svg';
 
 function renderCongratsIllust(isKid: boolean, isFemale: boolean) {
+  let congratsIllust;
   if (isKid === false && isFemale === false) {
-    return <CongratsBankiDad />;
+    congratsIllust = <CongratsBankiDad />;
   } else if (isKid === false && isFemale === true) {
-    return <CongratsBankiMom />;
+    congratsIllust = <CongratsBankiMom />;
   } else if (isKid === true && isFemale === false) {
-    return <CongratsBankiSon />;
+    congratsIllust = <CongratsBankiSon />;
   } else {
-    return <CongratsBankiDaughter />;
+    congratsIllust = <CongratsBankiDaughter />;
   }
+  return congratsIllust;
 }
 
 export default renderCongratsIllust;

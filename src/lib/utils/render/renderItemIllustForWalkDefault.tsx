@@ -10,24 +10,25 @@ import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/walk/c3.
 import { TItemName } from '@lib/types/TItemName';
 
 function renderItemIllustForWalkDefault(itemName: TItemName) {
+  let itemIllustForWalkDefault;
   if (itemName === '학용품') {
-    return <A1 />;
+    itemIllustForWalkDefault = <A1 />;
   } else if (itemName === '생활용품') {
-    return <A2 />;
+    itemIllustForWalkDefault = <A2 />;
   } else if (itemName === '전자제품') {
-    return <A3 />;
+    itemIllustForWalkDefault = <A3 />;
   } else if (itemName === '식품') {
-    return <B1 />;
+    itemIllustForWalkDefault = <B1 />;
   } else if (itemName === '문화생활') {
-    return <B2 />;
+    itemIllustForWalkDefault = <B2 />;
   } else if (itemName === '패션뷰티') {
-    return <B3 />;
+    itemIllustForWalkDefault = <B3 />;
   } else if (itemName === '선물') {
-    return <C1 />;
+    itemIllustForWalkDefault = <C1 />;
   } else if (itemName === '비상금') {
-    return <C2 />;
+    itemIllustForWalkDefault = <C2 />;
   } else if (itemName === '기타') {
-    return <C3 />;
+    itemIllustForWalkDefault = <C3 />;
   }
 }
 

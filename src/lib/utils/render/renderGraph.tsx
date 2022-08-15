@@ -12,29 +12,31 @@ import { ReactComponent as Graph100 } from '@assets/illusts/graph/graph_100.svg'
 import { TPercent } from '@lib/types/TPercent';
 
 function renderGraph(percent: TPercent) {
+  let graph;
   if (percent === 0) {
-    return <Graph0 />;
+    graph = <Graph0 />;
   } else if (percent === 10) {
-    return <Graph10 />;
+    graph = <Graph10 />;
   } else if (percent === 20) {
-    return <Graph20 />;
+    graph = <Graph20 />;
   } else if (percent === 30) {
-    return <Graph30 />;
+    graph = <Graph30 />;
   } else if (percent === 40) {
-    return <Graph40 />;
+    graph = <Graph40 />;
   } else if (percent === 50) {
-    return <Graph50 />;
+    graph = <Graph50 />;
   } else if (percent === 60) {
-    return <Graph60 />;
+    graph = <Graph60 />;
   } else if (percent === 70) {
-    return <Graph70 />;
+    graph = <Graph70 />;
   } else if (percent === 80) {
-    return <Graph80 />;
+    graph = <Graph80 />;
   } else if (percent === 90) {
-    return <Graph90 />;
+    graph = <Graph90 />;
   } else if (percent === 100) {
-    return <Graph100 />;
+    graph = <Graph100 />;
   }
+  return graph;
 }
 
 export default renderGraph;

@@ -7,20 +7,22 @@ import { ReactComponent as LevelMinus4 } from '@assets/illusts/homeBackground/Ho
 import { TLevel } from '@lib/types/TLevel';
 
 function renderHomeBackground(level: TLevel) {
+  let homeBackground;
   if (level === 1) {
-    return <Level1 />;
+    homeBackground = <Level1 />;
   } else if (level === 2) {
-    return <Level2 />;
+    homeBackground = <Level2 />;
   } else if (level === 3) {
-    return <Level3 />;
+    homeBackground = <Level3 />;
   } else if (level === 4) {
-    return <Level4 />;
+    homeBackground = <Level4 />;
   } else if (level === -4 || level === 0) {
     // TODO: 백 수정 이후 level: 0인 경우 삭제
-    return <LevelMinus4 />;
+    homeBackground = <LevelMinus4 />;
   } else if (level === 5) {
-    return <Level5 />;
+    homeBackground = <Level5 />;
   }
+  return homeBackground;
 }
 
 export default renderHomeBackground;
