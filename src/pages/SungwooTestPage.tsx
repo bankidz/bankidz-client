@@ -3,39 +3,116 @@ import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import InterestBadge from '@components/common/badges/InterestBadge';
+import MarginTemplate from '@components/layout/MarginTemplate';
+import Receipt from '@components/common/receipt/Receipt';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
-  function handleClick() {
+  function openContract() {
+    openModal(modals.receiptModal, {
+      variant: 'contract',
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+    });
+  }
+  function openProposed() {
+    openModal(modals.receiptModal, {
+      variant: 'proposed',
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      onExtraSubmit: () => {
+        console.log('handle extra submit');
+      },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+    });
+  }
+  function openProposing() {
+    openModal(modals.receiptModal, {
+      variant: 'proposing',
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+    });
+  }
+  function openRejected() {
     // modals.myModal: 열고자 하는 모달
     // {...}: submit 시 처리되는 비즈니스 로직
-    openModal(modals.quaternaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'rejected',
       onSubmit: () => {
-        console.log('비즈니스 로직 처리...');
+        console.log('handle submit');
       },
+      createdAt: '2022/08/03 04:06:04',
+      interestRate: 20,
+      isMom: false,
+      itemName: '선물',
+      title: '할머니 생신선물',
+      totalPrice: 10000,
+      weekPrice: 2000,
+      weeks: 4,
+      comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
     });
   }
 
   return (
-    <BackgroundTemplate>
-      <>
-        <InterestBadge interestRate={10} />
-        <InterestBadge interestRate={20} />
-        <InterestBadge interestRate={30} />
-      </>
-      {/* <Temp>
-        <button onClick={handleClick}>모달 열기</button>
+    <Wrapper>
+      <Wrapper>
+        <button onClick={openContract}>contract</button>
+        <button onClick={openProposed}>proposed</button>
+        <button onClick={openProposing}>proposing</button>
+        <button onClick={openRejected}>rejected</button>
         <Modals />
-      </Temp> */}
-    </BackgroundTemplate>
+      </Wrapper>
+      {/* <MarginTemplate>
+        <Receipt
+          createdAt="2022/08/03 04:06:04"
+          interestRate={20}
+          isMom={false}
+          itemName="선물"
+          totalPrice={10000}
+          weekPrice={2000}
+          weeks={4}
+        />
+      </MarginTemplate> */}
+    </Wrapper>
   );
 }
 
 export default SungwooTestPage;
 
-const Temp = styled.div`
+const Wrapper = styled.div`
   height: 1000px;
+  display: flex;
+  flex-direction: column;
   background: grey;
+  button + button {
+    margin-top: 10px;
+  }
 `;
 
 // https://joyful-development.tistory.com/35
@@ -71,3 +148,13 @@ const Temp = styled.div`
 //       <button onClick={handleFetchWalkingDongils}>
 //         Fetch Walking Money Roads
 //       </button>
+
+{
+  /* <Wrapper>
+        <button onClick={openContract}>contract</button>
+        <button onClick={openProposed}>proposed</button>
+        <button onClick={openProposing}>proposing</button>
+        <button onClick={openRejected}>rejected</button>
+        <Modals />
+      </Wrapper> */
+}

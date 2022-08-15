@@ -1,24 +1,36 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import ReactModal from 'react-modal';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import styled from 'styled-components';
 import CloseButton from '../../buttons/CloseButton';
+import InstructionCard from './InstructionCard';
 import { ReactComponent as ModalContentMoney } from '@assets/illusts/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illusts/congrats/congrats_banki_with_coins.svg';
-import InstructionCard from './InstructionCard';
+import ReactModal from 'react-modal';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
+import '../styles.css';
 
-interface TertiaryProps {
+interface TertiaryModalProps {
   /**
-   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
    * */
-  onSubmit?: any;
+  onSubmit: any;
 }
 
-function TertiaryModal({ onSubmit }: TertiaryProps) {
+function TertiaryModal({ onSubmit }: TertiaryModalProps) {
+  const [isOpen, setIsOpen] = useState(true);
+  function handleSubmit() {
+    setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 125);
+  }
+
   const reactModalParams = {
-    isOpen: true,
+    isOpen: isOpen,
+    onRequestClose: () => setIsOpen(false),
+    shouldCloseOnOverlayClick: true,
+    closeTimeoutMS: 125,
     style: {
       overlay: {
         zIndex: '700',
@@ -32,8 +44,6 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
       content: {
         height: '568px',
         position: 'absolute',
-        // top: '13vh',
-        // top: '50vh',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
@@ -59,13 +69,9 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
     slidesPerView: 1,
   };
 
-  function handleSubmit() {
-    onSubmit();
-  }
-
   return (
     // @ts-expect-error
-    <ReactModal {...reactModalParams}>
+    <StyledReactModal {...reactModalParams}>
       <Background>
         <div className="yellow-box"></div>
         <div className="white-box">
@@ -107,15 +113,28 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
             </InstructionCard>
           </SwiperSlide>
         </StyledSwiper>
+        <CloseButtonOverlay onClick={() => setIsOpen(false)} />
         <CloseButtonWrapper>
           <CloseButton onClick={handleSubmit} />
         </CloseButtonWrapper>
       </Content>
-    </ReactModal>
+    </StyledReactModal>
   );
 }
 
 export default TertiaryModal;
+
+const StyledReactModal = styled(ReactModal)`
+  @keyframes slide {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  animation: slide ${({ theme }) => theme.animation.modalOpen};
+`;
 
 const Background = styled.div`
   position: relative;
@@ -128,7 +147,7 @@ const Background = styled.div`
 
     position: absolute;
     left: 50%;
-    top: 116px; // overlaps 1px
+    top: 117px; // overlaps 2px
     transform: translate3d(-50%, -50%, 0);
 
     background: ${({ theme }) => theme.palette.main.yellow100};
@@ -200,6 +219,14 @@ const StyledSwiper = styled(Swiper)`
   height: 504px;
 `;
 
+const CloseButtonOverlay = styled.button`
+  width: 100%;
+  height: 64px;
+  cursor: default;
+`;
+
 const CloseButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 520px;
+  position: absolute;
+  z-index: 701;
 `;

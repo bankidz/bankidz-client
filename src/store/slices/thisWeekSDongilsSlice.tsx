@@ -10,13 +10,13 @@ interface IThisWeekSDongil {
   challengeList: IDongil[];
 }
 
-export type TThisWeekSDongilsState = {
-  thisWeekSDongils: IThisWeekSDongil[] | null;
+type TThisWeekSDongilsState = {
+  thisWeekSDongils: IThisWeekSDongil[];
   thisWeekSDongilsStatus?: TFetchStatus;
 };
 
 const initialState: TThisWeekSDongilsState = {
-  thisWeekSDongils: null,
+  thisWeekSDongils: [],
   thisWeekSDongilsStatus: 'idle',
 };
 

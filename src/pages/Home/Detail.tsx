@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Summary from '@components/home/sumary/Summary';
 import InterestStampList from '@components/home/walking/InterestStampList';
 import TotalInterest from '@components/home/walking/TotalInterest';
-import Receipt from '@components/common/Receipt';
+import Receipt from '@components/common/receipt/Receipt';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 
@@ -173,7 +173,6 @@ function Detail() {
       </Content>
 
       <Background colorByLevel={colorByLevel}></Background>
-      {/* bottom sheets */}
       {/* 정말 포기할거에요? */}
       <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
         <GiveUpCheck

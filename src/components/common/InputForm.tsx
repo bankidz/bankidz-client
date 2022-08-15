@@ -120,7 +120,7 @@ const InputBox = styled.input<{
       ? theme.palette.main.yellow300
       : theme.palette.main.yellow100};
   &:focus {
-    transition: ${({ theme }) => theme.transition.onFocus};
+    transition: ${({ theme }) => theme.transition.inputFocus};
     border-color: ${({ theme, error }) =>
       error ? theme.palette.sementic.red200 : theme.palette.main.yellow300};
   }

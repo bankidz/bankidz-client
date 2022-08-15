@@ -54,7 +54,12 @@ export const theme: DefaultTheme = {
     large: '24px',
   },
   transition: {
-    onFocus: '0.125s all ease-in',
+    inputFocus: '0.1s all ease-in',
+    kidSelect: '0.125s all ease-in',
+  },
+  animation: {
+    homeMount: '0.175s ease-in forwards',
+    modalOpen: '0.125s ease-in forwards',
   },
   typo: {
     fixed: {

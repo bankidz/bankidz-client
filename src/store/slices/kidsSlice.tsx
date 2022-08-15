@@ -4,9 +4,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export type TKidsState = {
+type TKidsState = {
   // kids: null - 연결된 자녀 없음
-  kids: IKid[] | null;
+  kids: IKid[];
   // selectedKid - 부모 홈에서 다자녀중 선택한 자녀 한명
   selectedKid: IKid | null;
   // hasMultipleKids - 다자녀 유무
@@ -15,7 +15,7 @@ export type TKidsState = {
 };
 
 const initialState: TKidsState = {
-  kids: null,
+  kids: [],
   selectedKid: null,
   hasMultipleKids: false,
   kidsStatus: 'idle',

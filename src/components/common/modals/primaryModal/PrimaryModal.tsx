@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import CheckButton from '../buttons/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
+import '../styles.css';
+import CheckButton from '@components/common/buttons/CheckButton';
 
 interface PrimaryModalProps {
   /**
-   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
    * */
-  onSubmit?: any;
+  onSubmit: any;
   isKid: boolean;
   isFemale: boolean;
   /** header에 표시될 내용을 입력합니다. */
@@ -25,8 +27,19 @@ function PrimaryModal({
   headerText,
   bodyText,
 }: PrimaryModalProps) {
+  const [isOpen, setIsOpen] = useState(true);
+  function handleSubmit() {
+    setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 125);
+  }
+
   const reactModalParams = {
-    isOpen: true,
+    isOpen: isOpen,
+    onRequestClose: () => setIsOpen(false),
+    shouldCloseOnOverlayClick: true,
+    closeTimeoutMS: 125,
     style: {
       overlay: {
         zIndex: '700',
@@ -40,8 +53,6 @@ function PrimaryModal({
       content: {
         height: '488px',
         position: 'absolute',
-        // top: '19vh',
-        // top: '50vh',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
@@ -59,13 +70,9 @@ function PrimaryModal({
     },
   };
 
-  function handleSubmit() {
-    onSubmit();
-  }
-
   return (
     // @ts-expect-error
-    <ReactModal {...reactModalParams}>
+    <StyledReactModal {...reactModalParams}>
       <Content>
         <WhiteBox>
           <div className="illust-wrapper">
@@ -74,21 +81,33 @@ function PrimaryModal({
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
         </WhiteBox>
+        <CheckButtonOverlay onClick={() => setIsOpen(false)} />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>
       </Content>
-    </ReactModal>
+    </StyledReactModal>
   );
 }
 
 export default PrimaryModal;
 
+const StyledReactModal = styled(ReactModal)`
+  @keyframes slide {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  animation: slide ${({ theme }) => theme.animation.modalOpen};
+`;
+
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 100%;
 `;
 
@@ -117,18 +136,15 @@ const WhiteBox = styled.div`
     margin-top: 32px;
     margin-bottom: 8px;
   }
-
   svg {
     width: ${calcRatio(206, 292)};
   }
-
   .header {
     ${({ theme }) => theme.typo.popup.Title_T_21_EB}
     height: 21px;
     margin-top: 8px;
     margin-bottom: 16px;
   }
-
   .body {
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
@@ -137,8 +153,20 @@ const WhiteBox = styled.div`
   }
 `;
 
+const CheckButtonOverlay = styled.button`
+  width: 100%;
+  height: 64px;
+  cursor: default;
+`;
+
 const CheckButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 440px;
+  position: absolute;
+  z-index: 701;
 `;
 
 // https://codepen.io/designcouch/pen/obvKxm
+// https://reactcommunity.org/react-modal/styles/transitions/
+// https://stackoverflow.com/questions/58355628/animate-react-modal
+// https://codesandbox.io/s/csstransition-component-forked-7jiwn
+// https://www.faqcode4u.com/faq/80486/animate-react-modal

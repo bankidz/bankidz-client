@@ -1,15 +1,17 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as CongratsGoal } from '@assets/illusts/congrats/congrats_goal.svg';
 import ReactModal from 'react-modal';
-import CheckButton from '../buttons/CheckButton';
 import { calcRatio } from '@lib/styles/theme';
+import '../styles.css';
+import CheckButton from '@components/common/buttons/CheckButton';
 
 interface SecondaryModalProps {
   /**
-   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
    * */
-  onSubmit?: any;
+  onSubmit: any;
   /** badge에 표시될 내용을 입력합니다. */
   badgeText: string;
   /** header에 표시될 내용을 입력합니다. */
@@ -25,12 +27,19 @@ function SecondaryModal({
   headerText,
   bodyText,
 }: SecondaryModalProps) {
+  const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
-    onSubmit();
+    setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, 125);
   }
 
   const reactModalParams = {
-    isOpen: true,
+    isOpen: isOpen,
+    onRequestClose: () => setIsOpen(false),
+    shouldCloseOnOverlayClick: true,
+    closeTimeoutMS: 125,
     style: {
       overlay: {
         zIndex: '700',
@@ -44,8 +53,6 @@ function SecondaryModal({
       content: {
         height: '552px',
         position: 'absolute',
-        // top: '14vh',
-        // top: '50vh',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
@@ -65,7 +72,7 @@ function SecondaryModal({
 
   return (
     // @ts-expect-error
-    <ReactModal {...reactModalParams}>
+    <StyledReactModal {...reactModalParams}>
       <Content>
         <WhiteBox>
           <div className="illust-wrapper">
@@ -75,15 +82,28 @@ function SecondaryModal({
           <span className="header">{headerText}</span>
           <div className="body">{bodyText}</div>
         </WhiteBox>
+        <CheckButtonOverlay onClick={() => setIsOpen(false)} />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>
       </Content>
-    </ReactModal>
+    </StyledReactModal>
   );
 }
 
 export default SecondaryModal;
+
+const StyledReactModal = styled(ReactModal)`
+  @keyframes slide {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  animation: slide ${({ theme }) => theme.animation.modalOpen};
+`;
 
 const Content = styled.div`
   display: flex;
@@ -157,6 +177,14 @@ const WhiteBox = styled.div`
   }
 `;
 
+const CheckButtonOverlay = styled.button`
+  width: 100%;
+  height: 64px;
+  cursor: default;
+`;
+
 const CheckButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 504px;
+  position: absolute;
+  z-index: 701;
 `;

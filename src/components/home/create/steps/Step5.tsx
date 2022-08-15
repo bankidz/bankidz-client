@@ -33,9 +33,9 @@ function Step5({ currentStep }: { currentStep: number }) {
     // dispatch(postChallenge(axiosPrivate));
     dispatch(dispatchResetChallengePayload());
     onDismiss(); // 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
-    openModal(modals.quaternaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'contract',
       onSubmit: () => {
-        closeModal(modals.quaternaryModal);
         navigate('/', { replace: true });
       },
       createdAt: moment().format('YYYY/MM/DD hh:mm:ss'),

@@ -10,13 +10,13 @@ interface IProposedDongil {
   challengeList: IDongil[];
 }
 
-export type TProposedDongilsState = {
-  proposedDongils: IProposedDongil[] | null;
+type TProposedDongilsState = {
+  proposedDongils: IProposedDongil[];
   proposedDongilsStatus?: TFetchStatus;
 };
 
 const initialState: TProposedDongilsState = {
-  proposedDongils: null,
+  proposedDongils: [],
   proposedDongilsStatus: 'idle',
 };
 

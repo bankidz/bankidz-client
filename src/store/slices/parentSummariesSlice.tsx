@@ -11,13 +11,13 @@ interface IParentSummary {
   };
 }
 
-export type TParentSummariesState = {
-  parentSummaries: IParentSummary[] | null;
+type TParentSummariesState = {
+  parentSummaries: IParentSummary[];
   parentSummariesStatus?: TFetchStatus;
 };
 
 const initialState: TParentSummariesState = {
-  parentSummaries: null,
+  parentSummaries: [],
   parentSummariesStatus: 'idle',
 };
 
