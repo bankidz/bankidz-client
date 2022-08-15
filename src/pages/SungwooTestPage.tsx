@@ -9,8 +9,8 @@ import Receipt from '@components/common/receipt/Receipt';
 function SungwooTestPage() {
   const { openModal } = useModals();
   function openContract() {
-    openModal(modals.receiptModal, {
-      variant: 'contract',
+    openModal(modals.tertiaryModal, {
+      // variant: 'contract',
       onSubmit: () => {
         console.log('handle submit');
       },

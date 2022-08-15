@@ -77,7 +77,7 @@ function ReceiptModal({
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    shouldCloseOnOverlayClick: true,
+    // shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 125,
     style: {
       overlay: {

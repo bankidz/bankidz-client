@@ -38,7 +38,7 @@ function SecondaryModal({
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    shouldCloseOnOverlayClick: true,
+    // shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -82,7 +82,8 @@ function SecondaryModal({
           <span className="header">{headerText}</span>
           <div className="body">{bodyText}</div>
         </WhiteBox>
-        <CheckButtonOverlay onClick={() => setIsOpen(false)} />
+        {/* <CheckButtonOverlay onClick={() => setIsOpen(false)} /> */}
+        <CheckButtonOverlay />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>
