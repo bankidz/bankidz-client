@@ -17,21 +17,29 @@ function getProposedDongilsContent(
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
 
+  let proposedDongilsContent;
   if (proposedDongilsStatus === 'loading') {
-    return (
+    proposedDongilsContent = (
       <>
         <h1>제안받은 돈길</h1>
         <SkeletonDongilList variant="proposed" />
       </>
     );
   } else if (proposedDongilsStatus === 'succeeded') {
+    const getSelectedKidSProposedDongils = (username: string) => {
+      const found = proposedDongils?.find(
+        (proposedDongil) => proposedDongil.userName === username,
+      );
+      return found?.challengeList;
+    };
+
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
     );
     if (selectedKidSProposedDongils?.length === 0) {
-      return <EmptyDongil property="proposed" />;
+      proposedDongilsContent = <EmptyDongil property="proposed" />;
     } else {
-      return (
+      proposedDongilsContent = (
         <>
           <h1>제안받은 돈길</h1>
           <ProposedDongilList
@@ -43,15 +51,9 @@ function getProposedDongilsContent(
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
-    return <p>Failed</p>;
+    proposedDongilsContent = <p>Failed</p>;
   }
-
-  function getSelectedKidSProposedDongils(username: string) {
-    const found = proposedDongils?.find(
-      (proposedDongil) => proposedDongil.userName === username,
-    );
-    return found?.challengeList;
-  }
+  return proposedDongilsContent;
 }
 
 export default getProposedDongilsContent;

@@ -8,15 +8,16 @@ import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import PendingDongilList from './PendingDongilList';
 
-function getPendingDontilsContent(
+function getPendingDongilsContent(
   onDeleteCheckOpen: () => void,
   setIdToDelete: Dispatch<SetStateAction<number | null>>,
 ) {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
 
+  let pendingDongilsContent;
   if (pendingDongilsStatus === 'loading') {
-    return (
+    pendingDongilsContent = (
       <>
         <h1>대기중인 돈길</h1>
         <SkeletonDongilList variant="pending" />
@@ -24,14 +25,14 @@ function getPendingDontilsContent(
     );
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils?.length === 0) {
-      return (
+      pendingDongilsContent = (
         <>
           <h1>대기중인 돈길</h1>
           <EmptyDongil property="pending" />
         </>
       );
     } else {
-      return (
+      pendingDongilsContent = (
         <>
           <h1>대기중인 돈길</h1>
           <PendingDongilList
@@ -43,8 +44,9 @@ function getPendingDontilsContent(
       );
     }
   } else if (pendingDongilsStatus === 'failed') {
-    return <p>Failed</p>;
+    pendingDongilsContent = <p>Failed</p>;
   }
+  return pendingDongilsContent;
 }
 
-export default getPendingDontilsContent;
+export default getPendingDongilsContent;

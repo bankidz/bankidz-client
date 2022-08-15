@@ -29,7 +29,7 @@ import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteChe
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import getKidSummaryContent from '@components/home/sumary/getKidSummaryContent';
 import getWalkingDongilsContent from '@components/home/walking/getWalkingDongilsContent';
-import getPendingDontilsContent from '@components/home/pending/getPendingDontilsContent';
+import getPendingDongilsContent from '@components/home/pending/getPendingDontilsContent';
 
 function KidHome() {
   const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
@@ -96,7 +96,7 @@ function KidHome() {
   // 주간 진행상황, 걷고있는 돈길, 대기중인 돈길
   let kidSummaryContent = getKidSummaryContent();
   let walkingDongilsContent = getWalkingDongilsContent();
-  let pendingDongilsContent = getPendingDontilsContent(
+  let pendingDongilsContent = getPendingDongilsContent(
     onDeleteCheckOpen,
     setIdToDelete,
   );

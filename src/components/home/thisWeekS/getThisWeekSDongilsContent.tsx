@@ -13,26 +13,34 @@ function getThisWeekSDongilsContent() {
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
 
+  let thisWeekSDongilsContent;
   if (thisWeekSDongilsStatus === 'loading') {
-    return (
+    thisWeekSDongilsContent = (
       <>
         <h1>금주의 돈길</h1>
         <SkeletonDongilList variant="thisWeekS" />
       </>
     );
   } else if (thisWeekSDongilsStatus === 'succeeded') {
+    const getSelectedKidSThisWeekSDongils = (username: string) => {
+      const found = thisWeekSDongils?.find(
+        (thisWeekSDongil) => thisWeekSDongil.userName === username,
+      );
+      return found?.challengeList;
+    };
+
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
     if (thisWeekSDongils?.length === 0) {
-      return (
+      thisWeekSDongilsContent = (
         <>
           <h1>금주의 돈길</h1>
           <EmptyDongil property="thisWeekS" />
         </>
       );
     } else {
-      return (
+      thisWeekSDongilsContent = (
         <>
           <h1>금주의 돈길</h1>
           <ThisWeekSDongilList
@@ -42,14 +50,7 @@ function getThisWeekSDongilsContent() {
       );
     }
   } else if (thisWeekSDongilsStatus === 'failed') {
-    return <p>Failed</p>;
-  }
-
-  function getSelectedKidSThisWeekSDongils(username: string) {
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === username,
-    );
-    return found?.challengeList;
+    thisWeekSDongilsContent = <p>Failed</p>;
   }
 }
 
