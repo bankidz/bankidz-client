@@ -38,7 +38,7 @@ function Button({
       fixed={fixed}
       {...props}
     >
-      {property == 'kakao' && <img src={kakao} />}
+      {property === 'kakao' && <img src={kakao} />}
       <p>{label}</p>
     </Wrapper>
   );
