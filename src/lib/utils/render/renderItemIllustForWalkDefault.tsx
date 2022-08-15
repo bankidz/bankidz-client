@@ -30,6 +30,7 @@ function renderItemIllustForWalkDefault(itemName: TItemName) {
   } else if (itemName === '기타') {
     itemIllustForWalkDefault = <C3 />;
   }
+  return itemIllustForWalkDefault;
 }
 
 export default renderItemIllustForWalkDefault;
