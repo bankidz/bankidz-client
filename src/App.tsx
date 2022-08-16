@@ -11,7 +11,7 @@ import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import WalkRouter from './pages/Walk';
 import { useEffect } from 'react';
-import SungwooTestPage from './pages/SungwooTestPage';
+// import SungwooTestPage from './pages/SungwooTestPage';
 
 function App() {
   useEffect(() => {
@@ -33,14 +33,13 @@ function App() {
         <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
         <Route path="/register/:step" element={<Register />} />
         {/* <Route element={<PersistLogin />}> */}
-        {/* <Route element={<RequireAuth />}> */}
-        <Route path="/*" element={<HomeRouter />} />
-        <Route path="/walk/*" element={<WalkRouter />} />
-        <Route path="/mypage/*" element={<MypageRouter />} />
-        <Route path="/financial/*" element={<FinancialRouter />} />
-        <Route path="/sungwoo" element={<SungwooTestPage />} />
-        <Route path="*" element={<NotFound />} />
-        {/* </Route> */}
+        <Route element={<RequireAuth />}>
+          <Route path="/*" element={<HomeRouter />} />
+          <Route path="/walk/*" element={<WalkRouter />} />
+          <Route path="/mypage/*" element={<MypageRouter />} />
+          <Route path="/financial/*" element={<FinancialRouter />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
         {/* </Route> */}
       </Route>
     </Routes>

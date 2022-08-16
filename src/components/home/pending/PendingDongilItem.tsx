@@ -3,7 +3,7 @@ import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import { EDongilStatus } from '@lib/types/TDongilStatus';
-import convertCreatedAtToYYYYMMDD from '@lib/utils/convertCreatedAtToYYYYMMDD';
+import convertTimeStampToYYYYMMDD from '@lib/utils/convertTimeStampToYYYYMMDD';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
@@ -85,7 +85,7 @@ function PendingDongilItem({
         <div className="text-wrapper">
           <span className="title">{title}</span>
           <span className="createdAt">
-            {convertCreatedAtToYYYYMMDD(createdAt)}
+            {convertTimeStampToYYYYMMDD(createdAt)}
           </span>
         </div>
         <ProposalBadge
