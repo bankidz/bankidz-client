@@ -54,7 +54,7 @@ export const thisWeekSDongilsSlice = createSlice({
       })
       .addCase(fetchThisWeekSDongils.rejected, (state, action) => {
         state.thisWeekSDongilsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

@@ -97,7 +97,7 @@ function Detail() {
           onGiveUpCheckDismiss();
           onExceededOpen();
         } else {
-          console.log(error.message);
+          console.log(error);
         }
       } finally {
         setGiveUStatus('idle');

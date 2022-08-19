@@ -78,7 +78,7 @@ export const walkingDongilsSlice = createSlice({
       })
       .addCase(fetchWalkingDongils.rejected, (state, action) => {
         state.walkingDongilsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       })
       .addCase(giveUpWalkingDongil.fulfilled, (state, action) => {
         const { id } = action.payload.data;

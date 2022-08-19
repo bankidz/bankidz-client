@@ -53,7 +53,7 @@ export const parentSummariesSlice = createSlice({
       })
       .addCase(fetchParentSummaries.rejected, (state, action) => {
         state.parentSummariesStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

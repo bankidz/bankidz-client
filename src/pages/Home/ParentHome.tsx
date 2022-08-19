@@ -90,7 +90,7 @@ function ParentHome() {
             }),
           ).unwrap());
       } catch (error: any) {
-        console.log(error.message);
+        console.log(error);
       }
     }
     hydrate();
@@ -162,7 +162,7 @@ function ParentHome() {
             }),
           ).unwrap());
       } catch (error: any) {
-        console.log(error.message);
+        console.log(error);
       }
     }
     hydrate();

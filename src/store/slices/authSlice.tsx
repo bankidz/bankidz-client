@@ -65,12 +65,16 @@ export const register = createAsyncThunk(
     isKid: boolean;
   }) => {
     const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
+    // try {
     const response = await axiosPrivate.patch('/user', {
       birthday,
       isFemale,
       isKid,
     });
     return response.data;
+    // } catch (error) {
+    // console.log('catch in thunk: ', error);
+    // }
   },
 );
 
@@ -120,6 +124,10 @@ export const authSlice = createSlice({
         state.auth.isKid = isKid;
         state.auth.phone = phone;
         state.auth.username = username;
+      })
+      .addCase(register.rejected, (state, action) => {
+        // TODO: rejectWithValue
+        console.error('action in rejected', action);
       });
   },
 });
@@ -135,3 +143,6 @@ export const selectLevel = (state: RootState) => state.auth.auth.level;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 
 export default authSlice.reducer;
+
+// https://stackoverflow.com/questions/63439021/handling-errors-with-redux-toolkit
+// https://redux-toolkit.js.org/api/createAsyncThunk

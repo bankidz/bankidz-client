@@ -54,7 +54,7 @@ export const proposedDongilsSlice = createSlice({
       })
       .addCase(fetchProposedDongils.rejected, (state, action) => {
         state.proposedDongilsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });
