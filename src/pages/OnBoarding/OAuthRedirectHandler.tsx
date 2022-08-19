@@ -19,7 +19,7 @@ function OAuthRedirectHandler() {
         code && (await dispatch(login({ code })).unwrap());
         navigate('/');
       } catch (error: any) {
-        console.error(error.message);
+        console.error(error);
       }
     }
     processLogin();

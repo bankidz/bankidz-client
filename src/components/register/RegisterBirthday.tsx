@@ -5,7 +5,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import InputForm from '@components/common/InputForm';
 import Button from '@components/common/buttons/Button';
-import refineBirthday from './refineBirthday';
+import refineDate from '../../lib/utils/refineBirthday';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -19,9 +19,9 @@ function RegisterBirthday() {
   const [isValidYear, setIsValidYear] = useState(false);
   const [isValidMonth, setIsValidMonth] = useState(false);
   const [isValidDay, setIsValidDay] = useState(false);
-  const [yearFocus, setYearFocus] = useState(false);
-  const [monthFocus, setMonthFocus] = useState(false);
-  const [dayFocus, setDayFocus] = useState(false);
+  const [isYearFocused, setIsYearFocused] = useState(false);
+  const [isMonthFocused, setIsMonthFocused] = useState(false);
+  const [isDayFocused, setIsDayFocused] = useState(false);
 
   function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
     setYear(e.target.value.slice(0, 4));
@@ -58,9 +58,9 @@ function RegisterBirthday() {
     }
   }, [day]);
 
-  const toggleYearErrorMessage = yearFocus && year && !isValidYear;
-  const toggleMonthErrorMessage = monthFocus && month && !isValidMonth;
-  const toggleDayErrorMessage = dayFocus && day && !isValidDay;
+  const toggleYearErrorMessage = isYearFocused && year && !isValidYear;
+  const toggleMonthErrorMessage = isMonthFocused && month && !isValidMonth;
+  const toggleDayErrorMessage = isDayFocused && day && !isValidDay;
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -80,7 +80,7 @@ function RegisterBirthday() {
     setYear('');
     setMonth('');
     setDay('');
-    dispatch(setBirthday({ birthday: refineBirthday(year, month, day) }));
+    dispatch(setBirthday({ birthday: refineDate(year, month, day) }));
     navigate('/register/2');
   }
 
@@ -97,8 +97,8 @@ function RegisterBirthday() {
           autoFocus
           type="number"
           required
-          onFocus={() => setYearFocus(true)}
-          onBlur={() => setYearFocus(false)}
+          onFocus={() => setIsYearFocused(true)}
+          onBlur={() => setIsYearFocused(false)}
           autoComplete="off"
           postfix="년"
           pattern="\d*"
@@ -111,8 +111,8 @@ function RegisterBirthday() {
           error={month && !isValidMonth}
           type="number"
           required
-          onFocus={() => setMonthFocus(true)}
-          onBlur={() => setMonthFocus(false)}
+          onFocus={() => setIsMonthFocused(true)}
+          onBlur={() => setIsMonthFocused(false)}
           autoComplete="off"
           postfix="월"
           ref={monthInputRef}
@@ -126,8 +126,8 @@ function RegisterBirthday() {
           error={day && !isValidDay}
           type="number"
           required
-          onFocus={() => setDayFocus(true)}
-          onBlur={() => setDayFocus(false)}
+          onFocus={() => setIsDayFocused(true)}
+          onBlur={() => setIsDayFocused(false)}
           autoComplete="off"
           postfix="일"
           ref={dayInputRef}
@@ -136,19 +136,19 @@ function RegisterBirthday() {
         <DummyButton type="submit" />
       </InputFormWrapper>
 
-      {yearFocus === true && (
+      {isYearFocused && (
         <ErrorMessage className={toggleYearErrorMessage ? 'active' : undefined}>
           연도 형식이 올바르지 않아요
         </ErrorMessage>
       )}
-      {monthFocus === true && (
+      {isMonthFocused && (
         <ErrorMessage
           className={toggleMonthErrorMessage ? 'active' : undefined}
         >
           월 형식이 올바르지 않아요
         </ErrorMessage>
       )}
-      {dayFocus === true && (
+      {isDayFocused && (
         <ErrorMessage className={toggleDayErrorMessage ? 'active' : undefined}>
           일 형식이 올바르지 않아요
         </ErrorMessage>
@@ -161,9 +161,7 @@ function RegisterBirthday() {
           onClick={handleSubmit}
           property="default"
           type="submit"
-          state={
-            isValidYear === true && isValidMonth === true && isValidDay === true
-          }
+          state={isValidYear && isValidMonth && isValidDay}
         />
       </ButtonWrapper>
     </Wrapper>

@@ -59,7 +59,7 @@ function KidHome() {
         familyStatus === 'idle' &&
           (await dispatch(fetchFamily({ axiosPrivate })).unwrap());
       } catch (error: any) {
-        console.log(error.message);
+        console.log(error);
       }
     }
     hydrate();
@@ -91,7 +91,7 @@ function KidHome() {
         // setOpenDeletedCompleted(true);
         onDeleteCheckOpen();
       } catch (error: any) {
-        console.log(error.message);
+        console.log(error);
       } finally {
         setDeleteStatus('idle');
       }

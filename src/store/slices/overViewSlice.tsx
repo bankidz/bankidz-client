@@ -61,7 +61,7 @@ export const overViewSlice = createSlice({
       })
       .addCase(fetchOverView.rejected, (state, action) => {
         state.overViewStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

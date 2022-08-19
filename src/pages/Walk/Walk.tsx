@@ -22,8 +22,9 @@ function Walk() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
+  // TODO: walkAbledDongils -> walkableDongils
   const walkAbledDongils = walkingDongils?.filter(
-    (dongil) => dongil.status === 2 && dongil.isAchieved === 1,
+    (dongil) => dongil.challengeStatus === 'WALKING',
   );
 
   useEffect(() => {

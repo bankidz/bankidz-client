@@ -13,8 +13,7 @@ function renderHomeBanki(level: TLevel) {
     homeBanki = <Level2 />;
   } else if (level === 3) {
     homeBanki = <Level3 />;
-  } else if (level === 4 || level === -4 || level === 0) {
-    // TODO: 백 수정 이후 level: 0인 경우 삭제
+  } else if (level === 4 || level === -4) {
     homeBanki = <Level4 />;
   } else if (level === 5) {
     homeBanki = <Level5 />;

@@ -69,55 +69,69 @@ function TertiaryModal({ onSubmit }: TertiaryModalProps) {
     slidesPerView: 1,
   };
 
+  const background = (
+    <Background>
+      <div className="yellow-box"></div>
+      <div className="white-box">
+        <ProgressCircle currentCardIdx={currentCardIdx}>
+          <div className="first" />
+          <div className="second" />
+          <div className="third" />
+        </ProgressCircle>
+      </div>
+    </Background>
+  );
+
+  const styledSwiper = (
+    // @ts-expect-error
+    <StyledSwiper {...swiperParams} ref={setSwiper}>
+      <SwiperSlide>
+        <InstructionCard
+          headerText="이자란?"
+          bodyText={`우리가 맡긴 돈에\n추가로 은행이 주는 돈`}
+          currentCardIdx={currentCardIdx}
+        >
+          <ModalContentMoney />
+        </InstructionCard>
+      </SwiperSlide>
+      <SwiperSlide>
+        <InstructionCard
+          headerText="이자율이란?"
+          bodyText={`돈을 밭기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
+          currentCardIdx={currentCardIdx}
+        >
+          <ModalContentMoney />
+        </InstructionCard>
+      </SwiperSlide>
+      <SwiperSlide>
+        <InstructionCard
+          headerText="이자부스터란?"
+          bodyText={`실제 은행의 이자율과 같은 말로\n뱅키즈 내에서 사용돼요!`}
+          currentCardIdx={currentCardIdx}
+        >
+          <ModalContentSaving />
+        </InstructionCard>
+      </SwiperSlide>
+    </StyledSwiper>
+  );
+
+  const closeButton = (
+    <>
+      {/* <CloseButtonOverlay onClick={() => setIsOpen(false)} /> */}
+      <CloseButtonOverlay />
+      <CloseButtonWrapper>
+        <CloseButton onClick={handleSubmit} />
+      </CloseButtonWrapper>
+    </>
+  );
+
   return (
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
-      <Background>
-        <div className="yellow-box"></div>
-        <div className="white-box">
-          <ProgressCircle currentCardIdx={currentCardIdx}>
-            <div className="first" />
-            <div className="second" />
-            <div className="third" />
-          </ProgressCircle>
-        </div>
-      </Background>
+      {background}
       <Content>
-        {/* @ts-expect-error */}
-        <StyledSwiper {...swiperParams} ref={setSwiper}>
-          <SwiperSlide>
-            <InstructionCard
-              headerText="이자란?"
-              bodyText={`우리가 맡긴 돈에\n추가로 은행이 주는 돈`}
-              currentCardIdx={currentCardIdx}
-            >
-              <ModalContentMoney />
-            </InstructionCard>
-          </SwiperSlide>
-          <SwiperSlide>
-            <InstructionCard
-              headerText="이자율이란?"
-              bodyText={`돈을 밭기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
-              currentCardIdx={currentCardIdx}
-            >
-              <ModalContentMoney />
-            </InstructionCard>
-          </SwiperSlide>
-          <SwiperSlide>
-            <InstructionCard
-              headerText="이자부스터란?"
-              bodyText={`실제 은행의 이자율과 같은 말로\n뱅키즈 내에서 사용돼요!`}
-              currentCardIdx={currentCardIdx}
-            >
-              <ModalContentSaving />
-            </InstructionCard>
-          </SwiperSlide>
-        </StyledSwiper>
-        {/* <CloseButtonOverlay onClick={() => setIsOpen(false)} /> */}
-        <CloseButtonOverlay />
-        <CloseButtonWrapper>
-          <CloseButton onClick={handleSubmit} />
-        </CloseButtonWrapper>
+        {styledSwiper}
+        {closeButton}
       </Content>
     </StyledReactModal>
   );

@@ -21,7 +21,7 @@ export const fetchWalkingDongils = createAsyncThunk(
   'walkingDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
-    const response = await axiosPrivate.get('/challenge/?status=accept');
+    const response = await axiosPrivate.get('/challenge/?status=walking');
     return response.data;
   },
 );
@@ -78,7 +78,7 @@ export const walkingDongilsSlice = createSlice({
       })
       .addCase(fetchWalkingDongils.rejected, (state, action) => {
         state.walkingDongilsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       })
       .addCase(giveUpWalkingDongil.fulfilled, (state, action) => {
         const { id } = action.payload.data;

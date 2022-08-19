@@ -56,7 +56,7 @@ export const kidsSlice = createSlice({
       })
       .addCase(fetchKids.rejected, (state, action) => {
         state.kidsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

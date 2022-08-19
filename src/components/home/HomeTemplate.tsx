@@ -60,48 +60,51 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
   //TODO: demo day
   let headerText;
   const isKid = useAppSelector(selectIsKid);
-  if (isKid === true && (level! === -4 || level! === 0)) {
+  if (isKid === true && level! === -4) {
     // 자녀 - 한규진
-    // TODO: 백 수정 이후 level: 0인 경우 삭제
     headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
   } else if (isKid === true && level! === 2) {
     // 자녀 - 주어진
     headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
-  } else if (isKid === false && (level! === -4 || level! === 0)) {
+  } else if (isKid === false && level! === -4) {
     // 부모 - 한규진 선택
-    // TODO: 백 수정 이후 level: 0인 경우 삭제
     headerText = `자녀의 저축 레벨이\n곧 있으면 올라가요`;
   } else if (isKid === false && level! === 2) {
     // 부모 - 주어진 선택
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
   }
 
-  return (
-    <Wrapper>
-      <FixedBar colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
-        <div className="logo-wrapper">
-          <BANKIDZ />
-        </div>
-        {hasMultipleKids === true && (
-          <KidListWrapper colorByLevel={colorByLevel}>
-            {kidsContent}
-          </KidListWrapper>
-        )}
-      </FixedBar>
-      <Content>
-        <MarginTemplate>
-          <FlexContainer>
-            <StyledHeader hasMultipleKids={hasMultipleKids!}>
-              {headerText}
-            </StyledHeader>
-            <LevelBadgeWrapper>
-              <LevelBadge level={level!} />
-            </LevelBadgeWrapper>
-          </FlexContainer>
-        </MarginTemplate>
-        {children}
-      </Content>
+  const fixedBar = (
+    <FixedBar colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
+      <div className="logo-wrapper">
+        <BANKIDZ />
+      </div>
+      {hasMultipleKids === true && (
+        <KidListWrapper colorByLevel={colorByLevel}>
+          {kidsContent}
+        </KidListWrapper>
+      )}
+    </FixedBar>
+  );
 
+  const content = (
+    <Content>
+      <MarginTemplate>
+        <FlexContainer>
+          <StyledHeader hasMultipleKids={hasMultipleKids!}>
+            {headerText}
+          </StyledHeader>
+          <LevelBadgeWrapper>
+            <LevelBadge level={level!} />
+          </LevelBadgeWrapper>
+        </FlexContainer>
+      </MarginTemplate>
+      {children}
+    </Content>
+  );
+
+  const background = (
+    <>
       <BackgroundBox
         colorByLevel={colorByLevel}
         hasMultipleKids={hasMultipleKids!}
@@ -116,6 +119,14 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
       <HomeBankiWrapper hasMultipleKids={hasMultipleKids!}>
         {renderHomeBanki(level!)}
       </HomeBankiWrapper>
+    </>
+  );
+
+  return (
+    <Wrapper>
+      {fixedBar}
+      {content}
+      {background}
     </Wrapper>
   );
 }
@@ -220,6 +231,7 @@ const BackgroundBox = styled.div<{
 
   width: 100%;
   z-index: 0;
+
   background-color: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.kidSelect};
   transition-property: background-color;
@@ -238,8 +250,10 @@ const BackgroundEllipse = styled.div<{
   height: 230px;
   border-radius: 265px / 115px;
   z-index: 1;
+
   background-color: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.kidSelect};
+  transition-property: background-color;
 `;
 
 const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`

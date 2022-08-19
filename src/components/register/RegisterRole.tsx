@@ -88,39 +88,18 @@ function RegisterRole() {
     if (canRegister) {
       try {
         setRegisterStatus('pending');
-        // await dispatch(
-        //   register({
-        //     axiosPrivate,
-        //     birthday,
-        //     isKid,
-        //     isFemale,
-        //   }),
-        // ).unwrap();
-
-        // TODO: demo day
-        let accessToken;
-        let level: TLevel | null = null;
-        if (isKid === false && isFemale === false) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzM3LCJzdWIiOiI1IiwiZXhwIjoxNjYxMzMzOTM3LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.lQX8aymHJXp8wXcgcix9x32ZQCwjP2arI3WEPvLLRRk';
-        } else if (isKid === false && isFemale === true) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzY1LCJzdWIiOiIyIiwiZXhwIjoxNjYxMzMzOTY1LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.f2B_gezGmD6uKh2Js3Y_blrLJGOFyWXzqva5MAXmbqc';
-        } else if (isKid === true && isFemale === false) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0';
-          level = -4;
-        } else if (isKid === true && isFemale === true) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU';
-          level = 2;
-        }
-        accessToken && dispatch(setCredentials({ accessToken, isKid, level }));
-
+        await dispatch(
+          register({
+            axiosPrivate,
+            birthday,
+            isKid,
+            isFemale,
+          }),
+        ).unwrap();
         onDismiss();
         handleModalOpen();
       } catch (error: any) {
-        console.error(error.message);
+        console.error('error in handle submit:', error);
       } finally {
         setRegisterStatus('idle');
       }

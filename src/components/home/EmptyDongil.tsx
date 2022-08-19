@@ -15,6 +15,7 @@ function EmptyDongil({ variant }: EmptyDongilProps) {
   } else if (variant === 'thisWeekS') {
     subject = '걷고있는';
   }
+
   return (
     <Wrapper>
       <button>

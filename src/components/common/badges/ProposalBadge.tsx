@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface ProposalBadgeProps {
   /** 상태를 선택합니다. isProposing이 true면 '제안중', false면 '거절됨'을 의미합니다. */

@@ -12,7 +12,7 @@ interface RoleButtonProps extends HTMLAttributes<HTMLButtonElement> {
    * 버튼이 선택된 경우 isSelect를 true로 설정합니다.
    * 버튼이 선택되지 않은 경우 false로 설정합니다.
    */
-  isSelected?: boolean | null;
+  isSelected?: boolean;
 }
 
 function RoleButton({

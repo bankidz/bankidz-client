@@ -64,7 +64,7 @@ export const familySlice = createSlice({
       })
       .addCase(fetchKids.rejected, (state, action) => {
         state.kidsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       })
       .addCase(fetchFamily.pending, (state) => {
         state.familyStatus = 'loading';
@@ -79,7 +79,7 @@ export const familySlice = createSlice({
       })
       .addCase(fetchFamily.rejected, (state, action) => {
         state.familyStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

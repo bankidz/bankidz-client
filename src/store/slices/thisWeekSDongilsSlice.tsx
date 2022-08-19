@@ -26,7 +26,7 @@ export const fetchThisWeekSDongils = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
-      `/challenge/kid/${kidId}?status=accept`,
+      `/challenge/kid/${kidId}?status=walking`,
     );
     return response.data;
   },
@@ -54,7 +54,7 @@ export const thisWeekSDongilsSlice = createSlice({
       })
       .addCase(fetchThisWeekSDongils.rejected, (state, action) => {
         state.thisWeekSDongilsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

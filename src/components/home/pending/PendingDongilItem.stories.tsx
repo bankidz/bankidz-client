@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PendingDongilItem from './PendingDongilItem';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { EDongilStatus } from '@lib/types/TDongilStatus';
 
 export default {
   title: 'home/pending/PendingDongilItem',
@@ -28,14 +27,13 @@ export const 제안중 = Template.bind({});
     title: 'FE Mock) 아이패드 사기',
     itemName: '전자제품',
     challengeCategory: '이자율 받기',
-    isAchieved: 1,
+    challengeStatus: 'PENDING',
     interestRate: 10,
     totalPrice: 150000,
     weekPrice: 10000,
     successWeeks: 0,
     weeks: 15,
     createdAt: '2022/07/14 03:28:29',
-    status: EDongilStatus.REJECTED,
     fileName: 'example',
     progressList: [
       {
@@ -60,14 +58,13 @@ export const 거절됨 = Template.bind({});
     title: 'FE Mock) 아이패드 사기',
     itemName: '전자제품',
     challengeCategory: '이자율 받기',
-    isAchieved: 1,
+    challengeStatus: 'REJECTED',
     interestRate: 10,
     totalPrice: 150000,
     weekPrice: 10000,
     successWeeks: 0,
     weeks: 15,
     createdAt: '2022/07/14 03:28:29',
-    status: EDongilStatus.REJECTED,
     fileName: 'example',
     progressList: [
       {
