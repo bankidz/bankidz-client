@@ -2,7 +2,7 @@ import ProposalBadge from '@components/common/badges/ProposalBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
-import convertTimeStampToYYYYMMDD from '@lib/utils/convertTimeStampToYYYYMMDD';
+import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
@@ -84,7 +84,7 @@ function PendingDongilItem({
         <div className="text-wrapper">
           <span className="title">{title}</span>
           <span className="createdAt">
-            {convertTimeStampToYYYYMMDD(createdAt)}
+            {getFormattedTimeStamp(createdAt, 'YYYY.MM.DD')}
           </span>
         </div>
         <ProposalBadge isProposing={challengeStatus === 'PENDING'} />
