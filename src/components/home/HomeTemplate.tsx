@@ -60,16 +60,14 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
   //TODO: demo day
   let headerText;
   const isKid = useAppSelector(selectIsKid);
-  if (isKid === true && (level! === -4 || level! === 0)) {
+  if (isKid === true && level! === -4) {
     // 자녀 - 한규진
-    // TODO: 백 수정 이후 level: 0인 경우 삭제
     headerText = `조금만 더 걸으면\n뱅키임당을 만날 수 있어요`;
   } else if (isKid === true && level! === 2) {
     // 자녀 - 주어진
     headerText = `실패한 돈길을 확인하고,\n앞으로를 대비해요`;
-  } else if (isKid === false && (level! === -4 || level! === 0)) {
+  } else if (isKid === false && level! === -4) {
     // 부모 - 한규진 선택
-    // TODO: 백 수정 이후 level: 0인 경우 삭제
     headerText = `자녀의 저축 레벨이\n곧 있으면 올라가요`;
   } else if (isKid === false && level! === 2) {
     // 부모 - 주어진 선택

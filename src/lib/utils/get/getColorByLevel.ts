@@ -13,9 +13,6 @@ function getColorByLevel(level: TLevel): string {
       return theme.palette.level.green100;
     case -4:
       return theme.palette.level.green100;
-    // TODO: 백 수정 이후 level: 0인 경우 삭제
-    case 0:
-      return theme.palette.level.green100;
     case 5:
       return theme.palette.level.yellow100;
     default:
