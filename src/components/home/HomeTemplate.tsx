@@ -231,6 +231,7 @@ const BackgroundBox = styled.div<{
 
   width: 100%;
   z-index: 0;
+
   background-color: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.kidSelect};
   transition-property: background-color;
@@ -249,8 +250,10 @@ const BackgroundEllipse = styled.div<{
   height: 230px;
   border-radius: 265px / 115px;
   z-index: 1;
+
   background-color: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.kidSelect};
+  transition-property: background-color;
 `;
 
 const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`
