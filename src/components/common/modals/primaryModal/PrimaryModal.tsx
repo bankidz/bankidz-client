@@ -38,7 +38,7 @@ function PrimaryModal({
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    shouldCloseOnOverlayClick: true,
+    // shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -81,7 +81,8 @@ function PrimaryModal({
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
         </WhiteBox>
-        <CheckButtonOverlay onClick={() => setIsOpen(false)} />
+        {/* <CheckButtonOverlay onClick={() => setIsOpen(false)} /> */}
+        <CheckButtonOverlay />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>

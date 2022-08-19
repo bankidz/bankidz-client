@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SelectInterestButton from '@components/home/create/SelectInterestButton';
 import { TSetStep4Form } from '@components/home/create/steps/Step4';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 const notifications = {
   null: {
@@ -43,7 +44,8 @@ const notifications = {
 };
 
 function SelectInterest({ form, setForm }: TSetStep4Form) {
-  const [select, setSelect] = useState<10 | 20 | 30 | null>(
+  // TODO: TInterestRate
+  const [select, setSelect] = useState<TInterestRate | null>(
     form?.interestRate ? form.interestRate : null,
   );
 

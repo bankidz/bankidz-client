@@ -12,7 +12,7 @@ import { TInterestRate } from '@lib/types/IInterestRate';
 import getThirdRow from './getThirdRow';
 import '../styles.css';
 import getSubmitButton from './getSubmitButton';
-import SuggestBadge from '@components/common/badges/SuggestBadge';
+import ProposalBadge from '@components/common/badges/ProposalBadge';
 import getHeightByVariant from './getHeightByVariant';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
@@ -77,7 +77,7 @@ function ReceiptModal({
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    shouldCloseOnOverlayClick: true,
+    // shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -135,8 +135,8 @@ function ReceiptModal({
           {variant === 'contract' && (
             <span className="header">계약서 전송 성공!</span>
           )}
-          {variant === 'proposing' && <SuggestBadge isSuggesting={true} />}
-          {variant === 'rejected' && <SuggestBadge isSuggesting={false} />}
+          {variant === 'proposing' && <ProposalBadge isProposing />}
+          {variant === 'rejected' && <ProposalBadge isProposing />}
           <span className="body">{title}</span>
         </Top>
 

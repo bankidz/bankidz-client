@@ -11,6 +11,7 @@ interface SheetCompleteProps {
 
 function SheetCompleted({ type, title, onDismiss }: SheetCompleteProps) {
   return (
+    // TODO: fragment
     <Wrapper>
       <Container>
         {type === 'feedback' ? <Feedback /> : <Complete />}

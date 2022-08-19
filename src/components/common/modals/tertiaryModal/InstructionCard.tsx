@@ -40,14 +40,10 @@ const YellowBox = styled.div<{ currentCardIdx: number }>`
   align-items: center;
 
   svg {
-    ${({ currentCardIdx }) =>
+    width: ${({ currentCardIdx }) =>
       currentCardIdx === 2
-        ? css`
-            width: ${calcRatio(160, 324)};
-          `
-        : css`
-            width: ${calcRatio(96, 324)};
-          `}
+        ? `${calcRatio(160, 324)}`
+        : `${calcRatio(96, 324)}`};
   }
 `;
 

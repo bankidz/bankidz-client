@@ -16,6 +16,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * 버튼 활성화 상태
    */
+  // TODO: state -> disable 최대한 직관적인 이ㅁㅡ로
   state?: boolean;
   /**
    * 너비 고정, 가운데 정렬인 버튼 (모달->삭제하기)
@@ -38,7 +39,7 @@ function Button({
       fixed={fixed}
       {...props}
     >
-      {property == 'kakao' && <img src={kakao} />}
+      {property === 'kakao' && <img src={kakao} />}
       <p>{label}</p>
     </Wrapper>
   );

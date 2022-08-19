@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import KidsRecordItem from './KidsRecordItem';
 
+// TODO: any
 function KidsRecordList({ kidsRecordData }: { kidsRecordData: any }) {
   return (
     <Wrapper>

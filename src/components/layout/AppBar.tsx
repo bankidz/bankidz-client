@@ -7,9 +7,8 @@ import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 interface AppBarProps {
-  /**
-   * 이전 페이지명
-   */
+  // TODO: 한줄 주석
+  /** 이전 페이지명 */
   label?: string;
   /**
    * 레벨
@@ -23,10 +22,12 @@ function AppBar({ label, level }: AppBarProps) {
     navigate(-1);
   };
 
+  // TODO: undefined
   const colorByLevel = level !== undefined && getColorByLevel(level!);
+  // TODO: null type
   const textColor = (level?: TLevel | null) => {
-    if (level == null || level == undefined) {
-      return '#2E3234';
+    if (level === null || level === undefined) {
+      return '#2E3234'; // TODO: 요런건 주석 남기기
     } else {
       return '#fff';
     }
@@ -52,6 +53,7 @@ const Wrapper = styled.div<{ colorByLevel: string | null }>`
   align-items: center;
   cursor: pointer;
 
+  /* TODO: 한줄 조건에 따른 CSS */
   ${({ colorByLevel }) =>
     colorByLevel &&
     css`
@@ -71,6 +73,7 @@ const Wrapper = styled.div<{ colorByLevel: string | null }>`
 
   p {
     //TODO : 보류
+    // TODO: 디자인 시스템
     font-family: 'TmoneyRoundWind';
     font-size: 17px;
     line-height: 100%;

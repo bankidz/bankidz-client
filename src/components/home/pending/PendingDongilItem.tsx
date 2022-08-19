@@ -1,9 +1,9 @@
-import SuggestBadge from '@components/common/badges/SuggestBadge';
+import ProposalBadge from '@components/common/badges/ProposalBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import { EDongilStatus } from '@lib/types/TDongilStatus';
-import { getDate } from '@lib/utils/get/getDate';
+import convertTimeStampToYYYYMMDD from '@lib/utils/convertTimeStampToYYYYMMDD';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
@@ -84,10 +84,12 @@ function PendingDongilItem({
       <StyledButton onClick={handleClick}>
         <div className="text-wrapper">
           <span className="title">{title}</span>
-          <span className="createdAt">{getDate(createdAt)}</span>
+          <span className="createdAt">
+            {convertTimeStampToYYYYMMDD(createdAt)}
+          </span>
         </div>
-        <SuggestBadge
-          isSuggesting={status === EDongilStatus.PENDING ? true : false}
+        <ProposalBadge
+          isProposing={status === EDongilStatus.PENDING ? true : false}
         />
       </StyledButton>
     </>

@@ -12,6 +12,7 @@ function KidList() {
   const dispatch = useAppDispatch();
   const kids = useAppSelector(selectKids);
   const selectedKid = useAppSelector(selectSelectedKid);
+
   return (
     <Wrapper>
       {kids?.map((kid) => (

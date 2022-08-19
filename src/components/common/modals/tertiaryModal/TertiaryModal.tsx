@@ -29,7 +29,7 @@ function TertiaryModal({ onSubmit }: TertiaryModalProps) {
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    shouldCloseOnOverlayClick: true,
+    // shouldCloseOnOverlayClick: true,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -113,7 +113,8 @@ function TertiaryModal({ onSubmit }: TertiaryModalProps) {
             </InstructionCard>
           </SwiperSlide>
         </StyledSwiper>
-        <CloseButtonOverlay onClick={() => setIsOpen(false)} />
+        {/* <CloseButtonOverlay onClick={() => setIsOpen(false)} /> */}
+        <CloseButtonOverlay />
         <CloseButtonWrapper>
           <CloseButton onClick={handleSubmit} />
         </CloseButtonWrapper>

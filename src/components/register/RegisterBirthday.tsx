@@ -58,9 +58,12 @@ function RegisterBirthday() {
     }
   }, [day]);
 
+  const toggleYearErrorMessage = yearFocus && year && !isValidYear;
+  const toggleMonthErrorMessage = monthFocus && month && !isValidMonth;
+  const toggleDayErrorMessage = dayFocus && day && !isValidDay;
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const parsedIntYear = parseInt(year);
@@ -80,10 +83,6 @@ function RegisterBirthday() {
     dispatch(setBirthday({ birthday: refineBirthday(year, month, day) }));
     navigate('/register/2');
   }
-
-  const toggleYearErrorMessage = yearFocus && year && !isValidYear;
-  const toggleMonthErrorMessage = monthFocus && month && !isValidMonth;
-  const toggleDayErrorMessage = dayFocus && day && !isValidDay;
 
   return (
     <Wrapper>

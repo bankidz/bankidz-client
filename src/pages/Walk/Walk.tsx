@@ -23,7 +23,7 @@ function Walk() {
   const axiosPrivate = useAxiosPrivate();
 
   const walkAbledDongils = walkingDongils?.filter(
-    (dongil) => dongil.status == 2 && dongil.isAchieved === 1,
+    (dongil) => dongil.status === 2 && dongil.isAchieved === 1,
   );
 
   useEffect(() => {

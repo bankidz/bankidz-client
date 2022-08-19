@@ -1,13 +1,15 @@
 function getRoleText(isKid: boolean, isFemale: boolean) {
+  let roleText;
   if (isKid === false && isFemale === false) {
-    return '아빠';
+    roleText = '아빠';
   } else if (isKid === false && isFemale === true) {
-    return '엄마';
+    roleText = '엄마';
   } else if (isKid === true && isFemale === false) {
-    return '아들';
+    roleText = '아들';
   } else {
-    return '딸';
+    roleText = '딸';
   }
+  return roleText;
 }
 
 export default getRoleText;

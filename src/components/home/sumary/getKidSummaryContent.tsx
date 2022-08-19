@@ -9,11 +9,14 @@ function getKidSummaryContent() {
   const kidSummary = useAppSelector(selectKidSummary);
   const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
 
+  let kidSummaryContent;
   if (kidSummaryStatus === 'loading') {
-    return <Summary variant="KidHome" currentSavings={0} totalPrice={0} />;
+    kidSummaryContent = (
+      <Summary variant="KidHome" currentSavings={0} totalPrice={0} />
+    );
   } else if (kidSummaryStatus === 'succeeded') {
     const { currentSavings, totalPrice } = kidSummary!;
-    return (
+    kidSummaryContent = (
       <Summary
         variant="KidHome"
         currentSavings={currentSavings!}
@@ -21,8 +24,9 @@ function getKidSummaryContent() {
       />
     );
   } else if (kidSummaryStatus === 'failed') {
-    return <p>Failed</p>;
+    kidSummaryContent = <p>Failed</p>;
   }
+  return kidSummaryContent;
 }
 
 export default getKidSummaryContent;

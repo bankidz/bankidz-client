@@ -11,8 +11,9 @@ function getParentSummaryContent() {
   const parentSummaries = useAppSelector(selectParentSummaries);
   const selectedKid = useAppSelector(selectSelectedKid);
 
+  let parentSummaryContent;
   if (parentSummariesStatus === 'loading') {
-    return (
+    parentSummaryContent = (
       <Summary
         variant="ParentHome"
         currentSavings={0}
@@ -21,12 +22,19 @@ function getParentSummaryContent() {
       />
     );
   } else if (parentSummariesStatus === 'succeeded') {
+    const getSelectedKidSParentSummary = (kidId: number) => {
+      const found = parentSummaries?.find(
+        (parentSummary) => parentSummary.kidId === kidId,
+      );
+      return found;
+    };
+
     const selectedKidSParentSummary = getSelectedKidSParentSummary(
       selectedKid?.kidId!,
     );
     if (selectedKidSParentSummary) {
       const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
-      return (
+      parentSummaryContent = (
         <Summary
           variant="ParentHome"
           currentSavings={currentSavings!}
@@ -36,15 +44,9 @@ function getParentSummaryContent() {
       );
     }
   } else if (parentSummariesStatus === 'failed') {
-    return <p>Failed</p>;
+    parentSummaryContent = <p>Failed</p>;
   }
-
-  function getSelectedKidSParentSummary(kidId: number) {
-    const found = parentSummaries?.find(
-      (parentSummary) => parentSummary.kidId === kidId,
-    );
-    return found;
-  }
+  return parentSummaryContent;
 }
 
 export default getParentSummaryContent;

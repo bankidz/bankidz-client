@@ -97,23 +97,23 @@ const ContentWrapper = styled.div<{ isKid: boolean; isFemale: boolean }>`
         width: ${calcRatio(87.12, 146)};
       `}
     // 엄마
-      ${({ isKid, isFemale }) =>
+    ${({ isKid, isFemale }) =>
       isKid === false &&
       isFemale === true &&
       css`
         margin-left: ${calcRatio(25, 146)};
         width: ${calcRatio(97.56, 146)};
       `}
-      // 아들
-      ${({ isKid, isFemale }) =>
+    // 아들
+    ${({ isKid, isFemale }) =>
       isKid === true &&
       isFemale === false &&
       css`
         margin-left: ${calcRatio(34, 146)};
         width: ${calcRatio(88.81, 146)};
       `}
-      // 딸
-      ${({ isKid, isFemale }) =>
+    // 딸
+    ${({ isKid, isFemale }) =>
       isKid === true &&
       isFemale === true &&
       css`

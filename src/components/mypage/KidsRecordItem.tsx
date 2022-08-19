@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import OverViewData from './OverViewData';
 
+// TODO: any
 function KidsRecordItem({ kid }: { kid: any }) {
   return (
     <Wrapper>

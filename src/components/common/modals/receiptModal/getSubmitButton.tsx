@@ -14,7 +14,8 @@ function getSubmitButton(
   return (
     <>
       {variant !== 'proposed' && (
-        <ButtonOverlay onClick={() => setIsOpen(false)} />
+        // <ButtonOverlay onClick={() => setIsOpen(false)} />
+        <ButtonOverlay />
       )}
 
       <ButtonWrapper variant={variant}>

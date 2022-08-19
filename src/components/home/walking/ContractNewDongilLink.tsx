@@ -29,14 +29,10 @@ export default ContractNewDongilLink;
 
 const StyledLink = styled(Link)<{ disable: string }>`
   ${({ theme }) => theme.typo.button.Text_T_14_EB};
-  ${({ disable }) =>
+  color: ${({ disable, theme }) =>
     disable === 'true'
-      ? css`
-          color: ${({ theme }) => theme.palette.greyScale.grey200};
-        `
-      : css`
-          color: ${({ theme }) => theme.palette.main.yellow400};
-        `}
+      ? `${theme.palette.greyScale.grey200}`
+      : `${theme.palette.main.yellow400}`};
 
   width: 150px;
   height: 48px;

@@ -10,25 +10,27 @@ import { ReactComponent as C3 } from '@assets/illusts/contractItemNames/general/
 import { TItemName } from '@lib/types/TItemName';
 
 function renderItemIllust(itemName: TItemName) {
+  let itemIllust;
   if (itemName === '학용품') {
-    return <A1 />;
+    itemIllust = <A1 />;
   } else if (itemName === '생활용품') {
-    return <A2 />;
+    itemIllust = <A2 />;
   } else if (itemName === '전자제품') {
-    return <A3 />;
+    itemIllust = <A3 />;
   } else if (itemName === '식품') {
-    return <B1 />;
+    itemIllust = <B1 />;
   } else if (itemName === '문화생활') {
-    return <B2 />;
+    itemIllust = <B2 />;
   } else if (itemName === '패션뷰티') {
-    return <B3 />;
+    itemIllust = <B3 />;
   } else if (itemName === '선물') {
-    return <C1 />;
+    itemIllust = <C1 />;
   } else if (itemName === '비상금') {
-    return <C2 />;
+    itemIllust = <C2 />;
   } else if (itemName === '기타') {
-    return <C3 />;
+    itemIllust = <C3 />;
   }
+  return itemIllust;
 }
 
 export default renderItemIllust;

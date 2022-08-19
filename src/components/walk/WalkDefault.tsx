@@ -25,6 +25,7 @@ type TWalkDefaultProps = {
   walkingDongils: IDongil[];
   user: TUser;
 };
+
 function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
   const level = useAppSelector(selectLevel);
   const patched = useAppSelector(selectIsWalkingDongilsPatched);

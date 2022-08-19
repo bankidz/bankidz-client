@@ -132,14 +132,7 @@ const Wrapper = styled.div`
 `;
 
 const FixedBar = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          height: 95px;
-        `
-      : css`
-          height: 48px;
-        `}
+  height: ${({ hasMultipleKids }) => (hasMultipleKids ? '95px' : '48px')};
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
   transition: ${({ theme }) => theme.transition.kidSelect};
@@ -219,14 +212,7 @@ const BackgroundBox = styled.div<{
   colorByLevel: string;
   hasMultipleKids: boolean;
 }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          height: 350px;
-        `
-      : css`
-          height: 275px;
-        `}
+  height: ${({ hasMultipleKids }) => (hasMultipleKids ? '380px' : '310px')};
   position: absolute;
   top: 0;
   left: 50%;
@@ -235,7 +221,7 @@ const BackgroundBox = styled.div<{
   width: 100%;
   z-index: 0;
   background-color: ${({ colorByLevel }) => colorByLevel};
-  transition: ${({ theme }) => theme.transition.inputFocus};
+  transition: ${({ theme }) => theme.transition.kidSelect};
   transition-property: background-color;
 `;
 
@@ -243,7 +229,43 @@ const BackgroundEllipse = styled.div<{
   colorByLevel: string;
   hasMultipleKids: boolean;
 }>`
-  ${({ hasMultipleKids }) =>
+  top: ${({ hasMultipleKids }) => (hasMultipleKids ? '410px' : '337px')};
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+
+  width: 530px;
+  height: 230px;
+  border-radius: 265px / 115px;
+  z-index: 1;
+  background-color: ${({ colorByLevel }) => colorByLevel};
+  transition: ${({ theme }) => theme.transition.kidSelect};
+`;
+
+const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`
+  top: ${({ hasMultipleKids }) => (hasMultipleKids ? '125px' : '48px')};
+  z-index: 1;
+  position: absolute;
+  right: 0;
+`;
+
+const HomeBankiWrapper = styled.div<{ hasMultipleKids: boolean }>`
+  top: ${({ hasMultipleKids }) => (hasMultipleKids ? '223px' : '146px')};
+  z-index: 2;
+  position: absolute;
+  right: 0;
+`;
+
+/* ${({ hasMultipleKids }) =>
+    hasMultipleKids === true
+      ? css`
+          height: 350px;
+        `
+      : css`
+          height: 275px;
+        `} */
+
+/* ${({ hasMultipleKids }) =>
     hasMultipleKids === true
       ? css`
           @keyframes slide {
@@ -265,44 +287,4 @@ const BackgroundEllipse = styled.div<{
             }
           }
         `}
-  animation: slide ${({ theme }) => theme.animation.homeMount};
-
-  position: absolute;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-
-  width: 530px;
-  height: 230px;
-  border-radius: 265px / 115px;
-  z-index: 1;
-  background-color: ${({ colorByLevel }) => colorByLevel};
-  transition: ${({ theme }) => theme.transition.inputFocus};
-`;
-
-const HomeBackgroundWrapper = styled.div<{ hasMultipleKids: boolean }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          top: 125px;
-        `
-      : css`
-          top: 48px;
-        `}
-  z-index: 1;
-  position: absolute;
-  right: 0;
-`;
-
-const HomeBankiWrapper = styled.div<{ hasMultipleKids: boolean }>`
-  ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          top: 223px;
-        `
-      : css`
-          top: 146px;
-        `}
-  z-index: 2;
-  position: absolute;
-  right: 0;
-`;
+  animation: slide ${({ theme }) => theme.animation.homeMount}; */

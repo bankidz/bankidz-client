@@ -111,6 +111,7 @@ function Detail() {
     onGiveUpCheckDismiss();
     onCancelCompletedOpen();
   }
+
   return (
     <Wrapper>
       <Content>
