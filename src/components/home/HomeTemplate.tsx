@@ -74,32 +74,37 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
     headerText = `자녀가 저축에 실패하지\n않도록 격려해주세요`;
   }
 
-  return (
-    <Wrapper>
-      <FixedBar colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
-        <div className="logo-wrapper">
-          <BANKIDZ />
-        </div>
-        {hasMultipleKids === true && (
-          <KidListWrapper colorByLevel={colorByLevel}>
-            {kidsContent}
-          </KidListWrapper>
-        )}
-      </FixedBar>
-      <Content>
-        <MarginTemplate>
-          <FlexContainer>
-            <StyledHeader hasMultipleKids={hasMultipleKids!}>
-              {headerText}
-            </StyledHeader>
-            <LevelBadgeWrapper>
-              <LevelBadge level={level!} />
-            </LevelBadgeWrapper>
-          </FlexContainer>
-        </MarginTemplate>
-        {children}
-      </Content>
+  const fixedBar = (
+    <FixedBar colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
+      <div className="logo-wrapper">
+        <BANKIDZ />
+      </div>
+      {hasMultipleKids === true && (
+        <KidListWrapper colorByLevel={colorByLevel}>
+          {kidsContent}
+        </KidListWrapper>
+      )}
+    </FixedBar>
+  );
 
+  const content = (
+    <Content>
+      <MarginTemplate>
+        <FlexContainer>
+          <StyledHeader hasMultipleKids={hasMultipleKids!}>
+            {headerText}
+          </StyledHeader>
+          <LevelBadgeWrapper>
+            <LevelBadge level={level!} />
+          </LevelBadgeWrapper>
+        </FlexContainer>
+      </MarginTemplate>
+      {children}
+    </Content>
+  );
+
+  const background = (
+    <>
       <BackgroundBox
         colorByLevel={colorByLevel}
         hasMultipleKids={hasMultipleKids!}
@@ -114,6 +119,14 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
       <HomeBankiWrapper hasMultipleKids={hasMultipleKids!}>
         {renderHomeBanki(level!)}
       </HomeBankiWrapper>
+    </>
+  );
+
+  return (
+    <Wrapper>
+      {fixedBar}
+      {content}
+      {background}
     </Wrapper>
   );
 }

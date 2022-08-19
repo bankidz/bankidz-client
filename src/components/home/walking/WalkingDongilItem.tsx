@@ -27,7 +27,6 @@ function WalkingDongilItem({
   interestRate,
   challengeStatus,
 }: WalkingDongilItemProps) {
-  const isFailed = challengeStatus === 'FAILED';
   const navigate = useNavigate();
 
   const [openDongilFailed, onOpenDongilFailed, onDismissDongilFailed] =
@@ -39,7 +38,7 @@ function WalkingDongilItem({
 
   return (
     <>
-      {isFailed ? (
+      {challengeStatus === 'FAILED' ? (
         <StyledDiv onClick={onOpenDongilFailed}>
           <div className="content-wrapper">
             <div className="illust">{renderItemIllust(itemName)}</div>
