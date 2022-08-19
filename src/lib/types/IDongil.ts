@@ -9,14 +9,13 @@ export interface IDongil {
   title: string;
   itemName: TItemName;
   challengeCategory: TDongilCategory;
-  isAchieved: number;
+  challengeStatus: TDongilStatus;
   interestRate: TInterestRate;
   totalPrice: number;
   weekPrice: number;
   successWeeks: number;
   weeks: number;
   createdAt: string;
-  status: TDongilStatus;
   fileName: string;
   progressList:
     | {

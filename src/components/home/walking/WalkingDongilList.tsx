@@ -16,7 +16,7 @@ function WalkingDongilList({ walkingDongils }: WalkingDongilListProps) {
           title={walkingDongil.title}
           to={`/detail/${walkingDongil.id}`}
           interestRate={walkingDongil.interestRate}
-          isFailed={!walkingDongil.isAchieved && !walkingDongil.status}
+          challengeStatus={walkingDongil.challengeStatus}
         />
       ))}
     </Wrapper>

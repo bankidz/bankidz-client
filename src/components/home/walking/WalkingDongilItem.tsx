@@ -10,13 +10,14 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DongilFailed from '@components/common/bottomSheets/sheetContents/DongilFailed';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import { TDongilStatus } from '@lib/types/TDongilStatus';
 
 interface WalkingDongilItemProps {
   itemName: TItemName;
   title: string;
   to: string;
   interestRate: TInterestRate;
-  isFailed: boolean;
+  challengeStatus: TDongilStatus;
 }
 
 function WalkingDongilItem({
@@ -24,12 +25,10 @@ function WalkingDongilItem({
   title,
   to,
   interestRate,
-  isFailed,
+  challengeStatus,
 }: WalkingDongilItemProps) {
+  const isFailed = challengeStatus === 'FAILED';
   const navigate = useNavigate();
-  const onNavigateWalkingDongilPage = () => {
-    navigate(to);
-  };
 
   const [openDongilFailed, onOpenDongilFailed, onDismissDongilFailed] =
     useBottomSheet(false);
@@ -68,7 +67,7 @@ function WalkingDongilItem({
             onDismissDongilFailed();
           }}
           onRightButtonClick={() => {
-            onNavigateWalkingDongilPage();
+            navigate(to);
           }}
           title={title}
           interestRate={interestRate}

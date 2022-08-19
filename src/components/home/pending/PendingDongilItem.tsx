@@ -2,7 +2,6 @@ import ProposalBadge from '@components/common/badges/ProposalBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
-import { EDongilStatus } from '@lib/types/TDongilStatus';
 import convertTimeStampToYYYYMMDD from '@lib/utils/convertTimeStampToYYYYMMDD';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
@@ -21,7 +20,7 @@ function PendingDongilItem({
   const { openModal } = useModals();
   const {
     id,
-    status,
+    challengeStatus,
     createdAt,
     interestRate,
     isMom,
@@ -72,9 +71,9 @@ function PendingDongilItem({
   }
 
   function handleClick() {
-    if (status === EDongilStatus.PENDING) {
+    if (challengeStatus === 'PENDING') {
       openQuinaryModal();
-    } else if (status === EDongilStatus.REJECTED) {
+    } else if (challengeStatus === 'REJECTED') {
       openSenaryModal();
     }
   }
@@ -88,9 +87,7 @@ function PendingDongilItem({
             {convertTimeStampToYYYYMMDD(createdAt)}
           </span>
         </div>
-        <ProposalBadge
-          isProposing={status === EDongilStatus.PENDING ? true : false}
-        />
+        <ProposalBadge isProposing={challengeStatus === 'PENDING'} />
       </StyledButton>
     </>
   );
