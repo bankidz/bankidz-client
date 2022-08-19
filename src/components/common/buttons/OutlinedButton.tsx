@@ -12,6 +12,7 @@ interface OutlinedButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * 버튼 활성화 상태
    */
+  // TODO: disabled
   state?: boolean;
 }
 

@@ -25,6 +25,7 @@ function RangeInput({
     form?.weekPrice ? form.weekPrice : 0,
   );
 
+  // TODO: magic number
   useEffect(() => {
     if (totalPrice < 100000) {
       form && setForm && setForm({ ...form, weekPrice: value });

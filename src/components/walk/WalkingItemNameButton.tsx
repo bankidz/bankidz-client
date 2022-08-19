@@ -43,6 +43,7 @@ const Wrapper = styled.button<{ isSelected: boolean }>`
       transform: scale(1.167);
     `}
 `;
+
 const Content = styled.div`
   position: absolute;
   left: 50%;

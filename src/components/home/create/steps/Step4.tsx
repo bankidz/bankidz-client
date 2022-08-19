@@ -28,6 +28,7 @@ import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
 export type TStep4Form = {
   weekPrice: number;
+  // TODO: TInterestRate, null
   interestRate: 10 | 20 | 30 | null;
 };
 export type TSetStep4Form = {
@@ -73,7 +74,8 @@ function Step4({ currentStep }: { currentStep: number }) {
   // 모달 여는 함수
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      onSubmit: () => {},
+      // TODO: 알아서 닫힘
+      // onSubmit: () => {},
     });
   };
 

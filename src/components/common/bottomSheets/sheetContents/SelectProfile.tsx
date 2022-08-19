@@ -5,6 +5,7 @@ import renderRoleText from '@lib/utils/get/getRoleText';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
+  // TODO: typing
   isKid: boolean | null;
   isFemale: boolean | null;
 }

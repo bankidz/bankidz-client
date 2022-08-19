@@ -69,6 +69,7 @@ function Step3({ currentStep }: { currentStep: number }) {
 
   return (
     <Wrapper>
+      {/* TODO: JSX는 요약처럼 보일 수 있게 */}
       <InputSection validate={validateName}>
         <InputForm
           placeholder="돈길 이름을 입력하세요"
