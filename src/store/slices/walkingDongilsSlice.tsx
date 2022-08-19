@@ -21,7 +21,7 @@ export const fetchWalkingDongils = createAsyncThunk(
   'walkingDongils/fetch',
   async (thunkPayload: { axiosPrivate: AxiosInstance }) => {
     const { axiosPrivate } = thunkPayload;
-    const response = await axiosPrivate.get('/challenge/?status=accept');
+    const response = await axiosPrivate.get('/challenge/?status=walking');
     return response.data;
   },
 );
