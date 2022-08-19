@@ -7,24 +7,26 @@ import {
   selectSelectedKid,
   setSelectedKid,
 } from '@store/slices/kidsSlice';
+import { IKid } from '@lib/types/IKid';
 
 function KidList() {
   const dispatch = useAppDispatch();
   const kids = useAppSelector(selectKids);
   const selectedKid = useAppSelector(selectSelectedKid);
+  const isSelectedKid = (kid: IKid) => kid === selectedKid;
 
   return (
     <Wrapper>
       {kids?.map((kid) => (
         <UsernameButton
+          key={kid.username}
           onClick={() => {
             dispatch(setSelectedKid(kid));
           }}
-          key={kid.username}
-          className={kid === selectedKid ? 'active' : undefined}
+          className={isSelectedKid(kid) ? 'active' : undefined}
         >
           {kid.username}
-          {kid === selectedKid && (
+          {isSelectedKid(kid) && (
             <div className="username-underline-wrapper">
               <UsernameUnderline />
             </div>
