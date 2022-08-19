@@ -38,6 +38,7 @@ function Step5({ currentStep }: { currentStep: number }) {
       onSubmit: () => {
         navigate('/', { replace: true });
       },
+      // TODO: day.js
       createdAt: moment().format('YYYY/MM/DD hh:mm:ss'),
       interestRate,
       isMom,

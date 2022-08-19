@@ -10,6 +10,7 @@ function Step1({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // TODO: 이벤트 핸들러 이름: handle ~, on ~
   const onClickRoleButton = (isFemale: boolean) => {
     dispatch(dispatchParent(isFemale));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
