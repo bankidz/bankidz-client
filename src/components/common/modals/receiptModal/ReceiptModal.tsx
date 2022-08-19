@@ -119,17 +119,20 @@ function ReceiptModal({
     handleExtraSubmit,
   );
 
+  /*
+   ** PerforatedLineTop의 height: 15px
+   ** PerforatedShape의 height: 10px, width: 20px
+   ** PerforatedLine과 접하는 컴포넌트의 경우 height를 10px 줄임
+   ** 컴포넌트 접합부 갈라짐으로 인해 2px 겹치도록 margin 조정함
+   ** 이로인한 오차는 모달 content의 height를 조절함으로서 보정함
+   ** 그 외에는 모두 디자인 원안을 준수함
+   */
+
   return (
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
         {dashedBorder}
-        {/* PerforatedLineTop의 height: 15px */}
-        {/* PerforatedShape의 height: 10px, width: 20px */}
-        {/* PerforatedLine과 접하는 컴포넌트의 경우 height를 10px 줄임 */}
-        {/* 컴포넌트 접합부 갈라짐으로 인해 2px 겹치도록 margin 조정함 */}
-        {/* 이로인한 오차는 모달 content의 height를 조절함으로서 보정함 */}
-        {/* 그 외에는 모두 디자인 원안을 준수함 */}
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top variant={variant}>
           {variant === 'contract' && (
