@@ -4,12 +4,12 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-type TPendingDongilsState = {
+interface IPendingDongilsState {
   pendingDongils: IDongil[];
   pendingDongilsStatus?: TFetchStatus;
-};
+}
 
-const initialState: TPendingDongilsState = {
+const initialState: IPendingDongilsState = {
   pendingDongils: [],
   pendingDongilsStatus: 'idle',
 };

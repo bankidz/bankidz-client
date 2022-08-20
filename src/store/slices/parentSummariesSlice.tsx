@@ -11,12 +11,12 @@ interface IParentSummary {
   };
 }
 
-type TParentSummariesState = {
+interface IParentSummariesState {
   parentSummaries: IParentSummary[];
   parentSummariesStatus?: TFetchStatus;
-};
+}
 
-const initialState: TParentSummariesState = {
+const initialState: IParentSummariesState = {
   parentSummaries: [],
   parentSummariesStatus: 'idle',
 };
@@ -42,14 +42,9 @@ export const parentSummariesSlice = createSlice({
       })
       .addCase(fetchParentSummaries.fulfilled, (state, action) => {
         state.parentSummariesStatus = 'succeeded';
-        if (state.parentSummaries === null) {
-          state.parentSummaries = [];
-          state.parentSummaries[0] = action.payload.data;
-        } else {
-          state.parentSummaries = state.parentSummaries.concat(
-            action.payload.data,
-          );
-        }
+        state.parentSummaries = state.parentSummaries.concat(
+          action.payload.data,
+        );
       })
       .addCase(fetchParentSummaries.rejected, (state, action) => {
         state.parentSummariesStatus = 'failed';

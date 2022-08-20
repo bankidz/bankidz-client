@@ -1,12 +1,7 @@
 import { IDongil } from '@lib/types/IDongil';
 import { IKid } from '@lib/types/IKid';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import {
-  createAsyncThunk,
-  createSlice,
-  current,
-  PayloadAction,
-} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
@@ -16,12 +11,12 @@ interface IThisWeekSDongil {
   challengeList: IDongil[];
 }
 
-type TThisWeekSDongilsState = {
+interface IThisWeekSDongilsState {
   thisWeekSDongils: IThisWeekSDongil[];
   thisWeekSDongilsStatus?: TFetchStatus;
-};
+}
 
-const initialState: TThisWeekSDongilsState = {
+const initialState: IThisWeekSDongilsState = {
   thisWeekSDongils: [],
   thisWeekSDongilsStatus: 'idle',
 };
@@ -49,15 +44,11 @@ export const thisWeekSDongilsSlice = createSlice({
       const { selectedKid, approvedDongil } = action.payload;
       state.thisWeekSDongils = state.thisWeekSDongils.map((thisWeekSDongil) => {
         if (thisWeekSDongil.userName === selectedKid.username) {
-          console.log('김민준 돈길:', current(thisWeekSDongil));
-          console.log('approvedDongil: ', approvedDongil);
           thisWeekSDongil.challengeList =
             thisWeekSDongil.challengeList.concat(approvedDongil);
         }
         return thisWeekSDongil;
       });
-      // state.thisWeekSDongils[0].userName += 't';
-      // state.thisWeekSDongils[0].challengeList.pop();
     },
   },
   extraReducers(builder) {
@@ -67,14 +58,8 @@ export const thisWeekSDongilsSlice = createSlice({
       })
       .addCase(fetchThisWeekSDongils.fulfilled, (state, action) => {
         state.thisWeekSDongilsStatus = 'succeeded';
-        if (state.thisWeekSDongils === null) {
-          state.thisWeekSDongils = [];
-          state.thisWeekSDongils[0] = action.payload.data;
-        } else {
-          state.thisWeekSDongils = state.thisWeekSDongils.concat(
-            action.payload.data,
-          );
-        }
+        state.thisWeekSDongils = [];
+        state.thisWeekSDongils[0] = action.payload.data;
       })
       .addCase(fetchThisWeekSDongils.rejected, (state, action) => {
         state.thisWeekSDongilsStatus = 'failed';

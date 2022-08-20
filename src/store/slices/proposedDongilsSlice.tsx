@@ -10,12 +10,12 @@ interface IProposedDongil {
   challengeList: IDongil[];
 }
 
-type TProposedDongilsState = {
+interface IProposedDongilsState {
   proposedDongils: IProposedDongil[];
   proposedDongilsStatus?: TFetchStatus;
-};
+}
 
-const initialState: TProposedDongilsState = {
+const initialState: IProposedDongilsState = {
   proposedDongils: [],
   proposedDongilsStatus: 'idle',
 };
@@ -59,14 +59,9 @@ export const proposedDongilsSlice = createSlice({
       })
       .addCase(fetchProposedDongils.fulfilled, (state, action) => {
         state.proposedDongilsStatus = 'succeeded';
-        if (state.proposedDongils === null) {
-          state.proposedDongils = [];
-          state.proposedDongils[0] = action.payload.data;
-        } else {
-          state.proposedDongils = state.proposedDongils.concat(
-            action.payload.data,
-          );
-        }
+        state.proposedDongils = state.proposedDongils.concat(
+          action.payload.data,
+        );
       })
       .addCase(fetchProposedDongils.rejected, (state, action) => {
         state.proposedDongilsStatus = 'failed';

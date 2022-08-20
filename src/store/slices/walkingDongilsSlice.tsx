@@ -4,13 +4,13 @@ import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IDongil } from '@lib/types/IDongil';
 
-type TWalkingDongilsState = {
+interface IWalkingDongilsState {
   walkingDongils: IDongil[];
   walkingDongilsStatus?: TFetchStatus;
   isWalkingDongilsPatched: boolean;
-};
+}
 
-const initialState: TWalkingDongilsState = {
+const initialState: IWalkingDongilsState = {
   walkingDongils: [],
   walkingDongilsStatus: 'idle',
   isWalkingDongilsPatched: false,
@@ -96,7 +96,7 @@ export const walkingDongilsSlice = createSlice({
       })
       .addCase(fetchWalkingDongils.rejected, (state, action) => {
         state.walkingDongilsStatus = 'failed';
-        console.error(action);
+        console.error(action.error);
       })
       .addCase(walkDongil.fulfilled, (state, action) => {
         const { id } = action.meta.arg;
