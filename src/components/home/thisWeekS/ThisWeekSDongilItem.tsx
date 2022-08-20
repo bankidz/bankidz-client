@@ -7,12 +7,14 @@ import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_paren
 interface ThisWeekSDongilItemProps {
   itemName: TItemName;
   title: string;
-  progressList: {
-    approvedAt: string;
-    challengeId: number;
-    isAchieved: boolean;
-    weeks: number;
-  }[];
+  progressList:
+    | {
+        approvedAt: string;
+        challengeId: number;
+        isAchieved: boolean;
+        weeks: number;
+      }[]
+    | null;
   to: string;
 }
 
@@ -22,7 +24,6 @@ function ThisWeekSDongilItem({
   progressList,
   to,
 }: ThisWeekSDongilItemProps) {
-  let lastProgress = progressList!.slice(-1)[0];
   return (
     <StyledLink to={to}>
       <div className="content-wrapper">
@@ -30,7 +31,9 @@ function ThisWeekSDongilItem({
         <span>{title}</span>
       </div>
       <div className="achieved-stamp">
-        {lastProgress.isAchieved && <AchievedStamp />}
+        {progressList && progressList.slice(-1)[0].isAchieved && (
+          <AchievedStamp />
+        )}
       </div>
     </StyledLink>
   );

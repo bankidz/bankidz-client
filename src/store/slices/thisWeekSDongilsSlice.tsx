@@ -1,7 +1,12 @@
 import { IDongil } from '@lib/types/IDongil';
 import { IKid } from '@lib/types/IKid';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  current,
+  PayloadAction,
+} from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
@@ -42,17 +47,17 @@ export const thisWeekSDongilsSlice = createSlice({
       action: PayloadAction<{ selectedKid: IKid; approvedDongil: IDongil }>,
     ) => {
       const { selectedKid, approvedDongil } = action.payload;
-      // state.thisWeekSDongils = state.thisWeekSDongils.map((thisWeekSDongil) => {
-      //   if (thisWeekSDongil.userName === selectedKid.username) {
-      //     console.log('김민준 찾음');
-      //     console.log('approvedDongil: ', approvedDongil);
-      //     thisWeekSDongil.challengeList.concat(approvedDongil);
-      //   }
-      //   return thisWeekSDongil;
-      // });
-      state.thisWeekSDongils[0].userName += 't';
-      state.thisWeekSDongils[0].challengeList.pop();
-      state.thisWeekSDongils[1].challengeList.pop();
+      state.thisWeekSDongils = state.thisWeekSDongils.map((thisWeekSDongil) => {
+        if (thisWeekSDongil.userName === selectedKid.username) {
+          console.log('김민준 돈길:', current(thisWeekSDongil));
+          console.log('approvedDongil: ', approvedDongil);
+          thisWeekSDongil.challengeList =
+            thisWeekSDongil.challengeList.concat(approvedDongil);
+        }
+        return thisWeekSDongil;
+      });
+      // state.thisWeekSDongils[0].userName += 't';
+      // state.thisWeekSDongils[0].challengeList.pop();
     },
   },
   extraReducers(builder) {

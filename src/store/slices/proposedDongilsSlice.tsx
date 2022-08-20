@@ -73,7 +73,6 @@ export const proposedDongilsSlice = createSlice({
         console.error(action.error);
       })
       .addCase(approveProposedDongil.fulfilled, (state, action: any) => {
-        // update proposedDongils
         const approvedId = action.payload.data.id;
         state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
           proposedDongil.challengeList = proposedDongil.challengeList.filter(

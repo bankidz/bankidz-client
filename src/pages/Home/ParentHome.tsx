@@ -130,13 +130,13 @@ function ParentHome() {
     if (canApproveProposedDongil) {
       try {
         setApproveProposedDongilStatus('pending');
-        // await dispatch(
-        //   approveProposedDongil({
-        //     axiosPrivate,
-        //     idToApprove,
-        //     isApprove: true,
-        //   }),
-        // ).unwrap();
+        await dispatch(
+          approveProposedDongil({
+            axiosPrivate,
+            idToApprove,
+            isApprove: true,
+          }),
+        ).unwrap();
 
         const getApprovedDongil = (idToApprove: number) => {
           let found;
@@ -145,7 +145,6 @@ function ParentHome() {
               (challenge) => challenge.id === idToApprove,
             );
           });
-          console.log('found: ', found);
           return found;
         };
         const approvedDongil = getApprovedDongil(idToApprove)!;
