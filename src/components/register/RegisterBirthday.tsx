@@ -80,7 +80,7 @@ function RegisterBirthday() {
     setYear('');
     setMonth('');
     setDay('');
-    dispatch(setBirthday({ birthday: refineDate(year, month, day) }));
+    dispatch(setBirthday(refineDate(year, month, day)));
     navigate('/register/2');
   }
 

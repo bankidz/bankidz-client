@@ -14,7 +14,7 @@ function WalkingDongilList({ walkingDongils }: WalkingDongilListProps) {
           key={walkingDongil.id}
           itemName={walkingDongil.itemName}
           title={walkingDongil.title}
-          to={`/detail/${walkingDongil.id}`}
+          id={walkingDongil.id}
           interestRate={walkingDongil.interestRate}
           challengeStatus={walkingDongil.challengeStatus}
         />

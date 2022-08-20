@@ -33,9 +33,9 @@ export type TAuthState = {
 const initialState: TAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0',
-    isKid: false,
-    level: null,
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o',
+    isKid: true,
+    level: -4,
     birthday: null,
     isFemale: null,
     phone: null,
@@ -65,16 +65,12 @@ export const register = createAsyncThunk(
     isKid: boolean;
   }) => {
     const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
-    // try {
     const response = await axiosPrivate.patch('/user', {
       birthday,
       isFemale,
       isKid,
     });
     return response.data;
-    // } catch (error) {
-    // console.log('catch in thunk: ', error);
-    // }
   },
 );
 
@@ -82,10 +78,6 @@ interface IAuth {
   accessToken: string | null;
   isKid: boolean | null;
   level: TLevel | null;
-}
-
-interface IBirthDay {
-  birthday: string;
 }
 
 export const authSlice = createSlice({
@@ -103,9 +95,8 @@ export const authSlice = createSlice({
       state.auth.isKid = null;
       state.auth.level = null;
     },
-    setBirthday: (state, action: PayloadAction<IBirthDay>) => {
-      const { birthday } = action.payload;
-      state.auth.birthday = birthday;
+    setBirthday: (state, action: PayloadAction<string>) => {
+      state.auth.birthday = action.payload;
     },
   },
   extraReducers(builder) {
@@ -124,10 +115,6 @@ export const authSlice = createSlice({
         state.auth.isKid = isKid;
         state.auth.phone = phone;
         state.auth.username = username;
-      })
-      .addCase(register.rejected, (state, action) => {
-        // TODO: rejectWithValue
-        console.error('action in rejected', action);
       });
   },
 });

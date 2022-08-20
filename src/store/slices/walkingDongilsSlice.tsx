@@ -1,8 +1,9 @@
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IDongil } from '@lib/types/IDongil';
+import { IError } from '@lib/types/IError';
 
 type TWalkingDongilsState = {
   walkingDongils: IDongil[];
@@ -27,12 +28,19 @@ export const fetchWalkingDongils = createAsyncThunk(
 );
 
 // DELETE: 걷고있는 돈길 중도 포기
-export const giveUpWalkingDongil = createAsyncThunk(
-  'walkingDongils/giveUp',
-  async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
+export const deleteWalkingDongil = createAsyncThunk(
+  'walkingDongils/delete',
+  async (
+    thunkPayload: { axiosPrivate: AxiosInstance; id: number },
+    { rejectWithValue },
+  ) => {
     const { axiosPrivate, id } = thunkPayload;
-    const response = await axiosPrivate.delete(`/challenge/${id}`);
-    return response.data;
+    try {
+      const response = await axiosPrivate.delete(`/challenge/${id}`);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data.error);
+    }
   },
 );
 
@@ -50,6 +58,17 @@ export const walkingDongilsSlice = createSlice({
   name: 'walkingDongils',
   initialState,
   reducers: {
+    // 걷고있는 돈길 상세 페이지(/Detail)에서 돈길 포기하기 시 Client Side의 걷고 있는 돈길은
+    // 바로 삭제 되는것이 아닌 '돈길이 포기되었어요' 바텀시트 확인 버튼 클릭 시 삭제되도록함
+    // Client Side와 Server Side 삭제 로직을 분리하였음
+    deleteClientSideWalkingDongilById: (
+      state,
+      action: PayloadAction<number>,
+    ) => {
+      state.walkingDongils = state.walkingDongils!.filter(
+        (walkingDongil) => walkingDongil.id !== action.payload,
+      );
+    },
     dispatchResetIsPatched(state) {
       state.isWalkingDongilsPatched = false;
     },
@@ -78,13 +97,7 @@ export const walkingDongilsSlice = createSlice({
       })
       .addCase(fetchWalkingDongils.rejected, (state, action) => {
         state.walkingDongilsStatus = 'failed';
-        console.error(action.error);
-      })
-      .addCase(giveUpWalkingDongil.fulfilled, (state, action) => {
-        const { id } = action.payload.data;
-        state.walkingDongils = state.walkingDongils!.filter(
-          (walkingDongil) => walkingDongil.id !== id,
-        );
+        console.error(action);
       })
       .addCase(walkDongil.fulfilled, (state, action) => {
         const { id } = action.meta.arg;
@@ -101,13 +114,18 @@ export const walkingDongilsSlice = createSlice({
   },
 });
 
-export const { dispatchResetIsPatched, dispatchSetPatched } =
-  walkingDongilsSlice.actions;
+export const {
+  dispatchResetIsPatched,
+  dispatchSetPatched,
+  deleteClientSideWalkingDongilById,
+} = walkingDongilsSlice.actions;
 
 export const selectWalkingDongilsStatus = (state: RootState) =>
   state.walkingDongils.walkingDongilsStatus;
 export const selectWalkingDongils = (state: RootState) =>
   state.walkingDongils.walkingDongils;
+// export const selectWalkingDongilsError = (state: RootState) =>
+//   state.walkingDongils.walkingDongilsError;
 export const selectIsWalkingDongilsPatched = (state: RootState) =>
   state.walkingDongils.isWalkingDongilsPatched;
 

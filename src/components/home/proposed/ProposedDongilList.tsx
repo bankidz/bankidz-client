@@ -1,9 +1,9 @@
 import { IDongil } from '@lib/types/IDongil';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
-import PendingDongilItem from './ProposedDongilItem';
+import ProposedDongilItem from './ProposedDongilItem';
 
-interface PendingDongilListProps {
+interface ProposedDongilListProps {
   proposedDongils: IDongil[];
   onApproveCheckOpen?: () => void;
   setIdToApprove?: Dispatch<SetStateAction<number | null>>;
@@ -13,11 +13,11 @@ function ProposedDongilList({
   proposedDongils,
   onApproveCheckOpen,
   setIdToApprove,
-}: PendingDongilListProps) {
+}: ProposedDongilListProps) {
   return (
     <Wrapper>
       {proposedDongils?.map((proposedDongil) => (
-        <PendingDongilItem
+        <ProposedDongilItem
           key={proposedDongil.id}
           proposedDongil={proposedDongil}
           onApproveCheckOpen={onApproveCheckOpen}
