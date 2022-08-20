@@ -15,6 +15,7 @@ import {
   selectWalkingDongilsStatus,
 } from '@store/slices/walkingDongilsSlice';
 import {
+  deletePendingDongil,
   fetchPendingDongils,
   selectPendingDongils,
   selectPendingDongilsStatus,
@@ -78,18 +79,17 @@ function KidHome() {
     useBottomSheet(false);
   const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
     useBottomSheet(false);
+
   async function handleDeleteButtonClick() {
     if (canDeletePendingDongil) {
       try {
         setDeletePendingDongilStatus('pending');
-        // await dispatch(
-        //   deletePendingDongil({
-        //     axiosPrivate,
-        //     id: idToDelete,
-        //   }),
-        // ).unwrap();
-        // setOpenDeleteCheck(false);
-        // setOpenDeletedCompleted(true);
+        await dispatch(
+          deletePendingDongil({
+            axiosPrivate,
+            id: idToDelete,
+          }),
+        ).unwrap();
         onDeleteCheckOpen();
       } catch (error: any) {
         console.log(error);

@@ -26,7 +26,7 @@ export const fetchWalkingDongils = createAsyncThunk(
   },
 );
 
-// DELETE: 걷고있는 돈길 중도 포기
+// DELETE: 걷고있는 돈길 삭제
 export const deleteWalkingDongil = createAsyncThunk(
   'walkingDongils/delete',
   async (
