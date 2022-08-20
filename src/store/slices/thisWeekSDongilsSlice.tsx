@@ -1,6 +1,7 @@
 import { IDongil } from '@lib/types/IDongil';
+import { IKid } from '@lib/types/IKid';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
@@ -35,7 +36,25 @@ export const fetchThisWeekSDongils = createAsyncThunk(
 export const thisWeekSDongilsSlice = createSlice({
   name: 'thisWeekSDongils',
   initialState,
-  reducers: {},
+  reducers: {
+    appendThisWeekSDongil: (
+      state,
+      action: PayloadAction<{ selectedKid: IKid; approvedDongil: IDongil }>,
+    ) => {
+      const { selectedKid, approvedDongil } = action.payload;
+      // state.thisWeekSDongils = state.thisWeekSDongils.map((thisWeekSDongil) => {
+      //   if (thisWeekSDongil.userName === selectedKid.username) {
+      //     console.log('김민준 찾음');
+      //     console.log('approvedDongil: ', approvedDongil);
+      //     thisWeekSDongil.challengeList.concat(approvedDongil);
+      //   }
+      //   return thisWeekSDongil;
+      // });
+      state.thisWeekSDongils[0].userName += 't';
+      state.thisWeekSDongils[0].challengeList.pop();
+      state.thisWeekSDongils[1].challengeList.pop();
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchThisWeekSDongils.pending, (state) => {
@@ -59,9 +78,10 @@ export const thisWeekSDongilsSlice = createSlice({
   },
 });
 
+export const { appendThisWeekSDongil } = thisWeekSDongilsSlice.actions;
+
 export const selectThisWeekSDongilsStatus = (state: RootState) =>
   state.thisWeekSDongils.thisWeekSDongilsStatus;
-
 export const selectThisWeekSDongils = (state: RootState) =>
   state.thisWeekSDongils.thisWeekSDongils;
 

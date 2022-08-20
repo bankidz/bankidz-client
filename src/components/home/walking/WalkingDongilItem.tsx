@@ -49,12 +49,12 @@ function WalkingDongilItem({
   const axiosPrivate = useAxiosPrivate();
   const [deleteWalkingDongilStatus, setDeleteWalingDongilStatus] =
     useState<TFetchStatus>('idle');
-  const canDelete =
+  const canDeleteWalkingDongil =
     deleteWalkingDongilStatus === 'idle' && challengeStatus === 'FAILED';
   const dispatch = useAppDispatch();
 
   async function handleDeleteButtonClick() {
-    if (canDelete) {
+    if (canDeleteWalkingDongil) {
       try {
         setDeleteWalingDongilStatus('pending');
         await dispatch(

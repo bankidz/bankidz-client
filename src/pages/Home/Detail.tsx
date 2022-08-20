@@ -73,8 +73,7 @@ function Detail() {
   const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
     useState<TFetchStatus>('idle');
   const walkingDongils = useAppSelector(selectWalkingDongils);
-  // const walkingDongilsError = useAppSelector(selectWalkingDongilsError);
-  const canGiveUp =
+  const canGiveUpWalkingDongil =
     walkingDongils !== null &&
     walkingDongils !== [] &&
     giveUpWalkingDongilStatus === 'idle';
@@ -83,7 +82,7 @@ function Detail() {
 
   // '정말 포기할거예요?' 바텀시트 하단 왼쪽 회색 버튼
   async function handleGiveUpButtonClick() {
-    if (canGiveUp) {
+    if (canGiveUpWalkingDongil) {
       try {
         setGiveUpWalkingDongilStatus('pending');
         await dispatch(

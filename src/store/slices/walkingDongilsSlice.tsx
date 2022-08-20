@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 import { IDongil } from '@lib/types/IDongil';
-import { IError } from '@lib/types/IError';
 
 type TWalkingDongilsState = {
   walkingDongils: IDongil[];
@@ -124,8 +123,6 @@ export const selectWalkingDongilsStatus = (state: RootState) =>
   state.walkingDongils.walkingDongilsStatus;
 export const selectWalkingDongils = (state: RootState) =>
   state.walkingDongils.walkingDongils;
-// export const selectWalkingDongilsError = (state: RootState) =>
-//   state.walkingDongils.walkingDongilsError;
 export const selectIsWalkingDongilsPatched = (state: RootState) =>
   state.walkingDongils.isWalkingDongilsPatched;
 

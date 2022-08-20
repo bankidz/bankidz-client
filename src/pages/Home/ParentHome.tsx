@@ -13,11 +13,14 @@ import {
 } from '@store/slices/parentSummariesSlice';
 import HomeTemplate from '@components/home/HomeTemplate';
 import {
+  appendThisWeekSDongil,
   fetchThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
 import {
+  approveProposedDongil,
   fetchProposedDongils,
+  selectProposedDongils,
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
 
@@ -37,6 +40,8 @@ import getThisWeekSDongilsContent from '@components/home/thisWeekS/getThisWeekSD
 import hasParentSummaryAlreadyBeenFetched from '@components/home/sumary/hasParentSummaryAlreadyBeenFetched';
 import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { IDongil } from '@lib/types/IDongil';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
@@ -113,10 +118,47 @@ function ParentHome() {
     onApproveCompletedOpen,
     onApproveCompletedDismiss,
   ] = useBottomSheet(false);
+  const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canApproveProposedDongil =
+    approveProposedDongilStatus === 'idle' &&
+    idToApprove !== null &&
+    selectedKid !== null;
+  const proposedDongils = useAppSelector(selectProposedDongils);
+
   async function handleApproveButtonClick() {
-    // Approve API fetch code goes here
-    onApproveCheckDismiss();
-    onApproveCompletedOpen();
+    if (canApproveProposedDongil) {
+      try {
+        setApproveProposedDongilStatus('pending');
+        // await dispatch(
+        //   approveProposedDongil({
+        //     axiosPrivate,
+        //     idToApprove,
+        //     isApprove: true,
+        //   }),
+        // ).unwrap();
+
+        const getApprovedDongil = (idToApprove: number) => {
+          let found;
+          proposedDongils.map((proposedDongil) => {
+            found = proposedDongil.challengeList.find(
+              (challenge) => challenge.id === idToApprove,
+            );
+          });
+          console.log('found: ', found);
+          return found;
+        };
+        const approvedDongil = getApprovedDongil(idToApprove)!;
+        dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
+
+        onApproveCheckDismiss();
+        onApproveCompletedOpen();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setApproveProposedDongilStatus('idle');
+      }
+    }
   }
 
   // 제안받은 돈길, 주간 진행상황, 금주의 돈길
@@ -129,11 +171,17 @@ function ParentHome() {
 
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
   const canFetchParentSummary =
-    !hasParentSummaryAlreadyBeenFetched() && selectedKid !== null;
+    !hasParentSummaryAlreadyBeenFetched() &&
+    parentSummariesStatus === 'succeeded' &&
+    selectedKid !== null;
   const canFetchProposedDongils =
-    !hasProposedDongilsAlreadyBeenFetched() && selectedKid !== null;
+    !hasProposedDongilsAlreadyBeenFetched() &&
+    proposedDongilsStatus === 'succeeded' &&
+    selectedKid !== null;
   const canFetchThisWeekSDongils =
-    !hasThisWeekSDongilsAlreadyBeenFetched() && selectedKid !== null;
+    !hasThisWeekSDongilsAlreadyBeenFetched() &&
+    thisWeekSDongilsStatus === 'succeeded' &&
+    selectedKid !== null;
   useEffect(() => {
     async function hydrate() {
       try {
@@ -185,12 +233,14 @@ function ParentHome() {
         {/* 다음 모달과 바텀시트를 열고 닫는 로직은 ProposedDongilItem에서 실행됩니다. */}
         {/* 모달은 전역상태로 관리되기에 별도의 props를 전달하지 않습니다. */}
         <Modals />
+        {/* 자녀의 돈길을 수락할까요? */}
         <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
           <ApproveCheck
             onApproveButtonClick={handleApproveButtonClick}
             onDismiss={onApproveCheckDismiss}
           />
         </CommonSheet>
+        {/* 자녀의 돈길이 수락되었어요 */}
         <CommonSheet
           open={openApproveCompleted}
           onDismiss={onApproveCompletedDismiss}

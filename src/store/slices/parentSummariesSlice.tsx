@@ -60,7 +60,6 @@ export const parentSummariesSlice = createSlice({
 
 export const selectParentSummariesStatus = (state: RootState) =>
   state.parentSummaries.parentSummariesStatus;
-
 export const selectParentSummaries = (state: RootState) =>
   state.parentSummaries.parentSummaries;
 
