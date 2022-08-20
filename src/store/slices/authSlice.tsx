@@ -34,7 +34,7 @@ interface IAuthState {
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o',
     isKid: true,
     level: 2,
     birthday: null,
