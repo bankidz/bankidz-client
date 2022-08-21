@@ -14,11 +14,10 @@ import { TDongilStatus } from '@lib/types/TDongilStatus';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useState } from 'react';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { useAppDispatch } from '@store/app/hooks';
 import {
   deleteClientSideWalkingDongilById,
   deleteWalkingDongil,
-  selectWalkingDongils,
 } from '@store/slices/walkingDongilsSlice';
 
 interface WalkingDongilItemProps {

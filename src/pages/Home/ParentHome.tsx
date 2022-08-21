@@ -11,7 +11,7 @@ import {
   fetchParentSummaries,
   selectParentSummariesStatus,
 } from '@store/slices/parentSummariesSlice';
-import HomeTemplate from '@components/home/HomeTemplate';
+import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import {
   appendThisWeekSDongil,
   fetchThisWeekSDongils,
