@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  register,
-  selectBirthday,
-  setCredentials,
-} from '@store/slices/authSlice';
+import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -15,7 +11,6 @@ import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { TLevel } from '@lib/types/TLevel';
 import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
 import SelectProfile from '@components/common/bottomSheets/commonSheet/SelectProfile';
 

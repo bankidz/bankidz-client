@@ -12,7 +12,11 @@ import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
+import {
+  deleteClientSideWalkingDongilById,
+  deleteWalkingDongil,
+  selectWalkingDongils,
+} from '@store/slices/walkingDongilsSlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 
 import { calcRatio } from '@lib/styles/theme';
@@ -66,10 +70,10 @@ function Detail() {
     useBottomSheet(false);
 
   const axiosPrivate = useAxiosPrivate();
-  const [giveUpWalkingDongilStatus, setGiveUStatus] =
+  const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
     useState<TFetchStatus>('idle');
   const walkingDongils = useAppSelector(selectWalkingDongils);
-  const canGiveUp =
+  const canGiveUpWalkingDongil =
     walkingDongils !== null &&
     walkingDongils !== [] &&
     giveUpWalkingDongilStatus === 'idle';
@@ -78,29 +82,26 @@ function Detail() {
 
   // '정말 포기할거예요?' 바텀시트 하단 왼쪽 회색 버튼
   async function handleGiveUpButtonClick() {
-    if (canGiveUp) {
+    if (canGiveUpWalkingDongil) {
       try {
-        setGiveUStatus('pending');
-        // await dispatch(
-        //   giveUpWalkingDongil({
-        //     axiosPrivate,
-        //     id: parseInt(id!),
-        //   }),
-        // ).unwrap();
+        setGiveUpWalkingDongilStatus('pending');
+        await dispatch(
+          deleteWalkingDongil({
+            axiosPrivate,
+            id: parseInt(id!),
+          }),
+        ).unwrap();
         onGiveUpCheckDismiss();
         onGiveUpCompletedOpen();
-      } catch (error: any) {
-        // TODO: 포기 횟수 초과 시 API response 확인
-        console.log('error.message', error.message);
-        console.log('error.status', error.status);
-        if (error.status === 403) {
+      } catch (error) {
+        if (error === 'E400-40007') {
           onGiveUpCheckDismiss();
           onExceededOpen();
         } else {
           console.log(error);
         }
       } finally {
-        setGiveUStatus('idle');
+        setGiveUpWalkingDongilStatus('idle');
       }
     }
   }
@@ -109,6 +110,12 @@ function Detail() {
   function handleRetryButtonClick() {
     onGiveUpCheckDismiss();
     onCancelCompletedOpen();
+  }
+
+  // '돈길이 포기되었어요' 바텀시트 확인 버튼
+  function handleConfirmButtonClick() {
+    dispatch(deleteClientSideWalkingDongilById(parseInt(id!)));
+    navigate('/');
   }
 
   return (
@@ -190,9 +197,7 @@ function Detail() {
         <SheetCompleted
           type="giveUp"
           title={title}
-          onDismiss={() => {
-            navigate('/');
-          }}
+          onDismiss={handleConfirmButtonClick}
         />
       </CommonSheet>
       {/* 포기횟수 초과 */}

@@ -2,7 +2,7 @@ import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { RootState } from '../app/store';
+import { RootState, store } from '../app/store';
 
 interface IProposedDongil {
   userName: string;
@@ -10,12 +10,12 @@ interface IProposedDongil {
   challengeList: IDongil[];
 }
 
-type TProposedDongilsState = {
+interface IProposedDongilsState {
   proposedDongils: IProposedDongil[];
   proposedDongilsStatus?: TFetchStatus;
-};
+}
 
-const initialState: TProposedDongilsState = {
+const initialState: IProposedDongilsState = {
   proposedDongils: [],
   proposedDongilsStatus: 'idle',
 };
@@ -32,6 +32,22 @@ export const fetchProposedDongils = createAsyncThunk(
   },
 );
 
+// PATCH: 제안받은 돈길 수락
+export const approveProposedDongil = createAsyncThunk(
+  'proposedDongils/approve',
+  async (thunkPayload: {
+    axiosPrivate: AxiosInstance;
+    idToApprove: number;
+    isApprove: boolean;
+  }) => {
+    const { axiosPrivate, idToApprove, isApprove } = thunkPayload;
+    const response = await axiosPrivate.patch(`/challenge/${idToApprove}`, {
+      accept: isApprove,
+    });
+    return response.data;
+  },
+);
+
 export const proposedDongilsSlice = createSlice({
   name: 'proposedDongils',
   initialState,
@@ -43,25 +59,28 @@ export const proposedDongilsSlice = createSlice({
       })
       .addCase(fetchProposedDongils.fulfilled, (state, action) => {
         state.proposedDongilsStatus = 'succeeded';
-        if (state.proposedDongils === null) {
-          state.proposedDongils = [];
-          state.proposedDongils[0] = action.payload.data;
-        } else {
-          state.proposedDongils = state.proposedDongils.concat(
-            action.payload.data,
-          );
-        }
+        state.proposedDongils = state.proposedDongils.concat(
+          action.payload.data,
+        );
       })
       .addCase(fetchProposedDongils.rejected, (state, action) => {
         state.proposedDongilsStatus = 'failed';
         console.error(action.error);
+      })
+      .addCase(approveProposedDongil.fulfilled, (state, action: any) => {
+        const approvedId = action.payload.data.id;
+        state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
+          proposedDongil.challengeList = proposedDongil.challengeList.filter(
+            (challenge) => challenge.id !== approvedId,
+          );
+          return proposedDongil;
+        });
       });
   },
 });
 
 export const selectProposedDongilsStatus = (state: RootState) =>
   state.proposedDongils.proposedDongilsStatus;
-
 export const selectProposedDongils = (state: RootState) =>
   state.proposedDongils.proposedDongils;
 
@@ -70,3 +89,4 @@ export default proposedDongilsSlice.reducer;
 // https://github.com/reduxjs/reselect#q-how-do-i-create-a-selector-that-takes-an-argument
 // https://kyounghwan01.github.io/blog/React/redux/redux-toolkit/#createslice
 // https://velog.io/@vvvvwvvvv/React-21.-Redux-Saga-createSlicecreateSelector-%EC%A0%81%EC%9A%A9
+// https://stackoverflow.com/questions/62451320/how-can-i-access-state-of-another-slice-in-redux-with-redux-toolkit

@@ -11,11 +11,20 @@ import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet
 import DongilFailed from '@components/common/bottomSheets/commonSheet/DongilFailed';
 import DeleteCheck from '@components/common/bottomSheets/commonSheet/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { useState } from 'react';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import {
+  deleteClientSideWalkingDongilById,
+  deleteWalkingDongil,
+  selectWalkingDongils,
+} from '@store/slices/walkingDongilsSlice';
 
 interface WalkingDongilItemProps {
   itemName: TItemName;
   title: string;
-  to: string;
+  id: number;
   interestRate: TInterestRate;
   challengeStatus: TDongilStatus;
 }
@@ -23,11 +32,12 @@ interface WalkingDongilItemProps {
 function WalkingDongilItem({
   itemName,
   title,
-  to,
+  id,
   interestRate,
   challengeStatus,
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();
+  const to = `/detail/${id}`;
 
   const [openDongilFailed, onOpenDongilFailed, onDismissDongilFailed] =
     useBottomSheet(false);
@@ -35,6 +45,34 @@ function WalkingDongilItem({
     useBottomSheet(false);
   const [openSheetComplete, onOpenSheetComplete, onDismissSheetComplete] =
     useBottomSheet(false);
+
+  const axiosPrivate = useAxiosPrivate();
+  const [deleteWalkingDongilStatus, setDeleteWalingDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canDeleteWalkingDongil =
+    deleteWalkingDongilStatus === 'idle' && challengeStatus === 'FAILED';
+  const dispatch = useAppDispatch();
+
+  async function handleDeleteButtonClick() {
+    if (canDeleteWalkingDongil) {
+      try {
+        setDeleteWalingDongilStatus('pending');
+        await dispatch(
+          deleteWalkingDongil({
+            axiosPrivate,
+            id,
+          }),
+        ).unwrap();
+        dispatch(deleteClientSideWalkingDongilById(id));
+        onDismissDeleteCheck();
+        onOpenSheetComplete();
+      } catch (error: any) {
+        console.log(error);
+      } finally {
+        setDeleteWalingDongilStatus('idle');
+      }
+    }
+  }
 
   return (
     <>
@@ -59,11 +97,12 @@ function WalkingDongilItem({
         </StyledLink>
       )}
 
+      {/* 돈길 걷기에 실패했어요 */}
       <CommonSheet open={openDongilFailed} onDismiss={onDismissDongilFailed}>
         <DongilFailed
           onLeftButtonClick={() => {
-            onOpenDeleteCheck();
             onDismissDongilFailed();
+            onOpenDeleteCheck();
           }}
           onRightButtonClick={() => {
             navigate(to);
@@ -72,16 +111,15 @@ function WalkingDongilItem({
           interestRate={interestRate}
         />
       </CommonSheet>
-      <CommonSheet open={openDeleteCheck} onDismiss={() => {}}>
+      {/* 정말로 삭제할거예요? */}
+      <CommonSheet open={openDeleteCheck} onDismiss={onDismissDeleteCheck}>
         <DeleteCheck
-          onClickDelete={() => {
-            onDismissDeleteCheck();
-            onOpenSheetComplete();
-          }}
+          onClickDelete={handleDeleteButtonClick}
           onDismiss={onDismissDeleteCheck}
         />
       </CommonSheet>
-      <CommonSheet open={openSheetComplete} onDismiss={() => {}}>
+      {/* 삭제되었어요! */}
+      <CommonSheet open={openSheetComplete} onDismiss={onDismissSheetComplete}>
         <SheetCompleted type="delete" onDismiss={onDismissSheetComplete} />
       </CommonSheet>
     </>
