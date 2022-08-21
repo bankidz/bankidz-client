@@ -5,7 +5,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import InputForm from '@components/common/InputForm';
 import Button from '@components/common/buttons/Button';
-import refineDate from '../../lib/utils/refineBirthday';
+import refineDate from '../../lib/utils/refineDate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month

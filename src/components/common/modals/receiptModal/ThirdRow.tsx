@@ -3,7 +3,12 @@ import getContractEndDate from '@lib/utils/get/getContractEndDate';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled from 'styled-components';
 
-function getThirdRow(weeks: number, createdAt: string) {
+interface ThirdRowProps {
+  weeks: number;
+  createdAt: string;
+}
+
+function ThirdRow({ weeks, createdAt }: ThirdRowProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);
   const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
 
@@ -23,7 +28,7 @@ function getThirdRow(weeks: number, createdAt: string) {
   );
 }
 
-export default getThirdRow;
+export default ThirdRow;
 
 const Wrapper = styled.div`
   width: 100%;

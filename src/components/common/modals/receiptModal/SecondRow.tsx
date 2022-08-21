@@ -2,11 +2,13 @@ import { calcRatio } from '@lib/styles/theme';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import styled from 'styled-components';
 
-function getSecondRow(
-  totalPrice: number,
-  weekPrice: number,
-  interestRate: TInterestRate,
-) {
+interface SecondRowProps {
+  totalPrice: number;
+  weekPrice: number;
+  interestRate: TInterestRate;
+}
+
+function SecondRow({ totalPrice, weekPrice, interestRate }: SecondRowProps) {
   return (
     <Wrapper>
       <div className="목표저금액">
@@ -25,7 +27,7 @@ function getSecondRow(
   );
 }
 
-export default getSecondRow;
+export default SecondRow;
 
 const Wrapper = styled.div`
   width: 100%;

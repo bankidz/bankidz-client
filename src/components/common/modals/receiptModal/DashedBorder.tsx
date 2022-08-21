@@ -5,7 +5,11 @@ import styled from 'styled-components';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
-function getDashedBorder(variant: TVariant) {
+interface DashedBorderProps {
+  variant: TVariant;
+}
+
+function DashedBorder({ variant }: DashedBorderProps) {
   return (
     <>
       <VerticalDashedBorderWrapper>
@@ -29,7 +33,7 @@ function getDashedBorder(variant: TVariant) {
   );
 }
 
-export default getDashedBorder;
+export default DashedBorder;
 
 const VerticalDashedBorderWrapper = styled.div`
   z-index: 700;
