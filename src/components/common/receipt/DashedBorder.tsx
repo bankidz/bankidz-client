@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizontal-dashed-border.svg';
 import { theme } from '@lib/styles/theme';
 
-function getDashedBorder() {
+function DashedBorder() {
   return (
     <>
       <FirstHorizontalDashedBorderWrapper>
@@ -15,7 +15,7 @@ function getDashedBorder() {
   );
 }
 
-export default getDashedBorder;
+export default DashedBorder;
 
 const FirstHorizontalDashedBorderWrapper = styled.div`
   z-index: 10;

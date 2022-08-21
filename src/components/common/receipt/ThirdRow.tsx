@@ -3,11 +3,15 @@ import getContractEndDate from '@lib/utils/get/getContractEndDate';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled from 'styled-components';
 
-interface getThirdRowProps {}
+interface ThirdRowProps {
+  createdAt: string;
+  weeks: number;
+}
 
-function getThirdRow(createdAt: string, weeks: number) {
+function ThirdRow({ createdAt, weeks }: ThirdRowProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);
   const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
+
   return (
     <Wrapper>
       <div className="총소요기간">
@@ -24,7 +28,7 @@ function getThirdRow(createdAt: string, weeks: number) {
   );
 }
 
-export default getThirdRow;
+export default ThirdRow;
 
 const Wrapper = styled.div`
   width: 100%;

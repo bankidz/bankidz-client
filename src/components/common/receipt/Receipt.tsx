@@ -4,10 +4,14 @@ import { TItemName } from '@lib/types/TItemName';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import PerforatedLineTop from '../modals/receiptModal/PerforatedLineTop';
 import PerforatedLineBottom from '../modals/receiptModal/PerforatedLineBottom';
-import getDashedBorder from './getDashedBorder';
-import getFirstRow from './getFirstRow';
-import getSecondRow from './getSecondRow';
-import getThirdRow from './getThirdRow';
+import getDashedBorder from './DashedBorder';
+import getFirstRow from './FirstRow';
+import getSecondRow from './SecondRow';
+import getThirdRow from './ThirdRow';
+import DashedBorder from './DashedBorder';
+import FirstRow from './FirstRow';
+import SecondRow from '../modals/receiptModal/SecondRow';
+import ThirdRow from './ThirdRow';
 
 interface ReceiptProps {
   createdAt: string;
@@ -28,19 +32,18 @@ function Receipt({
   weekPrice,
   weeks,
 }: ReceiptProps) {
-  const dashedBorder = getDashedBorder();
-  const firstRow = getFirstRow(isMom, itemName);
-  const secondRow = getSecondRow(totalPrice, weekPrice, interestRate);
-  const thirdRow = getThirdRow(createdAt, weeks);
-
   return (
     <Wrapper>
-      {dashedBorder}
+      <DashedBorder />
       <PerforatedLineTop fill={theme.palette.greyScale.grey100} />
       <Content>
-        {firstRow}
-        {secondRow}
-        {thirdRow}
+        <FirstRow isMom={isMom} itemName={itemName} />
+        <SecondRow
+          interestRate={interestRate}
+          totalPrice={totalPrice}
+          weekPrice={weekPrice}
+        />
+        <ThirdRow createdAt={createdAt} weeks={weeks} />
       </Content>
       <PerforatedLineBottom fill={theme.palette.greyScale.grey100} />
     </Wrapper>
