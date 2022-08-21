@@ -4,7 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export type TAuthState = {
+interface IAuthState {
   auth: {
     // login, refresh 시 반환되는 값: accessToken, isKid, level
     // authSlice의 변수는 통일성을 위해 모두 초기상태를 null로 관리합니다.
@@ -16,7 +16,7 @@ export type TAuthState = {
     phone: string | null;
     username: string | null;
   };
-};
+}
 
 /*
  ** https://api.bankidz.com
@@ -30,7 +30,7 @@ export type TAuthState = {
  ** 딸(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o
  */
 
-const initialState: TAuthState = {
+const initialState: IAuthState = {
   auth: {
     accessToken:
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o',
@@ -65,16 +65,12 @@ export const register = createAsyncThunk(
     isKid: boolean;
   }) => {
     const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
-    // try {
     const response = await axiosPrivate.patch('/user', {
       birthday,
       isFemale,
       isKid,
     });
     return response.data;
-    // } catch (error) {
-    // console.log('catch in thunk: ', error);
-    // }
   },
 );
 
@@ -82,10 +78,6 @@ interface IAuth {
   accessToken: string | null;
   isKid: boolean | null;
   level: TLevel | null;
-}
-
-interface IBirthDay {
-  birthday: string;
 }
 
 export const authSlice = createSlice({
@@ -103,9 +95,8 @@ export const authSlice = createSlice({
       state.auth.isKid = null;
       state.auth.level = null;
     },
-    setBirthday: (state, action: PayloadAction<IBirthDay>) => {
-      const { birthday } = action.payload;
-      state.auth.birthday = birthday;
+    setBirthday: (state, action: PayloadAction<string>) => {
+      state.auth.birthday = action.payload;
     },
   },
   extraReducers(builder) {
@@ -124,10 +115,6 @@ export const authSlice = createSlice({
         state.auth.isKid = isKid;
         state.auth.phone = phone;
         state.auth.username = username;
-      })
-      .addCase(register.rejected, (state, action) => {
-        // TODO: rejectWithValue
-        console.error('action in rejected', action);
       });
   },
 });

@@ -15,6 +15,7 @@ import {
   selectWalkingDongilsStatus,
 } from '@store/slices/walkingDongilsSlice';
 import {
+  deletePendingDongil,
   fetchPendingDongils,
   selectPendingDongils,
   selectPendingDongilsStatus,
@@ -66,34 +67,34 @@ function KidHome() {
   }, []);
 
   // 대기중인 돈길 삭제 (바텀시트, 모달)
-  const [deleteStatus, setDeleteStatus] = useState<TFetchStatus>('idle');
+  const [deletePendingDongilStatus, setDeletePendingDongilStatus] =
+    useState<TFetchStatus>('idle');
   const [idToDelete, setIdToDelete] = useState<number | null>(null);
-  const canDelete =
+  const canDeletePendingDongil =
     idToDelete !== null &&
     pendingDongils !== null &&
     pendingDongils.length !== 0 &&
-    deleteStatus === 'idle';
+    deletePendingDongilStatus === 'idle';
   const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
     useBottomSheet(false);
   const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
     useBottomSheet(false);
+
   async function handleDeleteButtonClick() {
-    if (canDelete) {
+    if (canDeletePendingDongil) {
       try {
-        setDeleteStatus('pending');
-        // await dispatch(
-        //   deletePendingDongil({
-        //     axiosPrivate,
-        //     id: idToDelete,
-        //   }),
-        // ).unwrap();
-        // setOpenDeleteCheck(false);
-        // setOpenDeletedCompleted(true);
+        setDeletePendingDongilStatus('pending');
+        await dispatch(
+          deletePendingDongil({
+            axiosPrivate,
+            id: idToDelete,
+          }),
+        ).unwrap();
         onDeleteCheckOpen();
       } catch (error: any) {
         console.log(error);
       } finally {
-        setDeleteStatus('idle');
+        setDeletePendingDongilStatus('idle');
       }
     }
     onDeleteCheckDismiss();

@@ -1,15 +1,15 @@
 import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-type TPendingDongilsState = {
+interface IPendingDongilsState {
   pendingDongils: IDongil[];
   pendingDongilsStatus?: TFetchStatus;
-};
+}
 
-const initialState: TPendingDongilsState = {
+const initialState: IPendingDongilsState = {
   pendingDongils: [],
   pendingDongilsStatus: 'idle',
 };
@@ -30,7 +30,6 @@ export const deletePendingDongil = createAsyncThunk(
   async (thunkPayload: { axiosPrivate: AxiosInstance; id: number }) => {
     const { axiosPrivate, id } = thunkPayload;
     const response = await axiosPrivate.delete(`/challenge/${id}`);
-    console.log('response.data', response.data);
     return response.data;
   },
 );
@@ -63,7 +62,6 @@ export const pendingDongilsSlice = createSlice({
 
 export const selectPendingDongilsStatus = (state: RootState) =>
   state.pendingDongils.pendingDongilsStatus;
-
 export const selectPendingDongils = (state: RootState) =>
   state.pendingDongils.pendingDongils;
 

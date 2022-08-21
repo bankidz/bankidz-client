@@ -8,12 +8,12 @@ interface IKidSummary {
   totalPrice: number;
 }
 
-type TKidSummaryState = {
+interface IKidSummaryState {
   kidSummary: IKidSummary | null;
   kidSummaryStatus?: TFetchStatus;
-};
+}
 
-const initialState: TKidSummaryState = {
+const initialState: IKidSummaryState = {
   kidSummary: null,
   kidSummaryStatus: 'idle',
 };

@@ -32,7 +32,7 @@ function ProposedDongilItem({
   } = proposedDongil;
 
   const navigate = useNavigate();
-  function openQuaternaryModal() {
+  function openProposedReceiptModal() {
     openModal(modals.receiptModal, {
       variant: 'proposed',
       onSubmit: () => {
@@ -56,11 +56,7 @@ function ProposedDongilItem({
   }
 
   return (
-    <StyledButton
-      onClick={() => {
-        openQuaternaryModal();
-      }}
-    >
+    <StyledButton onClick={openProposedReceiptModal}>
       <div className="text-wrapper">
         <span className="title">{title}</span>
         <span className="totalPrice">
