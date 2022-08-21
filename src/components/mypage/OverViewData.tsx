@@ -27,7 +27,10 @@ function OverViewData({ isKid, kid, forParent }: OverViewDataProps) {
         </>,
         <>
           <p>
-            {Math.ceil((kid!.achievedChallenge / kid!.totalChallenge) * 100)}%
+            {kid!.totalChallenge === 0
+              ? 0
+              : Math.ceil((kid!.achievedChallenge / kid!.totalChallenge) * 100)}
+            %
           </p>
           <p>평균 완주율</p>
         </>,

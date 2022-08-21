@@ -78,7 +78,9 @@ function Create() {
             {parents.length === 1
               ? title[parseInt(step)]
               : title[parseInt(step) - 1]}
+            {/* <CheckProcess currentStep={getTypedStep(parseInt(step))}> */}
             {renderContent(getTypedStep(parseInt(step)))}
+            {/* </CheckProcess> */}
           </MarginTemplate>
         </>
       )}

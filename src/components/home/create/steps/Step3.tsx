@@ -35,7 +35,6 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
-
   //TODO : api fetching
   const testDuplicate = ['중복된 이름'];
 

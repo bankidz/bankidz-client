@@ -30,6 +30,7 @@ function ContractSheet({
       open={open}
       onDismiss={onDismiss}
       snapPoints={({ minHeight }) => minHeight}
+      blocking={false}
     >
       <div ref={sheetRef}>
         <SheetContainer>{children}</SheetContainer>
