@@ -6,11 +6,11 @@ import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import DongilFailed from '@components/common/bottomSheets/sheetContents/DongilFailed';
-import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
-import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import { TDongilStatus } from '@lib/types/TDongilStatus';
+import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
+import DongilFailed from '@components/common/bottomSheets/commonSheet/DongilFailed';
+import DeleteCheck from '@components/common/bottomSheets/commonSheet/DeleteCheck';
+import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 
 interface WalkingDongilItemProps {
   itemName: TItemName;

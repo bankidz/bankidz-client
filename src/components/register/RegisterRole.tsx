@@ -10,14 +10,14 @@ import {
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import CommonSheet from '../common/bottomSheets/CommonSheet';
-import SelectProfile from '../common/bottomSheets/sheetContents/SelectProfile';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { TLevel } from '@lib/types/TLevel';
+import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
+import SelectProfile from '@components/common/bottomSheets/commonSheet/SelectProfile';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();

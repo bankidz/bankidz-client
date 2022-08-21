@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import ContractSheet from '@components/common/bottomSheets/ContractSheet';
-import SelectInterest from '@components/common/bottomSheets/sheetContents/SelectInterest';
+import SelectInterest from '@components/common/bottomSheets/contractSheet/SelectInterest';
 import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -15,7 +14,7 @@ import {
 } from '@store/slices/createChallengeSlice';
 import { ReactComponent as Divider } from '@assets/borders/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
-import RangeInput from '@components/common/bottomSheets/sheetContents/RangeInput';
+import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import getChallengeStep4Prices from '@lib/utils/get/getChallengeStep4Prices';
@@ -25,6 +24,7 @@ import moment from 'moment';
 import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 
 export type TStep4Form = {
   weekPrice: number;

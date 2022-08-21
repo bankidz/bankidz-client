@@ -1,5 +1,5 @@
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
+import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 import GoBackHeader from '@components/common/buttons/GoBackHeader';
 import InputForm from '@components/common/InputForm';
 import MarginTemplate from '@components/layout/MarginTemplate';

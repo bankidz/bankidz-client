@@ -23,10 +23,10 @@ import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import getTargetDongil from '@components/home/detail/getTargetDongil';
 
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUpExceeded';
-import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
-import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
+import GiveUpCheck from '@components/common/bottomSheets/commonSheet/GiveUpCheck';
+import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
+import GiveUpExceeded from '@components/common/bottomSheets/commonSheet/GiveUpExceeded';
 
 function Detail() {
   const { id } = useParams();
@@ -187,7 +187,7 @@ function Detail() {
           navigate('/');
         }}
       >
-        <SheetComplete
+        <SheetCompleted
           type="giveUp"
           title={title}
           onDismiss={() => {
@@ -204,7 +204,7 @@ function Detail() {
         open={openCancelCompleted}
         onDismiss={onCancelCompletedDismiss}
       >
-        <SheetComplete type="cancel" onDismiss={onCancelCompletedDismiss} />
+        <SheetCompleted type="cancel" onDismiss={onCancelCompletedDismiss} />
       </CommonSheet>
     </Wrapper>
   );

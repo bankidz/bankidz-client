@@ -1,5 +1,5 @@
-import ContractSheet from '@components/common/bottomSheets/ContractSheet';
-import Signature from '@components/common/bottomSheets/sheetContents/Signature';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
+import Signature from '@components/common/bottomSheets/contractSheet/Signature';
 import Modals, { modals } from '@components/common/modals/Modals';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useBottomSheet from '@lib/hooks/useBottomSheet';

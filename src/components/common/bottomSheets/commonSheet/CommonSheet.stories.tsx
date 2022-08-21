@@ -1,13 +1,13 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
-import DeleteCheck from './sheetContents/DeleteCheck';
-import GiveUpExceeded from './sheetContents/GiveUpExceeded';
-import GiveUpCheck from './sheetContents/GiveUpCheck';
-import SelectProfile from './sheetContents/SelectProfile';
-import SheetCompleted from './sheetContents/SheetCompleted';
-import DongilFailed from './sheetContents/DongilFailed';
-import ApproveCheck from './sheetContents/ApproveCheck';
+import ApproveCheck from './ApproveCheck';
+import SelectProfile from './SelectProfile';
+import GiveUpCheck from './GiveUpCheck';
+import DeleteCheck from './DeleteCheck';
+import SheetCompleted from './SheetCompleted';
+import GiveUpExceeded from './GiveUpExceeded';
+import DongilFailed from './DongilFailed';
 
 export default {
   title: 'common/bottomSheets/CommonSheet',

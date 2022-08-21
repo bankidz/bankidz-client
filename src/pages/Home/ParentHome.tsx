@@ -23,10 +23,8 @@ import {
 
 import { theme } from '@lib/styles/theme';
 import Modals from '@components/common/modals/Modals';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
+import ApproveCheck from '@components/common/bottomSheets/commonSheet/ApproveCheck';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
@@ -37,6 +35,8 @@ import getThisWeekSDongilsContent from '@components/home/thisWeekS/getThisWeekSD
 import hasParentSummaryAlreadyBeenFetched from '@components/home/sumary/hasParentSummaryAlreadyBeenFetched';
 import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
+import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
+import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
