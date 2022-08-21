@@ -18,10 +18,10 @@ function SheetCompleted({ type, title, onDismiss }: SheetCompleteProps) {
         {type === 'delete' && <p>삭제되었어요!</p>}
         {type === 'cancel' && <p>'포기하기'가 취소되었어요</p>}
         {type === 'giveUp' && (
-          <p>
-            <div>'{title}' 돈길이</div>
-            <div style={{ marginTop: '10px' }}>포기되었어요</div>
-          </p>
+          <div>
+            <p>'{title}' 돈길이</p>
+            <p style={{ marginTop: '10px' }}>포기되었어요</p>
+          </div>
         )}
         {type === 'feedback' && <p>자녀에게 피드백이 전송되었어요</p>}
         {type === 'approve' && <p>자녀의 돈길이 수락되었어요</p>}
@@ -42,7 +42,7 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  & > p {
+  & p {
     ${({ theme }) => theme.typo.bottomSheet.T_21_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
     text-align: center;
