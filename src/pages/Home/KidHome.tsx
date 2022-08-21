@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -28,9 +27,9 @@ import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import getKidSummaryContent from '@components/home/sumary/getKidSummaryContent';
-import getWalkingDongilsContent from '@components/home/walking/getWalkingDongilsContent';
-import getPendingDongilsContent from '@components/home/pending/getPendingDontilsContent';
+import KidSummary from '@components/home/sumary/KidSummary';
+import WalkingDongils from '@components/home/walking/WalkingDongils';
+import PendingDongils from '@components/home/pending/PendingDontils';
 
 /*
  ** 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
@@ -101,32 +100,27 @@ function KidHome() {
     onDeleteCompletedOpen();
   }
 
-  // 주간 진행상황, 걷고있는 돈길, 대기중인 돈길
-  let kidSummaryContent = getKidSummaryContent();
-  let walkingDongilsContent = getWalkingDongilsContent();
-  let pendingDongilsContent = getPendingDongilsContent(
-    onDeleteCheckOpen,
-    setIdToDelete,
-  );
-
   return (
     <HomeTemplate variant="KidHome">
       <MarginTemplate>
-        <SummaryWrapper>{kidSummaryContent}</SummaryWrapper>
-        <WalkingDongilsWrapper>{walkingDongilsContent}</WalkingDongilsWrapper>
-        <WaitingDongilWrapper>{pendingDongilsContent}</WaitingDongilWrapper>
+        <KidSummary />
+        <WalkingDongils />
+        <PendingDongils
+          onDeleteCheckOpen={onDeleteCheckOpen}
+          setIdToDelete={setIdToDelete}
+        />
         <LargeSpacer />
       </MarginTemplate>
-
-      {/* 다음 모달과 바텀시트를 열고 닫는 로직은 PendingDongilItem에서 실행됩니다. */}
-      {/* 모달은 전역상태로 관리되기에 별도의 props를 전달하지 않습니다. */}
       <Modals />
+
+      {/* 정말로 삭제할거예요? */}
       <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
         <DeleteCheck
           onClickDelete={handleDeleteButtonClick}
           onDismiss={onDeleteCheckDismiss}
         />
       </CommonSheet>
+      {/* 삭제되었어요 */}
       <CommonSheet
         open={openDeleteCompleted}
         onDismiss={onDeleteCompletedDismiss}
@@ -138,29 +132,3 @@ function KidHome() {
 }
 
 export default KidHome;
-
-const SummaryWrapper = styled.div`
-  margin-top: 198px;
-`;
-
-const WalkingDongilsWrapper = styled.div`
-  margin-top: 48px;
-  h1 {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;
-
-const WaitingDongilWrapper = styled.div`
-  margin-top: 48px;
-  h1 {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;

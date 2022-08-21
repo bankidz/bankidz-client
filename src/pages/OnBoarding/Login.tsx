@@ -15,11 +15,15 @@ function LoginPage() {
           <Logo />
           <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
-        {/* TODO: demo day */}
         <ButtonWithMarginBottom
           label="시연 체험해보기"
           onClick={() => navigate('/register/1')}
           property="default"
+        />
+        <ButtonWithMarginBottom
+          label="임시 애플 소셜 로그인 버튼"
+          onClick={() => navigate('/register/1')}
+          property="sub"
         />
         <ButtonWithMarginBottom
           label="카카오로 시작하기"

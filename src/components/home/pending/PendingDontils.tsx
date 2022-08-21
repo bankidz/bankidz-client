@@ -4,20 +4,26 @@ import {
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import PendingDongilList from './PendingDongilList';
 
-function getPendingDongilsContent(
-  onDeleteCheckOpen: () => void,
-  setIdToDelete: Dispatch<SetStateAction<number | null>>,
-) {
+interface PendingDongilsProps {
+  onDeleteCheckOpen: () => void;
+  setIdToDelete: Dispatch<SetStateAction<number | null>>;
+}
+
+function PendingDongils({
+  onDeleteCheckOpen,
+  setIdToDelete,
+}: PendingDongilsProps) {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
 
-  let pendingDongilsContent;
+  let content: JSX.Element = <></>;
   if (pendingDongilsStatus === 'loading') {
-    pendingDongilsContent = (
+    content = (
       <>
         <h1>대기중인 돈길</h1>
         <SkeletonDongilList variant="pending" />
@@ -25,14 +31,14 @@ function getPendingDongilsContent(
     );
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils?.length === 0) {
-      pendingDongilsContent = (
+      content = (
         <>
           <h1>대기중인 돈길</h1>
           <EmptyDongil variant="pending" />
         </>
       );
     } else {
-      pendingDongilsContent = (
+      content = (
         <>
           <h1>대기중인 돈길</h1>
           <PendingDongilList
@@ -44,9 +50,20 @@ function getPendingDongilsContent(
       );
     }
   } else if (pendingDongilsStatus === 'failed') {
-    pendingDongilsContent = <p>Failed</p>;
+    content = <p>Failed</p>;
   }
-  return pendingDongilsContent;
+  return <Wrapper>{content}</Wrapper>;
 }
 
-export default getPendingDongilsContent;
+export default PendingDongils;
+
+const Wrapper = styled.div`
+  margin-top: 48px;
+  h1 {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;

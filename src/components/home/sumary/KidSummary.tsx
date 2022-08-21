@@ -3,20 +3,19 @@ import {
   selectKidSummary,
   selectKidSummaryStatus,
 } from '@store/slices/kidSummarySlice';
+import styled from 'styled-components';
 import Summary from './Summary';
 
-function getKidSummaryContent() {
+function KidSummary() {
   const kidSummary = useAppSelector(selectKidSummary);
   const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
 
-  let kidSummaryContent;
+  let content: JSX.Element = <></>;
   if (kidSummaryStatus === 'loading') {
-    kidSummaryContent = (
-      <Summary variant="KidHome" currentSavings={0} totalPrice={0} />
-    );
+    content = <Summary variant="KidHome" currentSavings={0} totalPrice={0} />;
   } else if (kidSummaryStatus === 'succeeded') {
     const { currentSavings, totalPrice } = kidSummary!;
-    kidSummaryContent = (
+    content = (
       <Summary
         variant="KidHome"
         currentSavings={currentSavings!}
@@ -24,9 +23,13 @@ function getKidSummaryContent() {
       />
     );
   } else if (kidSummaryStatus === 'failed') {
-    kidSummaryContent = <p>Failed</p>;
+    content = <p>Failed</p>;
   }
-  return kidSummaryContent;
+  return <SummaryWrapper>{content}</SummaryWrapper>;
 }
 
-export default getKidSummaryContent;
+export default KidSummary;
+
+const SummaryWrapper = styled.div`
+  margin-top: 198px;
+`;
