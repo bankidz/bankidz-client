@@ -70,7 +70,7 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
       <div className="logo-wrapper">
         <BANKIDZ />
       </div>
-      {hasMultipleKids === true && (
+      {hasMultipleKids && (
         <KidListWrapper colorByLevel={colorByLevel}>
           {kidsContent}
         </KidListWrapper>
@@ -192,7 +192,7 @@ const LevelBadgeWrapper = styled.div`
 
 const StyledHeader = styled.h1<{ hasMultipleKids: boolean }>`
   ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
+    hasMultipleKids
       ? css`
           margin-top: 141px;
         `
@@ -260,36 +260,3 @@ const HomeBankiWrapper = styled.div<{ hasMultipleKids: boolean }>`
   position: absolute;
   right: 0;
 `;
-
-/* ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          height: 350px;
-        `
-      : css`
-          height: 275px;
-        `} */
-
-/* ${({ hasMultipleKids }) =>
-    hasMultipleKids === true
-      ? css`
-          @keyframes slide {
-            from {
-              top: 290px;
-            }
-            to {
-              top: 410px;
-            }
-          }
-        `
-      : css`
-          @keyframes slide {
-            from {
-              top: 225px;
-            }
-            to {
-              top: 337px;
-            }
-          }
-        `}
-  animation: slide ${({ theme }) => theme.animation.homeMount}; */

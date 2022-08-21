@@ -47,13 +47,13 @@ function RegisterBirthday() {
   }, [year, isValidYear]);
   useEffect(() => {
     setIsValidMonth(MONTH_REGEX.test(month));
-    if (MONTH_REGEX.test(month) === true && parseInt(month) >= 2) {
+    if (MONTH_REGEX.test(month) && parseInt(month) >= 2) {
       dayInputRef.current!.focus();
     }
   }, [month, isValidMonth]);
   useEffect(() => {
     setIsValidDay(DAY_REGEX.test(day));
-    if (DAY_REGEX.test(day) === true && parseInt(day) >= 4) {
+    if (DAY_REGEX.test(day) && parseInt(day) >= 4) {
       dayInputRef.current!.blur();
     }
   }, [day]);
