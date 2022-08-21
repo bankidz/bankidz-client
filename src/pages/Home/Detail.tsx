@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Summary from '@components/home/sumary/Summary';
-import InterestStampList from '@components/home/walking/InterestStampList';
 import TotalInterest from '@components/home/walking/TotalInterest';
-import Receipt from '@components/common/receipt/Receipt';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 
@@ -20,9 +18,7 @@ import {
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 
 import { calcRatio } from '@lib/styles/theme';
-import renderGraph from '@lib/utils/render/renderGraph';
 import { TLevel } from '@lib/types/TLevel';
-import { TPercent } from '@lib/types/TPercent';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import getTargetDongil from '@components/home/detail/getTargetDongil';
 
@@ -31,6 +27,9 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUpExceeded';
 import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
+import DetailOverView from '@components/home/detail/DetailOverView';
+import DetailInterestStampList from '@components/home/detail/DetailInterestStampList';
+import DongilContract from '@components/home/detail/DongilContract';
 
 function Detail() {
   const { id } = useParams();
@@ -58,7 +57,6 @@ function Detail() {
     successWeeks,
     challengeStatus,
   } = targetDongil!;
-  const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
 
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
@@ -105,13 +103,11 @@ function Detail() {
       }
     }
   }
-
   // '정말 포기할거예요?' 바텀시트 하단 오른쪽 노란색 버튼
   function handleRetryButtonClick() {
     onGiveUpCheckDismiss();
     onCancelCompletedOpen();
   }
-
   // '돈길이 포기되었어요' 바텀시트 확인 버튼
   function handleConfirmButtonClick() {
     dispatch(deleteClientSideWalkingDongilById(parseInt(id!)));
@@ -123,63 +119,48 @@ function Detail() {
       <Content>
         <MarginTemplate>
           <FlexContainer>
-            <div className="graph">{renderGraph(percent as TPercent)}</div>
-            <span className="challenging">
-              {progressList?.length}주차 도전중
-            </span>
-            <span className="title">{title}</span>
-
+            <DetailOverView
+              progressList={progressList}
+              successWeeks={successWeeks}
+              title={title}
+              weeks={weeks}
+            />
             <Summary
               variant="Detail"
               weekPrice={weekPrice}
               weeks={weeks}
               successWeeks={successWeeks}
             />
-
-            <InterestStampListWrapper>
-              <div className="text-wrapper">
-                <span className="header">이자 스탬프</span>
-                <span className="body">
-                  돈길 걷기를 완료한 주차에 해당하는 만큼 이자를 받아요
-                </span>
-                <InterestStampList weeks={weeks} stamps={progressList!} />
-              </div>
-            </InterestStampListWrapper>
-
+            <DetailInterestStampList
+              weeks={weeks}
+              progressList={progressList}
+            />
             <TotalInterest
               weeks={weeks}
               interestRate={interestRate}
               totalPrice={totalPrice}
               successWeeks={successWeeks}
             />
-
-            <DongilContractContent>
-              <span>돈길 계약 내용</span>
-              <div className="receipt-wrapper">
-                {progressList && (
-                  <Receipt
-                    createdAt={progressList[0].approvedAt}
-                    interestRate={interestRate}
-                    isMom={isMom}
-                    itemName={itemName}
-                    totalPrice={totalPrice}
-                    weekPrice={weekPrice}
-                    weeks={weeks}
-                  />
-                )}
-              </div>
-            </DongilContractContent>
+            <DongilContract
+              interestRate={interestRate}
+              isMom={isMom}
+              itemName={itemName}
+              progressList={progressList}
+              totalPrice={totalPrice}
+              weekPrice={weekPrice}
+              weeks={weeks}
+            />
             {isKid === true && challengeStatus !== 'FAILED' && (
               <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
                 돈길 포기하기
               </GiveUpDongilButton>
             )}
-            <LargeSpacer isWhite={true} />
+            <LargeSpacer isWhite />
           </FlexContainer>
         </MarginTemplate>
       </Content>
+      <Background colorByLevel={colorByLevel} />
 
-      <Background colorByLevel={colorByLevel}></Background>
       {/* 정말 포기할거에요? */}
       <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
         <GiveUpCheck
@@ -259,42 +240,6 @@ const FlexContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
-
-const InterestStampListWrapper = styled.div`
-  margin-top: 80px;
-  margin-bottom: 40px;
-  width: 100%;
-
-  .text-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    .header {
-      ${({ theme }) => theme.typo.text.T_16_EB};
-      color: ${({ theme }) => theme.palette.greyScale.black};
-    }
-    .body {
-      margin-top: 16px;
-      margin-bottom: 24px;
-      ${({ theme }) => theme.typo.text.S_12_M};
-      color: ${({ theme }) => theme.palette.greyScale.grey600};
-    }
-  }
-`;
-
-const DongilContractContent = styled.div`
-  margin-top: 80px;
-  width: 100%;
-  span {
-    height: 16px;
-    ${({ theme }) => theme.typo.text.T_16_EB};
-    color: ${({ theme }) => theme.palette.greyScale.black};
-  }
-  .receipt-wrapper {
-    margin-top: 20px;
-  }
 `;
 
 const GiveUpDongilButton = styled.button`
