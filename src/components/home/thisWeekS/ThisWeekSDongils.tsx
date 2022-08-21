@@ -16,12 +16,7 @@ function ThisWeekSDongils() {
 
   let content: JSX.Element = <></>;
   if (thisWeekSDongilsStatus === 'loading') {
-    content = (
-      <>
-        <h1>금주의 돈길</h1>
-        <SkeletonDongilList variant="thisWeekS" />
-      </>
-    );
+    content = <SkeletonDongilList variant="thisWeekS" />;
   } else if (thisWeekSDongilsStatus === 'succeeded') {
     const getSelectedKidSThisWeekSDongils = (username: string) => {
       const found = thisWeekSDongils?.find(
@@ -29,31 +24,27 @@ function ThisWeekSDongils() {
       );
       return found?.challengeList;
     };
-
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
+
     if (thisWeekSDongils?.length === 0) {
-      content = (
-        <>
-          <h1>금주의 돈길</h1>
-          <EmptyDongil variant="thisWeekS" />
-        </>
-      );
+      content = <EmptyDongil variant="thisWeekS" />;
     } else {
       content = (
-        <>
-          <h1>금주의 돈길</h1>
-          <ThisWeekSDongilList
-            thisWeekSDongils={selectedKidSThisWeekSDongils!}
-          />
-        </>
+        <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
       );
     }
   } else if (thisWeekSDongilsStatus === 'failed') {
     content = <p>Failed</p>;
   }
-  return <Wrapper>{content}</Wrapper>;
+
+  return (
+    <Wrapper>
+      <h1>금주의 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
 export default ThisWeekSDongils;

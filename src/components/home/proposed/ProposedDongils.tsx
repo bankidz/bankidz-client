@@ -23,14 +23,9 @@ function ProposedDongils({
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  let content;
+  let content: JSX.Element = <></>;
   if (proposedDongilsStatus === 'loading') {
-    content = (
-      <>
-        <h1>제안받은 돈길</h1>
-        <SkeletonDongilList variant="proposed" />
-      </>
-    );
+    content = <SkeletonDongilList variant="proposed" />;
   } else if (proposedDongilsStatus === 'succeeded') {
     const getSelectedKidSProposedDongils = (username: string) => {
       const found = proposedDongils?.find(
@@ -38,28 +33,30 @@ function ProposedDongils({
       );
       return found?.challengeList;
     };
-
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
     );
+
     if (selectedKidSProposedDongils?.length === 0) {
       content = <EmptyDongil variant="proposed" />;
     } else {
       content = (
-        <>
-          <h1>제안받은 돈길</h1>
-          <ProposedDongilList
-            proposedDongils={selectedKidSProposedDongils!}
-            onApproveCheckOpen={onApproveCheckOpen}
-            setIdToApprove={setIdToApprove}
-          />
-        </>
+        <ProposedDongilList
+          proposedDongils={selectedKidSProposedDongils!}
+          onApproveCheckOpen={onApproveCheckOpen}
+          setIdToApprove={setIdToApprove}
+        />
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
     content = <p>Failed</p>;
   }
-  return <Wrapper>{content}</Wrapper>;
+  return (
+    <Wrapper>
+      <h1>제안받은 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
 export default ProposedDongils;

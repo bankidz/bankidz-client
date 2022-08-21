@@ -37,7 +37,7 @@ import hasParentSummaryAlreadyBeenFetched from '@components/home/sumary/hasParen
 import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import ParentSummary from '@components/home/sumary/getParentSummaryContent';
+import ParentSummary from '@components/home/sumary/ParentSummary';
 import ProposedDongils from '@components/home/proposed/ProposedDongils';
 import ThisWeekSDongils from '@components/home/thisWeekS/ThisWeekSDongils';
 

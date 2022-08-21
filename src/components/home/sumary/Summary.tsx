@@ -31,7 +31,6 @@ function Summary({
   const today = new Date();
   const { month, weekNo } = getWeekNumberByMonth(today);
 
-  // Detail
   let currentSavingsForDetailPage: number;
   let currentCompletionRate: number;
   if (variant === 'Detail') {

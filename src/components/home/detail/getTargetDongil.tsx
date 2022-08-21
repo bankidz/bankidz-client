@@ -15,20 +15,20 @@ function getTargetDongil(id: string) {
       (walkingDongil) => walkingDongil.id === parseInt(id!),
     )!;
   } else if (isKid === false) {
+    const getSelectedKidSThisWeekSDongils = (username: string) => {
+      const found = thisWeekSDongils?.find(
+        (thisWeekSDongil) => thisWeekSDongil.userName === username,
+      );
+      return found?.challengeList;
+    };
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
+
     return selectedKidSThisWeekSDongils?.find(
       (selectedKidSThisWeekSDongil) =>
         selectedKidSThisWeekSDongil.id === parseInt(id!),
     )!;
-  }
-
-  function getSelectedKidSThisWeekSDongils(username: string) {
-    const found = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === username,
-    );
-    return found?.challengeList;
   }
 }
 

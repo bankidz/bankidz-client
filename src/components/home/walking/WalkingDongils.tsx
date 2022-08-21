@@ -26,24 +26,15 @@ function WalkingDongils() {
 
   let content: JSX.Element = <></>;
   if (walkingDongilsStatus === 'loading') {
-    content = (
-      <>
-        <h1>걷고있는 돈길</h1>
-        <SkeletonDongilList variant="walking" />
-      </>
-    );
+    content = <SkeletonDongilList variant="walking" />;
   } else if (walkingDongilsStatus === 'succeeded') {
     if (walkingDongils?.length === 0) {
       content = (
-        <>
-          <h1>걷고있는 돈길</h1>
-          <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
-        </>
+        <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
       );
     } else {
       content = (
         <>
-          <h1>걷고있는 돈길</h1>
           <WalkingDongilList walkingDongils={walkingDongils!} />
           <ContractNewDongilLink disable={disable} to={'/create/1'} />
         </>
@@ -52,7 +43,13 @@ function WalkingDongils() {
   } else if (walkingDongilsStatus === 'failed') {
     content = <p>Failed</p>;
   }
-  return <Wrapper>{content}</Wrapper>;
+
+  return (
+    <Wrapper>
+      <h1>걷고있는 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
 export default WalkingDongils;

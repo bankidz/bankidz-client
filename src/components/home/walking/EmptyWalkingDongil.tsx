@@ -33,7 +33,6 @@ const Wrapper = styled.div`
     height: 48px;
     border-radius: 50%;
   }
-
   span {
     margin-top: 16px;
     ${({ theme }) => theme.typo.text.T_18_EB};

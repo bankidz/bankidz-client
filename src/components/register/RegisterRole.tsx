@@ -133,7 +133,7 @@ function RegisterRole() {
         />
       </RoleButtonWrapper>
 
-      <div ref={inputDivRef}></div>
+      <div ref={inputDivRef} />
       <CommonSheet open={open} onDismiss={onDismiss} sheetRef={sheetDivRef}>
         <SelectProfile
           isKid={isKid}

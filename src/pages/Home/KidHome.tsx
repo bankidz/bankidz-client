@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';

@@ -16,7 +16,6 @@ import {
   selectWalkingDongils,
 } from '@store/slices/walkingDongilsSlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-
 import { calcRatio } from '@lib/styles/theme';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
