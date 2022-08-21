@@ -26,7 +26,7 @@ function Walk() {
   const walkAbledDongils = walkingDongils?.filter(
     (dongil) => dongil.challengeStatus === 'WALKING',
   );
-
+  console.log(walkAbledDongils);
   useEffect(() => {
     // @ts-expect-error
     dispatch(dispatchResetIsPatched({}));
@@ -40,7 +40,7 @@ function Walk() {
 
   return (
     <Wrapper>
-      {walkAbledDongils ? (
+      {walkAbledDongils.length > 0 ? (
         <>
           <WalkDefault walkingDongils={walkAbledDongils} user={user} />
         </>

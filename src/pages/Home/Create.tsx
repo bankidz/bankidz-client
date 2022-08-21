@@ -9,6 +9,7 @@ import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
 import { useAppSelector } from '@store/app/hooks';
 import { selectParents } from '@store/slices/familySlice';
+import CheckProcess from '@components/home/create/CheckProcess';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -78,7 +79,9 @@ function Create() {
             {parents.length === 1
               ? title[parseInt(step)]
               : title[parseInt(step) - 1]}
+            {/* <CheckProcess currentStep={getTypedStep(parseInt(step))}> */}
             {renderContent(getTypedStep(parseInt(step)))}
+            {/* </CheckProcess> */}
           </MarginTemplate>
         </>
       )}
