@@ -10,33 +10,22 @@ import { ReactComponent as Graph80 } from '@assets/illusts/graph/graph_80.svg';
 import { ReactComponent as Graph90 } from '@assets/illusts/graph/graph_90.svg';
 import { ReactComponent as Graph100 } from '@assets/illusts/graph/graph_100.svg';
 import { TPercent } from '@lib/types/TPercent';
+import React from 'react';
 
 function renderGraph(percent: TPercent) {
-  let graph;
-  if (percent === 0) {
-    graph = <Graph0 />;
-  } else if (percent === 10) {
-    graph = <Graph10 />;
-  } else if (percent === 20) {
-    graph = <Graph20 />;
-  } else if (percent === 30) {
-    graph = <Graph30 />;
-  } else if (percent === 40) {
-    graph = <Graph40 />;
-  } else if (percent === 50) {
-    graph = <Graph50 />;
-  } else if (percent === 60) {
-    graph = <Graph60 />;
-  } else if (percent === 70) {
-    graph = <Graph70 />;
-  } else if (percent === 80) {
-    graph = <Graph80 />;
-  } else if (percent === 90) {
-    graph = <Graph90 />;
-  } else if (percent === 100) {
-    graph = <Graph100 />;
-  }
-  return graph;
+  const map = new Map<TPercent, React.ReactElement>();
+  map.set(0, <Graph0 />);
+  map.set(10, <Graph10 />);
+  map.set(20, <Graph20 />);
+  map.set(30, <Graph30 />);
+  map.set(40, <Graph40 />);
+  map.set(50, <Graph50 />);
+  map.set(60, <Graph60 />);
+  map.set(70, <Graph70 />);
+  map.set(80, <Graph80 />);
+  map.set(90, <Graph90 />);
+  map.set(100, <Graph100 />);
+  return map.get(percent);
 }
 
 export default renderGraph;
