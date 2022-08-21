@@ -1,4 +1,3 @@
-import { TItemName } from '@lib/types/TItemName';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
