@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // 배포 환경
-// const BASE_URL = 'https://api.bankidz.com';
+//const BASE_URL = 'https://api.bankidz.com';
 // 테스트 환경
 const BASE_URL = 'https://bankids.click';
 

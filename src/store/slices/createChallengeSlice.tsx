@@ -24,7 +24,7 @@ type TcreateChallengeState = {
   status: TFetchStatus;
   error: string | undefined;
   challenge: {
-    category: string;
+    challengeCategory: string;
     isMom: boolean | null;
     itemName: string | null;
     title: string;
@@ -32,15 +32,18 @@ type TcreateChallengeState = {
     totalPrice: number;
     weekPrice: number;
     weeks: number;
+    fileName: string;
   };
   response: TPostChallengeResponseState | null;
+  // 새로고침시 false -> step1으로
+  inProcess: boolean;
 };
 
 const initialState: TcreateChallengeState = {
   status: 'idle',
   error: undefined,
   challenge: {
-    category: '이자율 받기',
+    challengeCategory: '이자율 받기',
     isMom: null,
     itemName: null,
     title: '',
@@ -48,8 +51,10 @@ const initialState: TcreateChallengeState = {
     totalPrice: 0,
     weekPrice: 0,
     weeks: 0,
+    fileName: '',
   },
   response: null,
+  inProcess: false,
 };
 
 // POST: 프로필 정보가 없는 회원에 대해 입력받은 프로필 정보 전송
@@ -96,6 +101,12 @@ export const createChallengeSlice = createSlice({
     dispatchWeeks(state, action: PayloadAction<number>) {
       state.challenge.weeks = action.payload;
     },
+    dispatchFileName(state, action: PayloadAction<string>) {
+      state.challenge.fileName = action.payload;
+    },
+    dispatchInProcess(state) {
+      state.inProcess = true;
+    },
     dispatchResetChallengePayload(state) {
       return initialState;
     },
@@ -124,6 +135,8 @@ export const {
   dispatchInterestRate,
   dispatchWeeks,
   dispatchResetChallengePayload,
+  dispatchInProcess,
+  dispatchFileName,
 } = createChallengeSlice.actions;
 
 export const selectCreateChallenge = (state: RootState) =>
@@ -143,6 +156,8 @@ export const selectStep4InitData = (state: RootState) => {
 };
 export const selectTotalPrice = (state: RootState) =>
   state.createChallenge.challenge.totalPrice;
+export const selectInProcess = (state: RootState) =>
+  state.createChallenge.inProcess;
 
 export const selectPostChallengeResponse = (state: RootState) => {
   return {

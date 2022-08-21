@@ -10,12 +10,14 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchTitle,
   dispatchTotalPrice,
+  selectInProcess,
   selectStep3InitData,
 } from '@store/slices/createChallengeSlice';
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import { useSelector } from 'react-redux';
 
 type TStep3Form = {
   contractName: string;
@@ -35,7 +37,6 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
-
   //TODO : api fetching
   const testDuplicate = ['중복된 이름'];
 

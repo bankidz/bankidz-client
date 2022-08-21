@@ -1,7 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
-import { dispatchItemName } from '@store/slices/createChallengeSlice';
+import {
+  dispatchInProcess,
+  dispatchItemName,
+} from '@store/slices/createChallengeSlice';
 import SelectItemNameButton from '../SelectItemNameButton';
 import { TItemName } from '@lib/types/TItemName';
 
@@ -20,10 +23,12 @@ const itemNames: TItemName[] = [
 function Step2({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
 
   const onClickItemNameButton = (itemName: string) => {
     dispatch(dispatchItemName(itemName));
+    if (currentStep === 1) {
+      dispatch(dispatchInProcess());
+    }
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
