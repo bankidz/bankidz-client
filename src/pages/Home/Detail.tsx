@@ -28,7 +28,7 @@ import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpChe
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import DetailOverView from '@components/home/detail/DetailOverView';
 import DetailInterestStampList from '@components/home/detail/DetailInterestStampList';
-import DongilContract from '@components/home/detail/DongilContract';
+import DongilContractContent from '@components/home/detail/DongilContractContent';
 
 function Detail() {
   const { id } = useParams();
@@ -140,7 +140,7 @@ function Detail() {
               totalPrice={totalPrice}
               successWeeks={successWeeks}
             />
-            <DongilContract
+            <DongilContractContent
               interestRate={interestRate}
               isMom={isMom}
               itemName={itemName}

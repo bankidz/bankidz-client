@@ -2,7 +2,7 @@ import Receipt from '@components/common/receipt/Receipt';
 import { IDongil } from '@lib/types/IDongil';
 import styled from 'styled-components';
 
-interface DongilContractProps
+interface DongilContractContentProps
   extends Pick<
     IDongil,
     | 'progressList'
@@ -14,7 +14,7 @@ interface DongilContractProps
     | 'weeks'
   > {}
 
-function DongilContract({
+function DongilContractContent({
   progressList,
   interestRate,
   isMom,
@@ -22,7 +22,7 @@ function DongilContract({
   totalPrice,
   weekPrice,
   weeks,
-}: DongilContractProps) {
+}: DongilContractContentProps) {
   return (
     <Wrapper>
       <span>돈길 계약 내용</span>
@@ -43,7 +43,7 @@ function DongilContract({
   );
 }
 
-export default DongilContract;
+export default DongilContractContent;
 
 const Wrapper = styled.div`
   margin-top: 80px;
