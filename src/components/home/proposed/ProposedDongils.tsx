@@ -5,21 +5,27 @@ import {
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ProposedDongilList from './ProposedDongilList';
 
-function getProposedDongilsContent(
-  onApproveCheckOpen: () => void,
-  setIdToApprove: Dispatch<SetStateAction<number | null>>,
-) {
+interface ProposedDongilsProps {
+  onApproveCheckOpen: () => void;
+  setIdToApprove: Dispatch<SetStateAction<number | null>>;
+}
+
+function ProposedDongils({
+  onApproveCheckOpen,
+  setIdToApprove,
+}: ProposedDongilsProps) {
   const proposedDongils = useAppSelector(selectProposedDongils);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  let proposedDongilsContent;
+  let content;
   if (proposedDongilsStatus === 'loading') {
-    proposedDongilsContent = (
+    content = (
       <>
         <h1>제안받은 돈길</h1>
         <SkeletonDongilList variant="proposed" />
@@ -37,9 +43,9 @@ function getProposedDongilsContent(
       selectedKid?.username!,
     );
     if (selectedKidSProposedDongils?.length === 0) {
-      proposedDongilsContent = <EmptyDongil variant="proposed" />;
+      content = <EmptyDongil variant="proposed" />;
     } else {
-      proposedDongilsContent = (
+      content = (
         <>
           <h1>제안받은 돈길</h1>
           <ProposedDongilList
@@ -51,9 +57,20 @@ function getProposedDongilsContent(
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
-    proposedDongilsContent = <p>Failed</p>;
+    content = <p>Failed</p>;
   }
-  return proposedDongilsContent;
+  return <Wrapper>{content}</Wrapper>;
 }
 
-export default getProposedDongilsContent;
+export default ProposedDongils;
+
+const Wrapper = styled.div`
+  margin-top: 48px;
+  h1 {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;

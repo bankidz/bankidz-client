@@ -4,16 +4,17 @@ import {
   selectParentSummaries,
   selectParentSummariesStatus,
 } from '@store/slices/parentSummariesSlice';
+import styled from 'styled-components';
 import Summary from './Summary';
 
-function getParentSummaryContent() {
+function ParentSummary() {
   const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
   const parentSummaries = useAppSelector(selectParentSummaries);
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  let parentSummaryContent;
+  let content: JSX.Element = <></>;
   if (parentSummariesStatus === 'loading') {
-    parentSummaryContent = (
+    content = (
       <Summary
         variant="ParentHome"
         currentSavings={0}
@@ -34,7 +35,7 @@ function getParentSummaryContent() {
     );
     if (selectedKidSParentSummary) {
       const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
-      parentSummaryContent = (
+      content = (
         <Summary
           variant="ParentHome"
           currentSavings={currentSavings!}
@@ -44,9 +45,13 @@ function getParentSummaryContent() {
       );
     }
   } else if (parentSummariesStatus === 'failed') {
-    parentSummaryContent = <p>Failed</p>;
+    content = <p>Failed</p>;
   }
-  return parentSummaryContent;
+  return <Wrapper>{content}</Wrapper>;
 }
 
-export default getParentSummaryContent;
+export default ParentSummary;
+
+const Wrapper = styled.div`
+  margin-top: 198px;
+`;

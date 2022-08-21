@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import {
@@ -34,14 +33,13 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import getParentSummaryContent from '@components/home/sumary/getParentSummaryContent';
-import getProposedDongilsContent from '@components/home/proposed/getProposedDongilsContent';
-import getThisWeekSDongilsContent from '@components/home/thisWeekS/getThisWeekSDongilsContent';
 import hasParentSummaryAlreadyBeenFetched from '@components/home/sumary/hasParentSummaryAlreadyBeenFetched';
 import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { IDongil } from '@lib/types/IDongil';
+import ParentSummary from '@components/home/sumary/getParentSummaryContent';
+import ProposedDongils from '@components/home/proposed/ProposedDongils';
+import ThisWeekSDongils from '@components/home/thisWeekS/ThisWeekSDongils';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
@@ -160,14 +158,6 @@ function ParentHome() {
     }
   }
 
-  // 제안받은 돈길, 주간 진행상황, 금주의 돈길
-  let parentSummaryContent = getParentSummaryContent();
-  let proposedDongilsContent = getProposedDongilsContent(
-    onApproveCheckOpen,
-    setIdToApprove,
-  );
-  let thisWeekSDongilsContent = getThisWeekSDongilsContent();
-
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
   const canFetchParentSummary =
     !hasParentSummaryAlreadyBeenFetched() &&
@@ -219,19 +209,16 @@ function ParentHome() {
     <>
       <HomeTemplate variant="ParentHome">
         <MarginTemplate>
-          <SummaryWrapper>{parentSummaryContent}</SummaryWrapper>
-          <ProposedDongilsWrapper>
-            {proposedDongilsContent}
-          </ProposedDongilsWrapper>
-          <ThisWeekSDongilWrapper>
-            {thisWeekSDongilsContent}
-          </ThisWeekSDongilWrapper>
+          <ParentSummary />
+          <ProposedDongils
+            onApproveCheckOpen={onApproveCheckOpen}
+            setIdToApprove={setIdToApprove}
+          />
+          <ThisWeekSDongils />
           <LargeSpacer />
         </MarginTemplate>
-
-        {/* 다음 모달과 바텀시트를 열고 닫는 로직은 ProposedDongilItem에서 실행됩니다. */}
-        {/* 모달은 전역상태로 관리되기에 별도의 props를 전달하지 않습니다. */}
         <Modals />
+
         {/* 자녀의 돈길을 수락할까요? */}
         <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
           <ApproveCheck
@@ -255,29 +242,3 @@ function ParentHome() {
 }
 
 export default ParentHome;
-
-const SummaryWrapper = styled.div`
-  margin-top: 198px;
-`;
-
-const ProposedDongilsWrapper = styled.div`
-  margin-top: 48px;
-  h1 {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;
-
-const ThisWeekSDongilWrapper = styled.div`
-  margin-top: 48px;
-  h1 {
-    width: 100%;
-    height: 16px;
-    margin-bottom: 24px;
-    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
-    ${({ theme }) => theme.palette.greyScale.black};
-  }
-`;
