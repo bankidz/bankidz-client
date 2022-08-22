@@ -14,11 +14,6 @@ function WalkingDongils() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
 
-  let disable: 'true' | 'false' = 'false';
-  if (walkingDongils !== null && walkingDongils.length === 5) {
-    disable = 'true';
-  }
-
   const navigate = useNavigate();
   function handleContractNewDongilButtonClick() {
     navigate('/create/1');
@@ -36,7 +31,7 @@ function WalkingDongils() {
       content = (
         <>
           <WalkingDongilList walkingDongils={walkingDongils!} />
-          <ContractNewDongilLink disable={disable} to={'/create/1'} />
+          <ContractNewDongilLink to={'/create/1'} />
         </>
       );
     }
