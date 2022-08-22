@@ -32,11 +32,11 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import hasParentSummaryAlreadyBeenFetched from '@components/home/summaries/hasParentSummaryAlreadyBeenFetched';
+import hasParentSummaryAlreadyBeenFetched from '@components/home/summay/hasParentSummaryAlreadyBeenFetched';
 import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import ParentSummary from '@components/home/summaries/ParentSummary';
+import ParentSummary from '@components/home/summay/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
 
