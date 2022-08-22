@@ -14,7 +14,7 @@ import BottomContent from './contents/BottomContent';
 import CommentContent from './contents/CommentContent';
 import SubmitButton from './SubmitButton';
 
-interface QuaternaryModalProps
+interface ReceiptModalProps
   extends Pick<
       IDongil,
       | 'createdAt'
@@ -60,7 +60,7 @@ function ReceiptModal({
   shouldCloseOnOverlayClick = false,
   fileName,
   isSubmit = false,
-}: QuaternaryModalProps) {
+}: ReceiptModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
