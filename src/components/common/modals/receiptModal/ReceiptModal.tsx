@@ -4,15 +4,15 @@ import { theme } from '@lib/styles/theme';
 import '../styles.css';
 import ReactModal from 'react-modal';
 import getHeightByVariant from './getHeightByVariant';
-import DashedBorder from './DashedBorder';
-import SubmitButton from './SubmitButton';
 import { IDongil } from '@lib/types/IDongil';
-import TopContent from './contents/TopContent';
-import BottomContent from './contents/BottomContent';
-import CommentContent from './contents/CommentContent';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
 import PerforatedLineTop from './perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from './perforatedLines/PerforatedLineBottom';
+import DashedBorder from './DashedBorder';
+import TopContent from './contents/TopContent';
+import BottomContent from './contents/BottomContent';
+import CommentContent from './contents/CommentContent';
+import SubmitButton from './SubmitButton';
 
 interface QuaternaryModalProps
   extends Pick<
