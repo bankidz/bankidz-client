@@ -1,5 +1,6 @@
 .ReactModal__Overlay {
   opacity: 0;
+  /* 모달 배경색 전환 */
   transition: all 0.125s ease-in-out;
 }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import Summary from '@components/home/sumary/Summary';
+import Summary from '@components/home/summaries/Summary';
 import TotalInterest from '@components/home/detail/TotalInterest';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';

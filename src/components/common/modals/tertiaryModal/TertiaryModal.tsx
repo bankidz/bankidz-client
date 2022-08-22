@@ -147,7 +147,7 @@ export default TertiaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(0);
+      transform: translateY(-10%);
     }
     to {
       transform: translateY(-50%);

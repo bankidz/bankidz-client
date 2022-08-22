@@ -25,7 +25,7 @@ import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import KidSummary from '@components/home/sumary/KidSummary';
+import KidSummary from '@components/home/summaries/KidSummary';
 import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
 import PendingDongilSection from '@components/home/pending/PendingDongilSection';
 

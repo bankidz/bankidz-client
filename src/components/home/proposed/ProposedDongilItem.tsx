@@ -51,7 +51,8 @@ function ProposedDongilItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      fileName,
+      filename: 'dummy',
+      shouldCloseOnOverlayClick: true,
     });
   }
 
