@@ -1,6 +1,6 @@
 import Button from '@components/common/buttons/Button';
 import CheckButton from '@components/common/buttons/CheckButton';
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
 
