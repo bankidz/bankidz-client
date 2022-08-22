@@ -26,8 +26,8 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import KidSummary from '@components/home/sumary/KidSummary';
-import WalkingDongils from '@components/home/walking/WalkingDongils';
-import PendingDongils from '@components/home/pending/PendingDontils';
+import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
+import PendingDongilSection from '@components/home/pending/PendingDongilSection';
 
 /*
  ** 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
@@ -102,8 +102,8 @@ function KidHome() {
     <>
       <MarginTemplate>
         <KidSummary />
-        <WalkingDongils />
-        <PendingDongils
+        <WalkingDongilSection />
+        <PendingDongilSection
           onDeleteCheckOpen={onDeleteCheckOpen}
           setIdToDelete={setIdToDelete}
         />

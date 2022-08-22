@@ -10,10 +10,9 @@ import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
-function WalkingDongils() {
+function WalkingDongilSection() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
-
   const navigate = useNavigate();
   function handleContractNewDongilButtonClick() {
     navigate('/create/1');
@@ -47,9 +46,9 @@ function WalkingDongils() {
   );
 }
 
-export default WalkingDongils;
+export default WalkingDongilSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin-top: 48px;
   h1 {
     width: 100%;

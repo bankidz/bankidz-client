@@ -9,7 +9,7 @@ import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
 
-function ThisWeekSDongils() {
+function ThisWeekSDongilSection() {
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -47,9 +47,9 @@ function ThisWeekSDongils() {
   );
 }
 
-export default ThisWeekSDongils;
+export default ThisWeekSDongilSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin-top: 48px;
   h1 {
     width: 100%;

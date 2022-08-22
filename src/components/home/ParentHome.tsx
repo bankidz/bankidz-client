@@ -37,8 +37,8 @@ import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasP
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import ParentSummary from '@components/home/sumary/ParentSummary';
-import ProposedDongils from '@components/home/proposed/ProposedDongils';
-import ThisWeekSDongils from '@components/home/thisWeekS/ThisWeekSDongils';
+import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
+import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
@@ -208,11 +208,11 @@ function ParentHome() {
     <>
       <MarginTemplate>
         <ParentSummary />
-        <ProposedDongils
+        <ProposedDongilSection
           onApproveCheckOpen={onApproveCheckOpen}
           setIdToApprove={setIdToApprove}
         />
-        <ThisWeekSDongils />
+        <ThisWeekSDongilSection />
         <LargeSpacer />
       </MarginTemplate>
       <Modals />

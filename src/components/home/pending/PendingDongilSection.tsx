@@ -9,15 +9,15 @@ import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import PendingDongilList from './PendingDongilList';
 
-interface PendingDongilsProps {
+interface PendingDongilSectionProps {
   onDeleteCheckOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function PendingDongils({
+function PendingDongilSection({
   onDeleteCheckOpen,
   setIdToDelete,
-}: PendingDongilsProps) {
+}: PendingDongilSectionProps) {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
 
@@ -55,9 +55,9 @@ function PendingDongils({
   return <Wrapper>{content}</Wrapper>;
 }
 
-export default PendingDongils;
+export default PendingDongilSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin-top: 48px;
   h1 {
     width: 100%;
