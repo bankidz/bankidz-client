@@ -3,7 +3,12 @@ import getContractEndDate from '@lib/utils/get/getContractEndDate';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled from 'styled-components';
 
-function getThirdRow(weeks: number, createdAt: string) {
+interface ThirdRowProps {
+  createdAt: string;
+  weeks: number;
+}
+
+function ThirdRow({ createdAt, weeks }: ThirdRowProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);
   const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
 
@@ -23,11 +28,11 @@ function getThirdRow(weeks: number, createdAt: string) {
   );
 }
 
-export default getThirdRow;
+export default ThirdRow;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100px;
+  height: 79px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -44,6 +49,7 @@ const Wrapper = styled.div`
       height: 12px;
       ${({ theme }) => theme.typo.text.S_12_M};
       color: ${({ theme }) => theme.palette.greyScale.grey500};
+      margin-top: 0;
       margin-bottom: 8px;
       padding: 0;
     }
@@ -68,6 +74,7 @@ const Wrapper = styled.div`
         height: 12px;
         ${({ theme }) => theme.typo.text.S_12_M};
         color: ${({ theme }) => theme.palette.greyScale.grey500};
+        margin-top: 0;
         margin-bottom: 8px;
       }
       .content {

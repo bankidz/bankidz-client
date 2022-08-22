@@ -2,11 +2,13 @@ import { calcRatio } from '@lib/styles/theme';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import styled from 'styled-components';
 
-function getSecondRow(
-  totalPrice: number,
-  weekPrice: number,
-  interestRate: TInterestRate,
-) {
+interface SecondRowProps {
+  totalPrice: number;
+  weekPrice: number;
+  interestRate: TInterestRate;
+}
+
+function SecondRow({ totalPrice, weekPrice, interestRate }: SecondRowProps) {
   return (
     <Wrapper>
       <div className="목표저금액">
@@ -25,16 +27,16 @@ function getSecondRow(
   );
 }
 
-export default getSecondRow;
+export default SecondRow;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 68px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  > div {
+  div {
     width: 33.3%;
     height: 100%;
     display: flex;
@@ -45,16 +47,17 @@ const Wrapper = styled.div`
     .title {
       width: 100%;
       height: 12px;
-      margin-top: 0;
-      margin-bottom: 8px;
       ${({ theme }) => theme.typo.text.S_12_M};
       color: ${({ theme }) => theme.palette.greyScale.grey500};
+      margin-bottom: 8px;
+      padding: 0;
     }
     .content {
       width: 100%;
       height: 16px;
       ${({ theme }) => theme.typo.text.T_16_EB};
       color: ${({ theme }) => theme.palette.greyScale.grey700};
+      padding: 0;
     }
   }
 `;

@@ -25,11 +25,7 @@ function OAuthRedirectHandler() {
     processLogin();
   }, []);
 
-  return (
-    <>
-      <div>로그인 처리중입니다...</div>
-    </>
-  );
+  return <p>로그인 처리중입니다...</p>;
 }
 
 export default OAuthRedirectHandler;

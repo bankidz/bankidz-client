@@ -5,12 +5,19 @@ import styled, { css } from 'styled-components';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
-function getSubmitButton(
-  variant: TVariant,
-  setIsOpen: Dispatch<SetStateAction<boolean>>,
-  handleSubmit: () => void,
-  handleExtraSubmit: () => void,
-) {
+interface SubmitButtonProps {
+  variant: TVariant;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  handleSubmit: () => void;
+  handleExtraSubmit: () => void;
+}
+
+function SubmitButton({
+  variant,
+  setIsOpen,
+  handleSubmit,
+  handleExtraSubmit,
+}: SubmitButtonProps) {
   return (
     <>
       {variant !== 'proposed' && (
@@ -46,7 +53,7 @@ function getSubmitButton(
   );
 }
 
-export default getSubmitButton;
+export default SubmitButton;
 
 const ButtonOverlay = styled.button`
   width: 100%;

@@ -4,23 +4,19 @@ import {
   selectThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
+import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
 
-function getThisWeekSDongilsContent() {
+function ThisWeekSDongils() {
   const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  let thisWeekSDongilsContent;
+  let content: JSX.Element = <></>;
   if (thisWeekSDongilsStatus === 'loading') {
-    thisWeekSDongilsContent = (
-      <>
-        <h1>금주의 돈길</h1>
-        <SkeletonDongilList variant="thisWeekS" />
-      </>
-    );
+    content = <SkeletonDongilList variant="thisWeekS" />;
   } else if (thisWeekSDongilsStatus === 'succeeded') {
     const getSelectedKidSThisWeekSDongils = (username: string) => {
       const found = thisWeekSDongils?.find(
@@ -28,31 +24,38 @@ function getThisWeekSDongilsContent() {
       );
       return found?.challengeList;
     };
-
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
       selectedKid?.username!,
     );
+
     if (thisWeekSDongils?.length === 0) {
-      thisWeekSDongilsContent = (
-        <>
-          <h1>금주의 돈길</h1>
-          <EmptyDongil variant="thisWeekS" />
-        </>
-      );
+      content = <EmptyDongil variant="thisWeekS" />;
     } else {
-      thisWeekSDongilsContent = (
-        <>
-          <h1>금주의 돈길</h1>
-          <ThisWeekSDongilList
-            thisWeekSDongils={selectedKidSThisWeekSDongils!}
-          />
-        </>
+      content = (
+        <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
       );
     }
   } else if (thisWeekSDongilsStatus === 'failed') {
-    thisWeekSDongilsContent = <p>Failed</p>;
+    content = <p>Failed</p>;
   }
-  return thisWeekSDongilsContent;
+
+  return (
+    <Wrapper>
+      <h1>금주의 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
-export default getThisWeekSDongilsContent;
+export default ThisWeekSDongils;
+
+const Wrapper = styled.div`
+  margin-top: 48px;
+  h1 {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;

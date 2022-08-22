@@ -5,7 +5,12 @@ import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { TItemName } from '@lib/types/TItemName';
 import { calcRatio } from '@lib/styles/theme';
 
-function getFirstRow(isMom: boolean, itemName: TItemName) {
+interface FirstRowProps {
+  isMom: boolean;
+  itemName: TItemName;
+}
+
+function FirstRow({ isMom, itemName }: FirstRowProps) {
   return (
     <Wrapper>
       <div className="계약대상">
@@ -28,11 +33,11 @@ function getFirstRow(isMom: boolean, itemName: TItemName) {
   );
 }
 
-export default getFirstRow;
+export default FirstRow;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 107px;
+  height: 102px;
   display: flex;
   justify-content: space-between;
   align-items: center;

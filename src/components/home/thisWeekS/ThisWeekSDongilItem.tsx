@@ -3,18 +3,10 @@ import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
+import { IDongil } from '@lib/types/IDongil';
 
-interface ThisWeekSDongilItemProps {
-  itemName: TItemName;
-  title: string;
-  progressList:
-    | {
-        approvedAt: string;
-        challengeId: number;
-        isAchieved: boolean;
-        weeks: number;
-      }[]
-    | null;
+interface ThisWeekSDongilItemProps
+  extends Pick<IDongil, 'itemName' | 'title' | 'progressList'> {
   to: string;
 }
 

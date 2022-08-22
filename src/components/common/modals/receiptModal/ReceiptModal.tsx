@@ -5,15 +5,15 @@ import { calcRatio, theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/TItemName';
 import PerforatedLineTop from './PerforatedLineTop';
 import PerforatedLineBottom from './PerforatedLineBottom';
-import getDashedBorder from './getDashedBorder';
-import getFirstRow from './getFirstRow';
-import getSecondRow from './getSecondRow';
 import { TInterestRate } from '@lib/types/IInterestRate';
-import getThirdRow from './getThirdRow';
 import '../styles.css';
-import getSubmitButton from './getSubmitButton';
 import ProposalBadge from '@components/common/badges/ProposalBadge';
 import getHeightByVariant from './getHeightByVariant';
+import DashedBorder from './DashedBorder';
+import FirstRow from './FirstRow';
+import SecondRow from './SecondRow';
+import ThirdRow from './ThirdRow';
+import SubmitButton from './SubmitButton';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
 
@@ -108,17 +108,6 @@ function ReceiptModal({
     },
   };
 
-  const dashedBorder = getDashedBorder(variant);
-  const firstRow = getFirstRow(isMom, itemName);
-  const secondRow = getSecondRow(totalPrice, weekPrice, interestRate);
-  const thirdRow = getThirdRow(weeks, createdAt);
-  const submitButton = getSubmitButton(
-    variant,
-    setIsOpen,
-    handleSubmit,
-    handleExtraSubmit,
-  );
-
   /*
    ** PerforatedLineTop의 height: 15px
    ** PerforatedShape의 height: 10px, width: 20px
@@ -132,7 +121,7 @@ function ReceiptModal({
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
-        {dashedBorder}
+        <DashedBorder variant={variant} />
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <Top variant={variant}>
           {variant === 'contract' && (
@@ -144,9 +133,13 @@ function ReceiptModal({
         </Top>
 
         <Bottom variant={variant}>
-          {firstRow}
-          {secondRow}
-          {thirdRow}
+          <FirstRow isMom={isMom} itemName={itemName} />
+          <SecondRow
+            totalPrice={totalPrice}
+            weekPrice={weekPrice}
+            interestRate={interestRate}
+          />
+          <ThirdRow weeks={weeks} createdAt={createdAt} />
           <SignatureWrapper>
             {/* <img
               src={
@@ -165,7 +158,12 @@ function ReceiptModal({
           </Comment>
         )}
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />
-        {submitButton}
+        <SubmitButton
+          variant={variant}
+          setIsOpen={setIsOpen}
+          handleSubmit={handleSubmit}
+          handleExtraSubmit={handleExtraSubmit}
+        />
       </Content>
     </StyledReactModal>
   );

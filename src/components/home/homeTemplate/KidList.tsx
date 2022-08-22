@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as UsernameUnderline } from '@assets/borders/username-underline.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';

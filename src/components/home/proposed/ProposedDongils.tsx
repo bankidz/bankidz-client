@@ -5,26 +5,27 @@ import {
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
 import { Dispatch, SetStateAction } from 'react';
+import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ProposedDongilList from './ProposedDongilList';
 
-function getProposedDongilsContent(
-  onApproveCheckOpen: () => void,
-  setIdToApprove: Dispatch<SetStateAction<number | null>>,
-) {
+interface ProposedDongilsProps {
+  onApproveCheckOpen: () => void;
+  setIdToApprove: Dispatch<SetStateAction<number | null>>;
+}
+
+function ProposedDongils({
+  onApproveCheckOpen,
+  setIdToApprove,
+}: ProposedDongilsProps) {
   const proposedDongils = useAppSelector(selectProposedDongils);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  let proposedDongilsContent;
+  let content: JSX.Element = <></>;
   if (proposedDongilsStatus === 'loading') {
-    proposedDongilsContent = (
-      <>
-        <h1>제안받은 돈길</h1>
-        <SkeletonDongilList variant="proposed" />
-      </>
-    );
+    content = <SkeletonDongilList variant="proposed" />;
   } else if (proposedDongilsStatus === 'succeeded') {
     const getSelectedKidSProposedDongils = (username: string) => {
       const found = proposedDongils?.find(
@@ -32,28 +33,41 @@ function getProposedDongilsContent(
       );
       return found?.challengeList;
     };
-
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
       selectedKid?.username!,
     );
+
     if (selectedKidSProposedDongils?.length === 0) {
-      proposedDongilsContent = <EmptyDongil variant="proposed" />;
+      content = <EmptyDongil variant="proposed" />;
     } else {
-      proposedDongilsContent = (
-        <>
-          <h1>제안받은 돈길</h1>
-          <ProposedDongilList
-            proposedDongils={selectedKidSProposedDongils!}
-            onApproveCheckOpen={onApproveCheckOpen}
-            setIdToApprove={setIdToApprove}
-          />
-        </>
+      content = (
+        <ProposedDongilList
+          proposedDongils={selectedKidSProposedDongils!}
+          onApproveCheckOpen={onApproveCheckOpen}
+          setIdToApprove={setIdToApprove}
+        />
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
-    proposedDongilsContent = <p>Failed</p>;
+    content = <p>Failed</p>;
   }
-  return proposedDongilsContent;
+  return (
+    <Wrapper>
+      <h1>제안받은 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
-export default getProposedDongilsContent;
+export default ProposedDongils;
+
+const Wrapper = styled.div`
+  margin-top: 48px;
+  h1 {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;

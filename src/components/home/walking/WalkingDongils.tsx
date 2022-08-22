@@ -4,12 +4,13 @@ import {
   selectWalkingDongilsStatus,
 } from '@store/slices/walkingDongilsSlice';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
-function getWalkingDongilsContent() {
+function WalkingDongils() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
 
@@ -23,33 +24,43 @@ function getWalkingDongilsContent() {
     navigate('/create/1');
   }
 
+  let content: JSX.Element = <></>;
   if (walkingDongilsStatus === 'loading') {
-    return (
-      <>
-        <h1>걷고있는 돈길</h1>
-        <SkeletonDongilList variant="walking" />
-      </>
-    );
+    content = <SkeletonDongilList variant="walking" />;
   } else if (walkingDongilsStatus === 'succeeded') {
     if (walkingDongils?.length === 0) {
-      return (
-        <>
-          <h1>걷고있는 돈길</h1>
-          <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
-        </>
+      content = (
+        <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
       );
     } else {
-      return (
+      content = (
         <>
-          <h1>걷고있는 돈길</h1>
           <WalkingDongilList walkingDongils={walkingDongils!} />
           <ContractNewDongilLink disable={disable} to={'/create/1'} />
         </>
       );
     }
   } else if (walkingDongilsStatus === 'failed') {
-    return <p>Failed</p>;
+    content = <p>Failed</p>;
   }
+
+  return (
+    <Wrapper>
+      <h1>걷고있는 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
-export default getWalkingDongilsContent;
+export default WalkingDongils;
+
+const Wrapper = styled.div`
+  margin-top: 48px;
+  h1 {
+    width: 100%;
+    height: 16px;
+    margin-bottom: 24px;
+    ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
+    ${({ theme }) => theme.palette.greyScale.black};
+  }
+`;

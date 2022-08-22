@@ -1,6 +1,4 @@
 import { IDongil } from '@lib/types/IDongil';
-import { TItemName } from '@lib/types/TItemName';
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';
 

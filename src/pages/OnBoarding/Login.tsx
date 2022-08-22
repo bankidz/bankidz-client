@@ -17,15 +17,18 @@ function LoginPage() {
         </TextWrapper>
         <ButtonWithMarginBottom
           label="시연 체험해보기"
-          // TODO: demo day
           onClick={() => navigate('/register/1')}
           property="default"
+        />
+        <ButtonWithMarginBottom
+          label="임시 애플 소셜 로그인 버튼"
+          onClick={() => navigate('/register/1')}
+          property="sub"
         />
         <ButtonWithMarginBottom
           label="카카오로 시작하기"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
           property="kakao"
-          state={false}
         />
       </MarginTemplate>
     </Wrapper>
