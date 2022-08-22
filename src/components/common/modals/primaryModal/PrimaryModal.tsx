@@ -5,6 +5,9 @@ import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
 interface PrimaryModalProps {
   /**
@@ -31,17 +34,23 @@ function PrimaryModal({
 }: PrimaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
-    setIsOpen(false);
+    setIsOpen(false); // close transition 적용을 위해 필요
     setTimeout(() => {
       onSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
 
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: () => setIsOpen(false),
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.primaryModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: 125,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',

@@ -13,6 +13,9 @@ import TopContent from './contents/TopContent';
 import BottomContent from './contents/BottomContent';
 import CommentContent from './contents/CommentContent';
 import SubmitButton from './SubmitButton';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
 
 interface ReceiptModalProps
   extends Pick<
@@ -66,20 +69,26 @@ function ReceiptModal({
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
   function handleExtraSubmit() {
     setIsOpen(false);
     setTimeout(() => {
       onExtraSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
 
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: () => setIsOpen(false),
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.receiptModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: 125,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',

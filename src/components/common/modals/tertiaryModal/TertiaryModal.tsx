@@ -8,6 +8,9 @@ import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import '../styles.css';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
 interface TertiaryModalProps {
   /**
@@ -27,14 +30,20 @@ function TertiaryModal({
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
 
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: () => setIsOpen(false),
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.tertiaryModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: 125,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
