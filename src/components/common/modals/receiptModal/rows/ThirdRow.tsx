@@ -1,12 +1,10 @@
 import { calcRatio } from '@lib/styles/theme';
+import { IDongil } from '@lib/types/IDongil';
 import getContractEndDate from '@lib/utils/get/getContractEndDate';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled from 'styled-components';
 
-interface ThirdRowProps {
-  weeks: number;
-  createdAt: string;
-}
+interface ThirdRowProps extends Pick<IDongil, 'weeks' | 'createdAt'> {}
 
 function ThirdRow({ weeks, createdAt }: ThirdRowProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);

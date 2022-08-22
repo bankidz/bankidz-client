@@ -1,12 +1,9 @@
 import { calcRatio } from '@lib/styles/theme';
-import { TInterestRate } from '@lib/types/IInterestRate';
+import { IDongil } from '@lib/types/IDongil';
 import styled from 'styled-components';
 
-interface SecondRowProps {
-  totalPrice: number;
-  weekPrice: number;
-  interestRate: TInterestRate;
-}
+interface SecondRowProps
+  extends Pick<IDongil, 'totalPrice' | 'weekPrice' | 'interestRate'> {}
 
 function SecondRow({ totalPrice, weekPrice, interestRate }: SecondRowProps) {
   return (

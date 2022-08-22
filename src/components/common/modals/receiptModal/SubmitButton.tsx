@@ -2,11 +2,10 @@ import Button from '@components/common/buttons/Button';
 import CheckButton from '@components/common/buttons/CheckButton';
 import React, { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
-
-type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+import { TReceiptModalVariant } from './TReceiptModalVariant';
 
 interface SubmitButtonProps {
-  variant: TVariant;
+  variant: TReceiptModalVariant;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   handleSubmit: () => void;
   handleExtraSubmit: () => void;
@@ -20,7 +19,7 @@ function SubmitButton({
   handleExtraSubmit,
   shouldCloseOnOverlayClick,
 }: SubmitButtonProps) {
-  const map = new Map<TVariant, React.ReactElement>();
+  const map = new Map<TReceiptModalVariant, React.ReactElement>();
   map.set(
     'contract',
     <>
