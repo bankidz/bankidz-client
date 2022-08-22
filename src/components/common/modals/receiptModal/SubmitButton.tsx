@@ -19,60 +19,61 @@ function SubmitButton({
   handleExtraSubmit,
   shouldCloseOnOverlayClick,
 }: SubmitButtonProps) {
-  const map = new Map<TReceiptModalVariant, React.ReactElement>();
-  map.set(
-    'contract',
-    <>
-      <ButtonOverlay
-        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
-      />
-      <ButtonWrapper variant={variant}>
-        <CheckButton onClick={handleSubmit} />
-      </ButtonWrapper>
-    </>,
-  );
-  map.set(
-    'proposing',
-    <>
-      <ButtonOverlay
-        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
-      />
-      <ButtonWrapper variant={variant}>
-        <CheckButton onClick={handleSubmit} />
-      </ButtonWrapper>
-    </>,
-  );
-  map.set(
-    'rejected',
-    <>
-      <ButtonOverlay
-        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
-      />
-      <ButtonWrapper variant={variant}>
-        <Button
-          onClick={handleSubmit}
-          property="default"
-          label="삭제하기"
-          fixed
+  let collection;
+  if (variant === 'contract') {
+    collection = (
+      <>
+        <ButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
         />
-      </ButtonWrapper>
-    </>,
-  );
-  map.set(
-    'proposed',
-    <>
-      <DoubleButtonWrapper>
-        <Button property="delete" label="거절하기" onClick={handleSubmit} />
-        <Button
-          property="default"
-          label="수락하기"
-          onClick={handleExtraSubmit}
+        <ButtonWrapper variant={variant}>
+          <CheckButton onClick={handleSubmit} />
+        </ButtonWrapper>
+      </>
+    );
+  } else if (variant === 'proposing') {
+    collection = (
+      <>
+        <ButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
         />
-      </DoubleButtonWrapper>
-    </>,
-  );
+        <ButtonWrapper variant={variant}>
+          <CheckButton onClick={handleSubmit} />
+        </ButtonWrapper>
+      </>
+    );
+  } else if (variant === 'rejected') {
+    collection = (
+      <>
+        <ButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+        />
+        <ButtonWrapper variant={variant}>
+          <Button
+            onClick={handleSubmit}
+            property="default"
+            label="삭제하기"
+            fixed
+          />
+        </ButtonWrapper>
+      </>
+    );
+  } else if (variant === 'proposed') {
+    collection = (
+      <>
+        <DoubleButtonWrapper>
+          <Button property="delete" label="거절하기" onClick={handleSubmit} />
+          <Button
+            property="default"
+            label="수락하기"
+            onClick={handleExtraSubmit}
+          />
+        </DoubleButtonWrapper>
+      </>
+    );
+  }
 
-  return <>{map.get(variant)}</>;
+  return <>{collection}</>;
 }
 
 export default SubmitButton;
