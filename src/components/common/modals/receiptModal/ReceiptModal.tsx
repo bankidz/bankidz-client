@@ -148,13 +148,9 @@ function ReceiptModal({
           {secondRow}
           {thirdRow}
           <SignatureWrapper>
-            {/* <img
-              src={
-                isSubmit
-                  ? fileName
-                  : `https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`
-              }
-            /> */}
+            <img
+              src={`https://ppoketdon-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
+            />
           </SignatureWrapper>
         </Bottom>
 
@@ -298,7 +294,7 @@ const SignatureWrapper = styled.div`
   height: 173px;
   right: 2px;
   bottom: 0;
-  background: rgba(36, 39, 41, 0.7);
+  // background: rgba(36, 39, 41, 0.7);
 
   & > img {
     max-width: 100%;

@@ -31,6 +31,7 @@ import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet
 import GiveUpCheck from '@components/common/bottomSheets/commonSheet/GiveUpCheck';
 import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 import GiveUpExceeded from '@components/common/bottomSheets/commonSheet/GiveUpExceeded';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 function Detail() {
   const { id } = useParams();
@@ -59,7 +60,8 @@ function Detail() {
     challengeStatus,
   } = targetDongil!;
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
-
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
   const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
     useBottomSheet(false);
   const [openGiveUpCompleted, onGiveUpCompletedOpen, onGiveUpCompletedDismiss] =
@@ -170,7 +172,21 @@ function Detail() {
               </div>
             </DongilContractContent>
             {isKid === true && challengeStatus !== 'FAILED' && (
-              <GiveUpDongilButton onClick={onGiveUpCheckOpen}>
+              <GiveUpDongilButton
+                onClick={() => {
+                  setOpenBottomSheet({
+                    sheetType: 'common',
+                    sheetContent: 'GiveUpCheck',
+                    sheetProps: {
+                      open: true,
+                    },
+                    contentProps: {
+                      onGiveUpButtonClick: () => {},
+                      onDismiss: () => {},
+                    },
+                  });
+                }}
+              >
                 돈길 포기하기
               </GiveUpDongilButton>
             )}
@@ -181,12 +197,12 @@ function Detail() {
 
       <Background colorByLevel={colorByLevel}></Background>
       {/* 정말 포기할거에요? */}
-      <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
+      {/* <CommonSheet open={openGiveUpCheck} onDismiss={onGiveUpCheckDismiss}>
         <GiveUpCheck
           onGiveUpButtonClick={handleGiveUpButtonClick}
           onDismiss={handleRetryButtonClick}
         />
-      </CommonSheet>
+      </CommonSheet> */}
       {/* 돈길이 포기되었어요 */}
       <CommonSheet
         open={openGiveUpCompleted}

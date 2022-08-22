@@ -3,10 +3,10 @@ import { Dispatch, SetStateAction, useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import styled from 'styled-components';
 
-type SignatureProps = {
+export interface SignatureProps {
   setDisabledNext: Dispatch<SetStateAction<boolean>>;
   setSign: Dispatch<SetStateAction<any>>;
-};
+}
 
 function Signature({ setDisabledNext, setSign }: SignatureProps) {
   const canvasRef = useRef<any>(null);

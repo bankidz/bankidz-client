@@ -9,7 +9,7 @@ import { ReactComponent as Refresh } from '@assets/icons/refresh.svg';
 import { calcRatio } from '@lib/styles/theme';
 import { darken } from 'polished';
 
-interface SelectMoneyProps {
+export interface SelectMoneyProps {
   pushAmount: (amount: number) => void;
   popAmount: () => void;
   resetAmount: () => void;

@@ -6,7 +6,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
-interface RangeInputProps extends TSetStep4Form {
+export interface RangeInputProps extends TSetStep4Form {
   totalPrice: number;
   min: number;
   max: number;

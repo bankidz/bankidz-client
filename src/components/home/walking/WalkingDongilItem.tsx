@@ -100,11 +100,11 @@ function WalkingDongilItem({
       {/* 돈길 걷기에 실패했어요 */}
       <CommonSheet open={openDongilFailed} onDismiss={onDismissDongilFailed}>
         <DongilFailed
-          onLeftButtonClick={() => {
+          onDeleteButtonClick={() => {
             onDismissDongilFailed();
             onOpenDeleteCheck();
           }}
-          onRightButtonClick={() => {
+          onCancelButtonClick={() => {
             navigate(to);
           }}
           title={title}

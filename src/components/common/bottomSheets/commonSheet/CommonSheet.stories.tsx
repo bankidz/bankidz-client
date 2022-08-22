@@ -91,8 +91,8 @@ export const 돈길_실패 = Template.bind({});
 돈길_실패.args = {
   children: (
     <DongilFailed
-      onLeftButtonClick={() => {}}
-      onRightButtonClick={() => {}}
+      onDeleteButtonClick={() => {}}
+      onCancelButtonClick={() => {}}
       title={'핸드폰 케이스 사기'}
       interestRate={20}
     />

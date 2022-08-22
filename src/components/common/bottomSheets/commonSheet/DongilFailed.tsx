@@ -5,18 +5,15 @@ import { NavigateFunction } from 'react-router-dom';
 import { TInterestRate } from '@lib/types/IInterestRate';
 
 interface GiveUpProps {
-  // TODO: 여러개의 바텀시트 컨텐츠를 하나의 UI 컴포넌트에서 연속적으로 사용하는 경우가 많아서
-  // onLeftButtonClick, onRightButtonClick 과 같은 네이밍은 좋지 않은것 같습니다.
-  // onCancelButtonClick, onDeleteButtonClick 과 같이 더 명시적인 네이밍이 좋은것 같습니다.
-  onLeftButtonClick: () => void;
-  onRightButtonClick: () => void;
+  onDeleteButtonClick: () => void;
+  onCancelButtonClick: () => void;
   title: string;
   interestRate: TInterestRate;
 }
 
 function DongilFailed({
-  onLeftButtonClick,
-  onRightButtonClick,
+  onDeleteButtonClick,
+  onCancelButtonClick,
   title,
   interestRate,
 }: GiveUpProps) {
@@ -38,8 +35,8 @@ function DongilFailed({
         </Rule>
       </Container>
       <ButtonContainer>
-        <Button label="삭제하기" property="sub" onClick={onLeftButtonClick} />
-        <Button label="내역보기" onClick={onRightButtonClick} />
+        <Button label="삭제하기" property="sub" onClick={onDeleteButtonClick} />
+        <Button label="내역보기" onClick={onCancelButtonClick} />
       </ButtonContainer>
     </Wrapper>
   );

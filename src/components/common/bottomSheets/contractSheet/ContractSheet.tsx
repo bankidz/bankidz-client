@@ -1,23 +1,42 @@
 import SheetButton from '@components/common/buttons/SheetButton';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
+import RangeInput from './RangeInput';
+import SelectInterest from './SelectInterest';
+import SelectMoney from './SelectMoney';
+import Signature from './Signature';
 
 interface ContractSheetProps {
   children: JSX.Element;
   open: boolean;
   onDismiss?: () => void;
   label: string;
+
   onClickNext: () => void;
   disabledNext: boolean;
   sheetRef?: React.RefObject<HTMLDivElement>;
 }
 
+export const CONTRACT_SHEET_CONTENTS = {
+  RangeInput: 'RangeInput',
+  SelectInterest: 'SelectInterest',
+  SelectMoney: 'SelectMoney',
+  Signature: 'Signature',
+} as const;
+
+const ContractSheetContent: any = {
+  [CONTRACT_SHEET_CONTENTS.RangeInput]: RangeInput,
+  [CONTRACT_SHEET_CONTENTS.SelectInterest]: SelectInterest,
+  [CONTRACT_SHEET_CONTENTS.SelectMoney]: SelectMoney,
+  [CONTRACT_SHEET_CONTENTS.Signature]: Signature,
+};
+
 function ContractSheet({
   children,
   sheetRef,
-
   open,
   onDismiss,
+
   onClickNext,
   label,
   disabledNext = true,

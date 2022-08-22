@@ -11,7 +11,6 @@ interface CommonSheetProps {
 function CommonSheet({
   children,
   sheetRef,
-
   open,
   onDismiss,
 }: CommonSheetProps) {
