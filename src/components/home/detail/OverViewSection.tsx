@@ -5,7 +5,7 @@ import { IDongil } from '@lib/types/IDongil';
 interface DetailOverViewProps
   extends Pick<IDongil, 'successWeeks' | 'weeks' | 'progressList' | 'title'> {}
 
-function DetailOverView({
+function OverViewSection({
   successWeeks,
   weeks,
   progressList,
@@ -22,4 +22,4 @@ function DetailOverView({
   );
 }
 
-export default DetailOverView;
+export default OverViewSection;

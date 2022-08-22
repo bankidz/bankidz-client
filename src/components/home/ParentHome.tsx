@@ -10,7 +10,6 @@ import {
   fetchParentSummaries,
   selectParentSummariesStatus,
 } from '@store/slices/parentSummariesSlice';
-import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import {
   appendThisWeekSDongil,
   fetchThisWeekSDongils,
@@ -207,36 +206,31 @@ function ParentHome() {
 
   return (
     <>
-      <HomeTemplate variant="ParentHome">
-        <MarginTemplate>
-          <ParentSummary />
-          <ProposedDongils
-            onApproveCheckOpen={onApproveCheckOpen}
-            setIdToApprove={setIdToApprove}
-          />
-          <ThisWeekSDongils />
-          <LargeSpacer />
-        </MarginTemplate>
-        <Modals />
+      <MarginTemplate>
+        <ParentSummary />
+        <ProposedDongils
+          onApproveCheckOpen={onApproveCheckOpen}
+          setIdToApprove={setIdToApprove}
+        />
+        <ThisWeekSDongils />
+        <LargeSpacer />
+      </MarginTemplate>
+      <Modals />
 
-        {/* 자녀의 돈길을 수락할까요? */}
-        <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
-          <ApproveCheck
-            onApproveButtonClick={handleApproveButtonClick}
-            onDismiss={onApproveCheckDismiss}
-          />
-        </CommonSheet>
-        {/* 자녀의 돈길이 수락되었어요 */}
-        <CommonSheet
-          open={openApproveCompleted}
-          onDismiss={onApproveCompletedDismiss}
-        >
-          <SheetCompleted
-            type="approve"
-            onDismiss={onApproveCompletedDismiss}
-          />
-        </CommonSheet>
-      </HomeTemplate>
+      {/* 자녀의 돈길을 수락할까요? */}
+      <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
+        <ApproveCheck
+          onApproveButtonClick={handleApproveButtonClick}
+          onDismiss={onApproveCheckDismiss}
+        />
+      </CommonSheet>
+      {/* 자녀의 돈길이 수락되었어요 */}
+      <CommonSheet
+        open={openApproveCompleted}
+        onDismiss={onApproveCompletedDismiss}
+      >
+        <SheetCompleted type="approve" onDismiss={onApproveCompletedDismiss} />
+      </CommonSheet>
     </>
   );
 }

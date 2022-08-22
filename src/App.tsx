@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import Login from './pages/OnBoarding/Login';
-import OAuthRedirectHandler from './pages/OnBoarding/OAuthRedirectHandler';
-import Register from './pages/OnBoarding/Register';
+import LoginPage from './pages/OnBoarding/LoginPage';
+import OAuthRedirectPage from './pages/OnBoarding/OAuthRedirectPage';
+import RegisterPage from './pages/OnBoarding/RegisterPage';
 import HomeRouter from './pages/Home';
 import MypageRouter from './pages/Mypage';
 import FinancialRouter from './pages/Financial';
@@ -29,9 +29,9 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/auth/kakao/callback" element={<OAuthRedirectHandler />} />
-        <Route path="/register/:step" element={<Register />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/kakao/callback" element={<OAuthRedirectPage />} />
+        <Route path="/register/:step" element={<RegisterPage />} />
         {/* <Route element={<PersistLogin />}> */}
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/*" element={<HomeRouter />} />

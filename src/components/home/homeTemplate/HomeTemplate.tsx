@@ -5,7 +5,7 @@ import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import FixedBar from './FixedBar';
-import Background from '@components/common/receipt/Background';
+import Background from '@components/home/homeTemplate/Background';
 import Content from './Content';
 import preventGoBack from '@lib/utils/preventGoBack';
 

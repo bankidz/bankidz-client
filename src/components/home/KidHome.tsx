@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import {
@@ -100,7 +99,7 @@ function KidHome() {
   }
 
   return (
-    <HomeTemplate variant="KidHome">
+    <>
       <MarginTemplate>
         <KidSummary />
         <WalkingDongils />
@@ -126,7 +125,7 @@ function KidHome() {
       >
         <SheetCompleted type="delete" onDismiss={onDeleteCompletedDismiss} />
       </CommonSheet>
-    </HomeTemplate>
+    </>
   );
 }
 

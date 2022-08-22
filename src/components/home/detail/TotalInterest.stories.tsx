@@ -1,9 +1,8 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MarginTemplate from '@components/layout/MarginTemplate';
 import TotalInterest from './TotalInterest';
 
 export default {
-  title: 'home/walking/TotalInterest',
+  title: 'home/detail/TotalInterest',
   component: TotalInterest,
   decorators: [
     (Story) => (

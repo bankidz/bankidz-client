@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Summary from '@components/home/sumary/Summary';
-import TotalInterest from '@components/home/walking/TotalInterest';
+import TotalInterest from '@components/home/detail/TotalInterest';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 
@@ -26,8 +26,8 @@ import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import GiveUpExceeded from '@components/common/bottomSheets/sheetContents/GiveUpExceeded';
 import GiveUpCheck from '@components/common/bottomSheets/sheetContents/GiveUpCheck';
 import SheetComplete from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import DetailOverView from '@components/home/detail/DetailOverView';
-import DetailInterestStampList from '@components/home/detail/DetailInterestStampList';
+import OverViewSection from '@components/home/detail/OverViewSection';
+import InterestStampListSection from '@components/home/detail/InterestStampListSection';
 import DongilContractContent from '@components/home/detail/DongilContractContent';
 
 function Detail() {
@@ -118,7 +118,7 @@ function Detail() {
       <Content>
         <MarginTemplate>
           <FlexContainer>
-            <DetailOverView
+            <OverViewSection
               progressList={progressList}
               successWeeks={successWeeks}
               title={title}
@@ -130,7 +130,7 @@ function Detail() {
               weeks={weeks}
               successWeeks={successWeeks}
             />
-            <DetailInterestStampList
+            <InterestStampListSection
               weeks={weeks}
               progressList={progressList}
             />
