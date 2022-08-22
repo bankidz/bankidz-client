@@ -15,9 +15,13 @@ interface TertiaryModalProps {
    * useModals hook에 의해 반환 됩니다.
    * */
   onSubmit: any;
+  shouldCloseOnOverlayClick: boolean;
 }
 
-function TertiaryModal({ onSubmit }: TertiaryModalProps) {
+function TertiaryModal({
+  onSubmit,
+  shouldCloseOnOverlayClick,
+}: TertiaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
@@ -29,7 +33,7 @@ function TertiaryModal({ onSubmit }: TertiaryModalProps) {
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    // shouldCloseOnOverlayClick: true,
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -117,8 +121,9 @@ function TertiaryModal({ onSubmit }: TertiaryModalProps) {
 
   const closeButton = (
     <>
-      {/* <CloseButtonOverlay onClick={() => setIsOpen(false)} /> */}
-      <CloseButtonOverlay />
+      <CloseButtonOverlay
+        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+      />
       <CloseButtonWrapper>
         <CloseButton onClick={handleSubmit} />
       </CloseButtonWrapper>

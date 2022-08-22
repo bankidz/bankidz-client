@@ -1,6 +1,6 @@
 import Button from '@components/common/buttons/Button';
 import CheckButton from '@components/common/buttons/CheckButton';
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
 
 type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
@@ -10,6 +10,7 @@ interface SubmitButtonProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   handleSubmit: () => void;
   handleExtraSubmit: () => void;
+  shouldCloseOnOverlayClick: boolean;
 }
 
 function SubmitButton({
@@ -17,40 +18,62 @@ function SubmitButton({
   setIsOpen,
   handleSubmit,
   handleExtraSubmit,
+  shouldCloseOnOverlayClick,
 }: SubmitButtonProps) {
-  return (
+  const map = new Map<TVariant, React.ReactElement>();
+  map.set(
+    'contract',
     <>
-      {variant !== 'proposed' && (
-        // <ButtonOverlay onClick={() => setIsOpen(false)} />
-        <ButtonOverlay />
-      )}
-
+      <ButtonOverlay
+        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+      />
       <ButtonWrapper variant={variant}>
-        {(variant === 'contract' || variant === 'proposing') && (
-          <CheckButton onClick={handleSubmit} />
-        )}
-        {variant === 'rejected' && (
-          <Button
-            onClick={handleSubmit}
-            property="default"
-            label="삭제하기"
-            fixed
-          />
-        )}
+        <CheckButton onClick={handleSubmit} />
       </ButtonWrapper>
-
-      {variant === 'proposed' && (
-        <DoubleButtonWrapper>
-          <Button property="delete" label="거절하기" onClick={handleSubmit} />
-          <Button
-            property="default"
-            label="수락하기"
-            onClick={handleExtraSubmit}
-          />
-        </DoubleButtonWrapper>
-      )}
-    </>
+    </>,
   );
+  map.set(
+    'proposing',
+    <>
+      <ButtonOverlay
+        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+      />
+      <ButtonWrapper variant={variant}>
+        <CheckButton onClick={handleSubmit} />
+      </ButtonWrapper>
+    </>,
+  );
+  map.set(
+    'rejected',
+    <>
+      <ButtonOverlay
+        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+      />
+      <ButtonWrapper variant={variant}>
+        <Button
+          onClick={handleSubmit}
+          property="default"
+          label="삭제하기"
+          fixed
+        />
+      </ButtonWrapper>
+    </>,
+  );
+  map.set(
+    'proposed',
+    <>
+      <DoubleButtonWrapper>
+        <Button property="delete" label="거절하기" onClick={handleSubmit} />
+        <Button
+          property="default"
+          label="수락하기"
+          onClick={handleExtraSubmit}
+        />
+      </DoubleButtonWrapper>
+    </>,
+  );
+
+  return <>{map.get(variant)}</>;
 }
 
 export default SubmitButton;

@@ -18,6 +18,7 @@ interface SecondaryModalProps {
   headerText: string;
   /** body에 표시될 내용을 입력합니다. */
   bodyText: string;
+  shouldCloseOnOverlayClick: boolean;
 }
 
 // 모달 내부에 표시될 UI 작성
@@ -26,6 +27,7 @@ function SecondaryModal({
   badgeText,
   headerText,
   bodyText,
+  shouldCloseOnOverlayClick,
 }: SecondaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
@@ -38,7 +40,7 @@ function SecondaryModal({
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    // shouldCloseOnOverlayClick: true,
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -82,8 +84,9 @@ function SecondaryModal({
           <span className="header">{headerText}</span>
           <div className="body">{bodyText}</div>
         </WhiteBox>
-        {/* <CheckButtonOverlay onClick={() => setIsOpen(false)} /> */}
-        <CheckButtonOverlay />
+        <CheckButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+        />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>

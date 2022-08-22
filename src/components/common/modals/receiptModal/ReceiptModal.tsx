@@ -40,6 +40,7 @@ interface QuaternaryModalProps {
   weekPrice: number;
   weeks: number;
   comment?: string;
+  shouldCloseOnOverlayClick: boolean;
   fileName?: string;
   isSubmit?: boolean;
 }
@@ -57,6 +58,7 @@ function ReceiptModal({
   weekPrice,
   weeks,
   comment,
+  shouldCloseOnOverlayClick = false,
   fileName,
   isSubmit = false,
 }: QuaternaryModalProps) {
@@ -77,7 +79,7 @@ function ReceiptModal({
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => setIsOpen(false),
-    // shouldCloseOnOverlayClick: true,
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
     closeTimeoutMS: 125,
     style: {
       overlay: {
@@ -163,6 +165,7 @@ function ReceiptModal({
           setIsOpen={setIsOpen}
           handleSubmit={handleSubmit}
           handleExtraSubmit={handleExtraSubmit}
+          shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         />
       </Content>
     </StyledReactModal>

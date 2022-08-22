@@ -25,7 +25,6 @@ function PendingDongilSection({
   if (pendingDongilsStatus === 'loading') {
     content = (
       <>
-        <h1>대기중인 돈길</h1>
         <SkeletonDongilList variant="pending" />
       </>
     );
@@ -33,14 +32,12 @@ function PendingDongilSection({
     if (pendingDongils?.length === 0) {
       content = (
         <>
-          <h1>대기중인 돈길</h1>
           <EmptyDongil variant="pending" />
         </>
       );
     } else {
       content = (
         <>
-          <h1>대기중인 돈길</h1>
           <PendingDongilList
             pendingDongils={pendingDongils!}
             onDeleteCheckOpen={onDeleteCheckOpen}
@@ -52,7 +49,12 @@ function PendingDongilSection({
   } else if (pendingDongilsStatus === 'failed') {
     content = <p>Failed</p>;
   }
-  return <Wrapper>{content}</Wrapper>;
+  return (
+    <Wrapper>
+      <h1>대기중인 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
 export default PendingDongilSection;
