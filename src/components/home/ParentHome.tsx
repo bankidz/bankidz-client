@@ -31,7 +31,7 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import ParentSummary from '@components/home/summay/ParentSummary';
+import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
 import useIsFetched from './useIsFetched';
