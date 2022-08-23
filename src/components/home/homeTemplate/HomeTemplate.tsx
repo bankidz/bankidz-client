@@ -19,8 +19,9 @@ interface HomeTemplateProps {
 function HomeTemplate({ children, variant }: HomeTemplateProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
   let level: TLevel;
+  const temp = useAppSelector(selectLevel)!;
   if (variant === 'KidHome') {
-    level = useAppSelector(selectLevel)!;
+    level = temp;
   } else if (variant === 'ParentHome') {
     level = selectedKid?.level!;
   }
