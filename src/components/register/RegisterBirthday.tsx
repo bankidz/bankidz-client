@@ -47,13 +47,22 @@ function RegisterBirthday() {
   }, [year, isValidYear]);
   useEffect(() => {
     setIsValidMonth(MONTH_REGEX.test(month));
-    if (MONTH_REGEX.test(month) && parseInt(month) >= 2) {
+    console.log(MONTH_REGEX.test(month));
+    console.log(parseInt(month));
+    if (
+      MONTH_REGEX.test(month) &&
+      ((month.length === 2 && parseInt(month) === 1) || parseInt(month) >= 2)
+    ) {
       dayInputRef.current!.focus();
     }
   }, [month, isValidMonth]);
   useEffect(() => {
     setIsValidDay(DAY_REGEX.test(day));
-    if (DAY_REGEX.test(day) && parseInt(day) >= 4) {
+    if (
+      DAY_REGEX.test(day) &&
+      ((day.length === 2 && 1 <= parseInt(day) && parseInt(day) <= 9) ||
+        parseInt(day) >= 4)
+    ) {
       dayInputRef.current!.blur();
     }
   }, [day]);

@@ -10,15 +10,15 @@ import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ProposedDongilList from './ProposedDongilList';
 
-interface ProposedDongilsProps {
+interface ProposedDongilSectionProps {
   onApproveCheckOpen: () => void;
   setIdToApprove: Dispatch<SetStateAction<number | null>>;
 }
 
-function ProposedDongils({
+function ProposedDongilSection({
   onApproveCheckOpen,
   setIdToApprove,
-}: ProposedDongilsProps) {
+}: ProposedDongilSectionProps) {
   const proposedDongils = useAppSelector(selectProposedDongils);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -59,9 +59,9 @@ function ProposedDongils({
   );
 }
 
-export default ProposedDongils;
+export default ProposedDongilSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin-top: 48px;
   h1 {
     width: 100%;

@@ -1,4 +1,3 @@
-import { TItemName } from '@lib/types/TItemName';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -23,9 +22,9 @@ function ThisWeekSDongilItem({
         <span>{title}</span>
       </div>
       <div className="achieved-stamp">
-        {progressList && progressList.slice(-1)[0].isAchieved && (
-          <AchievedStamp />
-        )}
+        {progressList &&
+          progressList.slice(-1)[0] &&
+          progressList.slice(-1)[0].isAchieved && <AchievedStamp />}
       </div>
     </StyledLink>
   );

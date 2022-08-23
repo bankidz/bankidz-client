@@ -2,16 +2,12 @@ import styled from 'styled-components';
 import { theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/TItemName';
 import { TInterestRate } from '@lib/types/IInterestRate';
-import PerforatedLineTop from '../modals/receiptModal/PerforatedLineTop';
-import PerforatedLineBottom from '../modals/receiptModal/PerforatedLineBottom';
-import getDashedBorder from './DashedBorder';
-import getFirstRow from './FirstRow';
-import getSecondRow from './SecondRow';
-import getThirdRow from './ThirdRow';
 import DashedBorder from './DashedBorder';
 import FirstRow from './FirstRow';
-import SecondRow from '../modals/receiptModal/SecondRow';
+import SecondRow from '../modals/receiptModal/rows/SecondRow';
 import ThirdRow from './ThirdRow';
+import PerforatedLineTop from '../modals/receiptModal/perforatedLines/PerforatedLineTop';
+import PerforatedLineBottom from '../modals/receiptModal/perforatedLines/PerforatedLineBottom';
 
 interface ReceiptProps {
   createdAt: string;

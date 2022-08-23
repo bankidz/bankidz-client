@@ -2,14 +2,14 @@ import Button from '@components/common/buttons/Button';
 import CheckButton from '@components/common/buttons/CheckButton';
 import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
-
-type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+import { TReceiptModalVariant } from './TReceiptModalVariant';
 
 interface SubmitButtonProps {
-  variant: TVariant;
+  variant: TReceiptModalVariant;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   handleSubmit: () => void;
   handleExtraSubmit: () => void;
+  shouldCloseOnOverlayClick: boolean;
 }
 
 function SubmitButton({
@@ -17,29 +17,50 @@ function SubmitButton({
   setIsOpen,
   handleSubmit,
   handleExtraSubmit,
+  shouldCloseOnOverlayClick,
 }: SubmitButtonProps) {
-  return (
-    <>
-      {variant !== 'proposed' && (
-        // <ButtonOverlay onClick={() => setIsOpen(false)} />
-        <ButtonOverlay />
-      )}
-
-      <ButtonWrapper variant={variant}>
-        {(variant === 'contract' || variant === 'proposing') && (
+  let collection;
+  if (variant === 'contract') {
+    collection = (
+      <>
+        <ButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+        />
+        <ButtonWrapper variant={variant}>
           <CheckButton onClick={handleSubmit} />
-        )}
-        {variant === 'rejected' && (
+        </ButtonWrapper>
+      </>
+    );
+  } else if (variant === 'proposing') {
+    collection = (
+      <>
+        <ButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+        />
+        <ButtonWrapper variant={variant}>
+          <CheckButton onClick={handleSubmit} />
+        </ButtonWrapper>
+      </>
+    );
+  } else if (variant === 'rejected') {
+    collection = (
+      <>
+        <ButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+        />
+        <ButtonWrapper variant={variant}>
           <Button
             onClick={handleSubmit}
             property="default"
             label="삭제하기"
             fixed
           />
-        )}
-      </ButtonWrapper>
-
-      {variant === 'proposed' && (
+        </ButtonWrapper>
+      </>
+    );
+  } else if (variant === 'proposed') {
+    collection = (
+      <>
         <DoubleButtonWrapper>
           <Button property="delete" label="거절하기" onClick={handleSubmit} />
           <Button
@@ -48,9 +69,11 @@ function SubmitButton({
             onClick={handleExtraSubmit}
           />
         </DoubleButtonWrapper>
-      )}
-    </>
-  );
+      </>
+    );
+  }
+
+  return <>{collection}</>;
 }
 
 export default SubmitButton;

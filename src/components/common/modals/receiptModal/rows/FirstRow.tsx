@@ -2,12 +2,11 @@ import styled from 'styled-components';
 import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg';
 import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
-import { TItemName } from '@lib/types/TItemName';
 import { calcRatio } from '@lib/styles/theme';
+import { IDongil } from '@lib/types/IDongil';
 
-interface FirstRowProps {
+interface FirstRowProps extends Pick<IDongil, 'itemName'> {
   isMom: boolean;
-  itemName: TItemName;
 }
 
 function FirstRow({ isMom, itemName }: FirstRowProps) {

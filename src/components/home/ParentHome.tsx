@@ -10,7 +10,6 @@ import {
   fetchParentSummaries,
   selectParentSummariesStatus,
 } from '@store/slices/parentSummariesSlice';
-import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import {
   appendThisWeekSDongil,
   fetchThisWeekSDongils,
@@ -33,13 +32,13 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import hasParentSummaryAlreadyBeenFetched from '@components/home/sumary/hasParentSummaryAlreadyBeenFetched';
+import hasParentSummaryAlreadyBeenFetched from '@components/home/summay/hasParentSummaryAlreadyBeenFetched';
 import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
 import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import ParentSummary from '@components/home/sumary/ParentSummary';
-import ProposedDongils from '@components/home/proposed/ProposedDongils';
-import ThisWeekSDongils from '@components/home/thisWeekS/ThisWeekSDongils';
+import ParentSummary from '@components/home/summay/ParentSummary';
+import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
+import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
@@ -207,36 +206,31 @@ function ParentHome() {
 
   return (
     <>
-      <HomeTemplate variant="ParentHome">
-        <MarginTemplate>
-          <ParentSummary />
-          <ProposedDongils
-            onApproveCheckOpen={onApproveCheckOpen}
-            setIdToApprove={setIdToApprove}
-          />
-          <ThisWeekSDongils />
-          <LargeSpacer />
-        </MarginTemplate>
-        <Modals />
+      <MarginTemplate>
+        <ParentSummary />
+        <ProposedDongilSection
+          onApproveCheckOpen={onApproveCheckOpen}
+          setIdToApprove={setIdToApprove}
+        />
+        <ThisWeekSDongilSection />
+        <LargeSpacer />
+      </MarginTemplate>
+      <Modals />
 
-        {/* 자녀의 돈길을 수락할까요? */}
-        <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
-          <ApproveCheck
-            onApproveButtonClick={handleApproveButtonClick}
-            onDismiss={onApproveCheckDismiss}
-          />
-        </CommonSheet>
-        {/* 자녀의 돈길이 수락되었어요 */}
-        <CommonSheet
-          open={openApproveCompleted}
-          onDismiss={onApproveCompletedDismiss}
-        >
-          <SheetCompleted
-            type="approve"
-            onDismiss={onApproveCompletedDismiss}
-          />
-        </CommonSheet>
-      </HomeTemplate>
+      {/* 자녀의 돈길을 수락할까요? */}
+      <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
+        <ApproveCheck
+          onApproveButtonClick={handleApproveButtonClick}
+          onDismiss={onApproveCheckDismiss}
+        />
+      </CommonSheet>
+      {/* 자녀의 돈길이 수락되었어요 */}
+      <CommonSheet
+        open={openApproveCompleted}
+        onDismiss={onApproveCompletedDismiss}
+      >
+        <SheetCompleted type="approve" onDismiss={onApproveCompletedDismiss} />
+      </CommonSheet>
     </>
   );
 }

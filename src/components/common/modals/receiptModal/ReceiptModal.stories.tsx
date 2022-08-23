@@ -60,5 +60,5 @@ rejected.args = {
   totalPrice: 150000,
   weekPrice: 10000,
   weeks: 15,
-  comment: '큰 이자를 줄만한 목표가 아닌것 같다~',
+  comment: { content: '큰 이자를 줄만한 목표가 아닌것 같다~', id: 1 },
 };

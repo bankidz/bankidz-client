@@ -9,15 +9,15 @@ import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import PendingDongilList from './PendingDongilList';
 
-interface PendingDongilsProps {
+interface PendingDongilSectionProps {
   onDeleteCheckOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function PendingDongils({
+function PendingDongilSection({
   onDeleteCheckOpen,
   setIdToDelete,
-}: PendingDongilsProps) {
+}: PendingDongilSectionProps) {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
 
@@ -25,7 +25,6 @@ function PendingDongils({
   if (pendingDongilsStatus === 'loading') {
     content = (
       <>
-        <h1>대기중인 돈길</h1>
         <SkeletonDongilList variant="pending" />
       </>
     );
@@ -33,14 +32,12 @@ function PendingDongils({
     if (pendingDongils?.length === 0) {
       content = (
         <>
-          <h1>대기중인 돈길</h1>
           <EmptyDongil variant="pending" />
         </>
       );
     } else {
       content = (
         <>
-          <h1>대기중인 돈길</h1>
           <PendingDongilList
             pendingDongils={pendingDongils!}
             onDeleteCheckOpen={onDeleteCheckOpen}
@@ -52,12 +49,17 @@ function PendingDongils({
   } else if (pendingDongilsStatus === 'failed') {
     content = <p>Failed</p>;
   }
-  return <Wrapper>{content}</Wrapper>;
+  return (
+    <Wrapper>
+      <h1>대기중인 돈길</h1>
+      {content}
+    </Wrapper>
+  );
 }
 
-export default PendingDongils;
+export default PendingDongilSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin-top: 48px;
   h1 {
     width: 100%;

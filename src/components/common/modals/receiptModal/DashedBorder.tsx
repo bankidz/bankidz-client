@@ -2,11 +2,10 @@ import { ReactComponent as HorizontalDashedBorder } from '@assets/borders/horizo
 import { ReactComponent as VerticalDashedBorder } from '@assets/borders/vertical-dashed-border.svg';
 import { theme } from '@lib/styles/theme';
 import styled from 'styled-components';
-
-type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+import { TReceiptModalVariant } from './TReceiptModalVariant';
 
 interface DashedBorderProps {
-  variant: TVariant;
+  variant: TReceiptModalVariant;
 }
 
 function DashedBorder({ variant }: DashedBorderProps) {

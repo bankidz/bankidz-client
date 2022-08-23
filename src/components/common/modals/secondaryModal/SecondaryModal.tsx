@@ -5,6 +5,9 @@ import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
 interface SecondaryModalProps {
   /**
@@ -18,6 +21,7 @@ interface SecondaryModalProps {
   headerText: string;
   /** body에 표시될 내용을 입력합니다. */
   bodyText: string;
+  shouldCloseOnOverlayClick: boolean;
 }
 
 // 모달 내부에 표시될 UI 작성
@@ -26,20 +30,27 @@ function SecondaryModal({
   badgeText,
   headerText,
   bodyText,
+  shouldCloseOnOverlayClick,
 }: SecondaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
 
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: () => setIsOpen(false),
-    // shouldCloseOnOverlayClick: true,
-    closeTimeoutMS: 125,
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.secondaryModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -82,8 +93,9 @@ function SecondaryModal({
           <span className="header">{headerText}</span>
           <div className="body">{bodyText}</div>
         </WhiteBox>
-        {/* <CheckButtonOverlay onClick={() => setIsOpen(false)} /> */}
-        <CheckButtonOverlay />
+        <CheckButtonOverlay
+          onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+        />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>
@@ -97,7 +109,7 @@ export default SecondaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(0);
+      transform: translateY(-10%);
     }
     to {
       transform: translateY(-50%);

@@ -1,11 +1,11 @@
 import { IDongil } from '@lib/types/IDongil';
 import styled from 'styled-components';
-import InterestStampList from '../walking/InterestStampList';
+import InterestStampList from './InterestStampList';
 
 interface DetailInterestStampListProps
   extends Pick<IDongil, 'weeks' | 'progressList'> {}
 
-function DetailInterestStampList({
+function InterestStampListSection({
   weeks,
   progressList,
 }: DetailInterestStampListProps) {
@@ -22,9 +22,9 @@ function DetailInterestStampList({
   );
 }
 
-export default DetailInterestStampList;
+export default InterestStampListSection;
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin-top: 80px;
   margin-bottom: 40px;
   width: 100%;
