@@ -32,13 +32,11 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import hasParentSummaryAlreadyBeenFetched from '@components/home/summay/hasParentSummaryAlreadyBeenFetched';
-import hasProposedDongilsAlreadyBeenFetched from '@components/home/proposed/hasProposedDongilsAlreadyBeenFetched';
-import hasThisWeekSDongilsAlreadyBeenFetched from '@components/home/thisWeekS/hasThisWeekSDongilsAlreadyBeenFetched';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import ParentSummary from '@components/home/summay/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
+import useIsFetched from './useIsFetched';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
@@ -159,15 +157,15 @@ function ParentHome() {
 
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
   const canFetchParentSummary =
-    !hasParentSummaryAlreadyBeenFetched() &&
+    !useIsFetched('parentSummaries') &&
     parentSummariesStatus === 'succeeded' &&
     selectedKid !== null;
   const canFetchProposedDongils =
-    !hasProposedDongilsAlreadyBeenFetched() &&
+    !useIsFetched('proposedDongils') &&
     proposedDongilsStatus === 'succeeded' &&
     selectedKid !== null;
   const canFetchThisWeekSDongils =
-    !hasThisWeekSDongilsAlreadyBeenFetched() &&
+    !useIsFetched('thisWeekSDongils') &&
     thisWeekSDongilsStatus === 'succeeded' &&
     selectedKid !== null;
   useEffect(() => {
