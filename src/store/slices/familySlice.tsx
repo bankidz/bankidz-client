@@ -14,6 +14,8 @@ interface IKid {
 
 export type TFamilyState = {
   kids: IKid[] | null;
+  // SUGGESTION: null인 경우 반드시 구분 필요하지 않다면 초기상태 []로 변경하고
+  // | null 삭제 부탁드립니다.
   parents: IFamilyState[] | null;
   family: IFamilyState[] | null; //진짜 맘에 안들지만....
   kidsStatus?: TFetchStatus;
@@ -71,6 +73,7 @@ export const familySlice = createSlice({
       })
       .addCase(fetchFamily.fulfilled, (state, action) => {
         state.familyStatus = 'succeeded';
+        // SUGGESTION: javascript list 네이밍 규칙에 대해 미리 합의한 대로 수정 부탁드립니다.
         const familyUserList = action.payload;
         state.parents = familyUserList.filter((v) => v.isKid === false);
         state.family = familyUserList

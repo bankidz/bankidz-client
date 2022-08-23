@@ -8,6 +8,9 @@ import FixedBar from './FixedBar';
 import Background from '@components/home/homeTemplate/Background';
 import Content from './Content';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
+import { selectFamily } from '@store/slices/familySlice';
+import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
+import NoFamily from '../NoFamily';
 
 interface HomeTemplateProps {
   children: React.ReactNode;
@@ -26,11 +29,20 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
   const colorByLevel = getColorByLevel(level!);
   usePreventGoBack();
 
+  const family = useAppSelector(selectFamily);
+  const hasNoFamily = family === null || family?.length === 0;
+
   return (
     <Wrapper>
-      <FixedBar colorByLevel={colorByLevel} />
-      <Content level={level!} children={children} />
-      <Background colorByLevel={colorByLevel} level={level!} />
+      {hasNoFamily ? (
+        <NoFamily />
+      ) : (
+        <>
+          <FixedBar colorByLevel={colorByLevel} />
+          <Content level={level!} children={children} />
+          <Background colorByLevel={colorByLevel} level={level!} />
+        </>
+      )}
     </Wrapper>
   );
 }

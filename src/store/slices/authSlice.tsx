@@ -27,16 +27,16 @@ interface IAuthState {
 // https://bankids.click
 // 엄마(주어진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0
 // 딸(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o
-// eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxMDU1MzQ1LCJzdWIiOiI4IiwiZXhwIjoxNjYzNDc0NTQ1LCJpZCI6OCwicm9sZXMiOiJVU0VSIn0.HezSWuFqO9a0XnC3E5nDKqwHvoXziUMQbwbRSSJVbX4
+// 아들(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxMDU1MzQ1LCJzdWIiOiI4IiwiZXhwIjoxNjYzNDc0NTQ1LCJpZCI6OCwicm9sZXMiOiJVU0VSIn0.HezSWuFqO9a0XnC3E5nDKqwHvoXziUMQbwbRSSJVbX4
 
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0',
-    isKid: false,
-    level: null,
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxMDU1MzQ1LCJzdWIiOiI4IiwiZXhwIjoxNjYzNDc0NTQ1LCJpZCI6OCwicm9sZXMiOiJVU0VSIn0.HezSWuFqO9a0XnC3E5nDKqwHvoXziUMQbwbRSSJVbX4',
+    isKid: true,
+    level: -4,
     birthday: null,
-    isFemale: true,
+    isFemale: null,
     phone: null,
     username: null,
   },

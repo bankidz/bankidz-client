@@ -22,7 +22,9 @@ function Walk() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
-  // TODO: walkAbledDongils -> walkableDongils
+  // SUGGESTION: walkAbledDongils -> walkableDongils
+  // Abled는 영문법상도 맞지 않습니다.
+  // code spell checker 사용을 추천드립니다.
   const walkAbledDongils = walkingDongils?.filter(
     (dongil) => dongil.challengeStatus === 'WALKING',
   );

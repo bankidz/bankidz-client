@@ -6,6 +6,7 @@ import {
 import styled from 'styled-components';
 import KidList from './KidList';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
+import { theme } from '@lib/styles/theme';
 
 interface FixedBarProps {
   colorByLevel: string;
@@ -26,7 +27,7 @@ function FixedBar({ colorByLevel }: FixedBarProps) {
   return (
     <Wrapper colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
       <div className="logo-wrapper">
-        <BANKIDZ />
+        <BANKIDZ fill={theme.palette.greyScale.white} />
       </div>
       {hasMultipleKids && (
         <KidListWrapper colorByLevel={colorByLevel}>
