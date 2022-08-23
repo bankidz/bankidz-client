@@ -22,7 +22,6 @@ import {
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
 
-import { theme } from '@lib/styles/theme';
 import Modals from '@components/common/modals/Modals';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
 import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
@@ -31,7 +30,6 @@ import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveC
 import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
 
-import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import ParentSummary from '@components/home/summay/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
@@ -95,14 +93,6 @@ function ParentHome() {
     }
     hydrate();
   }, []);
-
-  // 선택한 자녀에 따라 Level 업데이트
-  const [colorByLevel, setColorByLevel] = useState<string>(
-    theme.palette.greyScale.grey100,
-  );
-  useEffect(() => {
-    setColorByLevel(getColorByLevel(selectedKid?.level!));
-  }, [selectedKid]);
 
   // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
   const [idToApprove, setIdToApprove] = useState<number | null>(null);
