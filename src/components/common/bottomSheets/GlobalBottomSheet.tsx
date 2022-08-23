@@ -3,7 +3,6 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectBottomSheetState } from '@store/slices/bottomSheetSlice';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
-import SheetButton from '../buttons/SheetButton';
 import ApproveCheck from './commonSheet/ApproveCheck';
 import DeleteCheck from './commonSheet/DeleteCheck';
 import DongilFailed from './commonSheet/DongilFailed';
@@ -11,12 +10,8 @@ import GiveUpCheck from './commonSheet/GiveUpCheck';
 import GiveUpExceeded from './commonSheet/GiveUpExceeded';
 import SelectProfile from './commonSheet/SelectProfile';
 import SheetCompleted from './commonSheet/SheetCompleted';
-import RangeInput from './contractSheet/RangeInput';
-import SelectInterest from './contractSheet/SelectInterest';
-import SelectMoney from './contractSheet/SelectMoney';
-import Signature from './contractSheet/Signature';
 
-export const CONTRACT_SHEET_CONTENTS = {
+/* export const CONTRACT_SHEET_CONTENTS = {
   RangeInput: 'RangeInput',
   SelectInterest: 'SelectInterest',
   SelectMoney: 'SelectMoney',
@@ -28,7 +23,7 @@ const ContractSheetContent: any = {
   [CONTRACT_SHEET_CONTENTS.SelectInterest]: SelectInterest,
   [CONTRACT_SHEET_CONTENTS.SelectMoney]: SelectMoney,
   [CONTRACT_SHEET_CONTENTS.Signature]: Signature,
-};
+}; */
 
 export const COMMON_SHEET_CONTENTS = {
   ApproveCheck: 'ApproveCheck',
@@ -52,8 +47,9 @@ const CommonSheetContent: any = {
 
 function GlobalBottomSheet() {
   const state = useAppSelector(selectBottomSheetState);
-  const { sheetContent, sheetProps, sheetType, contentProps } = state || {};
+  const { sheetContent, sheetProps, contentProps } = state || {};
   const { setCloseBottomSheet } = useGlobalBottomSheet();
+
   document.documentElement.style.setProperty(
     '--rsbs-backdrop-bg',
     `rgba(0,0,0,0.7)`,
@@ -63,29 +59,25 @@ function GlobalBottomSheet() {
     if (!state) {
       return null;
     } else {
-      const SheetContentComponent =
-        sheetType === 'contract'
-          ? ContractSheetContent[sheetContent!]
-          : CommonSheetContent[sheetContent!];
+      const SheetContentComponent = CommonSheetContent[sheetContent!];
 
       return (
         <StyledBottomSheet
           open={sheetProps!.open}
           onDismiss={setCloseBottomSheet}
           snapPoints={({ minHeight }) => minHeight}
-          blocking={sheetType !== 'contract'}
         >
           <div ref={sheetProps!.sheetRef}>
             <SheetContent>
               <SheetContentComponent {...contentProps} />
             </SheetContent>
-            {sheetType === 'contract' && (
+            {/* {sheetType === 'contract' && (
               <SheetButton
                 onClickNext={sheetProps!.onClickNext!}
                 disabledNext={sheetProps!.disabledNext!}
                 label={sheetProps!.label!}
               />
-            )}
+            )} */}
           </div>
         </StyledBottomSheet>
       );

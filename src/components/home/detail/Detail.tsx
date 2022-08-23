@@ -29,6 +29,7 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
 import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 import GiveUpExceeded from '@components/common/bottomSheets/commonSheet/GiveUpExceeded';
+import { contextType } from 'react-modal';
 
 function Detail() {
   const { id } = useParams();
@@ -58,16 +59,12 @@ function Detail() {
     challengeStatus,
   } = targetDongil!;
   const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
-  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
-    useGlobalBottomSheet();
-  const [openGiveUpCheck, onGiveUpCheckOpen, onGiveUpCheckDismiss] =
-    useBottomSheet(false);
-  const [openGiveUpCompleted, onGiveUpCompletedOpen, onGiveUpCompletedDismiss] =
-    useBottomSheet(false);
-  const [openExceeded, onExceededOpen, onExceededDismiss] =
-    useBottomSheet(false);
-  const [openCancelCompleted, onCancelCompletedOpen, onCancelCompletedDismiss] =
-    useBottomSheet(false);
+  const {
+    isOpen,
+    setOpenBottomSheet,
+    setCloseBottomSheet,
+    openSheetBySequence,
+  } = useGlobalBottomSheet();
 
   const axiosPrivate = useAxiosPrivate();
   const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
@@ -80,7 +77,21 @@ function Detail() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // '정말 포기할거예요?' 바텀시트 하단 왼쪽 회색 버튼
+  //1. '돈길 포기하기' 바텀시트 열기
+  const openGiveUpBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'GiveUpCheck',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        onGiveUpButtonClick: handleGiveUpButtonClick,
+        onDismiss: handleCancelGiveUpBottomSheet,
+      },
+    });
+  };
+
+  // 2-a. 포기하기 버튼 클릭
   async function handleGiveUpButtonClick() {
     if (canGiveUpWalkingDongil) {
       try {
@@ -91,12 +102,12 @@ function Detail() {
             id: parseInt(id!),
           }),
         ).unwrap();
-        onGiveUpCheckDismiss();
-        onGiveUpCompletedOpen();
+        // '포기 완료' 바텀시트
+        handleGiveUpCompletedBottomSheet();
       } catch (error) {
         if (error === 'E400-40007') {
-          onGiveUpCheckDismiss();
-          onExceededOpen();
+          // 포기횟수 초과
+          handleGiveUpExceededBottomSheet();
         } else {
           console.log(error);
         }
@@ -105,16 +116,57 @@ function Detail() {
       }
     }
   }
-  // '정말 포기할거예요?' 바텀시트 하단 오른쪽 노란색 버튼
-  function handleRetryButtonClick() {
-    onGiveUpCheckDismiss();
-    onCancelCompletedOpen();
-  }
-  // '돈길이 포기되었어요' 바텀시트 확인 버튼
-  function handleConfirmButtonClick() {
+
+  //2-b. 포기하기 취소 버튼 클릭
+  const handleCancelGiveUpBottomSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'SheetCompleted',
+        sheetProps: {
+          open: true,
+        },
+        contentProps: {
+          type: 'cancel',
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  // 3-a. '포기 완료' 바텀시트 열기
+  const handleGiveUpCompletedBottomSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'SheetCompleted',
+        sheetProps: {
+          open: true,
+        },
+        contentProps: {
+          type: 'giveUp',
+          title: title,
+          onDismiss: handleConfirmButtonClick,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+  // 3-b. '포기 횟수 초과' 바텀시트 열기
+  const handleGiveUpExceededBottomSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'GiveUpExceeded',
+        sheetProps: {
+          open: true,
+        },
+        contentProps: { onDismiss: setCloseBottomSheet },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
+  const handleConfirmButtonClick = () => {
+    setCloseBottomSheet();
     dispatch(deleteClientSideWalkingDongilById(parseInt(id!)));
     navigate('/');
-  }
+  };
 
   return (
     <Wrapper>
@@ -153,21 +205,7 @@ function Detail() {
               weeks={weeks}
             />
             {isKid === true && challengeStatus !== 'FAILED' && (
-              <GiveUpDongilButton
-                onClick={() => {
-                  setOpenBottomSheet({
-                    sheetType: 'common',
-                    sheetContent: 'GiveUpCheck',
-                    sheetProps: {
-                      open: true,
-                    },
-                    contentProps: {
-                      onGiveUpButtonClick: () => {},
-                      onDismiss: () => {},
-                    },
-                  });
-                }}
-              >
+              <GiveUpDongilButton onClick={openGiveUpBottomSheet}>
                 돈길 포기하기
               </GiveUpDongilButton>
             )}
@@ -185,7 +223,7 @@ function Detail() {
         />
       </CommonSheet> */}
       {/* 돈길이 포기되었어요 */}
-      <CommonSheet
+      {/* <CommonSheet
         open={openGiveUpCompleted}
         onDismiss={() => {
           navigate('/');
@@ -196,18 +234,18 @@ function Detail() {
           title={title}
           onDismiss={handleConfirmButtonClick}
         />
-      </CommonSheet>
+      </CommonSheet> */}
       {/* 포기횟수 초과 */}
-      <CommonSheet open={openExceeded} onDismiss={onExceededDismiss}>
+      {/* <CommonSheet open={openExceeded} onDismiss={onExceededDismiss}>
         <GiveUpExceeded onDismiss={onExceededDismiss} />
-      </CommonSheet>
+      </CommonSheet> */}
       {/* '포기하기'가 취소되었어요 */}
-      <CommonSheet
+      {/* <CommonSheet
         open={openCancelCompleted}
         onDismiss={onCancelCompletedDismiss}
       >
         <SheetCompleted type="cancel" onDismiss={onCancelCompletedDismiss} />
-      </CommonSheet>
+      </CommonSheet> */}
     </Wrapper>
   );
 }
