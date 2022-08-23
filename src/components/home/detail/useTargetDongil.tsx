@@ -4,7 +4,7 @@ import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { selectThisWeekSDongils } from '@store/slices/thisWeekSDongilsSlice';
 import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
 
-function getTargetDongil(id: string) {
+function useTargetDongil(id: string) {
   const isKid = useAppSelector(selectIsKid);
   const selectedKid = useAppSelector(selectSelectedKid);
   const walkingDongils = useAppSelector(selectWalkingDongils);
@@ -32,4 +32,4 @@ function getTargetDongil(id: string) {
   }
 }
 
-export default getTargetDongil;
+export default useTargetDongil;

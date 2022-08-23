@@ -19,7 +19,7 @@ import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { calcRatio } from '@lib/styles/theme';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import getTargetDongil from '@components/home/detail/getTargetDongil';
+import useTargetDongil from '@components/home/detail/useTargetDongil';
 
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import CommonSheet from '@components/common/bottomSheets/CommonSheet';
@@ -34,16 +34,17 @@ function Detail() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
   const selectedKid = useAppSelector(selectSelectedKid);
-  let level: TLevel;
+  let level: TLevel = useAppSelector(selectLevel)!;
+  const temp = useAppSelector(selectLevel)!;
   if (isKid === true) {
-    level = useAppSelector(selectLevel)!;
+    level = temp;
   } else if (isKid === false) {
     level = selectedKid?.level!;
   }
   const colorByLevel = getColorByLevel(level!);
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
-  const targetDongil = getTargetDongil(id!);
+  const targetDongil = useTargetDongil(id!);
   const {
     isMom,
     title,
