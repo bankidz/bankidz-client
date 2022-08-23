@@ -9,11 +9,9 @@ import Background from '@components/home/homeTemplate/Background';
 import Content from './Content';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 
-type TVariant = 'KidHome' | 'ParentHome';
-
 interface HomeTemplateProps {
   children: React.ReactNode;
-  variant: TVariant;
+  variant: 'KidHome' | 'ParentHome';
 }
 
 function HomeTemplate({ children, variant }: HomeTemplateProps) {
