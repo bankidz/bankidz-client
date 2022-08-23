@@ -65,7 +65,7 @@ function PendingDongilItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      comment: comment?.content,
+      comment,
       fileName,
     });
   }

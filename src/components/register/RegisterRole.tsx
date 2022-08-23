@@ -16,11 +16,9 @@ import SelectProfile from '@components/common/bottomSheets/commonSheet/SelectPro
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
-
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
   const birthday = useAppSelector(selectBirthday);
-
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
 
@@ -135,7 +133,7 @@ function RegisterRole() {
         />
       </RoleButtonWrapper>
 
-      <div ref={inputDivRef}></div>
+      <div ref={inputDivRef} />
       <CommonSheet open={open} onDismiss={onDismiss} sheetRef={sheetDivRef}>
         <SelectProfile
           isKid={isKid}

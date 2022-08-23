@@ -1,19 +1,14 @@
 import { TLevel } from '@lib/types/TLevel';
 
 function getBankiNameByLevel(level: TLevel) {
-  let bankiNameByLevel;
-  if (level === 1) {
-    bankiNameByLevel = 'Lv.1 뱅키학';
-  } else if (level === 2) {
-    bankiNameByLevel = 'Lv.2 태계뱅키';
-  } else if (level === 3) {
-    bankiNameByLevel = 'Lv.3 율곡뱅키';
-  } else if (level === 4 || level === -4) {
-    bankiNameByLevel = 'Lv.4 뱅키대왕';
-  } else if (level === 5) {
-    bankiNameByLevel = 'Lv.5 뱅키임당';
-  }
-  return bankiNameByLevel;
+  const map = new Map<TLevel, string>();
+  map.set(1, 'Lv.1 뱅키학');
+  map.set(2, 'Lv.2 태계뱅키');
+  map.set(3, 'Lv.3 율곡뱅키');
+  map.set(4, 'Lv.4 뱅키대왕');
+  map.set(-4, 'Lv.4 뱅키대왕');
+  map.set(5, 'Lv.5 뱅키임당');
+  return map.get(level);
 }
 
 export default getBankiNameByLevel;

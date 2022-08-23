@@ -5,7 +5,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import InputForm from '@components/common/InputForm';
 import Button from '@components/common/buttons/Button';
-import refineDate from '../../lib/utils/refineBirthday';
+import refineDate from '../../lib/utils/refineDate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -47,13 +47,22 @@ function RegisterBirthday() {
   }, [year, isValidYear]);
   useEffect(() => {
     setIsValidMonth(MONTH_REGEX.test(month));
-    if (MONTH_REGEX.test(month) === true && parseInt(month) >= 2) {
+    console.log(MONTH_REGEX.test(month));
+    console.log(parseInt(month));
+    if (
+      MONTH_REGEX.test(month) &&
+      ((month.length === 2 && parseInt(month) === 1) || parseInt(month) >= 2)
+    ) {
       dayInputRef.current!.focus();
     }
   }, [month, isValidMonth]);
   useEffect(() => {
     setIsValidDay(DAY_REGEX.test(day));
-    if (DAY_REGEX.test(day) === true && parseInt(day) >= 4) {
+    if (
+      DAY_REGEX.test(day) &&
+      ((day.length === 2 && 1 <= parseInt(day) && parseInt(day) <= 9) ||
+        parseInt(day) >= 4)
+    ) {
       dayInputRef.current!.blur();
     }
   }, [day]);

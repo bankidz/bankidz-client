@@ -5,6 +5,9 @@ import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
 interface PrimaryModalProps {
   /**
@@ -18,6 +21,7 @@ interface PrimaryModalProps {
   headerText: string;
   /** body에 표시될 내용을 입력합니다. */
   bodyText: string;
+  shouldCloseOnOverlayClick: boolean;
 }
 
 function PrimaryModal({
@@ -26,20 +30,27 @@ function PrimaryModal({
   isFemale,
   headerText,
   bodyText,
+  shouldCloseOnOverlayClick = false,
 }: PrimaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
-    setIsOpen(false);
+    setIsOpen(false); // close transition 적용을 위해 필요
     setTimeout(() => {
       onSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
 
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: () => setIsOpen(false),
-    // shouldCloseOnOverlayClick: true,
-    closeTimeoutMS: 125,
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.primaryModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -81,8 +92,11 @@ function PrimaryModal({
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
         </WhiteBox>
-        {/* <CheckButtonOverlay onClick={() => setIsOpen(false)} /> */}
-        <CheckButtonOverlay />
+        <CheckButtonOverlay
+          onClick={() => {
+            shouldCloseOnOverlayClick && setIsOpen(false);
+          }}
+        />
         <CheckButtonWrapper>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>
@@ -96,7 +110,7 @@ export default PrimaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(0);
+      transform: translateY(-10%);
     }
     to {
       transform: translateY(-50%);

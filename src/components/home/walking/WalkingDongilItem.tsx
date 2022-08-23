@@ -1,33 +1,28 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { TItemName } from '@lib/types/TItemName';
-import { TInterestRate } from '@lib/types/IInterestRate';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import { TDongilStatus } from '@lib/types/TDongilStatus';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { useState } from 'react';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { useAppDispatch } from '@store/app/hooks';
+import {
+  deleteClientSideWalkingDongilById,
+  deleteWalkingDongil,
+} from '@store/slices/walkingDongilsSlice';
+import { IDongil } from '@lib/types/IDongil';
 import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
 import DongilFailed from '@components/common/bottomSheets/commonSheet/DongilFailed';
 import DeleteCheck from '@components/common/bottomSheets/commonSheet/DeleteCheck';
 import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useState } from 'react';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  deleteClientSideWalkingDongilById,
-  deleteWalkingDongil,
-  selectWalkingDongils,
-} from '@store/slices/walkingDongilsSlice';
 
-interface WalkingDongilItemProps {
-  itemName: TItemName;
-  title: string;
-  id: number;
-  interestRate: TInterestRate;
-  challengeStatus: TDongilStatus;
-}
+interface WalkingDongilItemProps
+  extends Pick<
+    IDongil,
+    'itemName' | 'title' | 'id' | 'interestRate' | 'challengeStatus'
+  > {}
 
 function WalkingDongilItem({
   itemName,

@@ -8,6 +8,9 @@ import ReactModal from 'react-modal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
 import '../styles.css';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
 interface TertiaryModalProps {
   /**
@@ -15,22 +18,32 @@ interface TertiaryModalProps {
    * useModals hook에 의해 반환 됩니다.
    * */
   onSubmit: any;
+  shouldCloseOnOverlayClick: boolean;
 }
 
-function TertiaryModal({ onSubmit }: TertiaryModalProps) {
+function TertiaryModal({
+  onSubmit,
+  shouldCloseOnOverlayClick,
+}: TertiaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, 125);
+    }, OVERLAY_TRANSITION_TIME);
   }
 
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
-    onRequestClose: () => setIsOpen(false),
-    // shouldCloseOnOverlayClick: true,
-    closeTimeoutMS: 125,
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.tertiaryModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -117,8 +130,9 @@ function TertiaryModal({ onSubmit }: TertiaryModalProps) {
 
   const closeButton = (
     <>
-      {/* <CloseButtonOverlay onClick={() => setIsOpen(false)} /> */}
-      <CloseButtonOverlay />
+      <CloseButtonOverlay
+        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+      />
       <CloseButtonWrapper>
         <CloseButton onClick={handleSubmit} />
       </CloseButtonWrapper>
@@ -142,7 +156,7 @@ export default TertiaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(0);
+      transform: translateY(-10%);
     }
     to {
       transform: translateY(-50%);

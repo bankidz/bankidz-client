@@ -1,6 +1,6 @@
-type TVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+import { TReceiptModalVariant } from './TReceiptModalVariant';
 
-function getHeightByVariant(variant: TVariant) {
+function getHeightByVariant(variant: TReceiptModalVariant) {
   if (variant === 'contract' || variant === 'proposed') {
     return 537;
   } else if (variant === 'proposing') {
