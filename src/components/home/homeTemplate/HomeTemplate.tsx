@@ -7,25 +7,24 @@ import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import FixedBar from './FixedBar';
 import Background from '@components/home/homeTemplate/Background';
 import Content from './Content';
-import preventGoBack from '@lib/utils/preventGoBack';
-
-type TVariant = 'KidHome' | 'ParentHome';
+import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 
 interface HomeTemplateProps {
   children: React.ReactNode;
-  variant: TVariant;
+  variant: 'KidHome' | 'ParentHome';
 }
 
 function HomeTemplate({ children, variant }: HomeTemplateProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
   let level: TLevel;
+  const temp = useAppSelector(selectLevel)!;
   if (variant === 'KidHome') {
-    level = useAppSelector(selectLevel)!;
+    level = temp;
   } else if (variant === 'ParentHome') {
     level = selectedKid?.level!;
   }
   const colorByLevel = getColorByLevel(level!);
-  preventGoBack();
+  usePreventGoBack();
 
   return (
     <Wrapper>

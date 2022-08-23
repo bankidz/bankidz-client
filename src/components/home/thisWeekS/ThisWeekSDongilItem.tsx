@@ -22,9 +22,7 @@ function ThisWeekSDongilItem({
         <span>{title}</span>
       </div>
       <div className="achieved-stamp">
-        {progressList &&
-          progressList.slice(-1)[0] &&
-          progressList.slice(-1)[0].isAchieved && <AchievedStamp />}
+        {progressList?.slice(-1)[0]?.isAchieved && <AchievedStamp />}
       </div>
     </StyledLink>
   );

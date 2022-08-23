@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function preventGoBack() {
+function usePreventGoBack() {
   const setState = () => {
     history.pushState(null, '', location.href);
   };
@@ -13,4 +13,4 @@ function preventGoBack() {
   }, []);
 }
 
-export default preventGoBack;
+export default usePreventGoBack;
