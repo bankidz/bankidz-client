@@ -19,7 +19,13 @@ const useGlobalBottomSheet = () => {
     sheetProps,
     contentProps,
   }: IBottomSheet) => {
-    dispatch(openBottomSheet({ sheetContent, sheetProps, contentProps }));
+    dispatch(
+      openBottomSheet({
+        sheetContent,
+        sheetProps: { ...sheetProps, open: true },
+        contentProps,
+      }),
+    );
   };
 
   // 바텀시트 닫기
