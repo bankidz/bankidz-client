@@ -1,32 +1,61 @@
-import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
-import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 import GoBackHeader from '@components/common/buttons/GoBackHeader';
 import InputForm from '@components/common/InputForm';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
+import { useAppDispatch } from '@store/app/hooks';
+import { rejectProposedDongil } from '@store/slices/proposedDongilsSlice';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
 function Reject() {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [comment, setComment] = useState('');
   const [validateComment, checkValidateComment] = useValidation();
-  const [openFeedBack, onFeedBackOpen, onFeedBackDismiss] =
-    useBottomSheet(false);
-
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
+  const dispatch = useAppDispatch();
+  const axiosPrivate = useAxiosPrivate();
   //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
     checkValidateComment('comment', comment);
   }, [comment]);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // PATCH API fetch code goes here
     if (comment.length <= 15) {
-      onFeedBackOpen();
+      try {
+        await dispatch(
+          rejectProposedDongil({
+            axiosPrivate,
+            idToApprove: parseInt(id!),
+            comment: comment,
+          }),
+        );
+        openFeedBackCompletedSheet();
+      } catch (err) {
+        console.log(err);
+      }
+      openFeedBackCompletedSheet();
     }
+  };
+
+  // '피드백이 전송되었어요' 바텀시트 열기
+  const openFeedBackCompletedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'SheetCompleted',
+      sheetProps: { open: true },
+      contentProps: {
+        type: 'feedback',
+        onDismiss: () => {
+          setCloseBottomSheet();
+          navigate('/');
+        },
+      },
+    });
   };
 
   return (
@@ -52,14 +81,6 @@ function Reject() {
           <p>{validateComment.message}</p>
         </InputSection>
       </MarginTemplate>
-      <CommonSheet open={openFeedBack} onDismiss={onFeedBackDismiss}>
-        <SheetCompleted
-          type="feedback"
-          onDismiss={() => {
-            navigate('/');
-          }}
-        />
-      </CommonSheet>
     </Wrapper>
   );
 }
