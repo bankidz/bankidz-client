@@ -28,7 +28,7 @@ function NoFamily() {
           <Banki />
           <p>
             {isKid
-              ? '아직 함께하는 부모가 없어요'
+              ? '아직 함께하는 부모님이 없어요'
               : '아직 함께하는 자녀가 없어요'}
           </p>
           <OutlinedButton
@@ -47,22 +47,22 @@ const Wrapper = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   height: calc(var(--vh, 1vh) * 100);
+  overflow-y: hidden;
+
   .logo-wrapper {
     margin-top: 17.73px;
     width: 100.24px;
     height: 15.82px;
   }
   .header-text {
-    background: pink;
-    width: 308px;
-    /* height: 58px; */
-    height: 100px;
-    white-space: pre-wrap;
-    line-height: 16px;
-
-    ${({ theme }) => theme.typo.fixed.TabName_T_21_EB}
-    color: ${({ theme }) => theme.palette.greyScale.black};
     margin-top: 30.44px;
+    width: 308px;
+    height: 58px;
+    white-space: pre-line;
+
+    color: ${({ theme }) => theme.palette.greyScale.black};
+    ${({ theme }) => theme.typo.fixed.TabName_T_21_EB}
+    line-height: 150%;
   }
 `;
 
@@ -86,6 +86,6 @@ const Container = styled.div`
     text-align: center;
     ${({ theme }) => theme.typo.fixed.EmptyText_S_16_M};
     color: ${({ theme }) => theme.palette.greyScale.grey600};
-    width: 200px;
+    width: 210px;
   }
 `;

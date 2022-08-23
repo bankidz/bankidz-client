@@ -2,15 +2,14 @@ import styled from 'styled-components';
 import { useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
+import { selectFamily } from '@store/slices/familySlice';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import FixedBar from './FixedBar';
 import Background from '@components/home/homeTemplate/Background';
 import Content from './Content';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
-import { selectFamily } from '@store/slices/familySlice';
-import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
-import NoFamily from '../NoFamily';
+import NoFamily from './NoFamily';
 
 interface HomeTemplateProps {
   children: React.ReactNode;
@@ -31,6 +30,8 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
 
   const family = useAppSelector(selectFamily);
   const hasNoFamily = family === null || family?.length === 0;
+  console.log(family);
+  console.log(hasNoFamily);
 
   return (
     <Wrapper>
