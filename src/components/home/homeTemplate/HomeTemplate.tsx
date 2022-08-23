@@ -7,7 +7,7 @@ import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import FixedBar from './FixedBar';
 import Background from '@components/home/homeTemplate/Background';
 import Content from './Content';
-import preventGoBack from '@lib/utils/preventGoBack';
+import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 
 type TVariant = 'KidHome' | 'ParentHome';
 
@@ -26,7 +26,7 @@ function HomeTemplate({ children, variant }: HomeTemplateProps) {
     level = selectedKid?.level!;
   }
   const colorByLevel = getColorByLevel(level!);
-  preventGoBack();
+  usePreventGoBack();
 
   return (
     <Wrapper>
