@@ -34,7 +34,7 @@ import { TFetchStatus } from '@lib/types/TFetchStatus';
 import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
-import useIsFetched from './useIsFetched';
+import useIsFetched from '../../lib/hooks/useIsFetched';
 
 /*
  ** 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.

@@ -58,8 +58,9 @@ export const thisWeekSDongilsSlice = createSlice({
       })
       .addCase(fetchThisWeekSDongils.fulfilled, (state, action) => {
         state.thisWeekSDongilsStatus = 'succeeded';
-        state.thisWeekSDongils = [];
-        state.thisWeekSDongils[0] = action.payload.data;
+        state.thisWeekSDongils = state.thisWeekSDongils.concat(
+          action.payload.data,
+        );
       })
       .addCase(fetchThisWeekSDongils.rejected, (state, action) => {
         state.thisWeekSDongilsStatus = 'failed';
