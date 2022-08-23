@@ -11,7 +11,7 @@ const useGlobalBottomSheet = () => {
   const dispatch = useAppDispatch();
 
   // 바텀시트 열려있는 상태
-  const isOpen = sheetProps && true;
+  const isOpen = sheetProps?.open;
 
   // 바텀시트 열기
   const setOpenBottomSheet = ({
