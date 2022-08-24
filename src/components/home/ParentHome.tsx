@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import {
-  fetchKids,
-  selectKidsStatus,
-  selectSelectedKid,
-} from '@store/slices/kidsSlice';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
 import {
   fetchParentSummaries,
   selectParentSummariesStatus,
@@ -28,7 +24,6 @@ import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetC
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import MarginTemplate from '@components/layout/MarginTemplate';
 
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import ParentSummary from '@components/home/summary/ParentSummary';
@@ -45,52 +40,12 @@ import useIsFetched from '../../lib/hooks/useIsFetched';
 // 해당 함수에서 반환하는 JSX는 RTK slice 내부의 fetchStatus에 따라 적절한 값으로 변화합니다.
 
 function ParentHome() {
-  const kidsStatus = useAppSelector(selectKidsStatus);
   const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
-
-  useEffect(() => {
-    async function hydrate() {
-      try {
-        let response;
-        // GET: 연결된 자녀 목록 조회
-        if (kidsStatus === 'idle') {
-          response = await dispatch(fetchKids({ axiosPrivate })).unwrap();
-        }
-        // GET: 첫번째 자녀의 Summary 데이터 조회
-        parentSummariesStatus === 'idle' &&
-          (await dispatch(
-            fetchParentSummaries({
-              axiosPrivate,
-              kidId: response.data[0].kidId,
-            }),
-          ).unwrap());
-        // GET: 첫번째 자녀의 제안받은 돈길 조회
-        proposedDongilsStatus === 'idle' &&
-          (await dispatch(
-            fetchProposedDongils({
-              axiosPrivate,
-              kidId: response.data[0].kidId,
-            }),
-          ).unwrap());
-        // GET: 첫번째 자녀의 금주의 돈길 조희
-        thisWeekSDongilsStatus === 'idle' &&
-          (await dispatch(
-            fetchThisWeekSDongils({
-              axiosPrivate,
-              kidId: response.data[0].kidId,
-            }),
-          ).unwrap());
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    hydrate();
-  }, []);
 
   // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
   const [idToApprove, setIdToApprove] = useState<number | null>(null);
@@ -192,15 +147,13 @@ function ParentHome() {
 
   return (
     <>
-      <MarginTemplate>
-        <ParentSummary />
-        <ProposedDongilSection
-          onApproveCheckOpen={onApproveCheckOpen}
-          setIdToApprove={setIdToApprove}
-        />
-        <ThisWeekSDongilSection />
-        <LargeSpacer />
-      </MarginTemplate>
+      <ParentSummary />
+      <ProposedDongilSection
+        onApproveCheckOpen={onApproveCheckOpen}
+        setIdToApprove={setIdToApprove}
+      />
+      <ThisWeekSDongilSection />
+      <LargeSpacer />
       <Modals />
 
       {/* 자녀의 돈길을 수락할까요? */}

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import FixedBar from './FixedBar';
 import Background from '@components/home/homeTemplate/Background';
-import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import ContentWrapper from './ContentWrapper';
 
 interface HomeTemplateProps {
@@ -9,8 +8,6 @@ interface HomeTemplateProps {
 }
 
 function HomeTemplate({ children }: HomeTemplateProps) {
-  usePreventGoBack();
-
   return (
     <Wrapper>
       <FixedBar />

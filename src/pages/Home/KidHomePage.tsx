@@ -9,6 +9,13 @@ import {
   selectFamilyStatus,
 } from '@store/slices/familySlice';
 import { useEffect } from 'react';
+import usePreventGoBack from '@lib/hooks/usePreventGoBack';
+
+// 자녀홈의 계층 구조는 다음과 같습니다.
+// 1. KidHomePage: 연결된 가족 fetch
+// 2. 연결된 가족이 없는 경우 - NoFamily
+// 2. 연결된 가족이 있는 경우 - HomeTemplate: FixedBar, Background 랜더링
+// 3. ParentHome: FixedBar, Background 제외 UI 요소 랜더링 및 관련 데이터 fetch
 
 function KidHomePage() {
   const familyStatus = useAppSelector(selectFamilyStatus);
@@ -27,7 +34,9 @@ function KidHomePage() {
   }, []);
 
   const family = useAppSelector(selectFamily);
-  const hasNoFamily = family === null || family?.length === 0;
+  const hasNoFamily = family?.length === 0 && familyStatus === 'succeeded';
+
+  usePreventGoBack();
 
   return (
     <>
