@@ -46,8 +46,8 @@ const CommonSheetContent: any = {
 };
 
 function GlobalBottomSheet() {
-  const state = useAppSelector(selectBottomSheetState);
-  const { sheetContent, sheetProps, contentProps } = state || {};
+  const bottomSheetState = useAppSelector(selectBottomSheetState);
+  const { sheetContent, sheetProps, contentProps } = bottomSheetState || {};
   const { setCloseBottomSheet } = useGlobalBottomSheet();
 
   document.documentElement.style.setProperty(
@@ -56,7 +56,7 @@ function GlobalBottomSheet() {
   );
 
   const renderComponent = () => {
-    if (!state) {
+    if (!bottomSheetState) {
       return null;
     } else {
       const SheetContentComponent = CommonSheetContent[sheetContent!];
@@ -71,13 +71,6 @@ function GlobalBottomSheet() {
             <SheetContent>
               <SheetContentComponent {...contentProps} />
             </SheetContent>
-            {/* {sheetType === 'contract' && (
-              <SheetButton
-                onClickNext={sheetProps!.onClickNext!}
-                disabledNext={sheetProps!.disabledNext!}
-                label={sheetProps!.label!}
-              />
-            )} */}
           </div>
         </StyledBottomSheet>
       );
