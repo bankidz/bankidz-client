@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import ContractSheet from '@components/common/bottomSheets/ContractSheet';
-import SelectMoney from '@components/common/bottomSheets/sheetContents/SelectMoney';
+import SelectMoney from '@components/common/bottomSheets/contractSheet/SelectMoney';
 import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
 import { useNavigate } from 'react-router-dom';
@@ -10,14 +9,13 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchTitle,
   dispatchTotalPrice,
-  selectInProcess,
   selectStep3InitData,
 } from '@store/slices/createChallengeSlice';
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
-import { useSelector } from 'react-redux';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 
 type TStep3Form = {
   contractName: string;

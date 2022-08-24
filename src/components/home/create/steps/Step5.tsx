@@ -1,5 +1,5 @@
-import ContractSheet from '@components/common/bottomSheets/ContractSheet';
-import Signature from '@components/common/bottomSheets/sheetContents/Signature';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
+import Signature from '@components/common/bottomSheets/contractSheet/Signature';
 import Modals, { modals } from '@components/common/modals/Modals';
 import { axiosPublic } from '@lib/api/axios';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
@@ -60,23 +60,17 @@ function Step5({ currentStep }: { currentStep: number }) {
   // 다음으로 버튼 클릭
   const onClickNextButton = () => {
     //왜 안돼...
-    /* const uploadS3 = async (sign: any) => {
-      const imageFile = dataURItoBlob(sign);
+    const uploadS3 = async (sign: any) => {
+      const file = dataURLtoFile(sign, preSignedUrl.imageName);
+      let formData = new FormData();
+      formData.append('file', file);
 
-      console.log(imageFile);
-      const response = await axios.put(
-        preSignedUrl.preSignedUrl,
-        { imageFile },
-        {
-          headers: {
-            'Content-Type': imageFile.type,
-            'x-amz-acl': 'public-read',
-          },
-        },
-      );
+      const response = await axios.put(preSignedUrl.preSignedUrl, file, {
+        headers: { 'Content-Type': 'image/png' },
+      });
       console.log(response);
-    }; */
-
+    };
+    uploadS3(sign);
     dispatch(postChallenge(axiosPrivate));
   };
 
@@ -101,8 +95,8 @@ function Step5({ currentStep }: { currentStep: number }) {
         weekPrice,
         weeks,
         isKid: true,
-        sign: sign,
         isSubmit: true,
+        fileName: preSignedUrl.imageName,
       });
     } else if (status === 'failed') {
       console.log('err');

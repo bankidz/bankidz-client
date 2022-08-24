@@ -27,8 +27,9 @@ interface ReceiptModalProps
       | 'totalPrice'
       | 'weekPrice'
       | 'weeks'
+      | 'fileName'
     >,
-    Pick<Partial<IDongil>, 'comment' | 'fileName'> {
+    Pick<Partial<IDongil>, 'comment'> {
   /**
    * 용도를 선택합니다.
    * contract: 자녀 - 새로 돈길 계약하기 / proposing: 자녀 - 대기중인 돈길 (제안중)
@@ -141,6 +142,7 @@ function ReceiptModal({
           interestRate={interestRate}
           weeks={weeks}
           createdAt={createdAt}
+          fileName={fileName}
         />
         {variant === 'rejected' && <CommentContent comment={comment!} />}
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />

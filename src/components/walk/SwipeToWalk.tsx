@@ -47,9 +47,7 @@ function SwipeToWalk({
     } else {
       setValue(id, 100);
       try {
-        // 데모데이 시연용
         await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
-        // dispatch(dispatchSetPatched({ id }));
         setIsAchieved(id, true);
       } catch (err) {
         console.error(err);

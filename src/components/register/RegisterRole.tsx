@@ -5,53 +5,50 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import CommonSheet from '../common/bottomSheets/CommonSheet';
-import SelectProfile from '../common/bottomSheets/sheetContents/SelectProfile';
-import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
   const birthday = useAppSelector(selectBirthday);
-  const [open, onOpen, onDismiss] = useBottomSheet(false);
-  const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
 
   // 아빠
   function handleDadButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(false);
       setIsFemale(false);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
   // 엄마
   function handleMomButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(false);
       setIsFemale(true);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
   // 아들
   function handleSonButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(true);
       setIsFemale(false);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
   // 딸
   function handleDaughterButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(true);
       setIsFemale(true);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
 
@@ -89,7 +86,7 @@ function RegisterRole() {
             isFemale,
           }),
         ).unwrap();
-        onDismiss();
+        setCloseBottomSheet();
         handleModalOpen();
       } catch (error: any) {
         console.error('error in handle submit:', error);
@@ -98,6 +95,20 @@ function RegisterRole() {
       }
     }
   }
+
+  const openSelectProfileSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'SelectProfile',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        isKid: isKid,
+        isFemale: isFemale,
+        onClick: handleSubmit,
+      },
+    });
+  };
 
   return (
     <Wrapper>
@@ -132,15 +143,6 @@ function RegisterRole() {
           isSelected={isKid === true && isFemale === true}
         />
       </RoleButtonWrapper>
-
-      <div ref={inputDivRef} />
-      <CommonSheet open={open} onDismiss={onDismiss} sheetRef={sheetDivRef}>
-        <SelectProfile
-          isKid={isKid}
-          isFemale={isFemale}
-          onClick={handleSubmit}
-        />
-      </CommonSheet>
       <Modals />
     </Wrapper>
   );

@@ -3,11 +3,11 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import ContractSheet from './ContractSheet';
 // import SelectInterest from './sheetContent/SelectInterest';
-import SelectMoney from './sheetContents/SelectMoney';
+import SelectMoney from './SelectMoney';
 import SelectInterestButton from '@components/home/create/SelectInterestButton';
-import SelectInterest from './sheetContents/SelectInterest';
-import Signature from './sheetContents/Signature';
-import RangeInput from './sheetContents/RangeInput';
+import SelectInterest from './SelectInterest';
+import Signature from './Signature';
+import RangeInput from './RangeInput';
 
 export default {
   title: 'common/bottomSheets/ContractSheet',

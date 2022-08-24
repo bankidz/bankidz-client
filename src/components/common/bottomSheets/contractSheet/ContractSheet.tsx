@@ -1,27 +1,45 @@
+import SheetButton from '@components/common/buttons/SheetButton';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
-import SheetButton from '../buttons/SheetButton';
+import RangeInput from './RangeInput';
+import SelectInterest from './SelectInterest';
+import SelectMoney from './SelectMoney';
+import Signature from './Signature';
 
 interface ContractSheetProps {
   children: JSX.Element;
   open: boolean;
   onDismiss?: () => void;
   label: string;
+
   onClickNext: () => void;
   disabledNext: boolean;
-  blocking?: boolean;
   sheetRef?: React.RefObject<HTMLDivElement>;
 }
 
+export const CONTRACT_SHEET_CONTENTS = {
+  RangeInput: 'RangeInput',
+  SelectInterest: 'SelectInterest',
+  SelectMoney: 'SelectMoney',
+  Signature: 'Signature',
+} as const;
+
+const ContractSheetContent: any = {
+  [CONTRACT_SHEET_CONTENTS.RangeInput]: RangeInput,
+  [CONTRACT_SHEET_CONTENTS.SelectInterest]: SelectInterest,
+  [CONTRACT_SHEET_CONTENTS.SelectMoney]: SelectMoney,
+  [CONTRACT_SHEET_CONTENTS.Signature]: Signature,
+};
+
 function ContractSheet({
   children,
+  sheetRef,
   open,
   onDismiss,
+
   onClickNext,
   label,
   disabledNext = true,
-  blocking = false,
-  sheetRef,
 }: ContractSheetProps) {
   document.documentElement.style.setProperty('--rsbs-backdrop-bg', `none`);
   document.documentElement.style.setProperty('--rsbs-content-opacity', `0`);
@@ -31,7 +49,7 @@ function ContractSheet({
       open={open}
       onDismiss={onDismiss}
       snapPoints={({ minHeight }) => minHeight}
-      blocking={blocking}
+      blocking={false}
     >
       <div ref={sheetRef}>
         <SheetContainer>{children}</SheetContainer>
@@ -70,16 +88,4 @@ const StyledBottomSheet = styled(BottomSheet)`
 
 const SheetContainer = styled.div`
   margin: 0px 18px 24px 18px;
-`;
-
-const NextButton = styled.button`
-  width: 100%;
-  height: 48px;
-  background-color: ${({ theme }) => theme.palette.main.yellow300};
-  &:disabled {
-    background-color: ${({ theme }) => theme.palette.greyScale.grey300};
-    cursor: default;
-  }
-  ${({ theme }) => theme.typo.button.Primary_T_15_EB}
-  color: white;
 `;
