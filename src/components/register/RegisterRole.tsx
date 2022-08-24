@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
