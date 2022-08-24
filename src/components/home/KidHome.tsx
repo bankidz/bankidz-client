@@ -21,13 +21,9 @@ import { fetchFamily, selectFamilyStatus } from '@store/slices/familySlice';
 
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
 import KidSummary from '@components/home/summary/KidSummary';
 import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
 import PendingDongilSection from '@components/home/pending/PendingDongilSection';
-import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
-import DeleteCheck from '@components/common/bottomSheets/commonSheet/DeleteCheck';
-import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 // 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
@@ -133,21 +129,6 @@ function KidHome() {
         <LargeSpacer />
       </MarginTemplate>
       <Modals />
-
-      {/* 정말로 삭제할거예요? */}
-      {/* <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
-        <DeleteCheck
-          onClickDelete={handleDeleteButtonClick}
-          onDismiss={onDeleteCheckDismiss}
-        />
-      </CommonSheet> */}
-      {/* 삭제되었어요 */}
-      {/* <CommonSheet
-        open={openDeleteCompleted}
-        onDismiss={onDeleteCompletedDismiss}
-      >
-        <SheetCompleted type="delete" onDismiss={onDeleteCompletedDismiss} />
-      </CommonSheet> */}
     </>
   );
 }

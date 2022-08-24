@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useState } from 'react';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
@@ -13,10 +12,7 @@ import {
   deleteWalkingDongil,
 } from '@store/slices/walkingDongilsSlice';
 import { IDongil } from '@lib/types/IDongil';
-import CommonSheet from '@components/common/bottomSheets/commonSheet/CommonSheet';
-import DongilFailed from '@components/common/bottomSheets/commonSheet/DongilFailed';
-import DeleteCheck from '@components/common/bottomSheets/commonSheet/DeleteCheck';
-import SheetCompleted from '@components/common/bottomSheets/commonSheet/SheetCompleted';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface WalkingDongilItemProps
   extends Pick<
@@ -33,13 +29,8 @@ function WalkingDongilItem({
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();
   const to = `/detail/${id}`;
-
-  const [openDongilFailed, onOpenDongilFailed, onDismissDongilFailed] =
-    useBottomSheet(false);
-  const [openDeleteCheck, onOpenDeleteCheck, onDismissDeleteCheck] =
-    useBottomSheet(false);
-  const [openSheetComplete, onOpenSheetComplete, onDismissSheetComplete] =
-    useBottomSheet(false);
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
 
   const axiosPrivate = useAxiosPrivate();
   const [deleteWalkingDongilStatus, setDeleteWalingDongilStatus] =
@@ -59,8 +50,8 @@ function WalkingDongilItem({
           }),
         ).unwrap();
         dispatch(deleteClientSideWalkingDongilById(id));
-        onDismissDeleteCheck();
-        onOpenSheetComplete();
+        // 삭제되었어요 바텀시트 열기
+        openDeleteCompletedSheet();
       } catch (error: any) {
         console.log(error);
       } finally {
@@ -68,11 +59,55 @@ function WalkingDongilItem({
       }
     }
   }
+  // 1. '돈길 걷기에 실패했어요' 바텀시트 열기
+  const openDongilFailedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'DongilFailed',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        onDeleteButtonClick: openDeleteCheckSheet,
+        onCancelButtonClick: () => {
+          setCloseBottomSheet();
+          navigate(to);
+        },
+      },
+    });
+  };
+
+  // 2. '정말로 삭제할까요?' 바텀시트 열기
+  const openDeleteCheckSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'DeleteCheck',
+        sheetProps: { open: true },
+        contentProps: {
+          onClickDelete: handleDeleteButtonClick,
+          onDismiss: setCloseBottomSheet,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  // 3. '삭제되었어요' 바텀시트 열기
+  const openDeleteCompletedSheet = () => {
+    const openSheet = () => {
+      setOpenBottomSheet({
+        sheetContent: 'SheetCompleted',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'delete',
+        },
+      });
+    };
+    openSheetBySequence(openSheet);
+  };
 
   return (
     <>
       {challengeStatus === 'FAILED' ? (
-        <StyledDiv onClick={onOpenDongilFailed}>
+        <StyledDiv onClick={openDongilFailedSheet}>
           <div className="content-wrapper">
             <div className="illust">{renderItemIllust(itemName)}</div>
             <span>{title}</span>
@@ -91,32 +126,6 @@ function WalkingDongilItem({
           <Arrow />
         </StyledLink>
       )}
-
-      {/* 돈길 걷기에 실패했어요 */}
-      <CommonSheet open={openDongilFailed} onDismiss={onDismissDongilFailed}>
-        <DongilFailed
-          onDeleteButtonClick={() => {
-            onDismissDongilFailed();
-            onOpenDeleteCheck();
-          }}
-          onCancelButtonClick={() => {
-            navigate(to);
-          }}
-          title={title}
-          interestRate={interestRate}
-        />
-      </CommonSheet>
-      {/* 정말로 삭제할거예요? */}
-      <CommonSheet open={openDeleteCheck} onDismiss={onDismissDeleteCheck}>
-        <DeleteCheck
-          onClickDelete={handleDeleteButtonClick}
-          onDismiss={onDismissDeleteCheck}
-        />
-      </CommonSheet>
-      {/* 삭제되었어요! */}
-      <CommonSheet open={openSheetComplete} onDismiss={onDismissSheetComplete}>
-        <SheetCompleted type="delete" onDismiss={onDismissSheetComplete} />
-      </CommonSheet>
     </>
   );
 }
