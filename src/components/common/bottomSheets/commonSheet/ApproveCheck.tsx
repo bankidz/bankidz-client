@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { ReactComponent as Check } from '@assets/icons/approveCheck.svg';
 import Button from '@components/common/buttons/Button';
 
-interface DeleteCheckProps {
+interface ApproveCheckProps {
   onApproveButtonClick: () => void;
   onDismiss: () => void;
 }
 
-function ApproveCheck({ onApproveButtonClick, onDismiss }: DeleteCheckProps) {
+function ApproveCheck({ onApproveButtonClick, onDismiss }: ApproveCheckProps) {
   return (
     <Wrapper>
       <Container>

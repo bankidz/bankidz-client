@@ -1,7 +1,7 @@
 import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { RootState, store } from '../app/store';
 
 interface IProposedDongil {
@@ -48,6 +48,23 @@ export const approveProposedDongil = createAsyncThunk(
   },
 );
 
+// PATCH: 제안받은 돈길 거절
+export const rejectProposedDongil = createAsyncThunk(
+  'proposedDongils/reject',
+  async (thunkPayload: {
+    axiosPrivate: AxiosInstance;
+    idToApprove: number;
+    comment: string;
+  }) => {
+    const { axiosPrivate, idToApprove, comment } = thunkPayload;
+    const response = await axiosPrivate.patch(`/challenge/${idToApprove}`, {
+      accept: false,
+      comment,
+    });
+    return response.data;
+  },
+);
+
 export const proposedDongilsSlice = createSlice({
   name: 'proposedDongils',
   initialState,
@@ -68,6 +85,15 @@ export const proposedDongilsSlice = createSlice({
         console.error(action.error);
       })
       .addCase(approveProposedDongil.fulfilled, (state, action: any) => {
+        const approvedId = action.payload.data.id;
+        state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
+          proposedDongil.challengeList = proposedDongil.challengeList.filter(
+            (challenge) => challenge.id !== approvedId,
+          );
+          return proposedDongil;
+        });
+      })
+      .addCase(rejectProposedDongil.fulfilled, (state, action: any) => {
         const approvedId = action.payload.data.id;
         state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
           proposedDongil.challengeList = proposedDongil.challengeList.filter(

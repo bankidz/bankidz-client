@@ -19,13 +19,10 @@ import {
 
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
-import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
 import KidSummary from '@components/home/summary/KidSummary';
 import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
 import PendingDongilSection from '@components/home/pending/PendingDongilSection';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 // 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
 // 이후에 홈 페이지 재 진입 시는 해당 데이터를 fetch 하지 않습니다.
@@ -65,10 +62,8 @@ function KidHome() {
     pendingDongils !== null &&
     pendingDongils.length !== 0 &&
     deletePendingDongilStatus === 'idle';
-  const [openDeleteCheck, onDeleteCheckOpen, onDeleteCheckDismiss] =
-    useBottomSheet(false);
-  const [openDeleteCompleted, onDeleteCompletedOpen, onDeleteCompletedDismiss] =
-    useBottomSheet(false);
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
 
   async function handleDeleteButtonClick() {
     if (canDeletePendingDongil) {
@@ -80,42 +75,53 @@ function KidHome() {
             id: idToDelete,
           }),
         ).unwrap();
-        onDeleteCheckOpen();
+        openDeleteCheckSheet();
       } catch (error: any) {
         console.log(error);
       } finally {
         setDeletePendingDongilStatus('idle');
       }
     }
-    onDeleteCheckDismiss();
-    onDeleteCompletedOpen();
+    openSheetBySequence(openDeleteCompletedSheet);
   }
+
+  // 1. '정말로 삭제할거에요?' 바텀시트 열기
+  const openDeleteCheckSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'DeleteCheck',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        onClickDelete: handleDeleteButtonClick,
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  };
+
+  // 2. '삭제되었어요' 바텀시트 열기
+  const openDeleteCompletedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'SheetCompleted',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'delete',
+      },
+    });
+  };
 
   return (
     <>
       <KidSummary />
       <WalkingDongilSection />
       <PendingDongilSection
-        onDeleteCheckOpen={onDeleteCheckOpen}
+        onDeleteCheckOpen={openDeleteCheckSheet}
         setIdToDelete={setIdToDelete}
       />
       <LargeSpacer />
       <Modals />
-
-      {/* 정말로 삭제할거예요? */}
-      <CommonSheet open={openDeleteCheck} onDismiss={onDeleteCheckDismiss}>
-        <DeleteCheck
-          onClickDelete={handleDeleteButtonClick}
-          onDismiss={onDeleteCheckDismiss}
-        />
-      </CommonSheet>
-      {/* 삭제되었어요 */}
-      <CommonSheet
-        open={openDeleteCompleted}
-        onDismiss={onDeleteCompletedDismiss}
-      >
-        <SheetCompleted type="delete" onDismiss={onDeleteCompletedDismiss} />
-      </CommonSheet>
     </>
   );
 }

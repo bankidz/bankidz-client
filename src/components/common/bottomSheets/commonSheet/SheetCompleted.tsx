@@ -2,14 +2,16 @@ import styled from 'styled-components';
 import { ReactComponent as Complete } from '@assets/icons/complete.svg';
 import { ReactComponent as Feedback } from '@assets/icons/feedback.svg';
 import Button from '@components/common/buttons/Button';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface SheetCompleteProps {
   type: 'delete' | 'cancel' | 'giveUp' | 'feedback' | 'approve';
   title?: string;
-  onDismiss: () => void;
+  onDismiss?: () => void;
 }
 
 function SheetCompleted({ type, title, onDismiss }: SheetCompleteProps) {
+  const { setCloseBottomSheet } = useGlobalBottomSheet();
   return (
     // TODO: fragment
     <Wrapper>
@@ -26,7 +28,11 @@ function SheetCompleted({ type, title, onDismiss }: SheetCompleteProps) {
         {type === 'feedback' && <p>자녀에게 피드백이 전송되었어요</p>}
         {type === 'approve' && <p>자녀의 돈길이 수락되었어요</p>}
       </Container>
-      <Button label="확인" property="default" onClick={onDismiss} />
+      <Button
+        label="확인"
+        property="default"
+        onClick={onDismiss ? onDismiss : setCloseBottomSheet}
+      />
     </Wrapper>
   );
 }

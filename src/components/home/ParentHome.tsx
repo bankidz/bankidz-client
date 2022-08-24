@@ -19,10 +19,6 @@ import {
 } from '@store/slices/proposedDongilsSlice';
 
 import Modals from '@components/common/modals/Modals';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import ApproveCheck from '@components/common/bottomSheets/sheetContents/ApproveCheck';
 import LargeSpacer from '@components/layout/LargeSpacer';
 
 import { TFetchStatus } from '@lib/types/TFetchStatus';
@@ -30,6 +26,7 @@ import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
 import useIsFetched from '../../lib/hooks/useIsFetched';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 // 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
 // 그 직후 자녀 목록의 첫번째 자녀의 kidId를 통해 해당 자녀에 대한
@@ -49,13 +46,13 @@ function ParentHome() {
 
   // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
   const [idToApprove, setIdToApprove] = useState<number | null>(null);
-  const [openApproveCheck, onApproveCheckOpen, onApproveCheckDismiss] =
-    useBottomSheet(false);
-  const [
-    openApproveCompleted,
-    onApproveCompletedOpen,
-    onApproveCompletedDismiss,
-  ] = useBottomSheet(false);
+
+  const {
+    isOpen,
+    setOpenBottomSheet,
+    setCloseBottomSheet,
+    openSheetBySequence,
+  } = useGlobalBottomSheet();
   const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
     useState<TFetchStatus>('idle');
   const canApproveProposedDongil =
@@ -88,8 +85,7 @@ function ParentHome() {
         const approvedDongil = getApprovedDongil(idToApprove)!;
         dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
 
-        onApproveCheckDismiss();
-        onApproveCompletedOpen();
+        openApproveCompletedSheet();
       } catch (error) {
         console.log(error);
       } finally {
@@ -145,31 +141,42 @@ function ParentHome() {
     hydrate();
   }, [selectedKid]);
 
+  // 수락하기 바텀시트 열기
+  const openApproveCheckSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'ApproveCheck',
+      sheetProps: { open: true },
+      contentProps: {
+        onApproveButtonClick: handleApproveButtonClick,
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  };
+
+  // 수락 완료 바텀시트 열기
+  const openApproveCompletedSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'SheetCompleted',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'approve',
+          onDismiss: setCloseBottomSheet,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
   return (
     <>
       <ParentSummary />
       <ProposedDongilSection
-        onApproveCheckOpen={onApproveCheckOpen}
+        onApproveCheckOpen={openApproveCheckSheet}
         setIdToApprove={setIdToApprove}
       />
       <ThisWeekSDongilSection />
       <LargeSpacer />
       <Modals />
-
-      {/* 자녀의 돈길을 수락할까요? */}
-      <CommonSheet open={openApproveCheck} onDismiss={onApproveCheckDismiss}>
-        <ApproveCheck
-          onApproveButtonClick={handleApproveButtonClick}
-          onDismiss={onApproveCheckDismiss}
-        />
-      </CommonSheet>
-      {/* 자녀의 돈길이 수락되었어요 */}
-      <CommonSheet
-        open={openApproveCompleted}
-        onDismiss={onApproveCompletedDismiss}
-      >
-        <SheetCompleted type="approve" onDismiss={onApproveCompletedDismiss} />
-      </CommonSheet>
     </>
   );
 }
