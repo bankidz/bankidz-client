@@ -1,18 +1,18 @@
 import LevelBadge from '@components/common/badges/LevelBadge';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { TLevel } from '@lib/types/TLevel';
+import useLevel from '@lib/hooks/useLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { selectHasMultipleKids } from '@store/slices/kidsSlice';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface ContentProps {
-  level: TLevel;
   children: React.ReactNode;
 }
 
-function Content({ level, children }: ContentProps) {
+function ContentWrapper({ children }: ContentProps) {
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
+  const level = useLevel();
 
   let headerText;
   const isKid = useAppSelector(selectIsKid);
@@ -33,13 +33,13 @@ function Content({ level, children }: ContentProps) {
             <LevelBadge level={level!} />
           </LevelBadgeWrapper>
         </FlexContainer>
+        {children}
       </MarginTemplate>
-      {children}
     </Wrapper>
   );
 }
 
-export default Content;
+export default ContentWrapper;
 
 const Wrapper = styled.div`
   width: 100%;

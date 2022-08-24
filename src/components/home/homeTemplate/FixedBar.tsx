@@ -7,12 +7,13 @@ import styled from 'styled-components';
 import KidList from './KidList';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { theme } from '@lib/styles/theme';
+import useLevel from '@lib/hooks/useLevel';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
-interface FixedBarProps {
-  colorByLevel: string;
-}
+function FixedBar() {
+  const level = useLevel();
+  const colorByLevel = getColorByLevel(level);
 
-function FixedBar({ colorByLevel }: FixedBarProps) {
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
   const kidsStatus = useAppSelector(selectKidsStatus);
   let kidsContent;

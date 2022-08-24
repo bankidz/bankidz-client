@@ -4,7 +4,7 @@ import ParentHome from '@components/home/ParentHome';
 function ParentHomePage() {
   return (
     <>
-      <HomeTemplate variant="ParentHome">
+      <HomeTemplate>
         <ParentHome />
       </HomeTemplate>
     </>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import MarginTemplate from '@components/layout/MarginTemplate';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import {
   fetchKidSummary,
@@ -17,7 +16,6 @@ import {
   selectPendingDongils,
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilsSlice';
-import { fetchFamily, selectFamilyStatus } from '@store/slices/familySlice';
 
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
@@ -39,7 +37,6 @@ function KidHome() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
-  const familyStatus = useAppSelector(selectFamilyStatus);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
@@ -52,8 +49,6 @@ function KidHome() {
           (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
         pendingDongilsStatus === 'idle' &&
           (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
-        familyStatus === 'idle' &&
-          (await dispatch(fetchFamily({ axiosPrivate })).unwrap());
       } catch (error: any) {
         console.log(error);
       }
@@ -98,15 +93,13 @@ function KidHome() {
 
   return (
     <>
-      <MarginTemplate>
-        <KidSummary />
-        <WalkingDongilSection />
-        <PendingDongilSection
-          onDeleteCheckOpen={onDeleteCheckOpen}
-          setIdToDelete={setIdToDelete}
-        />
-        <LargeSpacer />
-      </MarginTemplate>
+      <KidSummary />
+      <WalkingDongilSection />
+      <PendingDongilSection
+        onDeleteCheckOpen={onDeleteCheckOpen}
+        setIdToDelete={setIdToDelete}
+      />
+      <LargeSpacer />
       <Modals />
 
       {/* 정말로 삭제할거예요? */}
