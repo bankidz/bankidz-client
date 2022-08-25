@@ -44,9 +44,7 @@ function Mypage() {
   const family = useAppSelector(selectFamily);
   const user = useAppSelector(selectUserOverView);
 
-  // 성우의 제안: React hook은 조건에 따라 호출할 수 없습니다.
-  // 빌드 실패를 해결하기 위해 주석처리합니다.
-  // const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
+  const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -64,8 +62,8 @@ function Mypage() {
     <Wrapper>
       <Header>마이페이지</Header>
       <MarginTemplate>
-        {/* <OverView user={user} overView={kidOverView} /> */}
-        {/* {isKid && kidOverView ? (
+        <OverView user={user} overView={kidOverView} />
+        {isKid && kidOverView ? (
           <Section>
             <h2>MY 레벨</h2>
             <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
@@ -75,7 +73,7 @@ function Mypage() {
             <h2>자녀기록</h2>
             <KidsRecordList kidsRecordData={DemoKidsRecordData} />
           </Section>
-        )} */}
+        )}
         <Section>
           <h2>가족 관리</h2>
           {family ? <FamilyList family={family} /> : ''}

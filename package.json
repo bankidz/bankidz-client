@@ -22,7 +22,6 @@
     "@types/storybook-react-router": "^1.0.1",
     "axios": "^0.27.2",
     "dayjs": "^1.11.5",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "moment": "^2.29.4",
     "polished": "^4.2.2",
     "rc-slider": "^10.0.1",
