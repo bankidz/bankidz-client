@@ -53,7 +53,7 @@ function ProposedDongilSection({
   }
   return (
     <Wrapper>
-      <h1>제안받은 돈길</h1>
+      {proposedDongilsStatus !== 'idle' && <h1>제안받은 돈길</h1>}
       {content}
     </Wrapper>
   );

@@ -41,7 +41,7 @@ function ThisWeekSDongilSection() {
 
   return (
     <Wrapper>
-      <h1>금주의 돈길</h1>
+      {thisWeekSDongilsStatus !== 'idle' && <h1>금주의 돈길</h1>}
       {content}
     </Wrapper>
   );
