@@ -8,8 +8,8 @@ import styled from 'styled-components';
 
 interface ProposedDongilItemProps {
   proposedDongil: IDongil;
-  onApproveCheckOpen?: () => void;
-  setIdToApprove?: Dispatch<SetStateAction<number | null>>;
+  onApproveCheckOpen: () => void;
+  setIdToApprove: Dispatch<SetStateAction<number>>;
 }
 
 function ProposedDongilItem({
@@ -28,7 +28,6 @@ function ProposedDongilItem({
     totalPrice,
     weekPrice,
     weeks,
-    fileName,
   } = proposedDongil;
   const navigate = useNavigate();
   function openProposedReceiptModal() {

@@ -43,6 +43,7 @@ function Mypage() {
   const familyStatus = useAppSelector(selectFamilyStatus);
   const family = useAppSelector(selectFamily);
   const user = useAppSelector(selectUserOverView);
+
   const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
   useEffect(() => {
     const fetch = async () => {
@@ -70,10 +71,6 @@ function Mypage() {
         ) : (
           <Section smallGap={true}>
             <h2>자녀기록</h2>
-            {/* TODO : 데모데이 시연용 수정 
-            {kids.map((kids) => (
-              <></>
-            ))} */}
             <KidsRecordList kidsRecordData={DemoKidsRecordData} />
           </Section>
         )}

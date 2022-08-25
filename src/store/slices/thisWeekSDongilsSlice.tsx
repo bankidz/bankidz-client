@@ -13,7 +13,7 @@ interface IThisWeekSDongil {
 
 interface IThisWeekSDongilsState {
   thisWeekSDongils: IThisWeekSDongil[];
-  thisWeekSDongilsStatus?: TFetchStatus;
+  thisWeekSDongilsStatus: TFetchStatus;
 }
 
 const initialState: IThisWeekSDongilsState = {

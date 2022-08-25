@@ -12,6 +12,7 @@ import { selectSelectedKid } from '@store/slices/kidsSlice';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
+
   const level = isKid
     ? useAppSelector(selectLevel)
     : useAppSelector(selectSelectedKid)?.level!;

@@ -1,6 +1,6 @@
 {
   "extends": ["plugin:prettier/recommended"],
-  "plugins": ["react", "prettier", "react-hooks"],
+  "plugins": ["react", "prettier"],
   "parserOptions": {
     "ecmaVersion": 6,
     "ecmaFeatures": {
@@ -15,8 +15,7 @@
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "eqeqeq": "error",
-    "react-hooks/rules-of-hooks": "error"
+    "eqeqeq": "error"
   },
   "ignorePatterns": ["*.config.js"]
 }

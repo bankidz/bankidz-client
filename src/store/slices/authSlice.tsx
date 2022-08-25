@@ -18,21 +18,16 @@ interface IAuthState {
   auth: IAuth;
 }
 
-// https://api.bankidz.com
-// 아빠(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzM3LCJzdWIiOiI1IiwiZXhwIjoxNjYxMzMzOTM3LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.lQX8aymHJXp8wXcgcix9x32ZQCwjP2arI3WEPvLLRRk
-// 엄마(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzY1LCJzdWIiOiIyIiwiZXhwIjoxNjYxMzMzOTY1LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.f2B_gezGmD6uKh2Js3Y_blrLJGOFyWXzqva5MAXmbqc
-// 아들(한규진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0
-// 딸(주어진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU
-
-// https://bankids.click
-// 엄마(주어진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0
-// 딸(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o
-// 아들(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxMDU1MzQ1LCJzdWIiOiI4IiwiZXhwIjoxNjYzNDc0NTQ1LCJpZCI6OCwicm9sZXMiOiJVU0VSIn0.HezSWuFqO9a0XnC3E5nDKqwHvoXziUMQbwbRSSJVbX4
+// https://api.bankidz.com, https://bankids.click 통합
+// 아빠(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDMyNDYwLCJzdWIiOiI5IiwiZXhwIjoxNjYzODUxNjYwLCJpZCI6OSwicm9sZXMiOiJVU0VSIn0.5IAmAjvEaA60TETE76ZSOgCUZbFGYCMkzCiywnz70O4
+// 엄마(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDEzMTU3LCJzdWIiOiIyIiwiZXhwIjoxNjYzODMyMzU3LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.Cd01Ev34qZ8bKlpdtke3sNRRzXm2csyp3M_7rbyqYkE
+// 아들(한규진):
+// 딸(주어진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDIyMDMyLCJzdWIiOiIzIiwiZXhwIjoxNjYzODQxMjMyLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.aFmub0vNB49WST48bN5ryh61Lqrxg6umhU0I351xjdA
 
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDEzMTU3LCJzdWIiOiIyIiwiZXhwIjoxNjYzODMyMzU3LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.Cd01Ev34qZ8bKlpdtke3sNRRzXm2csyp3M_7rbyqYkE',
     isKid: false,
     level: 2,
     birthday: '',
@@ -47,6 +42,7 @@ export const login = createAsyncThunk(
   'auth/login',
   async (thunkPayload: { code: string }) => {
     const { code } = thunkPayload;
+    console.log(code);
     const response = await axiosPublic.post('/kakao/login', {
       code,
     });

@@ -44,56 +44,6 @@ function ParentHome() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
-  // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
-  const [idToApprove, setIdToApprove] = useState<number | null>(null);
-
-  const {
-    isOpen,
-    setOpenBottomSheet,
-    setCloseBottomSheet,
-    openSheetBySequence,
-  } = useGlobalBottomSheet();
-  const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const canApproveProposedDongil =
-    approveProposedDongilStatus === 'idle' &&
-    idToApprove !== null &&
-    selectedKid !== null;
-  const proposedDongils = useAppSelector(selectProposedDongils);
-
-  async function handleApproveButtonClick() {
-    if (canApproveProposedDongil) {
-      try {
-        setApproveProposedDongilStatus('pending');
-        await dispatch(
-          approveProposedDongil({
-            axiosPrivate,
-            idToApprove,
-            isApprove: true,
-          }),
-        ).unwrap();
-
-        const getApprovedDongil = (idToApprove: number) => {
-          let found;
-          proposedDongils.map((proposedDongil) => {
-            found = proposedDongil.challengeList.find(
-              (challenge) => challenge.id === idToApprove,
-            );
-          });
-          return found;
-        };
-        const approvedDongil = getApprovedDongil(idToApprove)!;
-        dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
-
-        openApproveCompletedSheet();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setApproveProposedDongilStatus('idle');
-      }
-    }
-  }
-
   // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
   const canFetchParentSummary =
     !useIsFetched('parentSummaries') &&
@@ -140,6 +90,54 @@ function ParentHome() {
     }
     hydrate();
   }, [selectedKid]);
+
+  // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
+  const [idToApprove, setIdToApprove] = useState<number>(-1); // -1: initial flag value
+  const {
+    isOpen,
+    setOpenBottomSheet,
+    setCloseBottomSheet,
+    openSheetBySequence,
+  } = useGlobalBottomSheet();
+  const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canApproveProposedDongil =
+    approveProposedDongilStatus === 'idle' &&
+    idToApprove !== -1 &&
+    selectedKid !== null;
+  const proposedDongils = useAppSelector(selectProposedDongils);
+
+  async function handleApproveButtonClick() {
+    if (canApproveProposedDongil) {
+      try {
+        setApproveProposedDongilStatus('pending');
+        await dispatch(
+          approveProposedDongil({
+            axiosPrivate,
+            idToApprove,
+            isApprove: true,
+          }),
+        ).unwrap();
+
+        const getApprovedDongil = (idToApprove: number) => {
+          let found;
+          proposedDongils.map((proposedDongil) => {
+            found = proposedDongil.challengeList.find(
+              (challenge) => challenge.id === idToApprove,
+            );
+          });
+          return found;
+        };
+        const approvedDongil = getApprovedDongil(idToApprove)!;
+        dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
+        openApproveCompletedSheet();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setApproveProposedDongilStatus('idle');
+      }
+    }
+  }
 
   // 수락하기 바텀시트 열기
   const openApproveCheckSheet = () => {
