@@ -28,6 +28,7 @@ function ProposedDongilItem({
     totalPrice,
     weekPrice,
     weeks,
+    fileName,
   } = proposedDongil;
   const navigate = useNavigate();
   function openProposedReceiptModal() {
