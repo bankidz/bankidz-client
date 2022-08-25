@@ -1,6 +1,6 @@
 // API BASE_URL
-// export const BASE_URL = 'https://api.bankidz.com'; // 배포 환경
-export const BASE_URL = 'https://bankids.click'; // 테스트 환경
+export const BASE_URL = 'https://api.bankidz.com'; // 배포 환경
+// export const BASE_URL = 'https://bankids.click'; // 테스트 환경
 
 // Client DOMAIN
 export const DOMAIN = 'https://bankidz.com'; // 배포 환경(고정)

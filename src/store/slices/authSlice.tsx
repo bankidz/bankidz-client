@@ -18,8 +18,8 @@ interface IAuthState {
   auth: IAuth;
 }
 
-// https://api.bankidz.com, https://bankids.click 통합
-// 아빠(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDMyNDYwLCJzdWIiOiI5IiwiZXhwIjoxNjYzODUxNjYwLCJpZCI6OSwicm9sZXMiOiJVU0VSIn0.5IAmAjvEaA60TETE76ZSOgCUZbFGYCMkzCiywnz70O4
+// https://api.bankidz.com, https://bankids.click Role 통일
+// 아빠(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDM1MTg5LCJzdWIiOiI1IiwiZXhwIjoxNjYzODU0Mzg5LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.SyPHLiGa68dGG7iYfo1_k-HRUiL80K0Gk03D0GVQrzI
 // 엄마(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDEzMTU3LCJzdWIiOiIyIiwiZXhwIjoxNjYzODMyMzU3LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.Cd01Ev34qZ8bKlpdtke3sNRRzXm2csyp3M_7rbyqYkE
 // 아들(한규진):
 // 딸(주어진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDIyMDMyLCJzdWIiOiIzIiwiZXhwIjoxNjYzODQxMjMyLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.aFmub0vNB49WST48bN5ryh61Lqrxg6umhU0I351xjdA
@@ -27,7 +27,7 @@ interface IAuthState {
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDEzMTU3LCJzdWIiOiIyIiwiZXhwIjoxNjYzODMyMzU3LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.Cd01Ev34qZ8bKlpdtke3sNRRzXm2csyp3M_7rbyqYkE',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDM1MTg5LCJzdWIiOiI1IiwiZXhwIjoxNjYzODU0Mzg5LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.SyPHLiGa68dGG7iYfo1_k-HRUiL80K0Gk03D0GVQrzI',
     isKid: false,
     level: null,
     birthday: '',
@@ -42,7 +42,6 @@ export const login = createAsyncThunk(
   'auth/login',
   async (thunkPayload: { code: string }) => {
     const { code } = thunkPayload;
-    console.log(code);
     const response = await axiosPublic.post('/kakao/login', {
       code,
     });
