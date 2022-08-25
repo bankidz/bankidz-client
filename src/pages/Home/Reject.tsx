@@ -45,7 +45,7 @@ function Reject() {
   // '피드백이 전송되었어요' 바텀시트 열기
   const openFeedBackCompletedSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'SheetCompleted',
+      sheetContent: 'Completed',
       sheetProps: { open: true },
       contentProps: {
         type: 'feedback',

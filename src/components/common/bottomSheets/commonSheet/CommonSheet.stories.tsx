@@ -4,7 +4,7 @@ import CommonSheet from './CommonSheet';
 import Check from './Check';
 import SelectProfile from './SelectProfile';
 import GiveUpCheck from './GiveUpCheck';
-import SheetCompleted from './SheetCompleted';
+import Completed from './Completed';
 import Notice from './Notice';
 import DongilFailed from './DongilFailed';
 
@@ -51,36 +51,32 @@ export const 가족그룹_이동 = Template.bind({});
 
 export const 삭제_완료 = Template.bind({});
 삭제_완료.args = {
-  children: <SheetCompleted type="delete" onDismiss={() => {}} />,
+  children: <Completed type="delete" onDismiss={() => {}} />,
   open: true,
 };
 
 export const 수락_완료 = Template.bind({});
 수락_완료.args = {
-  children: <SheetCompleted type="approve" onDismiss={() => {}} />,
+  children: <Completed type="approve" onDismiss={() => {}} />,
   open: true,
 };
 
 export const 포기_취소 = Template.bind({});
 포기_취소.args = {
-  children: <SheetCompleted type="cancel" onDismiss={() => {}} />,
+  children: <Completed type="cancel" onDismiss={() => {}} />,
   open: true,
 };
 
 export const 피드백_전송 = Template.bind({});
 피드백_전송.args = {
-  children: <SheetCompleted type="feedback" onDismiss={() => {}} />,
+  children: <Completed type="feedback" onDismiss={() => {}} />,
   open: true,
 };
 
 export const 돈길_포기_완료 = Template.bind({});
 돈길_포기_완료.args = {
   children: (
-    <SheetCompleted
-      type="giveUp"
-      title="에어팟 구매하기"
-      onDismiss={() => {}}
-    />
+    <Completed type="giveUp" title="에어팟 구매하기" onDismiss={() => {}} />
   ),
   open: true,
 };

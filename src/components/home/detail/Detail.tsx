@@ -116,7 +116,7 @@ function Detail() {
   const openCancelGiveUpBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
-        sheetContent: 'SheetCompleted',
+        sheetContent: 'Completed',
         sheetProps: {
           open: true,
         },
@@ -131,7 +131,7 @@ function Detail() {
   const openGiveUpCompletedBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
-        sheetContent: 'SheetCompleted',
+        sheetContent: 'Completed',
         sheetProps: {
           open: true,
         },

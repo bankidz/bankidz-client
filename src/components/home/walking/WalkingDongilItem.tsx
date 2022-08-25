@@ -95,7 +95,7 @@ function WalkingDongilItem({
   const openDeleteCompletedSheet = () => {
     const openSheet = () => {
       setOpenBottomSheet({
-        sheetContent: 'SheetCompleted',
+        sheetContent: 'Completed',
         sheetProps: { open: true },
         contentProps: {
           type: 'delete',

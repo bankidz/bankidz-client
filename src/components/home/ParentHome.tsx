@@ -146,7 +146,7 @@ function ParentHome() {
       sheetProps: { open: true },
       contentProps: {
         type: 'approve',
-        onApproveButtonClick: handleApproveButtonClick,
+        onMainActionClick: handleApproveButtonClick,
         onDismiss: setCloseBottomSheet,
       },
     });
@@ -156,7 +156,7 @@ function ParentHome() {
   const openApproveCompletedSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
-        sheetContent: 'SheetCompleted',
+        sheetContent: 'Completed',
         sheetProps: { open: true },
         contentProps: {
           type: 'approve',

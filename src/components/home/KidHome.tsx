@@ -103,7 +103,7 @@ function KidHome() {
   // 2. '삭제되었어요' 바텀시트 열기
   const openDeleteCompletedSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'SheetCompleted',
+      sheetContent: 'Completed',
       sheetProps: {
         open: true,
       },

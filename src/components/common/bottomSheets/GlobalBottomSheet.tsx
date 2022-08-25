@@ -8,7 +8,7 @@ import DongilFailed from './commonSheet/DongilFailed';
 import GiveUpCheck from './commonSheet/GiveUpCheck';
 import Notice from './commonSheet/Notice';
 import SelectProfile from './commonSheet/SelectProfile';
-import SheetCompleted from './commonSheet/SheetCompleted';
+import Completed from './commonSheet/Completed';
 import Warning from './commonSheet/Warning';
 
 /* export const CONTRACT_SHEET_CONTENTS = {
@@ -31,7 +31,7 @@ export const COMMON_SHEET_CONTENTS = {
   GiveUpCheck: 'GiveUpCheck',
   Notice: 'Notice',
   SelectProfile: 'SelectProfile',
-  SheetCompleted: 'SheetCompleted',
+  Completed: 'Completed',
 
   Warning: 'Warning',
 } as const;
@@ -42,7 +42,7 @@ const CommonSheetContent: any = {
   [COMMON_SHEET_CONTENTS.GiveUpCheck]: GiveUpCheck,
   [COMMON_SHEET_CONTENTS.Notice]: Notice,
   [COMMON_SHEET_CONTENTS.SelectProfile]: SelectProfile,
-  [COMMON_SHEET_CONTENTS.SheetCompleted]: SheetCompleted,
+  [COMMON_SHEET_CONTENTS.Completed]: Completed,
 
   [COMMON_SHEET_CONTENTS.Warning]: Warning,
 };

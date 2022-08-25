@@ -18,7 +18,7 @@ export type TSheetContent =
   | typeof COMMON_SHEET_CONTENTS.GiveUpCheck
   | typeof COMMON_SHEET_CONTENTS.Notice
   | typeof COMMON_SHEET_CONTENTS.SelectProfile
-  | typeof COMMON_SHEET_CONTENTS.SheetCompleted
+  | typeof COMMON_SHEET_CONTENTS.Completed
   | typeof COMMON_SHEET_CONTENTS.Warning;
 
 export interface IBottomSheet {
