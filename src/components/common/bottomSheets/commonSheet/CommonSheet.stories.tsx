@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
-import ApproveCheck from './ApproveCheck';
+import Check from './Check';
 import SelectProfile from './SelectProfile';
 import GiveUpCheck from './GiveUpCheck';
 import SheetCompleted from './SheetCompleted';
@@ -33,7 +33,18 @@ export const 돈길포기_확인 = Template.bind({});
 export const 돈길_수락 = Template.bind({});
 돈길_수락.args = {
   children: (
-    <ApproveCheck onApproveButtonClick={() => {}} onDismiss={() => {}} />
+    <Check type={'approve'} onMainActionClick={() => {}} onDismiss={() => {}} />
+  ),
+  open: true,
+};
+export const 가족그룹_이동 = Template.bind({});
+가족그룹_이동.args = {
+  children: (
+    <Check
+      type={'moveGroup'}
+      onMainActionClick={() => {}}
+      onDismiss={() => {}}
+    />
   ),
   open: true,
 };

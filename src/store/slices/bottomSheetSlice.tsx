@@ -13,7 +13,7 @@ export interface SheetContainerProps {
 }
 
 export type TSheetContent =
-  | typeof COMMON_SHEET_CONTENTS.ApproveCheck
+  | typeof COMMON_SHEET_CONTENTS.Check
   | typeof COMMON_SHEET_CONTENTS.DongilFailed
   | typeof COMMON_SHEET_CONTENTS.GiveUpCheck
   | typeof COMMON_SHEET_CONTENTS.GiveUpExceeded

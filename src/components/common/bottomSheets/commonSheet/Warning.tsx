@@ -32,8 +32,8 @@ function Warning({ type, onMainActionClick, onDismiss }: WarningProps) {
     <Wrapper>
       <Container>
         <Delete />
-        <p className="main">{renderContent[type].main}</p>
-        <p className="sub">{renderContent[type].sub}</p>
+        <div className="main">{renderContent[type].main}</div>
+        <div className="sub">{renderContent[type].sub}</div>
       </Container>
       <ButtonContainer>
         <Button label="취소" property="sub" onClick={onDismiss} />

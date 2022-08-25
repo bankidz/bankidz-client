@@ -3,7 +3,7 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectBottomSheetState } from '@store/slices/bottomSheetSlice';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
-import ApproveCheck from './commonSheet/ApproveCheck';
+import Check from './commonSheet/Check';
 import DongilFailed from './commonSheet/DongilFailed';
 import GiveUpCheck from './commonSheet/GiveUpCheck';
 import GiveUpExceeded from './commonSheet/GiveUpExceeded';
@@ -26,7 +26,7 @@ const ContractSheetContent: any = {
 }; */
 
 export const COMMON_SHEET_CONTENTS = {
-  ApproveCheck: 'ApproveCheck',
+  Check: 'Check',
   DongilFailed: 'DongilFailed',
   GiveUpCheck: 'GiveUpCheck',
   GiveUpExceeded: 'GiveUpExceeded',
@@ -37,7 +37,7 @@ export const COMMON_SHEET_CONTENTS = {
 } as const;
 
 const CommonSheetContent: any = {
-  [COMMON_SHEET_CONTENTS.ApproveCheck]: ApproveCheck,
+  [COMMON_SHEET_CONTENTS.Check]: Check,
   [COMMON_SHEET_CONTENTS.DongilFailed]: DongilFailed,
   [COMMON_SHEET_CONTENTS.GiveUpCheck]: GiveUpCheck,
   [COMMON_SHEET_CONTENTS.GiveUpExceeded]: GiveUpExceeded,

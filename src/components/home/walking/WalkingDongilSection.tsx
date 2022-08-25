@@ -35,7 +35,7 @@ function WalkingDongilSection() {
 
   return (
     <Wrapper>
-      <h1>걷고있는 돈길</h1>
+      {walkingDongilsStatus !== 'idle' && <h1>걷고있는 돈길</h1>}
       {content}
     </Wrapper>
   );

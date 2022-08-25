@@ -47,7 +47,7 @@ function PendingDongilSection({
   }
   return (
     <Wrapper>
-      <h1>대기중인 돈길</h1>
+      {pendingDongilsStatus !== 'idle' && <h1>대기중인 돈길</h1>}
       {content}
     </Wrapper>
   );
