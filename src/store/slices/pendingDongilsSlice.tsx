@@ -6,7 +6,7 @@ import { RootState } from '../app/store';
 
 interface IPendingDongilsState {
   pendingDongils: IDongil[];
-  pendingDongilsStatus?: TFetchStatus;
+  pendingDongilsStatus: TFetchStatus;
 }
 
 const initialState: IPendingDongilsState = {

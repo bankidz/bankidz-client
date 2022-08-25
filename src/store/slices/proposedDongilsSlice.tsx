@@ -12,7 +12,7 @@ interface IProposedDongil {
 
 interface IProposedDongilsState {
   proposedDongils: IProposedDongil[];
-  proposedDongilsStatus?: TFetchStatus;
+  proposedDongilsStatus: TFetchStatus;
 }
 
 const initialState: IProposedDongilsState = {
@@ -84,7 +84,7 @@ export const proposedDongilsSlice = createSlice({
         state.proposedDongilsStatus = 'failed';
         console.error(action.error);
       })
-      .addCase(approveProposedDongil.fulfilled, (state, action: any) => {
+      .addCase(approveProposedDongil.fulfilled, (state, action) => {
         const approvedId = action.payload.data.id;
         state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
           proposedDongil.challengeList = proposedDongil.challengeList.filter(
@@ -93,7 +93,7 @@ export const proposedDongilsSlice = createSlice({
           return proposedDongil;
         });
       })
-      .addCase(rejectProposedDongil.fulfilled, (state, action: any) => {
+      .addCase(rejectProposedDongil.fulfilled, (state, action) => {
         const approvedId = action.payload.data.id;
         state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
           proposedDongil.challengeList = proposedDongil.challengeList.filter(

@@ -8,7 +8,7 @@ interface IKidsState {
   kids: IKid[];
   selectedKid: IKid | null; // 부모 홈에서 다자녀중 선택한 자녀 한명
   hasMultipleKids: boolean; // 다자녀 유무
-  kidsStatus?: TFetchStatus;
+  kidsStatus: TFetchStatus;
 }
 
 const initialState: IKidsState = {

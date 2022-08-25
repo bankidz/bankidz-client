@@ -87,8 +87,6 @@ export const familySlice = createSlice({
   },
 });
 
-// export const selectKidsStatus = (state: RootState) => state.family.kidsStatus;
-// export const selectKids = (state: RootState) => state.family.kids;
 export const selectFamilyStatus = (state: RootState) =>
   state.family.familyStatus;
 export const selectParents = (state: RootState) => state.family.parents;

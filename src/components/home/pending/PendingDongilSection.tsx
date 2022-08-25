@@ -23,11 +23,7 @@ function PendingDongilSection({
 
   let content: JSX.Element = <></>;
   if (pendingDongilsStatus === 'loading') {
-    content = (
-      <>
-        <SkeletonDongilList variant="pending" />
-      </>
-    );
+    content = <p>Loading...</p>;
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils?.length === 0) {
       content = (

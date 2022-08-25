@@ -12,9 +12,10 @@ function OAuthRedirectPage() {
   // @ts-expect-error
   let params = new URL(document.location).searchParams;
   let code = params.get('code');
+  console.log(code);
 
   useEffect(() => {
-    async function processLogin() {
+    async function dispatchLogin() {
       try {
         code && (await dispatch(login({ code })).unwrap());
         navigate('/');
@@ -22,7 +23,7 @@ function OAuthRedirectPage() {
         console.error(error);
       }
     }
-    processLogin();
+    dispatchLogin();
   }, []);
 
   return <p>로그인 처리중입니다...</p>;

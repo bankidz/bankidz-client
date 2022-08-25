@@ -5,8 +5,8 @@ import ProposedDongilItem from './ProposedDongilItem';
 
 interface ProposedDongilListProps {
   proposedDongils: IDongil[];
-  onApproveCheckOpen?: () => void;
-  setIdToApprove?: Dispatch<SetStateAction<number | null>>;
+  onApproveCheckOpen: () => void;
+  setIdToApprove: Dispatch<SetStateAction<number>>;
 }
 
 function ProposedDongilList({

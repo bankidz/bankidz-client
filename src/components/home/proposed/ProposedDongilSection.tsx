@@ -12,7 +12,7 @@ import ProposedDongilList from './ProposedDongilList';
 
 interface ProposedDongilSectionProps {
   onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number | null>>;
+  setIdToApprove: Dispatch<SetStateAction<number>>;
 }
 
 function ProposedDongilSection({
@@ -25,7 +25,7 @@ function ProposedDongilSection({
 
   let content: JSX.Element = <></>;
   if (proposedDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="proposed" />;
+    content = <p>Loading...</p>;
   } else if (proposedDongilsStatus === 'succeeded') {
     const getSelectedKidSProposedDongils = (username: string) => {
       const found = proposedDongils?.find(
