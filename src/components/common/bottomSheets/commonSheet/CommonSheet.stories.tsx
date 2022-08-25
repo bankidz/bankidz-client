@@ -5,7 +5,7 @@ import Check from './Check';
 import SelectProfile from './SelectProfile';
 import GiveUpCheck from './GiveUpCheck';
 import SheetCompleted from './SheetCompleted';
-import GiveUpExceeded from './GiveUpExceeded';
+import Notice from './Notice';
 import DongilFailed from './DongilFailed';
 
 export default {
@@ -87,7 +87,13 @@ export const 돈길_포기_완료 = Template.bind({});
 
 export const 포기_횟수_초과 = Template.bind({});
 포기_횟수_초과.args = {
-  children: <GiveUpExceeded onDismiss={() => {}} />,
+  children: <Notice type="giveUpExceeded" />,
+  open: true,
+};
+
+export const 뱅키즈_쉬는날 = Template.bind({});
+뱅키즈_쉬는날.args = {
+  children: <Notice type="sunday" />,
   open: true,
 };
 

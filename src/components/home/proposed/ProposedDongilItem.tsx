@@ -1,7 +1,9 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
+import dayjs from 'dayjs';
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -17,7 +19,9 @@ function ProposedDongilItem({
   onApproveCheckOpen,
   setIdToApprove,
 }: ProposedDongilItemProps) {
+  const now = dayjs().day();
   const { openModal } = useModals();
+  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const {
     id,
     createdAt,
@@ -31,6 +35,7 @@ function ProposedDongilItem({
     fileName,
   } = proposedDongil;
   const navigate = useNavigate();
+
   function openProposedReceiptModal() {
     openModal(modals.receiptModal, {
       variant: 'proposed',
@@ -55,8 +60,22 @@ function ProposedDongilItem({
     });
   }
 
+  const openNoticeSundaySheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Notice',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'sunday',
+      },
+    });
+  };
+
   return (
-    <StyledButton onClick={openProposedReceiptModal}>
+    <StyledButton
+      onClick={now === 7 ? openNoticeSundaySheet : openProposedReceiptModal}
+    >
       <div className="text-wrapper">
         <span className="title">{title}</span>
         <span className="totalPrice">
