@@ -15,6 +15,7 @@ import {
   selectCreateChallenge,
   selectPostChallengeResponse,
 } from '@store/slices/createChallengeSlice';
+import { fetchPendingDongils } from '@store/slices/pendingDongilsSlice';
 import axios from 'axios';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -59,7 +60,7 @@ function Step5({ currentStep }: { currentStep: number }) {
 
   // 다음으로 버튼 클릭
   const onClickNextButton = () => {
-    //왜 안돼...
+    // s3 업로드 로직
     const uploadS3 = async (sign: any) => {
       const file = dataURLtoFile(sign, preSignedUrl.imageName);
       let formData = new FormData();
@@ -98,6 +99,7 @@ function Step5({ currentStep }: { currentStep: number }) {
         isSubmit: true,
         fileName: preSignedUrl.imageName,
       });
+      dispatch(fetchPendingDongils({ axiosPrivate }));
     } else if (status === 'failed') {
       console.log('err');
     }

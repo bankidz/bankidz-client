@@ -14,11 +14,11 @@ function Progress({ step, skipSelectParents }: ProgressProps) {
 
   return (
     <Wrapper skipSelectParents={skipSelectParents}>
-      <Circle fill={fill[0]}></Circle>
-      <Circle fill={fill[1]}></Circle>
-      <Circle fill={fill[2]}></Circle>
-      <Circle fill={fill[3]}></Circle>
-      {!skipSelectParents && <Circle fill={fill[4]}></Circle>}
+      <Circle isFilled={fill[0]}></Circle>
+      <Circle isFilled={fill[1]}></Circle>
+      <Circle isFilled={fill[2]}></Circle>
+      <Circle isFilled={fill[3]}></Circle>
+      {!skipSelectParents && <Circle isFilled={fill[4]}></Circle>}
     </Wrapper>
   );
 }
@@ -46,15 +46,15 @@ const Wrapper = styled.div<{ skipSelectParents: boolean }>`
   }
 `;
 
-const Circle = styled.div<{ fill: boolean }>`
+const Circle = styled.div<{ isFilled: boolean }>`
   width: 16px;
   height: 16px;
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.palette.greyScale.grey300};
   box-sizing: border-box;
 
-  ${({ fill }) =>
-    fill &&
+  ${({ isFilled }) =>
+    isFilled &&
     css`
       background-color: ${({ theme }) => theme.palette.main.yellow200};
     `}
