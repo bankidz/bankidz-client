@@ -11,6 +11,7 @@ import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
 import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
 import overViewReducer from '@store/slices/overViewSlice';
+import bottomSheetReducer from '@store/slices/bottomSheetSlice';
 
 export const store = configureStore({
   reducer: {
@@ -25,8 +26,12 @@ export const store = configureStore({
     proposedDongils: proposedDongilsReducer,
     thisWeekSDongils: thisWeekSDongilsReducer,
     overView: overViewReducer,
+    bottomSheet: bottomSheetReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(logger),
   devTools: process.env.NODE_ENV !== 'production',
 });
 

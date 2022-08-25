@@ -1,11 +1,11 @@
-import { TFetchStatus } from '@lib/types/api';
-import { TLevel } from '@lib/types/common';
-import { IFamilyState } from '@lib/types/kid';
+import { IFamilyState } from '@lib/types/IFamilyState';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { TLevel } from '@lib/types/TLevel';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export interface IKid {
+interface IKid {
   username: string;
   isFemale: boolean;
   level: TLevel;
@@ -14,6 +14,8 @@ export interface IKid {
 
 export type TFamilyState = {
   kids: IKid[] | null;
+  // 성우의 제안: null인 경우 반드시 구분 필요하지 않다면 초기상태 []로 변경하고
+  // | null 삭제 부탁드립니다.
   parents: IFamilyState[] | null;
   family: IFamilyState[] | null; //진짜 맘에 안들지만....
   kidsStatus?: TFetchStatus;
@@ -64,13 +66,14 @@ export const familySlice = createSlice({
       })
       .addCase(fetchKids.rejected, (state, action) => {
         state.kidsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       })
       .addCase(fetchFamily.pending, (state) => {
         state.familyStatus = 'loading';
       })
       .addCase(fetchFamily.fulfilled, (state, action) => {
         state.familyStatus = 'succeeded';
+        // 성우의 제안: javascript list 네이밍 규칙에 대해 미리 합의한 대로 수정 부탁드립니다.
         const familyUserList = action.payload;
         state.parents = familyUserList.filter((v) => v.isKid === false);
         state.family = familyUserList
@@ -79,13 +82,11 @@ export const familySlice = createSlice({
       })
       .addCase(fetchFamily.rejected, (state, action) => {
         state.familyStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });
 
-// export const selectKidsStatus = (state: RootState) => state.family.kidsStatus;
-// export const selectKids = (state: RootState) => state.family.kids;
 export const selectFamilyStatus = (state: RootState) =>
   state.family.familyStatus;
 export const selectParents = (state: RootState) => state.family.parents;

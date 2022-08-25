@@ -1,28 +1,18 @@
-import { TFetchStatus } from '@lib/types/api';
-import { TLevel } from '@lib/types/common';
+import { IKid } from '@lib/types/IKid';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-interface IKid {
-  username: string;
-  isFemale: boolean;
-  level: TLevel;
-  kidId: number;
+interface IKidsState {
+  kids: IKid[];
+  selectedKid: IKid | null; // 부모 홈에서 다자녀중 선택한 자녀 한명
+  hasMultipleKids: boolean; // 다자녀 유무
+  kidsStatus: TFetchStatus;
 }
 
-export type TKidsState = {
-  // kids: null - 연결된 자녀 없음
-  kids: IKid[] | null;
-  // selectedKid - 부모 홈에서 다자녀중 선택한 자녀 한명
-  selectedKid: IKid | null;
-  // hasMultipleKids - 다자녀 유무
-  hasMultipleKids: boolean;
-  kidsStatus?: TFetchStatus;
-};
-
-const initialState: TKidsState = {
-  kids: null,
+const initialState: IKidsState = {
+  kids: [],
   selectedKid: null,
   hasMultipleKids: false,
   kidsStatus: 'idle',
@@ -63,7 +53,7 @@ export const kidsSlice = createSlice({
       })
       .addCase(fetchKids.rejected, (state, action) => {
         state.kidsStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

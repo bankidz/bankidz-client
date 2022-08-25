@@ -1,13 +1,14 @@
 import styled, { css } from 'styled-components';
-import getContentsForMyLevel from '@lib/utils/kid/getContentsForMyLevel';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_walking.svg';
-import { TLevel } from '@lib/types/common';
+import getContentsForMyLevel from '@lib/utils/get/getContentsForMyLevel';
 
+// TODO: 일관성
 type TMyLevel = {
   achievedChallenge: number;
 };
 
 function MyLevel({ achievedChallenge }: TMyLevel) {
+  // TODO: goal, require 변수명 더 명확하게
   const { previousIllust, nextIllust, goal, require } =
     getContentsForMyLevel(achievedChallenge)!;
   const bankiPosition =

@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import ContractSheet from '@components/common/bottomSheets/ContractSheet';
-import SelectMoney from '@components/common/bottomSheets/sheetContents/SelectMoney';
+import SelectMoney from '@components/common/bottomSheets/contractSheet/SelectMoney';
 import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
 import { useNavigate } from 'react-router-dom';
@@ -13,9 +12,10 @@ import {
   selectStep3InitData,
 } from '@store/slices/createChallengeSlice';
 import SheetButton from '@components/common/buttons/SheetButton';
-import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import InputForm from '@components/common/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 
 type TStep3Form = {
   contractName: string;
@@ -35,7 +35,6 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
-
   //TODO : api fetching
   const testDuplicate = ['중복된 이름'];
 
@@ -69,6 +68,7 @@ function Step3({ currentStep }: { currentStep: number }) {
 
   return (
     <Wrapper>
+      {/* TODO: JSX는 요약처럼 보일 수 있게 */}
       <InputSection validate={validateName}>
         <InputForm
           placeholder="돈길 이름을 입력하세요"

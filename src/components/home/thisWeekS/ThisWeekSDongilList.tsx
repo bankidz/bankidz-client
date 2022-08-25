@@ -1,6 +1,4 @@
-import { TItemName } from '@lib/types/kid';
-import { IDongil } from '@store/slices/walkingDongilsSlice';
-import { Dispatch, SetStateAction } from 'react';
+import { IDongil } from '@lib/types/IDongil';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';
 
@@ -14,9 +12,9 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
       {thisWeekSDongils?.map((thisWeekSDongil) => (
         <ThisWeekSDongilItem
           key={thisWeekSDongil.id}
-          itemName={thisWeekSDongil.itemName as TItemName}
+          itemName={thisWeekSDongil.itemName}
           title={thisWeekSDongil.title}
-          progressList={thisWeekSDongil.progressList!}
+          progressList={thisWeekSDongil.progressList}
           to={`/detail/${thisWeekSDongil.id}`}
         />
       ))}

@@ -1,31 +1,19 @@
-import { TLevel } from '@lib/types/common';
-import getColorByLevel from '@lib/utils/common/getColorByLevel';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import getBankiNameByLevel from '@lib/utils/get/getBankiNameByLevel';
+import { TLevel } from '@lib/types/TLevel';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 interface LevelBadgeProps {
-  /** 레벨을 입력합니다. */
   level: TLevel;
 }
 
 function LevelBadge({ level }: LevelBadgeProps) {
-  function renderTextByLevel(level: TLevel) {
-    if (level === 1) {
-      return 'Lv.1 뱅키학';
-    } else if (level === 2) {
-      return 'Lv.2 태계뱅키';
-    } else if (level === 3) {
-      return 'Lv.3 율곡뱅키';
-    } else if (level === 4 || level === 0) {
-      return 'Lv.4 뱅키대왕';
-    } else if (level === 5) {
-      return 'Lv.5 뱅키임당';
-    }
-  }
   const colorByLevel = getColorByLevel(level);
+
   return (
     <Wrapper>
       <StyledSpan colorByLevel={colorByLevel}>
-        {renderTextByLevel(level!)}
+        {getBankiNameByLevel(level!)}
       </StyledSpan>
     </Wrapper>
   );
@@ -51,6 +39,6 @@ const StyledSpan = styled.span<{ colorByLevel: string }>`
   border-radius: ${({ theme }) => theme.radius.small};
   ${({ theme }) => theme.typo.tag.T_12_EB};
 
-  transition: ${({ theme }) => theme.transition.onFocus};
+  transition: ${({ theme }) => theme.transition.kidSelect};
   color: ${({ colorByLevel }) => colorByLevel};
 `;

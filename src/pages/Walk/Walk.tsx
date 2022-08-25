@@ -22,10 +22,13 @@ function Walk() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
+  // 성우의 제안: walkAbledDongils -> walkableDongils
+  // Abled는 영문법상도 맞지 않습니다.
+  // code spell checker 사용을 추천드립니다.
   const walkAbledDongils = walkingDongils?.filter(
-    (dongil) => dongil.status == 2 && dongil.isAchieved === 1,
+    (dongil) => dongil.challengeStatus === 'WALKING',
   );
-
+  console.log(walkAbledDongils);
   useEffect(() => {
     // @ts-expect-error
     dispatch(dispatchResetIsPatched({}));
@@ -39,7 +42,7 @@ function Walk() {
 
   return (
     <Wrapper>
-      {walkAbledDongils ? (
+      {walkAbledDongils.length > 0 ? (
         <>
           <WalkDefault walkingDongils={walkAbledDongils} user={user} />
         </>

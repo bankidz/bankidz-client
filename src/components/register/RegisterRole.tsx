@@ -1,66 +1,54 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  register,
-  selectBirthday,
-  setCredentials,
-} from '@store/slices/authSlice';
+import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
-import CommonSheet from '../common/bottomSheets/CommonSheet';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import SelectProfile from '../common/bottomSheets/sheetContents/SelectProfile';
 import useModals from '../../lib/hooks/useModals';
-import { modals } from '../common/modals/Modals';
 import Modals from '../common/modals/Modals';
-import { useState } from 'react';
-import { TFetchStatus } from '@lib/types/api';
-import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import { getAllJSDocTagsOfKind } from 'typescript';
-import { TLevel } from '@lib/types/common';
-import GoBackHeader from '@components/common/buttons/GoBackHeader';
+import { modals } from '../common/modals/Modals';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
-
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
   const birthday = useAppSelector(selectBirthday);
-
-  const [open, onOpen, onDismiss] = useBottomSheet(false);
-  const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
 
   // 아빠
   function handleDadButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(false);
       setIsFemale(false);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
   // 엄마
   function handleMomButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(false);
       setIsFemale(true);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
   // 아들
   function handleSonButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(true);
       setIsFemale(false);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
   // 딸
   function handleDaughterButtonClick() {
-    if (!open) {
+    if (!isOpen) {
       setIsKid(true);
       setIsFemale(true);
-      onOpen();
+      openSelectProfileSheet();
     }
   }
 
@@ -81,55 +69,51 @@ function RegisterRole() {
   const axiosPrivate = useAxiosPrivate();
   const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
   const canRegister =
-    isKid !== null && isFemale !== null && registerStatus === 'idle';
+    isKid !== null &&
+    isFemale !== null &&
+    birthday &&
+    registerStatus === 'idle';
 
   async function handleSubmit() {
     if (canRegister) {
       try {
         setRegisterStatus('pending');
-        // await dispatch(
-        //   register({
-        //     axiosPrivate,
-        //     birthday,
-        //     isKid,
-        //     isFemale,
-        //   }),
-        // ).unwrap();
-
-        // TODO: for demo day
-        let accessToken;
-        let level: TLevel | null = null;
-        if (isKid === false && isFemale === false) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzM3LCJzdWIiOiI1IiwiZXhwIjoxNjYxMzMzOTM3LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.lQX8aymHJXp8wXcgcix9x32ZQCwjP2arI3WEPvLLRRk';
-        } else if (isKid === false && isFemale === true) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTE0NzY1LCJzdWIiOiIyIiwiZXhwIjoxNjYxMzMzOTY1LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.f2B_gezGmD6uKh2Js3Y_blrLJGOFyWXzqva5MAXmbqc';
-        } else if (isKid === true && isFemale === false) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDAwLCJzdWIiOiI0IiwiZXhwIjoxNjYxNDA5MjAwLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.Sad0Wtg4-T8tW-m4OoGQZBCbWCO8D5S1YwZIjoHfGw0';
-          level = 0;
-        } else if (isKid === true && isFemale === true) {
-          accessToken =
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjU4OTkwMDYxLCJzdWIiOiIzIiwiZXhwIjoxNjYxNDA5MjYxLCJpZCI6Mywicm9sZXMiOiJVU0VSIn0.iiMmsuks0oWYctTmKt0fEJgacIl13XNSoAjyY6Jd7QU';
-          level = 2;
-        }
-        accessToken && dispatch(setCredentials({ accessToken, isKid, level }));
-
-        onDismiss();
+        await dispatch(
+          register({
+            axiosPrivate,
+            birthday,
+            isKid,
+            isFemale,
+          }),
+        ).unwrap();
+        setCloseBottomSheet();
         handleModalOpen();
       } catch (error: any) {
-        console.error(error.message);
+        console.error('error in handle submit:', error);
       } finally {
         setRegisterStatus('idle');
       }
     }
   }
 
+  const openSelectProfileSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'SelectProfile',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        isKid: isKid,
+        isFemale: isFemale,
+        onClick: handleSubmit,
+      },
+    });
+  };
+
   return (
     <Wrapper>
       <span>프로필을 선택해요</span>
-      <div className="button-wrapper">
+      <RoleButtonWrapper>
         {/* 아빠 */}
         <RoleButton
           onClick={handleDadButtonClick}
@@ -158,15 +142,7 @@ function RegisterRole() {
           isFemale={true}
           isSelected={isKid === true && isFemale === true}
         />
-      </div>
-      <div ref={inputDivRef}></div>
-      <CommonSheet open={open} onDismiss={onDismiss} sheetRef={sheetDivRef}>
-        <SelectProfile
-          isKid={isKid}
-          isFemale={isFemale}
-          onClick={handleSubmit}
-        />
-      </CommonSheet>
+      </RoleButtonWrapper>
       <Modals />
     </Wrapper>
   );
@@ -178,19 +154,17 @@ const Wrapper = styled.div`
   width: 100%;
   margin-top: 16px;
   & > span {
-    width: 100%;
-    height: 24px;
     margin-left: 8px;
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
 
-  .button-wrapper {
-    margin-top: 96px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    row-gap: 16px;
-    column-gap: 16px;
-  }
+const RoleButtonWrapper = styled.div`
+  margin-top: 96px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 16px;
+  column-gap: 16px;
 `;

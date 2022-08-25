@@ -1,6 +1,6 @@
 {
   "extends": ["plugin:prettier/recommended"],
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "react-hooks"],
   "parserOptions": {
     "ecmaVersion": 6,
     "ecmaFeatures": {
@@ -14,7 +14,9 @@
     "react/jsx-filename-extension": [
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
-    ]
+    ],
+    "eqeqeq": "error",
+    "react-hooks/rules-of-hooks": "error"
   },
   "ignorePatterns": ["*.config.js"]
 }

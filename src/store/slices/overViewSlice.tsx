@@ -1,4 +1,4 @@
-import { TFetchStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -61,7 +61,7 @@ export const overViewSlice = createSlice({
       })
       .addCase(fetchOverView.rejected, (state, action) => {
         state.overViewStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

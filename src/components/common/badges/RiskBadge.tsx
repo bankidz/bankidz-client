@@ -1,13 +1,27 @@
-import styled, { css } from 'styled-components';
+import { theme } from '@lib/styles/theme';
+import styled from 'styled-components';
 
-interface SuggestBadgeProps {
+type TRiskLevel = '안정' | '보통' | '위험';
+
+interface RiskBadgeProps {
   /** 위험도를 선택합니다. */
-  riskLevel: '안정' | '보통' | '위험';
+  riskLevel: TRiskLevel;
 }
 
-function RiskBadge({ riskLevel }: SuggestBadgeProps) {
+function RiskBadge({ riskLevel }: RiskBadgeProps) {
+  const colorByRiskLevel = getColorByRiskLevel(riskLevel);
+  function getColorByRiskLevel(interestRate: TRiskLevel) {
+    if (interestRate === '안정') {
+      return theme.palette.sementic.green300;
+    } else if (interestRate === '보통') {
+      return theme.palette.main.yellow300;
+    } else if (interestRate === '위험') {
+      return theme.palette.sementic.red300;
+    }
+  }
+
   return (
-    <Wrapper riskLevel={riskLevel}>
+    <Wrapper colorByRiskLevel={colorByRiskLevel!}>
       <StyledSpan>{riskLevel}</StyledSpan>
     </Wrapper>
   );
@@ -16,8 +30,9 @@ function RiskBadge({ riskLevel }: SuggestBadgeProps) {
 export default RiskBadge;
 
 const Wrapper = styled.div<{
-  riskLevel: '안정' | '보통' | '위험';
+  colorByRiskLevel: string;
 }>`
+  background: ${({ colorByRiskLevel }) => colorByRiskLevel};
   width: 32px;
   height: 15px;
   border-radius: ${({ theme }) => theme.radius.medium};
@@ -25,22 +40,6 @@ const Wrapper = styled.div<{
   display: flex;
   justify-content: center;
   align-items: center;
-
-  ${({ riskLevel }) =>
-    riskLevel === '안정' &&
-    css`
-      background: ${({ theme }) => theme.palette.sementic.green300};
-    `}
-  ${({ riskLevel }) =>
-    riskLevel === '보통' &&
-    css`
-      background: ${({ theme }) => theme.palette.main.yellow400};
-    `}
-  ${({ riskLevel }) =>
-    riskLevel === '위험' &&
-    css`
-      background: ${({ theme }) => theme.palette.sementic.red300};
-    `}
 `;
 
 const StyledSpan = styled.span`

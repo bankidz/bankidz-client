@@ -3,10 +3,10 @@ import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid, selectLevel } from '@store/slices/authSlice';
-import KidHome from './KidHome';
-import ParentHome from './ParentHome';
+import KidHomePage from './KidHomePage';
+import ParentHomePage from './ParentHomePage';
 import Create from './Create';
-import Detail from './Detail';
+import DetailPage from './DetailPage';
 import Reject from './Reject';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 
@@ -22,7 +22,7 @@ function HomeRouter() {
         path="/"
         element={
           <BackgroundTemplate>
-            {isKid === true ? <KidHome /> : <ParentHome />}
+            {isKid === true ? <KidHomePage /> : <ParentHomePage />}
           </BackgroundTemplate>
         }
       />
@@ -43,7 +43,7 @@ function HomeRouter() {
             label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
             level={level}
           >
-            <Detail />
+            <DetailPage />
           </ForegroundTemplate>
         }
       />

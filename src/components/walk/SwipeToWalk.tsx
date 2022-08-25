@@ -6,14 +6,14 @@ import { ReactComponent as Flag } from '@assets/illusts/walk/flag.svg';
 import { ReactComponent as Stamp } from '@assets/illusts/walk/achieved-stamp.svg';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { TInterestRate } from '@lib/types/common';
-import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
 import { useAppDispatch } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import {
   dispatchSetPatched,
   walkDongil,
 } from '@store/slices/walkingDongilsSlice';
+import { TInterestRate } from '@lib/types/IInterestRate';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;
@@ -47,9 +47,7 @@ function SwipeToWalk({
     } else {
       setValue(id, 100);
       try {
-        // 데모데이 시연용
-        //await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
-        dispatch(dispatchSetPatched({ id }));
+        await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
         setIsAchieved(id, true);
       } catch (err) {
         console.error(err);

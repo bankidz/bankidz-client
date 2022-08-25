@@ -1,8 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import ContractSheet from '@components/common/bottomSheets/ContractSheet';
-import SelectInterest from '@components/common/bottomSheets/sheetContents/SelectInterest';
+import SelectInterest from '@components/common/bottomSheets/contractSheet/SelectInterest';
 import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -15,19 +14,21 @@ import {
 } from '@store/slices/createChallengeSlice';
 import { ReactComponent as Divider } from '@assets/borders/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
-import RangeInput from '@components/common/bottomSheets/sheetContents/RangeInput';
+import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
-import getChallengeStep4Prices from '@lib/utils/kid/getChallengeStep4Prices';
-import getChallengeStep4Weeks from '@lib/utils/kid/getChallengeStep4Weeks';
-import getCommaThreeDigits from '@lib/utils/kid/getCommaThreeDigits';
+import getChallengeStep4Prices from '@lib/utils/get/getChallengeStep4Prices';
 import InputForm from '@components/common/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import moment from 'moment';
-import getWeekNumberByMonth from '@lib/utils/common/getWeekNumberByMonth';
+import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
+import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 
 export type TStep4Form = {
   weekPrice: number;
+  // TODO: TInterestRate, null
   interestRate: 10 | 20 | 30 | null;
 };
 export type TSetStep4Form = {
@@ -73,7 +74,8 @@ function Step4({ currentStep }: { currentStep: number }) {
   // 모달 여는 함수
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      onSubmit: () => {},
+      // TODO: 알아서 닫힘
+      // onSubmit: () => {},
     });
   };
 

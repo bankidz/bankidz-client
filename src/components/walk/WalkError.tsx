@@ -28,7 +28,7 @@ function WalkError() {
                 <p>새로운 돈길을 만들어봐요!</p>
               </div>
             ) : (
-              <p>아직 함께하는 부모가 없어요</p>
+              <p>아직 함께하는 부모님이 없어요</p>
             )}
           </div>
           <OutlinedButton

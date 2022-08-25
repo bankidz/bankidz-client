@@ -6,7 +6,7 @@ function RequireAuth() {
   const accessToken = useAppSelector(selectAccessToken);
   const isKid = useAppSelector(selectIsKid);
 
-  if (accessToken === null) {
+  if (accessToken === '') {
     return <Navigate to="/login" replace />;
   } else if (isKid === null) {
     return <Navigate to="/register/1" replace />;

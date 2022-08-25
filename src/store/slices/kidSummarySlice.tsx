@@ -1,19 +1,19 @@
-import { TFetchStatus } from '@lib/types/api';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
-export interface IKidSummary {
+interface IKidSummary {
   currentSavings: number;
   totalPrice: number;
 }
 
-export type TKidSummaryState = {
+interface IKidSummaryState {
   kidSummary: IKidSummary | null;
   kidSummaryStatus?: TFetchStatus;
-};
+}
 
-const initialState: TKidSummaryState = {
+const initialState: IKidSummaryState = {
   kidSummary: null,
   kidSummaryStatus: 'idle',
 };
@@ -43,7 +43,7 @@ export const kidSummarySlice = createSlice({
       })
       .addCase(fetchKidSummary.rejected, (state, action) => {
         state.kidSummaryStatus = 'failed';
-        console.error(action.error.message);
+        console.error(action.error);
       });
   },
 });

@@ -1,24 +1,49 @@
-import styled from 'styled-components';
 import { useState } from 'react';
-import ReactModal from 'react-modal';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import styled from 'styled-components';
 import CloseButton from '../../buttons/CloseButton';
+import InstructionCard from './InstructionCard';
 import { ReactComponent as ModalContentMoney } from '@assets/illusts/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illusts/congrats/congrats_banki_with_coins.svg';
-import InstructionCard from './InstructionCard';
+import ReactModal from 'react-modal';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.min.css';
+import '../styles.css';
+import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
-interface TertiaryProps {
+interface TertiaryModalProps {
   /**
-   * submit (제출 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
    * useModals hook에 의해 반환 됩니다.
    * */
-  onSubmit?: any;
+  onSubmit: any;
+  shouldCloseOnOverlayClick: boolean;
 }
 
-function TertiaryModal({ onSubmit }: TertiaryProps) {
+function TertiaryModal({
+  onSubmit,
+  shouldCloseOnOverlayClick,
+}: TertiaryModalProps) {
+  const [isOpen, setIsOpen] = useState(true);
+  function handleSubmit() {
+    setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, OVERLAY_TRANSITION_TIME);
+  }
+
+  const { closeModal } = useModals();
   const reactModalParams = {
-    isOpen: true,
+    isOpen: isOpen,
+    onRequestClose: () => {
+      setIsOpen(false);
+      setTimeout(() => {
+        closeModal(modals.tertiaryModal);
+      }, OVERLAY_TRANSITION_TIME);
+    },
+    shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
+    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -32,8 +57,6 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
       content: {
         height: '568px',
         position: 'absolute',
-        // top: '13vh',
-        // top: '50vh',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
         left: '18px',
@@ -59,63 +82,88 @@ function TertiaryModal({ onSubmit }: TertiaryProps) {
     slidesPerView: 1,
   };
 
-  function handleSubmit() {
-    onSubmit();
-  }
+  const background = (
+    <Background>
+      <div className="yellow-box"></div>
+      <div className="white-box">
+        <ProgressCircle currentCardIdx={currentCardIdx}>
+          <div className="first" />
+          <div className="second" />
+          <div className="third" />
+        </ProgressCircle>
+      </div>
+    </Background>
+  );
+
+  const styledSwiper = (
+    // @ts-expect-error
+    <StyledSwiper {...swiperParams} ref={setSwiper}>
+      <SwiperSlide>
+        <InstructionCard
+          headerText="이자란?"
+          bodyText={`우리가 맡긴 돈에\n추가로 은행이 주는 돈`}
+          currentCardIdx={currentCardIdx}
+        >
+          <ModalContentMoney />
+        </InstructionCard>
+      </SwiperSlide>
+      <SwiperSlide>
+        <InstructionCard
+          headerText="이자율이란?"
+          bodyText={`돈을 밭기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
+          currentCardIdx={currentCardIdx}
+        >
+          <ModalContentMoney />
+        </InstructionCard>
+      </SwiperSlide>
+      <SwiperSlide>
+        <InstructionCard
+          headerText="이자부스터란?"
+          bodyText={`실제 은행의 이자율과 같은 말로\n뱅키즈 내에서 사용돼요!`}
+          currentCardIdx={currentCardIdx}
+        >
+          <ModalContentSaving />
+        </InstructionCard>
+      </SwiperSlide>
+    </StyledSwiper>
+  );
+
+  const closeButton = (
+    <>
+      <CloseButtonOverlay
+        onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
+      />
+      <CloseButtonWrapper>
+        <CloseButton onClick={handleSubmit} />
+      </CloseButtonWrapper>
+    </>
+  );
 
   return (
     // @ts-expect-error
-    <ReactModal {...reactModalParams}>
-      <Background>
-        <div className="yellow-box"></div>
-        <div className="white-box">
-          <ProgressCircle currentCardIdx={currentCardIdx}>
-            <div className="first" />
-            <div className="second" />
-            <div className="third" />
-          </ProgressCircle>
-        </div>
-      </Background>
+    <StyledReactModal {...reactModalParams}>
+      {background}
       <Content>
-        {/* @ts-expect-error */}
-        <StyledSwiper {...swiperParams} ref={setSwiper}>
-          <SwiperSlide>
-            <InstructionCard
-              headerText="이자란?"
-              bodyText={`우리가 맡긴 돈에\n추가로 은행이 주는 돈`}
-              currentCardIdx={currentCardIdx}
-            >
-              <ModalContentMoney />
-            </InstructionCard>
-          </SwiperSlide>
-          <SwiperSlide>
-            <InstructionCard
-              headerText="이자율이란?"
-              bodyText={`돈을 밭기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
-              currentCardIdx={currentCardIdx}
-            >
-              <ModalContentMoney />
-            </InstructionCard>
-          </SwiperSlide>
-          <SwiperSlide>
-            <InstructionCard
-              headerText="이자부스터란?"
-              bodyText={`실제 은행의 이자율과 같은 말로\n뱅키즈 내에서 사용돼요!`}
-              currentCardIdx={currentCardIdx}
-            >
-              <ModalContentSaving />
-            </InstructionCard>
-          </SwiperSlide>
-        </StyledSwiper>
-        <CloseButtonWrapper>
-          <CloseButton onClick={handleSubmit} />
-        </CloseButtonWrapper>
+        {styledSwiper}
+        {closeButton}
       </Content>
-    </ReactModal>
+    </StyledReactModal>
   );
 }
 
 export default TertiaryModal;
+
+const StyledReactModal = styled(ReactModal)`
+  @keyframes slide {
+    from {
+      transform: translateY(-10%);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+  animation: slide ${({ theme }) => theme.animation.modalOpen};
+`;
 
 const Background = styled.div`
   position: relative;
@@ -128,7 +176,7 @@ const Background = styled.div`
 
     position: absolute;
     left: 50%;
-    top: 116px; // overlaps 1px
+    top: 117px; // overlaps 2px
     transform: translate3d(-50%, -50%, 0);
 
     background: ${({ theme }) => theme.palette.main.yellow100};
@@ -200,6 +248,14 @@ const StyledSwiper = styled(Swiper)`
   height: 504px;
 `;
 
+const CloseButtonOverlay = styled.button`
+  width: 100%;
+  height: 64px;
+  cursor: default;
+`;
+
 const CloseButtonWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 520px;
+  position: absolute;
+  z-index: 701;
 `;

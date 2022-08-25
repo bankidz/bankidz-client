@@ -1,88 +1,131 @@
-import { TItemName } from '@lib/types/kid';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import CommonSheet from '@components/common/bottomSheets/CommonSheet';
-import DongilFailed from '@components/common/bottomSheets/sheetContents/DongilFailed';
-import { TInterestRate } from '@lib/types/common';
-import DeleteCheck from '@components/common/bottomSheets/sheetContents/DeleteCheck';
-import SheetCompleted from '@components/common/bottomSheets/sheetContents/SheetCompleted';
-interface WalkingDongilItemProps {
-  itemName: TItemName;
-  title: string;
-  isFailed: boolean;
-  to: string;
-  interestRate: TInterestRate;
-}
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { useState } from 'react';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { useAppDispatch } from '@store/app/hooks';
+import {
+  deleteClientSideWalkingDongilById,
+  deleteWalkingDongil,
+} from '@store/slices/walkingDongilsSlice';
+import { IDongil } from '@lib/types/IDongil';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+
+interface WalkingDongilItemProps
+  extends Pick<
+    IDongil,
+    'itemName' | 'title' | 'id' | 'interestRate' | 'challengeStatus'
+  > {}
 
 function WalkingDongilItem({
   itemName,
   title,
-  to,
-  isFailed,
+  id,
   interestRate,
+  challengeStatus,
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();
-  const onNavigateWalkingDongilPage = () => {
-    navigate(to);
+  const to = `/detail/${id}`;
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
+
+  const axiosPrivate = useAxiosPrivate();
+  const [deleteWalkingDongilStatus, setDeleteWalingDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canDeleteWalkingDongil =
+    deleteWalkingDongilStatus === 'idle' && challengeStatus === 'FAILED';
+  const dispatch = useAppDispatch();
+
+  async function handleDeleteButtonClick() {
+    if (canDeleteWalkingDongil) {
+      try {
+        setDeleteWalingDongilStatus('pending');
+        await dispatch(
+          deleteWalkingDongil({
+            axiosPrivate,
+            id,
+          }),
+        ).unwrap();
+        dispatch(deleteClientSideWalkingDongilById(id));
+        // 삭제되었어요 바텀시트 열기
+        openDeleteCompletedSheet();
+      } catch (error: any) {
+        console.log(error);
+      } finally {
+        setDeleteWalingDongilStatus('idle');
+      }
+    }
+  }
+  // 1. '돈길 걷기에 실패했어요' 바텀시트 열기
+  const openDongilFailedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'DongilFailed',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        onDeleteButtonClick: openDeleteCheckSheet,
+        onCancelButtonClick: () => {
+          setCloseBottomSheet();
+          navigate(to);
+        },
+      },
+    });
   };
-  const [openDongilFailed, onOpenDongilFailed, onDismissDongilFailed] =
-    useBottomSheet(false);
-  const [openDeleteCheck, onOpenDeleteCheck, onDismissDeleteCheck] =
-    useBottomSheet(false);
-  const [openSheetComplete, onOpenSheetComplete, onDismissSheetComplete] =
-    useBottomSheet(false);
+
+  // 2. '정말로 삭제할까요?' 바텀시트 열기
+  const openDeleteCheckSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'DeleteCheck',
+        sheetProps: { open: true },
+        contentProps: {
+          onClickDelete: handleDeleteButtonClick,
+          onDismiss: setCloseBottomSheet,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  // 3. '삭제되었어요' 바텀시트 열기
+  const openDeleteCompletedSheet = () => {
+    const openSheet = () => {
+      setOpenBottomSheet({
+        sheetContent: 'SheetCompleted',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'delete',
+        },
+      });
+    };
+    openSheetBySequence(openSheet);
+  };
+
   return (
     <>
-      {isFailed ? (
-        <StyledDiv onClick={onOpenDongilFailed}>
-          <div>
-            <div>{renderItemIllust(itemName)}</div>
+      {challengeStatus === 'FAILED' ? (
+        <StyledDiv onClick={openDongilFailedSheet}>
+          <div className="content-wrapper">
+            <div className="illust">{renderItemIllust(itemName)}</div>
             <span>{title}</span>
           </div>
-          <div>
+          <div className="icon-wrapper">
             <Failed />
             <Arrow />
           </div>
         </StyledDiv>
       ) : (
         <StyledLink to={to}>
-          <div>
-            <div>{renderItemIllust(itemName)}</div>
+          <div className="content-wrapper">
+            <div className="illust">{renderItemIllust(itemName)}</div>
             <span>{title}</span>
           </div>
           <Arrow />
         </StyledLink>
       )}
-
-      <CommonSheet open={openDongilFailed} onDismiss={onDismissDongilFailed}>
-        <DongilFailed
-          onLeftButtonClick={() => {
-            onOpenDeleteCheck();
-            onDismissDongilFailed();
-          }}
-          onRightButtonClick={() => {
-            onNavigateWalkingDongilPage();
-          }}
-          title={title}
-          interestRate={interestRate}
-        />
-      </CommonSheet>
-      <CommonSheet open={openDeleteCheck} onDismiss={() => {}}>
-        <DeleteCheck
-          onClickDelete={() => {
-            onDismissDeleteCheck();
-            onOpenSheetComplete();
-          }}
-          onDismiss={onDismissDeleteCheck}
-        />
-      </CommonSheet>
-      <CommonSheet open={openSheetComplete} onDismiss={() => {}}>
-        <SheetCompleted type="delete" onDismiss={onDismissSheetComplete} />
-      </CommonSheet>
     </>
   );
 }
@@ -100,14 +143,13 @@ const StyledLink = styled(Link)`
   justify-content: space-between;
   align-items: center;
 
-  & > div {
+  .content-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    div {
+    .illust {
       width: 30px;
     }
-
     span {
       margin-left: 12px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
@@ -129,21 +171,20 @@ const StyledDiv = styled.div`
   cursor: pointer;
   padding: 0 16px;
 
-  & > div:first-child {
+  .content-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    div {
+    .illust {
       width: 30px;
     }
-
     span {
       margin-left: 12px;
       ${({ theme }) => theme.typo.button.Title_T_14_EB};
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
   }
-  & > div:last-child {
+  .icon-wrapper {
     display: flex;
     align-items: center;
     gap: 8px;

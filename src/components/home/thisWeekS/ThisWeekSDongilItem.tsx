@@ -1,18 +1,11 @@
-import { TItemName } from '@lib/types/kid';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
+import { IDongil } from '@lib/types/IDongil';
 
-interface ThisWeekSDongilItemProps {
-  itemName: TItemName;
-  title: string;
-  progressList: {
-    approvedAt: string;
-    challengeId: number;
-    isAchieved: boolean;
-    weeks: number;
-  }[];
+interface ThisWeekSDongilItemProps
+  extends Pick<IDongil, 'itemName' | 'title' | 'progressList'> {
   to: string;
 }
 
@@ -22,15 +15,14 @@ function ThisWeekSDongilItem({
   progressList,
   to,
 }: ThisWeekSDongilItemProps) {
-  let lastProgress = progressList!.slice(-1)[0];
   return (
     <StyledLink to={to}>
-      <div className="left-aligned-wrapper">
-        <div className="item-wrapper">{renderItemIllust(itemName)}</div>
+      <div className="content-wrapper">
+        <div className="illust">{renderItemIllust(itemName)}</div>
         <span>{title}</span>
       </div>
-      <div className="stamp-wrapper">
-        {lastProgress.isAchieved && <AchievedStamp />}
+      <div className="achieved-stamp">
+        {progressList?.slice(-1)[0]?.isAchieved && <AchievedStamp />}
       </div>
     </StyledLink>
   );
@@ -49,11 +41,11 @@ const StyledLink = styled(Link)`
   justify-content: space-between;
   align-items: center;
 
-  .left-aligned-wrapper {
+  .content-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    .item-wrapper {
+    .illust {
       width: 30px;
       margin-left: 16px;
     }
@@ -63,7 +55,7 @@ const StyledLink = styled(Link)`
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
   }
-  .stamp-wrapper {
+  .achieved-stamp {
     margin-right: 16px;
     width: 40px;
     height: 40px;

@@ -3,15 +3,20 @@ import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { kidMock } from '@lib/mocks/kid';
 import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/createChallengeSlice';
+import {
+  dispatchInProcess,
+  dispatchParent,
+} from '@store/slices/createChallengeSlice';
 import RoleButton from '@components/common/buttons/RoleButton';
 
 function Step1({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // TODO: 이벤트 핸들러 이름: handle ~, on ~
   const onClickRoleButton = (isFemale: boolean) => {
     dispatch(dispatchParent(isFemale));
+    dispatch(dispatchInProcess());
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 

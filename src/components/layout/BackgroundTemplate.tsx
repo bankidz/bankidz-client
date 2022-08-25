@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import TabBar from './TabBar';
 
+// TODO: 일관성 가져죠요
 interface BackgroundTemplateProps {
   children: JSX.Element;
 }

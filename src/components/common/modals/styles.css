@@ -1,0 +1,14 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  /* 모달 배경 투명도 전환 */
+  /* OVERLAY_TRANSITION_TIME과 동기화 필요 */
+  transition: all 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}

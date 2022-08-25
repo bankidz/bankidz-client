@@ -1,8 +1,8 @@
 import { HTMLAttributes, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingItemNameButtonBorder } from '@assets/borders/walking-itemName-border.svg';
-import renderItemIllust from '@lib/utils/common/renderItemIllust';
-import { TItemName } from '@lib/types/kid';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
+import { TItemName } from '@lib/types/TItemName';
 import { calcRatio, theme } from '@lib/styles/theme';
 
 interface WalkingItemNameButtonProps extends HTMLAttributes<HTMLButtonElement> {
@@ -43,6 +43,7 @@ const Wrapper = styled.button<{ isSelected: boolean }>`
       transform: scale(1.167);
     `}
 `;
+
 const Content = styled.div`
   position: absolute;
   left: 50%;

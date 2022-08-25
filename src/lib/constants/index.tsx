@@ -1,7 +1,10 @@
-// 서비스 배포 환경
-// export const DOMAIN = 'https://bankidz.com';
-// 클라이언트 테스트 환경
-export const DOMAIN = 'http://localhost:3000';
+// Client DOMAIN
+export const DOMAIN = 'https://bankidz.com'; // 배포 환경
+// export const DOMAIN = 'http://localhost:3000'; // 테스트 환경
+
+// API BASE_URL
+export const BASE_URL = 'https://api.bankidz.com'; // 배포 환경
+// export const BASE_URL = 'https://bankids.click'; // 테스트 환경
 
 export const REST_API_KEY = `${process.env.REACT_APP_KAKAO_REST_API_KEY}`;
 export const REDIRECT_URI = `${DOMAIN}/auth/kakao/callback`;

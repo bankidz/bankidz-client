@@ -1,9 +1,8 @@
-import SuggestBadge from '@components/common/badges/SuggestBadge';
+import ProposalBadge from '@components/common/badges/ProposalBadge';
 import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
-import { EDongilStatus } from '@lib/types/common';
-import { getDate } from '@lib/utils/common/getDate';
-import { IDongil } from '@store/slices/walkingDongilsSlice';
+import { IDongil } from '@lib/types/IDongil';
+import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
@@ -21,7 +20,7 @@ function PendingDongilItem({
   const { openModal } = useModals();
   const {
     id,
-    status,
+    challengeStatus,
     createdAt,
     interestRate,
     isMom,
@@ -36,7 +35,8 @@ function PendingDongilItem({
 
   // 제안중
   function openQuinaryModal() {
-    openModal(modals.quinaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'proposing',
       createdAt: createdAt,
       interestRate: interestRate,
       isMom: isMom,
@@ -51,7 +51,8 @@ function PendingDongilItem({
 
   // 거절됨
   function openSenaryModal() {
-    openModal(modals.senaryModal, {
+    openModal(modals.receiptModal, {
+      variant: 'rejected',
       onSubmit: () => {
         onDeleteCheckOpen();
         setIdToDelete(id);
@@ -64,15 +65,15 @@ function PendingDongilItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      comment: comment?.content,
+      comment,
       fileName,
     });
   }
 
   function handleClick() {
-    if (status === EDongilStatus.PENDING) {
+    if (challengeStatus === 'PENDING') {
       openQuinaryModal();
-    } else if (status === EDongilStatus.REJECTED) {
+    } else if (challengeStatus === 'REJECTED') {
       openSenaryModal();
     }
   }
@@ -82,13 +83,11 @@ function PendingDongilItem({
       <StyledButton onClick={handleClick}>
         <div className="text-wrapper">
           <span className="title">{title}</span>
-          <span className="createdAt">{getDate(createdAt)}</span>
+          <span className="createdAt">
+            {getFormattedTimeStamp(createdAt, 'YYYY.MM.DD')}
+          </span>
         </div>
-        <SuggestBadgeWrapper>
-          <SuggestBadge
-            isSuggesting={status === EDongilStatus.PENDING ? true : false}
-          />
-        </SuggestBadgeWrapper>
+        <ProposalBadge isProposing={challengeStatus === 'PENDING'} />
       </StyledButton>
     </>
   );
@@ -124,5 +123,3 @@ const StyledButton = styled.button`
     }
   }
 `;
-
-const SuggestBadgeWrapper = styled.div``;

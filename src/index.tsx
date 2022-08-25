@@ -12,6 +12,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import './assets/fonts/fontStyle.css';
 import ReactModal from 'react-modal';
 import { ModalsContextProvider } from './components/common/modals/ModalsContext';
+import GlobalBottomSheet from '@components/common/bottomSheets/GlobalBottomSheet';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -25,6 +26,7 @@ root.render(
       <ThemeProvider theme={theme}>
         <ModalsContextProvider>
           <App />
+          <GlobalBottomSheet />
         </ModalsContextProvider>
       </ThemeProvider>
     </BrowserRouter>
