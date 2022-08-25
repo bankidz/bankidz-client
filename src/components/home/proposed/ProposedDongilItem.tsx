@@ -30,7 +30,6 @@ function ProposedDongilItem({
     weeks,
     fileName,
   } = proposedDongil;
-
   const navigate = useNavigate();
   function openProposedReceiptModal() {
     openModal(modals.receiptModal, {
@@ -51,7 +50,7 @@ function ProposedDongilItem({
       totalPrice: totalPrice,
       weekPrice: weekPrice,
       weeks: weeks,
-      filename: 'dummy',
+      fileName: fileName,
       shouldCloseOnOverlayClick: true,
     });
   }
