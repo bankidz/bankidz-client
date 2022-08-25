@@ -14,18 +14,13 @@ function WalkingDongilSection() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
   const navigate = useNavigate();
-  function handleContractNewDongilButtonClick() {
-    navigate('/create/1');
-  }
 
   let content: JSX.Element = <></>;
   if (walkingDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="walking" />;
+    content = <p>Loading...</p>;
   } else if (walkingDongilsStatus === 'succeeded') {
     if (walkingDongils?.length === 0) {
-      content = (
-        <EmptyWalkingDongil onClick={handleContractNewDongilButtonClick} />
-      );
+      content = <EmptyWalkingDongil onClick={() => navigate('/create/1')} />;
     } else {
       content = (
         <>

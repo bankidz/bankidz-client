@@ -16,7 +16,7 @@ function ThisWeekSDongilSection() {
 
   let content: JSX.Element = <></>;
   if (thisWeekSDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="thisWeekS" />;
+    content = <p>Loading...</p>;
   } else if (thisWeekSDongilsStatus === 'succeeded') {
     const getSelectedKidSThisWeekSDongils = (username: string) => {
       const found = thisWeekSDongils?.find(
@@ -28,7 +28,7 @@ function ThisWeekSDongilSection() {
       selectedKid?.username!,
     );
 
-    if (thisWeekSDongils?.length === 0) {
+    if (selectedKidSThisWeekSDongils?.length === 0) {
       content = <EmptyDongil variant="thisWeekS" />;
     } else {
       content = (

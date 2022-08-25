@@ -6,7 +6,7 @@ import { IDongil } from '@lib/types/IDongil';
 
 interface IWalkingDongilsState {
   walkingDongils: IDongil[];
-  walkingDongilsStatus?: TFetchStatus;
+  walkingDongilsStatus: TFetchStatus;
   isWalkingDongilsPatched: boolean;
 }
 
