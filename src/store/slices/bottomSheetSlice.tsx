@@ -16,7 +16,7 @@ export type TSheetContent =
   | typeof COMMON_SHEET_CONTENTS.Check
   | typeof COMMON_SHEET_CONTENTS.DongilFailed
   | typeof COMMON_SHEET_CONTENTS.GiveUpCheck
-  | typeof COMMON_SHEET_CONTENTS.GiveUpExceeded
+  | typeof COMMON_SHEET_CONTENTS.Notice
   | typeof COMMON_SHEET_CONTENTS.SelectProfile
   | typeof COMMON_SHEET_CONTENTS.SheetCompleted
   | typeof COMMON_SHEET_CONTENTS.Warning;

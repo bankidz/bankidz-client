@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Check from './commonSheet/Check';
 import DongilFailed from './commonSheet/DongilFailed';
 import GiveUpCheck from './commonSheet/GiveUpCheck';
-import GiveUpExceeded from './commonSheet/GiveUpExceeded';
+import Notice from './commonSheet/Notice';
 import SelectProfile from './commonSheet/SelectProfile';
 import SheetCompleted from './commonSheet/SheetCompleted';
 import Warning from './commonSheet/Warning';
@@ -29,7 +29,7 @@ export const COMMON_SHEET_CONTENTS = {
   Check: 'Check',
   DongilFailed: 'DongilFailed',
   GiveUpCheck: 'GiveUpCheck',
-  GiveUpExceeded: 'GiveUpExceeded',
+  Notice: 'Notice',
   SelectProfile: 'SelectProfile',
   SheetCompleted: 'SheetCompleted',
 
@@ -40,7 +40,7 @@ const CommonSheetContent: any = {
   [COMMON_SHEET_CONTENTS.Check]: Check,
   [COMMON_SHEET_CONTENTS.DongilFailed]: DongilFailed,
   [COMMON_SHEET_CONTENTS.GiveUpCheck]: GiveUpCheck,
-  [COMMON_SHEET_CONTENTS.GiveUpExceeded]: GiveUpExceeded,
+  [COMMON_SHEET_CONTENTS.Notice]: Notice,
   [COMMON_SHEET_CONTENTS.SelectProfile]: SelectProfile,
   [COMMON_SHEET_CONTENTS.SheetCompleted]: SheetCompleted,
 

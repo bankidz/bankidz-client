@@ -3,6 +3,7 @@ import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
+import dayjs from 'dayjs';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 

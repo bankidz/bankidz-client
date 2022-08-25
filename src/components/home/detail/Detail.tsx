@@ -148,11 +148,11 @@ function Detail() {
   const openGiveUpExceededBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
-        sheetContent: 'GiveUpExceeded',
+        sheetContent: 'Notice',
         sheetProps: {
           open: true,
         },
-        contentProps: { onDismiss: setCloseBottomSheet },
+        contentProps: { type: 'giveUpExceeded' },
       });
     openSheetBySequence(openSheet);
   };
