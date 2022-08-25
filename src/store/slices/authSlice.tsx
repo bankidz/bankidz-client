@@ -4,18 +4,18 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
+interface IAuth {
+  accessToken: string;
+  isKid: boolean | null;
+  level: TLevel | null;
+  birthday: string;
+  username: string;
+  isFemale: boolean;
+  phone: string | null;
+}
+
 interface IAuthState {
-  auth: {
-    // login, refresh 시 반환되는 값: accessToken, isKid, level
-    // authSlice의 변수는 통일성을 위해 모두 초기상태를 null로 관리합니다.
-    accessToken: string | null;
-    isKid: boolean | null;
-    level: TLevel | null;
-    birthday: string | null;
-    isFemale: boolean | null;
-    phone: string | null;
-    username: string | null;
-  };
+  auth: IAuth;
 }
 
 // https://api.bankidz.com
@@ -27,18 +27,18 @@ interface IAuthState {
 // https://bankids.click
 // 엄마(주어진): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0
 // 딸(김민준): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o
-// eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxMDU1MzQ1LCJzdWIiOiI4IiwiZXhwIjoxNjYzNDc0NTQ1LCJpZCI6OCwicm9sZXMiOiJVU0VSIn0.HezSWuFqO9a0XnC3E5nDKqwHvoXziUMQbwbRSSJVbX4
+// 아들(신성우): eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxMDU1MzQ1LCJzdWIiOiI4IiwiZXhwIjoxNjYzNDc0NTQ1LCJpZCI6OCwicm9sZXMiOiJVU0VSIn0.HezSWuFqO9a0XnC3E5nDKqwHvoXziUMQbwbRSSJVbX4
 
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2NTM0LCJzdWIiOiIxIiwiZXhwIjoxNjYzMTM1NzM0LCJpZCI6MSwicm9sZXMiOiJVU0VSIn0.FGl_c8WBwC-nd6VP3MAqNz6snQinRpgsRVhAljDrg1o',
-    isKid: true,
-    level: 1,
-    birthday: null,
-    isFemale: true,
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYwNzE2Nzk1LCJzdWIiOiI2IiwiZXhwIjoxNjYzMTM1OTk1LCJpZCI6Niwicm9sZXMiOiJVU0VSIn0.nT9Al7o7fwMCZFTN3OkljGI9JmrdRyK1RRGzf_SxNn0',
+    isKid: false,
+    level: null,
+    birthday: '',
+    username: '',
+    isFemale: false,
     phone: null,
-    username: null,
   },
 };
 
@@ -73,24 +73,20 @@ export const register = createAsyncThunk(
   },
 );
 
-interface IAuth {
-  accessToken: string | null;
-  isKid: boolean | null;
-  level: TLevel | null;
-}
+interface ICredential extends Pick<IAuth, 'accessToken' | 'isKid' | 'level'> {}
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<IAuth>) => {
+    setCredentials: (state, action: PayloadAction<ICredential>) => {
       const { accessToken, isKid, level } = action.payload;
       state.auth.accessToken = accessToken;
       state.auth.isKid = isKid;
       state.auth.level = level;
     },
     resetCredentials: (state) => {
-      state.auth.accessToken = null;
+      state.auth.accessToken = '';
       state.auth.isKid = null;
       state.auth.level = null;
     },

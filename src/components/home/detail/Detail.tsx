@@ -143,6 +143,7 @@ function Detail() {
       });
     openSheetBySequence(openSheet);
   };
+
   // 3-b. '포기 횟수 초과' 바텀시트 열기
   const openGiveUpExceededBottomSheet = () => {
     const openSheet = () =>

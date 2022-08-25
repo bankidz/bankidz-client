@@ -1,16 +1,14 @@
-import { TLevel } from '@lib/types/TLevel';
+import useLevel from '@lib/hooks/useLevel';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderHomeBackground from '@lib/utils/render/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/render/renderHomeBanki';
 import { useAppSelector } from '@store/app/hooks';
 import { selectHasMultipleKids } from '@store/slices/kidsSlice';
 import styled from 'styled-components';
 
-interface BackgroundProps {
-  colorByLevel: string;
-  level: TLevel;
-}
-
-function Background({ colorByLevel, level }: BackgroundProps) {
+function Background() {
+  const level = useLevel();
+  const colorByLevel = getColorByLevel(level);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
   return (

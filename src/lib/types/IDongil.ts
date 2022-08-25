@@ -22,7 +22,6 @@ export interface IDongil {
         challengeId: number;
         weeks: number;
         isAchieved: boolean;
-        // 저축 챌린지 계약 종료일, 추후 Enum으로 프백 통일 예정
         approvedAt: string;
       }[]
     | null;
