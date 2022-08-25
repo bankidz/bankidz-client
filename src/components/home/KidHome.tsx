@@ -75,7 +75,7 @@ function KidHome() {
             id: idToDelete,
           }),
         ).unwrap();
-        openDeleteCheckSheet();
+        openWarningDeleteSheet();
       } catch (error: any) {
         console.log(error);
       } finally {
@@ -86,14 +86,15 @@ function KidHome() {
   }
 
   // 1. '정말로 삭제할거에요?' 바텀시트 열기
-  const openDeleteCheckSheet = () => {
+  const openWarningDeleteSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'DeleteCheck',
+      sheetContent: 'Warning',
       sheetProps: {
         open: true,
       },
       contentProps: {
-        onClickDelete: handleDeleteButtonClick,
+        type: 'delete',
+        onMainActionClick: handleDeleteButtonClick,
         onDismiss: setCloseBottomSheet,
       },
     });
@@ -117,7 +118,7 @@ function KidHome() {
       <KidSummary />
       <WalkingDongilSection />
       <PendingDongilSection
-        onDeleteCheckOpen={openDeleteCheckSheet}
+        onWarningDeleteSheetOpen={openWarningDeleteSheet}
         setIdToDelete={setIdToDelete}
       />
       <LargeSpacer />

@@ -67,7 +67,7 @@ function WalkingDongilItem({
         open: true,
       },
       contentProps: {
-        onDeleteButtonClick: openDeleteCheckSheet,
+        onDeleteButtonClick: openWarningDeleteSheet,
         onCancelButtonClick: () => {
           setCloseBottomSheet();
           navigate(to);
@@ -77,13 +77,14 @@ function WalkingDongilItem({
   };
 
   // 2. '정말로 삭제할까요?' 바텀시트 열기
-  const openDeleteCheckSheet = () => {
+  const openWarningDeleteSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
-        sheetContent: 'DeleteCheck',
+        sheetContent: 'Warning',
         sheetProps: { open: true },
         contentProps: {
-          onClickDelete: handleDeleteButtonClick,
+          type: 'delete',
+          onMainActionClick: handleDeleteButtonClick,
           onDismiss: setCloseBottomSheet,
         },
       });

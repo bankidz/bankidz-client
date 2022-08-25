@@ -8,13 +8,13 @@ import styled from 'styled-components';
 
 interface PendingDongilItemProps {
   pendingDongil: IDongil;
-  onDeleteCheckOpen: () => void;
+  onWarningDeleteSheetOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
 function PendingDongilItem({
   pendingDongil,
-  onDeleteCheckOpen,
+  onWarningDeleteSheetOpen,
   setIdToDelete,
 }: PendingDongilItemProps) {
   const { openModal } = useModals();
@@ -54,7 +54,7 @@ function PendingDongilItem({
     openModal(modals.receiptModal, {
       variant: 'rejected',
       onSubmit: () => {
-        onDeleteCheckOpen();
+        onWarningDeleteSheetOpen();
         setIdToDelete(id);
       },
       createdAt: createdAt,

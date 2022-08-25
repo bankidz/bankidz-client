@@ -34,10 +34,9 @@ function Reject() {
             idToApprove: parseInt(id!),
             comment: comment,
           }),
-        );
-        openFeedBackCompletedSheet();
+        ).unwrap();
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
       openFeedBackCompletedSheet();
     }

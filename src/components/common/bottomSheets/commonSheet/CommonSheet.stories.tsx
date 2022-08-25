@@ -4,7 +4,6 @@ import CommonSheet from './CommonSheet';
 import ApproveCheck from './ApproveCheck';
 import SelectProfile from './SelectProfile';
 import GiveUpCheck from './GiveUpCheck';
-import DeleteCheck from './DeleteCheck';
 import SheetCompleted from './SheetCompleted';
 import GiveUpExceeded from './GiveUpExceeded';
 import DongilFailed from './DongilFailed';
@@ -28,12 +27,6 @@ export const 프로필_선택_확인 = Template.bind({});
 export const 돈길포기_확인 = Template.bind({});
 돈길포기_확인.args = {
   children: <GiveUpCheck onGiveUpButtonClick={() => {}} onDismiss={() => {}} />,
-  open: true,
-};
-
-export const 삭제_확인 = Template.bind({});
-삭제_확인.args = {
-  children: <DeleteCheck onClickDelete={() => {}} onDismiss={() => {}} />,
   open: true,
 };
 

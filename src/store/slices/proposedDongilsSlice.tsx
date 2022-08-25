@@ -61,6 +61,7 @@ export const rejectProposedDongil = createAsyncThunk(
       accept: false,
       comment,
     });
+    console.log(response);
     return response.data;
   },
 );
@@ -101,6 +102,9 @@ export const proposedDongilsSlice = createSlice({
           );
           return proposedDongil;
         });
+      })
+      .addCase(rejectProposedDongil.rejected, (state, action: any) => {
+        console.log(action);
       });
   },
 });
