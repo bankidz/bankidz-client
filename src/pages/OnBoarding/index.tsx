@@ -5,7 +5,6 @@ import APPLEAuthRedirectPage from './APPLEAuthRedirectPage';
 import RegisterPage from './RegisterPage';
 
 function OnBoardingRouter() {
-  console.log('여기');
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />

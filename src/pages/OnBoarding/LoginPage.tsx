@@ -13,14 +13,14 @@ function LoginPage() {
           <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
         <ButtonWithMarginBottom
-          label="애플로 시작하기"
-          onClick={() => (window.location.href = APPLE_AUTH_URL)}
-          property="kakao"
-        />
-        <ButtonWithMarginBottom
           label="카카오로 시작하기"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
           property="kakao"
+        />
+        <ButtonWithMarginBottom
+          label="APPLE로 로그인"
+          onClick={() => (window.location.href = APPLE_AUTH_URL)}
+          property="sub"
         />
       </MarginTemplate>
     </Wrapper>
