@@ -19,7 +19,7 @@ function ProposedDongilItem({
   onApproveCheckOpen,
   setIdToApprove,
 }: ProposedDongilItemProps) {
-  const now = dayjs().day();
+  const currentDayOfWeek = dayjs().day();
   const { openModal } = useModals();
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const {
@@ -74,7 +74,11 @@ function ProposedDongilItem({
 
   return (
     <StyledButton
-      onClick={now === 7 ? openNoticeSundaySheet : openProposedReceiptModal}
+      onClick={
+        currentDayOfWeek === 7
+          ? openNoticeSundaySheet
+          : openProposedReceiptModal
+      }
     >
       <div className="text-wrapper">
         <span className="title">{title}</span>
