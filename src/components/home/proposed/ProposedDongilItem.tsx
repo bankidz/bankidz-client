@@ -1,6 +1,5 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
-<<<<<<< HEAD
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
@@ -13,14 +12,8 @@ import {
   selectProposedDongils,
 } from '@store/slices/proposedDongilsSlice';
 import { appendThisWeekSDongil } from '@store/slices/thisWeekSDongilsSlice';
-import { useState } from 'react';
-=======
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import useModals from '@lib/hooks/useModals';
-import { IDongil } from '@lib/types/IDongil';
 import dayjs from 'dayjs';
-import { Dispatch, SetStateAction } from 'react';
->>>>>>> dev
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -28,18 +21,8 @@ interface ProposedDongilItemProps {
   proposedDongil: IDongil;
 }
 
-<<<<<<< HEAD
 function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
-=======
-function ProposedDongilItem({
-  proposedDongil,
-  onApproveCheckOpen,
-  setIdToApprove,
-}: ProposedDongilItemProps) {
   const currentDayOfWeek = dayjs().day();
-  const { openModal } = useModals();
-  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
->>>>>>> dev
   const {
     id,
     createdAt,
@@ -52,7 +35,6 @@ function ProposedDongilItem({
     weeks,
     fileName,
   } = proposedDongil;
-<<<<<<< HEAD
 
   const {
     isOpen,
@@ -106,9 +88,10 @@ function ProposedDongilItem({
   // 2. 자녀의 돈길을 수락할까요?
   const openApproveCheckSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'ApproveCheck',
+      sheetContent: 'Check',
       sheetProps: { open: true },
       contentProps: {
+        type: 'approve',
         onApproveButtonClick: handleApproveButtonClick,
         onDismiss: setCloseBottomSheet,
       },
@@ -119,7 +102,7 @@ function ProposedDongilItem({
   const openApproveCompletedSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
-        sheetContent: 'SheetCompleted',
+        sheetContent: 'Completed',
         sheetProps: { open: true },
         contentProps: {
           type: 'approve',
@@ -131,8 +114,6 @@ function ProposedDongilItem({
 
   // 1. 제안받은 돈길 모달
   const { openModal } = useModals();
-=======
->>>>>>> dev
   const navigate = useNavigate();
 
   function openProposedReceiptModal() {
@@ -144,7 +125,6 @@ function ProposedDongilItem({
       onExtraSubmit: () => {
         openApproveCheckSheet!();
       },
-<<<<<<< HEAD
       createdAt,
       interestRate,
       itemName,
@@ -154,18 +134,6 @@ function ProposedDongilItem({
       weeks,
       fileName,
       isMom,
-=======
-      isKid: false,
-      createdAt: createdAt,
-      interestRate: interestRate,
-      isMom: isMom,
-      itemName: itemName,
-      title: title,
-      totalPrice: totalPrice,
-      weekPrice: weekPrice,
-      weeks: weeks,
-      fileName: fileName,
->>>>>>> dev
       shouldCloseOnOverlayClick: true,
     });
   }

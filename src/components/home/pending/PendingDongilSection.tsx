@@ -7,19 +7,7 @@ import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import PendingDongilList from './PendingDongilList';
 
-<<<<<<< HEAD
 function PendingDongilSection() {
-=======
-interface PendingDongilSectionProps {
-  onWarningDeleteSheetOpen: () => void;
-  setIdToDelete: Dispatch<SetStateAction<number | null>>;
-}
-
-function PendingDongilSection({
-  onWarningDeleteSheetOpen,
-  setIdToDelete,
-}: PendingDongilSectionProps) {
->>>>>>> dev
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
 
@@ -36,15 +24,7 @@ function PendingDongilSection({
     } else {
       content = (
         <>
-<<<<<<< HEAD
           <PendingDongilList pendingDongils={pendingDongils!} />
-=======
-          <PendingDongilList
-            pendingDongils={pendingDongils!}
-            onWarningDeleteSheetOpen={onWarningDeleteSheetOpen}
-            setIdToDelete={setIdToDelete}
-          />
->>>>>>> dev
         </>
       );
     }

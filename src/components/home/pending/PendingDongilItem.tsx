@@ -6,34 +6,16 @@ import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
-<<<<<<< HEAD
 import { useAppDispatch } from '@store/app/hooks';
 import { deletePendingDongil } from '@store/slices/pendingDongilsSlice';
 import { useState } from 'react';
-=======
-import dayjs from 'dayjs';
-import { Dispatch, SetStateAction } from 'react';
->>>>>>> dev
 import styled from 'styled-components';
 
 interface PendingDongilItemProps {
   pendingDongil: IDongil;
-<<<<<<< HEAD
 }
 
 function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
-=======
-  onWarningDeleteSheetOpen: () => void;
-  setIdToDelete: Dispatch<SetStateAction<number | null>>;
-}
-
-function PendingDongilItem({
-  pendingDongil,
-  onWarningDeleteSheetOpen,
-  setIdToDelete,
-}: PendingDongilItemProps) {
-  const { openModal } = useModals();
->>>>>>> dev
   const {
     id,
     challengeStatus,
@@ -82,12 +64,13 @@ function PendingDongilItem({
   // 1. 정말로 삭제할거에요?
   const openDeleteCheckSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'DeleteCheck',
+      sheetContent: 'Check',
       sheetProps: {
         open: true,
       },
       contentProps: {
-        onClickDelete: handleDeleteButtonClick,
+        type: 'delete',
+        onMainActionClick: handleDeleteButtonClick,
         onDismiss: setCloseBottomSheet,
       },
     });
@@ -96,7 +79,7 @@ function PendingDongilItem({
   // 3. 삭제되었어요
   const openDeleteCompletedSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'SheetCompleted',
+      sheetContent: 'Completed',
       sheetProps: {
         open: true,
       },
@@ -128,12 +111,7 @@ function PendingDongilItem({
     openModal(modals.receiptModal, {
       variant: 'rejected',
       onSubmit: () => {
-<<<<<<< HEAD
         openDeleteCheckSheet();
-=======
-        onWarningDeleteSheetOpen();
-        setIdToDelete(id);
->>>>>>> dev
       },
       createdAt,
       interestRate,
