@@ -1,17 +1,14 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import LoginPage from './pages/OnBoarding/LoginPage';
-import OAuthRedirectPage from './pages/OnBoarding/OAuthRedirectPage';
-import RegisterPage from './pages/OnBoarding/RegisterPage';
+import OnBoardingRouter from './pages/OnBoarding';
 import HomeRouter from './pages/Home';
+import WalkRouter from './pages/Walk';
 import MypageRouter from './pages/Mypage';
 import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
-import WalkRouter from './pages/Walk';
-import { useEffect } from 'react';
-// import SungwooTestPage from './pages/SungwooTestPage';
 
 function App() {
   useEffect(() => {
@@ -29,9 +26,7 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/auth/kakao/callback" element={<OAuthRedirectPage />} />
-        <Route path="/register/:step" element={<RegisterPage />} />
+        <Route path="/auth/*" element={<OnBoardingRouter />} />
         {/* <Route element={<PersistLogin />}> */}
         {/* <Route element={<RequireAuth />}> */}
         <Route path="/*" element={<HomeRouter />} />

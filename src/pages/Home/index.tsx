@@ -17,6 +17,7 @@ function HomeRouter() {
   const myLevel = useAppSelector(selectLevel);
   const kidLevel = useAppSelector(selectSelectedKid)?.level!;
   level = isKid ? myLevel : kidLevel;
+
   return (
     <Routes>
       {/* 자녀 / 부모 - 홈 */}
