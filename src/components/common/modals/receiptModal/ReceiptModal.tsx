@@ -45,7 +45,6 @@ interface ReceiptModalProps
   onExtraSubmit?: any;
   isMom: boolean;
   shouldCloseOnOverlayClick: boolean;
-  isSubmit?: boolean;
 }
 
 function ReceiptModal({
@@ -63,7 +62,6 @@ function ReceiptModal({
   comment,
   shouldCloseOnOverlayClick = false,
   fileName,
-  isSubmit = false,
 }: ReceiptModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
@@ -78,7 +76,6 @@ function ReceiptModal({
       onExtraSubmit();
     }, OVERLAY_TRANSITION_TIME);
   }
-
   const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,

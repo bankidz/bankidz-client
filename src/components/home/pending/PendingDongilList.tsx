@@ -5,13 +5,13 @@ import PendingDongilItem from './PendingDongilItem';
 
 interface PendingDongilListProps {
   pendingDongils: IDongil[];
-  onDeleteCheckOpen: () => void;
+  onWarningDeleteSheetOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
 function PendingDongilList({
   pendingDongils,
-  onDeleteCheckOpen,
+  onWarningDeleteSheetOpen,
   setIdToDelete,
 }: PendingDongilListProps) {
   return (
@@ -20,7 +20,7 @@ function PendingDongilList({
         <PendingDongilItem
           key={pendingDongil.id}
           pendingDongil={pendingDongil}
-          onDeleteCheckOpen={onDeleteCheckOpen}
+          onWarningDeleteSheetOpen={onWarningDeleteSheetOpen}
           setIdToDelete={setIdToDelete}
         />
       ))}

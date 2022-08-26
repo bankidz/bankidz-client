@@ -3,13 +3,13 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectBottomSheetState } from '@store/slices/bottomSheetSlice';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
-import ApproveCheck from './commonSheet/ApproveCheck';
-import DeleteCheck from './commonSheet/DeleteCheck';
+import Check from './commonSheet/Check';
 import DongilFailed from './commonSheet/DongilFailed';
 import GiveUpCheck from './commonSheet/GiveUpCheck';
-import GiveUpExceeded from './commonSheet/GiveUpExceeded';
+import Notice from './commonSheet/Notice';
 import SelectProfile from './commonSheet/SelectProfile';
-import SheetCompleted from './commonSheet/SheetCompleted';
+import Completed from './commonSheet/Completed';
+import Warning from './commonSheet/Warning';
 
 /* export const CONTRACT_SHEET_CONTENTS = {
   RangeInput: 'RangeInput',
@@ -26,23 +26,25 @@ const ContractSheetContent: any = {
 }; */
 
 export const COMMON_SHEET_CONTENTS = {
-  ApproveCheck: 'ApproveCheck',
-  DeleteCheck: 'DeleteCheck',
+  Check: 'Check',
   DongilFailed: 'DongilFailed',
   GiveUpCheck: 'GiveUpCheck',
-  GiveUpExceeded: 'GiveUpExceeded',
+  Notice: 'Notice',
   SelectProfile: 'SelectProfile',
-  SheetCompleted: 'SheetCompleted',
+  Completed: 'Completed',
+
+  Warning: 'Warning',
 } as const;
 
 const CommonSheetContent: any = {
-  [COMMON_SHEET_CONTENTS.ApproveCheck]: ApproveCheck,
-  [COMMON_SHEET_CONTENTS.DeleteCheck]: DeleteCheck,
+  [COMMON_SHEET_CONTENTS.Check]: Check,
   [COMMON_SHEET_CONTENTS.DongilFailed]: DongilFailed,
   [COMMON_SHEET_CONTENTS.GiveUpCheck]: GiveUpCheck,
-  [COMMON_SHEET_CONTENTS.GiveUpExceeded]: GiveUpExceeded,
+  [COMMON_SHEET_CONTENTS.Notice]: Notice,
   [COMMON_SHEET_CONTENTS.SelectProfile]: SelectProfile,
-  [COMMON_SHEET_CONTENTS.SheetCompleted]: SheetCompleted,
+  [COMMON_SHEET_CONTENTS.Completed]: Completed,
+
+  [COMMON_SHEET_CONTENTS.Warning]: Warning,
 };
 
 function GlobalBottomSheet() {

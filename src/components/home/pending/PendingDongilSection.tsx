@@ -10,12 +10,12 @@ import SkeletonDongilList from '../SkeletonDongilList';
 import PendingDongilList from './PendingDongilList';
 
 interface PendingDongilSectionProps {
-  onDeleteCheckOpen: () => void;
+  onWarningDeleteSheetOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
 function PendingDongilSection({
-  onDeleteCheckOpen,
+  onWarningDeleteSheetOpen,
   setIdToDelete,
 }: PendingDongilSectionProps) {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
@@ -36,7 +36,7 @@ function PendingDongilSection({
         <>
           <PendingDongilList
             pendingDongils={pendingDongils!}
-            onDeleteCheckOpen={onDeleteCheckOpen}
+            onWarningDeleteSheetOpen={onWarningDeleteSheetOpen}
             setIdToDelete={setIdToDelete}
           />
         </>

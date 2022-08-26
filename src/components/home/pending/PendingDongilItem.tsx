@@ -3,18 +3,19 @@ import { modals } from '@components/common/modals/Modals';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
+import dayjs from 'dayjs';
 import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface PendingDongilItemProps {
   pendingDongil: IDongil;
-  onDeleteCheckOpen: () => void;
+  onWarningDeleteSheetOpen: () => void;
   setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
 function PendingDongilItem({
   pendingDongil,
-  onDeleteCheckOpen,
+  onWarningDeleteSheetOpen,
   setIdToDelete,
 }: PendingDongilItemProps) {
   const { openModal } = useModals();
@@ -54,7 +55,7 @@ function PendingDongilItem({
     openModal(modals.receiptModal, {
       variant: 'rejected',
       onSubmit: () => {
-        onDeleteCheckOpen();
+        onWarningDeleteSheetOpen();
         setIdToDelete(id);
       },
       createdAt: createdAt,
