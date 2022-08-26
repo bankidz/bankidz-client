@@ -11,7 +11,7 @@ interface CompleteProps {
   onDismiss?: () => void;
 }
 
-const renderContent = {
+const content = {
   delete: {
     icon: <Complete />,
     main: '삭제되었어요',
@@ -57,11 +57,9 @@ function Completed({ type, title, onDismiss }: CompleteProps) {
     // TODO: fragment
     <Wrapper>
       <Container>
-        {renderContent[type].icon}
+        {content[type].icon}
         <div>
-          {type === 'giveUp'
-            ? `'${title}'가 취소되었어요`
-            : renderContent[type].main}
+          {type === 'giveUp' ? `'${title}'가 취소되었어요` : content[type].main}
         </div>
       </Container>
       <Button

@@ -9,7 +9,7 @@ interface WarningProps {
   onDismiss: () => void;
 }
 
-const renderContent = {
+const content = {
   delete: {
     icon: <Delete />,
     main: '정말로 삭제할거예요?',
@@ -32,8 +32,8 @@ function Warning({ type, onMainActionClick, onDismiss }: WarningProps) {
     <Wrapper>
       <Container>
         <Delete />
-        <div className="main">{renderContent[type].main}</div>
-        <div className="sub">{renderContent[type].sub}</div>
+        <div className="main">{content[type].main}</div>
+        <div className="sub">{content[type].sub}</div>
       </Container>
       <ButtonContainer>
         <Button label="취소" property="sub" onClick={onDismiss} />

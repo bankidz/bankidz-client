@@ -9,7 +9,7 @@ interface NoticeProps {
   onMainActionClick?: () => void;
 }
 
-const renderContent = {
+const content = {
   giveUpExceeded: {
     icon: <Banki />,
     main: '포기 횟수 초과',
@@ -31,9 +31,9 @@ function Notice({ type, onMainActionClick }: NoticeProps) {
   return (
     <Wrapper>
       <Container type={type}>
-        {renderContent[type].icon}
-        <p>{renderContent[type].main}</p>
-        <p>{renderContent[type].sub}</p>
+        {content[type].icon}
+        <p>{content[type].main}</p>
+        <p>{content[type].sub}</p>
       </Container>
       <Button
         label="확인"

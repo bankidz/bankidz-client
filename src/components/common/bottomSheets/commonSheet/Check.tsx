@@ -15,7 +15,7 @@ interface CheckProps {
   onDismiss: () => void;
 }
 
-const renderContent = {
+const content = {
   approve: {
     icon: <CheckIcon />,
     main: <p>자녀의 돈길을 수락할까요?</p>,
@@ -62,14 +62,14 @@ function Check({ type, onMainActionClick, onDismiss }: CheckProps) {
   return (
     <Wrapper>
       <Container>
-        {renderContent[type].icon}
-        <div className="main">{renderContent[type].main}</div>
-        <div className="sub">{renderContent[type].sub}</div>
+        {content[type].icon}
+        <div className="main">{content[type].main}</div>
+        <div className="sub">{content[type].sub}</div>
       </Container>
       <ButtonContainer>
         <Button label="취소" property="sub" onClick={onDismiss} />
         <Button
-          label={renderContent[type].label}
+          label={content[type].label}
           property="default"
           onClick={onMainActionClick}
         />
