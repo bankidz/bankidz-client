@@ -31,7 +31,7 @@ function Reject() {
         await dispatch(
           rejectProposedDongil({
             axiosPrivate,
-            idToApprove: parseInt(id!),
+            id: parseInt(id!),
             comment: comment,
           }),
         ).unwrap();

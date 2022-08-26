@@ -51,9 +51,8 @@ export const kidsSlice = createSlice({
           }
         }
       })
-      .addCase(fetchKids.rejected, (state, action) => {
+      .addCase(fetchKids.rejected, (state) => {
         state.kidsStatus = 'failed';
-        console.error(action.error);
       });
   },
 });

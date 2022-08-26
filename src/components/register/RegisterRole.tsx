@@ -59,8 +59,8 @@ function RegisterRole() {
       onSubmit: () => {
         navigate('/', { replace: true });
       },
-      isKid: isKid,
-      isFemale: isFemale,
+      isKid,
+      isFemale,
       headerText: '뱅키즈 첫 가입을 축하해요',
       bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
     });

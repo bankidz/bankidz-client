@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
@@ -7,26 +7,19 @@ import {
   selectParentSummariesStatus,
 } from '@store/slices/parentSummariesSlice';
 import {
-  appendThisWeekSDongil,
   fetchThisWeekSDongils,
   selectThisWeekSDongilsStatus,
 } from '@store/slices/thisWeekSDongilsSlice';
 import {
-  approveProposedDongil,
   fetchProposedDongils,
-  selectProposedDongils,
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
-
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-
-import { TFetchStatus } from '@lib/types/TFetchStatus';
 import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
 import useIsFetched from '../../lib/hooks/useIsFetched';
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 // 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
 // 그 직후 자녀 목록의 첫번째 자녀의 kidId를 통해 해당 자녀에 대한
@@ -91,88 +84,10 @@ function ParentHome() {
     hydrate();
   }, [selectedKid]);
 
-  // 제안받은 돈길 거절하기, 수락하기 (바텀시트, 모달)
-  const [idToApprove, setIdToApprove] = useState<number>(-1); // -1: initial flag value
-  const {
-    isOpen,
-    setOpenBottomSheet,
-    setCloseBottomSheet,
-    openSheetBySequence,
-  } = useGlobalBottomSheet();
-  const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const canApproveProposedDongil =
-    approveProposedDongilStatus === 'idle' &&
-    idToApprove !== -1 &&
-    selectedKid !== null;
-  const proposedDongils = useAppSelector(selectProposedDongils);
-
-  async function handleApproveButtonClick() {
-    if (canApproveProposedDongil) {
-      try {
-        setApproveProposedDongilStatus('pending');
-        await dispatch(
-          approveProposedDongil({
-            axiosPrivate,
-            idToApprove,
-            isApprove: true,
-          }),
-        ).unwrap();
-
-        const getApprovedDongil = (idToApprove: number) => {
-          let found;
-          proposedDongils.map((proposedDongil) => {
-            found = proposedDongil.challengeList.find(
-              (challenge) => challenge.id === idToApprove,
-            );
-          });
-          return found;
-        };
-        const approvedDongil = getApprovedDongil(idToApprove)!;
-        dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
-        openApproveCompletedSheet();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setApproveProposedDongilStatus('idle');
-      }
-    }
-  }
-
-  // 수락하기 바텀시트 열기
-  const openApproveCheckSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'Check',
-      sheetProps: { open: true },
-      contentProps: {
-        type: 'approve',
-        onMainActionClick: handleApproveButtonClick,
-        onDismiss: setCloseBottomSheet,
-      },
-    });
-  };
-
-  // 수락 완료 바텀시트 열기
-  const openApproveCompletedSheet = () => {
-    const openSheet = () =>
-      setOpenBottomSheet({
-        sheetContent: 'Completed',
-        sheetProps: { open: true },
-        contentProps: {
-          type: 'approve',
-          onDismiss: setCloseBottomSheet,
-        },
-      });
-    openSheetBySequence(openSheet);
-  };
-
   return (
     <>
       <ParentSummary />
-      <ProposedDongilSection
-        onApproveCheckOpen={openApproveCheckSheet}
-        setIdToApprove={setIdToApprove}
-      />
+      <ProposedDongilSection />
       <ThisWeekSDongilSection />
       <LargeSpacer />
       <Modals />

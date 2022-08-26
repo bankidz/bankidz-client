@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { KAKAO_AUTH_URL } from '@lib/constants';
+import { APPLE_AUTH_URL, KAKAO_AUTH_URL } from '@lib/constants';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 
 function LoginPage() {
@@ -16,6 +16,11 @@ function LoginPage() {
           label="카카오로 시작하기"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
           property="kakao"
+        />
+        <ButtonWithMarginBottom
+          label="APPLE로 로그인"
+          onClick={() => (window.location.href = APPLE_AUTH_URL)}
+          property="sub"
         />
       </MarginTemplate>
     </Wrapper>

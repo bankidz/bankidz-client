@@ -37,11 +37,11 @@ export const approveProposedDongil = createAsyncThunk(
   'proposedDongils/approve',
   async (thunkPayload: {
     axiosPrivate: AxiosInstance;
-    idToApprove: number;
+    id: number;
     isApprove: boolean;
   }) => {
-    const { axiosPrivate, idToApprove, isApprove } = thunkPayload;
-    const response = await axiosPrivate.patch(`/challenge/${idToApprove}`, {
+    const { axiosPrivate, id, isApprove } = thunkPayload;
+    const response = await axiosPrivate.patch(`/challenge/${id}`, {
       accept: isApprove,
     });
     return response.data;
@@ -53,11 +53,11 @@ export const rejectProposedDongil = createAsyncThunk(
   'proposedDongils/reject',
   async (thunkPayload: {
     axiosPrivate: AxiosInstance;
-    idToApprove: number;
+    id: number;
     comment: string;
   }) => {
-    const { axiosPrivate, idToApprove, comment } = thunkPayload;
-    const response = await axiosPrivate.patch(`/challenge/${idToApprove}`, {
+    const { axiosPrivate, id, comment } = thunkPayload;
+    const response = await axiosPrivate.patch(`/challenge/${id}`, {
       accept: false,
       comment,
     });
@@ -81,9 +81,8 @@ export const proposedDongilsSlice = createSlice({
           action.payload.data,
         );
       })
-      .addCase(fetchProposedDongils.rejected, (state, action) => {
+      .addCase(fetchProposedDongils.rejected, (state) => {
         state.proposedDongilsStatus = 'failed';
-        console.error(action.error);
       })
       .addCase(approveProposedDongil.fulfilled, (state, action) => {
         const approvedId = action.payload.data.id;

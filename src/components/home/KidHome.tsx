@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
 import {
   fetchKidSummary,
   selectKidSummaryStatus,
@@ -11,18 +10,14 @@ import {
   selectWalkingDongilsStatus,
 } from '@store/slices/walkingDongilsSlice';
 import {
-  deletePendingDongil,
   fetchPendingDongils,
-  selectPendingDongils,
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilsSlice';
-
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import KidSummary from '@components/home/summary/KidSummary';
 import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
 import PendingDongilSection from '@components/home/pending/PendingDongilSection';
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 // 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
 // 이후에 홈 페이지 재 진입 시는 해당 데이터를 fetch 하지 않습니다.
@@ -33,7 +28,6 @@ function KidHome() {
   const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
-  const pendingDongils = useAppSelector(selectPendingDongils);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
@@ -53,74 +47,11 @@ function KidHome() {
     hydrate();
   }, []);
 
-  // 대기중인 돈길 삭제 (바텀시트, 모달)
-  const [deletePendingDongilStatus, setDeletePendingDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const [idToDelete, setIdToDelete] = useState<number | null>(null);
-  const canDeletePendingDongil =
-    idToDelete !== null &&
-    pendingDongils !== null &&
-    pendingDongils.length !== 0 &&
-    deletePendingDongilStatus === 'idle';
-  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
-    useGlobalBottomSheet();
-
-  async function handleDeleteButtonClick() {
-    if (canDeletePendingDongil) {
-      try {
-        setDeletePendingDongilStatus('pending');
-        await dispatch(
-          deletePendingDongil({
-            axiosPrivate,
-            id: idToDelete,
-          }),
-        ).unwrap();
-        openWarningDeleteSheet();
-      } catch (error: any) {
-        console.log(error);
-      } finally {
-        setDeletePendingDongilStatus('idle');
-      }
-    }
-    openSheetBySequence(openDeleteCompletedSheet);
-  }
-
-  // 1. '정말로 삭제할거에요?' 바텀시트 열기
-  const openWarningDeleteSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'Warning',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        type: 'delete',
-        onMainActionClick: handleDeleteButtonClick,
-        onDismiss: setCloseBottomSheet,
-      },
-    });
-  };
-
-  // 2. '삭제되었어요' 바텀시트 열기
-  const openDeleteCompletedSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'Completed',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        type: 'delete',
-      },
-    });
-  };
-
   return (
     <>
       <KidSummary />
       <WalkingDongilSection />
-      <PendingDongilSection
-        onWarningDeleteSheetOpen={openWarningDeleteSheet}
-        setIdToDelete={setIdToDelete}
-      />
+      <PendingDongilSection />
       <LargeSpacer />
       <Modals />
     </>

@@ -3,21 +3,11 @@ import {
   selectPendingDongils,
   selectPendingDongilsStatus,
 } from '@store/slices/pendingDongilsSlice';
-import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
-import SkeletonDongilList from '../SkeletonDongilList';
 import PendingDongilList from './PendingDongilList';
 
-interface PendingDongilSectionProps {
-  onWarningDeleteSheetOpen: () => void;
-  setIdToDelete: Dispatch<SetStateAction<number | null>>;
-}
-
-function PendingDongilSection({
-  onWarningDeleteSheetOpen,
-  setIdToDelete,
-}: PendingDongilSectionProps) {
+function PendingDongilSection() {
   const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
   const pendingDongils = useAppSelector(selectPendingDongils);
 
@@ -34,11 +24,7 @@ function PendingDongilSection({
     } else {
       content = (
         <>
-          <PendingDongilList
-            pendingDongils={pendingDongils!}
-            onWarningDeleteSheetOpen={onWarningDeleteSheetOpen}
-            setIdToDelete={setIdToDelete}
-          />
+          <PendingDongilList pendingDongils={pendingDongils!} />
         </>
       );
     }

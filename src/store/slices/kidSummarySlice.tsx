@@ -41,9 +41,8 @@ export const kidSummarySlice = createSlice({
         state.kidSummaryStatus = 'succeeded';
         state.kidSummary = action.payload.data;
       })
-      .addCase(fetchKidSummary.rejected, (state, action) => {
+      .addCase(fetchKidSummary.rejected, (state) => {
         state.kidSummaryStatus = 'failed';
-        console.error(action.error);
       });
   },
 });

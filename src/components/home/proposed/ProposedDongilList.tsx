@@ -5,23 +5,15 @@ import ProposedDongilItem from './ProposedDongilItem';
 
 interface ProposedDongilListProps {
   proposedDongils: IDongil[];
-  onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number>>;
 }
 
-function ProposedDongilList({
-  proposedDongils,
-  onApproveCheckOpen,
-  setIdToApprove,
-}: ProposedDongilListProps) {
+function ProposedDongilList({ proposedDongils }: ProposedDongilListProps) {
   return (
     <Wrapper>
       {proposedDongils?.map((proposedDongil) => (
         <ProposedDongilItem
           key={proposedDongil.id}
           proposedDongil={proposedDongil}
-          onApproveCheckOpen={onApproveCheckOpen}
-          setIdToApprove={setIdToApprove}
         />
       ))}
     </Wrapper>

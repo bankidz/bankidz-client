@@ -1,27 +1,28 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
+import {
+  approveProposedDongil,
+  selectProposedDongils,
+} from '@store/slices/proposedDongilsSlice';
+import { appendThisWeekSDongil } from '@store/slices/thisWeekSDongilsSlice';
 import dayjs from 'dayjs';
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface ProposedDongilItemProps {
   proposedDongil: IDongil;
-  onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number>>;
 }
 
-function ProposedDongilItem({
-  proposedDongil,
-  onApproveCheckOpen,
-  setIdToApprove,
-}: ProposedDongilItemProps) {
+function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   const currentDayOfWeek = dayjs().day();
-  const { openModal } = useModals();
-  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const {
     id,
     createdAt,
@@ -34,6 +35,85 @@ function ProposedDongilItem({
     weeks,
     fileName,
   } = proposedDongil;
+
+  const {
+    isOpen,
+    setOpenBottomSheet,
+    setCloseBottomSheet,
+    openSheetBySequence,
+  } = useGlobalBottomSheet();
+
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const proposedDongils = useAppSelector(selectProposedDongils);
+  const dispatch = useAppDispatch();
+  const axiosPrivate = useAxiosPrivate();
+  const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canApproveProposedDongil =
+    approveProposedDongilStatus === 'idle' && selectedKid !== null;
+
+  // 3. 제안받은 돈길 수락
+  async function handleApproveButtonClick() {
+    if (canApproveProposedDongil) {
+      try {
+        setApproveProposedDongilStatus('pending');
+        await dispatch(
+          approveProposedDongil({
+            axiosPrivate,
+            id,
+            isApprove: true,
+          }),
+        ).unwrap();
+
+        const getApprovedDongil = (id: number) => {
+          let found;
+          proposedDongils.map((proposedDongil) => {
+            found = proposedDongil.challengeList.find(
+              (challenge) => challenge.id === id,
+            );
+          });
+          return found;
+        };
+        const approvedDongil = getApprovedDongil(id)!;
+        dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
+        openApproveCompletedSheet();
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setApproveProposedDongilStatus('idle');
+      }
+    }
+  }
+
+  // 2. 자녀의 돈길을 수락할까요?
+  const openApproveCheckSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Check',
+      sheetProps: { open: true },
+      contentProps: {
+        type: 'approve',
+        onApproveButtonClick: handleApproveButtonClick,
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  };
+
+  // 4. 자녀의 돈길이 수락되었어요
+  const openApproveCompletedSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Completed',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'approve',
+          onDismiss: setCloseBottomSheet,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  // 1. 제안받은 돈길 모달
+  const { openModal } = useModals();
   const navigate = useNavigate();
 
   function openProposedReceiptModal() {
@@ -43,19 +123,17 @@ function ProposedDongilItem({
         navigate(`/reject/${id}`);
       },
       onExtraSubmit: () => {
-        setIdToApprove!(id);
-        onApproveCheckOpen!();
+        openApproveCheckSheet!();
       },
-      isKid: false,
-      createdAt: createdAt,
-      interestRate: interestRate,
-      isMom: isMom,
-      itemName: itemName,
-      title: title,
-      totalPrice: totalPrice,
-      weekPrice: weekPrice,
-      weeks: weeks,
-      fileName: fileName,
+      createdAt,
+      interestRate,
+      itemName,
+      title,
+      totalPrice,
+      weekPrice,
+      weeks,
+      fileName,
+      isMom,
       shouldCloseOnOverlayClick: true,
     });
   }

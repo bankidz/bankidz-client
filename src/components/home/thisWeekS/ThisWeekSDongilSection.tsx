@@ -6,7 +6,6 @@ import {
 } from '@store/slices/thisWeekSDongilsSlice';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
-import SkeletonDongilList from '../SkeletonDongilList';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
 
 function ThisWeekSDongilSection() {
