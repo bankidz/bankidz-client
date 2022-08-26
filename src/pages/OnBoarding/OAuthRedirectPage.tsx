@@ -12,7 +12,6 @@ function OAuthRedirectPage() {
   // @ts-expect-error
   let params = new URL(document.location).searchParams;
   let code = params.get('code');
-  console.log(code);
 
   useEffect(() => {
     async function dispatchLogin() {
