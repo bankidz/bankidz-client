@@ -10,15 +10,7 @@ import EmptyDongil from '../EmptyDongil';
 import SkeletonDongilList from '../SkeletonDongilList';
 import ProposedDongilList from './ProposedDongilList';
 
-interface ProposedDongilSectionProps {
-  onApproveCheckOpen: () => void;
-  setIdToApprove: Dispatch<SetStateAction<number>>;
-}
-
-function ProposedDongilSection({
-  onApproveCheckOpen,
-  setIdToApprove,
-}: ProposedDongilSectionProps) {
+function ProposedDongilSection() {
   const proposedDongils = useAppSelector(selectProposedDongils);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -41,11 +33,7 @@ function ProposedDongilSection({
       content = <EmptyDongil variant="proposed" />;
     } else {
       content = (
-        <ProposedDongilList
-          proposedDongils={selectedKidSProposedDongils!}
-          onApproveCheckOpen={onApproveCheckOpen}
-          setIdToApprove={setIdToApprove}
-        />
+        <ProposedDongilList proposedDongils={selectedKidSProposedDongils!} />
       );
     }
   } else if (proposedDongilsStatus === 'failed') {
