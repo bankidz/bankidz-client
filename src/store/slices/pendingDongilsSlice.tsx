@@ -47,9 +47,8 @@ export const pendingDongilsSlice = createSlice({
         state.pendingDongilsStatus = 'succeeded';
         state.pendingDongils = action.payload.data;
       })
-      .addCase(fetchPendingDongils.rejected, (state, action) => {
+      .addCase(fetchPendingDongils.rejected, (state) => {
         state.pendingDongilsStatus = 'failed';
-        console.error(action.error);
       })
       .addCase(deletePendingDongil.fulfilled, (state, action) => {
         const { id } = action.payload.data;

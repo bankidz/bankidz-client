@@ -80,9 +80,8 @@ export const proposedDongilsSlice = createSlice({
           action.payload.data,
         );
       })
-      .addCase(fetchProposedDongils.rejected, (state, action) => {
+      .addCase(fetchProposedDongils.rejected, (state) => {
         state.proposedDongilsStatus = 'failed';
-        console.error(action.error);
       })
       .addCase(approveProposedDongil.fulfilled, (state, action) => {
         const approvedId = action.payload.data.id;
