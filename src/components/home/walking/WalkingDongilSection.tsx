@@ -5,7 +5,6 @@ import {
 } from '@store/slices/walkingDongilsSlice';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SkeletonDongilList from '../SkeletonDongilList';
 import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';

@@ -14,10 +14,8 @@ import {
   fetchProposedDongils,
   selectProposedDongilsStatus,
 } from '@store/slices/proposedDongilsSlice';
-
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-
 import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';

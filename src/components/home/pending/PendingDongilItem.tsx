@@ -1,23 +1,21 @@
 import ProposalBadge from '@components/common/badges/ProposalBadge';
 import { modals } from '@components/common/modals/Modals';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
+import { TFetchStatus } from '@lib/types/TFetchStatus';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
-import { Dispatch, SetStateAction } from 'react';
+import { useAppDispatch } from '@store/app/hooks';
+import { deletePendingDongil } from '@store/slices/pendingDongilsSlice';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 interface PendingDongilItemProps {
   pendingDongil: IDongil;
-  onDeleteCheckOpen: () => void;
-  setIdToDelete: Dispatch<SetStateAction<number | null>>;
 }
 
-function PendingDongilItem({
-  pendingDongil,
-  onDeleteCheckOpen,
-  setIdToDelete,
-}: PendingDongilItemProps) {
-  const { openModal } = useModals();
+function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   const {
     id,
     challengeStatus,
@@ -33,38 +31,95 @@ function PendingDongilItem({
     fileName,
   } = pendingDongil;
 
-  // 제안중
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
+
+  const dispatch = useAppDispatch();
+  const axiosPrivate = useAxiosPrivate();
+  const [deletePendingDongilStatus, setDeletePendingDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canDeletePendingDongil = deletePendingDongilStatus === 'idle';
+
+  // 2. 제안중인 돈길 삭제
+  async function handleDeleteButtonClick() {
+    if (canDeletePendingDongil) {
+      try {
+        setDeletePendingDongilStatus('pending');
+        await dispatch(
+          deletePendingDongil({
+            axiosPrivate,
+            id,
+          }),
+        ).unwrap();
+        openDeleteCheckSheet();
+      } catch (error: any) {
+        console.log(error);
+      } finally {
+        setDeletePendingDongilStatus('idle');
+      }
+    }
+    openSheetBySequence(openDeleteCompletedSheet);
+  }
+
+  // 1. 정말로 삭제할거에요?
+  const openDeleteCheckSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'DeleteCheck',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        onClickDelete: handleDeleteButtonClick,
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  };
+
+  // 3. 삭제되었어요
+  const openDeleteCompletedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'SheetCompleted',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'delete',
+      },
+    });
+  };
+
+  const { openModal } = useModals();
+  // 1-a. 제안중 모달
   function openQuinaryModal() {
     openModal(modals.receiptModal, {
       variant: 'proposing',
-      createdAt: createdAt,
-      interestRate: interestRate,
-      isMom: isMom,
-      itemName: itemName,
-      title: title,
-      totalPrice: totalPrice,
-      weekPrice: weekPrice,
-      weeks: weeks,
+      createdAt,
+      interestRate,
+      isMom,
+      itemName,
+      title,
+      totalPrice,
+      weekPrice,
+      weeks,
       fileName,
     });
   }
 
-  // 거절됨
+  // 1-b. 거절됨 모달
   function openSenaryModal() {
     openModal(modals.receiptModal, {
       variant: 'rejected',
       onSubmit: () => {
-        onDeleteCheckOpen();
-        setIdToDelete(id);
+        openDeleteCheckSheet();
       },
-      createdAt: createdAt,
-      interestRate: interestRate,
-      isMom: isMom,
-      itemName: itemName,
-      title: title,
-      totalPrice: totalPrice,
-      weekPrice: weekPrice,
-      weeks: weeks,
+      createdAt,
+      interestRate,
+      isMom,
+      itemName,
+      title,
+      totalPrice,
+      weekPrice,
+      weeks,
       comment,
       fileName,
     });

@@ -50,7 +50,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   const canApproveProposedDongil =
     approveProposedDongilStatus === 'idle' && selectedKid !== null;
 
-  // 3. 돈길 수락
+  // 3. 제안받은 돈길 수락
   async function handleApproveButtonClick() {
     if (canApproveProposedDongil) {
       try {
@@ -58,16 +58,16 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
         await dispatch(
           approveProposedDongil({
             axiosPrivate,
-            idToApprove: id,
+            id,
             isApprove: true,
           }),
         ).unwrap();
 
-        const getApprovedDongil = (idToApprove: number) => {
+        const getApprovedDongil = (id: number) => {
           let found;
           proposedDongils.map((proposedDongil) => {
             found = proposedDongil.challengeList.find(
-              (challenge) => challenge.id === idToApprove,
+              (challenge) => challenge.id === id,
             );
           });
           return found;
