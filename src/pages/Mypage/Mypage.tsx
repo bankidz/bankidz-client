@@ -5,6 +5,7 @@ import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import {
@@ -18,6 +19,7 @@ import {
   selectKidOverView,
   selectUserOverView,
 } from '@store/slices/overViewSlice';
+import { darken } from 'polished';
 import { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
@@ -43,8 +45,9 @@ function Mypage() {
   const familyStatus = useAppSelector(selectFamilyStatus);
   const family = useAppSelector(selectFamily);
   const user = useAppSelector(selectUserOverView);
-
   const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
+  const { setOpenBottomSheet } = useGlobalBottomSheet();
+
   useEffect(() => {
     const fetch = async () => {
       try {
@@ -57,6 +60,16 @@ function Mypage() {
     };
     fetch();
   }, []);
+
+  const openCreateDongilCompletedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Completed',
+      sheetProps: { open: true },
+      contentProps: {
+        type: 'createGroup',
+      },
+    });
+  };
 
   return (
     <Wrapper>
@@ -76,7 +89,14 @@ function Mypage() {
         )}
         <Section>
           <h2>가족 관리</h2>
-          {family ? <FamilyList family={family} /> : ''}
+          {family?.length ? (
+            <FamilyList family={family} />
+          ) : (
+            <CreateDongil onClick={openCreateDongilCompletedSheet}>
+              <p>가족그룹 만들기</p>
+              <p>그룹을 만들고 가족을 초대해봐요</p>
+            </CreateDongil>
+          )}
         </Section>
       </MarginTemplate>
       <LargeSpacer />
@@ -104,7 +124,7 @@ const Header = styled.div`
   position: fixed;
   top: 0px;
   width: 100%;
-  z-index: 5;
+  //z-index: 5;
 `;
 
 const Section = styled.div<{ smallGap?: boolean }>`
@@ -118,5 +138,25 @@ const Section = styled.div<{ smallGap?: boolean }>`
     ${({ theme }) => theme.typo.text.T_16_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
     margin-bottom: 24px;
+  }
+`;
+
+const CreateDongil = styled.div`
+  width: 100%;
+  background-color: ${({ theme }) => theme.palette.greyScale.white};
+  padding: 16px;
+  cursor: pointer;
+  border-radius: ${({ theme }) => theme.radius.small};
+  &:active {
+    background-color: ${darken(0.02, '#fff')};
+  }
+  & > p:first-child {
+    ${({ theme }) => theme.typo.text.T_18_EB}
+    color: ${({ theme }) => theme.palette.greyScale.black};
+    margin-bottom: 8px;
+  }
+  & > p:last-child {
+    ${({ theme }) => theme.typo.text.T_12_EB}
+    color: ${({ theme }) => theme.palette.greyScale.grey500};
   }
 `;
