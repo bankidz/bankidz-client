@@ -6,16 +6,34 @@ import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
+<<<<<<< HEAD
 import { useAppDispatch } from '@store/app/hooks';
 import { deletePendingDongil } from '@store/slices/pendingDongilsSlice';
 import { useState } from 'react';
+=======
+import dayjs from 'dayjs';
+import { Dispatch, SetStateAction } from 'react';
+>>>>>>> dev
 import styled from 'styled-components';
 
 interface PendingDongilItemProps {
   pendingDongil: IDongil;
+<<<<<<< HEAD
 }
 
 function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
+=======
+  onWarningDeleteSheetOpen: () => void;
+  setIdToDelete: Dispatch<SetStateAction<number | null>>;
+}
+
+function PendingDongilItem({
+  pendingDongil,
+  onWarningDeleteSheetOpen,
+  setIdToDelete,
+}: PendingDongilItemProps) {
+  const { openModal } = useModals();
+>>>>>>> dev
   const {
     id,
     challengeStatus,
@@ -110,7 +128,12 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
     openModal(modals.receiptModal, {
       variant: 'rejected',
       onSubmit: () => {
+<<<<<<< HEAD
         openDeleteCheckSheet();
+=======
+        onWarningDeleteSheetOpen();
+        setIdToDelete(id);
+>>>>>>> dev
       },
       createdAt,
       interestRate,

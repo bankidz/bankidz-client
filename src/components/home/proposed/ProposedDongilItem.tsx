@@ -1,5 +1,6 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
+<<<<<<< HEAD
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
@@ -13,6 +14,13 @@ import {
 } from '@store/slices/proposedDongilsSlice';
 import { appendThisWeekSDongil } from '@store/slices/thisWeekSDongilsSlice';
 import { useState } from 'react';
+=======
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import useModals from '@lib/hooks/useModals';
+import { IDongil } from '@lib/types/IDongil';
+import dayjs from 'dayjs';
+import { Dispatch, SetStateAction } from 'react';
+>>>>>>> dev
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -20,7 +28,18 @@ interface ProposedDongilItemProps {
   proposedDongil: IDongil;
 }
 
+<<<<<<< HEAD
 function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
+=======
+function ProposedDongilItem({
+  proposedDongil,
+  onApproveCheckOpen,
+  setIdToApprove,
+}: ProposedDongilItemProps) {
+  const currentDayOfWeek = dayjs().day();
+  const { openModal } = useModals();
+  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
+>>>>>>> dev
   const {
     id,
     createdAt,
@@ -33,6 +52,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     weeks,
     fileName,
   } = proposedDongil;
+<<<<<<< HEAD
 
   const {
     isOpen,
@@ -111,7 +131,10 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
 
   // 1. 제안받은 돈길 모달
   const { openModal } = useModals();
+=======
+>>>>>>> dev
   const navigate = useNavigate();
+
   function openProposedReceiptModal() {
     openModal(modals.receiptModal, {
       variant: 'proposed',
@@ -121,6 +144,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       onExtraSubmit: () => {
         openApproveCheckSheet!();
       },
+<<<<<<< HEAD
       createdAt,
       interestRate,
       itemName,
@@ -130,12 +154,42 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       weeks,
       fileName,
       isMom,
+=======
+      isKid: false,
+      createdAt: createdAt,
+      interestRate: interestRate,
+      isMom: isMom,
+      itemName: itemName,
+      title: title,
+      totalPrice: totalPrice,
+      weekPrice: weekPrice,
+      weeks: weeks,
+      fileName: fileName,
+>>>>>>> dev
       shouldCloseOnOverlayClick: true,
     });
   }
 
+  const openNoticeSundaySheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Notice',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'sunday',
+      },
+    });
+  };
+
   return (
-    <StyledButton onClick={openProposedReceiptModal}>
+    <StyledButton
+      onClick={
+        currentDayOfWeek === 7
+          ? openNoticeSundaySheet
+          : openProposedReceiptModal
+      }
+    >
       <div className="text-wrapper">
         <span className="title">{title}</span>
         <span className="totalPrice">

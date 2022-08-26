@@ -76,7 +76,6 @@ function ReceiptModal({
       onExtraSubmit();
     }, OVERLAY_TRANSITION_TIME);
   }
-
   const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,

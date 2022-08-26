@@ -1,12 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
 import CommonSheet from './CommonSheet';
-import ApproveCheck from './ApproveCheck';
+import Check from './Check';
 import SelectProfile from './SelectProfile';
 import GiveUpCheck from './GiveUpCheck';
-import DeleteCheck from './DeleteCheck';
-import SheetCompleted from './SheetCompleted';
-import GiveUpExceeded from './GiveUpExceeded';
+import Completed from './Completed';
+import Notice from './Notice';
 import DongilFailed from './DongilFailed';
 
 export default {
@@ -31,59 +30,66 @@ export const 돈길포기_확인 = Template.bind({});
   open: true,
 };
 
-export const 삭제_확인 = Template.bind({});
-삭제_확인.args = {
-  children: <DeleteCheck onClickDelete={() => {}} onDismiss={() => {}} />,
-  open: true,
-};
-
 export const 돈길_수락 = Template.bind({});
 돈길_수락.args = {
   children: (
-    <ApproveCheck onApproveButtonClick={() => {}} onDismiss={() => {}} />
+    <Check type={'approve'} onMainActionClick={() => {}} onDismiss={() => {}} />
   ),
   open: true,
 };
-
-export const 삭제_완료 = Template.bind({});
-삭제_완료.args = {
-  children: <SheetCompleted type="delete" onDismiss={() => {}} />,
-  open: true,
-};
-
-export const 수락_완료 = Template.bind({});
-수락_완료.args = {
-  children: <SheetCompleted type="approve" onDismiss={() => {}} />,
-  open: true,
-};
-
-export const 포기_취소 = Template.bind({});
-포기_취소.args = {
-  children: <SheetCompleted type="cancel" onDismiss={() => {}} />,
-  open: true,
-};
-
-export const 피드백_전송 = Template.bind({});
-피드백_전송.args = {
-  children: <SheetCompleted type="feedback" onDismiss={() => {}} />,
-  open: true,
-};
-
-export const 돈길_포기_완료 = Template.bind({});
-돈길_포기_완료.args = {
+export const 가족그룹_이동 = Template.bind({});
+가족그룹_이동.args = {
   children: (
-    <SheetCompleted
-      type="giveUp"
-      title="에어팟 구매하기"
+    <Check
+      type={'moveGroup'}
+      onMainActionClick={() => {}}
       onDismiss={() => {}}
     />
   ),
   open: true,
 };
 
+export const 삭제_완료 = Template.bind({});
+삭제_완료.args = {
+  children: <Completed type="delete" onDismiss={() => {}} />,
+  open: true,
+};
+
+export const 수락_완료 = Template.bind({});
+수락_완료.args = {
+  children: <Completed type="approve" onDismiss={() => {}} />,
+  open: true,
+};
+
+export const 포기_취소 = Template.bind({});
+포기_취소.args = {
+  children: <Completed type="cancel" onDismiss={() => {}} />,
+  open: true,
+};
+
+export const 피드백_전송 = Template.bind({});
+피드백_전송.args = {
+  children: <Completed type="feedback" onDismiss={() => {}} />,
+  open: true,
+};
+
+export const 돈길_포기_완료 = Template.bind({});
+돈길_포기_완료.args = {
+  children: (
+    <Completed type="giveUp" title="에어팟 구매하기" onDismiss={() => {}} />
+  ),
+  open: true,
+};
+
 export const 포기_횟수_초과 = Template.bind({});
 포기_횟수_초과.args = {
-  children: <GiveUpExceeded onDismiss={() => {}} />,
+  children: <Notice type="giveUpExceeded" />,
+  open: true,
+};
+
+export const 뱅키즈_쉬는날 = Template.bind({});
+뱅키즈_쉬는날.args = {
+  children: <Notice type="sunday" />,
   open: true,
 };
 

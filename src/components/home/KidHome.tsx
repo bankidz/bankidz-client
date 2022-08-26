@@ -47,11 +47,81 @@ function KidHome() {
     hydrate();
   }, []);
 
+<<<<<<< HEAD
+=======
+  // 대기중인 돈길 삭제 (바텀시트, 모달)
+  const [deletePendingDongilStatus, setDeletePendingDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const [idToDelete, setIdToDelete] = useState<number | null>(null);
+  const canDeletePendingDongil =
+    idToDelete !== null &&
+    pendingDongils !== null &&
+    pendingDongils.length !== 0 &&
+    deletePendingDongilStatus === 'idle';
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
+
+  async function handleDeleteButtonClick() {
+    if (canDeletePendingDongil) {
+      try {
+        setDeletePendingDongilStatus('pending');
+        await dispatch(
+          deletePendingDongil({
+            axiosPrivate,
+            id: idToDelete,
+          }),
+        ).unwrap();
+        openWarningDeleteSheet();
+      } catch (error: any) {
+        console.log(error);
+      } finally {
+        setDeletePendingDongilStatus('idle');
+      }
+    }
+    openSheetBySequence(openDeleteCompletedSheet);
+  }
+
+  // 1. '정말로 삭제할거에요?' 바텀시트 열기
+  const openWarningDeleteSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Warning',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'delete',
+        onMainActionClick: handleDeleteButtonClick,
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  };
+
+  // 2. '삭제되었어요' 바텀시트 열기
+  const openDeleteCompletedSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Completed',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'delete',
+      },
+    });
+  };
+
+>>>>>>> dev
   return (
     <>
       <KidSummary />
       <WalkingDongilSection />
+<<<<<<< HEAD
       <PendingDongilSection />
+=======
+      <PendingDongilSection
+        onWarningDeleteSheetOpen={openWarningDeleteSheet}
+        setIdToDelete={setIdToDelete}
+      />
+>>>>>>> dev
       <LargeSpacer />
       <Modals />
     </>
