@@ -6,18 +6,15 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { selectIsKid } from '@store/slices/authSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import {
   deleteClientSideWalkingDongilById,
   deleteWalkingDongil,
-  selectWalkingDongils,
 } from '@store/slices/walkingDongilsSlice';
-import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { calcRatio } from '@lib/styles/theme';
-import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import useTargetDongil from '@components/home/detail/useTargetDongil';
 
@@ -25,18 +22,12 @@ import OverViewSection from '@components/home/detail/OverViewSection';
 import InterestStampListSection from '@components/home/detail/InterestStampListSection';
 import DongilContractContentSection from '@components/home/detail/DongilContractContentSection';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import useLevel from '@lib/hooks/useLevel';
 
 function Detail() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
-  const selectedKid = useAppSelector(selectSelectedKid);
-  let level: TLevel = useAppSelector(selectLevel)!;
-  const temp = useAppSelector(selectLevel)!;
-  if (isKid === true) {
-    level = temp;
-  } else if (isKid === false) {
-    level = selectedKid?.level!;
-  }
+  const level = useLevel();
   const colorByLevel = getColorByLevel(level!);
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
@@ -53,7 +44,6 @@ function Detail() {
     successWeeks,
     challengeStatus,
   } = targetDongil!;
-  const percent = Math.ceil((successWeeks / weeks / 10) * 100) * 10;
   const {
     isOpen,
     setOpenBottomSheet,
@@ -62,17 +52,13 @@ function Detail() {
   } = useGlobalBottomSheet();
 
   const axiosPrivate = useAxiosPrivate();
-  const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const walkingDongils = useAppSelector(selectWalkingDongils);
-  const canGiveUpWalkingDongil =
-    walkingDongils !== null &&
-    walkingDongils !== [] &&
-    giveUpWalkingDongilStatus === 'idle';
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canGiveUpWalkingDongil = giveUpWalkingDongilStatus === 'idle';
 
-  //1. '돈길 포기하기' 바텀시트 열기
+  // 1. '돈길 포기하기' 바텀시트 열기
   const openGiveUpBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'GiveUpCheck',
@@ -112,7 +98,7 @@ function Detail() {
     }
   }
 
-  //2-b. 포기하기 취소 버튼 클릭
+  // 2-b. 포기하기 취소 버튼 클릭
   const openCancelGiveUpBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
