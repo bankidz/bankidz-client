@@ -1,14 +1,14 @@
-import ProposalBadge from '@components/common/badges/ProposalBadge';
 import { modals } from '@components/common/modals/Modals';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
-import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
 import { useAppDispatch } from '@store/app/hooks';
 import { deletePendingDongil } from '@store/slices/pendingDongilsSlice';
 import { useState } from 'react';
+import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
+import ProposalBadge from '@components/common/badges/ProposalBadge';
 import styled from 'styled-components';
 
 interface PendingDongilItemProps {

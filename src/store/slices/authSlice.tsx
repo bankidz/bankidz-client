@@ -27,9 +27,9 @@ interface IAuthState {
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDEzMTU3LCJzdWIiOiIyIiwiZXhwIjoxNjYzODMyMzU3LCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.Cd01Ev34qZ8bKlpdtke3sNRRzXm2csyp3M_7rbyqYkE',
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDM1MTg5LCJzdWIiOiI1IiwiZXhwIjoxNjYzODU0Mzg5LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.SyPHLiGa68dGG7iYfo1_k-HRUiL80K0Gk03D0GVQrzI',
     isKid: false,
-    level: 2,
+    level: null,
     birthday: '',
     username: '',
     isFemale: false,
@@ -68,13 +68,13 @@ export const register = createAsyncThunk(
   },
 );
 
-interface ICredential extends Pick<IAuth, 'accessToken' | 'isKid' | 'level'> {}
+interface ICredentials extends Pick<IAuth, 'accessToken' | 'isKid' | 'level'> {}
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<ICredential>) => {
+    setCredentials: (state, action: PayloadAction<ICredentials>) => {
       const { accessToken, isKid, level } = action.payload;
       state.auth.accessToken = accessToken;
       state.auth.isKid = isKid;
