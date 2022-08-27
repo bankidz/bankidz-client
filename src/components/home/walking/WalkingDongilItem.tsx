@@ -15,16 +15,12 @@ import { IDongil } from '@lib/types/IDongil';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface WalkingDongilItemProps
-  extends Pick<
-    IDongil,
-    'itemName' | 'title' | 'id' | 'interestRate' | 'challengeStatus'
-  > {}
+  extends Pick<IDongil, 'itemName' | 'title' | 'id' | 'challengeStatus'> {}
 
 function WalkingDongilItem({
   itemName,
   title,
   id,
-  interestRate,
   challengeStatus,
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();

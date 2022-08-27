@@ -8,6 +8,7 @@ import Receipt from '@components/common/receipt/Receipt';
 import SkeletonCircle from '@components/skeletons/SkeletonCircle';
 import SkeletonRectangle from '@components/skeletons/SkeletonRectangle';
 import SkeletonSummary from '@components/skeletons/SkeletonSummary';
+import SkeletonDongilList from '@components/skeletons/SkeletonDongilList';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -85,8 +86,10 @@ function SungwooTestPage() {
   return (
     <Wrapper>
       <MarginTemplate>
-        <SkeletonSummary variant="KidHome" />
-        <SkeletonSummary variant="ParentHome" />
+        <SkeletonDongilList variant="walking" />
+        {/* <SkeletonDongilList variant='pending'/>
+        <SkeletonDongilList variant='proposed'/>
+        <SkeletonDongilList variant='thisWeekS'/> */}
         {/* <RectangleWrapper>
           <SkeletonRectangle borderRadius={10} />
         </RectangleWrapper>

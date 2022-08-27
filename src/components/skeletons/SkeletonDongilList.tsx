@@ -1,16 +1,21 @@
 import { TDongilVariant } from '@lib/types/TDongilVariant';
 import styled, { css } from 'styled-components';
+import WalkingDongilItem from './dongilItems/WalkingDongilItem';
 
 interface SkeletonDongilListProps {
   variant: TDongilVariant;
 }
 
 function SkeletonDongilList({ variant }: SkeletonDongilListProps) {
+  let content;
+  if (variant === 'walking') {
+    content = <WalkingDongilItem />;
+  }
+
   return (
     <Wrapper variant={variant}>
-      <Item variant={variant} />
-      <Item variant={variant} />
-      <Item variant={variant} />
+      <ItemWrapper variant={variant}>{content}</ItemWrapper>
+      <ItemWrapper variant={variant}>{content}</ItemWrapper>
     </Wrapper>
   );
 }
@@ -25,7 +30,8 @@ const Wrapper = styled.div<{ variant: TDongilVariant }>`
   align-items: center;
 `;
 
-const Item = styled.div<{ variant: TDongilVariant }>`
+const ItemWrapper = styled.div<{ variant: TDongilVariant }>`
+  background: skyblue;
   width: 100%;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
