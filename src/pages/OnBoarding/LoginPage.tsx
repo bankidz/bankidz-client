@@ -59,3 +59,5 @@ const TextWrapper = styled.div`
 const ButtonWithMarginBottom = styled(Button)`
   margin-bottom: 16px;
 `;
+
+// https://developer.apple.com/forums/thread/122857
