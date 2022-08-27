@@ -7,6 +7,7 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import Receipt from '@components/common/receipt/Receipt';
 import SkeletonCircle from '@components/skeletons/SkeletonCircle';
 import SkeletonRectangle from '@components/skeletons/SkeletonRectangle';
+import SkeletonSummary from '@components/skeletons/SkeletonSummary';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -84,13 +85,14 @@ function SungwooTestPage() {
   return (
     <Wrapper>
       <MarginTemplate>
-        <RectangleWrapper>
+        <SkeletonSummary variant="KidHome" />
+        <SkeletonSummary variant="ParentHome" />
+        {/* <RectangleWrapper>
           <SkeletonRectangle borderRadius={10} />
         </RectangleWrapper>
         <CircleWrapper>
           <SkeletonCircle radius={100} />
-        </CircleWrapper>
-        {/* <Shimmer /> */}
+        </CircleWrapper> */}
       </MarginTemplate>
     </Wrapper>
   );
