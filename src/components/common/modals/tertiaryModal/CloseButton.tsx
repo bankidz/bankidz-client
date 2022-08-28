@@ -1,7 +1,7 @@
 import CloseButton from '@components/common/buttons/CloseButton';
 import { SetStateAction } from 'react';
 import styled from 'styled-components';
-import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import { MODAL_CLOSE_TRANSITION_TIME } from '../constants';
 
 interface CloseButtonProps {
   shouldCloseOnOverlayClick: boolean;
@@ -18,7 +18,7 @@ function CloseButtonSection({
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, OVERLAY_TRANSITION_TIME);
+    }, MODAL_CLOSE_TRANSITION_TIME);
   }
 
   return (

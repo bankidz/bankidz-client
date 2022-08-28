@@ -5,7 +5,11 @@ import ReactModal from 'react-modal';
 import { calcRatio } from '@lib/styles/theme';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
-import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import {
+  MODAL_CLOSE_TRANSITION_TIME,
+  MODAL_SLIDE_FROM_POSITION,
+  MODAL_SLIDE_TO_POSITION,
+} from '../constants';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 
@@ -30,14 +34,14 @@ function SecondaryModal({
   badgeText,
   headerText,
   bodyText,
-  shouldCloseOnOverlayClick,
+  shouldCloseOnOverlayClick = false,
 }: SecondaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   function handleSubmit() {
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
-    }, OVERLAY_TRANSITION_TIME);
+    }, MODAL_CLOSE_TRANSITION_TIME);
   }
 
   const { closeModal } = useModals();
@@ -47,10 +51,10 @@ function SecondaryModal({
       setIsOpen(false);
       setTimeout(() => {
         closeModal(modals.secondaryModal);
-      }, OVERLAY_TRANSITION_TIME);
+      }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
+    closeTimeoutMS: MODAL_CLOSE_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -109,10 +113,10 @@ export default SecondaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(-10%);
+      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
     }
     to {
-      transform: translateY(-50%);
+      transform: translateY(${MODAL_SLIDE_TO_POSITION});
     }
   }
   animation: slide ${({ theme }) => theme.animation.modalOpen};

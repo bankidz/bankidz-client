@@ -2,23 +2,37 @@ import Button from '@components/common/buttons/Button';
 import CheckButton from '@components/common/buttons/CheckButton';
 import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
+import { MODAL_CLOSE_TRANSITION_TIME } from '../constants';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
 
 interface SubmitButtonProps {
   variant: TReceiptModalVariant;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  handleSubmit: () => void;
-  handleExtraSubmit: () => void;
+  onSubmit: any;
+  onExtraSubmit: any;
   shouldCloseOnOverlayClick: boolean;
 }
 
 function SubmitButton({
   variant,
   setIsOpen,
-  handleSubmit,
-  handleExtraSubmit,
+  onSubmit,
+  onExtraSubmit,
   shouldCloseOnOverlayClick,
 }: SubmitButtonProps) {
+  function handleSubmit() {
+    setIsOpen(false);
+    setTimeout(() => {
+      onSubmit();
+    }, MODAL_CLOSE_TRANSITION_TIME);
+  }
+  function handleExtraSubmit() {
+    setIsOpen(false);
+    setTimeout(() => {
+      onExtraSubmit();
+    }, MODAL_CLOSE_TRANSITION_TIME);
+  }
+
   let collection;
   if (variant === 'contract') {
     collection = (

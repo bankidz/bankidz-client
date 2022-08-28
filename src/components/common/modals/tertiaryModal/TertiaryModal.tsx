@@ -5,9 +5,13 @@ import '../styles.css';
 import Background from './Background';
 import StyledSwiper from './StyledSwiper';
 import CloseButtonSection from './CloseButton';
-import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
-// import useModals from '@lib/hooks/useModals';
-// import { modals } from '../Modals';
+import {
+  MODAL_CLOSE_TRANSITION_TIME,
+  MODAL_SLIDE_FROM_POSITION,
+  MODAL_SLIDE_TO_POSITION,
+} from '../constants';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '../Modals';
 
 interface TertiaryModalProps {
   /**
@@ -25,17 +29,17 @@ function TertiaryModal({
   const [isOpen, setIsOpen] = useState(true);
   const [currentCardIdx, setCurrentCardIdx] = useState(0);
 
-  // const { closeModal } = useModals();
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        // closeModal(modals.tertiaryModal);
-      }, OVERLAY_TRANSITION_TIME);
+        closeModal(modals.tertiaryModal);
+      }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
+    closeTimeoutMS: MODAL_CLOSE_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -90,10 +94,10 @@ export default TertiaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(-10%);
+      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
     }
     to {
-      transform: translateY(-50%);
+      transform: translateY(${MODAL_SLIDE_TO_POSITION});
     }
   }
   animation: slide ${({ theme }) => theme.animation.modalOpen};

@@ -5,7 +5,9 @@ import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
-import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
+import { MODAL_CLOSE_TRANSITION_TIME } from '../constants';
+import { MODAL_SLIDE_FROM_POSITION } from '../constants';
+import { MODAL_SLIDE_TO_POSITION } from '../constants';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 
@@ -37,7 +39,7 @@ function PrimaryModal({
     setIsOpen(false); // close transition 적용을 위해 필요
     setTimeout(() => {
       onSubmit();
-    }, OVERLAY_TRANSITION_TIME);
+    }, MODAL_CLOSE_TRANSITION_TIME);
   }
 
   const { closeModal } = useModals();
@@ -47,10 +49,10 @@ function PrimaryModal({
       setIsOpen(false);
       setTimeout(() => {
         closeModal(modals.primaryModal);
-      }, OVERLAY_TRANSITION_TIME);
+      }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
+    closeTimeoutMS: MODAL_CLOSE_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -110,10 +112,10 @@ export default PrimaryModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(-10%);
+      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
     }
     to {
-      transform: translateY(-50%);
+      transform: translateY(${MODAL_SLIDE_TO_POSITION});
     }
   }
   animation: slide ${({ theme }) => theme.animation.modalOpen};

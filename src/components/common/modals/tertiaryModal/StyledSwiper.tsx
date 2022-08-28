@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.min.css';
 import { ReactComponent as ModalContentMoney } from '@assets/illusts/congrats/coins.svg';
 import { ReactComponent as ModalContentSaving } from '@assets/illusts/congrats/congrats_banki_with_coins.svg';
-import 'swiper/swiper.min.css';
 import InstructionCard from './InstructionCard';
 
 interface StyledSwiperProps {
