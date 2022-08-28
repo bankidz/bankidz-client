@@ -1,3 +1,4 @@
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { useAppSelector } from '@store/app/hooks';
 import {
   selectPendingDongils,
@@ -13,7 +14,7 @@ function PendingDongilSection() {
 
   let content: JSX.Element = <></>;
   if (pendingDongilsStatus === 'loading') {
-    content = <p>Loading...</p>;
+    content = <SkeletonDongilList variant="pending" />;
   } else if (pendingDongilsStatus === 'succeeded') {
     if (pendingDongils?.length === 0) {
       content = (

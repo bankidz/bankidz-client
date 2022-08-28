@@ -1,3 +1,4 @@
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import {
@@ -15,7 +16,7 @@ function ThisWeekSDongilSection() {
 
   let content: JSX.Element = <></>;
   if (thisWeekSDongilsStatus === 'loading') {
-    content = <p>Loading...</p>;
+    content = <SkeletonDongilList variant="thisWeekS" />;
   } else if (thisWeekSDongilsStatus === 'succeeded') {
     const getSelectedKidSThisWeekSDongils = (username: string) => {
       const found = thisWeekSDongils?.find(

@@ -23,10 +23,10 @@ function ParentSummary() {
       );
       return found;
     };
-
     const selectedKidSParentSummary = getSelectedKidSParentSummary(
       selectedKid?.kidId!,
     );
+
     if (selectedKidSParentSummary) {
       const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
       content = (

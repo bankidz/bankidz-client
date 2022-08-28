@@ -1,3 +1,4 @@
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { useAppSelector } from '@store/app/hooks';
 import {
   selectWalkingDongils,
@@ -16,7 +17,7 @@ function WalkingDongilSection() {
 
   let content: JSX.Element = <></>;
   if (walkingDongilsStatus === 'loading') {
-    content = <p>Loading...</p>;
+    content = <SkeletonDongilList variant="walking" />;
   } else if (walkingDongilsStatus === 'succeeded') {
     if (walkingDongils?.length === 0) {
       content = <EmptyWalkingDongil onClick={() => navigate('/create/1')} />;

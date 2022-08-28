@@ -1,4 +1,3 @@
-import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled, { css } from 'styled-components';
 import SkeletonElement from './SkeletonElement';
 

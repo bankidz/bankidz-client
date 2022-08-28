@@ -1,3 +1,4 @@
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import {
@@ -15,7 +16,7 @@ function ProposedDongilSection() {
 
   let content: JSX.Element = <></>;
   if (proposedDongilsStatus === 'loading') {
-    content = <p>Loading...</p>;
+    content = <SkeletonDongilList variant="proposed" />;
   } else if (proposedDongilsStatus === 'succeeded') {
     const getSelectedKidSProposedDongils = (username: string) => {
       const found = proposedDongils?.find(
