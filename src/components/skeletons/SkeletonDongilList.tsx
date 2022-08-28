@@ -1,5 +1,6 @@
 import { TDongilVariant } from '@lib/types/TDongilVariant';
 import styled, { css } from 'styled-components';
+import PendingDongilItem from './dongilItems/PendingDongilItem';
 import WalkingDongilItem from './dongilItems/WalkingDongilItem';
 
 interface SkeletonDongilListProps {
@@ -7,15 +8,17 @@ interface SkeletonDongilListProps {
 }
 
 function SkeletonDongilList({ variant }: SkeletonDongilListProps) {
-  let content;
+  let item;
   if (variant === 'walking') {
-    content = <WalkingDongilItem />;
+    item = <WalkingDongilItem />;
+  } else if (variant === 'pending') {
+    item = <PendingDongilItem />;
   }
 
   return (
     <Wrapper variant={variant}>
-      <ItemWrapper variant={variant}>{content}</ItemWrapper>
-      <ItemWrapper variant={variant}>{content}</ItemWrapper>
+      <ItemWrapper variant={variant}>{item}</ItemWrapper>
+      <ItemWrapper variant={variant}>{item}</ItemWrapper>
     </Wrapper>
   );
 }

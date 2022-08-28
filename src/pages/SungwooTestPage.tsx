@@ -87,6 +87,7 @@ function SungwooTestPage() {
     <Wrapper>
       <MarginTemplate>
         <SkeletonDongilList variant="walking" />
+        <SkeletonDongilList variant="pending" />
         {/* <SkeletonDongilList variant='pending'/>
         <SkeletonDongilList variant='proposed'/>
         <SkeletonDongilList variant='thisWeekS'/> */}

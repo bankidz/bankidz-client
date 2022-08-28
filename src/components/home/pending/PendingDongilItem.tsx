@@ -135,17 +135,15 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   }
 
   return (
-    <>
-      <StyledButton onClick={handleClick}>
-        <div className="text-wrapper">
-          <span className="title">{title}</span>
-          <span className="createdAt">
-            {getFormattedTimeStamp(createdAt, 'YYYY.MM.DD')}
-          </span>
-        </div>
-        <ProposalBadge isProposing={challengeStatus === 'PENDING'} />
-      </StyledButton>
-    </>
+    <StyledButton onClick={handleClick}>
+      <div className="text-wrapper">
+        <span className="title">{title}</span>
+        <span className="createdAt">
+          {getFormattedTimeStamp(createdAt, 'YYYY.MM.DD')}
+        </span>
+      </div>
+      <ProposalBadge isProposing={challengeStatus === 'PENDING'} />
+    </StyledButton>
   );
 }
 
