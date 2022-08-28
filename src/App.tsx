@@ -10,9 +10,10 @@ import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import SungwooTestPage from './pages/SungwooTestPage';
+import { useQueryClient } from 'react-query';
 
 function App() {
-  useEffect(() => {
+  /* useEffect(() => {
     const setScreenSize = () => {
       let vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -22,7 +23,20 @@ function App() {
     return () => {
       window.removeEventListener('resize', setScreenSize);
     };
-  }, []);
+  }, []); */
+
+  const queryClient = useQueryClient();
+  queryClient.setDefaultOptions({
+    queries: {
+      refetchInterval: 0,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      onError: (error: any) => {},
+    },
+    mutations: {
+      onError: (error: any) => {},
+    },
+  });
 
   return (
     <Routes>
@@ -34,7 +48,7 @@ function App() {
         <Route path="/walk/*" element={<WalkRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
-        <Route path="/sungwoo" element={<SungwooTestPage />} />
+        {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
         <Route path="*" element={<NotFound />} />
         {/* </Route> */}
         {/* </Route> */}

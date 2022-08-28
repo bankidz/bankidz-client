@@ -2,7 +2,13 @@ import styled from 'styled-components';
 import renderMypageRoleIllust from '@lib/utils/render/renderMypageRoleIllust';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import getRoleText from '@lib/utils/get/getRoleText';
-function FamilyItem({ user }: { user: IFamilyState }) {
+
+interface FamilyItemProps {
+  user: IFamilyState;
+  me?: boolean;
+}
+
+function FamilyItem({ user, me = false }: FamilyItemProps) {
   const { isFemale, isKid, username } = user;
   return (
     <Wrapper>
@@ -10,7 +16,7 @@ function FamilyItem({ user }: { user: IFamilyState }) {
         {renderMypageRoleIllust(isKid, isFemale)}
         <p>{username}</p>
       </div>
-      <div>{getRoleText(isKid, isFemale)}</div>
+      <div>{me ? '나' : getRoleText(isKid, isFemale)}</div>
     </Wrapper>
   );
 }

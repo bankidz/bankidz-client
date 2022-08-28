@@ -3,6 +3,8 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { store } from './store/app/store';
 import { ThemeProvider } from 'styled-components';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { theme } from './lib/styles/theme';
 import { GlobalStyle } from './lib/styles/global-style';
 import { createRoot } from 'react-dom/client';
@@ -17,6 +19,8 @@ import GlobalBottomSheet from '@components/common/bottomSheets/GlobalBottomSheet
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
+const queryClient = new QueryClient();
+
 ReactModal.setAppElement('#root');
 
 root.render(
@@ -25,8 +29,11 @@ root.render(
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <ModalsContextProvider>
-          <App />
-          <GlobalBottomSheet />
+          <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false} />
+            <App />
+            <GlobalBottomSheet />
+          </QueryClientProvider>
         </ModalsContextProvider>
       </ThemeProvider>
     </BrowserRouter>
