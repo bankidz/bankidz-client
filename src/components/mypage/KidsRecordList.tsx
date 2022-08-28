@@ -10,9 +10,8 @@ function KidsRecordList() {
   const { data, status } = useQuery(KID, getKid);
   return (
     <Wrapper>
-      {status === 'success'
-        ? data.map((kid) => <KidsRecordItem kid={kid} key={kid.username} />)
-        : '스켈레톤'}
+      {status === 'success' &&
+        data.map((kid) => <KidsRecordItem kid={kid} key={kid.username} />)}
     </Wrapper>
   );
 }

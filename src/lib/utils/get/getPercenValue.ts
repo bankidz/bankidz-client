@@ -5,9 +5,7 @@
  */
 
 const getPercentValue = (numerator: number, denominator: number) => {
-  return `${
-    denominator === 0 ? '0' : Math.ceil((numerator / denominator) * 100)
-  }%`;
+  return denominator === 0 ? '0' : Math.ceil((numerator / denominator) * 100);
 };
 
 export default getPercentValue;

@@ -31,7 +31,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     });
   };
 
-  // 2. 정말로 그룹 나갈래?
+  // 2. 정말로 가족그룹을 나갈건가요?
   const openLeaveGroupCheckWarningSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({

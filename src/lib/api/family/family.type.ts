@@ -1,5 +1,6 @@
 import { IFamilyState } from '@lib/types/IFamilyState';
 import { IKid } from '@lib/types/IKid';
+
 export interface IGetFamilyResData {
   id: number;
   code: string;

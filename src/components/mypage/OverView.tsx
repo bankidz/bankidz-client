@@ -5,7 +5,7 @@ import OverViewContent from './OverViewContent';
 import { useQuery } from 'react-query';
 import { KID } from '@lib/constants/queryKeyes';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
-import getPercentValue from '@lib/utils/get/getPercent';
+import getPercentValue from '@lib/utils/get/getPercenValue';
 
 export type OverViewProps = {
   userData: IGetUserResData;
@@ -17,8 +17,9 @@ function OverView({ userData }: OverViewProps) {
   const { data: kidData, status } = useQuery(KID, getKid);
 
   const getOverViewData = (isKid: boolean) => {
+    let overViewData;
     if (isKid) {
-      return [
+      overViewData = [
         { name: '완주한 돈길', value: kid?.achievedChallenge },
         { name: '총 돈길', value: kid?.totalChallenge },
         {
@@ -27,14 +28,19 @@ function OverView({ userData }: OverViewProps) {
         },
       ];
     } else {
-      return [
+      overViewData = [
         { name: '자녀의 수', value: kidData?.length },
         {
           name: '총 돈길 수락률',
-          value: getPercentValue(parent!.acceptedRequest, parent!.totalRequest),
+          value: `${getPercentValue(
+            parent!.acceptedRequest,
+            parent!.totalRequest,
+          )}%`,
         },
       ];
     }
+
+    return overViewData;
   };
 
   return (

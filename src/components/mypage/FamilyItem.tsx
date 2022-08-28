@@ -3,7 +3,7 @@ import renderMypageRoleIllust from '@lib/utils/render/renderMypageRoleIllust';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import getRoleText from '@lib/utils/get/getRoleText';
 
-export interface FamilyItemProps {
+interface FamilyItemProps {
   user: IFamilyState;
   me?: boolean;
 }

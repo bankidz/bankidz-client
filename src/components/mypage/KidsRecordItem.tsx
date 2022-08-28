@@ -1,6 +1,6 @@
 import { IGetKidResDataItem } from '@lib/api/family/family.type';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
-import getPercentValue from '@lib/utils/get/getPercent';
+import getPercentValue from '@lib/utils/get/getPercenValue';
 import styled from 'styled-components';
 import OverViewData from './OverViewContent';
 
@@ -14,7 +14,7 @@ function KidsRecordItem({ kid }: { kid: IGetKidResDataItem }) {
     },
     {
       name: '아이의 완주율',
-      value: getPercentValue(kid.achievedChallenge, kid.totalChallenge),
+      value: `${getPercentValue(kid.achievedChallenge, kid.totalChallenge)}%`,
     },
   ];
   return (
