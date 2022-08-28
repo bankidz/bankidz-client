@@ -7,20 +7,11 @@ import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList'
 
 function SungwooTestPage() {
   const { openModal } = useModals();
-  function openContract() {
+  function openTertiary() {
     openModal(modals.tertiaryModal, {
-      // variant: 'contract',
       onSubmit: () => {
         console.log('handle submit');
       },
-      createdAt: '2022/08/03 04:06:04',
-      interestRate: 20,
-      isMom: false,
-      itemName: '선물',
-      title: '할머니 생신선물',
-      totalPrice: 10000,
-      weekPrice: 2000,
-      weeks: 4,
     });
   }
   function openProposed() {
@@ -80,13 +71,15 @@ function SungwooTestPage() {
 
   return (
     <Wrapper>
+      <button onClick={openTertiary}>open</button>
+      <Modals />
       <MarginTemplate>
         {/* <SkeletonDongilList variant="walking" />
         <SkeletonDongilList variant="pending" />
         <SkeletonDongilList variant="proposed" />
         <SkeletonDongilList variant="thisWeekS" /> */}
-        <SkeletonSummary variant="KidHome" />
-        <SkeletonSummary variant="ParentHome" />
+        {/* <SkeletonSummary variant="KidHome" />
+        <SkeletonSummary variant="ParentHome" /> */}
       </MarginTemplate>
     </Wrapper>
   );

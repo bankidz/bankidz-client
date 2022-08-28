@@ -76,13 +76,14 @@ function ReceiptModal({
       onExtraSubmit();
     }, OVERLAY_TRANSITION_TIME);
   }
-  const { closeModal } = useModals();
+
+  // const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        closeModal(modals.receiptModal);
+        // closeModal(modals.receiptModal);
       }, OVERLAY_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
