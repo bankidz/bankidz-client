@@ -6,14 +6,14 @@ function PendingDongilItem() {
     <Wrapper>
       <div className="text-wrapper">
         <span className="title">
-          <SkeletonElement variant="rectangle" borderRadius={7} />
+          <SkeletonElement borderRadius={7} />
         </span>
         <span className="createdAt">
-          <SkeletonElement variant="rectangle" borderRadius={7} />
+          <SkeletonElement borderRadius={7} />
         </span>
       </div>
       <div className="badge-wrapper">
-        <SkeletonElement variant="rectangle" borderRadius={8} />
+        <SkeletonElement borderRadius={8} />
       </div>
     </Wrapper>
   );

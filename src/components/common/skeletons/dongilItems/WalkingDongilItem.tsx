@@ -7,10 +7,10 @@ function WalkingDongilItem() {
     <Wrapper>
       <div className="content-wrapper">
         <div className="left">
-          <SkeletonElement variant="rectangle" borderRadius={8} />
+          <SkeletonElement borderRadius={8} />
         </div>
         <div className="right">
-          <SkeletonElement variant="rectangle" borderRadius={7} />
+          <SkeletonElement borderRadius={7} />
         </div>
       </div>
       <div className="icon-wrapper">

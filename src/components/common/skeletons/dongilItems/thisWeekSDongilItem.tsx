@@ -6,10 +6,10 @@ function ThisWeekSDongilItem() {
     <Wrapper>
       <div className="content-wrapper">
         <div className="illust">
-          <SkeletonElement variant="rectangle" borderRadius={8} />
+          <SkeletonElement borderRadius={8} />
         </div>
         <div className="title">
-          <SkeletonElement variant="rectangle" borderRadius={7} />
+          <SkeletonElement borderRadius={7} />
         </div>
       </div>
     </Wrapper>

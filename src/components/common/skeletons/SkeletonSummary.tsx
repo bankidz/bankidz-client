@@ -18,25 +18,25 @@ function SkeletonSummary({ variant }: SummaryProps) {
       <>
         <TitleWrapper variant={variant}>
           <div className="top">
-            <SkeletonElement variant="rectangle" borderRadius={7} />
+            <SkeletonElement borderRadius={7} />
           </div>
         </TitleWrapper>
         <InfoWrapper>
           <TextWrapper>
             <div className="top">
-              <SkeletonElement variant="rectangle" borderRadius={8} />
+              <SkeletonElement borderRadius={8} />
             </div>
             <div className="bottom">
-              <SkeletonElement variant="rectangle" borderRadius={6} />
+              <SkeletonElement borderRadius={6} />
             </div>
           </TextWrapper>
           <Divider />
           <TextWrapper>
             <div className="top">
-              <SkeletonElement variant="rectangle" borderRadius={8} />
+              <SkeletonElement borderRadius={8} />
             </div>
             <div className="bottom">
-              <SkeletonElement variant="rectangle" borderRadius={6} />
+              <SkeletonElement borderRadius={6} />
             </div>
           </TextWrapper>
         </InfoWrapper>
@@ -47,28 +47,28 @@ function SkeletonSummary({ variant }: SummaryProps) {
       <>
         <TitleWrapper variant={variant}>
           <div className="top">
-            <SkeletonElement variant="rectangle" borderRadius={7} />
+            <SkeletonElement borderRadius={7} />
           </div>
           <div className="bottom">
-            <SkeletonElement variant="rectangle" borderRadius={8} />
+            <SkeletonElement borderRadius={8} />
           </div>
         </TitleWrapper>
         <InfoWrapper>
           <TextWrapper>
             <div className="top">
-              <SkeletonElement variant="rectangle" borderRadius={8} />
+              <SkeletonElement borderRadius={8} />
             </div>
             <div className="bottom">
-              <SkeletonElement variant="rectangle" borderRadius={6} />
+              <SkeletonElement borderRadius={6} />
             </div>
           </TextWrapper>
           <Divider />
           <TextWrapper>
             <div className="top">
-              <SkeletonElement variant="rectangle" borderRadius={8} />
+              <SkeletonElement borderRadius={8} />
             </div>
             <div className="bottom">
-              <SkeletonElement variant="rectangle" borderRadius={6} />
+              <SkeletonElement borderRadius={6} />
             </div>
           </TextWrapper>
         </InfoWrapper>

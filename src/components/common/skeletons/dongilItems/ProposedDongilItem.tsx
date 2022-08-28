@@ -6,14 +6,14 @@ function ProposedDongilItem() {
     <Wrapper>
       <div className="text-wrapper">
         <span className="title">
-          <SkeletonElement variant="rectangle" borderRadius={7} />
+          <SkeletonElement borderRadius={7} />
         </span>
         <span className="totalPrice">
-          <SkeletonElement variant="rectangle" borderRadius={7} />
+          <SkeletonElement borderRadius={7} />
         </span>
       </div>
       <div className="badge-wrapper">
-        <SkeletonElement variant="rectangle" borderRadius={24} />
+        <SkeletonElement borderRadius={24} />
       </div>
     </Wrapper>
   );
