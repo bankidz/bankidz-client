@@ -9,14 +9,12 @@ import Create from './Create';
 import DetailPage from './DetailPage';
 import Reject from './Reject';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
+import useLevel from '@lib/hooks/useLevel';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
+  const level = useLevel();
 
-  let level;
-  const myLevel = useAppSelector(selectLevel);
-  const kidLevel = useAppSelector(selectSelectedKid)?.level!;
-  level = isKid ? myLevel : kidLevel;
   return (
     <Routes>
       {/* 자녀 / 부모 - 홈 */}

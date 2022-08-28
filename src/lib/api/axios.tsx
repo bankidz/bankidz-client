@@ -14,3 +14,9 @@ export const axiosPrivateInstance = axios.create({
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
 });
+
+export interface ApiResponse<T> {
+  data: T | null;
+  statusCode: string | null;
+  responseMessage: string | null;
+}

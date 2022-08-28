@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { kidMock } from '@lib/mocks/kid';
 import { useAppDispatch } from '@store/app/hooks';
 import {
   dispatchInProcess,

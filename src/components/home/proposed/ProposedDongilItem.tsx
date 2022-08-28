@@ -54,6 +54,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
 
   // 3. 제안받은 돈길 수락
   async function handleApproveButtonClick() {
+    console.log('asdf');
     if (canApproveProposedDongil) {
       try {
         setApproveProposedDongilStatus('pending');
@@ -92,7 +93,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       sheetProps: { open: true },
       contentProps: {
         type: 'approve',
-        onApproveButtonClick: handleApproveButtonClick,
+        onMainActionClick: handleApproveButtonClick,
         onDismiss: setCloseBottomSheet,
       },
     });

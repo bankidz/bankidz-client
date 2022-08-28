@@ -1,40 +1,68 @@
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectAuth } from '@store/slices/authSlice';
 import styled, { css } from 'styled-components';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
-import { TOverView, TUser } from '@store/slices/overViewSlice';
-import OverViewData from './OverViewData';
+import { IGetUserResData } from '@lib/api/user/user.type';
+import OverViewContent from './OverViewContent';
+import { useQuery } from 'react-query';
+import { KID } from '@lib/constants/queryKeyes';
+import useFamilyApi from '@lib/api/family/useFamilyApi';
+import getPercentValue from '@lib/utils/get/getPercenValue';
+
 export type OverViewProps = {
-  user: TUser;
-  overView: TOverView | null;
+  userData: IGetUserResData;
 };
 
-function OverView({ user, overView }: OverViewProps) {
+function OverView({ userData }: OverViewProps) {
+  const { user, kid, parent } = userData;
+  const { getKid } = useFamilyApi();
+  const { data: kidData, status } = useQuery(KID, getKid);
+
+  const getOverViewData = (isKid: boolean) => {
+    let overViewData;
+    if (isKid) {
+      overViewData = [
+        { name: '완주한 돈길', value: kid?.achievedChallenge },
+        { name: '총 돈길', value: kid?.totalChallenge },
+        {
+          name: '평균 완주율',
+          value: `${kid!.achievedChallenge / kid!.totalChallenge}%`,
+        },
+      ];
+    } else {
+      overViewData = [
+        { name: '자녀의 수', value: kidData?.length },
+        {
+          name: '총 돈길 수락률',
+          value: `${getPercentValue(
+            parent!.acceptedRequest,
+            parent!.totalRequest,
+          )}%`,
+        },
+      ];
+    }
+
+    return overViewData;
+  };
+
   return (
     <Wrapper>
-      <Container isKid={user.isKid}>
-        <Banki isKid={user.isKid} isFemale={user.isFemale!}>
-          {renderRoleIllust(user.isKid, user.isFemale)}
-        </Banki>
-        <p>
-          {user.username} {user.isKid && '뱅키'}
-        </p>
-        {overView && <OverViewData isKid={user.isKid} kid={overView} />}
-      </Container>
+      <Banki isKid={user.isKid} isFemale={user.isFemale!}>
+        {renderRoleIllust(user.isKid, user.isFemale)}
+      </Banki>
+      <p>
+        {user.username} {user.isKid && '뱅키'}
+      </p>
+      {status && <OverViewContent data={getOverViewData(user.isKid)} />}
     </Wrapper>
   );
 }
 
 export default OverView;
 
-const Wrapper = styled.div``;
-
-const Container = styled.div<{ isKid: boolean }>`
+const Wrapper = styled.div`
   width: 100%;
   border-radius: ${({ theme }) => theme.radius.large};
   background-color: ${({ theme }) => theme.palette.greyScale.white};
-  height: ${({ isKid }) => (isKid ? 168 : 91)}px;
-
+  height: 168px;
   margin-top: 122px;
   position: relative;
 
