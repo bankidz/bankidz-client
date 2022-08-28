@@ -4,62 +4,26 @@ import FamilyList from '@components/mypage/FamilyList';
 import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import useFamilyApi from '@lib/api/family/useFamilyApi';
+import useUserApi from '@lib/api/user/useUserAPi';
+import { FAMILY, USER } from '@lib/constants/queryKeyes';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
-import {
-  fetchKids,
-  fetchFamily,
-  selectFamilyStatus,
-  selectFamily,
-} from '@store/slices/familySlice';
-import {
-  fetchOverView,
-  selectKidOverView,
-  selectUserOverView,
-} from '@store/slices/overViewSlice';
 import { darken } from 'polished';
-import { useEffect } from 'react';
+import { useQueries } from 'react-query';
 import styled, { css } from 'styled-components';
 
-const DemoKidsRecordData = [
-  {
-    username: '주어진',
-    acceptRate: 80,
-    acceptRequest: 5,
-    achieveRate: 20,
-  },
-  {
-    username: '한규진',
-    acceptRate: 70,
-    acceptRequest: 25,
-    achieveRate: 60,
-  },
-];
-
 function Mypage() {
-  const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
-  const isKid = useAppSelector(selectIsKid)!;
-  const familyStatus = useAppSelector(selectFamilyStatus);
-  const family = useAppSelector(selectFamily);
-  const user = useAppSelector(selectUserOverView);
-  const kidOverView = isKid ? useAppSelector(selectKidOverView) : null;
   const { setOpenBottomSheet } = useGlobalBottomSheet();
 
-  useEffect(() => {
-    const fetch = async () => {
-      try {
-        await dispatch(fetchOverView({ axiosPrivate })).unwrap();
-        if (familyStatus === 'idle')
-          await dispatch(fetchFamily({ axiosPrivate })).unwrap();
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetch();
-  }, []);
+  const { getFamily } = useFamilyApi();
+  const { getUser } = useUserApi();
+  const [family, user] = useQueries([
+    { queryKey: FAMILY, queryFn: getFamily },
+    { queryKey: USER, queryFn: getUser },
+  ]);
+
+  const { data: familyData, status: familyStatus } = family;
+  const { data: userData, status: userStatus } = user;
 
   const openCreateDongilCompletedSheet = () => {
     setOpenBottomSheet({
@@ -75,27 +39,36 @@ function Mypage() {
     <Wrapper>
       <Header>마이페이지</Header>
       <MarginTemplate>
-        <OverView user={user} overView={kidOverView} />
-        {isKid && kidOverView ? (
+        {userStatus === 'success' ? (
+          <OverView userData={userData} />
+        ) : (
+          /* TODO */
+          '스켈레톤'
+        )}
+        {userData?.user.isKid ? (
           <Section>
             <h2>MY 레벨</h2>
-            <MyLevel achievedChallenge={kidOverView.achievedChallenge} />
+            <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
           </Section>
         ) : (
           <Section smallGap={true}>
             <h2>자녀기록</h2>
-            <KidsRecordList kidsRecordData={DemoKidsRecordData} />
+            <KidsRecordList />
           </Section>
         )}
         <Section>
           <h2>가족 관리</h2>
-          {family?.length ? (
-            <FamilyList family={family} />
-          ) : (
-            <CreateDongil onClick={openCreateDongilCompletedSheet}>
-              <p>가족그룹 만들기</p>
-              <p>그룹을 만들고 가족을 초대해봐요</p>
-            </CreateDongil>
+          {familyStatus === 'success' && (
+            <>
+              {familyData!.familyUserList.length > 0 ? (
+                <FamilyList family={familyData!.familyUserList} />
+              ) : (
+                <CreateDongil onClick={openCreateDongilCompletedSheet}>
+                  <p>가족그룹 만들기</p>
+                  <p>그룹을 만들고 가족을 초대해봐요</p>
+                </CreateDongil>
+              )}
+            </>
           )}
         </Section>
       </MarginTemplate>
@@ -124,7 +97,7 @@ const Header = styled.div`
   position: fixed;
   top: 0px;
   width: 100%;
-  //z-index: 5;
+  z-index: 3;
 `;
 
 const Section = styled.div<{ smallGap?: boolean }>`

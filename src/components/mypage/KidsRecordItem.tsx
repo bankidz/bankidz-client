@@ -1,12 +1,26 @@
+import { IGetKidResDataItem } from '@lib/api/family/family.type';
+import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import getPercentValue from '@lib/utils/get/getPercent';
 import styled from 'styled-components';
-import OverViewData from './OverViewData';
+import OverViewData from './OverViewContent';
 
 // TODO: any
-function KidsRecordItem({ kid }: { kid: any }) {
+function KidsRecordItem({ kid }: { kid: IGetKidResDataItem }) {
+  const overViewData = [
+    { name: '총 저금액', value: `${getCommaThreeDigits(kid.savings)}원` },
+    {
+      name: '아이의 총 돈길',
+      value: kid.totalChallenge,
+    },
+    {
+      name: '아이의 완주율',
+      value: getPercentValue(kid.achievedChallenge, kid.totalChallenge),
+    },
+  ];
   return (
     <Wrapper>
       <p>{kid.username} 뱅키</p>
-      <OverViewData isKid={false} forParent={kid} />
+      <OverViewData data={overViewData} />
     </Wrapper>
   );
 }

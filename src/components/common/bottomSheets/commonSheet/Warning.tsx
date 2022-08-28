@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import { ReactComponent as Delete } from '@assets/icons/delete.svg';
 import { ReactComponent as Leave } from '@assets/icons/leaveGroup.svg';
 import Button from '@components/common/buttons/Button';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface WarningProps {
   type: 'delete' | 'leaveGroup' | 'leaveGroupCheck';
   onMainActionClick: () => void;
-  onDismiss: () => void;
+  onDismiss?: () => void;
 }
 
 const content = {
@@ -28,6 +29,7 @@ const content = {
 };
 
 function Warning({ type, onMainActionClick, onDismiss }: WarningProps) {
+  const { setCloseBottomSheet } = useGlobalBottomSheet();
   return (
     <Wrapper>
       <Container>
@@ -36,7 +38,11 @@ function Warning({ type, onMainActionClick, onDismiss }: WarningProps) {
         <div className="sub">{content[type].sub}</div>
       </Container>
       <ButtonContainer>
-        <Button label="취소" property="sub" onClick={onDismiss} />
+        <Button
+          label="취소"
+          property="sub"
+          onClick={onDismiss ? onDismiss : setCloseBottomSheet}
+        />
         <Button
           label="삭제하기"
           property="delete"
