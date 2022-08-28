@@ -155,8 +155,12 @@ const TextWrapper = styled.div`
   .top {
     width: 138px;
     height: 21px;
+    margin-bottom: 8px;
   }
   .bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 47px;
     height: 12px;
   }

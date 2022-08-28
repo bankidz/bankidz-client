@@ -18,6 +18,22 @@ function SkeletonElement({
   borderRadius,
   radius,
 }: SkeletonRectangleProps) {
+  let figure;
+  if (variant === 'rectangle') {
+    figure = (
+      <rect
+        x="0"
+        y="0"
+        rx={borderRadius}
+        ry={borderRadius}
+        width="100%"
+        height="100%"
+      />
+    );
+  } else if (variant === 'circle') {
+    figure = <circle cx={radius} cy={radius} r={radius} />;
+  }
+
   return (
     <ContentLoader
       width={'100%'}
@@ -25,17 +41,7 @@ function SkeletonElement({
       backgroundColor="#FAFAFC" // grey100
       foregroundColor="#EAEAEC" // grey200
     >
-      {variant === 'rectangle' && (
-        <rect
-          x="0"
-          y="0"
-          rx={borderRadius}
-          ry={borderRadius}
-          width="100%"
-          height="100%"
-        />
-      )}
-      {variant === 'circle' && <circle cx={radius} cy={radius} r={radius} />}
+      {figure}
     </ContentLoader>
   );
 }

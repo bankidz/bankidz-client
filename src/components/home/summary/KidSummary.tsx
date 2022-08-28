@@ -1,4 +1,4 @@
-import SkeletonSummary from '@components/skeletons/SkeletonSummary';
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { useAppSelector } from '@store/app/hooks';
 import {
   selectKidSummary,

@@ -1,14 +1,9 @@
 import styled from 'styled-components';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
-import BackgroundTemplate from '@components/layout/BackgroundTemplate';
-import InterestBadge from '@components/common/badges/InterestBadge';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import Receipt from '@components/common/receipt/Receipt';
-import SkeletonCircle from '@components/skeletons/SkeletonCircle';
-import SkeletonElement from '@components/skeletons/SkeletonElement';
-import SkeletonSummary from '@components/skeletons/SkeletonSummary';
-import SkeletonDongilList from '@components/skeletons/SkeletonDongilList';
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -86,20 +81,12 @@ function SungwooTestPage() {
   return (
     <Wrapper>
       <MarginTemplate>
-        <SkeletonDongilList variant="walking" />
+        {/* <SkeletonDongilList variant="walking" />
         <SkeletonDongilList variant="pending" />
         <SkeletonDongilList variant="proposed" />
-        <SkeletonDongilList variant="thisWeekS" />
-        {/* <SkeletonDongilList variant="thisWeekS" /> */}
-        {/* <SkeletonDongilList variant='pending'/>
-        <SkeletonDongilList variant='proposed'/>
-        <SkeletonDongilList variant='thisWeekS'/> */}
-        {/* <RectangleWrapper>
-          <SkeletonRectangle borderRadius={10} />
-        </RectangleWrapper>
-        <CircleWrapper>
-          <SkeletonCircle radius={100} />
-        </CircleWrapper> */}
+        <SkeletonDongilList variant="thisWeekS" /> */}
+        <SkeletonSummary variant="KidHome" />
+        <SkeletonSummary variant="ParentHome" />
       </MarginTemplate>
     </Wrapper>
   );
