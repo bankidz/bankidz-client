@@ -1,53 +1,47 @@
 import styled from 'styled-components';
 import SkeletonElement from '../SkeletonElement';
-import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 
-function WalkingDongilItem() {
+function ThisWeekSDongilItem() {
   return (
     <Wrapper>
       <div className="content-wrapper">
-        <div className="left">
+        <div className="illust">
           <SkeletonElement variant="rectangle" borderRadius={8} />
         </div>
-        <div className="right">
+        <div className="title">
           <SkeletonElement variant="rectangle" borderRadius={7} />
         </div>
-      </div>
-      <div className="icon-wrapper">
-        <Arrow />
       </div>
     </Wrapper>
   );
 }
 
-export default WalkingDongilItem;
+export default ThisWeekSDongilItem;
 
 const Wrapper = styled.div`
   width: 100%;
   height: 54px;
+  background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
+  margin-bottom: 8px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
 
   .content-wrapper {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    .left {
+    .illust {
       width: 30px;
       height: 30px;
-      margin-right: 8px;
+      margin-left: 16px;
     }
-    .right {
-      width: 180px;
+    .title {
+      margin-left: 12px;
+      width: 198px;
       height: 14px;
     }
-  }
-  .icon-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
 `;

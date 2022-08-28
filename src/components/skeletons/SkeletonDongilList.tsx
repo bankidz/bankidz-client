@@ -1,6 +1,8 @@
 import { TDongilVariant } from '@lib/types/TDongilVariant';
 import styled, { css } from 'styled-components';
 import PendingDongilItem from './dongilItems/PendingDongilItem';
+import ProposedDongilItem from './dongilItems/ProposedDongilItem';
+import ThisWeekSDongilItem from './dongilItems/thisWeekSDongilItem';
 import WalkingDongilItem from './dongilItems/WalkingDongilItem';
 
 interface SkeletonDongilListProps {
@@ -13,6 +15,10 @@ function SkeletonDongilList({ variant }: SkeletonDongilListProps) {
     item = <WalkingDongilItem />;
   } else if (variant === 'pending') {
     item = <PendingDongilItem />;
+  } else if (variant === 'proposed') {
+    item = <ProposedDongilItem />;
+  } else if (variant === 'thisWeekS') {
+    item = <ThisWeekSDongilItem />;
   }
 
   return (
@@ -51,10 +57,10 @@ const ItemWrapper = styled.div<{ variant: TDongilVariant }>`
       height: 68px;
       margin-bottom: 8px;
     `}
-      ${({ variant }) =>
+  ${({ variant }) =>
     variant === 'proposed' &&
     css`
-      height: 54px;
+      height: 75px;
       margin-bottom: 8px;
     `}
 `;

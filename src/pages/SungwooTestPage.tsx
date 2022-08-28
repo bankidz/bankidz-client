@@ -6,7 +6,7 @@ import InterestBadge from '@components/common/badges/InterestBadge';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Receipt from '@components/common/receipt/Receipt';
 import SkeletonCircle from '@components/skeletons/SkeletonCircle';
-import SkeletonRectangle from '@components/skeletons/SkeletonRectangle';
+import SkeletonElement from '@components/skeletons/SkeletonElement';
 import SkeletonSummary from '@components/skeletons/SkeletonSummary';
 import SkeletonDongilList from '@components/skeletons/SkeletonDongilList';
 
@@ -88,6 +88,9 @@ function SungwooTestPage() {
       <MarginTemplate>
         <SkeletonDongilList variant="walking" />
         <SkeletonDongilList variant="pending" />
+        <SkeletonDongilList variant="proposed" />
+        <SkeletonDongilList variant="thisWeekS" />
+        {/* <SkeletonDongilList variant="thisWeekS" /> */}
         {/* <SkeletonDongilList variant='pending'/>
         <SkeletonDongilList variant='proposed'/>
         <SkeletonDongilList variant='thisWeekS'/> */}

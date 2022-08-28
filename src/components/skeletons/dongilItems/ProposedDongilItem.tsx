@@ -1,55 +1,56 @@
 import styled from 'styled-components';
 import SkeletonElement from '../SkeletonElement';
 
-function PendingDongilItem() {
+function ProposedDongilItem() {
   return (
     <Wrapper>
       <div className="text-wrapper">
         <span className="title">
           <SkeletonElement variant="rectangle" borderRadius={7} />
         </span>
-        <span className="createdAt">
+        <span className="totalPrice">
           <SkeletonElement variant="rectangle" borderRadius={7} />
         </span>
       </div>
       <div className="badge-wrapper">
-        <SkeletonElement variant="rectangle" borderRadius={8} />
+        <SkeletonElement variant="rectangle" borderRadius={24} />
       </div>
     </Wrapper>
   );
 }
 
-export default PendingDongilItem;
+export default ProposedDongilItem;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 68px;
+  height: 75px;
   background: ${({ theme }) => theme.palette.greyScale.white};
   border-radius: ${({ theme }) => theme.radius.medium};
-  margin-bottom: 12px;
-  padding: 18px 16px 16px 16px;
 
+  margin-bottom: 8px;
+  padding: 20px 16px 18px 16px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 
   .text-wrapper {
+    height: 37px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: start;
+    justify-content: space-between;
     .title {
-      margin-bottom: 8px;
-      width: 207px;
+      width: 160px;
       height: 14px;
     }
-    .createdAt {
+    .totalPrice {
       width: 70px;
-      height: 12px;
+      height: 13px;
     }
   }
+
   .badge-wrapper {
-    width: 67px;
+    width: 112px;
     height: 26px;
   }
 `;
