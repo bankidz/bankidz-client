@@ -4,8 +4,10 @@ import { FAMILY, USER } from '@lib/constants/queryKeyes';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useEffect } from 'react';
 import { useQueries } from 'react-query';
+import { useParams } from 'react-router-dom';
 
 const GroupLink = () => {
+  const { groupCode } = useParams();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const { getFamily } = useFamilyApi();
   const { getUser } = useUserApi();
@@ -33,6 +35,7 @@ const GroupLink = () => {
   useEffect(() => {
     if (userStatus === 'error') {
       openUnregisteredCheckSheet();
+    } else {
     }
   }, [userStatus]);
 

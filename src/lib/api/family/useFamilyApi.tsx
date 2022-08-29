@@ -1,5 +1,9 @@
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { IGetFamilyResData, IGetKidResDataItem } from './family.type';
+import {
+  IDeleteFamilyPayload,
+  IGetFamilyResData,
+  IGetKidResDataItem,
+} from './family.type';
 
 const useFamilyApi = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -16,7 +20,15 @@ const useFamilyApi = () => {
     return data as IGetKidResDataItem[];
   };
 
-  return { getFamily, getKid };
+  const deleteFamily = async (payload: IDeleteFamilyPayload) => {
+    const response = await axiosPrivate.delete('/family/user', {
+      data: payload,
+    });
+    const data = response.data.data;
+    return data as IGetFamilyResData;
+  };
+
+  return { getFamily, getKid, deleteFamily };
 };
 
 export default useFamilyApi;

@@ -1,22 +1,35 @@
 import { IGetUserResData } from '@lib/api/user/user.type';
-import { USER } from '@lib/constants/queryKeyes';
+import { FAMILY, USER } from '@lib/constants/queryKeyes';
 import { IFamilyState } from '@lib/types/IFamilyState';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import FamilyItem from './FamilyItem';
 import { ReactComponent as Share } from '@assets/icons/shareMypage.svg';
 import { ReactComponent as Leave } from '@assets/icons/leaveGroupMypage.svg';
 import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import useFamilyApi from '@lib/api/family/useFamilyApi';
+import { IGetFamilyResData } from '@lib/api/family/family.type';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
+  const { deleteFamily } = useFamilyApi();
+
   const queryClient = useQueryClient();
-  const user = queryClient.getQueryData(USER) as IGetUserResData;
+  const userData = queryClient.getQueryData(USER) as IGetUserResData;
+  const familyData = queryClient.getQueryData(FAMILY) as IGetFamilyResData;
+
+  const { mutate: MutateDeleteFamily } = useMutation(deleteFamily, {
+    onSuccess: () => {
+      openLeaveGroupCompletedSheet();
+      queryClient.invalidateQueries(FAMILY);
+    },
+  });
+
   const me = {
-    username: user.user.username,
-    isFemale: user.user.isFemale,
-    isKid: user.user.isKid,
+    username: userData.user.username,
+    isFemale: userData.user.isFemale,
+    isKid: userData.user.isKid,
   };
 
   // 1. 그룹나가기 버튼 클릭
@@ -39,7 +52,25 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
         sheetProps: { open: true },
         contentProps: {
           type: 'leaveGroupCheck',
-          onMainActionClick: () => {},
+          onMainActionClick: onLeaveGroupButtonClick,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  const onLeaveGroupButtonClick = async () => {
+    const code = familyData.code;
+    MutateDeleteFamily({ code });
+  };
+
+  // 3. 기존 가족그룹에서 나갔어요
+  const openLeaveGroupCompletedSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Completed',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'leaveGroup',
         },
       });
     openSheetBySequence(openSheet);

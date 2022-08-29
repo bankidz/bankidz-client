@@ -54,7 +54,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path="/link" element={<GroupLink />} />
+        <Route path="/link/:groupCode" element={<GroupLink />} />
       </Route>
     </Routes>
   );

@@ -12,3 +12,7 @@ export interface IGetKidResDataItem extends IKid {
   achievedChallenge: number;
   totalChallenge: number;
 }
+
+export interface IDeleteFamilyPayload {
+  code: string;
+}

@@ -24,7 +24,10 @@ function OverView({ userData }: OverViewProps) {
         { name: '총 돈길', value: kid?.totalChallenge },
         {
           name: '평균 완주율',
-          value: `${kid!.achievedChallenge / kid!.totalChallenge}%`,
+          value: `${getPercentValue(
+            kid!.achievedChallenge,
+            kid!.totalChallenge,
+          )}%`,
         },
       ];
     } else {
