@@ -13,7 +13,7 @@ function ProposedDongilItem() {
         </span>
       </div>
       <div className="badge-wrapper">
-        <SkeletonElement borderRadius={24} />
+        <SkeletonElement borderRadius={13} />
       </div>
     </Wrapper>
   );

@@ -11,6 +11,7 @@ import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import SungwooTestPage from './pages/SungwooTestPage';
 import { useQueryClient } from 'react-query';
+import GroupLink from './pages/GroupLink';
 
 function App() {
   /* useEffect(() => {
@@ -42,16 +43,18 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
-        {/* <Route element={<PersistLogin />}> */}
-        {/* <Route element={<RequireAuth />}> */}
-        <Route path="/*" element={<HomeRouter />} />
-        <Route path="/walk/*" element={<WalkRouter />} />
-        <Route path="/mypage/*" element={<MypageRouter />} />
-        <Route path="/financial/*" element={<FinancialRouter />} />
-        {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
-        <Route path="*" element={<NotFound />} />
-        {/* </Route> */}
-        {/* </Route> */}
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/*" element={<HomeRouter />} />
+            <Route path="/walk/*" element={<WalkRouter />} />
+            <Route path="/mypage/*" element={<MypageRouter />} />
+            <Route path="/financial/*" element={<FinancialRouter />} />
+            {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Route>
+
+        <Route path="/link" element={<GroupLink />} />
       </Route>
     </Routes>
   );
