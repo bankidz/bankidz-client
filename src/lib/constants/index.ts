@@ -46,7 +46,7 @@ const config = {
   response_type: 'code id_token',
   state: 'origin:web', // Any string of your choice that you may use for some logic. It's optional and you may omit it.
   scope: 'name email', // To tell apple we want the user name and emails fields in the response it sends us.
-  response_mode: 'form_post',
+  response_mode: 'query',
   m: 11,
   v: '1.5.4',
 };
