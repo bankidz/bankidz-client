@@ -3,7 +3,7 @@
  ** API Base URL
  ** =============================================================================
  */
-//export const BASE_URL = 'https://api.bankidz.com'; // 배포 환경
+// export const BASE_URL = 'https://api.bankidz.com'; // 배포 환경
 export const BASE_URL = 'https://bankids.click'; // 테스트 환경
 
 /*
@@ -12,6 +12,15 @@ export const BASE_URL = 'https://bankids.click'; // 테스트 환경
  ** =============================================================================
  */
 export const AWS_S3_URL = `${process.env.REACT_APP_AWS_S3_URL}`;
+
+/*
+ ** =============================================================================
+ ** Modal Animation
+ ** =============================================================================
+ */
+export const MODAL_CLOSE_TRANSITION_TIME = 200; // milliseconds
+export const MODAL_SLIDE_FROM_POSITION = '-10%';
+export const MODAL_SLIDE_TO_POSITION = '-50%';
 
 /*
  ** =============================================================================
@@ -37,7 +46,7 @@ const config = {
   response_type: 'code id_token',
   state: 'origin:web', // Any string of your choice that you may use for some logic. It's optional and you may omit it.
   scope: 'name email', // To tell apple we want the user name and emails fields in the response it sends us.
-  response_mode: 'form_post',
+  response_mode: 'query',
   m: 11,
   v: '1.5.4',
 };

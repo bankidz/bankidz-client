@@ -5,9 +5,11 @@ import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
-import { MODAL_CLOSE_TRANSITION_TIME } from '../constants';
-import { MODAL_SLIDE_FROM_POSITION } from '../constants';
-import { MODAL_SLIDE_TO_POSITION } from '../constants';
+import {
+  MODAL_CLOSE_TRANSITION_TIME,
+  MODAL_SLIDE_FROM_POSITION,
+  MODAL_SLIDE_TO_POSITION,
+} from '@lib/constants';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 

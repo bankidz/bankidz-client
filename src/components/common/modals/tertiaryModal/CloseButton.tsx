@@ -1,7 +1,7 @@
 import CloseButton from '@components/common/buttons/CloseButton';
 import { SetStateAction } from 'react';
 import styled from 'styled-components';
-import { MODAL_CLOSE_TRANSITION_TIME } from '../constants';
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants';
 
 interface CloseButtonProps {
   shouldCloseOnOverlayClick: boolean;

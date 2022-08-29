@@ -26,9 +26,8 @@ interface IAuthState {
 
 const initialState: IAuthState = {
   auth: {
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDM1MTg5LCJzdWIiOiI1IiwiZXhwIjoxNjYzODU0Mzg5LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.SyPHLiGa68dGG7iYfo1_k-HRUiL80K0Gk03D0GVQrzI',
-    isKid: false,
+    accessToken: '',
+    isKid: null,
     level: null,
     birthday: '',
     username: '',
