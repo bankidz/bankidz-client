@@ -6,10 +6,10 @@ import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import useUserApi from '@lib/api/user/useUserAPi';
-import { FAMILY, USER } from '@lib/constants/queryKeyes';
+import { FAMILY, KID, USER } from '@lib/constants/queryKeyes';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
-import { useQueries } from 'react-query';
+import { useQueries, useQuery } from 'react-query';
 import styled, { css } from 'styled-components';
 
 function Mypage() {
@@ -17,6 +17,8 @@ function Mypage() {
 
   const { getFamily } = useFamilyApi();
   const { getUser } = useUserApi();
+  const { getKid } = useFamilyApi();
+
   const [family, user] = useQueries([
     { queryKey: FAMILY, queryFn: getFamily },
     { queryKey: USER, queryFn: getUser },
@@ -24,6 +26,9 @@ function Mypage() {
 
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
+  const { data: kidData, status: kidStatus } = useQuery(KID, getKid, {
+    enabled: userData?.user.isKid === false,
+  });
 
   const openCreateDongilCompletedSheet = () => {
     setOpenBottomSheet({
@@ -53,7 +58,7 @@ function Mypage() {
         ) : (
           <Section smallGap={true}>
             <h2>자녀기록</h2>
-            <KidsRecordList />
+            {kidStatus === 'success' && <KidsRecordList kidData={kidData!} />}
           </Section>
         )}
         <Section>

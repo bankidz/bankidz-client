@@ -11,21 +11,9 @@ import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
 import SungwooTestPage from './pages/SungwooTestPage';
 import { useQueryClient } from 'react-query';
-import GroupLink from './pages/GroupLink';
+import GroupLink from './components/mypage/GroupLink';
 
 function App() {
-  /* useEffect(() => {
-    const setScreenSize = () => {
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-    setScreenSize();
-    window.addEventListener('resize', setScreenSize);
-    return () => {
-      window.removeEventListener('resize', setScreenSize);
-    };
-  }, []); */
-
   const queryClient = useQueryClient();
   queryClient.setDefaultOptions({
     queries: {
@@ -43,6 +31,7 @@ function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
+        <Route path="/link/:groupCode" element={<GroupLink />} />
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
             <Route path="/*" element={<HomeRouter />} />
@@ -53,8 +42,6 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>
-
-        <Route path="/link/:groupCode" element={<GroupLink />} />
       </Route>
     </Routes>
   );

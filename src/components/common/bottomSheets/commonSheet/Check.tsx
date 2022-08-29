@@ -3,6 +3,7 @@ import { ReactComponent as CheckIcon } from '@assets/icons/approveCheck.svg';
 import { ReactComponent as Group } from '@assets/icons/group.svg';
 import { ReactComponent as Warning } from '@assets/icons/warning.svg';
 import Button from '@components/common/buttons/Button';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface CheckProps {
   type:
@@ -12,7 +13,7 @@ interface CheckProps {
     | 'joinGroup'
     | 'unregistered';
   onMainActionClick: () => void;
-  onDismiss: () => void;
+  onDismiss?: () => void;
 }
 
 const content = {
@@ -59,6 +60,7 @@ const content = {
 };
 
 function Check({ type, onMainActionClick, onDismiss }: CheckProps) {
+  const { setCloseBottomSheet } = useGlobalBottomSheet();
   return (
     <Wrapper>
       <Container>
@@ -67,7 +69,11 @@ function Check({ type, onMainActionClick, onDismiss }: CheckProps) {
         <div className="sub">{content[type].sub}</div>
       </Container>
       <ButtonContainer>
-        <Button label="취소" property="sub" onClick={onDismiss} />
+        <Button
+          label="취소"
+          property="sub"
+          onClick={onDismiss ? onDismiss : setCloseBottomSheet}
+        />
         <Button
           label={content[type].label}
           property="default"

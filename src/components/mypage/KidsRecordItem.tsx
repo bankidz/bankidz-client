@@ -1,6 +1,6 @@
 import { IGetKidResDataItem } from '@lib/api/family/family.type';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
-import getPercentValue from '@lib/utils/get/getPercenValue';
+import getPercentValue from '@lib/utils/get/getPercentValue';
 import styled from 'styled-components';
 import OverViewData from './OverViewContent';
 

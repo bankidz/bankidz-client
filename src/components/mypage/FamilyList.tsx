@@ -10,6 +10,8 @@ import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import { IGetFamilyResData } from '@lib/api/family/family.type';
+import dayjs from 'dayjs';
+import { cipher, decipher } from '@lib/utils/crypt';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
@@ -76,6 +78,26 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     openSheetBySequence(openSheet);
   };
 
+  // 그룹링크 공유하기 버튼 클릭
+  const onShareButtonClick = () => {
+    const data = {
+      code: familyData.code,
+      expiredDate: dayjs().add(2, 'days'),
+    };
+    const encrypted = cipher(JSON.stringify(data));
+    const link = `http://localhost:3000/link/${encrypted}`;
+    console.log(link);
+    messageToRNWebView(link);
+  };
+
+  const messageToRNWebView = (link: string) => {
+    if (window.ReactNativeWebView) {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ link }));
+    } else {
+      console.log('웹뷰 환경이 아닙니다');
+    }
+  };
+
   return (
     <Wrapper>
       <List>
@@ -90,7 +112,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
           <p className="leave">그룹 나가기</p>
         </button>
         <span className="divider" />
-        <button>
+        <button onClick={onShareButtonClick}>
           <Share />
           <p className="share">그룹링크 공유하기</p>
         </button>

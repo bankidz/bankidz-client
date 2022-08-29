@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 import { IGetUserResData } from '@lib/api/user/user.type';
 import OverViewContent from './OverViewContent';
-import { useQuery } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { KID } from '@lib/constants/queryKeyes';
-import useFamilyApi from '@lib/api/family/useFamilyApi';
-import getPercentValue from '@lib/utils/get/getPercenValue';
+import getPercentValue from '@lib/utils/get/getPercentValue';
+import { IGetKidResDataItem } from '@lib/api/family/family.type';
 
 export type OverViewProps = {
   userData: IGetUserResData;
@@ -13,8 +13,8 @@ export type OverViewProps = {
 
 function OverView({ userData }: OverViewProps) {
   const { user, kid, parent } = userData;
-  const { getKid } = useFamilyApi();
-  const { data: kidData, status } = useQuery(KID, getKid);
+  const queryClient = useQueryClient();
+  const kidData = queryClient.getQueryData(KID) as IGetKidResDataItem[];
 
   const getOverViewData = (isKid: boolean) => {
     let overViewData;
@@ -54,7 +54,7 @@ function OverView({ userData }: OverViewProps) {
       <p>
         {user.username} {user.isKid && '뱅키'}
       </p>
-      {status && <OverViewContent data={getOverViewData(user.isKid)} />}
+      <OverViewContent data={getOverViewData(user.isKid)} />
     </Wrapper>
   );
 }

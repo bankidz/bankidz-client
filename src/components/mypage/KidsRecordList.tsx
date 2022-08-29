@@ -1,17 +1,17 @@
+import { IGetKidResDataItem } from '@lib/api/family/family.type';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
-import { KID } from '@lib/constants/queryKeyes';
-import { useQuery } from 'react-query';
+import { IGetUserResData } from '@lib/api/user/user.type';
+import { KID, USER } from '@lib/constants/queryKeyes';
+import { useQuery, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import KidsRecordItem from './KidsRecordItem';
 
-// TODO: any
-function KidsRecordList() {
-  const { getKid } = useFamilyApi();
-  const { data, status } = useQuery(KID, getKid);
+function KidsRecordList({ kidData }: { kidData: IGetKidResDataItem[] }) {
   return (
     <Wrapper>
-      {status === 'success' &&
-        data.map((kid) => <KidsRecordItem kid={kid} key={kid.username} />)}
+      {kidData.map((kid) => (
+        <KidsRecordItem kid={kid} key={kid.username} />
+      ))}
     </Wrapper>
   );
 }
