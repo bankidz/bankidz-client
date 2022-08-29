@@ -3,19 +3,19 @@ import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 
 function APPLEAuthRedirectPage() {
+  console.log('apple callback 진입');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function dispatchLogin() {
-      try {
-        // await dispatch(login({ code })).unwrap();
-        navigate('/');
-      } catch (error: any) {
-        console.error(error);
-      }
-    }
-    dispatchLogin();
+    document.addEventListener('AppleIDSignInOnSuccess', (data) => {
+      console.log('handle success');
+      console.log('data:', data);
+    });
+    document.addEventListener('AppleIDSignInOnFailure', (error) => {
+      console.error('handle error');
+      console.error('error: ', error);
+    });
   }, []);
 
   return <p>애플 로그인 처리중입니다...</p>;

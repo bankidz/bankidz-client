@@ -1,3 +1,4 @@
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import {
@@ -14,14 +15,7 @@ function ParentSummary() {
 
   let content: JSX.Element = <></>;
   if (parentSummariesStatus === 'loading') {
-    content = (
-      <Summary
-        variant="ParentHome"
-        currentSavings={0}
-        totalPrice={0}
-        username={'loading'}
-      />
-    );
+    content = <SkeletonSummary variant="ParentHome" />;
   } else if (parentSummariesStatus === 'succeeded') {
     const getSelectedKidSParentSummary = (kidId: number) => {
       const found = parentSummaries?.find(
@@ -29,10 +23,10 @@ function ParentSummary() {
       );
       return found;
     };
-
     const selectedKidSParentSummary = getSelectedKidSParentSummary(
       selectedKid?.kidId!,
     );
+
     if (selectedKidSParentSummary) {
       const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
       content = (

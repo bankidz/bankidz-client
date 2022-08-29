@@ -1,3 +1,4 @@
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { useAppSelector } from '@store/app/hooks';
 import {
   selectKidSummary,
@@ -12,7 +13,7 @@ function KidSummary() {
 
   let content: JSX.Element = <></>;
   if (kidSummaryStatus === 'loading') {
-    content = <Summary variant="KidHome" currentSavings={0} totalPrice={0} />;
+    content = <SkeletonSummary variant="KidHome" />;
   } else if (kidSummaryStatus === 'succeeded') {
     const { currentSavings, totalPrice } = kidSummary!;
     content = (

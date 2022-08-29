@@ -13,9 +13,13 @@ import TopContent from './contents/TopContent';
 import BottomContent from './contents/BottomContent';
 import CommentContent from './contents/CommentContent';
 import SubmitButton from './SubmitButton';
+import {
+  MODAL_CLOSE_TRANSITION_TIME,
+  MODAL_SLIDE_FROM_POSITION,
+  MODAL_SLIDE_TO_POSITION,
+} from '../constants';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
-import { OVERLAY_TRANSITION_TIME } from '../backgroundTransitionTime';
 
 interface ReceiptModalProps
   extends Pick<
@@ -64,18 +68,7 @@ function ReceiptModal({
   fileName,
 }: ReceiptModalProps) {
   const [isOpen, setIsOpen] = useState(true);
-  function handleSubmit() {
-    setIsOpen(false);
-    setTimeout(() => {
-      onSubmit();
-    }, OVERLAY_TRANSITION_TIME);
-  }
-  function handleExtraSubmit() {
-    setIsOpen(false);
-    setTimeout(() => {
-      onExtraSubmit();
-    }, OVERLAY_TRANSITION_TIME);
-  }
+
   const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
@@ -83,10 +76,10 @@ function ReceiptModal({
       setIsOpen(false);
       setTimeout(() => {
         closeModal(modals.receiptModal);
-      }, OVERLAY_TRANSITION_TIME);
+      }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
-    closeTimeoutMS: OVERLAY_TRANSITION_TIME,
+    closeTimeoutMS: MODAL_CLOSE_TRANSITION_TIME,
     style: {
       overlay: {
         zIndex: '700',
@@ -146,8 +139,8 @@ function ReceiptModal({
         <SubmitButton
           variant={variant}
           setIsOpen={setIsOpen}
-          handleSubmit={handleSubmit}
-          handleExtraSubmit={handleExtraSubmit}
+          onSubmit={onSubmit}
+          onExtraSubmit={onExtraSubmit}
           shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         />
       </Content>
@@ -160,10 +153,10 @@ export default ReceiptModal;
 const StyledReactModal = styled(ReactModal)`
   @keyframes slide {
     from {
-      transform: translateY(-10%);
+      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
     }
     to {
-      transform: translateY(-50%);
+      transform: translateY(${MODAL_SLIDE_TO_POSITION});
     }
   }
   animation: slide ${({ theme }) => theme.animation.modalOpen};

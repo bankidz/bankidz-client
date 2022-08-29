@@ -22,7 +22,6 @@ interface ProposedDongilItemProps {
 }
 
 function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
-  const currentDayOfWeek = dayjs().day();
   const {
     id,
     createdAt,
@@ -151,9 +150,12 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     });
   };
 
+  const currentDayOfWeek = dayjs().day();
+
   return (
     <StyledButton
       onClick={
+        // 7: Sunday
         currentDayOfWeek === 7
           ? openNoticeSundaySheet
           : openProposedReceiptModal
