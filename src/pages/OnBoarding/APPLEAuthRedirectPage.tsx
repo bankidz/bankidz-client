@@ -3,11 +3,13 @@ import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 
 function APPLEAuthRedirectPage() {
-  console.log('apple callback 진입');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('apple callback redirected');
+    console.log('login API');
+
     document.addEventListener('AppleIDSignInOnSuccess', (data) => {
       console.log('handle success');
       console.log('data:', data);
