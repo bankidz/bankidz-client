@@ -1,5 +1,5 @@
 import { IGetUserResData } from '@lib/api/user/user.type';
-import { FAMILY, USER } from '@lib/constants/queryKeyes';
+import { FAMILY, KID, USER } from '@lib/constants/queryKeys';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import { IFamilyDTO } from '@lib/api/family/family.type';
 import dayjs from 'dayjs';
-import { cipher, decipher } from '@lib/utils/crypt';
+import { cipher } from '@lib/utils/crypt';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
@@ -25,6 +25,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
       queryClient.invalidateQueries(FAMILY);
+      queryClient.invalidateQueries(KID);
     },
   });
 

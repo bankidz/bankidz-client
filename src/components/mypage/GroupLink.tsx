@@ -1,7 +1,7 @@
 import useOpenGroupLinkSheets from '@components/mypage/useOpenGroupLinkSheets';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import useUserApi from '@lib/api/user/useUserAPi';
-import { FAMILY, USER } from '@lib/constants/queryKeyes';
+import { FAMILY, USER } from '@lib/constants/queryKeys';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { decipher } from '@lib/utils/crypt';
 import dayjs from 'dayjs';
@@ -31,16 +31,20 @@ const GroupLink = () => {
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
 
-  const handleSetGroupCompleted = () => {
+  const handleJoinGroupCompleted = () => {
     setCloseBottomSheet();
     navigate('/');
   };
 
+  const handleMoveGroupCompleted = () => {
+    openMoveGroupCompletedSheet(handleJoinGroupCompleted);
+  };
+
   const { mutate: MutateJoinFamily } = useMutation(joinFamily, {
-    onSuccess: handleSetGroupCompleted,
+    onSuccess: handleJoinGroupCompleted,
   });
   const { mutate: MutateMoveFamily } = useMutation(joinFamily, {
-    onSuccess: handleSetGroupCompleted,
+    onSuccess: handleMoveGroupCompleted,
   });
 
   useEffect(() => {

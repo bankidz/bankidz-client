@@ -21,8 +21,7 @@ export default OverViewContent;
 
 const Wrapper = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
 `;
 
 const Item = styled.div<{ item: { name: string; value: any } }>`

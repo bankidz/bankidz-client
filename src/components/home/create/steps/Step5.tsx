@@ -1,11 +1,10 @@
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import Signature from '@components/common/bottomSheets/contractSheet/Signature';
 import Modals, { modals } from '@components/common/modals/Modals';
-import { axiosPublic } from '@lib/api/axios';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import useModals from '@lib/hooks/useModals';
-import dataURLtoFile from '@lib/utils/convertURLtoFile';
+import convertDataURLtoFile from '@lib/utils/convertDataURLtoFile';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchFileName,
@@ -61,7 +60,7 @@ function Step5({ currentStep }: { currentStep: number }) {
   const onClickNextButton = () => {
     // s3 업로드 로직
     const uploadS3 = async (sign: any) => {
-      const file = dataURLtoFile(sign, preSignedUrl.imageName);
+      const file = convertDataURLtoFile(sign, preSignedUrl.imageName);
       let formData = new FormData();
       formData.append('file', file);
 

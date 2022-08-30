@@ -124,7 +124,7 @@ function Detail() {
         contentProps: {
           type: 'giveUp',
           title: title,
-          onDismiss: handleConfirmButtonClick,
+          onMainActionClick: handleConfirmButtonClick,
         },
       });
     openSheetBySequence(openSheet);
