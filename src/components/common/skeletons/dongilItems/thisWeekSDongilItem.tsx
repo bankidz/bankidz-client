@@ -1,15 +1,18 @@
 import styled from 'styled-components';
-import SkeletonElement from '../SkeletonElement';
+import PrimaryRectangleElement from '../elements/PrimaryRectangleElement';
+import SecondaryRectangleElement from '../elements/SecondaryRectangleElement';
+
+const TITLE_HEIGHT = 14;
 
 function ThisWeekSDongilItem() {
   return (
     <Wrapper>
       <div className="content-wrapper">
         <div className="illust">
-          <SkeletonElement borderRadius={8} />
+          <PrimaryRectangleElement />
         </div>
         <div className="title">
-          <SkeletonElement borderRadius={7} />
+          <SecondaryRectangleElement height={TITLE_HEIGHT} />
         </div>
       </div>
     </Wrapper>
@@ -41,7 +44,7 @@ const Wrapper = styled.div`
     .title {
       margin-left: 12px;
       width: 198px;
-      height: 14px;
+      height: ${TITLE_HEIGHT}px;
     }
   }
 `;

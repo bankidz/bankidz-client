@@ -1,16 +1,19 @@
 import styled from 'styled-components';
-import SkeletonElement from '../SkeletonElement';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
+import PrimaryRectangleElement from '../elements/PrimaryRectangleElement';
+import SecondaryRectangleElement from '../elements/SecondaryRectangleElement';
+
+const RIGHT_CONTENT_HEIGHT = 14;
 
 function WalkingDongilItem() {
   return (
     <Wrapper>
       <div className="content-wrapper">
         <div className="left">
-          <SkeletonElement borderRadius={8} />
+          <PrimaryRectangleElement />
         </div>
         <div className="right">
-          <SkeletonElement borderRadius={7} />
+          <SecondaryRectangleElement height={RIGHT_CONTENT_HEIGHT} />
         </div>
       </div>
       <div className="icon-wrapper">
@@ -42,7 +45,7 @@ const Wrapper = styled.div`
     }
     .right {
       width: 180px;
-      height: 14px;
+      height: ${RIGHT_CONTENT_HEIGHT}px;
     }
   }
   .icon-wrapper {

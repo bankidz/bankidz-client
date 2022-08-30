@@ -1,19 +1,23 @@
 import styled from 'styled-components';
-import SkeletonElement from '../SkeletonElement';
+import PrimaryRectangleElement from '../elements/PrimaryRectangleElement';
+import SecondaryRectangleElement from '../elements/SecondaryRectangleElement';
+
+const TITLE_HEIGHT = 14;
+const CREATED_AT_HEIGHT = 12;
 
 function PendingDongilItem() {
   return (
     <Wrapper>
       <div className="text-wrapper">
         <span className="title">
-          <SkeletonElement borderRadius={7} />
+          <SecondaryRectangleElement height={TITLE_HEIGHT} />
         </span>
         <span className="createdAt">
-          <SkeletonElement borderRadius={7} />
+          <SecondaryRectangleElement height={CREATED_AT_HEIGHT} />
         </span>
       </div>
       <div className="badge-wrapper">
-        <SkeletonElement borderRadius={8} />
+        <PrimaryRectangleElement />
       </div>
     </Wrapper>
   );
@@ -41,11 +45,11 @@ const Wrapper = styled.div`
     .title {
       margin-bottom: 8px;
       width: 207px;
-      height: 14px;
+      height: ${TITLE_HEIGHT}px;
     }
     .createdAt {
       width: 70px;
-      height: 12px;
+      height: ${CREATED_AT_HEIGHT}px;
     }
   }
   .badge-wrapper {
