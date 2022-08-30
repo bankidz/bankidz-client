@@ -1,24 +1,25 @@
+import { TPage } from '@lib/types/TPage';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import styled, { css } from 'styled-components';
 
-type TVariant = 'KidHome' | 'Detail' | 'ParentHome';
+type TVariant = Extract<TPage, 'KidHome' | 'Detail' | 'ParentHome'>;
 
 interface SummaryProps {
-  /**
-   * 본 컴포넌트가 사용되는 Page를 선택합니다.
-   * 'KidHome', 'Detail', 'ParentHome' 중 하나를 선택합니다.
-   */
   variant: TVariant;
   currentSavings?: number;
   totalPrice?: number;
-  /** variant: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다. */
   username?: string;
-  /** variant: 다음은 'Detail'인 경우 필요한 props 입니다. */
   weekPrice?: number;
   weeks?: number;
   successWeeks?: number;
 }
 
+/**
+ * @param variant 본 컴포넌트가 사용되는 Page를 선택합니다.
+ * 'KidHome', 'Detail', 'ParentHome' 중 하나를 선택합니다.
+ * @param username variant: 'ParentHome'인 경우 표시될 자녀의 이름을 입력합니다.
+ * @param weekPrice variant: 다음은 'Detail'인 경우 필요한 props 입니다.
+ */
 function Summary({
   variant,
   currentSavings,

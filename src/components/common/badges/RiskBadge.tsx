@@ -4,10 +4,12 @@ import styled from 'styled-components';
 type TRiskLevel = '안정' | '보통' | '위험';
 
 interface RiskBadgeProps {
-  /** 위험도를 선택합니다. */
   riskLevel: TRiskLevel;
 }
 
+/**
+ * @param riskLevel 위험도를 선택합니다.
+ */
 function RiskBadge({ riskLevel }: RiskBadgeProps) {
   const colorByRiskLevel = getColorByRiskLevel(riskLevel);
   function getColorByRiskLevel(interestRate: TRiskLevel) {

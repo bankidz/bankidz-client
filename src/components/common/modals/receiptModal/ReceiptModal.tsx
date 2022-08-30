@@ -5,7 +5,6 @@ import '../styles.css';
 import ReactModal from 'react-modal';
 import getHeightByVariant from './getHeightByVariant';
 import { IDongil } from '@lib/types/IDongil';
-import { TReceiptModalVariant } from './TReceiptModalVariant';
 import PerforatedLineTop from './perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from './perforatedLines/PerforatedLineBottom';
 import DashedBorder from './DashedBorder';
@@ -20,6 +19,7 @@ import {
 } from '@lib/constants';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
+import { TReceiptModalVariant } from './TReceiptModalVariant';
 
 interface ReceiptModalProps
   extends Pick<
@@ -34,23 +34,21 @@ interface ReceiptModalProps
       | 'fileName'
     >,
     Pick<Partial<IDongil>, 'comment'> {
-  /**
-   * 용도를 선택합니다.
-   * contract: 자녀 - 새로 돈길 계약하기 / proposing: 자녀 - 대기중인 돈길 (제안중)
-   * rejected: 자녀 - 대기중인 돈길 (거절됨) / proposed: 부모 - 제안받은 돈길
-   * */
   variant: TReceiptModalVariant;
-  /**
-   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
-   * 모달 하단 버튼이 1개인 경우 onSubmit만 사용합니다.
-   * 모달 하단 버튼이 2개인 경우 왼쪽 버튼은 onSubmit을, 오른쪽 버튼은 onExtraSubmit을 사용합니다.
-   * */
   onSubmit: any;
   onExtraSubmit?: any;
   isMom: boolean;
   shouldCloseOnOverlayClick: boolean;
 }
 
+/**
+ * @param variant 용도를 선택합니다.
+ * contract: 자녀 - 새로 돈길 계약하기 / proposing: 자녀 - 대기중인 돈길 (제안중)
+ * rejected: 자녀 - 대기중인 돈길 (거절됨) / proposed: 부모 - 제안받은 돈길
+ * @param onSubmit submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+ * 모달 하단 버튼이 1개인 경우 onSubmit만 사용합니다.
+ * 모달 하단 버튼이 2개인 경우 왼쪽 버튼은 onSubmit을, 오른쪽 버튼은 onExtraSubmit을 사용합니다.
+ */
 function ReceiptModal({
   variant,
   onSubmit,

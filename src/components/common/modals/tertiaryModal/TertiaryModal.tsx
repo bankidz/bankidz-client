@@ -14,14 +14,14 @@ import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 
 interface TertiaryModalProps {
-  /**
-   * submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
-   * useModals hook에 의해 반환 됩니다.
-   * */
   onSubmit: any;
   shouldCloseOnOverlayClick: boolean;
 }
 
+/**
+ * @param onSubmit submit (모달 하단 버튼 클릭) 시 처리될 지스니스 로직을 처리하는 함수 입니다.
+ * useModals hook에 의해 반환 됩니다.
+ */
 function TertiaryModal({
   onSubmit,
   shouldCloseOnOverlayClick = false,

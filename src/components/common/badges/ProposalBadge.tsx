@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 interface ProposalBadgeProps {
-  /** 상태를 선택합니다. isProposing이 true면 '제안중', false면 '거절됨'을 의미합니다. */
   isProposing: boolean;
 }
 
+/**
+ * @param isProposing 상태를 선택합니다.
+ * isProposing이 true면 '제안중', false면 '거절됨'을 의미합니다.
+ */
 function ProposalBadge({ isProposing }: ProposalBadgeProps) {
   return (
     <Wrapper isProposing={isProposing}>
