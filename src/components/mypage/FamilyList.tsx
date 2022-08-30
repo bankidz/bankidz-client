@@ -9,19 +9,19 @@ import { ReactComponent as Leave } from '@assets/icons/leaveGroupMypage.svg';
 import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
-import { IGetFamilyResData } from '@lib/api/family/family.type';
+import { IFamilyDTO } from '@lib/api/family/family.type';
 import dayjs from 'dayjs';
 import { cipher, decipher } from '@lib/utils/crypt';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
-  const { deleteFamily } = useFamilyApi();
+  const { leaveFamily } = useFamilyApi();
 
   const queryClient = useQueryClient();
   const userData = queryClient.getQueryData(USER) as IGetUserResData;
-  const familyData = queryClient.getQueryData(FAMILY) as IGetFamilyResData;
+  const familyData = queryClient.getQueryData(FAMILY) as IFamilyDTO;
 
-  const { mutate: MutateDeleteFamily } = useMutation(deleteFamily, {
+  const { mutate: MutateLeaveFamily } = useMutation(leaveFamily, {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
       queryClient.invalidateQueries(FAMILY);
@@ -62,7 +62,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
 
   const onLeaveGroupButtonClick = async () => {
     const code = familyData.code;
-    MutateDeleteFamily({ code });
+    MutateLeaveFamily({ code });
   };
 
   // 3. 기존 가족그룹에서 나갔어요

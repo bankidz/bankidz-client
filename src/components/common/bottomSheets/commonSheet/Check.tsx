@@ -54,7 +54,7 @@ const content = {
   unregistered: {
     icon: <Warning />,
     main: <p>아직 가입이 안된 회원이에요.</p>,
-    sub: <p>가입 완료 후 링크에 재접속해주세요.</p>,
+    sub: <p>가입 또는 로그인 후 링크에 재접속해주세요.</p>,
     label: '가입하기',
   },
 };

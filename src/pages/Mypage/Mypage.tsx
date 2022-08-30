@@ -9,13 +9,13 @@ import useUserApi from '@lib/api/user/useUserAPi';
 import { FAMILY, KID, USER } from '@lib/constants/queryKeyes';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
-import { useQueries, useQuery } from 'react-query';
+import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 
 function Mypage() {
+  const queryClient = useQueryClient();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
-
-  const { getFamily } = useFamilyApi();
+  const { getFamily, createFamily } = useFamilyApi();
   const { getUser } = useUserApi();
   const { getKid } = useFamilyApi();
 
@@ -28,6 +28,14 @@ function Mypage() {
   const { data: userData, status: userStatus } = user;
   const { data: kidData, status: kidStatus } = useQuery(KID, getKid, {
     enabled: userData?.user.isKid === false,
+  });
+
+  const { mutate: MutateCreateFamily } = useMutation(createFamily, {
+    onSuccess: (data) => {
+      console.log(data);
+      openCreateDongilCompletedSheet();
+      queryClient.invalidateQueries(FAMILY);
+    },
   });
 
   const openCreateDongilCompletedSheet = () => {
@@ -65,10 +73,10 @@ function Mypage() {
           <h2>가족 관리</h2>
           {familyStatus === 'success' && (
             <>
-              {familyData!.familyUserList.length > 0 ? (
+              {familyData!.id ? (
                 <FamilyList family={familyData!.familyUserList} />
               ) : (
-                <CreateDongil onClick={openCreateDongilCompletedSheet}>
+                <CreateDongil onClick={() => MutateCreateFamily()}>
                   <p>가족그룹 만들기</p>
                   <p>그룹을 만들고 가족을 초대해봐요</p>
                 </CreateDongil>

@@ -5,7 +5,7 @@ import OverViewContent from './OverViewContent';
 import { useQueryClient } from 'react-query';
 import { KID } from '@lib/constants/queryKeyes';
 import getPercentValue from '@lib/utils/get/getPercentValue';
-import { IGetKidResDataItem } from '@lib/api/family/family.type';
+import { IKidListDTO } from '@lib/api/family/family.type';
 
 export type OverViewProps = {
   userData: IGetUserResData;
@@ -14,7 +14,7 @@ export type OverViewProps = {
 function OverView({ userData }: OverViewProps) {
   const { user, kid, parent } = userData;
   const queryClient = useQueryClient();
-  const kidData = queryClient.getQueryData(KID) as IGetKidResDataItem[];
+  const kidData = queryClient.getQueryData(KID) as IKidListDTO[];
 
   const getOverViewData = (isKid: boolean) => {
     let overViewData;

@@ -15,12 +15,13 @@ const useOpenGroupLinkSheets = () => {
   };
 
   // '링크가 만료되었어요' 바텀시트
-  const openExpiredNoticeSheet = () => {
+  const openExpiredNoticeSheet = (handler: () => void) => {
     setOpenBottomSheet({
       sheetContent: 'Notice',
       sheetProps: { open: true },
       contentProps: {
         type: 'expired',
+        onMainActionClick: handler,
       },
     });
   };
@@ -65,12 +66,25 @@ const useOpenGroupLinkSheets = () => {
     });
   };
 
+  // '새로운 가족 그룹으로 이동했어요' 바텀시트
+  const openMoveGroupCompletedSheet = (handler: () => void) => {
+    setOpenBottomSheet({
+      sheetContent: 'Completed',
+      sheetProps: { open: true },
+      contentProps: {
+        type: 'moveGroup',
+        onMainActionClick: handler,
+      },
+    });
+  };
+
   return {
     openUnregisteredCheckSheet,
     openExpiredNoticeSheet,
     openMoveGroupCheckSheet,
     openMoveGroupDoubleCheckSheet,
     openJoinGroupCheckSheet,
+    openMoveGroupCompletedSheet,
   };
 };
 

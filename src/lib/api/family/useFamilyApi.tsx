@@ -1,9 +1,5 @@
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import {
-  IDeleteFamilyPayload,
-  IGetFamilyResData,
-  IGetKidResDataItem,
-} from './family.type';
+import { IFamilyGroupPayload, IFamilyDTO, IKidListDTO } from './family.type';
 
 const useFamilyApi = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -11,24 +7,38 @@ const useFamilyApi = () => {
   const getFamily = async () => {
     const response = await axiosPrivate.get('/family');
     const data = response.data.data;
-    return data as IGetFamilyResData;
+    return data as IFamilyDTO;
   };
 
   const getKid = async () => {
     const response = await axiosPrivate.get('/family/kid');
     const data = response.data.data;
-    return data as IGetKidResDataItem[];
+    return data as IKidListDTO[];
   };
 
-  const deleteFamily = async (payload: IDeleteFamilyPayload) => {
+  const createFamily = async () => {
+    const response = await axiosPrivate.post('/family');
+    const data = response.data.data;
+    return data as IFamilyDTO;
+  };
+
+  const leaveFamily = async (payload: IFamilyGroupPayload) => {
     const response = await axiosPrivate.delete('/family/user', {
       data: payload,
     });
     const data = response.data.data;
-    return data as IGetFamilyResData;
+    return data as IFamilyDTO;
   };
 
-  return { getFamily, getKid, deleteFamily };
+  const joinFamily = async (payload: IFamilyGroupPayload) => {
+    const response = await axiosPrivate.post('/family/user', {
+      data: payload,
+    });
+    const data = response.data.data;
+    return data as IFamilyDTO;
+  };
+
+  return { getFamily, getKid, createFamily, leaveFamily, joinFamily };
 };
 
 export default useFamilyApi;
