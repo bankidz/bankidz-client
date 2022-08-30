@@ -64,11 +64,7 @@ function Summary({
       <>
         <TitleWrapper variant={variant}>
           <span className="date">{`${month}월 ${weekNo}주차`}</span>
-          {username === 'loading' ? (
-            <span className="username">{``}</span>
-          ) : (
-            <span className="username">{`${username} 저금통`}</span>
-          )}
+          <span className="username">{`${username} 저금통`}</span>
         </TitleWrapper>
         <InfoWrapper>
           <TextWrapper>

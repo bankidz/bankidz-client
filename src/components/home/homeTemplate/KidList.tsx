@@ -18,7 +18,7 @@ function KidList() {
     <Wrapper>
       {kids?.map((kid) => (
         <UsernameButton
-          key={kid.username}
+          key={kid.kidId}
           onClick={() => {
             dispatch(setSelectedKid(kid));
           }}

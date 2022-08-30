@@ -1,8 +1,8 @@
 import { IDongil } from '@lib/types/IDongil';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosError, AxiosInstance } from 'axios';
-import { RootState, store } from '../app/store';
+import { AxiosInstance } from 'axios';
+import { RootState } from '../app/store';
 
 interface IProposedDongil {
   userName: string;

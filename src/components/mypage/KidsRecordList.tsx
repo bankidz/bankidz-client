@@ -6,7 +6,7 @@ function KidsRecordList({ kidData }: { kidData: IKidListDTO[] }) {
   return (
     <Wrapper>
       {kidData.map((kid) => (
-        <KidsRecordItem kid={kid} key={kid.username} />
+        <KidsRecordItem kid={kid} key={kid.kidId} />
       ))}
     </Wrapper>
   );
