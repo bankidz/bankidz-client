@@ -68,14 +68,17 @@ const useOpenGroupLinkSheets = () => {
 
   // '새로운 가족 그룹으로 이동했어요' 바텀시트
   const openMoveGroupCompletedSheet = (handler: () => void) => {
-    setOpenBottomSheet({
-      sheetContent: 'Completed',
-      sheetProps: { open: true },
-      contentProps: {
-        type: 'moveGroup',
-        onMainActionClick: handler,
-      },
-    });
+    const sheetOpen = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Completed',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'moveGroup',
+          onMainActionClick: handler,
+        },
+      });
+
+    openSheetBySequence(sheetOpen);
   };
 
   return {

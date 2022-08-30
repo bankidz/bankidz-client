@@ -13,7 +13,7 @@ const GroupLink = () => {
   const navigate = useNavigate();
   const { groupCode } = useParams();
   const { code, expiredDate } = decipher(groupCode!);
-
+  const { setCloseBottomSheet } = useGlobalBottomSheet();
   const {
     openExpiredNoticeSheet,
     openJoinGroupCheckSheet,
@@ -31,17 +31,16 @@ const GroupLink = () => {
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
 
-  const onRedirectHome = () => {
+  const handleSetGroupCompleted = () => {
+    setCloseBottomSheet();
     navigate('/');
   };
 
   const { mutate: MutateJoinFamily } = useMutation(joinFamily, {
-    onSuccess: onRedirectHome,
+    onSuccess: handleSetGroupCompleted,
   });
   const { mutate: MutateMoveFamily } = useMutation(joinFamily, {
-    onSuccess: () => {
-      openMoveGroupCompletedSheet(onRedirectHome);
-    },
+    onSuccess: handleSetGroupCompleted,
   });
 
   useEffect(() => {
@@ -50,10 +49,10 @@ const GroupLink = () => {
 
     if (expired.isBefore(now)) {
       // 1. 링크 만료되었을 때
-      openExpiredNoticeSheet(onRedirectHome);
+      openExpiredNoticeSheet(() => navigate('/'));
     } else if (userStatus === 'error') {
       // 2. 리프레쉬토큰 없을때 : 로그인 또는 가입하기 바텀시트
-      openUnregisteredCheckSheet(onRedirectHome);
+      openUnregisteredCheckSheet(() => navigate('/'));
     } else if (familyStatus === 'success') {
       if (familyData.code) {
         // 3. 가족이 있을때 : 새로운 가족그룹으로 이동

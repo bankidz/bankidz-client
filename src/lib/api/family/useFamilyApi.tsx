@@ -31,9 +31,7 @@ const useFamilyApi = () => {
   };
 
   const joinFamily = async (payload: IFamilyGroupPayload) => {
-    const response = await axiosPrivate.post('/family/user', {
-      data: payload,
-    });
+    const response = await axiosPrivate.post('/family/user', payload);
     const data = response.data.data;
     return data as IFamilyDTO;
   };
