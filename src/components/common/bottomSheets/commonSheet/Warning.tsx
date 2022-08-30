@@ -15,16 +15,19 @@ const content = {
     icon: <Delete />,
     main: '정말로 삭제할거예요?',
     sub: null,
+    label: '삭제하기',
   },
   leaveGroup: {
     icon: <Leave />,
     main: '기존 가족그룹을 나갈까요?',
     sub: '가족그룹이 있어야 돈길을 생성할 수 있어요.',
+    label: '나가기',
   },
   leaveGroupCheck: {
     icon: <Leave />,
     main: '정말로 가족그룹을 나갈건가요?',
     sub: '이전 진행한 돈길은 모두 삭제됩니다.',
+    label: '나가기',
   },
 };
 
@@ -44,7 +47,7 @@ function Warning({ type, onMainActionClick, onDismiss }: WarningProps) {
           onClick={onDismiss ? onDismiss : setCloseBottomSheet}
         />
         <Button
-          label="삭제하기"
+          label={content[type].label}
           property="delete"
           onClick={onMainActionClick}
         />

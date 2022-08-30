@@ -1,17 +1,13 @@
-import useFamilyApi from '@lib/api/family/useFamilyApi';
-import { KID } from '@lib/constants/queryKeyes';
-import { useQuery } from 'react-query';
+import { IKidListDTO } from '@lib/api/family/family.type';
 import styled from 'styled-components';
 import KidsRecordItem from './KidsRecordItem';
 
-// TODO: any
-function KidsRecordList() {
-  const { getKid } = useFamilyApi();
-  const { data, status } = useQuery(KID, getKid);
+function KidsRecordList({ kidData }: { kidData: IKidListDTO[] }) {
   return (
     <Wrapper>
-      {status === 'success' &&
-        data.map((kid) => <KidsRecordItem kid={kid} key={kid.username} />)}
+      {kidData.map((kid) => (
+        <KidsRecordItem kid={kid} key={kid.username} />
+      ))}
     </Wrapper>
   );
 }

@@ -6,7 +6,6 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import dataURLtoFile from '@lib/utils/convertURLtoFile';
-import dataURItoBlob from '@lib/utils/dataURItoBlob';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   dispatchFileName,
