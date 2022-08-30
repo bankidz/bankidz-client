@@ -1,23 +1,19 @@
 import styled from 'styled-components';
-import SecondaryRectangleElement from '../elements/SecondaryRectangleElement';
-
-const TITLE_HEIGHT = 14;
-const TOTAL_PRICE_HEIGHT = 13;
-const BADGE_HEIGHT = 26;
+import SkeletonElement from '../SkeletonElement';
 
 function ProposedDongilItem() {
   return (
     <Wrapper>
       <div className="text-wrapper">
         <span className="title">
-          <SecondaryRectangleElement height={TITLE_HEIGHT} />
+          <SkeletonElement borderRadius={7} />
         </span>
         <span className="totalPrice">
-          <SecondaryRectangleElement height={TOTAL_PRICE_HEIGHT} />
+          <SkeletonElement borderRadius={7} />
         </span>
       </div>
-      <div className="badge">
-        <SecondaryRectangleElement height={BADGE_HEIGHT} />
+      <div className="badge-wrapper">
+        <SkeletonElement borderRadius={13} />
       </div>
     </Wrapper>
   );
@@ -45,16 +41,16 @@ const Wrapper = styled.div`
     justify-content: space-between;
     .title {
       width: 160px;
-      height: ${TITLE_HEIGHT}px;
+      height: 14px;
     }
     .totalPrice {
       width: 70px;
-      height: ${TOTAL_PRICE_HEIGHT}px;
+      height: 13px;
     }
   }
 
-  .badge {
+  .badge-wrapper {
     width: 112px;
-    height: ${BADGE_HEIGHT}px;
+    height: 26px;
   }
 `;

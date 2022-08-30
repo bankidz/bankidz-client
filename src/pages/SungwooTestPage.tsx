@@ -4,8 +4,6 @@ import Modals, { modals } from '@components/common/modals/Modals';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import PrimaryRectangle from '@components/common/skeletons/elements/PrimaryRectangleElement';
-import SecondaryRectangle from '@components/common/skeletons/elements/SecondaryRectangleElement';
 
 function SungwooTestPage() {
   const { openModal } = useModals();
@@ -76,16 +74,10 @@ function SungwooTestPage() {
       <button onClick={openTertiary}>open</button>
       <Modals />
       <MarginTemplate>
-        {/* <RectangleWrapper>
-          <PrimaryRectangle />
-        </RectangleWrapper>
-        <RectangleWrapper>
-          <SecondaryRectangle height={50} />
-        </RectangleWrapper> */}
-        <SkeletonDongilList variant="walking" />
+        {/* <SkeletonDongilList variant="walking" />
         <SkeletonDongilList variant="pending" />
         <SkeletonDongilList variant="proposed" />
-        <SkeletonDongilList variant="thisWeekS" />
+        <SkeletonDongilList variant="thisWeekS" /> */}
         {/* <SkeletonSummary variant="KidHome" />
         <SkeletonSummary variant="ParentHome" /> */}
       </MarginTemplate>
