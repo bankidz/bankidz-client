@@ -8,7 +8,7 @@ function OverViewContent({ data }: OverViewDataProps) {
   return (
     <Wrapper>
       {data.map((item) => (
-        <Item key={item.name}>
+        <Item key={item.name} item={item}>
           <p>{item.value}</p>
           <p>{item.name}</p>
         </Item>
@@ -21,11 +21,14 @@ export default OverViewContent;
 
 const Wrapper = styled.div`
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 `;
 
-const Item = styled.div`
+const Item = styled.div<{ item: { name: string; value: any } }>`
   width: 100%;
+  min-width: ${({ item }) =>
+    item.name === '총 저금액' && item.value.length > 7 && '128px'};
   height: 45px;
   display: flex;
   flex-direction: column;
