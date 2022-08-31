@@ -1,16 +1,17 @@
+import { TPage } from '@lib/types/TPage';
 import styled, { css } from 'styled-components';
 import SkeletonElement from './SkeletonElement';
 
-type TVariant = 'KidHome' | 'ParentHome';
+type TVariant = Extract<TPage, 'KidHome' | 'ParentHome'>;
 
 interface SummaryProps {
-  /**
-   * 본 컴포넌트가 사용되는 Page를 선택합니다.
-   * 'KidHome', 'ParentHome' 중 하나를 선택합니다.
-   */
   variant: TVariant;
 }
 
+/**
+ * @param variant 본 컴포넌트가 사용되는 Page를 선택합니다.
+ * 'KidHome', 'ParentHome' 중 하나를 선택합니다.
+ */
 function SkeletonSummary({ variant }: SummaryProps) {
   let content;
   if (variant === 'KidHome') {

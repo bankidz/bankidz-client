@@ -4,10 +4,12 @@ interface SheetButtonProps {
   onClickNext: () => void;
   disabledNext: boolean;
   label: string;
-  /* 바텀시트 내에서 사용될때는 하단고정 하지 않음 */
   outerSheet?: boolean;
 }
 
+/**
+ * @param outerSheet 바텀시트 내에서 사용될때는 하단고정 하지 않음
+ */
 function SheetButton({
   onClickNext,
   disabledNext,

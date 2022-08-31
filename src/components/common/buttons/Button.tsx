@@ -14,17 +14,17 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
    * 버튼 내용
    */
   label: string;
-  /**
-   * 버튼 활성화 상태
-   */
-  // TODO: state -> disable 최대한 직관적인 이ㅁㅡ로
+  // 성우의 제안: state -> disable 최대한 예측가능하게
   state?: boolean;
-  /**
-   * 너비 고정, 가운데 정렬인 버튼 (모달->삭제하기)
-   */
   fixed?: boolean;
 }
 
+/**
+ * @param property 기본, 카카오로그인, 삭제, 강조되지 않은 버튼, 아웃라인
+ * @param label 버튼 내용
+ * @param state 버튼 활성화 상태
+ * @param fixed 너비 고정, 가운데 정렬인 버튼 (모달->삭제하기)
+ */
 function Button({
   property = 'default',
   label,

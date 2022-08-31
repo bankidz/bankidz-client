@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import 'swiper/components/navigation/navigation.min.css';
 import { ReactNode } from 'react';
 import { calcRatio } from '@lib/styles/theme';

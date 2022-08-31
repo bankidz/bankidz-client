@@ -8,13 +8,13 @@ import renderRoleText from '@lib/utils/get/getRoleText';
 interface RoleButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isKid: boolean;
   isFemale: boolean;
-  /**
-   * 버튼이 선택된 경우 isSelect를 true로 설정합니다.
-   * 버튼이 선택되지 않은 경우 false로 설정합니다.
-   */
   isSelected?: boolean;
 }
 
+/**
+ * @param isSelected 버튼이 선택된 경우 true로 설정합니다.
+ * 버튼이 선택되지 않은 경우 false로 설정합니다.
+ */
 function RoleButton({
   isKid,
   isFemale,

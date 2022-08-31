@@ -149,7 +149,11 @@ const ButtonSet = styled.div`
     justify-content: center;
     align-items: center;
     padding: 8px;
-    ${({ theme }) => theme.typo.button.Text_T_14_EB}
+
+    p {
+      ${({ theme }) => theme.typo.button.Text_T_14_EB}
+      margin-bottom: -2px;
+    }
     svg {
       margin-right: 4px;
     }

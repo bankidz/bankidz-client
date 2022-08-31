@@ -36,7 +36,7 @@ function Warning({ type, onMainActionClick, onDismiss }: WarningProps) {
   return (
     <Wrapper>
       <Container>
-        <Delete />
+        {content[type].icon}
         <div className="main">{content[type].main}</div>
         <div className="sub">{content[type].sub}</div>
       </Container>

@@ -6,12 +6,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
-  const href = window.location.href;
+  // const href = window.location.href;
   // @ts-expect-error
-  let params = new URL(document.location).searchParams;
-  let code = params.get('code');
+  const params = new URL(document.location).searchParams;
+  const code = params.get('code');
 
   useEffect(() => {
     async function dispatchLogin() {
