@@ -58,7 +58,7 @@ const Wrapper = styled.div`
   bottom: 0px;
   left: -1px;
   border-radius: 12px 12px 0px 0px;
-  padding-bottom: 14px;
+  padding-bottom: 4px;
 
   a {
     display: flex;

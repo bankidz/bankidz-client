@@ -8,7 +8,7 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 interface CompleteProps {
   type: 'delete' | 'cancel' | 'giveUp' | 'feedback' | 'approve';
   title?: string;
-  onDismiss?: () => void;
+  onMainActionClick?: () => void;
 }
 
 const content = {
@@ -51,7 +51,7 @@ const content = {
   },
 };
 
-function Completed({ type, title, onDismiss }: CompleteProps) {
+function Completed({ type, title, onMainActionClick }: CompleteProps) {
   const { setCloseBottomSheet } = useGlobalBottomSheet();
   return (
     // TODO: fragment
@@ -65,7 +65,7 @@ function Completed({ type, title, onDismiss }: CompleteProps) {
       <Button
         label="확인"
         property="default"
-        onClick={onDismiss ? onDismiss : setCloseBottomSheet}
+        onClick={onMainActionClick ? onMainActionClick : setCloseBottomSheet}
       />
     </Wrapper>
   );

@@ -106,7 +106,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
         sheetProps: { open: true },
         contentProps: {
           type: 'approve',
-          onDismiss: setCloseBottomSheet,
+          onMainActionClick: setCloseBottomSheet,
         },
       });
     openSheetBySequence(openSheet);

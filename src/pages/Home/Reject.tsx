@@ -49,7 +49,7 @@ function Reject() {
       sheetProps: { open: true },
       contentProps: {
         type: 'feedback',
-        onDismiss: () => {
+        onMainActionClick: () => {
           setCloseBottomSheet();
           navigate('/');
         },

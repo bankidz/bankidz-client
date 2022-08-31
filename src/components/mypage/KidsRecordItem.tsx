@@ -7,7 +7,7 @@ import OverViewData from './OverViewContent';
 // TODO: any
 function KidsRecordItem({ kid }: { kid: IKidListDTO }) {
   const overViewData = [
-    { name: '총 저금액', value: `${getCommaThreeDigits(kid.savings)}원` },
+    { name: '총 저금액', value: `${getCommaThreeDigits(kid.savings)}` },
     {
       name: '아이의 총 돈길',
       value: kid.totalChallenge,
