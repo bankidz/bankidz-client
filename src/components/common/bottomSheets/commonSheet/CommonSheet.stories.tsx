@@ -51,32 +51,36 @@ export const 가족그룹_이동 = Template.bind({});
 
 export const 삭제_완료 = Template.bind({});
 삭제_완료.args = {
-  children: <Completed type="delete" onDismiss={() => {}} />,
+  children: <Completed type="delete" onMainActionClick={() => {}} />,
   open: true,
 };
 
 export const 수락_완료 = Template.bind({});
 수락_완료.args = {
-  children: <Completed type="approve" onDismiss={() => {}} />,
+  children: <Completed type="approve" onMainActionClick={() => {}} />,
   open: true,
 };
 
 export const 포기_취소 = Template.bind({});
 포기_취소.args = {
-  children: <Completed type="cancel" onDismiss={() => {}} />,
+  children: <Completed type="cancel" onMainActionClick={() => {}} />,
   open: true,
 };
 
 export const 피드백_전송 = Template.bind({});
 피드백_전송.args = {
-  children: <Completed type="feedback" onDismiss={() => {}} />,
+  children: <Completed type="feedback" onMainActionClick={() => {}} />,
   open: true,
 };
 
 export const 돈길_포기_완료 = Template.bind({});
 돈길_포기_완료.args = {
   children: (
-    <Completed type="giveUp" title="에어팟 구매하기" onDismiss={() => {}} />
+    <Completed
+      type="giveUp"
+      title="에어팟 구매하기"
+      onMainActionClick={() => {}}
+    />
   ),
   open: true,
 };

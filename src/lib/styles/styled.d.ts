@@ -56,6 +56,7 @@ declare module 'styled-components' {
         HomeTitle_T_24_EB: string;
         HomeSubtitle_T_16_EB: string;
         GraphNum_T_21_EB: string;
+        GraphNum_T_18_EB: string;
         GraphSub_S_12_M: string;
         EmptyText_S_16_M: string;
       };
@@ -73,6 +74,7 @@ declare module 'styled-components' {
         S_14_M: string;
         T_12_EB: string;
         S_12_M: string;
+        S_16_B: string;
       };
       popup: {
         T_24_EB: string;

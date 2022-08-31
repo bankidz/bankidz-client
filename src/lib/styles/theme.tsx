@@ -78,6 +78,9 @@ export const theme: DefaultTheme = {
       GraphNum_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
         21,
       )};line-height: 100%;font-weight: 800;`,
+      GraphNum_T_18_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        18,
+      )};line-height: 100%;font-weight: 800;`,
       GraphSub_S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
         12,
       )};line-height: 100%;font-weight: 500;`,
@@ -92,7 +95,7 @@ export const theme: DefaultTheme = {
       )};line-height: 100%;font-weight: 800;`,
       TextField_T_16_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
         16,
-      )};line-height: 100%;font-weight: 800;`,
+      )};line-height: 150%;font-weight: 800;`,
       TextField_Num_T_21_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
         21,
       )};line-height: 100%;font-weight: 800;`,
@@ -115,12 +118,15 @@ export const theme: DefaultTheme = {
       )};line-height: 100%;font-weight: 800;`,
       S_14_M: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
         14,
-      )};line-height: 100%;font-weight: 500;`,
+      )};line-height: 150%;font-weight: 500;`,
       T_12_EB: ` font-family: 'TmoneyRoundWind';font-size: ${calcRem(
         12,
       )};line-height: 100%;font-weight: 800;`,
       S_12_M: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
         12,
+      )};line-height: 150%;font-weight: 500;`,
+      S_16_B: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
+        16,
       )};line-height: 100%;font-weight: 500;`,
     },
     popup: {

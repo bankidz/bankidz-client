@@ -5,17 +5,15 @@ import { darken } from 'polished';
 import { theme } from '@lib/styles/theme';
 
 interface OutlinedButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  /**
-   * 버튼 내용
-   */
   label: string;
-  /**
-   * 버튼 활성화 상태
-   */
-  // TODO: disabled
+  // 성우의 제안: disabled
   state?: boolean;
 }
 
+/**
+ * @param label 버튼 내용
+ * @param state 버튼 활성화 상태
+ */
 function OutlinedButton({
   label,
   state = true,

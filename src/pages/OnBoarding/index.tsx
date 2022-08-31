@@ -9,8 +9,7 @@ function OnBoardingRouter() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/kakao/callback" element={<KAKAOAuthRedirectPage />} />
-      {/* apple callback */}
-      <Route path="/apple/login" element={<APPLEAuthRedirectPage />} />
+      <Route path="/apple/callback" element={<APPLEAuthRedirectPage />} />
       <Route path="/register/:step" element={<RegisterPage />} />
     </Routes>
   );

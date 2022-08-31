@@ -1,7 +1,7 @@
 import useOpenGroupLinkSheets from '@components/mypage/useOpenGroupLinkSheets';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import useUserApi from '@lib/api/user/useUserAPi';
-import { FAMILY, USER } from '@lib/constants/queryKeyes';
+import { FAMILY, USER } from '@lib/constants/queryKeys';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { decipher } from '@lib/utils/crypt';
 import dayjs from 'dayjs';
@@ -31,16 +31,20 @@ const GroupLink = () => {
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
 
-  const handleSetGroupCompleted = () => {
+  const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
     navigate('/');
   };
 
+  const handleMoveGroupCompleted = () => {
+    openMoveGroupCompletedSheet(handleSheetCompletedAction);
+  };
+
   const { mutate: MutateJoinFamily } = useMutation(joinFamily, {
-    onSuccess: handleSetGroupCompleted,
+    onSuccess: handleSheetCompletedAction,
   });
   const { mutate: MutateMoveFamily } = useMutation(joinFamily, {
-    onSuccess: handleSetGroupCompleted,
+    onSuccess: handleMoveGroupCompleted,
   });
 
   useEffect(() => {
@@ -49,10 +53,10 @@ const GroupLink = () => {
 
     if (expired.isBefore(now)) {
       // 1. 링크 만료되었을 때
-      openExpiredNoticeSheet(() => navigate('/'));
+      openExpiredNoticeSheet(handleSheetCompletedAction);
     } else if (userStatus === 'error') {
       // 2. 리프레쉬토큰 없을때 : 로그인 또는 가입하기 바텀시트
-      openUnregisteredCheckSheet(() => navigate('/'));
+      openUnregisteredCheckSheet(handleSheetCompletedAction);
     } else if (familyStatus === 'success') {
       if (familyData.code) {
         // 3. 가족이 있을때 : 새로운 가족그룹으로 이동

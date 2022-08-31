@@ -2,9 +2,6 @@ import { ReactNode } from 'react';
 import styled from 'styled-components';
 
 interface ButtonSetProps {
-  /**
-   * etc : 카카오로그인 / primary-secondary : 한칸 두칸
-   */
   children: ReactNode;
 }
 

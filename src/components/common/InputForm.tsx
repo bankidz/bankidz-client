@@ -1,6 +1,8 @@
 import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
+// 성우의 제안: interface 내부 주석을 봐도 이해가 되지 않습니다.
+// JSDoc으로 주석 정리 부탁드립니다.
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
   value: string | number;
