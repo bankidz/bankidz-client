@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useInsertionEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { login } from '@store/slices/authSlice';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -13,16 +13,32 @@ function KAKAOAuthRedirectPage() {
   const params = new URL(document.location).searchParams;
   const code = params.get('code');
 
-  useEffect(() => {
-    async function dispatchLogin() {
-      try {
-        code && (await dispatch(login({ code })).unwrap());
-        navigate('/');
-      } catch (error: any) {
-        console.error(error);
-      }
+  // useEffect(() => {
+  //   async function dispatchLogin() {
+  //     try {
+  //       code && (await dispatch(login({ code })).unwrap());
+  //       navigate('/');
+  //     } catch (error: any) {
+  //       console.error(error);
+  //     }
+  //   }
+  //   dispatchLogin();
+  // }, []);
+
+  const RNListener = () => {
+    const listener = (event: any) => {
+      alert(event.data);
+      alert(typeof event.data);
+    };
+
+    if (window.ReactNativeWebView) {
+      document.addEventListener('message', listener); // AOS
+      window.addEventListener('message', listener); // iOS
     }
-    dispatchLogin();
+  };
+
+  useEffect(() => {
+    RNListener();
   }, []);
 
   return <p>카카오 로그인 처리중입니다...</p>;

@@ -71,16 +71,8 @@ function SungwooTestPage() {
 
   return (
     <Wrapper>
-      <button onClick={openTertiary}>open</button>
+      <button onClick={openProposed}>open</button>
       <Modals />
-      <MarginTemplate>
-        {/* <SkeletonDongilList variant="walking" />
-        <SkeletonDongilList variant="pending" />
-        <SkeletonDongilList variant="proposed" />
-        <SkeletonDongilList variant="thisWeekS" /> */}
-        {/* <SkeletonSummary variant="KidHome" />
-        <SkeletonSummary variant="ParentHome" /> */}
-      </MarginTemplate>
     </Wrapper>
   );
 }

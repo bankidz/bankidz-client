@@ -11,7 +11,6 @@ function useRefreshToken() {
     dispatch(setCredentials({ accessToken, isKid, level }));
     return accessToken;
   };
-
   return refresh;
 }
 
