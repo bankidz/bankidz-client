@@ -1,14 +1,17 @@
 import styled from 'styled-components';
+import { isMetaProperty } from 'typescript';
 
 type OverViewDataProps = {
   data: { name: string; value: any }[];
 };
 
 function OverViewContent({ data }: OverViewDataProps) {
+  const isKidRecord = data[0].name === '총 저금액';
+
   return (
     <Wrapper>
       {data.map((item) => (
-        <Item key={item.name} item={item}>
+        <Item key={item.name} isKidRecord={isKidRecord}>
           <p>{item.value}</p>
           <p>{item.name}</p>
         </Item>
@@ -24,17 +27,18 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const Item = styled.div<{ item: { name: string; value: any } }>`
+const Item = styled.div<{ isKidRecord: boolean }>`
   width: 100%;
-  min-width: ${({ item }) =>
-    item.name === '총 저금액' && item.value.length > 7 && '128px'};
   height: 45px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   & > p:first-child {
-    ${({ theme }) => theme.typo.fixed.GraphNum_T_21_EB};
+    ${({ theme, isKidRecord }) =>
+      isKidRecord
+        ? theme.typo.fixed.GraphNum_T_18_EB
+        : theme.typo.fixed.GraphNum_T_21_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
     margin-bottom: 8px;
   }

@@ -31,17 +31,17 @@ const GroupLink = () => {
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
 
-  const handleJoinGroupCompleted = () => {
+  const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
     navigate('/');
   };
 
   const handleMoveGroupCompleted = () => {
-    openMoveGroupCompletedSheet(handleJoinGroupCompleted);
+    openMoveGroupCompletedSheet(handleSheetCompletedAction);
   };
 
   const { mutate: MutateJoinFamily } = useMutation(joinFamily, {
-    onSuccess: handleJoinGroupCompleted,
+    onSuccess: handleSheetCompletedAction,
   });
   const { mutate: MutateMoveFamily } = useMutation(joinFamily, {
     onSuccess: handleMoveGroupCompleted,
@@ -53,10 +53,10 @@ const GroupLink = () => {
 
     if (expired.isBefore(now)) {
       // 1. 링크 만료되었을 때
-      openExpiredNoticeSheet(() => navigate('/'));
+      openExpiredNoticeSheet(handleSheetCompletedAction);
     } else if (userStatus === 'error') {
       // 2. 리프레쉬토큰 없을때 : 로그인 또는 가입하기 바텀시트
-      openUnregisteredCheckSheet(() => navigate('/'));
+      openUnregisteredCheckSheet(handleSheetCompletedAction);
     } else if (familyStatus === 'success') {
       if (familyData.code) {
         // 3. 가족이 있을때 : 새로운 가족그룹으로 이동
