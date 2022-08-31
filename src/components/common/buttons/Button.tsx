@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import kakao from '@assets/icons/kakao.svg';
+import { ReactComponent as Kakao } from '@assets/icons/kakao.svg';
+import { ReactComponent as Apple } from '@assets/icons/apple.svg';
 import { darken } from 'polished';
 import { theme } from '@lib/styles/theme';
 
@@ -8,7 +9,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /**
    * 기본, 카카오로그인, 삭제, 강조되지 않은 버튼, 아웃라인
    */
-  property?: 'default' | 'kakao' | 'delete' | 'sub';
+  property?: 'default' | 'kakao' | 'delete' | 'sub' | 'apple';
   /**
    * 버튼 내용
    */
@@ -39,7 +40,8 @@ function Button({
       fixed={fixed}
       {...props}
     >
-      {property === 'kakao' && <img src={kakao} />}
+      {property === 'kakao' && <Kakao />}
+      {property === 'apple' && <Apple />}
       <p>{label}</p>
     </Wrapper>
   );
@@ -47,11 +49,14 @@ function Button({
 
 export default Button;
 
-const handleColorType = (property: 'default' | 'kakao' | 'delete' | 'sub') => {
+const handleColorType = (
+  property: 'default' | 'kakao' | 'delete' | 'sub' | 'apple',
+) => {
   const defaultColor = theme.palette.main.yellow300;
   const subColor = theme.palette.greyScale.grey300;
   const deleteColor = theme.palette.sementic.red300;
   const kakaoColor = '#fee500';
+  const appleColor = '#000';
 
   switch (property) {
     case 'default':
@@ -62,11 +67,13 @@ const handleColorType = (property: 'default' | 'kakao' | 'delete' | 'sub') => {
       return deleteColor;
     case 'kakao':
       return kakaoColor;
+    case 'apple':
+      return appleColor;
   }
 };
 
 const Wrapper = styled.button<{
-  property: 'default' | 'kakao' | 'delete' | 'sub';
+  property: 'default' | 'kakao' | 'delete' | 'sub' | 'apple';
   fixed: boolean;
   state: boolean;
 }>`
@@ -100,18 +107,19 @@ const Wrapper = styled.button<{
   }
 
   ${({ property }) =>
-    property === 'kakao' &&
+    (property === 'kakao' || property === 'apple') &&
     css`
       height: 49px;
-      color: #191919 !important;
-      img {
-        position: absolute;
-        left: 34px;
+      color: ${property === 'kakao' ? '#191919' : '#ffffff'};
+      svg {
+        margin-right: ${property === 'kakao' ? '8px' : '0px'};
+
+        margin-left: ${property === 'kakao' ? '#0px' : '-8px'};
       }
       p {
         font-family: 'Spoqa Han Sans Neo';
         font-weight: 500;
-        position: absolute;
+        margin-bottom: -3px;
       }
     `};
 `;
