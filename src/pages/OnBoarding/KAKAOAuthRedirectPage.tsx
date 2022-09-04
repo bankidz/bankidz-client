@@ -3,6 +3,7 @@ import { useAppDispatch } from '@store/app/hooks';
 import { login } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import useRegisterFCMToken from '@lib/hooks/useRegisterFCMToken';
+import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
@@ -14,7 +15,7 @@ function KAKAOAuthRedirectPage() {
   const code = params.get('code');
 
   useEffect(() => {
-    async function dispatchLogin() {
+    async function proceedLogin() {
       try {
         code && (await dispatch(login({ code })).unwrap());
         await registerFCMToken();
@@ -23,10 +24,10 @@ function KAKAOAuthRedirectPage() {
         console.error(error);
       }
     }
-    dispatchLogin();
+    proceedLogin();
   }, []);
 
-  return <p>카카오 로그인 처리중입니다...</p>;
+  return <CustomSyncLoader />;
 }
 
 export default KAKAOAuthRedirectPage;

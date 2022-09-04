@@ -5,6 +5,7 @@ import { setCredentials } from '@store/slices/authSlice';
 import { string } from 'prop-types';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
 import useRegisterFCMToken from '@lib/hooks/useRegisterFCMToken';
+import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function APPLEAuthRedirectPage() {
   const dispatch = useAppDispatch();
@@ -12,9 +13,6 @@ function APPLEAuthRedirectPage() {
   const registerFCMToken = useRegisterFCMToken();
 
   useEffect(() => {
-    console.log('apple callback redirected');
-    console.log('login API');
-
     // @ts-expect-error
     const params = new URL(document.location).searchParams;
     const accessToken = params.get('aT');
@@ -24,25 +22,27 @@ function APPLEAuthRedirectPage() {
       params.get('level') && stringToBooleanOrNull(params.get('level')!);
     const provider = params.get('provider');
 
-    const error = params.get('error');
-    if (!error) {
-      console.log(error);
-    }
-
     console.log('accessToken: ', accessToken);
     console.log('isKid: ', isKid);
     console.log('level: ', level);
     console.log('provider: ', provider);
-    console.log('error: ', error);
 
     const canSetCredentials = accessToken && isKid && level && provider;
     canSetCredentials &&
       dispatch(setCredentials({ accessToken, isKid, level, provider }));
 
-    // navigate('/');
+    async function proceedLogin() {
+      try {
+        await registerFCMToken();
+        navigate('/');
+      } catch (error: any) {
+        console.error(error);
+      }
+    }
+    proceedLogin();
   }, []);
 
-  return <p>애플 로그인 처리중입니다...</p>;
+  return <CustomSyncLoader />;
 }
 
 export default APPLEAuthRedirectPage;

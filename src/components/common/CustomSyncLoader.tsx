@@ -7,7 +7,7 @@ function CustomSyncLoader() {
       <SyncLoader
         size={13}
         margin={2}
-        color="#DBDEE1" // grey300
+        color="#FFC52F" // yellow400
         loading={true}
         speedMultiplier={0.7}
       />
