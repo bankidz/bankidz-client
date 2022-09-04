@@ -40,9 +40,10 @@ const Wrapper = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    padding-left: ${calcRatio(24, 324)};
+    padding-top: 13px;
+    padding-left: ${calcRatio(7, 290)};
     .title {
       height: 12px;
       ${({ theme }) => theme.typo.text.S_12_M};
@@ -60,12 +61,13 @@ const Wrapper = styled.div`
 
   .계약종료일 {
     width: 66.6%;
-    height: 70px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: flex-start;
-    padding-left: ${calcRatio(24, 324)};
+    padding-top: 13px;
+    padding-left: ${calcRatio(7, 290)};
     .text-wrapper {
       .title {
         height: 12px;

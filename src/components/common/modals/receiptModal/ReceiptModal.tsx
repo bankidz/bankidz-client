@@ -7,7 +7,6 @@ import getHeightByVariant from './getHeightByVariant';
 import { IDongil } from '@lib/types/IDongil';
 import PerforatedLineTop from './perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from './perforatedLines/PerforatedLineBottom';
-import DashedBorder from './DashedBorder';
 import TopContent from './contents/TopContent';
 import BottomContent from './contents/BottomContent';
 import CommentContent from './contents/CommentContent';
@@ -118,7 +117,6 @@ function ReceiptModal({
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
-        <DashedBorder variant={variant} />
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <TopContent variant={variant} title={title} />
         <BottomContent

@@ -13,8 +13,10 @@ const Template: ComponentStory<typeof PrimaryModal> = (args) => (
   <PrimaryModal {...args} />
 );
 
-export const 가족이_생겼어요 = Template.bind({});
-가족이_생겼어요.args = {
-  headerText: '가족이 생겼어요',
-  bodyText: '기획에서 워딩 생각해주세요',
+export const 에어팟_사기 = Template.bind({});
+에어팟_사기.args = {
+  isKid: false,
+  isFemale: false,
+  headerText: '뱅키즈 첫 가입을 축하해요',
+  bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
 };

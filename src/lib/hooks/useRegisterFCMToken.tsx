@@ -26,6 +26,7 @@ function useRegisterFCMToken() {
       console.error(error);
     }
   };
+
   return registerFCMToken;
 }
 

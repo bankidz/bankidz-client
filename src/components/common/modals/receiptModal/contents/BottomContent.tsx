@@ -72,6 +72,9 @@ const Wrapper = styled.div<{ variant: TReceiptModalVariant }>`
   justify-content: flex-start;
   align-items: space-between;
   position: relative;
+
+  padding-left: 17px;
+  padding-right: 17px;
 `;
 
 const SignatureWrapper = styled.div`

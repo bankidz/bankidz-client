@@ -53,6 +53,9 @@ export const theme: DefaultTheme = {
     medium: '12px',
     large: '24px',
   },
+  border: {
+    receipt: '#eaeaec dotted 2px',
+  },
   transition: {
     inputFocus: '0.1s all ease-in',
     kidSelect: '0.125s all ease-in',
