@@ -9,7 +9,7 @@ import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
-import SungwooTestPage from './pages/SungwooTestPage';
+import TestPage from './pages/Test/TestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
 
@@ -38,7 +38,7 @@ function App() {
         <Route path="/walk/*" element={<WalkRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
-        {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
+        <Route path="/test" element={<TestPage />} />
         <Route path="*" element={<NotFound />} />
         {/* </Route> */}
         {/* </Route> */}

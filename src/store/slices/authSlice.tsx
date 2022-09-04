@@ -49,15 +49,15 @@ export const login = createAsyncThunk(
   },
 );
 
+interface IRegisterThunkPayload
+  extends Pick<IAuth, 'birthday' | 'isFemale' | 'isKid'> {
+  axiosPrivate: AxiosInstance;
+}
+
 // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
 export const register = createAsyncThunk(
   'auth/register',
-  async (thunkPayload: {
-    axiosPrivate: AxiosInstance;
-    birthday: string;
-    isFemale: boolean;
-    isKid: boolean;
-  }) => {
+  async (thunkPayload: IRegisterThunkPayload) => {
     const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
     const response = await axiosPrivate.patch('/user', {
       birthday,
