@@ -22,6 +22,7 @@ function APPLEAuthRedirectPage() {
       params.get('isKid') && stringToBooleanOrNull(params.get('isKid')!);
     const level =
       params.get('level') && stringToBooleanOrNull(params.get('level')!);
+    const provider = params.get('provider');
 
     const error = params.get('error');
     if (!error) {
@@ -31,11 +32,12 @@ function APPLEAuthRedirectPage() {
     console.log('accessToken: ', accessToken);
     console.log('isKid: ', isKid);
     console.log('level: ', level);
+    console.log('provider: ', provider);
     console.log('error: ', error);
 
-    const canSetCredentials = accessToken && isKid && level;
+    const canSetCredentials = accessToken && isKid && level && provider;
     canSetCredentials &&
-      dispatch(setCredentials({ accessToken, isKid, level }));
+      dispatch(setCredentials({ accessToken, isKid, level, provider }));
 
     // navigate('/');
   }, []);

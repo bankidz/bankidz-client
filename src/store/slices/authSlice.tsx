@@ -8,6 +8,7 @@ interface IAuth {
   accessToken: string;
   isKid: boolean | null;
   level: TLevel | null;
+  provider: string;
   birthday: string;
   username: string;
   isFemale: boolean;
@@ -30,6 +31,7 @@ const initialState: IAuthState = {
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDM1MTg5LCJzdWIiOiI1IiwiZXhwIjoxNjYzODU0Mzg5LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.SyPHLiGa68dGG7iYfo1_k-HRUiL80K0Gk03D0GVQrzI',
     isKid: false,
     level: null,
+    provider: '',
     birthday: '',
     username: '',
     isFemale: false,
@@ -68,22 +70,25 @@ export const register = createAsyncThunk(
   },
 );
 
-interface ICredentials extends Pick<IAuth, 'accessToken' | 'isKid' | 'level'> {}
+interface ICredentials
+  extends Pick<IAuth, 'accessToken' | 'isKid' | 'level' | 'provider'> {}
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<ICredentials>) => {
-      const { accessToken, isKid, level } = action.payload;
+      const { accessToken, isKid, level, provider } = action.payload;
       state.auth.accessToken = accessToken;
       state.auth.isKid = isKid;
       state.auth.level = level;
+      state.auth.provider = provider;
     },
     resetCredentials: (state) => {
       state.auth.accessToken = '';
       state.auth.isKid = null;
       state.auth.level = null;
+      state.auth.provider = '';
     },
     setBirthday: (state, action: PayloadAction<string>) => {
       state.auth.birthday = action.payload;
@@ -92,10 +97,11 @@ export const authSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        const { accessToken, isKid, level } = action.payload.data;
+        const { accessToken, isKid, level, provider } = action.payload.data;
         state.auth.accessToken = accessToken;
         state.auth.isKid = isKid;
         state.auth.level = level;
+        state.auth.provider = provider;
       })
       .addCase(register.fulfilled, (state, action) => {
         const { birthday, isFemale, isKid, phone, username } =
