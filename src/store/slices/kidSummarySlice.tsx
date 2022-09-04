@@ -49,7 +49,6 @@ export const kidSummarySlice = createSlice({
 
 export const selectKidSummaryStatus = (state: RootState) =>
   state.kidSummary.kidSummaryStatus;
-
 export const selectKidSummary = (state: RootState) =>
   state.kidSummary.kidSummary;
 

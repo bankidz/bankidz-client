@@ -21,10 +21,15 @@ const initialState: IThisWeekSDongilsState = {
   thisWeekSDongilsStatus: 'idle',
 };
 
+interface IFetchThisWeekSDongilsThunkPayload
+  extends Pick<IThisWeekSDongil, 'kidId'> {
+  axiosPrivate: AxiosInstance;
+}
+
 // GET: 금주의 돈길 조회
 export const fetchThisWeekSDongils = createAsyncThunk(
   'thisWeekSDongils/fetch',
-  async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
+  async (thunkPayload: IFetchThisWeekSDongilsThunkPayload) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
       `/challenge/kid/${kidId}?status=walking`,

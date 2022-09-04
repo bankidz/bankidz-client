@@ -20,10 +20,15 @@ const initialState: IProposedDongilsState = {
   proposedDongilsStatus: 'idle',
 };
 
+interface IFetchProposedDongilsThunkPayload
+  extends Pick<IProposedDongil, 'kidId'> {
+  axiosPrivate: AxiosInstance;
+}
+
 // GET: 제안받은 돈길 조회
 export const fetchProposedDongils = createAsyncThunk(
   'proposedDongils/fetch',
-  async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
+  async (thunkPayload: IFetchProposedDongilsThunkPayload) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
       `/challenge/kid/${kidId}?status=pending`,
