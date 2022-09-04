@@ -41,14 +41,21 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-top: ${({ theme }) => theme.border.receipt};
+  border-bottom: ${({ theme }) => theme.border.receipt};
+
   .계약대상 {
     display: flex;
     justify-content: space-between;
     width: 50%;
     height: 100%;
+    border-right: ${({ theme }) => theme.border.receipt};
+
     .banki-illust {
       width: 60.98px;
-      margin-left: ${calcRatio(21, 162)};
+      margin-left: ${calcRatio(14, 162)};
     }
     .text-wrapper {
       width: 47px;

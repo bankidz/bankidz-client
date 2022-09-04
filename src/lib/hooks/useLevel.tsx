@@ -6,7 +6,8 @@ import { selectSelectedKid } from '@store/slices/kidsSlice';
 function useLevel() {
   const isKid = useAppSelector(selectIsKid);
   const selectedKid = useAppSelector(selectSelectedKid);
-  let level = null;
+
+  let level;
   const temp = useAppSelector(selectLevel)!;
   if (isKid === true) {
     level = temp;

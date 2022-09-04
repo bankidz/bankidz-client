@@ -33,6 +33,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  border-bottom: ${({ theme }) => theme.border.receipt};
+
   div {
     width: 33.3%;
     height: 100%;
@@ -40,7 +42,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-left: ${calcRatio(24, 324)};
+    padding-left: ${calcRatio(7, 290)};
     .title {
       width: 100%;
       height: 12px;

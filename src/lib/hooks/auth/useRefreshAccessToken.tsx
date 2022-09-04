@@ -2,17 +2,16 @@ import { useAppDispatch } from '../../../store/app/hooks';
 import { axiosPublic } from '../../api/axios';
 import { setCredentials } from '@store/slices/authSlice';
 
-function useRefreshToken() {
+function useRefreshAccessToken() {
   const dispatch = useAppDispatch();
 
-  const refresh = async () => {
+  const refreshAccessToken = async () => {
     const response = await axiosPublic.patch('/user/refresh');
-    const { accessToken, isKid, level } = response.data.data;
-    dispatch(setCredentials({ accessToken, isKid, level }));
+    const { accessToken, isKid, level, provider } = response.data.data;
+    dispatch(setCredentials({ accessToken, isKid, level, provider }));
     return accessToken;
   };
-
-  return refresh;
+  return refreshAccessToken;
 }
 
-export default useRefreshToken;
+export default useRefreshAccessToken;

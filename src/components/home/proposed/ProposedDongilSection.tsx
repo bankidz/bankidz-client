@@ -18,14 +18,14 @@ function ProposedDongilSection() {
   if (proposedDongilsStatus === 'loading') {
     content = <SkeletonDongilList variant="proposed" />;
   } else if (proposedDongilsStatus === 'succeeded') {
-    const getSelectedKidSProposedDongils = (username: string) => {
+    const getSelectedKidSProposedDongils = (kidId: number) => {
       const found = proposedDongils?.find(
-        (proposedDongil) => proposedDongil.userName === username,
+        (proposedDongil) => proposedDongil.kidId === kidId,
       );
       return found?.challengeList;
     };
     const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
-      selectedKid?.username!,
+      selectedKid?.kidId!,
     );
 
     if (selectedKidSProposedDongils?.length === 0) {

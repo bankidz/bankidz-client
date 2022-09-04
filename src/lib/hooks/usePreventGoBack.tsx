@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
+function setState() {
+  history.pushState(null, '', location.href);
+}
+
 function usePreventGoBack() {
-  const setState = () => {
-    history.pushState(null, '', location.href);
-  };
   useEffect(() => {
     history.pushState(null, '', location.href);
     window.addEventListener('popstate', setState);

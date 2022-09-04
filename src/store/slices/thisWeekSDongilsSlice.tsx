@@ -6,7 +6,7 @@ import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
 interface IThisWeekSDongil {
-  userName: string;
+  kidId: number;
   isFemale: boolean;
   challengeList: IDongil[];
 }
@@ -21,10 +21,15 @@ const initialState: IThisWeekSDongilsState = {
   thisWeekSDongilsStatus: 'idle',
 };
 
+interface IFetchThisWeekSDongilsThunkPayload
+  extends Pick<IThisWeekSDongil, 'kidId'> {
+  axiosPrivate: AxiosInstance;
+}
+
 // GET: 금주의 돈길 조회
 export const fetchThisWeekSDongils = createAsyncThunk(
   'thisWeekSDongils/fetch',
-  async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
+  async (thunkPayload: IFetchThisWeekSDongilsThunkPayload) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(
       `/challenge/kid/${kidId}?status=walking`,
@@ -43,7 +48,7 @@ export const thisWeekSDongilsSlice = createSlice({
     ) => {
       const { selectedKid, approvedDongil } = action.payload;
       state.thisWeekSDongils = state.thisWeekSDongils.map((thisWeekSDongil) => {
-        if (thisWeekSDongil.userName === selectedKid.username) {
+        if (thisWeekSDongil.kidId === selectedKid.kidId) {
           thisWeekSDongil.challengeList =
             thisWeekSDongil.challengeList.concat(approvedDongil);
         }

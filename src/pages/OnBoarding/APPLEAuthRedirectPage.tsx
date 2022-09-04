@@ -4,24 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
 import { string } from 'prop-types';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
+import useRegisterFCMToken from '@lib/hooks/useRegisterFCMToken';
+import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function APPLEAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const registerFCMToken = useRegisterFCMToken();
 
   useEffect(() => {
-    console.log('apple callback redirected');
-    console.log('login API');
-
-    document.addEventListener('AppleIDSignInOnSuccess', (data) => {
-      console.log('handle success');
-      console.log('data:', data);
-    });
-    document.addEventListener('AppleIDSignInOnFailure', (error) => {
-      console.error('handle error');
-      console.error('error: ', error);
-    });
-
     // @ts-expect-error
     const params = new URL(document.location).searchParams;
     const accessToken = params.get('aT');
@@ -29,25 +20,29 @@ function APPLEAuthRedirectPage() {
       params.get('isKid') && stringToBooleanOrNull(params.get('isKid')!);
     const level =
       params.get('level') && stringToBooleanOrNull(params.get('level')!);
-
-    const error = params.get('error');
-    if (!error) {
-      console.log(error);
-    }
+    const provider = params.get('provider');
 
     console.log('accessToken: ', accessToken);
     console.log('isKid: ', isKid);
     console.log('level: ', level);
-    console.log('error: ', error);
+    console.log('provider: ', provider);
 
-    const canSetCredentials = accessToken && isKid && level;
+    const canSetCredentials = accessToken && isKid && level && provider;
     canSetCredentials &&
-      dispatch(setCredentials({ accessToken, isKid, level }));
+      dispatch(setCredentials({ accessToken, isKid, level, provider }));
 
-    // navigate('/');
+    async function proceedLogin() {
+      try {
+        await registerFCMToken();
+        navigate('/');
+      } catch (error: any) {
+        console.error(error);
+      }
+    }
+    proceedLogin();
   }, []);
 
-  return <p>애플 로그인 처리중입니다...</p>;
+  return <CustomSyncLoader />;
 }
 
 export default APPLEAuthRedirectPage;
