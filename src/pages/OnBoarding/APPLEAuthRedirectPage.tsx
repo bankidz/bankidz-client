@@ -4,23 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
 import { string } from 'prop-types';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
+import useRegisterFCMToken from '@lib/hooks/useRegisterFCMToken';
 
 function APPLEAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const registerFCMToken = useRegisterFCMToken();
 
   useEffect(() => {
     console.log('apple callback redirected');
     console.log('login API');
-
-    document.addEventListener('AppleIDSignInOnSuccess', (data) => {
-      console.log('handle success');
-      console.log('data:', data);
-    });
-    document.addEventListener('AppleIDSignInOnFailure', (error) => {
-      console.error('handle error');
-      console.error('error: ', error);
-    });
 
     // @ts-expect-error
     const params = new URL(document.location).searchParams;
