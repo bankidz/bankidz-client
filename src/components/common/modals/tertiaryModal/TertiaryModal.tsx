@@ -9,7 +9,7 @@ import {
   MODAL_CLOSE_TRANSITION_TIME,
   MODAL_SLIDE_FROM_POSITION,
   MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants';
+} from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 
