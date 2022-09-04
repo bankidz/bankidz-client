@@ -5,7 +5,7 @@ import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
 interface IProposedDongil {
-  userName: string;
+  kidId: number;
   isFemale: boolean;
   challengeList: IDongil[];
 }

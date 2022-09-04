@@ -6,7 +6,7 @@ import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
 interface IThisWeekSDongil {
-  userName: string;
+  kidId: number;
   isFemale: boolean;
   challengeList: IDongil[];
 }
@@ -43,7 +43,7 @@ export const thisWeekSDongilsSlice = createSlice({
     ) => {
       const { selectedKid, approvedDongil } = action.payload;
       state.thisWeekSDongils = state.thisWeekSDongils.map((thisWeekSDongil) => {
-        if (thisWeekSDongil.userName === selectedKid.username) {
+        if (thisWeekSDongil.kidId === selectedKid.kidId) {
           thisWeekSDongil.challengeList =
             thisWeekSDongil.challengeList.concat(approvedDongil);
         }

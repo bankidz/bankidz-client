@@ -19,11 +19,11 @@ function useIsFetched(
     );
   } else if (target === 'proposedDongils') {
     isFetched = proposedDongils?.find(
-      (proposedDongil) => proposedDongil.userName === selectedKid?.username,
+      (proposedDongil) => proposedDongil.kidId === selectedKid?.kidId,
     );
   } else if (target === 'thisWeekSDongils') {
     isFetched = thisWeekSDongils?.find(
-      (thisWeekSDongil) => thisWeekSDongil.userName === selectedKid?.username,
+      (thisWeekSDongil) => thisWeekSDongil.kidId === selectedKid?.kidId,
     );
   }
   return isFetched;

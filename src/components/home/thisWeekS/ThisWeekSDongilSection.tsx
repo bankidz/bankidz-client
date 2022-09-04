@@ -18,14 +18,14 @@ function ThisWeekSDongilSection() {
   if (thisWeekSDongilsStatus === 'loading') {
     content = <SkeletonDongilList variant="thisWeekS" />;
   } else if (thisWeekSDongilsStatus === 'succeeded') {
-    const getSelectedKidSThisWeekSDongils = (username: string) => {
+    const getSelectedKidSThisWeekSDongils = (kidId: number) => {
       const found = thisWeekSDongils?.find(
-        (thisWeekSDongil) => thisWeekSDongil.userName === username,
+        (thisWeekSDongil) => thisWeekSDongil.kidId === kidId,
       );
       return found?.challengeList;
     };
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
-      selectedKid?.username!,
+      selectedKid?.kidId!,
     );
 
     if (selectedKidSThisWeekSDongils?.length === 0) {
