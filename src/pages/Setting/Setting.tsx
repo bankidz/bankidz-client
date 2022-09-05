@@ -22,6 +22,7 @@ function Setting() {
       <>
         {contents.map((content) => (
           <Item
+            key={content.title}
             onClick={() => {
               content.title !== '로그아웃' && navigate(content.link);
             }}
