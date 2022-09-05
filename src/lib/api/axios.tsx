@@ -1,5 +1,5 @@
+import { BASE_URL } from '@lib/constants/BASE_URL';
 import axios from 'axios';
-import { BASE_URL } from '@lib/constants';
 
 export const axiosPublic = axios.create({
   baseURL: BASE_URL,

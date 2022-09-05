@@ -41,6 +41,9 @@ declare module 'styled-components' {
       medium: '12px';
       large: '24px';
     };
+    border: {
+      receipt: string;
+    };
     transition: {
       inputFocus: string;
       kidSelect: string;

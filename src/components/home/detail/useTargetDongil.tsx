@@ -15,14 +15,14 @@ function useTargetDongil(id: string) {
       (walkingDongil) => walkingDongil.id === parseInt(id!),
     )!;
   } else if (isKid === false) {
-    const getSelectedKidSThisWeekSDongils = (username: string) => {
+    const getSelectedKidSThisWeekSDongils = (kidId: number) => {
       const found = thisWeekSDongils?.find(
-        (thisWeekSDongil) => thisWeekSDongil.userName === username,
+        (thisWeekSDongil) => thisWeekSDongil.kidId === kidId,
       );
       return found?.challengeList;
     };
     const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
-      selectedKid?.username!,
+      selectedKid?.kidId!,
     );
 
     return selectedKidSThisWeekSDongils?.find(

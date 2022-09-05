@@ -1,5 +1,5 @@
 import { IGetUserResData } from '@lib/api/user/user.type';
-import { FAMILY, KID, USER } from '@lib/constants/queryKeys';
+import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';

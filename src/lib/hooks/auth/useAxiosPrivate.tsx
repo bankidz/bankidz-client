@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '@store/app/hooks';
-import useRefreshToken from '@lib/hooks/auth/useRefreshToken';
+import useRefreshAccessToken from '@lib/hooks/auth/useRefreshAccessToken';
 import { selectAccessToken } from '@store/slices/authSlice';
 import { axiosPrivateInstance } from '@lib/api/axios';
 
-// https://axios-http.com/kr/docs/interceptors
 function useAxiosPrivate() {
-  const refresh = useRefreshToken();
+  const refreshAccessToken = useRefreshAccessToken();
   const accessToken = useAppSelector(selectAccessToken);
 
   useEffect(() => {
@@ -27,13 +26,13 @@ function useAxiosPrivate() {
       async (error) => {
         const prevRequest = error?.config;
         if (error?.response?.status === 401 && !prevRequest?.sent) {
-          // access token expired (401) -> refresh access token -> request prevRequest
+          // aT expired (401) -> refresh aT -> request prevRequest
           prevRequest.sent = true;
-          const newAccessToken = await refresh();
+          const newAccessToken = await refreshAccessToken();
           prevRequest.headers['X-AUTH-TOKEN'] = `${newAccessToken}`;
           return axiosPrivateInstance(prevRequest);
         }
-        return Promise.reject(error); // refresh token expired (again 401) -> navigate to loginPage
+        return Promise.reject(error); // rT expired (again 401) -> navigate to loginPage
       },
     );
 
@@ -41,9 +40,11 @@ function useAxiosPrivate() {
       axiosPrivateInstance.interceptors.request.eject(requestIntercept);
       axiosPrivateInstance.interceptors.response.eject(responseIntercept);
     };
-  }, [accessToken, refresh]);
+  }, [accessToken, refreshAccessToken]);
 
-  return axiosPrivateInstance; // return instance applied interceptors
+  return axiosPrivateInstance; // interceptors applied
 }
 
 export default useAxiosPrivate;
+
+// https://axios-http.com/kr/docs/interceptors

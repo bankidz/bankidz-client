@@ -1,7 +1,7 @@
 import useOpenGroupLinkSheets from '@components/mypage/useOpenGroupLinkSheets';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import useUserApi from '@lib/api/user/useUserAPi';
-import { FAMILY, USER } from '@lib/constants/queryKeys';
+import { FAMILY, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { decipher } from '@lib/utils/crypt';
 import dayjs from 'dayjs';

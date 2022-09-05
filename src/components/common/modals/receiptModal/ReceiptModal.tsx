@@ -7,7 +7,6 @@ import getHeightByVariant from './getHeightByVariant';
 import { IDongil } from '@lib/types/IDongil';
 import PerforatedLineTop from './perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from './perforatedLines/PerforatedLineBottom';
-import DashedBorder from './DashedBorder';
 import TopContent from './contents/TopContent';
 import BottomContent from './contents/BottomContent';
 import CommentContent from './contents/CommentContent';
@@ -16,7 +15,7 @@ import {
   MODAL_CLOSE_TRANSITION_TIME,
   MODAL_SLIDE_FROM_POSITION,
   MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants';
+} from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
@@ -118,7 +117,6 @@ function ReceiptModal({
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
-        <DashedBorder variant={variant} />
         <PerforatedLineTop fill={theme.palette.greyScale.white} />
         <TopContent variant={variant} title={title} />
         <BottomContent

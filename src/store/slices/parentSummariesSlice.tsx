@@ -21,10 +21,15 @@ const initialState: IParentSummariesState = {
   parentSummariesStatus: 'idle',
 };
 
+interface IFetchParentSummariesThunkPayload
+  extends Pick<IParentSummary, 'kidId'> {
+  axiosPrivate: AxiosInstance;
+}
+
 // GET: 부모 홈 페이지 Summary 데이터 조회
 export const fetchParentSummaries = createAsyncThunk(
   'parentSummaries/fetch',
-  async (thunkPayload: { axiosPrivate: AxiosInstance; kidId: number }) => {
+  async (thunkPayload: IFetchParentSummariesThunkPayload) => {
     const { axiosPrivate, kidId } = thunkPayload;
     const response = await axiosPrivate.get(`/challenge/kid/progress/${kidId}`);
     return response.data;
