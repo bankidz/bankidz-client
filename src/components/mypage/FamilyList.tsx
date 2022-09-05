@@ -86,7 +86,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
       expiredDate: dayjs().add(2, 'days'),
     };
     const encrypted = cipher(JSON.stringify(data));
-    const link = `http://localhost:3000/link/${encrypted}`;
+    const link = `http:/bankidz.com/link/${encrypted}`;
     console.log(link);
     messageToRNWebView(link);
   };

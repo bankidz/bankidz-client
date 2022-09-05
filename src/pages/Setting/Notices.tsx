@@ -9,14 +9,15 @@ const Notices = () => {
     <ForegroundTemplate label="공지사항">
       <>
         {noticeData.map((notice) => (
-          <Item
+          <NoticeItem
+            key={notice.id}
             onClick={() => {
               navigate(`${notice.id}`);
             }}
           >
             <p>{notice.title}</p>
             <p>{notice.date}</p>
-          </Item>
+          </NoticeItem>
         ))}
       </>
     </ForegroundTemplate>
@@ -24,7 +25,7 @@ const Notices = () => {
 };
 export default Notices;
 
-const Item = styled.button`
+export const NoticeItem = styled.button`
   padding: 20px 26px;
   width: 100%;
   height: 82px;

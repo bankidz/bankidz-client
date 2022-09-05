@@ -6,6 +6,7 @@ import Features from './Features';
 import Guides from './Guides';
 import Inquiry from './Inquiry';
 import Notices from './Notices';
+import NoticeView from './NoticeView';
 import Privacy from './Privacy';
 import Setting from './Setting';
 import Terms from './Tems';
@@ -16,7 +17,7 @@ const SettingRouter = () => {
     <Routes>
       <Route path="/" element={<Setting />} />
       <Route path="/notices" element={<Notices />} />
-      <Route path="/notices/:id" element={<Notice />} />
+      <Route path="/notices/:id" element={<NoticeView />} />
       <Route path="/features" element={<Features />} />
       <Route path="/guides" element={<Guides />} />
       <Route path="/alerts" element={<Alerts />} />
