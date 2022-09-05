@@ -45,6 +45,9 @@ function AppBar({ label, level }: AppBarProps) {
 export default AppBar;
 
 const Wrapper = styled.div<{ colorByLevel: string | null }>`
+  position: fixed;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 48px;
   padding: 0px 18px;
@@ -53,12 +56,8 @@ const Wrapper = styled.div<{ colorByLevel: string | null }>`
   align-items: center;
   cursor: pointer;
 
-  /* TODO: 한줄 조건에 따른 CSS */
-  ${({ colorByLevel }) =>
-    colorByLevel &&
-    css`
-      background-color: ${colorByLevel};
-    `}
+  background-color: ${({ theme, colorByLevel }) =>
+    colorByLevel ? colorByLevel : theme.palette.greyScale.grey100};
 
   z-index: 3;
 
@@ -74,10 +73,7 @@ const Wrapper = styled.div<{ colorByLevel: string | null }>`
   p {
     //TODO : 보류
     // TODO: 디자인 시스템
-    font-family: 'TmoneyRoundWind';
-    font-size: 17px;
-    line-height: 100%;
-    font-weight: 800;
+    ${({ theme }) => theme.typo.fixed.Navbar_T_17_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
 `;

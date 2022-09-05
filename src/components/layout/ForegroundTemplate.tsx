@@ -24,4 +24,6 @@ function ForegroundTemplate({
 
 export default ForegroundTemplate;
 
-const Screen = styled.div``;
+const Screen = styled.div`
+  margin-top: 48px;
+`;
