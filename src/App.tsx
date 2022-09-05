@@ -9,7 +9,7 @@ import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
-import SungwooTestPage from './pages/SungwooTestPage';
+import TestPage from './pages/Test/TestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
 import Setting from './pages/Setting/Setting';
@@ -45,6 +45,7 @@ function App() {
         {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
         <Route path="*" element={<NotFound />} />
         {/* </Route> */}
+
         {/* </Route> */}
       </Route>
     </Routes>

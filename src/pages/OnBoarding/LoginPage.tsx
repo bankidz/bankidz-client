@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { APPLE_AUTH_URL, KAKAO_AUTH_URL } from '@lib/constants';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
+import { KAKAO_AUTH_URL } from '@lib/constants/KAKAO_AUTH_URL';
+import { APPLE_AUTH_URL } from '@lib/constants/APPLE_AUTH_URL';
 
 function LoginPage() {
   return (

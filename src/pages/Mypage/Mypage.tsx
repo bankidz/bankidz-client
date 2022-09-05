@@ -7,7 +7,7 @@ import OverView from '@components/mypage/OverView';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import useUserApi from '@lib/api/user/useUserAPi';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
-import { FAMILY, KID, USER } from '@lib/constants/queryKeys';
+import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';

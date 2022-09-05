@@ -279,4 +279,5 @@ const Summary = styled.div<{ weekCost: number }>`
 
 const Divider = styled.div`
   border-top: ${({ theme }) => theme.border.receipt};
+  margin: 8px 0px;
 `;

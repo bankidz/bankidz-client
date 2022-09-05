@@ -14056,11 +14056,6 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-react-apple-login@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/react-apple-login/-/react-apple-login-1.1.5.tgz#847a9ab5bbb653c0d82aad435c1140913ff69fe9"
-  integrity sha512-RAsiA5ZSB/shFoXTeL8s5AVRcoQBy7iIZum8N/Wvs4DRh95UQuACAzDcbVaOJM1REcJwnyL539LYqP+3MEJbOw==
-
 react-clientside-effect@^1.2.6:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz#29f9b14e944a376b03fb650eed2a754dd128ea3a"
@@ -14437,6 +14432,11 @@ react-sizeme@^2.6.7:
     invariant "^2.2.4"
     shallowequal "^1.1.0"
     throttle-debounce "^2.1.0"
+
+react-spinners@^0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.4.tgz#20f7435e5cb3a2bde23110efa8b7dfbe485373e9"
+  integrity sha512-V6IURjYOwomhdngMfuVxBp4utCF6v21sjQ6r4K2JoKl8fwXZp1UeHMBLf+2SU+cts8hAVj9rHOJ8kdT5UqqaJw==
 
 react-spring-bottom-sheet@^3.4.1:
   version "3.4.1"
