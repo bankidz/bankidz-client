@@ -12,7 +12,6 @@ import {
   selectStep4InitData,
   selectTotalPrice,
 } from '@store/slices/createChallengeSlice';
-import { ReactComponent as Divider } from '@assets/borders/create-challenge-dashed-divider.svg';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
 import useModals from '@lib/hooks/useModals';
@@ -175,8 +174,7 @@ function Step4({ currentStep }: { currentStep: number }) {
           />
         </div>
       </InputSection>
-
-      <StyledDivider />
+      <Divider />
       <Summary weekCost={contractInfo.weekCost}>
         <p>
           <span>
@@ -258,10 +256,6 @@ const InputSection = styled.div`
   }
 `;
 
-const StyledDivider = styled(Divider)`
-  margin: 8px 0;
-`;
-
 const Summary = styled.div<{ weekCost: number }>`
   display: flex;
   flex-direction: column;
@@ -281,4 +275,8 @@ const Summary = styled.div<{ weekCost: number }>`
     ${({ theme }) => theme.typo.text.S_12_M};
     color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
+`;
+
+const Divider = styled.div`
+  border-top: ${({ theme }) => theme.border.receipt};
 `;
