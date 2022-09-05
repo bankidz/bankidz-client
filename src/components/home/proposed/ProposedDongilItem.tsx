@@ -76,7 +76,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
         };
         const approvedDongil = getApprovedDongil(id)!;
         dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
-        openApproveCompletedSheet();
+        openApproveCompletedBottomSheet();
       } catch (error) {
         console.log(error);
       } finally {
@@ -86,7 +86,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   }
 
   // 2. 자녀의 돈길을 수락할까요?
-  const openApproveCheckSheet = () => {
+  const openApproveCheckBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Check',
       sheetProps: { open: true },
@@ -99,7 +99,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   };
 
   // 4. 자녀의 돈길이 수락되었어요
-  const openApproveCompletedSheet = () => {
+  const openApproveCompletedBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
@@ -123,7 +123,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
         navigate(`/reject/${id}`);
       },
       onExtraSubmit: () => {
-        openApproveCheckSheet!();
+        openApproveCheckBottomSheet!();
       },
       createdAt,
       interestRate,
@@ -138,7 +138,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     });
   }
 
-  const openNoticeSundaySheet = () => {
+  const openNoticeSundayBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Notice',
       sheetProps: {
@@ -157,7 +157,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       onClick={
         // 7: Sunday
         currentDayOfWeek === 7
-          ? openNoticeSundaySheet
+          ? openNoticeSundayBottomSheet
           : openProposedReceiptModal
       }
     >
