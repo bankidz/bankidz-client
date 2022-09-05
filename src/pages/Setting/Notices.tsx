@@ -1,14 +1,21 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import noticeData from '@components/setting/notices/noticeData';
+import useNoticeApi from '@lib/api/notice/useNoticeApi';
+import { NOTICE } from '@lib/constants/QUERY_KEY';
+import dayjs from 'dayjs';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Notices = () => {
   const navigate = useNavigate();
+  const { getNotices } = useNoticeApi();
+  const { data } = useQuery(NOTICE, getNotices);
+  console.log(data);
   return (
     <ForegroundTemplate label="공지사항">
       <>
-        {noticeData.map((notice) => (
+        {data?.map((notice) => (
           <NoticeItem
             key={notice.id}
             onClick={() => {
@@ -16,7 +23,7 @@ const Notices = () => {
             }}
           >
             <p>{notice.title}</p>
-            <p>{notice.date}</p>
+            <p>{dayjs(notice.createdAt).format('YYYY.MM.DD')}</p>
           </NoticeItem>
         ))}
       </>
