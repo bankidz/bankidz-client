@@ -6,14 +6,17 @@ import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import useFamilyApi from '@lib/api/family/useFamilyApi';
 import useUserApi from '@lib/api/user/useUserAPi';
+import { ReactComponent as Setting } from '@assets/icons/setting.svg';
 import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 function Mypage() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const { getFamily, createFamily } = useFamilyApi();
   const { getUser } = useUserApi();
@@ -50,7 +53,10 @@ function Mypage() {
 
   return (
     <Wrapper>
-      <Header>마이페이지</Header>
+      <Header>
+        마이페이지
+        <Setting onClick={() => navigate('/setting')} />
+      </Header>
       <MarginTemplate>
         {userStatus === 'success' ? (
           <OverView userData={userData} />
@@ -102,7 +108,7 @@ const Header = styled.div`
   ${({ theme }) => theme.typo.fixed.TabName_T_21_EB}
   color: ${({ theme }) => theme.palette.greyScale.black};
   height: 48px;
-  padding: 0px 16px;
+  padding: 0px 6px 0px 16px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -111,6 +117,10 @@ const Header = styled.div`
   top: 0px;
   width: 100%;
   z-index: 3;
+  justify-content: space-between;
+  svg {
+    cursor: pointer;
+  }
 `;
 
 const Section = styled.div<{ smallGap?: boolean }>`

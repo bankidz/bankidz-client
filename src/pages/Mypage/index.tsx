@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Info from './Info';
+import Setting from '../Setting/Setting';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import Mypage from './Mypage';
 
@@ -14,7 +14,6 @@ function MypageRouter() {
           </BackgroundTemplate>
         }
       />
-      <Route path="/info" element={<Info />} />
     </Routes>
   );
 }

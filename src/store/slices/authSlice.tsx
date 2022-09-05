@@ -28,8 +28,8 @@ interface IAuthState {
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDM1MTg5LCJzdWIiOiI1IiwiZXhwIjoxNjYzODU0Mzg5LCJpZCI6NSwicm9sZXMiOiJVU0VSIn0.SyPHLiGa68dGG7iYfo1_k-HRUiL80K0Gk03D0GVQrzI',
-    isKid: false,
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDQwMjUxLCJzdWIiOiI0IiwiZXhwIjoxNjYzODU5NDUxLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.uqkdNdiIhz5Aix1mY-wx2TIYM2DS8pPqNPNNqrTe7lg',
+    isKid: true,
     level: null,
     provider: '',
     birthday: '',
