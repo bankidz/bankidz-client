@@ -31,7 +31,7 @@ const initialState: IAuthState = {
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDQwMjUxLCJzdWIiOiI0IiwiZXhwIjoxNjYzODU5NDUxLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.uqkdNdiIhz5Aix1mY-wx2TIYM2DS8pPqNPNNqrTe7lg',
     isKid: true,
     level: null,
-    provider: '',
+    provider: 'apple',
     birthday: '',
     username: '',
     isFemale: false,
@@ -124,6 +124,7 @@ export const selectAccessToken = (state: RootState) =>
 export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
 export const selectLevel = (state: RootState) => state.auth.auth.level;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
+export const selectProvider = (state: RootState) => state.auth.auth.provider;
 
 export default authSlice.reducer;
 

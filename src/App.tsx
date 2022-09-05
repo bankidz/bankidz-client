@@ -41,6 +41,7 @@ function App() {
           <Route path="/mypage/*" element={<MypageRouter />} />
           <Route path="/setting/*" element={<SettingRouter />} />
           <Route path="/financial/*" element={<FinancialRouter />} />
+          <Route path="/test/*" element={<TestPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* </Route> */}

@@ -24,6 +24,7 @@ function Setting() {
   const logout = useLogout();
   function openLogoutCheckBottomSheet() {
     setOpenBottomSheet({
+      // TODO: 로그아웃 체크로 수정 부탁드립니다.
       sheetContent: 'Check',
       sheetProps: { open: true },
       contentProps: {

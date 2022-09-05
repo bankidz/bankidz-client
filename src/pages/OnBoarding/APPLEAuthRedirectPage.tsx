@@ -2,15 +2,14 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
-import { string } from 'prop-types';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
-import useRegisterFCMToken from '@lib/hooks/useRegisterFCMToken';
+import useRegisterEXPOToken from '@lib/hooks/useRegisterEXPOToken';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function APPLEAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const registerFCMToken = useRegisterFCMToken();
+  const registerEXPOToken = useRegisterEXPOToken();
 
   useEffect(() => {
     // @ts-expect-error
@@ -33,7 +32,7 @@ function APPLEAuthRedirectPage() {
 
     async function proceedLogin() {
       try {
-        await registerFCMToken();
+        await registerEXPOToken();
         navigate('/');
       } catch (error: any) {
         console.error(error);

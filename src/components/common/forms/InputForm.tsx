@@ -7,7 +7,7 @@ interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
   value: string | number;
   //onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  /* 유효성 검사 후 조건에 따라 빨간색 테두리로 나타납니다  */
+  /*   */
   error: boolean;
   /* 바텀시트를 사용하는 경우에 true */
   readonly?: boolean;

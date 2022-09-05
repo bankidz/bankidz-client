@@ -91,7 +91,6 @@ export const theme: DefaultTheme = {
         16,
       )};line-height: 100%;font-weight: 500;`,
     },
-
     input: {
       Title_T_24_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
         24,
@@ -130,7 +129,7 @@ export const theme: DefaultTheme = {
       )};line-height: 150%;font-weight: 500;`,
       S_16_B: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
         16,
-      )};line-height: 100%;font-weight: 500;`,
+      )};line-height: 100%;font-weight: 700;`,
     },
     popup: {
       T_24_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
