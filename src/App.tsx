@@ -12,6 +12,8 @@ import PersistLogin from '@components/auth/PersistLogin';
 import SungwooTestPage from './pages/SungwooTestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
+import Setting from './pages/Setting/Setting';
+import SettingRouter from './pages/Setting';
 
 function App() {
   const queryClient = useQueryClient();
@@ -37,6 +39,8 @@ function App() {
         <Route path="/*" element={<HomeRouter />} />
         <Route path="/walk/*" element={<WalkRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
+
+        <Route path="/setting/*" element={<SettingRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
         {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
         <Route path="*" element={<NotFound />} />
