@@ -6,6 +6,7 @@ import {
 import styled from 'styled-components';
 import KidList from './KidList';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
+import { ReactComponent as Bell } from '@assets/icons/bell.svg';
 import { theme } from '@lib/styles/theme';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
@@ -27,6 +28,9 @@ function FixedBar() {
 
   return (
     <Wrapper colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
+      <div className="alert">
+        <Bell />
+      </div>
       <div className="logo-wrapper">
         <BANKIDZ fill={theme.palette.greyScale.white} />
       </div>
@@ -60,6 +64,12 @@ const Wrapper = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
     height: 15.82px;
     margin-left: 19.79px;
     margin-top: 17.73px;
+  }
+
+  .alert {
+    position: absolute;
+    top: 0px;
+    right: 6px;
   }
 `;
 

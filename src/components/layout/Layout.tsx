@@ -58,6 +58,7 @@ const Container = styled.div`
     width: 100%;
     min-width: 320px;
     height: calc(var(--vh, 1vh) * 100);
+    overflow-y: auto;
     border: none;
     border-radius: 0px;
   }

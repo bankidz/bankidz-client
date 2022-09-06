@@ -29,6 +29,7 @@ type TcreateChallengeState = {
     itemName: string | null;
     title: string;
     interestRate: 10 | 20 | 30 | null;
+    interestPrice: number;
     totalPrice: number;
     weekPrice: number;
     weeks: number;
@@ -48,6 +49,7 @@ const initialState: TcreateChallengeState = {
     itemName: null,
     title: '',
     interestRate: null,
+    interestPrice: 0,
     totalPrice: 0,
     weekPrice: 0,
     weeks: 0,
@@ -98,6 +100,9 @@ export const createChallengeSlice = createSlice({
     dispatchInterestRate(state, action: PayloadAction<10 | 20 | 30 | null>) {
       state.challenge.interestRate = action.payload;
     },
+    dispatchInterestPrice(state, action: PayloadAction<number>) {
+      state.challenge.interestPrice = action.payload;
+    },
     dispatchWeeks(state, action: PayloadAction<number>) {
       state.challenge.weeks = action.payload;
     },
@@ -133,6 +138,7 @@ export const {
   dispatchTotalPrice,
   dispatchWeekPrice,
   dispatchInterestRate,
+  dispatchInterestPrice,
   dispatchWeeks,
   dispatchResetChallengePayload,
   dispatchInProcess,

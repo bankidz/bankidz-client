@@ -83,12 +83,12 @@ function WithdrawContent() {
         <Button
           property="sub"
           label="탈퇴하기"
-          onClick={() => navigate('/setting/withdraw/reason')}
+          onClick={() => navigate('/manage/withdraw/reason')}
         />
         <Button
           property="default"
           label="돌아가기"
-          onClick={() => navigate('/setting')}
+          onClick={() => navigate('/manage')}
         />
       </DoubleButtonWrapper>
     </Wrapper>

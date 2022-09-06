@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as CheckIcon } from '@assets/icons/approveCheck.svg';
 import { ReactComponent as Group } from '@assets/icons/group.svg';
 import { ReactComponent as Warning } from '@assets/icons/warning.svg';
+import { ReactComponent as Logout } from '@assets/icons/logout.svg';
 import Button from '@components/common/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
@@ -11,7 +12,8 @@ interface CheckProps {
     | 'moveGroup'
     | 'moveGroupCheck'
     | 'joinGroup'
-    | 'unregistered';
+    | 'unregistered'
+    | 'logout';
   onMainActionClick: () => void;
   onDismiss?: () => void;
 }
@@ -56,6 +58,12 @@ const content = {
     main: <p>아직 가입이 안된 회원이에요.</p>,
     sub: <p>가입 또는 로그인 후 링크에 재접속해주세요.</p>,
     label: '가입하기',
+  },
+  logout: {
+    icon: <Logout />,
+    main: <p>로그아웃 하시겠습니까?</p>,
+    sub: null,
+    label: '확인',
   },
 };
 

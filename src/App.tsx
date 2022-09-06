@@ -12,8 +12,7 @@ import PersistLogin from '@components/auth/PersistLogin';
 import TestPage from './pages/Test/TestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
-import Setting from './pages/Setting/Setting';
-import SettingRouter from './pages/Setting';
+import ManageRouter from './pages/Manage';
 
 function App() {
   const queryClient = useQueryClient();
@@ -39,11 +38,12 @@ function App() {
           <Route path="/*" element={<HomeRouter />} />
           <Route path="/walk/*" element={<WalkRouter />} />
           <Route path="/mypage/*" element={<MypageRouter />} />
-          <Route path="/setting/*" element={<SettingRouter />} />
+          <Route path="/manage/*" element={<ManageRouter />} />
           <Route path="/financial/*" element={<FinancialRouter />} />
           <Route path="/test/*" element={<TestPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+
         {/* </Route> */}
       </Route>
     </Routes>

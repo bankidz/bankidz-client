@@ -1,5 +1,5 @@
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { IGetUserResData } from './user.type';
+import { IGetUserResData } from './user.dto';
 
 const useUserApi = () => {
   const axiosPrivate = useAxiosPrivate();

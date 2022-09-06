@@ -1,4 +1,3 @@
-import { IGetUserResData } from '@lib/api/user/user.type';
 import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
@@ -8,15 +7,15 @@ import { ReactComponent as Share } from '@assets/icons/shareMypage.svg';
 import { ReactComponent as Leave } from '@assets/icons/leaveGroupMypage.svg';
 import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import useFamilyApi from '@lib/api/family/useFamilyApi';
-import { IFamilyDTO } from '@lib/api/family/family.type';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
+import useFamilyApi from '@apis/family/useFamilyApi';
+import { IGetUserResData } from '@apis/user/user.dto';
+import { IFamilyDTO } from '@apis/family/family.dto';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
   const { leaveFamily } = useFamilyApi();
-
   const queryClient = useQueryClient();
   const userData = queryClient.getQueryData(USER) as IGetUserResData;
   const familyData = queryClient.getQueryData(FAMILY) as IFamilyDTO;
@@ -30,9 +29,9 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   });
 
   const me = {
-    username: userData.user.username,
-    isFemale: userData.user.isFemale,
-    isKid: userData.user.isKid,
+    username: userData?.user.username,
+    isFemale: userData?.user.isFemale,
+    isKid: userData?.user.isKid,
   };
 
   // 1. 그룹나가기 버튼 클릭
@@ -86,7 +85,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
       expiredDate: dayjs().add(2, 'days'),
     };
     const encrypted = cipher(JSON.stringify(data));
-    const link = `http://localhost:3000/link/${encrypted}`;
+    const link = `http:/bankidz.com/link/${encrypted}`;
     console.log(link);
     messageToRNWebView(link);
   };
@@ -102,7 +101,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   return (
     <Wrapper>
       <List>
-        <FamilyItem user={me} me={true} />
+        {userData && <FamilyItem user={me} me={true} />}
         {family.map((member) => (
           <FamilyItem user={member} key={member.username} />
         ))}

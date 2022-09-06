@@ -17,7 +17,7 @@ const contents = [
   { title: '탈퇴하기', link: 'withdraw' },
 ];
 
-function Setting() {
+function Manage() {
   const navigate = useNavigate();
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
@@ -28,18 +28,17 @@ function Setting() {
       sheetContent: 'Check',
       sheetProps: { open: true },
       contentProps: {
-        type: 'approve',
+        type: 'logout',
         onMainActionClick: () => {
           setCloseBottomSheet();
           logout();
         },
-        onDismiss: setCloseBottomSheet,
       },
     });
   }
 
   return (
-    <ForegroundTemplate label={'설정'}>
+    <ForegroundTemplate label={'설정'} to="/mypage">
       <>
         {contents.map((content) => (
           <Item
@@ -59,7 +58,7 @@ function Setting() {
   );
 }
 
-export default Setting;
+export default Manage;
 
 const Item = styled.button`
   height: 56px;

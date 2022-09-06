@@ -70,7 +70,7 @@ function SelectMoney({ pushAmount, popAmount, resetAmount }: SelectMoneyProps) {
 export default SelectMoney;
 
 const Wrapper = styled.div`
-  margin: 9px 16px 0px 16px;
+  margin-top: 9px;
 `;
 
 const ButtonContainer = styled.div`

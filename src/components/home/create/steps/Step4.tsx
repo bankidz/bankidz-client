@@ -6,6 +6,7 @@ import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
+  dispatchInterestPrice,
   dispatchInterestRate,
   dispatchWeekPrice,
   dispatchWeeks,
@@ -83,6 +84,7 @@ function Step4({ currentStep }: { currentStep: number }) {
     dispatch(dispatchWeekPrice(form.weekPrice));
     dispatch(dispatchInterestRate(form.interestRate));
     dispatch(dispatchWeeks(contractInfo.weekCost));
+    dispatch(dispatchInterestPrice(totalPrice * form.interestRate! * 0.01));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 

@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import { ReactComponent as Warning } from '@assets/icons/warning.svg';
+import { ReactComponent as Complete } from '@assets/icons/complete.svg';
 import Button from '@components/common/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface NoticeProps {
-  type: 'giveUpExceeded' | 'sunday' | 'expired';
+  type: 'giveUpExceeded' | 'sunday' | 'expired' | 'withdrawed';
   onMainActionClick?: () => void;
 }
 
@@ -24,6 +25,11 @@ const content = {
     icon: <Warning />,
     main: '링크가 만료되었어요',
     sub: '가족에게 그룹링크를 다시 요청해주세요',
+  },
+  withdrawed: {
+    icon: <Complete />,
+    main: '탈퇴되었습니다',
+    sub: '지금까지 뱅키즈를 이용해주셔서 감사합니다',
   },
 };
 function Notice({ type, onMainActionClick }: NoticeProps) {
@@ -48,7 +54,9 @@ export default Notice;
 
 const Wrapper = styled.div``;
 
-const Container = styled.div<{ type: 'giveUpExceeded' | 'sunday' | 'expired' }>`
+const Container = styled.div<{
+  type: 'giveUpExceeded' | 'sunday' | 'expired' | 'withdrawed';
+}>`
   margin: 25px 16px 32px 16px;
   display: flex;
   gap: 16px;
