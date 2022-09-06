@@ -5,8 +5,7 @@ function useRegisterEXPOToken() {
 
   async function registerEXPOToken() {
     const listener = (event: any) => {
-      let EXPOToken = 'web';
-      EXPOToken = JSON.stringify(event.data);
+      const EXPOToken = JSON.stringify(event.data);
       alert(EXPOToken);
       axiosPrivate.patch('/user/expo', {
         expoToken: EXPOToken,
@@ -16,6 +15,10 @@ function useRegisterEXPOToken() {
     if (window.ReactNativeWebView) {
       document.addEventListener('message', listener); // AOS
       window.addEventListener('message', listener); // iOS
+    } else {
+      axiosPrivate.patch('/user/expo', {
+        expoToken: 'web',
+      });
     }
   }
 
