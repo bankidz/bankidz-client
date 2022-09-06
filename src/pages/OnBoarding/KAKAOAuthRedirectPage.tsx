@@ -19,8 +19,8 @@ function KAKAOAuthRedirectPage() {
       try {
         console.log(code);
         code && (await dispatch(login({ code })).unwrap());
-        // await registerEXPOToken();
-        // navigate('/test');
+        await registerEXPOToken();
+        navigate('/test');
       } catch (error: any) {
         console.error(error);
       }

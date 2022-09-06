@@ -11,6 +11,7 @@ function AuthTest() {
   const registerEXPOToken = useRegisterEXPOToken();
 
   async function handleRegisterEXPOToken() {
+    console.log('handle register expo token');
     registerEXPOToken();
   }
 
