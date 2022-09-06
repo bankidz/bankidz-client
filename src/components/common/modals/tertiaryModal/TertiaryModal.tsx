@@ -10,7 +10,7 @@ import {
   MODAL_SLIDE_FROM_POSITION,
   MODAL_SLIDE_TO_POSITION,
 } from '@lib/constants/MODAL';
-import useModals from '@lib/hooks/useModals';
+// import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 
 interface TertiaryModalProps {
@@ -29,13 +29,13 @@ function TertiaryModal({
   const [isOpen, setIsOpen] = useState(true);
   const [currentCardIdx, setCurrentCardIdx] = useState(0);
 
-  const { closeModal } = useModals();
+  // const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        closeModal(modals.tertiaryModal);
+        // closeModal(modals.tertiaryModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
