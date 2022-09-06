@@ -36,14 +36,13 @@ function App() {
         <Route path="/link/:groupCode" element={<GroupLink />} />
         {/* <Route element={<PersistLogin />}> */}
         {/* <Route element={<RequireAuth />}> */}
-        <Route path="/*" element={<TestPage />} />
-        {/* <Route path="/*" element={<HomeRouter />} />
+        <Route path="/*" element={<HomeRouter />} />
         <Route path="/walk/*" element={<WalkRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
         <Route path="/setting/*" element={<SettingRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
         <Route path="/test/*" element={<TestPage />} />
-        <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
         {/* </Route> */}
         {/* </Route> */}
       </Route>

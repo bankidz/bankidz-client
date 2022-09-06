@@ -24,6 +24,20 @@ function RegisterRole() {
   const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
     useGlobalBottomSheet();
 
+  const openSelectProfileSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'SelectProfile',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        isKid: isKid,
+        isFemale: isFemale,
+        onClick: handleSubmit,
+      },
+    });
+  };
+
   // 아빠
   function handleDadButtonClick() {
     if (!isOpen) {
@@ -83,14 +97,14 @@ function RegisterRole() {
     if (canRegister) {
       try {
         setRegisterStatus('pending');
-        await dispatch(
-          register({
-            axiosPrivate,
-            birthday,
-            isKid,
-            isFemale,
-          }),
-        ).unwrap();
+        // await dispatch(
+        //   register({
+        //     axiosPrivate,
+        //     birthday,
+        //     isKid,
+        //     isFemale,
+        //   }),
+        // ).unwrap();
 
         let accessToken;
         let level: TLevel | null = null;
@@ -124,23 +138,15 @@ function RegisterRole() {
     }
   }
 
-  const openSelectProfileSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'SelectProfile',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        isKid: isKid,
-        isFemale: isFemale,
-        onClick: handleSubmit,
-      },
-    });
-  };
+  function handlePrint() {
+    console.log(isKid);
+    console.log(isFemale);
+  }
 
   return (
     <Wrapper>
       <span>프로필을 선택해요</span>
+      <button onClick={handlePrint}>print</button>
       <RoleButtonWrapper>
         {/* 아빠 */}
         <RoleButton

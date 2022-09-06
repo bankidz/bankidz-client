@@ -90,7 +90,7 @@ function RegisterBirthday() {
     setMonth('');
     setDay('');
     dispatch(setBirthday(refineDate(year, month, day)));
-    navigate('/register/2');
+    navigate('/auth/register/2');
   }
 
   return (
