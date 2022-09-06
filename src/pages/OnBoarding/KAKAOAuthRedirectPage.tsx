@@ -20,6 +20,7 @@ function KAKAOAuthRedirectPage() {
         console.log(code);
         code && (await dispatch(login({ code })).unwrap());
         await registerEXPOToken();
+        console.log('kakao login');
         navigate('/test');
       } catch (error: any) {
         console.error(error);
