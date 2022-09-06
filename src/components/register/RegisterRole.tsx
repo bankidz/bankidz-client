@@ -2,7 +2,11 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { register, selectBirthday } from '@store/slices/authSlice';
+import {
+  register,
+  selectBirthday,
+  setCredentials,
+} from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
 import useModals from '../../lib/hooks/useModals';
@@ -10,6 +14,7 @@ import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import { TLevel } from '@lib/types/TLevel';
 
 function RegisterRole() {
   const dispatch = useAppDispatch();
@@ -86,6 +91,29 @@ function RegisterRole() {
             isFemale,
           }),
         ).unwrap();
+
+        let accessToken;
+        let level: TLevel | null = null;
+        if (isKid === false && isFemale === false) {
+          accessToken =
+            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8';
+        } else if (isKid === false && isFemale === true) {
+          accessToken =
+            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU';
+        } else if (isKid === true && isFemale === false) {
+          accessToken =
+            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0';
+          level = -4;
+        } else if (isKid === true && isFemale === true) {
+          accessToken =
+            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0NjYxMTYsInN1YiI6IjMiLCJleHAiOjE2NjI0NjYxNzYsImlkIjozLCJyb2xlcyI6IlVTRVIifQ.YiKX_aC38euioOH9Fyc0It0SsQM8AHkRD2l9onsDZyw';
+          level = 2;
+        }
+        accessToken &&
+          dispatch(
+            setCredentials({ accessToken, isKid, level, provider: 'kakao' }),
+          );
+
         setCloseBottomSheet();
         handleModalOpen();
       } catch (error: any) {
