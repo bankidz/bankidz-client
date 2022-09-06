@@ -9,12 +9,6 @@ function AuthTest() {
   const refreshAccessToken = useRefreshAccessToken();
   const axiosPrivate = useAxiosPrivate();
 
-  async function handleHealth() {
-    const response = axiosPublic.get('/health');
-    alert(JSON.stringify(response));
-    console.log(response);
-  }
-
   async function handleRefresh() {
     const newAccessToken = await refreshAccessToken();
     alert(`newAccessToken in handleRefresh: ${JSON.stringify(newAccessToken)}`);
@@ -38,7 +32,6 @@ function AuthTest() {
 
   return (
     <Wrapper>
-      <button onClick={handleHealth}>health</button>
       <button onClick={handleRefresh}>refresh test</button>
       <button onClick={handleRequestWithAT}>request with aT test</button>
       <button onClick={handlePrint}>print auth</button>
