@@ -86,6 +86,7 @@ function WithdrawReason() {
           property="default"
           label="탈퇴하기"
           onClick={handleWithdrawButtonClick}
+          state={reason !== ''}
         />
       </DoubleButtonWrapper>
     </Wrapper>
