@@ -33,6 +33,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
         <Route path="/link/:groupCode" element={<GroupLink />} />
+<<<<<<< HEAD
         {/* <Route element={<PersistLogin />}> */}
         <Route element={<RequireAuth />}>
           <Route path="/*" element={<HomeRouter />} />
@@ -45,6 +46,19 @@ function App() {
         </Route>
 
         {/* </Route> */}
+=======
+        <Route path="/test/*" element={<TestPage />} />
+        <Route element={<PersistLogin />}>
+          <Route element={<RequireAuth />}>
+            <Route path="/*" element={<HomeRouter />} />
+            <Route path="/walk/*" element={<WalkRouter />} />
+            <Route path="/mypage/*" element={<MypageRouter />} />
+            <Route path="/setting/*" element={<SettingRouter />} />
+            <Route path="/financial/*" element={<FinancialRouter />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Route>
+>>>>>>> main
       </Route>
     </Routes>
   );
