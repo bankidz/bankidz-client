@@ -49,12 +49,12 @@ const Wrapper = styled.div`
     height: 100%;
     .banki-illust {
       width: 60.98px;
-      margin-left: ${calcRatio(21, 162)};
+      margin-left: ${calcRatio(6, 146)};
     }
     .text-wrapper {
       width: 47px;
       height: 100%;
-      margin-right: ${calcRatio(20, 162)};
+      margin-right: ${calcRatio(20, 146)};
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -81,12 +81,11 @@ const Wrapper = styled.div`
       justify-content: center;
       align-items: center;
       width: 70px;
-      margin-left: ${calcRatio(9, 162)};
+      margin-left: ${calcRatio(9, 146)};
     }
     .text-wrapper {
       width: 58px;
       height: 100%;
-      margin-right: ${calcRatio(16, 162)};
       display: flex;
       flex-direction: column;
       justify-content: center;
