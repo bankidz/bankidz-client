@@ -33,7 +33,7 @@ function APPLEAuthRedirectPage() {
     async function proceedLogin() {
       try {
         await registerEXPOToken();
-        navigate('/');
+        // navigate('/');
       } catch (error: any) {
         console.error(error);
       }

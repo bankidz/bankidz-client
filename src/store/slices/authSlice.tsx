@@ -11,7 +11,7 @@ interface IAuth {
   provider: string;
   birthday: string;
   username: string;
-  isFemale: boolean;
+  isFemale: boolean | null;
   phone: string | null;
 }
 
@@ -27,14 +27,13 @@ interface IAuthState {
 
 const initialState: IAuthState = {
   auth: {
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYxNDQwMjUxLCJzdWIiOiI0IiwiZXhwIjoxNjYzODU5NDUxLCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.uqkdNdiIhz5Aix1mY-wx2TIYM2DS8pPqNPNNqrTe7lg',
-    isKid: true,
+    accessToken: '',
+    isKid: null,
     level: null,
-    provider: 'apple',
+    provider: '',
     birthday: '',
     username: '',
-    isFemale: false,
+    isFemale: null,
     phone: null,
   },
 };

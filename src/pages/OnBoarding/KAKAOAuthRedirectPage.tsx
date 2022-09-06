@@ -17,7 +17,7 @@ function KAKAOAuthRedirectPage() {
   useEffect(() => {
     async function proceedLogin() {
       try {
-        // code && (await dispatch(login({ code })).unwrap());
+        code && (await dispatch(login({ code })).unwrap());
         await registerEXPOToken();
         // navigate('/');
       } catch (error: any) {
