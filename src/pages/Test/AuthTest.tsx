@@ -3,10 +3,17 @@ import useRefreshAccessToken from '@lib/hooks/auth/useRefreshAccessToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth } from '@store/slices/authSlice';
+import useRegisterEXPOToken from '@lib/hooks/useRegisterEXPOToken';
 
 function AuthTest() {
   const refreshAccessToken = useRefreshAccessToken();
   const axiosPrivate = useAxiosPrivate();
+  const registerEXPOToken = useRegisterEXPOToken();
+
+  async function handleRegisterEXPOToken() {
+    console.log('handle register expo token');
+    registerEXPOToken();
+  }
 
   async function handleRefresh() {
     const newAccessToken = await refreshAccessToken();
@@ -31,6 +38,7 @@ function AuthTest() {
 
   return (
     <Wrapper>
+      <button onClick={handleRegisterEXPOToken}>register EXPO Token</button>
       <button onClick={handleRefresh}>refresh test</button>
       <button onClick={handleRequestWithAT}>request with aT test</button>
       <button onClick={handlePrint}>print auth</button>

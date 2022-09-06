@@ -8,7 +8,6 @@ import isBetween from '@lib/utils/isBetween';
 function RegisterPage() {
   const { step } = useParams();
   const currentStep = isBetween(parseInt(step!), 1, 2);
-
   return (
     <>
       <GoBackHeader />
