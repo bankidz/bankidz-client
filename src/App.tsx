@@ -34,10 +34,10 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
         <Route path="/link/:groupCode" element={<GroupLink />} />
+        <Route path="/test/*" element={<TestPage />} />
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
             <Route path="/*" element={<HomeRouter />} />
-            <Route path="/test/*" element={<TestPage />} />
             <Route path="/walk/*" element={<WalkRouter />} />
             <Route path="/mypage/*" element={<MypageRouter />} />
             <Route path="/setting/*" element={<SettingRouter />} />
