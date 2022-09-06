@@ -27,6 +27,7 @@ function useAxiosPrivate() {
         const prevRequest = error?.config;
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           // aT expired (401) -> refresh aT -> request prevRequest
+          console.log('aT expired (401) -> refresh aT -> request prevRequest');
           prevRequest.sent = true;
           const newAccessToken = await refreshAccessToken();
           prevRequest.headers['X-AUTH-TOKEN'] = `${newAccessToken}`;
