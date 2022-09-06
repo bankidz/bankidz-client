@@ -3,10 +3,17 @@ import useRefreshAccessToken from '@lib/hooks/auth/useRefreshAccessToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectAuth } from '@store/slices/authSlice';
+import { axiosPublic } from '@lib/api/axios';
 
 function AuthTest() {
   const refreshAccessToken = useRefreshAccessToken();
   const axiosPrivate = useAxiosPrivate();
+
+  async function handleHealth() {
+    const response = axiosPublic.get('/health');
+    alert(JSON.stringify(response));
+    console.log(response);
+  }
 
   async function handleRefresh() {
     const newAccessToken = await refreshAccessToken();
@@ -31,6 +38,7 @@ function AuthTest() {
 
   return (
     <Wrapper>
+      <button onClick={handleHealth}>health</button>
       <button onClick={handleRefresh}>refresh test</button>
       <button onClick={handleRequestWithAT}>request with aT test</button>
       <button onClick={handlePrint}>print auth</button>
