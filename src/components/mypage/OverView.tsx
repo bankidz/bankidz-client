@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
-import { IGetUserResData } from '@lib/api/user/user.type';
 import OverViewContent from './OverViewContent';
 import { useQueryClient } from 'react-query';
 import { KID } from '@lib/constants/QUERY_KEY';
 import getPercentValue from '@lib/utils/get/getPercentValue';
-import { IKidListDTO } from '@lib/api/family/family.type';
+import { IGetUserResData } from '@apis/user/user.dto';
+import { IKidListDTO } from '@apis/family/family.dto';
 
 export type OverViewProps = {
   userData: IGetUserResData;

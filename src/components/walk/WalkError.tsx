@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { useNavigate } from 'react-router-dom';
-import useFamilyApi from '@lib/api/family/useFamilyApi';
 import { FAMILY } from '@lib/constants/QUERY_KEY';
 import { useQuery } from 'react-query';
+import useFamilyApi from '@apis/family/useFamilyApi';
 
 function WalkError() {
   const { getFamily } = useFamilyApi();

@@ -1,4 +1,3 @@
-import { IGetUserResData } from '@lib/api/user/user.type';
 import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
@@ -8,10 +7,11 @@ import { ReactComponent as Share } from '@assets/icons/shareMypage.svg';
 import { ReactComponent as Leave } from '@assets/icons/leaveGroupMypage.svg';
 import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import useFamilyApi from '@lib/api/family/useFamilyApi';
-import { IFamilyDTO } from '@lib/api/family/family.type';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
+import useFamilyApi from '@apis/family/useFamilyApi';
+import { IGetUserResData } from '@apis/user/user.dto';
+import { IFamilyDTO } from '@apis/family/family.dto';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();

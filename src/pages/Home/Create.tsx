@@ -9,7 +9,7 @@ import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
 import { useQuery } from 'react-query';
 import { FAMILY } from '@lib/constants/QUERY_KEY';
-import useFamilyApi from '@lib/api/family/useFamilyApi';
+import useFamilyApi from '@apis/family/useFamilyApi';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,

@@ -1,5 +1,5 @@
+import useNoticeApi from '@apis/notice/useNoticeApi';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import useNoticeApi from '@lib/api/notice/useNoticeApi';
 import { NOTICE } from '@lib/constants/QUERY_KEY';
 import dayjs from 'dayjs';
 import { useQuery } from 'react-query';

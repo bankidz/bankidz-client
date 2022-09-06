@@ -1,4 +1,4 @@
-import { IKidListDTO } from '@lib/api/family/family.type';
+import { IKidListDTO } from '@apis/family/family.dto';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import getPercentValue from '@lib/utils/get/getPercentValue';
 import styled from 'styled-components';

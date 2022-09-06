@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../../store/app/hooks';
-import { axiosPublic } from '../../api/axios';
 import { setCredentials } from '@store/slices/authSlice';
+import { axiosPublic } from '@apis/axios';
 
 function useRefreshAccessToken() {
   const dispatch = useAppDispatch();

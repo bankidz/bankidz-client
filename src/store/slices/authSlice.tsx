@@ -1,4 +1,4 @@
-import { axiosPublic } from '@lib/api/axios';
+import { axiosPublic } from '@apis/axios';
 import { TLevel } from '@lib/types/TLevel';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';

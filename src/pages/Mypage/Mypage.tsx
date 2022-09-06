@@ -4,8 +4,6 @@ import FamilyList from '@components/mypage/FamilyList';
 import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
-import useFamilyApi from '@lib/api/family/useFamilyApi';
-import useUserApi from '@lib/api/user/useUserAPi';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
 import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
@@ -13,6 +11,8 @@ import { darken } from 'polished';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import useFamilyApi from '@apis/family/useFamilyApi';
+import useUserApi from '@apis/user/useUserAPi';
 
 function Mypage() {
   const queryClient = useQueryClient();
