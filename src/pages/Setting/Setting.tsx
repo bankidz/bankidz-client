@@ -2,6 +2,8 @@ import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import useLogout from '@lib/hooks/auth/useLogout';
 const contents = [
   { title: '공지사항', link: 'notices' },
   { title: '서비스 소개', link: 'features' },
@@ -17,6 +19,25 @@ const contents = [
 
 function Setting() {
   const navigate = useNavigate();
+
+  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
+  const logout = useLogout();
+  function openLogoutCheckBottomSheet() {
+    setOpenBottomSheet({
+      // TODO: 로그아웃 체크로 수정 부탁드립니다.
+      sheetContent: 'Check',
+      sheetProps: { open: true },
+      contentProps: {
+        type: 'approve',
+        onMainActionClick: () => {
+          setCloseBottomSheet();
+          logout();
+        },
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  }
+
   return (
     <ForegroundTemplate label={'설정'}>
       <>
@@ -24,7 +45,9 @@ function Setting() {
           <Item
             key={content.title}
             onClick={() => {
-              content.title !== '로그아웃' && navigate(content.link);
+              content.title === '로그아웃'
+                ? openLogoutCheckBottomSheet()
+                : navigate(content.link);
             }}
           >
             <p>{content.title}</p>

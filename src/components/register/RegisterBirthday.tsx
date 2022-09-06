@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import InputForm from '@components/common/InputForm';
+import InputForm from '@components/common/forms/InputForm';
 import Button from '@components/common/buttons/Button';
 import refineDate from '../../lib/utils/refineDate';
 

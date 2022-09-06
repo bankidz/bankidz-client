@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { login } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import useRegisterFCMToken from '@lib/hooks/useRegisterFCMToken';
+import useRegisterEXPOToken from '@lib/hooks/useRegisterEXPOToken';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const registerFCMToken = useRegisterFCMToken();
+  const registerEXPOToken = useRegisterEXPOToken();
 
   // @ts-expect-error
   const params = new URL(document.location).searchParams;
@@ -18,8 +18,8 @@ function KAKAOAuthRedirectPage() {
     async function proceedLogin() {
       try {
         code && (await dispatch(login({ code })).unwrap());
-        await registerFCMToken();
-        navigate('/');
+        await registerEXPOToken();
+        // navigate('/');
       } catch (error: any) {
         console.error(error);
       }

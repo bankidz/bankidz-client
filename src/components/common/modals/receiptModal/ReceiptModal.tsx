@@ -16,7 +16,7 @@ import {
   MODAL_SLIDE_FROM_POSITION,
   MODAL_SLIDE_TO_POSITION,
 } from '@lib/constants/MODAL';
-import useModals from '@lib/hooks/useModals';
+// import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
 
@@ -66,13 +66,13 @@ function ReceiptModal({
 }: ReceiptModalProps) {
   const [isOpen, setIsOpen] = useState(true);
 
-  const { closeModal } = useModals();
+  // const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        closeModal(modals.receiptModal);
+        // closeModal(modals.receiptModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
