@@ -7,8 +7,9 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
-import { useAppSelector } from '@store/app/hooks';
-import { selectParents } from '@store/slices/familySlice';
+import { useQuery } from 'react-query';
+import { FAMILY } from '@lib/constants/QUERY_KEY';
+import useFamilyApi from '@lib/api/family/useFamilyApi';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -26,7 +27,10 @@ const title = [
 
 function Create() {
   const { step } = useParams();
-  const parents = useAppSelector(selectParents)!;
+  const { getFamily } = useFamilyApi();
+  const { data: familyData, status } = useQuery(FAMILY, getFamily);
+  const parents = familyData?.familyUserList.filter((member) => !member.isKid);
+  const isCouple = parents?.length === 1;
 
   const getTypedStep = (parsedStep: number) => {
     if (step && parsedStep > 0 && parsedStep <= 5) {
@@ -37,7 +41,7 @@ function Create() {
   };
 
   const renderContent = (typedStep: 1 | 2 | 3 | 4 | 5) => {
-    if (parents?.length === 1) {
+    if (isCouple) {
       switch (typedStep) {
         case 1:
           return <Step2 currentStep={1} />;
@@ -72,15 +76,13 @@ function Create() {
         <>
           <Progress
             step={getTypedStep(parseInt(step))}
-            skipSelectParents={parents?.length === 1 ? true : false}
+            skipSelectParents={status === 'success' && isCouple ? true : false}
           />
           <MarginTemplate>
-            {parents.length === 1
+            {status === 'success' && isCouple
               ? title[parseInt(step)]
               : title[parseInt(step) - 1]}
-            {/* <CheckProcess currentStep={getTypedStep(parseInt(step))}> */}
             {renderContent(getTypedStep(parseInt(step)))}
-            {/* </CheckProcess> */}
           </MarginTemplate>
         </>
       )}
