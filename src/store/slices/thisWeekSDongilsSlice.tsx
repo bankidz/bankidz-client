@@ -7,7 +7,6 @@ import { RootState } from '../app/store';
 
 interface IThisWeekSDongil {
   kidId: number;
-  isFemale: boolean;
   challengeList: IDongil[];
 }
 

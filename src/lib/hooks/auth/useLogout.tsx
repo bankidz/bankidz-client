@@ -9,7 +9,8 @@ function useLogout() {
   const logout = async () => {
     dispatch(resetCredentials());
     try {
-      await axiosPrivate.get('/users/logout');
+      const response = await axiosPrivate.patch('/users/logout');
+      console.log('logout response: ', response);
     } catch (error) {
       console.error(error);
     }
