@@ -1,8 +1,7 @@
 import ToggleButton from '@components/common/buttons/ToggleButton';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useToggle from '@lib/hooks/useToggle';
-import { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const Alerts = () => {
   const [toggleEvent, clickToggleEvent] = useToggle(false);
@@ -41,7 +40,7 @@ export default Alerts;
 const Wrapper = styled.div`
   h2 {
     ${({ theme }) => theme.typo.text.T_16_EB}
-    margin:40px 26px 20px 26px;
+    padding:40px 26px 20px 26px;
   }
 `;
 const Cell = styled.div`
@@ -50,6 +49,7 @@ const Cell = styled.div`
   grid-template-columns: auto 51px;
   grid-gap: 8px;
   align-items: center;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.greyScale.grey200};
 `;
 
 const Text = styled.div`

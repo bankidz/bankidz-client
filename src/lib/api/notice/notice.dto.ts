@@ -4,3 +4,5 @@ export interface INoticeDTO {
   createdAt: string;
   body: string;
 }
+
+export type TNoticesDTO = Pick<INoticeDTO, 'id' | 'title' | 'createdAt'>[];

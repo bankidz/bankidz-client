@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { useNavigate } from 'react-router-dom';
+import useFamilyApi from '@lib/api/family/useFamilyApi';
+import { FAMILY } from '@lib/constants/QUERY_KEY';
+import { useQuery } from 'react-query';
 
 function WalkError() {
-  const family = true; //임시. TODO: kidsSlice 관련 이야기해보기
+  const { getFamily } = useFamilyApi();
+  const { data, status } = useQuery(FAMILY, getFamily);
+  const hasParent = status === 'success' && data?.familyUserList.length > 0;
   const navigate = useNavigate();
   const onButtonClick = () => {
-    if (family) {
+    if (hasParent) {
       navigate('/create/1');
     } else {
       //임시
@@ -20,21 +25,27 @@ function WalkError() {
       <MarginTemplate>
         <h1>돈길 걷기</h1>
         <Container>
-          <Banki />
-          <div>
-            {family ? (
+          {status === 'success' && (
+            <>
+              <Banki />
               <div>
-                <p style={{ marginBottom: '10px' }}>걷고 있는 돈길이 없어요</p>
-                <p>새로운 돈길을 만들어봐요!</p>
+                {hasParent ? (
+                  <div>
+                    <p style={{ marginBottom: '10px' }}>
+                      걷고 있는 돈길이 없어요
+                    </p>
+                    <p>새로운 돈길을 만들어봐요!</p>
+                  </div>
+                ) : (
+                  <p>아직 함께하는 부모님이 없어요</p>
+                )}
               </div>
-            ) : (
-              <p>아직 함께하는 부모님이 없어요</p>
-            )}
-          </div>
-          <OutlinedButton
-            label={family ? '새로운 돈길 계약하기' : '가족 추가하기'}
-            onClick={onButtonClick}
-          />
+              <OutlinedButton
+                label={hasParent ? '새로운 돈길 계약하기' : '가족 추가하기'}
+                onClick={hasParent ? onButtonClick : onButtonClick}
+              />
+            </>
+          )}
         </Container>
       </MarginTemplate>
     </Wrapper>
@@ -58,6 +69,7 @@ const Container = styled.div`
   position: absolute;
   left: 50%;
   top: calc(50% - 32px);
+  width: 100%;
   transform: translate3d(-50%, -50%, 0);
   display: grid;
   grid-template-rows: 185px auto;

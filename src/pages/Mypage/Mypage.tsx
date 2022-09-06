@@ -35,7 +35,6 @@ function Mypage() {
 
   const { mutate: MutateCreateFamily } = useMutation(createFamily, {
     onSuccess: (data) => {
-      console.log(data);
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(FAMILY);
     },

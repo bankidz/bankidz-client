@@ -16,7 +16,6 @@ import { cipher } from '@lib/utils/crypt';
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
   const { leaveFamily } = useFamilyApi();
-
   const queryClient = useQueryClient();
   const userData = queryClient.getQueryData(USER) as IGetUserResData;
   const familyData = queryClient.getQueryData(FAMILY) as IFamilyDTO;
@@ -30,9 +29,9 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   });
 
   const me = {
-    username: userData.user.username,
-    isFemale: userData.user.isFemale,
-    isKid: userData.user.isKid,
+    username: userData?.user.username,
+    isFemale: userData?.user.isFemale,
+    isKid: userData?.user.isKid,
   };
 
   // 1. 그룹나가기 버튼 클릭
@@ -102,7 +101,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   return (
     <Wrapper>
       <List>
-        <FamilyItem user={me} me={true} />
+        {userData && <FamilyItem user={me} me={true} />}
         {family.map((member) => (
           <FamilyItem user={member} key={member.username} />
         ))}
