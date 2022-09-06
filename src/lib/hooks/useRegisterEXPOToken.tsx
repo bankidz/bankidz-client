@@ -1,9 +1,9 @@
 import useAxiosPrivate from './auth/useAxiosPrivate';
 
 function useRegisterEXPOToken() {
-  const axiosPrivate = useAxiosPrivate();
-
   async function registerEXPOToken() {
+    const axiosPrivate = useAxiosPrivate();
+
     const listener = (event: any) => {
       const EXPOToken = JSON.stringify(event.data);
       alert(EXPOToken);
@@ -17,7 +17,7 @@ function useRegisterEXPOToken() {
       window.addEventListener('message', listener); // iOS
     } else {
       axiosPrivate.patch('/user/expo', {
-        expoToken: 'web',
+        expoToken: 'notWebview',
       });
     }
   }
