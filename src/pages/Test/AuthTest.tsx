@@ -6,16 +6,19 @@ import { selectAuth } from '@store/slices/authSlice';
 
 function AuthTest() {
   const refreshAccessToken = useRefreshAccessToken();
+
   async function handleRefresh() {
     const newAccessToken = await refreshAccessToken();
     console.log('newAccessToken in handleRefresh: ', newAccessToken);
   }
+
   const axiosPrivate = useAxiosPrivate();
   async function handleRequestWithAT() {
     const response = await axiosPrivate.get('/user');
     console.log('response.data in handleRequest: ', response); // response.status 401 인지 확인
     console.log('response.data in handleRequest: ', response.status); // response.status 401 인지 확인
   }
+
   const auth = useAppSelector(selectAuth);
   function handlePrint() {
     console.log('=======================');
@@ -43,6 +46,14 @@ function AuthTest() {
 export default AuthTest;
 
 const Wrapper = styled.div`
-  height: 1000px;
-  background: pink;
+  display: flex;
+  flex-direction: column;
+
+  button + button {
+    margin-top: 30px;
+  }
+
+  button {
+    border: 2px solid red;
+  }
 `;
