@@ -1,4 +1,3 @@
-import Notice from '@components/setting/notices/Notice';
 import { Route, Routes } from 'react-router-dom';
 import Alerts from './Alerts';
 import Faq from './Faq';
@@ -8,16 +7,16 @@ import Inquiry from './Inquiry';
 import Notices from './Notices';
 import NoticeView from './NoticeView';
 import Privacy from './Privacy';
-import Setting from './Setting';
+import Manage from './Manage';
 import Terms from './Tems';
 import WithdrawCallbackPage from './WithdrawCallbackPage';
 import WithdrawPage from './WithdrawPage';
 import WithdrawReasonPage from './WithdrawReasonPage';
 
-const SettingRouter = () => {
+const ManageRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Setting />} />
+      <Route path="/" element={<Manage />} />
       <Route path="/notices" element={<Notices />} />
       <Route path="/notices/:id" element={<NoticeView />} />
       <Route path="/features" element={<Features />} />
@@ -34,4 +33,4 @@ const SettingRouter = () => {
   );
 };
 
-export default SettingRouter;
+export default ManageRouter;

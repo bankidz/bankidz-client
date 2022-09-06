@@ -54,7 +54,7 @@ function Mypage() {
     <Wrapper>
       <Header>
         마이페이지
-        <Setting onClick={() => navigate('/setting')} />
+        <Setting onClick={() => navigate('/manage')} />
       </Header>
       <MarginTemplate>
         {userStatus === 'success' ? (

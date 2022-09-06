@@ -7,19 +7,18 @@ import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 interface AppBarProps {
-  // TODO: 한줄 주석
-  /** 이전 페이지명 */
+  // 이전 페이지명
   label?: string;
-  /**
-   * 레벨
-   */
+  // 레벨
   level?: TLevel | null;
+  // 이전 페이지 링크
+  to?: string;
 }
 
-function AppBar({ label, level }: AppBarProps) {
+function AppBar({ label, level, to }: AppBarProps) {
   const navigate = useNavigate();
   const onClickAppBar = () => {
-    navigate(-1);
+    to ? navigate(to) : navigate(-1);
   };
 
   // TODO: undefined

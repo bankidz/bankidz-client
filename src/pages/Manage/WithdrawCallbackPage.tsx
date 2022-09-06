@@ -9,12 +9,12 @@ function WithdrawCallbackPage() {
   // TODO: 탈퇴되었습니다. 바텀시트로 교체 부탁드립니다.
   function openWithdrawBottomSheet() {
     setOpenBottomSheet({
-      sheetContent: 'Completed',
+      sheetContent: 'Notice',
       sheetProps: {
         open: true,
       },
       contentProps: {
-        type: 'delete',
+        type: 'withdrawed',
         onMainActionClick: () => {
           setCloseBottomSheet();
           logout();

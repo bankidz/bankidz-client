@@ -5,6 +5,7 @@ import AppBar from './AppBar';
 interface ForegroundTemplateProps {
   level?: TLevel | null;
   label?: string;
+  to?: string;
   children: JSX.Element;
 }
 
@@ -13,10 +14,11 @@ function ForegroundTemplate({
   level,
   label,
   children,
+  to,
 }: ForegroundTemplateProps) {
   return (
     <>
-      <AppBar label={label} level={level} />
+      <AppBar label={label} level={level} to={to} />
       <Screen>{children}</Screen>
     </>
   );
