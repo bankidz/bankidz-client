@@ -57,6 +57,10 @@ const Wrapper = styled.div``;
 const Container = styled.div<{
   type: 'giveUpExceeded' | 'sunday' | 'expired' | 'withdrawed';
 }>`
+  svg {
+    width: 48px;
+    height: 48px;
+  }
   margin: 25px 16px 32px 16px;
   display: flex;
   gap: 16px;
