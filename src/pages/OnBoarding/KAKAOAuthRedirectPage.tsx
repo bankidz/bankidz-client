@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { login } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import useRegisterEXPOToken from '@lib/hooks/useRegisterEXPOToken';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import { useEffect } from 'react';
 
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
@@ -17,9 +17,10 @@ function KAKAOAuthRedirectPage() {
   useEffect(() => {
     async function proceedLogin() {
       try {
+        console.log(code);
         code && (await dispatch(login({ code })).unwrap());
-        await registerEXPOToken();
-        navigate('/test');
+        // await registerEXPOToken();
+        // navigate('/test');
       } catch (error: any) {
         console.error(error);
       }
