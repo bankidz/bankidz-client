@@ -6,7 +6,6 @@ import { RootState } from '../app/store';
 
 interface IProposedDongil {
   kidId: number;
-  isFemale: boolean;
   challengeList: IDongil[];
 }
 

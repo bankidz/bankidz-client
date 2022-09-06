@@ -10,7 +10,7 @@ import {
   MODAL_SLIDE_FROM_POSITION,
   MODAL_SLIDE_TO_POSITION,
 } from '@lib/constants/MODAL';
-import useModals from '@lib/hooks/useModals';
+// import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 
 interface PrimaryModalProps {
@@ -44,13 +44,13 @@ function PrimaryModal({
     }, MODAL_CLOSE_TRANSITION_TIME);
   }
 
-  const { closeModal } = useModals();
+  // const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        closeModal(modals.primaryModal);
+        // closeModal(modals.primaryModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,

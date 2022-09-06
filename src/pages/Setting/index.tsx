@@ -10,7 +10,9 @@ import NoticeView from './NoticeView';
 import Privacy from './Privacy';
 import Setting from './Setting';
 import Terms from './Tems';
-import Withdraw from './Withdraw';
+import WithdrawCallbackPage from './WithdrawCallbackPage';
+import WithdrawPage from './WithdrawPage';
+import WithdrawReasonPage from './WithdrawReasonPage';
 
 const SettingRouter = () => {
   return (
@@ -25,7 +27,9 @@ const SettingRouter = () => {
       <Route path="/terms" element={<Terms />} />
       <Route path="/faq" element={<Faq />} />
       <Route path="/inquiry" element={<Inquiry />} />
-      <Route path="/withdraw" element={<Withdraw />} />
+      <Route path="/withdraw" element={<WithdrawPage />} />
+      <Route path="/withdraw/reason" element={<WithdrawReasonPage />} />
+      <Route path="/withdraw/callback" element={<WithdrawCallbackPage />} />
     </Routes>
   );
 };

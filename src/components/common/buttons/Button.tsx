@@ -6,13 +6,7 @@ import { darken } from 'polished';
 import { theme } from '@lib/styles/theme';
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  /**
-   * 기본, 카카오로그인, 삭제, 강조되지 않은 버튼, 아웃라인
-   */
   property?: 'default' | 'kakao' | 'delete' | 'sub' | 'apple';
-  /**
-   * 버튼 내용
-   */
   label: string;
   // 성우의 제안: state -> disable 최대한 예측가능하게
   state?: boolean;

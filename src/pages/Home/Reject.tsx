@@ -1,5 +1,5 @@
 import GoBackHeader from '@components/common/buttons/GoBackHeader';
-import InputForm from '@components/common/InputForm';
+import InputForm from '@components/common/forms/InputForm';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';

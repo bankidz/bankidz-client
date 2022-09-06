@@ -44,7 +44,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-left: ${calcRatio(24, 324)};
+    padding-left: ${calcRatio(9, 294)};
     .title {
       height: 12px;
       ${({ theme }) => theme.typo.text.S_12_M};

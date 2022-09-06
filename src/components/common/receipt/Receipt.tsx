@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { theme } from '@lib/styles/theme';
 import { TItemName } from '@lib/types/TItemName';
 import { TInterestRate } from '@lib/types/IInterestRate';
-import DashedBorder from './DashedBorder';
 import FirstRow from './FirstRow';
-import SecondRow from '../modals/receiptModal/rows/SecondRow';
+import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
 import PerforatedLineTop from '../modals/receiptModal/perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from '../modals/receiptModal/perforatedLines/PerforatedLineBottom';
@@ -30,7 +29,7 @@ function Receipt({
 }: ReceiptProps) {
   return (
     <Wrapper>
-      <DashedBorder />
+      {/* <DashedBorder /> */}
       <PerforatedLineTop fill={theme.palette.greyScale.grey100} />
       <Content>
         <FirstRow isMom={isMom} itemName={itemName} />
@@ -69,4 +68,7 @@ const Content = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: space-between;
+
+  padding-left: 15px;
+  padding-right: 15px;
 `;

@@ -44,19 +44,8 @@ function Detail() {
     successWeeks,
     challengeStatus,
   } = targetDongil!;
-  const {
-    isOpen,
-    setOpenBottomSheet,
-    setCloseBottomSheet,
-    openSheetBySequence,
-  } = useGlobalBottomSheet();
-
-  const axiosPrivate = useAxiosPrivate();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const canGiveUpWalkingDongil = giveUpWalkingDongilStatus === 'idle';
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
 
   // 1. '돈길 포기하기' 바텀시트 열기
   const openGiveUpBottomSheet = () => {
@@ -71,6 +60,13 @@ function Detail() {
       },
     });
   };
+
+  const axiosPrivate = useAxiosPrivate();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
+    useState<TFetchStatus>('idle');
+  const canGiveUpWalkingDongil = giveUpWalkingDongilStatus === 'idle';
 
   // 2-a. 포기하기 버튼 클릭
   async function handleGiveUpButtonClick() {

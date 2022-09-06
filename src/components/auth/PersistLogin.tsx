@@ -25,7 +25,7 @@ function PersistLogin() {
     };
 
     // verify only on refresh
-    if (!accessToken && persist) {
+    if (accessToken === '' && persist) {
       verifyRefreshToken();
     } else {
       setIsLoading(false);

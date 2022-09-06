@@ -39,13 +39,11 @@ function App() {
         <Route path="/*" element={<HomeRouter />} />
         <Route path="/walk/*" element={<WalkRouter />} />
         <Route path="/mypage/*" element={<MypageRouter />} />
-
         <Route path="/setting/*" element={<SettingRouter />} />
         <Route path="/financial/*" element={<FinancialRouter />} />
-        {/* <Route path="/sungwoo" element={<SungwooTestPage />} /> */}
+        <Route path="/test/*" element={<TestPage />} />
         <Route path="*" element={<NotFound />} />
         {/* </Route> */}
-
         {/* </Route> */}
       </Route>
     </Routes>
