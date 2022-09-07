@@ -10,8 +10,10 @@ import { ReactComponent as Bell } from '@assets/icons/bell.svg';
 import { theme } from '@lib/styles/theme';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import { useNavigate } from 'react-router-dom';
 
 function FixedBar() {
+  const navigate = useNavigate();
   const level = useLevel();
   const colorByLevel = getColorByLevel(level);
 
@@ -28,7 +30,7 @@ function FixedBar() {
 
   return (
     <Wrapper colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
-      <div className="alert">
+      <div className="alert" onClick={() => navigate('/alert')}>
         <Bell />
       </div>
       <div className="logo-wrapper">
@@ -70,6 +72,17 @@ const Wrapper = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
     position: absolute;
     top: 0px;
     right: 6px;
+    cursor: pointer;
+  }
+  .alert:after {
+    content: '';
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.palette.sementic.red300};
+    position: absolute;
+    right: 14px;
+    top: 14px;
   }
 `;
 
