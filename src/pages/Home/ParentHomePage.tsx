@@ -1,5 +1,5 @@
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
-import NoFamily from '@components/common/NoFamily';
+import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
@@ -85,7 +85,7 @@ function ParentHomePage() {
   return (
     <>
       {hasNoFamily ? (
-        <NoFamily variant="Home" />
+        <NoFamily />
       ) : (
         <HomeTemplate>
           <ParentHome />

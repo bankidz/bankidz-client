@@ -10,13 +10,14 @@ import { theme } from '@lib/styles/theme';
 import { TPage } from '@lib/types/TPage';
 
 interface NoFamilyProps {
-  variant: Extract<TPage, 'Home' | 'Interest'>;
+  variant?: Extract<TPage, 'Home' | 'Interest'>;
 }
 
 /**
- * Home, Interest 2개의 Page에서 사용되는 컴포넌트이기에 /common에 위치시켰습니다.
+ * 본 컴포넌트는 Home, Interest 2개의 Page에서 사용됩니다.
+ * @param variant Interest Page에서 사용되는 경우 'Interest'를 명시합니다.
  */
-function NoFamily({ variant }: NoFamilyProps) {
+function NoFamily({ variant = 'Home' }: NoFamilyProps) {
   const isKid = useAppSelector(selectIsKid);
   const navigate = useNavigate();
 

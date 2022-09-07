@@ -10,34 +10,52 @@ import { ReactComponent as Bell } from '@assets/icons/bell.svg';
 import { theme } from '@lib/styles/theme';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import { TPage } from '@lib/types/TPage';
 
-function FixedBar() {
+interface FixedBarProps {
+  variant?: Extract<TPage, 'Home' | 'Interest'>;
+}
+
+/**
+ * 본 컴포넌트는 Home, Interest 2개의 Page에서 사용됩니다.
+ * @param variant Interest Page에서 사용되는 경우 'Interest'를 명시합니다.
+ */
+function FixedBar({ variant = 'Home' }: FixedBarProps) {
   const level = useLevel();
   const colorByLevel = getColorByLevel(level);
 
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
   const kidsStatus = useAppSelector(selectKidsStatus);
-  let kidsContent;
+  let kidsList;
   if (kidsStatus === 'loading') {
-    kidsContent = <p>Loading</p>;
+    kidsList = <p>Loading</p>;
   } else if (kidsStatus === 'succeeded') {
-    kidsContent = <KidList />;
-  } else if (kidsContent === 'failed') {
-    kidsContent = <p>Failed</p>;
+    kidsList = <KidList />;
+  } else if (kidsList === 'failed') {
+    kidsList = <p>Failed</p>;
+  }
+
+  let headerText;
+  if (variant === 'Home') {
+    headerText = (
+      <div className="logo-wrapper">
+        <BANKIDZ fill={theme.palette.greyScale.white} />
+      </div>
+    );
+  } else if (variant === 'Interest') {
+    headerText = <div className="header-text">이자내역</div>;
   }
 
   return (
     <Wrapper colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
-      <div className="alert">
-        <Bell />
-      </div>
-      <div className="logo-wrapper">
-        <BANKIDZ fill={theme.palette.greyScale.white} />
-      </div>
+      {variant === 'Home' && (
+        <div className="alert">
+          <Bell />
+        </div>
+      )}
+      {headerText}
       {hasMultipleKids && (
-        <KidListWrapper colorByLevel={colorByLevel}>
-          {kidsContent}
-        </KidListWrapper>
+        <KidListWrapper colorByLevel={colorByLevel}>{kidsList}</KidListWrapper>
       )}
     </Wrapper>
   );
@@ -64,6 +82,13 @@ const Wrapper = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
     height: 15.82px;
     margin-left: 19.79px;
     margin-top: 17.73px;
+  }
+  .header-text {
+    ${({ theme }) => theme.typo.fixed.TabName_T_21_EB};
+    color: ${({ theme }) => theme.palette.greyScale.white};
+    margin-left: 16px;
+    margin-top: 16px;
+    margin-bottom: -3.8px;
   }
 
   .alert {
