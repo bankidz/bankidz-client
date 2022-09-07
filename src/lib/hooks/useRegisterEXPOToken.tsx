@@ -5,6 +5,7 @@ function useRegisterEXPOToken() {
 
   async function registerEXPOToken() {
     const listener = (event: any) => {
+      alert('listener called!');
       const EXPOToken = JSON.stringify(event.data);
       alert(EXPOToken);
       const response = axiosPrivate.patch('/user/expo', {
