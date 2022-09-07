@@ -38,7 +38,7 @@ function App() {
           <Route path="/*" element={<HomeRouter />} />
           <Route path="/walk/*" element={<WalkRouter />} />
           <Route path="/mypage/*" element={<MypageRouter />} />
-          <Route path="/setting/*" element={<ManageRouter />} />
+          <Route path="/manage/*" element={<ManageRouter />} />
           <Route path="/financial/*" element={<FinancialRouter />} />
           <Route path="*" element={<NotFound />} />
         </Route>
