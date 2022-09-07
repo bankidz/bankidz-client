@@ -4,7 +4,6 @@ import OnBoardingRouter from './pages/OnBoarding';
 import HomeRouter from './pages/Home';
 import WalkRouter from './pages/Walk';
 import MypageRouter from './pages/Mypage';
-import FinancialRouter from './pages/Financial';
 import NotFound from './pages/NotFound';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
@@ -12,6 +11,7 @@ import TestPage from './pages/Test/TestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
 import ManageRouter from './pages/Manage';
+import InterestHistoryRouter from './pages/InterestHistory';
 
 function App() {
   const queryClient = useQueryClient();
@@ -39,7 +39,7 @@ function App() {
           <Route path="/walk/*" element={<WalkRouter />} />
           <Route path="/mypage/*" element={<MypageRouter />} />
           <Route path="/setting/*" element={<ManageRouter />} />
-          <Route path="/financial/*" element={<FinancialRouter />} />
+          <Route path="/interest/*" element={<InterestHistoryRouter />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* </Route> */}

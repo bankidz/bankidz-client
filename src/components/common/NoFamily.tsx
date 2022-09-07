@@ -7,8 +7,13 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { theme } from '@lib/styles/theme';
+import { TPage } from '@lib/types/TPage';
 
-function NoFamily() {
+interface NoFamilyProps {
+  variant: Extract<TPage, 'InterestHistory' | 'Home'>;
+}
+
+function NoFamily({ variant }: NoFamilyProps) {
   const isKid = useAppSelector(selectIsKid);
   const navigate = useNavigate();
 

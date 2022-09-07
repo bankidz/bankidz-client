@@ -1,5 +1,5 @@
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
-import NoFamily from '@components/home/NoFamily';
+import NoFamily from '@components/common/NoFamily';
 import KidHome from '@components/home/KidHome';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -41,7 +41,7 @@ function KidHomePage() {
   return (
     <>
       {hasNoFamily ? (
-        <NoFamily />
+        <NoFamily variant="Home" />
       ) : (
         <HomeTemplate>
           <KidHome />
