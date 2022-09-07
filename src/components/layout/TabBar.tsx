@@ -19,11 +19,11 @@ function TabBar() {
 
   return (
     <Wrapper>
-      <NavLink to={isKid === true ? '/' : '/financial'}>
+      <NavLink to={isKid === true ? '/' : '/interest'}>
         {isKid ? (
           <Home stroke={pathname === '/' ? active[1] : active[0]} />
         ) : (
-          <Content stroke={pathname === '/financial' ? active[1] : active[0]} />
+          <Content stroke={pathname === '/interest' ? active[1] : active[0]} />
         )}
       </NavLink>
       <NavLink to={isKid === true ? '/walk' : '/'}>
