@@ -4,11 +4,11 @@ function useRegisterEXPOToken() {
   const axiosPrivate = useAxiosPrivate();
 
   async function registerEXPOToken() {
-    const listener = (event: any) => {
+    const listener = async (event: any) => {
       alert('listener called!');
       const EXPOToken = JSON.stringify(event.data);
       alert(EXPOToken);
-      const response = axiosPrivate.patch('/user/expo', {
+      const response = await axiosPrivate.patch('/user/expo', {
         expoToken: EXPOToken,
       });
       console.log(response);
@@ -20,7 +20,7 @@ function useRegisterEXPOToken() {
       window.addEventListener('message', listener); // iOS
     } else {
       alert('notWebview');
-      const response = axiosPrivate.patch('/user/expo', {
+      const response = await axiosPrivate.patch('/user/expo', {
         expoToken: 'notWebview',
       });
       console.log(response);

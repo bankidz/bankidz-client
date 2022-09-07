@@ -26,7 +26,7 @@ function AuthTest() {
 
   async function handleRegisterEXPOToken() {
     console.log('handle register expo token');
-    // registerEXPOToken();
+    await registerEXPOToken();
     RNListener();
   }
 
