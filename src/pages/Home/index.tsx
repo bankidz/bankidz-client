@@ -8,8 +8,8 @@ import ParentHomePage from './ParentHomePage';
 import Create from './Create';
 import DetailPage from './DetailPage';
 import Reject from './Reject';
-import { selectSelectedKid } from '@store/slices/kidsSlice';
 import useLevel from '@lib/hooks/useLevel';
+import Alert from './Alert';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -53,6 +53,7 @@ function HomeRouter() {
         path="reject/:id"
         element={isKid ? <>부적절한 접근입니다.</> : <Reject />}
       />
+      <Route path="alert" element={<Alert />} />
     </Routes>
   );
 }
