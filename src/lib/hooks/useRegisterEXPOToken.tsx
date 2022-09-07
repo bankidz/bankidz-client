@@ -14,6 +14,7 @@ function useRegisterEXPOToken() {
     };
 
     if (window.ReactNativeWebView) {
+      alert('window.ReactNativeWebView');
       document.addEventListener('message', listener); // AOS
       window.addEventListener('message', listener); // iOS
     } else {

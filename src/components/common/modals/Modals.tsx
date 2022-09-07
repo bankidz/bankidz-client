@@ -2,6 +2,7 @@ import { useModalsDispatch, useModalsState } from './ModalsContext';
 import PrimaryModal from './primaryModal/PrimaryModal';
 import SecondaryModal from './secondaryModal/SecondaryModal';
 import TertiaryModal from './tertiaryModal/TertiaryModal';
+import QuaternaryModal from './QuaternaryModal/QuaternaryModal';
 import ReceiptModal from './receiptModal/ReceiptModal';
 
 // TODO: code splitting
@@ -9,6 +10,7 @@ export const modals = {
   primaryModal: PrimaryModal,
   secondaryModal: SecondaryModal,
   tertiaryModal: TertiaryModal,
+  quaternaryModal: QuaternaryModal,
   receiptModal: ReceiptModal,
 };
 

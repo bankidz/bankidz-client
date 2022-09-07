@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import getContractEndDate from '@lib/utils/get/getContractEndDate';
 import dayjs from 'dayjs';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
+import useModals from '@lib/hooks/useModals';
+import Modals, { modals } from '@components/common/modals/Modals';
 
 function getCompletionDate(createdAt: string, weeks: number) {
   const contractEndDate = getContractEndDate(createdAt, weeks);
@@ -19,8 +21,28 @@ interface InterestTOPayListProps {
 }
 
 function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
+  const { openModal } = useModals();
+  function handlePaidButtonClick(
+    interestPrice: number,
+    title: string,
+    weeks: number,
+    successWeeks: number,
+  ) {
+    openModal(modals.quaternaryModal, {
+      onExtraSubmit: () => {
+        console.log('handle submit');
+      },
+      interestPrice,
+      title,
+      weeks,
+      successWeeks,
+      shouldCloseOnOverlayClick: true,
+    });
+  }
+
   return (
     <Wrapper>
+      <Modals />
       {challengeDTOList?.map((challengeDTO) => (
         <Block key={challengeDTO.challenge.id}>
           <div className="text-wrapper">
@@ -36,7 +58,17 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
               <span className="amount">{challengeDTO.interestPrice}원</span>
             </div>
           </div>
-          <Button label="지급 완료하기" />
+          <Button
+            label="지급 완료하기"
+            onClick={() =>
+              handlePaidButtonClick(
+                challengeDTO.interestPrice,
+                challengeDTO.challenge.title,
+                challengeDTO.challenge.weeks,
+                challengeDTO.challenge.successWeeks,
+              )
+            }
+          />
         </Block>
       ))}
     </Wrapper>
