@@ -11,7 +11,7 @@ import TestPage from './pages/Test/TestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
 import ManageRouter from './pages/Manage';
-import InterestRouter from './pages/InterestHistory';
+import InterestRouter from './pages/Interest';
 
 function App() {
   const queryClient = useQueryClient();
