@@ -1,1 +1,1 @@
-export type TPage = 'KidHome' | 'ParentHome' | 'Detail';
+export type TPage = 'Home' | 'KidHome' | 'ParentHome' | 'Detail' | 'Interest';
