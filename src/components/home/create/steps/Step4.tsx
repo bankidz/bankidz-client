@@ -25,6 +25,7 @@ import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
+import dayjs from 'dayjs';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -106,9 +107,7 @@ function Step4({ currentStep }: { currentStep: number }) {
         form.weekPrice,
         form.interestRate,
       );
-      const endDate = moment()
-        .day(7)
-        .add(7 * weekCost, 'day');
+      const endDate = dayjs().add(7 * weekCost, 'days');
       const { month, weekNo } = getWeekNumberByMonth(endDate.toDate());
       setContractInfo({
         weekCost: weekCost,
