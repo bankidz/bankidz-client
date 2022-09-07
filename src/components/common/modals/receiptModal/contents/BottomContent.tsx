@@ -43,7 +43,8 @@ function BottomContent({
       <ThirdRow weeks={weeks} createdAt={createdAt} />
       <SignatureWrapper>
         <img
-          src={`https://ppoketdon-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
+          /* src={`https://ppoketdon-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`} */
+          src={`https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
         />
       </SignatureWrapper>
     </Wrapper>
