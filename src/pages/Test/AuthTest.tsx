@@ -10,9 +10,24 @@ function AuthTest() {
   const axiosPrivate = useAxiosPrivate();
   const registerEXPOToken = useRegisterEXPOToken();
 
+  const RNListener = () => {
+    console.log('RNListener');
+    const listener = (event: any) => {
+      alert('listener called in RNListener');
+      alert(alert(JSON.stringify(event.data)));
+    };
+
+    if (window.ReactNativeWebView) {
+      alert('window.reactNative');
+      document.addEventListener('message', listener); /** android */
+      window.addEventListener('message', listener); /** ios */
+    }
+  };
+
   async function handleRegisterEXPOToken() {
     console.log('handle register expo token');
-    registerEXPOToken();
+    // registerEXPOToken();
+    RNListener();
   }
 
   async function handleRefresh() {
