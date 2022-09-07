@@ -1,6 +1,1 @@
-export type TPage =
-  | 'InterestHistory'
-  | 'Home'
-  | 'KidHome'
-  | 'ParentHome'
-  | 'Detail';
+export type TPage = 'Home' | 'KidHome' | 'ParentHome' | 'Detail' | 'Interest';

@@ -1,15 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
 import BackgroundTemplate from '../../components/layout/BackgroundTemplate';
-import InterestHistoryPage from './InterestHistoryPage';
+import InterestPage from './InterestPage';
 
-function InterestHistoryRouter() {
+function InterestRouter() {
   return (
     <Routes>
       <Route
         path="/"
         element={
           <BackgroundTemplate>
-            <InterestHistoryPage />
+            <InterestPage />
           </BackgroundTemplate>
         }
       />
@@ -17,4 +17,4 @@ function InterestHistoryRouter() {
   );
 }
 
-export default InterestHistoryRouter;
+export default InterestRouter;

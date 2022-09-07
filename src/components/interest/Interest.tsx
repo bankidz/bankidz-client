@@ -1,15 +1,14 @@
 import NoFamily from '@components/common/NoFamily';
 import styled from 'styled-components';
 
-function InterestHistory() {
+function Interest() {
   return (
     <Wrapper>
-      <span>test</span>
-      <NoFamily variant="InterestHistory" />
+      <NoFamily variant="Interest" />
     </Wrapper>
   );
 }
 
-export default InterestHistory;
+export default Interest;
 
 const Wrapper = styled.div``;

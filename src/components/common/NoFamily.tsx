@@ -3,32 +3,45 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
+import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
-import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { theme } from '@lib/styles/theme';
 import { TPage } from '@lib/types/TPage';
 
 interface NoFamilyProps {
-  variant: Extract<TPage, 'InterestHistory' | 'Home'>;
+  variant: Extract<TPage, 'Home' | 'Interest'>;
 }
 
+/**
+ * Home, Interest 2개의 Page에서 사용되는 컴포넌트이기에 /common에 위치시켰습니다.
+ */
 function NoFamily({ variant }: NoFamilyProps) {
   const isKid = useAppSelector(selectIsKid);
   const navigate = useNavigate();
 
-  return (
-    <Wrapper>
-      <MarginTemplate>
+  let header;
+  if (variant === 'Home') {
+    header = (
+      <>
         <div className="logo-wrapper">
           <BANKIDZ fill={theme.palette.main.yellow400} />
         </div>
-        <div className="header-text">
+        <div className="home-header-text">
           {isKid
             ? '부모님과 돈길 걷기\n함께해요'
             : '우리 아이와\n돈길 걷기 함께해요'}
         </div>
+      </>
+    );
+  } else if (variant === 'Interest') {
+    header = <div className="interest-header-text">이자내역</div>;
+  }
 
+  return (
+    <Wrapper>
+      <MarginTemplate>
+        {header}
         <Container>
           <Banki />
           <p>
@@ -59,7 +72,7 @@ const Wrapper = styled.div`
     width: 100.24px;
     height: 15.82px;
   }
-  .header-text {
+  .home-header-text {
     margin-top: 30.44px;
     width: 308px;
     height: 58px;
@@ -68,6 +81,12 @@ const Wrapper = styled.div`
     color: ${({ theme }) => theme.palette.greyScale.black};
     ${({ theme }) => theme.typo.fixed.TabName_T_21_EB}
     line-height: 150%;
+  }
+  .interest-header-text {
+    color: ${({ theme }) => theme.palette.greyScale.black};
+    ${({ theme }) => theme.typo.fixed.TabName_T_21_EB}
+    margin-top: 16px;
+    margin-left: -2px;
   }
 `;
 

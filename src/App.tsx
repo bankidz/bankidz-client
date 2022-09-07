@@ -11,7 +11,7 @@ import TestPage from './pages/Test/TestPage';
 import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
 import ManageRouter from './pages/Manage';
-import InterestHistoryRouter from './pages/InterestHistory';
+import InterestRouter from './pages/InterestHistory';
 
 function App() {
   const queryClient = useQueryClient();
@@ -39,7 +39,7 @@ function App() {
           <Route path="/walk/*" element={<WalkRouter />} />
           <Route path="/mypage/*" element={<MypageRouter />} />
           <Route path="/setting/*" element={<ManageRouter />} />
-          <Route path="/interest/*" element={<InterestHistoryRouter />} />
+          <Route path="/interest/*" element={<InterestRouter />} />
           <Route path="*" element={<NotFound />} />
         </Route>
         {/* </Route> */}
