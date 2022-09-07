@@ -38,6 +38,7 @@ function AuthTest() {
 
   return (
     <Wrapper>
+      <span>1151</span>
       <button onClick={handleRegisterEXPOToken}>register EXPO Token</button>
       <button onClick={handleRefresh}>refresh test</button>
       <button onClick={handleRequestWithAT}>request with aT test</button>

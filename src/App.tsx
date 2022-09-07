@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import OnBoardingRouter from './pages/OnBoarding';
@@ -33,17 +32,16 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
         <Route path="/link/:groupCode" element={<GroupLink />} />
+        <Route path="/test/*" element={<TestPage />} />
         {/* <Route element={<PersistLogin />}> */}
         <Route element={<RequireAuth />}>
           <Route path="/*" element={<HomeRouter />} />
           <Route path="/walk/*" element={<WalkRouter />} />
           <Route path="/mypage/*" element={<MypageRouter />} />
-          <Route path="/manage/*" element={<ManageRouter />} />
+          <Route path="/setting/*" element={<ManageRouter />} />
           <Route path="/financial/*" element={<FinancialRouter />} />
-          <Route path="/test/*" element={<TestPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
-
         {/* </Route> */}
       </Route>
     </Routes>

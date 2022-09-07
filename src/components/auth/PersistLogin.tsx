@@ -26,6 +26,7 @@ function PersistLogin() {
 
     // verify only on refresh
     if (accessToken === '' && persist) {
+      console.log('verify only on refresh');
       verifyRefreshToken();
     } else {
       setIsLoading(false);
