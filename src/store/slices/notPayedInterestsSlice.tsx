@@ -4,13 +4,15 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
 
+export interface IChallengeDTO {
+  challenge: IDongil;
+  interestPrice: number;
+}
+
 interface IInterest {
   kidId: number;
   achievedChallengeListDTO: {
-    challengeDTOList: {
-      challenge: IDongil;
-      interestPrice: number;
-    }[];
+    challengeDTOList: IChallengeDTO[];
     totalInterestPrice: number;
   };
 }

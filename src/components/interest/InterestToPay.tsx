@@ -5,7 +5,10 @@ import {
   selectHasMultipleKids,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
-import { fetchNotPayedInterest } from '@store/slices/notPayedInterestsSlice';
+import {
+  fetchNotPayedInterest,
+  selectNotPayedInterests,
+} from '@store/slices/notPayedInterestsSlice';
 import { useEffect } from 'react';
 import styled, { ThemeContext } from 'styled-components';
 import InterestToPayList from './InterestToPayList';
@@ -20,15 +23,30 @@ function InterestToPay() {
     dispatch(
       fetchNotPayedInterest({ axiosPrivate, kidId: selectedKid?.kidId! }),
     );
-  }, []);
+  }, [selectedKid]);
+
+  const notPayedInterests = useAppSelector(selectNotPayedInterests);
+  const getSelectedKidSNotPayedInterests = (kidId: number) => {
+    const found = notPayedInterests?.find(
+      (notPayedInterest) => notPayedInterest.kidId === kidId,
+    );
+    return found?.achievedChallengeListDTO;
+  };
+  const selectedKidSNotPayedInterests = getSelectedKidSNotPayedInterests(
+    selectedKid?.kidId!,
+  );
+
+  console.log('outside: ', selectedKidSNotPayedInterests?.challengeDTOList!);
 
   return (
     <>
       <Header hasMultipleKids={hasMultipleKids}>
         <h1>지급이 필요한 이자</h1>
-        <h2>0원</h2>
+        <h2>{selectedKidSNotPayedInterests?.totalInterestPrice}원</h2>
       </Header>
-      <InterestToPayList />
+      <InterestToPayList
+        challengeDTOList={selectedKidSNotPayedInterests?.challengeDTOList!}
+      />
     </>
   );
 }

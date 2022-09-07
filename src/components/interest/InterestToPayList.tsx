@@ -1,21 +1,44 @@
 import Button from '@components/common/buttons/Button';
+import { IChallengeDTO } from '@store/slices/notPayedInterestsSlice';
 import styled from 'styled-components';
+import getContractEndDate from '@lib/utils/get/getContractEndDate';
+import dayjs from 'dayjs';
+import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
 
-function InterestToPayList() {
+function getCompletionDate(createdAt: string, weeks: number) {
+  const contractEndDate = getContractEndDate(createdAt, weeks);
+  const formattedContractEndDate = getFormattedTimeStamp(
+    contractEndDate,
+    'YYYY.MM.DD',
+  );
+  return formattedContractEndDate;
+}
+
+interface InterestTOPayListProps {
+  challengeDTOList: IChallengeDTO[];
+}
+
+function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
   return (
     <Wrapper>
-      <Block>
-        <div className="text-wrapper">
-          <span className="date">2022.09.01 완주성공</span>
-          <h1>기말고사 끝! 축하파티</h1>
-          <div className="amount-wrapper">
-            <span className="total-interest">총 이자</span>
-            <span className="amount">3000원</span>
+      {challengeDTOList?.map((challengeDTO) => (
+        <Block key={challengeDTO.challenge.id}>
+          <div className="text-wrapper">
+            <span className="date">
+              {`${getCompletionDate(
+                challengeDTO.challenge.createdAt,
+                challengeDTO.challenge.weeks,
+              )} 완주성공`}
+            </span>
+            <h1>{challengeDTO.challenge.title}</h1>
+            <div className="amount-wrapper">
+              <span className="total-interest">총 이자</span>
+              <span className="amount">{challengeDTO.interestPrice}원</span>
+            </div>
           </div>
-        </div>
-
-        <Button label="지급 완료하기" />
-      </Block>
+          <Button label="지급 완료하기" />
+        </Block>
+      ))}
     </Wrapper>
   );
 }
@@ -40,16 +63,25 @@ const Block = styled.section`
   background: ${({ theme }) => theme.palette.greyScale.white};
 
   .date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     ${({ theme }) => theme.typo.fixed.GraphSub_S_12_M};
     color: ${({ theme }) => theme.palette.greyScale.grey500};
+    height: 12px;
+    line-height: 12px;
     margin-top: 8px;
   }
   h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 276px;
     height: 22px;
+    line-height: 22px;
+    margin-top: 4px;
     ${({ theme }) => theme.typo.text.T_18_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
-    margin-top: 4px;
   }
   .amount-wrapper {
     display: flex;
