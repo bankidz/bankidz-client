@@ -10,6 +10,7 @@ import walkingDongilsReducer from '../slices/walkingDongilsSlice';
 import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
 import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
+import notPayedInterestsReducer from '../slices/notPayedInterestsSlice';
 import overViewReducer from '@store/slices/overViewSlice';
 import bottomSheetReducer from '@store/slices/bottomSheetSlice';
 
@@ -25,6 +26,7 @@ export const store = configureStore({
     pendingDongils: pendingDongilsReducer,
     proposedDongils: proposedDongilsReducer,
     thisWeekSDongils: thisWeekSDongilsReducer,
+    notPayedInterests: notPayedInterestsReducer,
     overView: overViewReducer,
     bottomSheet: bottomSheetReducer,
   },
