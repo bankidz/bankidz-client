@@ -11,6 +11,7 @@ import { theme } from '@lib/styles/theme';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TPage } from '@lib/types/TPage';
+import { useNavigate } from 'react-router-dom';
 
 interface FixedBarProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -21,6 +22,7 @@ interface FixedBarProps {
  * @param variant Interest Page에서 사용되는 경우 'Interest'를 명시합니다.
  */
 function FixedBar({ variant = 'Home' }: FixedBarProps) {
+  const navigate = useNavigate();
   const level = useLevel();
   const colorByLevel = getColorByLevel(level);
 
@@ -48,12 +50,12 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
 
   return (
     <Wrapper colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
-      {variant === 'Home' && (
-        <div className="alert">
-          <Bell />
-        </div>
-      )}
-      {headerText}
+      <div className="alert" onClick={() => navigate('/alert')}>
+        <Bell />
+      </div>
+      <div className="logo-wrapper">
+        <BANKIDZ fill={theme.palette.greyScale.white} />
+      </div>
       {hasMultipleKids && (
         <KidListWrapper colorByLevel={colorByLevel}>{kidsList}</KidListWrapper>
       )}
@@ -95,6 +97,17 @@ const Wrapper = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
     position: absolute;
     top: 0px;
     right: 6px;
+    cursor: pointer;
+  }
+  .alert:after {
+    content: '';
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: ${({ theme }) => theme.palette.sementic.red300};
+    position: absolute;
+    right: 14px;
+    top: 14px;
   }
 `;
 

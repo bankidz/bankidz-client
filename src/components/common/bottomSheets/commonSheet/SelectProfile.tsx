@@ -11,6 +11,7 @@ interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 function SelectProfile({ isKid, isFemale, ...props }: SelectProfileProps) {
+  console.log(isKid, isFemale);
   return (
     <Wrapper>
       <Container>
