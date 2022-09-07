@@ -13,6 +13,7 @@ import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useFamilyApi from '@apis/family/useFamilyApi';
 import useUserApi from '@apis/user/useUserAPi';
+import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
 
 function Mypage() {
   const queryClient = useQueryClient();
@@ -60,8 +61,7 @@ function Mypage() {
         {userStatus === 'success' ? (
           <OverView userData={userData} />
         ) : (
-          /* TODO */
-          '스켈레톤'
+          <SkeletonOverview isKid={true} />
         )}
         {userData?.user.isKid ? (
           <Section>
@@ -70,14 +70,18 @@ function Mypage() {
           </Section>
         ) : (
           <Section smallGap={true}>
-            <h2>자녀기록</h2>
-            {kidStatus === 'success' && <KidsRecordList kidData={kidData!} />}
+            {kidStatus === 'success' && (
+              <>
+                <h2>자녀기록</h2>
+                <KidsRecordList kidData={kidData!} />
+              </>
+            )}
           </Section>
         )}
         <Section>
-          <h2>가족 관리</h2>
           {familyStatus === 'success' && (
             <>
+              <h2>가족 관리</h2>
               {familyData!.id ? (
                 <FamilyList family={familyData!.familyUserList} />
               ) : (
