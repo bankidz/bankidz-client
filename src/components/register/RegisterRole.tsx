@@ -146,7 +146,6 @@ function RegisterRole() {
   return (
     <Wrapper>
       <span>프로필을 선택해요</span>
-      <button onClick={handlePrint}>print</button>
       <RoleButtonWrapper>
         {/* 아빠 */}
         <RoleButton
