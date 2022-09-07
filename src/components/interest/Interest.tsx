@@ -4,6 +4,7 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectFamily, selectFamilyStatus } from '@store/slices/familySlice';
 import styled from 'styled-components';
 import InterestTemplate from './InterestTemplate';
+import InterestToPay from './InterestToPay';
 
 function Interest() {
   const family = useAppSelector(selectFamily);
@@ -11,27 +12,24 @@ function Interest() {
   const hasNoFamily = family?.length === 0 && familyStatus === 'succeeded';
 
   return (
-    <Wrapper>
+    <>
       {hasNoFamily ? (
         <NoFamily variant="Interest" />
       ) : (
         <>
           <InterestTemplate>
-            <span>test</span>
+            <FlexContainer>
+              <InterestToPay />
+            </FlexContainer>
           </InterestTemplate>
         </>
       )}
-    </Wrapper>
+    </>
   );
 }
 
 export default Interest;
 
-const Wrapper = styled.div`
-  width: 100%;
-  position: relative;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: calc(var(--vh, 1vh) * 100);
+const FlexContainer = styled.div`
+  margin-top: 100px;
 `;

@@ -1,4 +1,6 @@
 import FixedBar from '@components/home/homeTemplate/FixedBar';
+import LargeSpacer from '@components/layout/LargeSpacer';
+import MarginTemplate from '@components/layout/MarginTemplate';
 import styled from 'styled-components';
 
 interface InterestTemplateProps {
@@ -9,7 +11,8 @@ function InterestTemplate({ children }: InterestTemplateProps) {
   return (
     <Wrapper>
       <FixedBar variant="Interest" />
-      {children}
+      <MarginTemplate>{children}</MarginTemplate>
+      <LargeSpacer />
     </Wrapper>
   );
 }
@@ -23,4 +26,6 @@ const Wrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
+
+  background: ${({ theme }) => theme.palette.greyScale.grey100};
 `;
