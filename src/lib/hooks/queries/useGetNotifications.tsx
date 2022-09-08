@@ -3,13 +3,14 @@ import { useInView } from 'react-intersection-observer';
 import { ReactElement, useEffect } from 'react';
 import { INotificationDTO } from '@apis/notification/notification.dto';
 import useNotificationApi from '@apis/notification/useNotificationApi';
+import { NOTIFICATION } from '@lib/constants/QUERY_KEY';
 
 const useGetNotifications = () => {
   const { getNotification } = useNotificationApi();
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
     INotificationDTO,
     unknown
-  >(['talks'], getNotification, {
+  >(NOTIFICATION, getNotification, {
     getNextPageParam: (lastPage) => lastPage.lastId,
     //refetchInterval: 5000,
   });
@@ -22,6 +23,7 @@ const useGetNotifications = () => {
 
       const pageLastIdx = data.pages.length - 1;
       const isLast = data?.pages[pageLastIdx].isLast;
+      console.log(isLast);
       if (!isLast && inView) fetchNextPage();
     }, [inView]);
 

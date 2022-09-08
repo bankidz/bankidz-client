@@ -130,6 +130,12 @@ export const theme: DefaultTheme = {
       S_16_B: `font-family: 'Spoqa Han Sans Neo';font-size: ${calcRem(
         16,
       )};line-height: 100%;font-weight: 700;`,
+      Alarm_T_14_R: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(
+        14,
+      )};line-height: 100%;font-weight: 400;`,
+      Alarm_T_12_R: `font-family: 'TmoneyRoundWindo';font-size: ${calcRem(
+        12,
+      )};line-height: 100%;font-weight: 400;`,
     },
     popup: {
       T_24_EB: `font-family: 'TmoneyRoundWind';font-size: ${calcRem(

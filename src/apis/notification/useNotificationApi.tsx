@@ -4,14 +4,22 @@ const useNotificationApi = () => {
   const axiosPrivate = useAxiosPrivate();
 
   const getNotification = async ({
-    pageParam = null,
+    pageParam = '',
   }): Promise<INotificationDTO> => {
-    const response = await axiosPrivate.get(`/notification?last=${pageParam}`);
+    const response = await axiosPrivate.get(
+      `/notification?lastId=${pageParam}`,
+    );
     const data = response.data.data;
     return data;
   };
 
-  return { getNotification };
+  const patchNotificationIsRead = async (id: number) => {
+    const response = await axiosPrivate.patch(`/notification/${id}`);
+    const data = response.data.data;
+    return data;
+  };
+
+  return { getNotification, patchNotificationIsRead };
 };
 
 export default useNotificationApi;

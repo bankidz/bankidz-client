@@ -120,7 +120,7 @@ function RegisterRole() {
           level = -4;
         } else if (isKid === true && isFemale === true) {
           accessToken =
-            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0';
+            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI1NTY2MzYsInN1YiI6IjMiLCJleHAiOjE2NjM3NjYyMzYsImlkIjozLCJyb2xlcyI6IlVTRVIifQ.aGEph20bt6xRLKNHis-JLInmZluhEOGP2m4H9Oh_oXo';
           level = 2;
         }
         accessToken &&
