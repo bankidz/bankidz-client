@@ -1,16 +1,20 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useAppDispatch } from '@store/app/hooks';
-import { setLevel } from '@store/slices/authSlice';
+import { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { selectAccessToken, setLevel } from '@store/slices/authSlice';
+import useLocalStorage from '@lib/hooks/auth/useLocalStorage';
 
 function PersistLogin() {
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
+  // @ts-expect-error
   useEffect(() => {
-    async function getServerSideLevel() {
+    let isMounted = true;
+    async function fetchLevel() {
       try {
         const response = await axiosPrivate.get('/user');
         const { isKid } = response.data.data.user;
@@ -18,14 +22,21 @@ function PersistLogin() {
           const { level } = response.data.data.kid;
           dispatch(setLevel(level)); // latest level
         }
-      } catch (error) {
-        navigate('/auth/login');
+      } catch (error: any) {
+        navigate('/auth/login'); // access token expired
+      } finally {
+        isMounted && setIsLoading(false); // escape memory leak
       }
     }
-    getServerSideLevel();
+    fetchLevel();
+    return () => (isMounted = false);
   }, []);
 
-  return <Outlet />;
+  if (isLoading) {
+    return <></>;
+  } else {
+    return <Outlet />;
+  }
 }
 
 export default PersistLogin;
@@ -51,7 +62,6 @@ export default PersistLogin;
 
 //   // verify only on refresh
 //   if (accessToken === '' && persist) {
-//     console.log('verify only on refresh');
 //     verifyRefreshToken();
 //   } else {
 //     setIsLoading(false);
