@@ -14,23 +14,22 @@ function KAKAOAuthRedirectPage() {
   const code = params.get('code');
 
   useEffect(() => {
-    const EXPOToken = getEXPOToken();
-    alert(JSON.stringify(EXPOToken));
-  }, []);
-
-  useEffect(() => {
     async function proceedLogin() {
       try {
         console.log(code);
         code && (await dispatch(login({ code })).unwrap());
-        // await registerEXPOToken();
-        console.log('kakao login');
         navigate('/test');
       } catch (error: any) {
         console.error(error);
       }
     }
     proceedLogin();
+
+    async function registerEXPOToken() {
+      const EXPOToken = getEXPOToken();
+      alert(`EXPOToken in registerEXPOToken: ${EXPOToken}`);
+    }
+    registerEXPOToken();
   }, []);
 
   return <CustomSyncLoader />;
