@@ -20,7 +20,7 @@ function RegisterRole() {
 
   const { openModal } = useModals();
   const navigate = useNavigate();
-  function handleModalOpen() {
+  function handleModalOpen(isKid: boolean, isFemale: boolean) {
     openModal(modals.primaryModal, {
       onSubmit: () => {
         navigate('/', { replace: true });
@@ -37,42 +37,37 @@ function RegisterRole() {
     useGlobalBottomSheet();
   const axiosPrivate = useAxiosPrivate();
   const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
-  const canRegister =
-    isKid !== null &&
-    isFemale !== null &&
-    birthday &&
-    registerStatus === 'idle';
+  const canRegister = birthday && registerStatus === 'idle';
 
-  async function handleSubmit() {
-    console.log('handle submit');
-    // if (canRegister) {
-    //   try {
-    //     setRegisterStatus('pending');
-    //     // await dispatch(
-    //     //   register({
-    //     //     axiosPrivate,
-    //     //     birthday,
-    //     //     isKid,
-    //     //     isFemale,
-    //     //   }),
-    //     // ).unwrap();
+  async function handleSubmit(isKid: boolean, isFemale: boolean) {
+    console.log(canRegister);
+    if (canRegister) {
+      try {
+        setRegisterStatus('pending');
+        await dispatch(
+          register({
+            axiosPrivate,
+            birthday,
+            isKid,
+            isFemale,
+          }),
+        ).unwrap();
 
-    //     console.log('temp');
-    //     const temp = getLocalStorage('auth');
-    //     setLocalStorage('auth', {
-    //       accessToken: temp?.accessToken, // overwrite
-    //       isKid,
-    //       provider: temp?.provider, // overwrite
-    //     });
+        const temp = getLocalStorage('auth');
+        setLocalStorage('auth', {
+          accessToken: temp?.accessToken, // overwrite
+          isKid,
+          provider: temp?.provider, // overwrite
+        });
 
-    //     setCloseBottomSheet();
-    //     handleModalOpen();
-    //   } catch (error: any) {
-    //     console.error('error in handle submit:', error);
-    //   } finally {
-    //     setRegisterStatus('idle');
-    //   }
-    // }
+        setCloseBottomSheet();
+        handleModalOpen(isKid, isFemale);
+      } catch (error: any) {
+        console.error(error);
+      } finally {
+        setRegisterStatus('idle');
+      }
+    }
   }
 
   const openSelectProfileSheet = (isKid: boolean, isFemale: boolean) => {
@@ -85,11 +80,8 @@ function RegisterRole() {
         isKid: isKid,
         isFemale: isFemale,
         onClick: () => {
-          handleSubmit();
+          handleSubmit(isKid, isFemale);
         },
-        // onClick: () => {
-        //   console.log('click');
-        // },
       },
     });
   };

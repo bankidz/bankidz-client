@@ -4,10 +4,8 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 import { KAKAO_AUTH_URL } from '@lib/constants/KAKAO_AUTH_URL';
 import { APPLE_AUTH_URL } from '@lib/constants/APPLE_AUTH_URL';
-import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
-  const navigate = useNavigate();
   return (
     <Wrapper>
       <MarginTemplate>
@@ -15,13 +13,6 @@ function LoginPage() {
           <Logo />
           <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
-        <ButtonWithMarginBottom
-          label="QA 계정으로 시작하기"
-          onClick={() => {
-            navigate('/auth/register/1');
-          }}
-          property="default"
-        />
         <ButtonWithMarginBottom
           label="카카오로 시작하기"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
