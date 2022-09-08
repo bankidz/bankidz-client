@@ -29,9 +29,8 @@ interface IAuthState {
 const temp = getLocalStorage('auth');
 const initialState: IAuthState = {
   auth: {
-    accessToken:
-      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8',
-    isKid: null,
+    accessToken: temp?.accessToken,
+    isKid: temp?.isKid,
     level: null,
     provider: temp?.provider,
     birthday: '',

@@ -19,7 +19,7 @@ function PendingDongilSection() {
     if (pendingDongils?.length === 0) {
       content = (
         <>
-          <EmptyDongil variant="pending" />
+          <EmptyDongil subject="대기중인" />
         </>
       );
     } else {

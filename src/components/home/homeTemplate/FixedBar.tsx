@@ -3,7 +3,7 @@ import {
   selectHasMultipleKids,
   selectKidsStatus,
 } from '@store/slices/kidsSlice';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import KidList from './KidList';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { ReactComponent as Bell } from '@assets/icons/bell.svg';
@@ -12,6 +12,9 @@ import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TPage } from '@lib/types/TPage';
 import { useNavigate } from 'react-router-dom';
+import useNotificationApi from '@apis/notification/useNotificationApi';
+import { NOTIFICATION_IS_READ } from '@lib/constants/QUERY_KEY';
+import { useQuery } from 'react-query';
 
 interface FixedBarProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -28,6 +31,11 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
 
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
   const kidsStatus = useAppSelector(selectKidsStatus);
+  const { getNotificationIsAllRead } = useNotificationApi();
+  const { data: isAllRead } = useQuery(
+    NOTIFICATION_IS_READ,
+    getNotificationIsAllRead,
+  );
   let kidsList;
   if (kidsStatus === 'loading') {
     kidsList = <p>Loading</p>;
@@ -49,7 +57,11 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
   }
 
   return (
-    <Wrapper colorByLevel={colorByLevel} hasMultipleKids={hasMultipleKids}>
+    <Wrapper
+      colorByLevel={colorByLevel}
+      hasMultipleKids={hasMultipleKids}
+      isAllRead={isAllRead!}
+    >
       <div className="alert" onClick={() => navigate('/alert')}>
         <Bell />
       </div>
@@ -65,7 +77,11 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
 
 export default FixedBar;
 
-const Wrapper = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
+const Wrapper = styled.div<{
+  colorByLevel: string;
+  hasMultipleKids: boolean;
+  isAllRead: boolean;
+}>`
   height: ${({ hasMultipleKids }) => (hasMultipleKids ? '95px' : '48px')};
   z-index: 3;
   background: ${({ colorByLevel }) => colorByLevel};
@@ -99,16 +115,20 @@ const Wrapper = styled.div<{ colorByLevel: string; hasMultipleKids: boolean }>`
     right: 6px;
     cursor: pointer;
   }
-  .alert:after {
-    content: '';
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    background-color: ${({ theme }) => theme.palette.sementic.red300};
-    position: absolute;
-    right: 14px;
-    top: 14px;
-  }
+  ${({ isAllRead }) =>
+    isAllRead === false &&
+    css`
+      .alert:after {
+        content: '';
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        background-color: ${({ theme }) => theme.palette.sementic.red300};
+        position: absolute;
+        right: 14px;
+        top: 14px;
+      }
+    `}
 `;
 
 const KidListWrapper = styled.div<{ colorByLevel: string }>`

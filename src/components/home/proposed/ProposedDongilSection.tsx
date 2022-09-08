@@ -29,7 +29,7 @@ function ProposedDongilSection() {
     );
 
     if (selectedKidSProposedDongils?.length === 0) {
-      content = <EmptyDongil variant="proposed" />;
+      content = <EmptyDongil subject="제안받은" />;
     } else {
       content = (
         <ProposedDongilList proposedDongils={selectedKidSProposedDongils!} />
