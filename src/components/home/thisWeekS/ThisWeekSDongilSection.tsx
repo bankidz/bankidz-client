@@ -29,7 +29,7 @@ function ThisWeekSDongilSection() {
     );
 
     if (selectedKidSThisWeekSDongils?.length === 0) {
-      content = <EmptyDongil variant="thisWeekS" />;
+      content = <EmptyDongil subject="걷고있는" />;
     } else {
       content = (
         <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />

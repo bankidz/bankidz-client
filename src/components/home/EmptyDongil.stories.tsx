@@ -21,15 +21,15 @@ const Template: ComponentStory<typeof EmptyDongil> = (args) => (
 
 export const 대기중인_돈길이_없어요 = Template.bind({});
 대기중인_돈길이_없어요.args = {
-  variant: 'pending',
+  subject: '대기중인',
 };
 
 export const 제안받은_돈길이_없어요 = Template.bind({});
 제안받은_돈길이_없어요.args = {
-  variant: 'proposed',
+  subject: '제안받은',
 };
 
 export const 걷고있는_돈길이_없어요 = Template.bind({});
 걷고있는_돈길이_없어요.args = {
-  variant: 'thisWeekS',
+  subject: '걷고있는',
 };

@@ -1,3 +1,4 @@
+import EmptyDongil from '@components/home/EmptyDongil';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -36,15 +37,20 @@ function InterestToPay() {
     selectedKid?.kidId!,
   );
 
+  console.log('what: ', selectedKidSNotPayedInterests?.totalInterestPrice);
   return (
     <>
       <Header hasMultipleKids={hasMultipleKids}>
         <h1>지급이 필요한 이자</h1>
         <h2>{selectedKidSNotPayedInterests?.totalInterestPrice}원</h2>
       </Header>
-      <InterestToPayList
-        challengeDTOList={selectedKidSNotPayedInterests?.challengeDTOList!}
-      />
+      {selectedKidSNotPayedInterests?.totalInterestPrice === 0 ? (
+        <EmptyDongil subject="아직 완주한" />
+      ) : (
+        <InterestToPayList
+          challengeDTOList={selectedKidSNotPayedInterests?.challengeDTOList!}
+        />
+      )}
     </>
   );
 }
