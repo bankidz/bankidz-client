@@ -21,7 +21,7 @@ function PersistLogin() {
           const { level } = response.data.data.kid;
           dispatch(setLevel(level)); // latest level
         }
-      } catch (error: any) {
+      } catch (error) {
         navigate('/auth/login'); // access token expired
       } finally {
         isMounted && setIsLoading(false); // escape memory leak
