@@ -1,9 +1,9 @@
 import { useAppDispatch } from '@store/app/hooks';
 import { login } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import { useEffect } from 'react';
-import getEXPOToken from '@lib/utils/get/getEXPOToken';
+import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
@@ -16,20 +16,22 @@ function KAKAOAuthRedirectPage() {
   useEffect(() => {
     async function proceedLogin() {
       try {
-        console.log(code);
-        code && (await dispatch(login({ code })).unwrap());
-        navigate('/test');
+        if (code) {
+          const response = await dispatch(login({ code })).unwrap();
+          setLocalStorage('auth', response.data);
+        }
+        navigate('/');
       } catch (error: any) {
         console.error(error);
       }
     }
     proceedLogin();
 
-    async function registerEXPOToken() {
-      const EXPOToken = getEXPOToken();
-      alert(`EXPOToken in registerEXPOToken: ${EXPOToken}`);
-    }
-    registerEXPOToken();
+    // async function registerEXPOToken() {
+    //   const EXPOToken = getEXPOToken();
+    //   alert(`EXPOToken in registerEXPOToken: ${EXPOToken}`);
+    // }
+    // registerEXPOToken();
   }, []);
 
   return <CustomSyncLoader />;

@@ -3,13 +3,11 @@ import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
-import useRegisterEXPOToken from '@lib/utils/get/getEXPOToken';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function APPLEAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const registerEXPOToken = useRegisterEXPOToken();
 
   useEffect(() => {
     // @ts-expect-error
