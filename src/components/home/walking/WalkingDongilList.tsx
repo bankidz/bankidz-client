@@ -16,6 +16,7 @@ function WalkingDongilList({ walkingDongils }: WalkingDongilListProps) {
           title={walkingDongil.title}
           id={walkingDongil.id}
           challengeStatus={walkingDongil.challengeStatus}
+          interestRate={walkingDongil.interestRate}
         />
       ))}
     </Wrapper>

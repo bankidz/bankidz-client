@@ -15,13 +15,17 @@ import { IDongil } from '@lib/types/IDongil';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface WalkingDongilItemProps
-  extends Pick<IDongil, 'itemName' | 'title' | 'id' | 'challengeStatus'> {}
+  extends Pick<
+    IDongil,
+    'itemName' | 'title' | 'id' | 'challengeStatus' | 'interestRate'
+  > {}
 
 function WalkingDongilItem({
   itemName,
   title,
   id,
   challengeStatus,
+  interestRate,
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();
   const to = `/detail/${id}`;
@@ -63,6 +67,8 @@ function WalkingDongilItem({
         open: true,
       },
       contentProps: {
+        title,
+        interestRate,
         onDeleteButtonClick: openWarningDeleteSheet,
         onCancelButtonClick: () => {
           setCloseBottomSheet();
