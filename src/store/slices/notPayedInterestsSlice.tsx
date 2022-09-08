@@ -39,7 +39,6 @@ export const fetchNotPayedInterest = createAsyncThunk(
     const response = await axiosPrivate.get(
       `/challenge/kid/achieved/${kidId}?interestPayment=notPayed`,
     );
-    console.log(response.data);
     return response.data;
   },
 );

@@ -3,22 +3,13 @@ import { ReactComponent as BankiSad } from '@assets/illusts/banki/banki_sad.svg'
 import { TDongilVariant } from '@lib/types/TDongilVariant';
 
 interface EmptyDongilProps {
-  variant: Extract<TDongilVariant, 'pending' | 'proposed' | 'thisWeekS'>;
+  subject: string;
 }
 
 /**
- * @param variant 용도(메세지의 주어)를 선택합니다.
+ * @param subject 용도(메세지의 주어)를 선택합니다.
  */
-function EmptyDongil({ variant }: EmptyDongilProps) {
-  let subject;
-  if (variant === 'pending') {
-    subject = '대기중인';
-  } else if (variant === 'proposed') {
-    subject = '제안받은';
-  } else if (variant === 'thisWeekS') {
-    subject = '걷고있는';
-  }
-
+function EmptyDongil({ subject }: EmptyDongilProps) {
   return (
     <Wrapper>
       <button>
