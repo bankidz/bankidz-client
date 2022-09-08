@@ -1,4 +1,4 @@
-import WithdrawReason from '@components/setting/withdraw/WithdrawReason';
+import WithdrawReason from '@components/manage/withdraw/WithdrawReason';
 
 function WithdrawReasonPage() {
   return <WithdrawReason />;

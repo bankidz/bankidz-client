@@ -10,7 +10,7 @@ function AuthTest() {
 
   return (
     <Wrapper>
-      <span>1151</span>
+      <span>1234</span>
     </Wrapper>
   );
 }

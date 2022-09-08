@@ -6,7 +6,7 @@ function TestPage() {
   return (
     <Wrapper>
       <AuthTest />
-      <LocalStorageTest />
+      {/* <LocalStorageTest /> */}
     </Wrapper>
   );
 }

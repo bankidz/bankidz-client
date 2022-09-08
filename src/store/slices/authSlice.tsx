@@ -46,6 +46,7 @@ export const login = createAsyncThunk(
     const response = await axiosPublic.post('/kakao/login', {
       code,
     });
+
     return response.data;
   },
 );
