@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
+import getEXPOToken from '@lib/utils/get/getEXPOToken';
 
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
@@ -27,11 +28,26 @@ function KAKAOAuthRedirectPage() {
     }
     proceedLogin();
 
-    // async function registerEXPOToken() {
-    //   const EXPOToken = getEXPOToken();
-    //   alert(`EXPOToken in registerEXPOToken: ${EXPOToken}`);
-    // }
-    // registerEXPOToken();
+    function proceedGetEXPOToken() {
+      const EXPOToken = getEXPOToken();
+      alert(`3 EXPOToken: ${EXPOToken}`);
+    }
+    proceedGetEXPOToken();
+
+    //
+    // let EXPOToken = 'notWebView';
+    //   const listener = (event: any) => {
+    //     alert('listener called');
+    //     // alert(`0 EXPOToken: ${EXPOToken}`);
+    //     // EXPOToken = JSON.stringify(event.data);
+    //     // alert(`1 EXPOToken: ${EXPOToken}`);
+    //   };
+
+    //   if (window.ReactNativeWebView) {
+    //     alert('window.ReactNativeWebView'); // 2
+    //     document.addEventListener('message', listener); // AOS
+    //     window.addEventListener('message', listener); // iOS
+    //   }
   }, []);
 
   return <CustomSyncLoader />;

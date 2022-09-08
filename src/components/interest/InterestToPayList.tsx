@@ -22,7 +22,16 @@ interface InterestTOPayListProps {
 
 function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
   const { openModal } = useModals();
-  function handlePaidButtonClick(
+
+  function handlePaidButtonClick() {
+    openModal(modals.secondaryModal, {
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+    });
+  }
+
+  function handleIsPaidButtonClick(
     interestPrice: number,
     title: string,
     weeks: number,
@@ -30,7 +39,7 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
   ) {
     openModal(modals.quaternaryModal, {
       onExtraSubmit: () => {
-        console.log('handle submit');
+        handlePaidButtonClick();
       },
       interestPrice,
       title,
@@ -61,7 +70,7 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
           <Button
             label="지급 완료하기"
             onClick={() =>
-              handlePaidButtonClick(
+              handleIsPaidButtonClick(
                 challengeDTO.interestPrice,
                 challengeDTO.challenge.title,
                 challengeDTO.challenge.weeks,

@@ -5,7 +5,7 @@ import getEXPOToken from '@lib/utils/get/getEXPOToken';
 function AuthTest() {
   useEffect(() => {
     const EXPOToken = getEXPOToken();
-    alert(`3 EXPOToken: ${EXPOToken}`);
+    alert(`3 EXPOToken: ${EXPOToken}`); // 3 not webview
   }, []);
 
   return (
