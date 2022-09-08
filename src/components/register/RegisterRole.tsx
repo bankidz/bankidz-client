@@ -2,11 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  register,
-  selectBirthday,
-  setCredentials,
-} from '@store/slices/authSlice';
+import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import RoleButton from '../common/buttons/RoleButton';
 import useModals from '../../lib/hooks/useModals';
@@ -14,66 +10,17 @@ import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import { TLevel } from '@lib/types/TLevel';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 
 function RegisterRole() {
-  const dispatch = useAppDispatch();
+  const birthday = useAppSelector(selectBirthday);
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
-  const birthday = useAppSelector(selectBirthday);
-  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
-    useGlobalBottomSheet();
-
-  const openSelectProfileSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'SelectProfile',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        isKid: isKid,
-        isFemale: isFemale,
-        onClick: handleSubmit,
-      },
-    });
-  };
-
-  // 아빠
-  function handleDadButtonClick() {
-    if (!isOpen) {
-      setIsKid(false);
-      setIsFemale(false);
-      openSelectProfileSheet();
-    }
-  }
-  // 엄마
-  function handleMomButtonClick() {
-    if (!isOpen) {
-      setIsKid(false);
-      setIsFemale(true);
-      openSelectProfileSheet();
-    }
-  }
-  // 아들
-  function handleSonButtonClick() {
-    if (!isOpen) {
-      setIsKid(true);
-      setIsFemale(false);
-      openSelectProfileSheet();
-    }
-  }
-  // 딸
-  function handleDaughterButtonClick() {
-    if (!isOpen) {
-      setIsKid(true);
-      setIsFemale(true);
-      openSelectProfileSheet();
-    }
-  }
 
   const { openModal } = useModals();
   const navigate = useNavigate();
-  function handleModalOpen() {
+  function handleModalOpen(isKid: boolean, isFemale: boolean) {
     openModal(modals.primaryModal, {
       onSubmit: () => {
         navigate('/', { replace: true });
@@ -85,63 +32,59 @@ function RegisterRole() {
     });
   }
 
+  const dispatch = useAppDispatch();
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
   const axiosPrivate = useAxiosPrivate();
   const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
-  const canRegister =
-    isKid !== null &&
-    isFemale !== null &&
-    birthday &&
-    registerStatus === 'idle';
+  const canRegister = birthday && registerStatus === 'idle';
 
-  async function handleSubmit() {
+  async function handleSubmit(isKid: boolean, isFemale: boolean) {
+    console.log(canRegister);
     if (canRegister) {
       try {
         setRegisterStatus('pending');
-        // await dispatch(
-        //   register({
-        //     axiosPrivate,
-        //     birthday,
-        //     isKid,
-        //     isFemale,
-        //   }),
-        // ).unwrap();
+        await dispatch(
+          register({
+            axiosPrivate,
+            birthday,
+            isKid,
+            isFemale,
+          }),
+        ).unwrap();
 
-        let accessToken;
-        let level: TLevel | null = null;
-        if (isKid === false && isFemale === false) {
-          accessToken =
-            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8';
-        } else if (isKid === false && isFemale === true) {
-          accessToken =
-            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU';
-        } else if (isKid === true && isFemale === false) {
-          accessToken =
-            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0';
-          level = -4;
-        } else if (isKid === true && isFemale === true) {
-          accessToken =
-            'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI1NTY2MzYsInN1YiI6IjMiLCJleHAiOjE2NjM3NjYyMzYsImlkIjozLCJyb2xlcyI6IlVTRVIifQ.aGEph20bt6xRLKNHis-JLInmZluhEOGP2m4H9Oh_oXo';
-          level = 2;
-        }
-        accessToken &&
-          dispatch(
-            setCredentials({ accessToken, isKid, level, provider: 'kakao' }),
-          );
+        const temp = getLocalStorage('auth');
+        setLocalStorage('auth', {
+          accessToken: temp?.accessToken, // overwrite
+          isKid,
+          provider: temp?.provider, // overwrite
+        });
 
         setCloseBottomSheet();
-        handleModalOpen();
+        handleModalOpen(isKid, isFemale);
       } catch (error: any) {
-        console.error('error in handle submit:', error);
+        console.error(error);
       } finally {
         setRegisterStatus('idle');
       }
     }
   }
 
-  function handlePrint() {
-    console.log(isKid);
-    console.log(isFemale);
-  }
+  const openSelectProfileSheet = (isKid: boolean, isFemale: boolean) => {
+    setOpenBottomSheet({
+      sheetContent: 'SelectProfile',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        isKid: isKid,
+        isFemale: isFemale,
+        onClick: () => {
+          handleSubmit(isKid, isFemale);
+        },
+      },
+    });
+  };
 
   return (
     <Wrapper>
@@ -149,31 +92,47 @@ function RegisterRole() {
       <RoleButtonWrapper>
         {/* 아빠 */}
         <RoleButton
-          onClick={handleDadButtonClick}
+          onClick={() => {
+            openSelectProfileSheet(false, false);
+            setIsKid(false);
+            setIsFemale(false);
+          }}
           isKid={false}
           isFemale={false}
-          isSelected={isKid === false && isFemale === false}
+          isSelected={isOpen && isKid === false && isFemale === false}
         />
         {/* 엄마 */}
         <RoleButton
-          onClick={handleMomButtonClick}
+          onClick={() => {
+            openSelectProfileSheet(false, true);
+            setIsKid(false);
+            setIsFemale(true);
+          }}
           isKid={false}
           isFemale={true}
-          isSelected={isKid === false && isFemale === true}
+          isSelected={isOpen && isKid === false && isFemale === true}
         />
         {/* 아들 */}
         <RoleButton
-          onClick={handleSonButtonClick}
+          onClick={() => {
+            openSelectProfileSheet(true, false);
+            setIsKid(true);
+            setIsFemale(false);
+          }}
           isKid={true}
           isFemale={false}
-          isSelected={isKid === true && isFemale === false}
+          isSelected={isOpen && isKid === true && isFemale === false}
         />
         {/* 딸 */}
         <RoleButton
-          onClick={handleDaughterButtonClick}
+          onClick={() => {
+            openSelectProfileSheet(true, true);
+            setIsKid(true);
+            setIsFemale(true);
+          }}
           isKid={true}
           isFemale={true}
-          isSelected={isKid === true && isFemale === true}
+          isSelected={isOpen && isKid === true && isFemale === true}
         />
       </RoleButtonWrapper>
       <Modals />
@@ -201,3 +160,23 @@ const RoleButtonWrapper = styled.div`
   row-gap: 16px;
   column-gap: 16px;
 `;
+
+// let accessToken;
+// let level: TLevel | null = null;
+// if (isKid === false && isFemale === false) {
+//   accessToken =
+//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8';
+// } else if (isKid === false && isFemale === true) {
+//   accessToken =
+//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU';
+// } else if (isKid === true && isFemale === false) {
+//   accessToken =
+//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0';
+//   level = -4;
+// } else if (isKid === true && isFemale === true) {
+//   accessToken =
+//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0';
+//   level = 2;
+// }
+// accessToken &&
+//   dispatch(setCredentials({ accessToken, isKid, level, provider: 'kakao' }));

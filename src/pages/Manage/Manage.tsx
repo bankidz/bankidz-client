@@ -1,9 +1,11 @@
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
+import styled from 'styled-components';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLogout from '@lib/hooks/auth/useLogout';
+import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
+
 const contents = [
   { title: '공지사항', link: 'notices' },
   { title: '서비스 소개', link: 'features' },
@@ -24,7 +26,6 @@ function Manage() {
   const logout = useLogout();
   function openLogoutCheckBottomSheet() {
     setOpenBottomSheet({
-      // TODO: 로그아웃 체크로 수정 부탁드립니다.
       sheetContent: 'Check',
       sheetProps: { open: true },
       contentProps: {
@@ -32,6 +33,7 @@ function Manage() {
         onMainActionClick: () => {
           setCloseBottomSheet();
           logout();
+          removeLocalStorage('auth');
         },
       },
     });

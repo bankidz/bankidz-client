@@ -36,8 +36,6 @@ function InterestToPay() {
     selectedKid?.kidId!,
   );
 
-  console.log('outside: ', selectedKidSNotPayedInterests?.challengeDTOList!);
-
   return (
     <>
       <Header hasMultipleKids={hasMultipleKids}>
