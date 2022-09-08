@@ -4,6 +4,7 @@ export interface INotification {
   isRead: boolean;
   message: string;
   title: string;
+  notificationCategory: 'CHALLENGE' | 'NOTICE' | 'LEVEL' | 'FAMILY';
 }
 
 export interface INotificationDTO {

@@ -154,8 +154,8 @@ const RcSliderHandleStyle = {
 const Selector = styled.div<{ value: number }>`
   position: absolute;
   top: -28px;
-  height: 40px;
-  width: 44px;
+  height: 72px;
+  width: 72px;
   z-index: 3;
   ${({ value }) => {
     return value > 0
