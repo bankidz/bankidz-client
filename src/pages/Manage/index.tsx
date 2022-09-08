@@ -25,7 +25,6 @@ const ManageRouter = () => {
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/faq" element={<Faq />} />
-      <Route path="/inquiry" element={<Inquiry />} />
       <Route path="/withdraw" element={<WithdrawPage />} />
       <Route path="/withdraw/reason" element={<WithdrawReasonPage />} />
       <Route path="/withdraw/callback" element={<WithdrawCallbackPage />} />
