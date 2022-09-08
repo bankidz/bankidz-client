@@ -1,12 +1,9 @@
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { login, selectAuth } from '@store/slices/authSlice';
+import { useAppDispatch } from '@store/app/hooks';
+import { login } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import { useEffect } from 'react';
-import getEXPOToken from '@lib/utils/get/getEXPOToken';
-import { axiosPublic } from '@apis/axios';
+import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 
 function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();

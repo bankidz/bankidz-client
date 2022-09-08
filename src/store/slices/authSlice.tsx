@@ -1,5 +1,6 @@
 import { axiosPublic } from '@apis/axios';
 import { TLevel } from '@lib/types/TLevel';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -25,12 +26,13 @@ interface IAuthState {
 // 아들(한규진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0
 // 딸(주어진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0
 
+const temp = getLocalStorage('auth');
 const initialState: IAuthState = {
   auth: {
-    accessToken: '',
-    isKid: null,
+    accessToken: temp?.accessToken,
+    isKid: temp?.isKid,
     level: null,
-    provider: '',
+    provider: temp?.provider,
     birthday: '',
     username: '',
     isFemale: null,
@@ -93,6 +95,9 @@ export const authSlice = createSlice({
     setBirthday: (state, action: PayloadAction<string>) => {
       state.auth.birthday = action.payload;
     },
+    setLevel: (state, action: PayloadAction<TLevel>) => {
+      state.auth.level = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -115,7 +120,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, resetCredentials, setBirthday } =
+export const { setCredentials, resetCredentials, setBirthday, setLevel } =
   authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.auth;

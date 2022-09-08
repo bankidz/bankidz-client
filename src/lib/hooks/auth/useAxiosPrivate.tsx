@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '@store/app/hooks';
-import useRefreshAccessToken from '@lib/hooks/auth/useRefreshAccessToken';
 import { selectAccessToken } from '@store/slices/authSlice';
 import { axiosPrivateInstance } from '@apis/axios';
+import useRefreshAccessToken from '@lib/hooks/auth/useRefreshAccessToken';
 
 function useAxiosPrivate() {
   const refreshAccessToken = useRefreshAccessToken();
@@ -27,7 +27,6 @@ function useAxiosPrivate() {
         const prevRequest = error?.config;
         if (error?.response?.status === 401 && !prevRequest?.sent) {
           // aT expired (401) -> refresh aT -> request prevRequest
-          console.log('aT expired (401) -> refresh aT -> request prevRequest');
           prevRequest.sent = true;
           const newAccessToken = await refreshAccessToken();
           prevRequest.headers['X-AUTH-TOKEN'] = `${newAccessToken}`;

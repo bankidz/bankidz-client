@@ -1,21 +1,29 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
-import { setCredentials } from '@store/slices/authSlice';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import { setLevel } from '@store/slices/authSlice';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 
 function PersistLogin() {
-  const auth = getLocalStorage('auth');
   const dispatch = useAppDispatch();
-  if (auth) {
-    dispatch(
-      setCredentials({
-        accessToken: auth.accessToken,
-        isKid: auth.isKid,
-        level: auth.level,
-        provider: auth.provider,
-      }),
-    );
-  }
+  const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function getServerSideLevel() {
+      try {
+        const response = await axiosPrivate.get('/user');
+        const { isKid } = response.data.data.user;
+        if (isKid) {
+          const { level } = response.data.data.kid;
+          dispatch(setLevel(level)); // latest level
+        }
+      } catch (error) {
+        navigate('/auth/login');
+      }
+    }
+    getServerSideLevel();
+  }, []);
 
   return <Outlet />;
 }
