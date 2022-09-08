@@ -1,9 +1,8 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { useAppDispatch } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectAccessToken, setLevel } from '@store/slices/authSlice';
-import useLocalStorage from '@lib/hooks/auth/useLocalStorage';
+import { setLevel } from '@store/slices/authSlice';
 
 function PersistLogin() {
   const [isLoading, setIsLoading] = useState(true);
