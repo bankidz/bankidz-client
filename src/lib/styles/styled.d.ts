@@ -78,6 +78,8 @@ declare module 'styled-components' {
         T_12_EB: string;
         S_12_M: string;
         S_16_B: string;
+        Alarm_T_14_R: string;
+        Alarm_T_12_R: string;
       };
       popup: {
         T_24_EB: string;

@@ -1,13 +1,25 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import styled from 'styled-components';
+import useGetNotifications from '@lib/hooks/queries/useGetNotifications';
+import AlertList from '@components/home/AlertList';
 const Alert = () => {
+  const { data, Observation } = useGetNotifications();
   return (
     <ForegroundTemplate label="알림 내역">
-      <Content>
+      <>
+        {/* <Content>
         <Banki />
         <p>등록된 알림이 없어요</p>
-      </Content>
+      </Content> */}
+        {data?.pages.map((alertList) => (
+          <AlertList
+            alertList={alertList.notificationList}
+            key={alertList.lastId}
+          />
+        ))}
+        <Observation />
+      </>
     </ForegroundTemplate>
   );
 };
