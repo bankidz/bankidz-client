@@ -9,9 +9,9 @@ import NoticeView from './NoticeView';
 import Privacy from './Privacy';
 import Manage from './Manage';
 import Terms from './Tems';
-import WithdrawCallbackPage from './WithdrawCallbackPage';
-import WithdrawPage from './WithdrawPage';
-import WithdrawReasonPage from './WithdrawReasonPage';
+import WithdrawCallbackPage from './Withdraw/WithdrawCallbackPage';
+import WithdrawPage from './Withdraw/WithdrawPage';
+import WithdrawReasonPage from './Withdraw/WithdrawReasonPage';
 
 const ManageRouter = () => {
   return (
