@@ -44,14 +44,15 @@ const initialState: IAuthState = {
 // const initialState: IAuthState = {
 //   auth: {
 //     accessToken:
-//       'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0',
-//     isKid: true,
+//       'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU',
+//     isKid: false,
 //     provider: 'kakao',
 //     level: null,
 //     birthday: '',
 //     username: '',
 //     isFemale: null,
 //     phone: null,
+//     withdrawReason: '',
 //   },
 // };
 
