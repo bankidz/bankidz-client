@@ -37,7 +37,7 @@ interface ReceiptModalProps
   onSubmit: any;
   onExtraSubmit?: any;
   isMom: boolean;
-  shouldCloseOnOverlayClick: boolean;
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 /**
