@@ -1,4 +1,5 @@
 import GoBackHeader from '@components/common/buttons/GoBackHeader';
+import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/forms/InputForm';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
@@ -24,8 +25,7 @@ function Reject() {
     checkValidateComment('comment', comment);
   }, [comment]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitFeedBack = async () => {
     if (comment.length <= 15) {
       try {
         await dispatch(
@@ -40,6 +40,11 @@ function Reject() {
       }
       openFeedBackCompletedSheet();
     }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    submitFeedBack();
   };
 
   // '피드백이 전송되었어요' 바텀시트 열기
@@ -80,6 +85,12 @@ function Reject() {
           <p>{validateComment.message}</p>
         </InputSection>
       </MarginTemplate>
+      <SheetButton
+        label="피드백 보내기"
+        outerSheet={true}
+        onClickNext={submitFeedBack}
+        disabledNext={comment.length > 15 || comment.length < 1}
+      />
     </Wrapper>
   );
 }

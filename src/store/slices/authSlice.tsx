@@ -21,11 +21,18 @@ interface IAuthState {
   auth: IAuth;
 }
 
+// 한규진 카카오 (아들) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzMyMjM4LCJzdWIiOiI0IiwiZXhwIjoxNjc4Mjg0MjM4LCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.EN5n-n8RQv825ummHGIVyoZEnjfyd9N4BA5W8tekuVc"
+// 한규진 애플 (아빠) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzMyMzM5LCJzdWIiOiIxNiIsImV4cCI6MTY3ODI4NDMzOSwiaWQiOjE2LCJyb2xlcyI6IlVTRVIifQ.Xq1D3K03-_OmhdJRDtMPA8okaYkBO2QAka1LJ8vVAGw"
+// 김민준 카카오 (엄마) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs"
 const initialState: IAuthState = {
   auth: {
     accessToken: getLocalStorage('accessToken'),
+    //accessToken:
+    // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs',
     isKid: getLocalStorage('isKid'),
+    //isKid: false,
     provider: getLocalStorage('provider'),
+    //provider: 'kakao',
     level: null,
     birthday: '',
     username: '',
@@ -38,7 +45,7 @@ const initialState: IAuthState = {
 // https://api.bankidz.com, https://bankids.click Role 통일
 // 아빠(신성우): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8
 // 엄마(김민준): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU
-// 아들(한규진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0
+// 아들(한규진): "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzMxMzc0LCJzdWIiOiI0IiwiZXhwIjoxNjc4MjgzMzc0LCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.ZjHYuaGNts3SLQn3IbFOa9Xp5IxqkUC5yebbs0aMnYM"
 // 딸(주어진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0
 
 // const initialState: IAuthState = {
