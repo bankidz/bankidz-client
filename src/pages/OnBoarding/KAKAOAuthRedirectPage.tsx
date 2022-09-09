@@ -40,13 +40,14 @@ function KAKAOAuthRedirectPage() {
     async function registerEXPOToken() {
       alert(`EXPOToken의 변화를 감지했습니다. 토큰값은 ${EXPOToken} 입니다.`);
       try {
-        const response = await axiosPrivate.post('/user/expo', {
+        const response = await axiosPrivate.patch('/user/expo', {
           expoToken: EXPOToken,
         });
         console.log(response);
         alert(`/user/expo response: ${JSON.stringify(response)}`);
         // navigate('/');
       } catch (error: any) {
+        alert(`error: ${JSON.stringify(error)}`);
         console.error(error);
       }
     }
