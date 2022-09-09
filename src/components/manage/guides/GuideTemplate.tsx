@@ -39,7 +39,7 @@ const GuideTemplate = ({ page, isKid }: GuideTemplateProps) => {
   };
 
   const content = () => {
-    if (isKid && step) {
+    if (step) {
       return <Step step={step} isKid={isKid} />;
     } else if (isKid && !step) {
       return <KidMain />;
