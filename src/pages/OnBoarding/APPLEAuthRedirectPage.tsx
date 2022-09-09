@@ -6,31 +6,28 @@ import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function APPLEAuthRedirectPage() {
+  // @ts-expect-error
+  const params = new URL(document.location).searchParams;
+  const accessToken = params.get('accessToken');
+  const isKid = JSON.parse(params.get('isKid')!);
+  const level = JSON.parse(params.get('level')!);
+  const provider = params.get('provider');
+  const canSetCredentials = accessToken && isKid && level && provider;
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  console.log('accessToken: ', accessToken);
+  console.log('isKid: ', isKid);
+  console.log('level: ', level);
+  console.log('isKid === null', isKid === null);
+  console.log('level === null', level === null);
+  console.log('provider: ', provider);
+
   useEffect(() => {
-    // @ts-expect-error
-    const params = new URL(document.location).searchParams;
-    const accessToken = params.get('aT');
-    const isKid =
-      params.get('isKid') && stringToBooleanOrNull(params.get('isKid')!);
-    const level =
-      params.get('level') && stringToBooleanOrNull(params.get('level')!);
-    const provider = params.get('provider');
-
-    console.log('accessToken: ', accessToken);
-    console.log('isKid: ', isKid);
-    console.log('level: ', level);
-    console.log('provider: ', provider);
-
-    const canSetCredentials = accessToken && isKid && level && provider;
-    canSetCredentials &&
-      dispatch(setCredentials({ accessToken, isKid, level, provider }));
-
     async function proceedLogin() {
       try {
-        // await registerEXPOToken();
+        canSetCredentials &&
+          dispatch(setCredentials({ accessToken, isKid, level, provider }));
         // navigate('/');
       } catch (error: any) {
         console.error(error);

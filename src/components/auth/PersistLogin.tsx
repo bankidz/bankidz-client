@@ -3,13 +3,10 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { selectAccessToken, setLevel } from '@store/slices/authSlice';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function PersistLogin() {
   const accessToken = useAppSelector(selectAccessToken);
-  // const accessToken = getLocalStorage('accessToken');
-  console.log('aT in PersistLogin: ', accessToken);
-
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
@@ -38,7 +35,7 @@ function PersistLogin() {
   }, []);
 
   if (accessToken !== null && isLoading) {
-    return <p>자동로그인 처리중입니다...</p>;
+    return <CustomSyncLoader />;
   } else {
     return <Outlet />;
   }
