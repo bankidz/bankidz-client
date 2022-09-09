@@ -43,7 +43,6 @@ function KAKAOAuthRedirectPage() {
           expoToken: EXPOToken,
         });
         alert(`/user/expo response: ${JSON.stringify(response)}`);
-        // navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
       }

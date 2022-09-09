@@ -34,10 +34,6 @@ function APPLEAuthRedirectPage() {
       setLocalStorage('accessToken', accessToken);
       setLocalStorage('isKid', isKid);
       setLocalStorage('provider', provider);
-
-      setTimeout(() => {
-        navigate('/');
-      }, 5000); // webView 환경 아닌 경우 EXPO Token 등록 생략
       loadEXPOToken(setEXPOToken);
       navigate('/');
     }
@@ -55,7 +51,6 @@ function APPLEAuthRedirectPage() {
           expoToken: EXPOToken,
         });
         alert(`/user/expo response: ${JSON.stringify(response)}`);
-        navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
       }
