@@ -14,20 +14,20 @@ function APPLEAuthRedirectPage() {
   const isKid = JSON.parse(params.get('isKid')!);
   const level = JSON.parse(params.get('level')!);
   const provider = params.get('provider');
-  const canSetCredentials = accessToken && isKid && level && provider;
   const [EXPOToken, setEXPOToken] = useState<string>('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     async function proceedLogin() {
-      if (canSetCredentials) {
-        dispatch(setCredentials({ accessToken, isKid, level, provider }));
-        setLocalStorage('accessToken', accessToken);
-        setLocalStorage('isKid', isKid);
-        setLocalStorage('provider', provider);
-      }
+      dispatch(setCredentials({ accessToken, isKid, level, provider }));
+      setLocalStorage('accessToken', accessToken);
+      setLocalStorage('isKid', isKid);
+      setLocalStorage('provider', provider);
       loadEXPOToken(setEXPOToken);
+      setTimeout(() => {
+        navigate('/');
+      }, 10000); // dismiss register EXPOToken
     }
     proceedLogin();
   }, []);

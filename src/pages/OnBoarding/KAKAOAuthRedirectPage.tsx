@@ -25,6 +25,9 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('provider', response.data.provider);
         }
         loadEXPOToken(setEXPOToken);
+        setTimeout(() => {
+          navigate('/');
+        }, 10000); // dismiss register EXPOToken
       } catch (error: any) {
         console.error(error);
       }
