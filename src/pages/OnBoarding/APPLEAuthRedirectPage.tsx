@@ -5,7 +5,7 @@ import { setCredentials } from '@store/slices/authSlice';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import loadEXPOToken from '@lib/utils/loadEXPOToken';
+import loadEXPOToken from '@lib/hooks/auth/useRegisterEXPOToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 
 function APPLEAuthRedirectPage() {
@@ -27,7 +27,7 @@ function APPLEAuthRedirectPage() {
       setLocalStorage('accessToken', accessToken);
       setLocalStorage('isKid', isKid);
       setLocalStorage('provider', provider);
-      loadEXPOToken(setEXPOToken);
+      // loadEXPOToken(setEXPOToken);
       navigate('/');
     }
     proceedLogin();
@@ -44,6 +44,7 @@ function APPLEAuthRedirectPage() {
           expoToken: EXPOToken,
         });
         alert(`/user/expo response: ${JSON.stringify(response)}`);
+        navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
       }
