@@ -5,7 +5,11 @@ import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
 import { useAppSelector } from '@store/app/hooks';
-import { resetCredentials, selectProvider } from '@store/slices/authSlice';
+import {
+  resetCredentials,
+  selectProvider,
+  setWithdrawReason,
+} from '@store/slices/authSlice';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -40,9 +44,8 @@ function WithdrawReason() {
       contentProps: {
         type: 'delete',
         onMainActionClick: () => {
-          // logout
           setCloseBottomSheet();
-          removeLocalStorage('accessToken');
+          removeLocalStorage('accessToken'); // logout
           removeLocalStorage('isKid');
           removeLocalStorage('provider');
           dispatch(resetCredentials());
@@ -56,7 +59,7 @@ function WithdrawReason() {
   async function handleWithdrawButtonClick() {
     if (provider === 'kakao') {
       try {
-        const response = axiosPrivate.delete('/user', {
+        const response = await axiosPrivate.delete('/user', {
           data: { message: reason },
         });
         console.log(response);
@@ -65,6 +68,7 @@ function WithdrawReason() {
         console.log(error);
       }
     } else if (provider === 'apple') {
+      dispatch(setWithdrawReason(reason)); // get latest level
       window.location.href = APPLE_DEAUTH_URL;
     }
   }

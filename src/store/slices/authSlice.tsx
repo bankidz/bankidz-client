@@ -14,6 +14,7 @@ interface IAuth {
   username: string;
   isFemale: boolean | null;
   phone: string | null;
+  withdrawReason: string;
 }
 
 interface IAuthState {
@@ -30,6 +31,7 @@ const initialState: IAuthState = {
     username: '',
     isFemale: null,
     phone: null,
+    withdrawReason: '',
   },
 };
 
@@ -110,6 +112,9 @@ export const authSlice = createSlice({
     setLevel: (state, action: PayloadAction<TLevel>) => {
       state.auth.level = action.payload;
     },
+    setWithdrawReason: (state, action: PayloadAction<string>) => {
+      state.auth.withdrawReason = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -132,8 +137,13 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, resetCredentials, setBirthday, setLevel } =
-  authSlice.actions;
+export const {
+  setCredentials,
+  resetCredentials,
+  setBirthday,
+  setLevel,
+  setWithdrawReason,
+} = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
@@ -142,6 +152,8 @@ export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
 export const selectLevel = (state: RootState) => state.auth.auth.level;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 export const selectProvider = (state: RootState) => state.auth.auth.provider;
+export const selectWithdrawReason = (state: RootState) =>
+  state.auth.auth.withdrawReason;
 
 export default authSlice.reducer;
 
