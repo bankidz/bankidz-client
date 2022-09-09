@@ -3,8 +3,7 @@ import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import styled from 'styled-components';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import useLogout from '@lib/hooks/auth/useLogout';
-import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
+import useLogoutWithServer from '@lib/hooks/auth/useLogoutWithServer';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { useEffect } from 'react';
 
@@ -25,7 +24,7 @@ function Manage() {
   const navigate = useNavigate();
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
-  const logout = useLogout();
+  const logoutWithServer = useLogoutWithServer();
   useEffect(() => {
     const KAKAO_JS_KEY = `${process.env.REACT_APP_KAKAO_JS_KEY}`;
     if (!window.Kakao.isInitialized()) {
@@ -58,7 +57,7 @@ function Manage() {
       contentProps: {
         type: 'logout',
         onMainActionClick: async () => {
-          await logout();
+          await logoutWithServer();
           setCloseBottomSheet();
           console.log(
             'aT in onMainActionClick: ',

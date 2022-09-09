@@ -7,16 +7,11 @@ function useLogout() {
   const dispatch = useDispatch();
   const axiosPrivate = useAxiosPrivate();
 
-  async function logout() {
-    try {
-      await axiosPrivate.patch('/user/logout');
-      dispatch(resetCredentials());
-      removeLocalStorage('accessToken');
-      removeLocalStorage('isKid');
-      removeLocalStorage('provider');
-    } catch (error) {
-      console.error(error);
-    }
+  function logout() {
+    dispatch(resetCredentials());
+    removeLocalStorage('accessToken');
+    removeLocalStorage('isKid');
+    removeLocalStorage('provider');
   }
   return logout;
 }
