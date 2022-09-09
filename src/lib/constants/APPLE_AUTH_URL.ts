@@ -8,8 +8,8 @@ const config = {
   response_type: 'code id_token',
   scope: 'name', // To tell apple we want the user name and emails fields in the response it sends us.
   response_mode: 'form_post',
-  m: 11,
-  v: '1.5.4',
+  // m: 11,
+  // v: '1.5.4',
   nonce: `${process.env.REACT_APP_APPLE_NONCE}`,
 };
 const queryString = Object.entries(config)

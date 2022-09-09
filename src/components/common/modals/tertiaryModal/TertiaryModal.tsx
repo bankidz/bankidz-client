@@ -15,7 +15,7 @@ import { modals } from '../Modals';
 
 interface TertiaryModalProps {
   onSubmit: any;
-  shouldCloseOnOverlayClick: boolean;
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 /**

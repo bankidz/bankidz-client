@@ -31,12 +31,16 @@ import { useEffect } from 'react';
 // 선택한 자녀 데이터 추가 fetch 및 caching
 
 function ParentHomePage() {
+  usePreventGoBack();
   const kidsStatus = useAppSelector(selectKidsStatus);
   const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
   const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
   const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
+
+  const kids = useAppSelector(selectKids);
+  const hasNoFamily = kids.length === 0 && kidsStatus === 'succeeded';
 
   useEffect(() => {
     async function hydrate() {
@@ -48,6 +52,7 @@ function ParentHomePage() {
         }
         // GET: 첫번째 자녀의 Summary 데이터 조회
         parentSummariesStatus === 'idle' &&
+          !hasNoFamily &&
           (await dispatch(
             fetchParentSummaries({
               axiosPrivate,
@@ -56,6 +61,7 @@ function ParentHomePage() {
           ).unwrap());
         // GET: 첫번째 자녀의 제안받은 돈길 조회
         proposedDongilsStatus === 'idle' &&
+          !hasNoFamily &&
           (await dispatch(
             fetchProposedDongils({
               axiosPrivate,
@@ -64,6 +70,7 @@ function ParentHomePage() {
           ).unwrap());
         // GET: 첫번째 자녀의 금주의 돈길 조희
         thisWeekSDongilsStatus === 'idle' &&
+          !hasNoFamily &&
           (await dispatch(
             fetchThisWeekSDongils({
               axiosPrivate,
@@ -76,11 +83,6 @@ function ParentHomePage() {
     }
     hydrate();
   }, []);
-
-  const kids = useAppSelector(selectKids);
-  const hasNoFamily = kids.length === 0 && kidsStatus === 'succeeded';
-
-  usePreventGoBack();
 
   return (
     <>

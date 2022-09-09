@@ -40,7 +40,6 @@ function RegisterRole() {
   const canRegister = birthday && registerStatus === 'idle';
 
   async function handleSubmit(isKid: boolean, isFemale: boolean) {
-    console.log(canRegister);
     if (canRegister) {
       try {
         setRegisterStatus('pending');
@@ -52,14 +51,7 @@ function RegisterRole() {
             isFemale,
           }),
         ).unwrap();
-
-        const temp = getLocalStorage('auth');
-        setLocalStorage('auth', {
-          accessToken: temp?.accessToken, // overwrite
-          isKid,
-          provider: temp?.provider, // overwrite
-        });
-
+        setLocalStorage('isKid', isKid);
         setCloseBottomSheet();
         handleModalOpen(isKid, isFemale);
       } catch (error: any) {

@@ -19,7 +19,7 @@ interface QuaternaryModalProps {
   title: string;
   weeks: number;
   successWeeks: number;
-  shouldCloseOnOverlayClick: boolean;
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 /**

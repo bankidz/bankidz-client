@@ -1,1 +1,1 @@
-export type TLocalStorageKey = 'auth';
+export type TLocalStorageKey = 'accessToken' | 'isKid' | 'provider';

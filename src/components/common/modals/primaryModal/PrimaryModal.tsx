@@ -19,7 +19,7 @@ interface PrimaryModalProps {
   isFemale: boolean;
   headerText: string;
   bodyText: string;
-  shouldCloseOnOverlayClick: boolean;
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 /**
