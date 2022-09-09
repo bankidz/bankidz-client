@@ -13,13 +13,20 @@ function KAKAOAuthRedirectPage() {
   const code = params.get('code');
   const dispatch = useAppDispatch();
   const [EXPOToken, setEXPOToken] = useState<string>('');
+  const navigate = useNavigate();
   useEffect(() => {
     async function proceedLogin() {
       try {
         if (code) {
           const response = await dispatch(login({ code })).unwrap();
-          setLocalStorage('auth', response.data);
+          setLocalStorage('accessToken', response.data.accessToken);
+          setLocalStorage('isKid', response.data.isKid);
+          setLocalStorage('provider', response.data.provider);
         }
+        // setTimeout(() => {
+        //   navigate('/');
+        // }, 5000); // webView 환경 아닌 경우 EXPO Token 등록 생략
+
         loadEXPOToken(setEXPOToken);
       } catch (error: any) {
         console.error(error);
@@ -29,7 +36,6 @@ function KAKAOAuthRedirectPage() {
   }, []);
 
   const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
   useEffect(() => {
     async function registerEXPOToken() {
       alert(`EXPOToken의 변화를 감지했습니다. 토큰값은 ${EXPOToken} 입니다.`);
@@ -38,6 +44,7 @@ function KAKAOAuthRedirectPage() {
           expoToken: EXPOToken,
         });
         console.log(response);
+        alert(`/user/expo response: ${JSON.stringify(response)}`);
         // navigate('/');
       } catch (error: any) {
         console.error(error);

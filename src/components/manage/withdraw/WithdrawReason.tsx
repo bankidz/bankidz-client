@@ -30,7 +30,6 @@ function WithdrawReason() {
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const logout = useLogout();
-  // TODO: 탈퇴되었습니다. 바텀시트로 교체 부탁드립니다.
   function openWithdrawCompletedBottomSheet() {
     setOpenBottomSheet({
       sheetContent: 'Completed',
@@ -39,9 +38,9 @@ function WithdrawReason() {
       },
       contentProps: {
         type: 'delete',
-        onMainActionClick: () => {
+        onMainActionClick: async () => {
+          await logout();
           setCloseBottomSheet();
-          logout();
         },
       },
     });

@@ -5,6 +5,7 @@ import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLogout from '@lib/hooks/auth/useLogout';
 import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 
 const contents = [
   { title: '공지사항', link: 'notices' },
@@ -30,10 +31,13 @@ function Manage() {
       sheetProps: { open: true },
       contentProps: {
         type: 'logout',
-        onMainActionClick: () => {
+        onMainActionClick: async () => {
+          await logout();
           setCloseBottomSheet();
-          logout();
-          removeLocalStorage('auth');
+          console.log(
+            'aT in onMainActionClick: ',
+            getLocalStorage('accessToken'),
+          );
         },
       },
     });
