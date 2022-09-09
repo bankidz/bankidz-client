@@ -38,6 +38,18 @@ const Wrapper = styled.div`
   .true-4 {
     margin-top: 34px;
   }
+  .false-1 {
+    margin-top: 30px;
+  }
+  .false-2 {
+    margin-top: 56px;
+  }
+  .false-3 {
+    margin-top: 30px;
+  }
+  .false-4 {
+    margin-top: 30px;
+  }
 `;
 
 const Title = styled.div`
