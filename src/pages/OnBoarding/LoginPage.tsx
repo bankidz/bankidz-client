@@ -13,6 +13,7 @@ function LoginPage() {
           <Logo />
           <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
+        <span>09090619</span>
         <ButtonWithMarginBottom
           label="카카오로 시작하기"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
