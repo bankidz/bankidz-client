@@ -39,10 +39,7 @@ function APPLEAuthRedirectPage() {
         navigate('/');
       }, 5000); // webView 환경 아닌 경우 EXPO Token 등록 생략
       loadEXPOToken(setEXPOToken);
-      // navigate('/');
-      // setTimeout(() => {
-      //   navigate('/');
-      // }, 5000); // webView 환경 아닌 경우 EXPO Token 등록 생략
+      navigate('/');
     }
     proceedLogin();
   }, []);
