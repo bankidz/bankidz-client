@@ -16,6 +16,7 @@ function PersistLogin() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const isRegisteredUser = accessToken && isKid;
 
   // @ts-expect-error
   useEffect(() => {
@@ -35,11 +36,11 @@ function PersistLogin() {
       }
     }
     console.log('aT in fetchLevel: ', accessToken);
-    accessToken && fetchLevel();
+    isRegisteredUser && fetchLevel();
     return () => (isMounted = false);
   }, []);
 
-  if (accessToken !== null && isKid !== null && isLoading) {
+  if (isRegisteredUser && isLoading) {
     return <CustomSyncLoader />;
   } else {
     return <Outlet />;
