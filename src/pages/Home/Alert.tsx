@@ -8,16 +8,22 @@ const Alert = () => {
   return (
     <ForegroundTemplate label="알림 내역">
       <>
-        {/* <Content>
-        <Banki />
-        <p>등록된 알림이 없어요</p>
-      </Content> */}
-        {data?.pages.map((alertList) => (
-          <AlertList
-            alertList={alertList.notificationList}
-            key={alertList.lastId}
-          />
-        ))}
+        {data?.pages[0].notificationList.length === 0 ? (
+          <Content>
+            <Banki />
+            <p>등록된 알림이 없어요</p>
+          </Content>
+        ) : (
+          <>
+            {data?.pages.map((alertList) => (
+              <AlertList
+                alertList={alertList.notificationList}
+                key={alertList.lastId}
+              />
+            ))}
+          </>
+        )}
+
         <Observation />
       </>
     </ForegroundTemplate>

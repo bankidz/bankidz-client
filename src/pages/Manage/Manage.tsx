@@ -6,6 +6,7 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLogout from '@lib/hooks/auth/useLogout';
 import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import { useEffect } from 'react';
 
 const contents = [
   { title: '공지사항', link: 'notices' },
@@ -15,7 +16,7 @@ const contents = [
   { title: '개인정보 처리방침', link: 'privacy' },
   { title: '서비스 약관', link: 'terms' },
   { title: '자주 묻는 질문', link: 'faq' },
-  { title: '문의하기', link: 'inquiry' },
+  { title: '문의하기', link: '' },
   { title: '로그아웃', link: '' },
   { title: '탈퇴하기', link: 'withdraw' },
 ];
@@ -25,7 +26,32 @@ function Manage() {
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const logout = useLogout();
-  function openLogoutCheckBottomSheet() {
+  useEffect(() => {
+    const KAKAO_JS_KEY = `${process.env.REACT_APP_KAKAO_JS_KEY}`;
+    if (!window.Kakao.isInitialized()) {
+      // JavaScript key를 인자로 주고 SDK 초기화
+      window.Kakao.init(KAKAO_JS_KEY);
+      // SDK 초기화 여부를 확인하자.
+    }
+  }, []);
+
+  const onManageLinkClick = (content: { title: string; link: string }) => {
+    if (content.title === '로그아웃') {
+      openLogoutCheckBottomSheet();
+    } else if (content.title === '문의하기') {
+      onChatButtonClick();
+    } else navigate(content.link);
+  };
+
+  //카카오채널 상담 열기
+  const onChatButtonClick = () => {
+    window.Kakao.Channel.chat({
+      channelPublicId: '_LjxjVxj',
+    });
+  };
+
+  // 로그아웃 하시겠습니까 바텀시트
+  const openLogoutCheckBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Check',
       sheetProps: { open: true },
@@ -41,20 +67,13 @@ function Manage() {
         },
       },
     });
-  }
+  };
 
   return (
     <ForegroundTemplate label={'설정'} to="/mypage">
       <>
         {contents.map((content) => (
-          <Item
-            key={content.title}
-            onClick={() => {
-              content.title === '로그아웃'
-                ? openLogoutCheckBottomSheet()
-                : navigate(content.link);
-            }}
-          >
+          <Item key={content.title} onClick={() => onManageLinkClick(content)}>
             <p>{content.title}</p>
             <Arrow />
           </Item>
