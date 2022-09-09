@@ -43,12 +43,10 @@ function KAKAOAuthRedirectPage() {
         const response = await axiosPrivate.patch('/user/expo', {
           expoToken: EXPOToken,
         });
-        console.log(response);
         alert(`/user/expo response: ${JSON.stringify(response)}`);
-        // navigate('/');
+        navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
-        console.error(error);
       }
     }
     EXPOToken !== '' && registerEXPOToken();

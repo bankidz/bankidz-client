@@ -8,7 +8,8 @@ function loadEXPOToken(setEXPOToken: Dispatch<SetStateAction<string>>) {
   const listener = (event: any) => {
     alert('listener called'); // 4 // 7
     // alert(`0 EXPOToken: ${EXPOToken}`); // 5 not webview // 8 token
-    setEXPOToken(JSON.stringify(event.data));
+    // setEXPOToken(JSON.stringify(event.data));
+    setEXPOToken(event.data);
     // alert(`1 EXPOToken: ${EXPOToken}`); // 6 token // 9 token
   };
 
