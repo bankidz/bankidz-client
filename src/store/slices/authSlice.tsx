@@ -35,15 +35,15 @@ interface IAuthState {
 
 // https://api.bankidz.com, https://bankids.click Role 통일
 // 아빠(신성우): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8
-// 엄마(김민준): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU
+// 엄마(김민준): "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs"
 // 아들(한규진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0
 // 딸(주어진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0
 
 const initialState: IAuthState = {
   auth: {
     accessToken:
-      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0',
-    isKid: true,
+      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs',
+    isKid: false,
     provider: 'kakao',
     level: null,
     birthday: '',
