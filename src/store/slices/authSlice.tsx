@@ -26,13 +26,13 @@ interface IAuthState {
 // 김민준 카카오 (엄마) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs"
 const initialState: IAuthState = {
   auth: {
-    //accessToken: getLocalStorage('accessToken'),
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs',
-    //isKid: getLocalStorage('isKid'),
-    isKid: false,
-    //provider: getLocalStorage('provider'),
-    provider: 'kakao',
+    accessToken: getLocalStorage('accessToken'),
+    //accessToken:
+    // 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs',
+    isKid: getLocalStorage('isKid'),
+    //isKid: false,
+    provider: getLocalStorage('provider'),
+    //provider: 'kakao',
     level: null,
     birthday: '',
     username: '',
