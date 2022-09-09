@@ -27,7 +27,7 @@ function KAKAOAuthRedirectPage() {
         loadEXPOToken(setEXPOToken);
         setTimeout(() => {
           navigate('/');
-        }, 10000); // dismiss register EXPOToken
+        }, 5000); // dismiss register EXPOToken
       } catch (error: any) {
         console.error(error);
       }
@@ -38,14 +38,14 @@ function KAKAOAuthRedirectPage() {
   const axiosPrivate = useAxiosPrivate();
   useEffect(() => {
     async function registerEXPOToken() {
-      alert(
-        `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
-      );
+      // alert(
+      //   `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
+      // );
       try {
         const response = await axiosPrivate.patch('/user/expo', {
           expoToken: EXPOToken,
         });
-        alert(`/user/expo response: ${JSON.stringify(response)}`);
+        // alert(`/user/expo response: ${JSON.stringify(response)}`);
         navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
