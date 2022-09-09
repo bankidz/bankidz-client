@@ -4,9 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import loadEXPOToken from '@lib/hooks/auth/useRegisterEXPOToken';
+import loadEXPOToken from '@lib/utils/loadEXPOToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import useRegisterEXPOToken from '@lib/hooks/auth/useRegisterEXPOToken';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
@@ -15,7 +14,6 @@ function KAKAOAuthRedirectPage() {
   const [EXPOToken, setEXPOToken] = useState<string>('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const registerEXPOToken = useRegisterEXPOToken();
 
   useEffect(() => {
     async function proceedLogin() {
@@ -25,10 +23,9 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('accessToken', response.data.accessToken);
           setLocalStorage('isKid', response.data.isKid);
           setLocalStorage('provider', response.data.provider);
-          registerEXPOToken();
-          navigate('/');
         }
-        // loadEXPOToken(setEXPOToken);
+        loadEXPOToken(setEXPOToken);
+        navigate('/');
       } catch (error: any) {
         console.error(error);
       }
@@ -36,24 +33,23 @@ function KAKAOAuthRedirectPage() {
     code && proceedLogin();
   }, []);
 
-  // const axiosPrivate = useAxiosPrivate();
-  // useEffect(() => {
-  //   async function registerEXPOToken() {
-  //     alert(
-  //       `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
-  //     );
-  //     try {
-  //       const response = await axiosPrivate.patch('/user/expo', {
-  //         expoToken: EXPOToken,
-  //       });
-  //       alert(`/user/expo response: ${JSON.stringify(response)}`);
-  //       navigate('/');
-  //     } catch (error: any) {
-  //       alert(`error: ${JSON.stringify(error)}`);
-  //     }
-  //   }
-  //   EXPOToken !== '' && registerEXPOToken();
-  // }, [EXPOToken]);
+  const axiosPrivate = useAxiosPrivate();
+  useEffect(() => {
+    async function registerEXPOToken() {
+      alert(
+        `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
+      );
+      try {
+        const response = await axiosPrivate.patch('/user/expo', {
+          expoToken: EXPOToken,
+        });
+        alert(`/user/expo response: ${JSON.stringify(response)}`);
+      } catch (error: any) {
+        alert(`error: ${JSON.stringify(error)}`);
+      }
+    }
+    EXPOToken !== '' && registerEXPOToken();
+  }, [EXPOToken]);
 
   return <CustomSyncLoader />;
 }
