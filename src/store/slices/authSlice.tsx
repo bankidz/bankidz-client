@@ -14,44 +14,47 @@ interface IAuth {
   username: string;
   isFemale: boolean | null;
   phone: string | null;
+  withdrawReason: string;
 }
 
 interface IAuthState {
   auth: IAuth;
 }
 
-// const initialState: IAuthState = {
-//   auth: {
-//     accessToken: getLocalStorage('accessToken'),
-//     isKid: getLocalStorage('isKid'),
-//     provider: getLocalStorage('provider'),
-//     level: null,
-//     birthday: '',
-//     username: '',
-//     isFemale: null,
-//     phone: null,
-//   },
-// };
-
-// https://api.bankidz.com, https://bankids.click Role 통일
-// 아빠(신성우): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8
-// 엄마(김민준): "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs"
-// 아들(한규진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0
-// 딸(주어진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0
-
 const initialState: IAuthState = {
   auth: {
-    accessToken:
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs',
-    isKid: false,
-    provider: 'kakao',
+    accessToken: getLocalStorage('accessToken'),
+    isKid: getLocalStorage('isKid'),
+    provider: getLocalStorage('provider'),
     level: null,
     birthday: '',
     username: '',
     isFemale: null,
     phone: null,
+    withdrawReason: '',
   },
 };
+
+// https://api.bankidz.com, https://bankids.click Role 통일
+// 아빠(신성우): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8
+// 엄마(김민준): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU
+// 아들(한규진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0
+// 딸(주어진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0
+
+// const initialState: IAuthState = {
+//   auth: {
+//     accessToken:
+//       'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU',
+//     isKid: false,
+//     provider: 'kakao',
+//     level: null,
+//     birthday: '',
+//     username: '',
+//     isFemale: null,
+//     phone: null,
+//     withdrawReason: '',
+//   },
+// };
 
 // POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
 export const login = createAsyncThunk(
@@ -110,6 +113,9 @@ export const authSlice = createSlice({
     setLevel: (state, action: PayloadAction<TLevel>) => {
       state.auth.level = action.payload;
     },
+    setWithdrawReason: (state, action: PayloadAction<string>) => {
+      state.auth.withdrawReason = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -132,8 +138,13 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setCredentials, resetCredentials, setBirthday, setLevel } =
-  authSlice.actions;
+export const {
+  setCredentials,
+  resetCredentials,
+  setBirthday,
+  setLevel,
+  setWithdrawReason,
+} = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth.auth;
 export const selectAccessToken = (state: RootState) =>
@@ -142,6 +153,8 @@ export const selectIsKid = (state: RootState) => state.auth.auth.isKid;
 export const selectLevel = (state: RootState) => state.auth.auth.level;
 export const selectBirthday = (state: RootState) => state.auth.auth.birthday;
 export const selectProvider = (state: RootState) => state.auth.auth.provider;
+export const selectWithdrawReason = (state: RootState) =>
+  state.auth.auth.withdrawReason;
 
 export default authSlice.reducer;
 

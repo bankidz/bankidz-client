@@ -2,15 +2,21 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectAccessToken, setLevel } from '@store/slices/authSlice';
+import {
+  selectAccessToken,
+  selectIsKid,
+  setLevel,
+} from '@store/slices/authSlice';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function PersistLogin() {
   const accessToken = useAppSelector(selectAccessToken);
+  const isKid = useAppSelector(selectIsKid);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const isRegisteredUser = accessToken && isKid;
 
   // @ts-expect-error
   useEffect(() => {
@@ -30,11 +36,11 @@ function PersistLogin() {
       }
     }
     console.log('aT in fetchLevel: ', accessToken);
-    accessToken && fetchLevel();
+    isRegisteredUser && fetchLevel();
     return () => (isMounted = false);
   }, []);
 
-  if (accessToken !== null && isLoading) {
+  if (isRegisteredUser && isLoading) {
     return <CustomSyncLoader />;
   } else {
     return <Outlet />;
