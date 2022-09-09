@@ -20,21 +20,18 @@ interface IAuthState {
   auth: IAuth;
 }
 
-const initialState: IAuthState = {
-  auth: {
-    //accessToken: getLocalStorage('accessToken'),
-    //isKid: getLocalStorage('isKid'),
-    accessToken:
-      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8',
-    isKid: false,
-    provider: getLocalStorage('provider'),
-    level: null,
-    birthday: '',
-    username: '',
-    isFemale: null,
-    phone: null,
-  },
-};
+// const initialState: IAuthState = {
+//   auth: {
+//     accessToken: getLocalStorage('accessToken'),
+//     isKid: getLocalStorage('isKid'),
+//     provider: getLocalStorage('provider'),
+//     level: null,
+//     birthday: '',
+//     username: '',
+//     isFemale: null,
+//     phone: null,
+//   },
+// };
 
 // https://api.bankidz.com, https://bankids.click Role 통일
 // 아빠(신성우): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8
@@ -42,19 +39,19 @@ const initialState: IAuthState = {
 // 아들(한규진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0
 // 딸(주어진): eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0
 
-// const initialState: IAuthState = {
-//   auth: {
-//     accessToken:
-//       'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8',
-//     isKid: false,
-//     level: null,
-//     provider: temp?.provider,
-//     birthday: '',
-//     username: '',
-//     isFemale: null,
-//     phone: null,
-//   },
-// };
+const initialState: IAuthState = {
+  auth: {
+    accessToken:
+      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0',
+    isKid: true,
+    provider: 'kakao',
+    level: null,
+    birthday: '',
+    username: '',
+    isFemale: null,
+    phone: null,
+  },
+};
 
 // POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
 export const login = createAsyncThunk(

@@ -3,9 +3,12 @@ import Progress from '@components/home/create/Progress';
 import styled from 'styled-components';
 import { ReactComponent as Exit } from '@assets/icons/exit.svg';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import KidMain from './KidMain';
+import Step from './Step';
 interface GuideTemplateProps {
   page: 'manage' | 'onboarding';
-  step: 0 | 1 | 2 | 3 | 4;
+  isKid: boolean;
 }
 
 const label = [
@@ -16,7 +19,8 @@ const label = [
   '뱅키즈 시작하기',
 ];
 
-const GuideTemplate = ({ page, step }: GuideTemplateProps) => {
+const GuideTemplate = ({ page, isKid }: GuideTemplateProps) => {
+  const [step, setStep] = useState<0 | 1 | 2 | 3 | 4>(0);
   const navigate = useNavigate();
   const onExitButtonClick = () => {
     if (page === 'manage') {
@@ -26,14 +30,35 @@ const GuideTemplate = ({ page, step }: GuideTemplateProps) => {
     }
   };
 
+  const onNextButtonClick = () => {
+    if (step === 4) {
+      onExitButtonClick();
+    } else {
+      setStep((step + 1) as 0 | 1 | 2 | 3 | 4);
+    }
+  };
+
+  const content = () => {
+    if (isKid && step) {
+      return <Step step={step} isKid={isKid} />;
+    } else if (isKid && !step) {
+      return <KidMain />;
+    } else {
+      return <></>;
+    }
+  };
+
   return (
     <Wrapper>
       <div onClick={onExitButtonClick} className="exit">
         <Exit />
       </div>
-      {step !== 0 && <Progress step={step} skipSelectParents={true} />}
+      <div className="progress">
+        {step !== 0 && <Progress step={step} skipSelectParents={true} />}
+      </div>
+      {content()}
       <SheetButton
-        onClickNext={() => {}}
+        onClickNext={onNextButtonClick}
         label={label[step]}
         disabledNext={false}
         outerSheet={true}
@@ -53,7 +78,9 @@ const Wrapper = styled.div`
     right: 6px;
     z-index: 3;
   }
-  & > div:nth-child(2) {
-    margin: 0 auto;
+  .progress {
+    & > div {
+      margin: 0 auto;
+    }
   }
 `;

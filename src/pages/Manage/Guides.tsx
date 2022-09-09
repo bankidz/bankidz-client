@@ -7,7 +7,7 @@ const Guides = () => {
   return (
     <>
       <AppBar label="서비스 이용 방법" to="/manage" />
-      <GuideTemplate page={'manage'} step={1} />
+      <GuideTemplate page={'manage'} isKid={isKid} />
     </>
   );
 };
