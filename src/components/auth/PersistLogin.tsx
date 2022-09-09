@@ -2,11 +2,16 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { selectAccessToken, setLevel } from '@store/slices/authSlice';
+import {
+  selectAccessToken,
+  selectIsKid,
+  setLevel,
+} from '@store/slices/authSlice';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 
 function PersistLogin() {
   const accessToken = useAppSelector(selectAccessToken);
+  const isKid = useAppSelector(selectIsKid);
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
@@ -34,7 +39,7 @@ function PersistLogin() {
     return () => (isMounted = false);
   }, []);
 
-  if (accessToken !== null && isLoading) {
+  if (accessToken !== null && isKid !== null && isLoading) {
     return <CustomSyncLoader />;
   } else {
     return <Outlet />;
