@@ -39,13 +39,13 @@ function WithdrawReason() {
       },
       contentProps: {
         type: 'delete',
-        onMainActionClick: async () => {
+        onMainActionClick: () => {
           // logout
-          dispatch(resetCredentials());
+          setCloseBottomSheet();
           removeLocalStorage('accessToken');
           removeLocalStorage('isKid');
           removeLocalStorage('provider');
-          setCloseBottomSheet();
+          dispatch(resetCredentials());
         },
       },
     });
