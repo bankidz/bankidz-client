@@ -11,9 +11,10 @@ function KAKAOAuthRedirectPage() {
   // @ts-expect-error
   const params = new URL(document.location).searchParams;
   const code = params.get('code');
-  const dispatch = useAppDispatch();
   const [EXPOToken, setEXPOToken] = useState<string>('');
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     async function proceedLogin() {
       try {
@@ -36,7 +37,7 @@ function KAKAOAuthRedirectPage() {
   useEffect(() => {
     async function registerEXPOToken() {
       alert(
-        `EXPO Token의 변화를 감지했습니다. 토큰값은 다음과 같습니다. ${EXPOToken}`,
+        `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
       );
       try {
         const response = await axiosPrivate.patch('/user/expo', {

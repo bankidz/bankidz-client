@@ -16,16 +16,9 @@ function APPLEAuthRedirectPage() {
   const level = JSON.parse(params.get('level')!);
   const provider = params.get('provider');
   const canSetCredentials = accessToken && isKid && level && provider;
-  const dispatch = useAppDispatch();
   const [EXPOToken, setEXPOToken] = useState<string>('');
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  console.log('accessToken: ', accessToken);
-  console.log('isKid: ', isKid);
-  console.log('level: ', level);
-  console.log('isKid === null', isKid === null);
-  console.log('level === null', level === null);
-  console.log('provider: ', provider);
 
   useEffect(() => {
     async function proceedLogin() {
@@ -44,7 +37,7 @@ function APPLEAuthRedirectPage() {
   useEffect(() => {
     async function registerEXPOToken() {
       alert(
-        `EXPO Token의 변화를 감지했습니다. 토큰값은 다음과 같습니다. ${EXPOToken}`,
+        `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
       );
       try {
         const response = await axiosPrivate.patch('/user/expo', {
