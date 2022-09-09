@@ -1,9 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
 import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
+import loadEXPOToken from '@lib/utils/loadEXPOToken';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 
 function APPLEAuthRedirectPage() {
   // @ts-expect-error
@@ -14,6 +17,7 @@ function APPLEAuthRedirectPage() {
   const provider = params.get('provider');
   const canSetCredentials = accessToken && isKid && level && provider;
   const dispatch = useAppDispatch();
+  const [EXPOToken, setEXPOToken] = useState<string>('');
   const navigate = useNavigate();
 
   console.log('accessToken: ', accessToken);
@@ -25,16 +29,42 @@ function APPLEAuthRedirectPage() {
 
   useEffect(() => {
     async function proceedLogin() {
-      try {
-        canSetCredentials &&
-          dispatch(setCredentials({ accessToken, isKid, level, provider }));
-        // navigate('/');
-      } catch (error: any) {
-        console.error(error);
-      }
+      canSetCredentials &&
+        dispatch(setCredentials({ accessToken, isKid, level, provider }));
+      setLocalStorage('accessToken', accessToken);
+      setLocalStorage('isKid', isKid);
+      setLocalStorage('provider', provider);
+
+      setTimeout(() => {
+        navigate('/');
+      }, 5000); // webView 환경 아닌 경우 EXPO Token 등록 생략
+      loadEXPOToken(setEXPOToken);
+      // navigate('/');
+      // setTimeout(() => {
+      //   navigate('/');
+      // }, 5000); // webView 환경 아닌 경우 EXPO Token 등록 생략
     }
     proceedLogin();
   }, []);
+
+  const axiosPrivate = useAxiosPrivate();
+  useEffect(() => {
+    async function registerEXPOToken() {
+      alert(
+        `EXPO Token의 변화를 감지했습니다. 토큰값은 다음과 같습니다. ${EXPOToken}`,
+      );
+      try {
+        const response = await axiosPrivate.patch('/user/expo', {
+          expoToken: EXPOToken,
+        });
+        alert(`/user/expo response: ${JSON.stringify(response)}`);
+        navigate('/');
+      } catch (error: any) {
+        alert(`error: ${JSON.stringify(error)}`);
+      }
+    }
+    EXPOToken !== '' && registerEXPOToken();
+  }, [EXPOToken]);
 
   return <CustomSyncLoader />;
 }
