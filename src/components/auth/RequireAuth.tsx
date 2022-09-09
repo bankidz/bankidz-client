@@ -6,12 +6,12 @@ function RequireAuth() {
   const accessToken = useAppSelector(selectAccessToken);
   const isKid = useAppSelector(selectIsKid);
 
-  console.log('aT: ', accessToken);
-  console.log('isKid: ', isKid);
-  if (accessToken === '') {
-    return <Navigate to="auth/login" replace />;
+  console.log('aT in RequireAuth : ', accessToken);
+  console.log('isKid in RequireAuth : ', isKid);
+  if (accessToken === null) {
+    return <Navigate to="auth/login" replace />; // invalid aT
   } else if (isKid === null) {
-    return <Navigate to="auth/register/1" replace />;
+    return <Navigate to="auth/register/1" replace />; // initial login
   } else {
     return <Outlet />;
   }

@@ -1,16 +1,39 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
-import getEXPOToken from '@lib/utils/get/getEXPOToken';
+import { useEffect, useState } from 'react';
+import loadEXPOToken from '@lib/utils/loadEXPOToken';
+import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 
 function AuthTest() {
+  const [EXPOToken, setEXPOToken] = useState<string>('');
   useEffect(() => {
-    const EXPOToken = getEXPOToken();
-    alert(`3 EXPOToken: ${EXPOToken}`);
+    // function proceedGetEXPOToken() {
+    // loadEXPOToken(setEXPOToken);
+    // alert(`3 EXPOToken: ${EXPOToken}`); // 3 not webview
+    // }
+    // proceedGetEXPOToken();
+    loadEXPOToken(setEXPOToken);
   }, []);
+
+  const axiosPrivate = useAxiosPrivate();
+  useEffect(() => {
+    async function registerEXPOToken() {
+      alert(`EXPOToken의 변화를 감지했습니다. 토큰값은 ${EXPOToken} 입니다.`);
+      try {
+        const response = await axiosPrivate.post('/user/expo', {
+          expoToken: EXPOToken,
+        });
+        console.log(response);
+      } catch (error: any) {
+        console.error(error);
+      }
+    }
+    EXPOToken !== '' && registerEXPOToken();
+  }, [EXPOToken]);
 
   return (
     <Wrapper>
-      <span>1234</span>
+      <span>1147</span>
+      <span>{`EXPOToken: ${EXPOToken}`}</span>
     </Wrapper>
   );
 }

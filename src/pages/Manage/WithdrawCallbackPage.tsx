@@ -6,8 +6,8 @@ import { useEffect } from 'react';
 function WithdrawCallbackPage() {
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const logout = useLogout();
-  // TODO: 탈퇴되었습니다. 바텀시트로 교체 부탁드립니다.
-  function openWithdrawBottomSheet() {
+
+  useEffect(() => {
     setOpenBottomSheet({
       sheetContent: 'Notice',
       sheetProps: {
@@ -15,16 +15,12 @@ function WithdrawCallbackPage() {
       },
       contentProps: {
         type: 'withdrawed',
-        onMainActionClick: () => {
+        onMainActionClick: async () => {
+          await logout();
           setCloseBottomSheet();
-          logout();
         },
       },
     });
-  }
-
-  useEffect(() => {
-    openWithdrawBottomSheet();
   }, []);
 
   return <CustomSyncLoader />;

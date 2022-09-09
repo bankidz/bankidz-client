@@ -37,7 +37,6 @@ function InterestToPay() {
     selectedKid?.kidId!,
   );
 
-  console.log('what: ', selectedKidSNotPayedInterests?.totalInterestPrice);
   return (
     <>
       <Header hasMultipleKids={hasMultipleKids}>
@@ -45,7 +44,9 @@ function InterestToPay() {
         <h2>{selectedKidSNotPayedInterests?.totalInterestPrice}원</h2>
       </Header>
       {selectedKidSNotPayedInterests?.totalInterestPrice === 0 ? (
-        <EmptyDongil subject="아직 완주한" />
+        <EmptyDongilWrapper>
+          <EmptyDongil subject="아직 완주한" />
+        </EmptyDongilWrapper>
       ) : (
         <InterestToPayList
           challengeDTOList={selectedKidSNotPayedInterests?.challengeDTOList!}
@@ -68,4 +69,8 @@ const Header = styled.header<{ hasMultipleKids: boolean }>`
     ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const EmptyDongilWrapper = styled.div`
+  margin-top: 40px;
 `;

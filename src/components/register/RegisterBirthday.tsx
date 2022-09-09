@@ -47,8 +47,6 @@ function RegisterBirthday() {
   }, [year, isValidYear]);
   useEffect(() => {
     setIsValidMonth(MONTH_REGEX.test(month));
-    console.log(MONTH_REGEX.test(month));
-    console.log(parseInt(month));
     if (
       MONTH_REGEX.test(month) &&
       ((month.length === 2 && parseInt(month) === 1) || parseInt(month) >= 2)

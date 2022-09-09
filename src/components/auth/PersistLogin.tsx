@@ -1,10 +1,15 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch } from '@store/app/hooks';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { setLevel } from '@store/slices/authSlice';
+import { selectAccessToken, setLevel } from '@store/slices/authSlice';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 
 function PersistLogin() {
+  const accessToken = useAppSelector(selectAccessToken);
+  // const accessToken = getLocalStorage('accessToken');
+  console.log('aT in PersistLogin: ', accessToken);
+
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
@@ -19,7 +24,7 @@ function PersistLogin() {
         const { isKid } = response.data.data.user;
         if (isKid) {
           const { level } = response.data.data.kid;
-          dispatch(setLevel(level)); // latest level
+          dispatch(setLevel(level)); // get latest level
         }
       } catch (error) {
         navigate('/auth/login'); // access token expired
@@ -27,12 +32,13 @@ function PersistLogin() {
         isMounted && setIsLoading(false); // escape memory leak
       }
     }
-    fetchLevel();
+    console.log('aT in fetchLevel: ', accessToken);
+    accessToken && fetchLevel();
     return () => (isMounted = false);
   }, []);
 
-  if (isLoading) {
-    return <></>;
+  if (accessToken !== null && isLoading) {
+    return <p>자동로그인 처리중입니다...</p>;
   } else {
     return <Outlet />;
   }

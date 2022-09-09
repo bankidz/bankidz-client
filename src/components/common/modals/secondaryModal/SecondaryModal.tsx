@@ -15,10 +15,11 @@ import { modals } from '../Modals';
 
 interface SecondaryModalProps {
   onSubmit: any;
-  badgeText: string;
+  badgeText?: string;
   headerText: string;
   bodyText: string;
-  shouldCloseOnOverlayClick: boolean;
+  hasBadge?: boolean;
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 /**
@@ -27,12 +28,14 @@ interface SecondaryModalProps {
  * @param badgeText badge에 표시될 내용을 입력합니다.
  * @param headerText header에 표시될 내용을 입력합니다.
  * @param bodyText body에 표시될 내용을 입력합니다.
+ * @param hasBadge 노란색 배지 포함 여부를 선택합니다. 기본값은 true 입니다.
  */
 function SecondaryModal({
   onSubmit,
   badgeText,
   headerText,
   bodyText,
+  hasBadge = true,
   shouldCloseOnOverlayClick = false,
 }: SecondaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
@@ -43,6 +46,12 @@ function SecondaryModal({
     }, MODAL_CLOSE_TRANSITION_TIME);
   }
 
+  let height;
+  if (hasBadge) {
+    height = '552px';
+  } else {
+    height = '488px';
+  }
   // const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
@@ -65,7 +74,7 @@ function SecondaryModal({
         background: 'rgba(36, 39, 41, 0.7)',
       },
       content: {
-        height: '552px',
+        height: height,
         position: 'absolute',
         top: 'calc(var(--vh, 1vh) * 50)',
         transform: 'translate3d(0, -50%, 0)',
@@ -88,18 +97,18 @@ function SecondaryModal({
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
-        <WhiteBox>
+        <WhiteBox hasBadge={hasBadge}>
           <div className="illust-wrapper">
             <CongratsGoal />
           </div>
-          <span className="badge">{badgeText}</span>
-          <span className="header">{headerText}</span>
-          <div className="body">{bodyText}</div>
+          {hasBadge && <span className="badge">{badgeText}</span>}
+          <HeaderText hasBadge={hasBadge}>{headerText}</HeaderText>
+          <BodyText>{bodyText}</BodyText>
         </WhiteBox>
         <CheckButtonOverlay
           onClick={() => shouldCloseOnOverlayClick && setIsOpen(false)}
         />
-        <CheckButtonWrapper>
+        <CheckButtonWrapper hasBadge={hasBadge}>
           <CheckButton onClick={handleSubmit} />
         </CheckButtonWrapper>
       </Content>
@@ -128,9 +137,9 @@ const Content = styled.div`
   width: 100%;
 `;
 
-const WhiteBox = styled.div`
+const WhiteBox = styled.div<{ hasBadge: boolean }>`
   background: ${({ theme }) => theme.palette.greyScale.white};
-  height: 488px;
+  height: ${({ hasBadge }) => (hasBadge ? '488px' : '424px')};
   width: 100%;
 
   display: flex;
@@ -173,24 +182,24 @@ const WhiteBox = styled.div`
     display: inline-block;
     text-align: center;
   }
+`;
 
-  .header {
-    margin-top: 16px;
-    ${({ theme }) => theme.typo.popup.Title_T_21_EB};
-    color: ${({ theme }) => theme.palette.greyScale.black};
-  }
+const HeaderText = styled.span<{ hasBadge: boolean }>`
+  margin-top: ${({ hasBadge }) => (hasBadge ? '16px' : '33.04')};
+  ${({ theme }) => theme.typo.popup.Title_T_21_EB};
+  color: ${({ theme }) => theme.palette.greyScale.black};
+`;
 
-  .body {
-    margin-top: 16px;
-    ${({ theme }) => theme.typo.popup.Sub_S_14_R}
-    color: ${({ theme }) => theme.palette.greyScale.grey600};
-    line-height: 150%;
+const BodyText = styled.div`
+  margin-top: 16px;
+  ${({ theme }) => theme.typo.popup.Sub_S_14_R}
+  color: ${({ theme }) => theme.palette.greyScale.grey600};
+  line-height: 150%;
 
-    display: flex;
-    align-items: center;
-    text-align: center;
-    white-space: pre-wrap;
-  }
+  display: flex;
+  align-items: center;
+  text-align: center;
+  white-space: pre-wrap;
 `;
 
 const CheckButtonOverlay = styled.button`
@@ -199,8 +208,8 @@ const CheckButtonOverlay = styled.button`
   cursor: default;
 `;
 
-const CheckButtonWrapper = styled.div`
-  margin-top: 504px;
+const CheckButtonWrapper = styled.div<{ hasBadge: boolean }>`
+  margin-top: ${({ hasBadge }) => (hasBadge ? '504px' : '440px')};
   position: absolute;
   z-index: 701;
 `;

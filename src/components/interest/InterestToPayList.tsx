@@ -1,20 +1,10 @@
+import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import { IChallengeDTO } from '@store/slices/notPayedInterestsSlice';
-import styled from 'styled-components';
-import getContractEndDate from '@lib/utils/get/getContractEndDate';
-import dayjs from 'dayjs';
-import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
-
-function getCompletionDate(createdAt: string, weeks: number) {
-  const contractEndDate = getContractEndDate(createdAt, weeks);
-  const formattedContractEndDate = getFormattedTimeStamp(
-    contractEndDate,
-    'YYYY.MM.DD',
-  );
-  return formattedContractEndDate;
-}
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
+import getCompletionDate from '@lib/utils/get/getCompletionDate';
 
 interface InterestTOPayListProps {
   challengeDTOList: IChallengeDTO[];
@@ -22,7 +12,20 @@ interface InterestTOPayListProps {
 
 function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
   const { openModal } = useModals();
-  function handlePaidButtonClick(
+
+  function handlePaidButtonClick() {
+    console.log('click');
+    openModal(modals.secondaryModal, {
+      onSubmit: () => {
+        console.log('handle submit');
+      },
+      headerText: '이자지급을 완료했어요',
+      bodyText: '자녀의 급융습관이 쑥쑥 자라고 있어요!',
+      hasBadge: false,
+    });
+  }
+
+  function handleIsPaidButtonClick(
     interestPrice: number,
     title: string,
     weeks: number,
@@ -30,7 +33,9 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
   ) {
     openModal(modals.quaternaryModal, {
       onExtraSubmit: () => {
-        console.log('handle submit');
+        setTimeout(() => {
+          handlePaidButtonClick();
+        }, MODAL_CLOSE_TRANSITION_TIME);
       },
       interestPrice,
       title,
@@ -50,6 +55,7 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
               {`${getCompletionDate(
                 challengeDTO.challenge.createdAt,
                 challengeDTO.challenge.weeks,
+                'YYYY.MM.DD',
               )} 완주성공`}
             </span>
             <h1>{challengeDTO.challenge.title}</h1>
@@ -61,7 +67,7 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
           <Button
             label="지급 완료하기"
             onClick={() =>
-              handlePaidButtonClick(
+              handleIsPaidButtonClick(
                 challengeDTO.interestPrice,
                 challengeDTO.challenge.title,
                 challengeDTO.challenge.weeks,
@@ -131,7 +137,6 @@ const Block = styled.section`
       color: ${({ theme }) => theme.palette.greyScale.black};
     }
   }
-
   & + & {
     margin-top: 16px;
   }
