@@ -11,7 +11,7 @@ function AuthTest() {
     // alert(`3 EXPOToken: ${EXPOToken}`); // 3 not webview
     // }
     // proceedGetEXPOToken();
-    loadEXPOToken(setEXPOToken);
+    // loadEXPOToken(setEXPOToken);
   }, []);
 
   const axiosPrivate = useAxiosPrivate();

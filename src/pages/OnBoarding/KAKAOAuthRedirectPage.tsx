@@ -25,7 +25,6 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('provider', response.data.provider);
         }
         loadEXPOToken(setEXPOToken);
-        navigate('/');
       } catch (error: any) {
         console.error(error);
       }
@@ -44,6 +43,7 @@ function KAKAOAuthRedirectPage() {
           expoToken: EXPOToken,
         });
         alert(`/user/expo response: ${JSON.stringify(response)}`);
+        navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
       }

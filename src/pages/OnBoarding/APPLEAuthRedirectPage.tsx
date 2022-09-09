@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
-import stringToBooleanOrNull from '@lib/utils/stringToBooleanOrNull';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import loadEXPOToken from '@lib/utils/loadEXPOToken';
@@ -22,13 +21,13 @@ function APPLEAuthRedirectPage() {
 
   useEffect(() => {
     async function proceedLogin() {
-      canSetCredentials &&
+      if (canSetCredentials) {
         dispatch(setCredentials({ accessToken, isKid, level, provider }));
-      setLocalStorage('accessToken', accessToken);
-      setLocalStorage('isKid', isKid);
-      setLocalStorage('provider', provider);
+        setLocalStorage('accessToken', accessToken);
+        setLocalStorage('isKid', isKid);
+        setLocalStorage('provider', provider);
+      }
       loadEXPOToken(setEXPOToken);
-      navigate('/');
     }
     proceedLogin();
   }, []);
@@ -44,6 +43,7 @@ function APPLEAuthRedirectPage() {
           expoToken: EXPOToken,
         });
         alert(`/user/expo response: ${JSON.stringify(response)}`);
+        navigate('/');
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
       }
