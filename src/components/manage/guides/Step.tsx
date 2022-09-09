@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import renderImage from './renderImage';
 interface StepProps {
   step: 1 | 2 | 3 | 4;
   isKid: boolean;
@@ -12,6 +12,7 @@ const Step = ({ step, isKid }: StepProps) => {
         <div>{isKid ? kid[step].sub : parent[step].sub}</div>
         <div>{isKid ? kid[step].main : parent[step].main}</div>
       </Title>
+      {renderImage(isKid, step)}
     </Wrapper>
   );
 };
@@ -19,7 +20,26 @@ export default Step;
 
 const Wrapper = styled.div`
   margin-top: 48px;
+  img {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  .true-1 {
+    margin-top: 30px;
+  }
+  .true-2 {
+    margin-top: 52px;
+  }
+  .true-3 {
+    margin-top: 62px;
+  }
+  .true-4 {
+    margin-top: 34px;
+  }
 `;
+
 const Title = styled.div`
   padding: 0 26px;
   & > div:first-child {

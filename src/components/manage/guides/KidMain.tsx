@@ -37,11 +37,10 @@ const Wrapper = styled.div`
     margin-bottom: 15px;
   }
   .main2 {
-    padding-left: 9px;
     width: 100%;
     box-sizing: border-box;
+    padding: 0 8px;
     margin-top: 15px;
-    margin-bottom: 15px;
   }
 `;
 
