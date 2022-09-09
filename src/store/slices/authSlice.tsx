@@ -22,8 +22,11 @@ interface IAuthState {
 
 const initialState: IAuthState = {
   auth: {
-    accessToken: getLocalStorage('accessToken'),
-    isKid: getLocalStorage('isKid'),
+    //accessToken: getLocalStorage('accessToken'),
+    //isKid: getLocalStorage('isKid'),
+    accessToken:
+      'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8',
+    isKid: false,
     provider: getLocalStorage('provider'),
     level: null,
     birthday: '',
