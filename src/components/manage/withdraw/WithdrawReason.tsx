@@ -2,14 +2,10 @@ import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import useLogout from '@lib/hooks/auth/useLogout';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
 import { useAppSelector } from '@store/app/hooks';
-import {
-  resetCredentials,
-  selectProvider,
-  setWithdrawReason,
-} from '@store/slices/authSlice';
+import { selectProvider, setWithdrawReason } from '@store/slices/authSlice';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -35,6 +31,7 @@ function WithdrawReason() {
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const dispatch = useDispatch();
+  const logout = useLogout();
   function openWithdrawCompletedBottomSheet() {
     setOpenBottomSheet({
       sheetContent: 'Completed',
@@ -45,10 +42,7 @@ function WithdrawReason() {
         type: 'delete',
         onMainActionClick: () => {
           setCloseBottomSheet();
-          removeLocalStorage('accessToken'); // logout
-          removeLocalStorage('isKid');
-          removeLocalStorage('provider');
-          dispatch(resetCredentials());
+          logout();
         },
       },
     });

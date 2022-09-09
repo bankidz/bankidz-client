@@ -2,7 +2,6 @@ import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useLogout from '@lib/hooks/auth/useLogout';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
 import { useAppSelector } from '@store/app/hooks';
 import { selectWithdrawReason } from '@store/slices/authSlice';
 import { useEffect } from 'react';
@@ -11,6 +10,7 @@ function WithdrawCallbackPage() {
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const axiosPrivate = useAxiosPrivate();
   const withdrawReason = useAppSelector(selectWithdrawReason);
+  const logout = useLogout();
 
   useEffect(() => {
     setOpenBottomSheet({
@@ -22,14 +22,13 @@ function WithdrawCallbackPage() {
         type: 'withdrawed',
         onMainActionClick: async () => {
           try {
+            console.log('withdrawReason: ', withdrawReason);
             const response = await axiosPrivate.delete('/user', {
-              data: { message: withdrawReason },
+              data: { message: '애플은 탈퇴사유 출시 이후에 구현할게용 ㅠㅠ' },
             });
             console.log(response);
             setCloseBottomSheet();
-            removeLocalStorage('accessToken'); // logout
-            removeLocalStorage('isKid');
-            removeLocalStorage('provider');
+            logout();
           } catch (error: any) {
             console.log(error);
           }
@@ -38,7 +37,7 @@ function WithdrawCallbackPage() {
     });
   }, []);
 
-  return <CustomSyncLoader />;
+  return <></>;
 }
 
 export default WithdrawCallbackPage;
