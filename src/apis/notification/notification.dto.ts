@@ -4,6 +4,7 @@ export interface INotification {
   isRead: boolean;
   message: string;
   title: string;
+  linkUrl: string;
   notificationCategory: 'CHALLENGE' | 'NOTICE' | 'LEVEL' | 'FAMILY';
 }
 

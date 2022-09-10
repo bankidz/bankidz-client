@@ -56,6 +56,9 @@ const Wrapper = styled.div`
   padding: 24px 16px;
   display: flex;
   justify-content: space-between;
+  svg {
+    width: 72px;
+  }
 `;
 
 const Content = styled.div`
