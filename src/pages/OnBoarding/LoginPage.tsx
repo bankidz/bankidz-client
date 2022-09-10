@@ -4,8 +4,14 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 import { KAKAO_AUTH_URL } from '@lib/constants/KAKAO_AUTH_URL';
 import { APPLE_AUTH_URL } from '@lib/constants/APPLE_AUTH_URL';
+import { axiosPrivateTemp } from '@apis/axios';
 
 function LoginPage() {
+  const handleClick = async () => {
+    const response = await axiosPrivateTemp.get('/user');
+    console.log(response);
+  };
+
   return (
     <Wrapper>
       <MarginTemplate>
@@ -14,6 +20,7 @@ function LoginPage() {
           <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
         <span>09090619</span>
+        <button onClick={handleClick}>axios private test</button>
         <ButtonWithMarginBottom
           label="카카오로 시작하기"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
