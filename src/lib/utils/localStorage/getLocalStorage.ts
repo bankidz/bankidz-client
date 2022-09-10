@@ -6,6 +6,7 @@ import { TLocalStorageKey } from './TLocalStorageKey';
  */
 function getLocalStorage(key: TLocalStorageKey) {
   const value = localStorage.getItem(key);
+  console.log(value);
   if (value) {
     return JSON.parse(value);
   }
