@@ -30,6 +30,7 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
       if (!isRead) {
         await patchNotificationIsRead(id);
       }
+      console.log(url);
       url && navigate(url); //TODO : 임시
     },
     [],
@@ -92,5 +93,9 @@ const Item = styled.div<{ isRead: boolean }>`
     ${({ theme }) => theme.typo.text.Alarm_T_14_R}
     line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.black};
+  }
+
+  svg {
+    margin: auto 0px;
   }
 `;
