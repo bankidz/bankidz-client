@@ -2,12 +2,12 @@ import styled, { css } from 'styled-components';
 
 interface ToggleButtonProps {
   toggle: boolean;
-  clickToggle: () => void;
+  onToggleClick: () => void;
 }
 
-const ToggleButton = ({ toggle, clickToggle }: ToggleButtonProps) => {
+const ToggleButton = ({ toggle, onToggleClick }: ToggleButtonProps) => {
   return (
-    <ToggleBtn onClick={clickToggle} toggle={toggle}>
+    <ToggleBtn onClick={onToggleClick} toggle={toggle}>
       <Circle toggle={toggle} />
     </ToggleBtn>
   );

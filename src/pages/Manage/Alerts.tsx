@@ -1,11 +1,48 @@
+import { IOptInDTO } from '@apis/user/user.dto';
+import useUserApi from '@apis/user/useUserAPi';
 import ToggleButton from '@components/common/buttons/ToggleButton';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
+import { ALERT } from '@lib/constants/QUERY_KEY';
 import useToggle from '@lib/hooks/useToggle';
+import isEmptyObject from '@lib/utils/isEmptyObject';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
+import { useEffect, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
 
 const Alerts = () => {
-  const [toggleEvent, clickToggleEvent] = useToggle(false);
-  const [toggleActivity, clicktoggleActivity] = useToggle(false);
+  const { patchNoticeAlert, patchServiceAlert, getUserOptIn } = useUserApi();
+  const { mutate: mutateNotice } = useMutation(patchNoticeAlert, {
+    onSuccess: (data) => syncAlert(data),
+  });
+  const { mutate: mutateService } = useMutation(patchServiceAlert, {
+    onSuccess: (data) => syncAlert(data),
+  });
+
+  const [alert, setAlert] = useState<IOptInDTO>(getLocalStorage('alert') || {});
+
+  // 로컬 저장소에 값 없을 시 값 패칭해서 사용
+  const syncAlert = (data: IOptInDTO) => {
+    setLocalStorage('alert', data);
+    setAlert(data);
+  };
+  const { data } = useQuery(ALERT, getUserOptIn, {
+    enabled: isEmptyObject(alert),
+    onSuccess: (data) => syncAlert(data),
+  });
+
+  const [toggleNotice, setToggleNotice, clickToggleNotice] = useToggle(
+    alert.noticeOptIn || false,
+  );
+  const [toggleService, setToggleService, clickToggleService] = useToggle(
+    alert.serviceOptIn || false,
+  );
+
+  useEffect(() => {
+    setToggleNotice(alert.noticeOptIn);
+    setToggleService(alert.serviceOptIn);
+  }, [alert]);
 
   return (
     <ForegroundTemplate label="알림 설정">
@@ -16,7 +53,10 @@ const Alerts = () => {
             <p>공지 및 이벤트 알림</p>
             <p>이벤트 및 다양한 정보에 대한 소식을 알려드려요</p>
           </Text>
-          <ToggleButton toggle={toggleEvent} clickToggle={clickToggleEvent} />
+          <ToggleButton
+            toggle={toggleNotice}
+            onToggleClick={() => clickToggleNotice(mutateNotice)}
+          />
         </Cell>
         <Cell>
           <Text>
@@ -27,8 +67,8 @@ const Alerts = () => {
             </p>
           </Text>
           <ToggleButton
-            toggle={toggleActivity}
-            clickToggle={clicktoggleActivity}
+            toggle={toggleService}
+            onToggleClick={() => clickToggleService(mutateService)}
           />
         </Cell>
       </Wrapper>

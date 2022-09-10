@@ -1,24 +1,37 @@
 import { TLevel } from '@lib/types/TLevel';
 
-export interface IGetUserResData {
-  user: TUser;
-  kid: {
-    achievedChallenge: number;
-    totalChallenge: number;
-    level: TLevel;
-  } | null;
-  parent: {
-    acceptedRequest: number;
-    totalRequest: number;
-  } | null;
+export interface IMyPageDTO {
+  user: IUserDTO;
+  kid: IKidDTO | null;
+  parent: IParentDTO | null;
 }
 
-/* authSlice 파일안에 이미 있는것 확인했는데, 서버상태 관련한 타입은 api 디렉토리 하에서 관리하는게 어떠신가요
-일단 중복으로 만들어둘게요.  */
-export type TUser = {
+export interface IUserDTO {
   username: string;
   isFemale: boolean;
   isKid: boolean;
   birthday: string;
   phone: string | null;
-};
+}
+
+export interface IKidDTO {
+  achievedChallenge: number;
+  totalChallenge: number;
+  level: TLevel;
+}
+
+export interface IParentDTO {
+  acceptedRequest: number;
+  totalRequest: number;
+}
+
+/**
+ * @noticeOptin : 공지 및 이벤트 알림 동의 여부
+ * @serviceOptin : 가족 활동 알림 동의 여부
+ * @updatedAt : 유저 데이터 마지막 수정 시점
+ */
+export interface IOptInDTO {
+  noticeOptIn: boolean;
+  serviceOptIn: boolean;
+  updatedAt: string;
+}

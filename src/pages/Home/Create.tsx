@@ -10,6 +10,9 @@ import Step5 from '@components/home/create/steps/Step5';
 import { useQuery } from 'react-query';
 import { FAMILY } from '@lib/constants/QUERY_KEY';
 import useFamilyApi from '@apis/family/useFamilyApi';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@store/app/hooks';
+import { dispatchParent } from '@store/slices/createChallengeSlice';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -27,10 +30,17 @@ const title = [
 
 function Create() {
   const { step } = useParams();
+  const dispatch = useAppDispatch();
   const { getFamily } = useFamilyApi();
   const { data: familyData, status } = useQuery(FAMILY, getFamily);
   const parents = familyData?.familyUserList.filter((member) => !member.isKid);
-  const isCouple = parents?.length === 1;
+  const isAlone = parents?.length === 1;
+
+  useEffect(() => {
+    if (isAlone) {
+      dispatch(dispatchParent(parents[0].isFemale));
+    }
+  }, [isAlone]);
 
   const getTypedStep = (parsedStep: number) => {
     if (step && parsedStep > 0 && parsedStep <= 5) {
@@ -41,7 +51,7 @@ function Create() {
   };
 
   const renderContent = (typedStep: 1 | 2 | 3 | 4 | 5) => {
-    if (isCouple) {
+    if (isAlone) {
       switch (typedStep) {
         case 1:
           return <Step2 currentStep={1} />;
@@ -76,10 +86,10 @@ function Create() {
         <>
           <Progress
             step={getTypedStep(parseInt(step))}
-            skipSelectParents={status === 'success' && isCouple ? true : false}
+            skipSelectParents={status === 'success' && isAlone ? true : false}
           />
           <MarginTemplate>
-            {status === 'success' && isCouple
+            {status === 'success' && isAlone
               ? title[parseInt(step)]
               : title[parseInt(step) - 1]}
             {renderContent(getTypedStep(parseInt(step)))}
@@ -93,7 +103,7 @@ function Create() {
 export default Create;
 
 const Wrapper = styled.div`
-  margin-top: 16px;
+  padding-top: 16px;
 
   & > :first-child {
     margin: 0px auto;

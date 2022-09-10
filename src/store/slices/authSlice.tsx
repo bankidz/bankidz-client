@@ -25,6 +25,9 @@ const initialState: IAuthState = {
   auth: {
     accessToken: getLocalStorage('accessToken'),
     isKid: getLocalStorage('isKid'),
+    //accessToken:
+    //'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzMyMzM5LCJzdWIiOiIxNiIsImV4cCI6MTY3ODI4NDMzOSwiaWQiOjE2LCJyb2xlcyI6IlVTRVIifQ.Xq1D3K03-_OmhdJRDtMPA8okaYkBO2QAka1LJ8vVAGw',
+    //isKid: false,
     provider: getLocalStorage('provider'),
     level: null,
     birthday: '',

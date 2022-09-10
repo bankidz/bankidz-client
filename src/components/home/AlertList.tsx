@@ -25,12 +25,16 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
     FAMILY: '가족',
   };
 
-  const onAlertItemClick = useCallback(async (id: number, isRead: boolean) => {
-    if (!isRead) {
-      await patchNotificationIsRead(id);
-    }
-    navigate('/'); //TODO : 임시
-  }, []);
+  const onAlertItemClick = useCallback(
+    async (id: number, isRead: boolean, url: string) => {
+      if (!isRead) {
+        await patchNotificationIsRead(id);
+      }
+      console.log(url);
+      url && navigate(url); //TODO : 임시
+    },
+    [],
+  );
 
   return (
     <Wrapper>
@@ -38,7 +42,9 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
         <Item
           key={alert.id}
           isRead={alert.isRead}
-          onClick={() => onAlertItemClick(alert.id, alert.isRead)}
+          onClick={() =>
+            onAlertItemClick(alert.id, alert.isRead, alert.linkUrl)
+          }
         >
           {icon[alert.notificationCategory]}
           <div>
@@ -87,5 +93,9 @@ const Item = styled.div<{ isRead: boolean }>`
     ${({ theme }) => theme.typo.text.Alarm_T_14_R}
     line-height: 150%;
     color: ${({ theme }) => theme.palette.greyScale.black};
+  }
+
+  svg {
+    margin: auto 0px;
   }
 `;

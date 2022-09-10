@@ -16,6 +16,7 @@ import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
+import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
 
 type TStep3Form = {
   contractName: string;
@@ -36,7 +37,8 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
   //TODO : api fetching
-  const testDuplicate = ['중복된 이름'];
+  const walkingDongil = useAppSelector(selectWalkingDongils);
+  const testDuplicate = walkingDongil.map((dongil) => dongil.title);
 
   const onClickNextButton = () => {
     dispatch(dispatchTitle(form.contractName));
