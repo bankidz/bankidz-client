@@ -85,14 +85,14 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
       expiredDate: dayjs().add(2, 'days'),
     };
     const encrypted = cipher(JSON.stringify(data));
-    const link = `http:/bankidz.com/link/${encrypted}`;
+    const link = `https://bankidz.com/link/${encrypted}`;
     console.log(link);
     messageToRNWebView(link);
   };
 
   const messageToRNWebView = (link: string) => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ link }));
+      window.ReactNativeWebView.postMessage(link);
     } else {
       console.log('웹뷰 환경이 아닙니다');
     }
