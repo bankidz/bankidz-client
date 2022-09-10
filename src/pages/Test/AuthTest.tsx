@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
-import loadEXPOToken from '@lib/utils/loadEXPOToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 
 function AuthTest() {
