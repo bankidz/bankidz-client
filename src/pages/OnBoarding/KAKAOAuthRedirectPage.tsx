@@ -28,15 +28,8 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('provider', response.data.provider);
         }
         // loadEXPOToken(setEXPOToken);
-
-        console.log('aT just before patch', getLocalStorage('accessToken'));
-        const response = await axiosPrivateTemp.patch('/user/expo', {
-          expoToken: 'test',
-        });
-        console.log('response: ', response);
-
         registerEXPOToken();
-        // navigate('/');
+        navigate('/');
         // setTimeout(() => {
         //   navigate('/');
         // }, 5000); // dismiss register EXPOToken
