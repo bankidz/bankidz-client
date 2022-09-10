@@ -28,10 +28,13 @@ export const axiosPrivateTemp = axios.create({
   headers: { 'Content-Type': 'application/json' },
 });
 
-const accessToken = getLocalStorage('accessToken');
 axiosPrivateTemp.interceptors.request.use((request) => {
+  const accessToken = getLocalStorage('accessToken');
   // @ts-expect-error
-  request.headers['X-AUTH-TOKEN'] = `${accessToken}`;
+  if (!request.headers['X-AUTH-TOKEN']) {
+    // @ts-expect-error
+    request.headers['X-AUTH-TOKEN'] = `${accessToken}`;
+  }
   return request;
 });
 

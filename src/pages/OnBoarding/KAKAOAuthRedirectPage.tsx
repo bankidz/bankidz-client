@@ -28,6 +28,9 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('provider', response.data.provider);
         }
         // loadEXPOToken(setEXPOToken);
+        // console.log('aT before GET /user: ', getLocalStorage('accessToken'));
+        // const response = await axiosPrivateTemp.get('/user');
+        // alert(`GET /user response: ${JSON.stringify(response)}`);
         registerEXPOToken();
         navigate('/');
         // setTimeout(() => {
