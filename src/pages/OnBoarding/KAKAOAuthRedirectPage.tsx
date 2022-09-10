@@ -6,6 +6,7 @@ import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import loadEXPOToken from '@lib/utils/loadEXPOToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import registerEXPOToken from '@lib/utils/registerEXPOToken';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
@@ -24,10 +25,12 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('isKid', response.data.isKid);
           setLocalStorage('provider', response.data.provider);
         }
-        loadEXPOToken(setEXPOToken);
-        setTimeout(() => {
-          navigate('/');
-        }, 5000); // dismiss register EXPOToken
+        // loadEXPOToken(setEXPOToken);
+        registerEXPOToken();
+        navigate('/');
+        // setTimeout(() => {
+        //   navigate('/');
+        // }, 5000); // dismiss register EXPOToken
       } catch (error: any) {
         console.error(error);
       }
@@ -35,24 +38,24 @@ function KAKAOAuthRedirectPage() {
     code && proceedLogin();
   }, []);
 
-  const axiosPrivate = useAxiosPrivate();
-  useEffect(() => {
-    async function registerEXPOToken() {
-      // alert(
-      //   `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
-      // );
-      try {
-        const response = await axiosPrivate.patch('/user/expo', {
-          expoToken: EXPOToken,
-        });
-        // alert(`/user/expo response: ${JSON.stringify(response)}`);
-        navigate('/');
-      } catch (error: any) {
-        alert(`error: ${JSON.stringify(error)}`);
-      }
-    }
-    EXPOToken !== '' && registerEXPOToken();
-  }, [EXPOToken]);
+  // const axiosPrivate = useAxiosPrivate();
+  // useEffect(() => {
+  //   async function registerEXPOToken() {
+  //     // alert(
+  //     //   `EXPOToken의 변화를 감지했습니다. 변화된 토큰값은 다음과 같습니다. ${EXPOToken}`,
+  //     // );
+  //     try {
+  //       const response = await axiosPrivate.patch('/user/expo', {
+  //         expoToken: EXPOToken,
+  //       });
+  //       // alert(`/user/expo response: ${JSON.stringify(response)}`);
+  //       navigate('/');
+  //     } catch (error: any) {
+  //       alert(`error: ${JSON.stringify(error)}`);
+  //     }
+  //   }
+  //   EXPOToken !== '' && registerEXPOToken();
+  // }, [EXPOToken]);
 
   return <CustomSyncLoader />;
 }
