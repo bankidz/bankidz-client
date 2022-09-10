@@ -4,11 +4,11 @@ import OverViewContent from './OverViewContent';
 import { useQueryClient } from 'react-query';
 import { KID } from '@lib/constants/QUERY_KEY';
 import getPercentValue from '@lib/utils/get/getPercentValue';
-import { IGetUserResData } from '@apis/user/user.dto';
+import { IMyPageDTO } from '@apis/user/user.dto';
 import { IKidListDTO } from '@apis/family/family.dto';
 
 export type OverViewProps = {
-  userData: IGetUserResData;
+  userData: IMyPageDTO;
 };
 
 function OverView({ userData }: OverViewProps) {

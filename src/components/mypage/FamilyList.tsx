@@ -10,14 +10,14 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
 import useFamilyApi from '@apis/family/useFamilyApi';
-import { IGetUserResData } from '@apis/user/user.dto';
+import { IMyPageDTO } from '@apis/user/user.dto';
 import { IFamilyDTO } from '@apis/family/family.dto';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
   const { leaveFamily } = useFamilyApi();
   const queryClient = useQueryClient();
-  const userData = queryClient.getQueryData(USER) as IGetUserResData;
+  const userData = queryClient.getQueryData(USER) as IMyPageDTO;
   const familyData = queryClient.getQueryData(FAMILY) as IFamilyDTO;
 
   const { mutate: MutateLeaveFamily } = useMutation(leaveFamily, {

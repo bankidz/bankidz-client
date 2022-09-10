@@ -8,6 +8,7 @@ export const KID = 'kid';
  * user api 관련
  */
 export const USER = 'user';
+export const ALERT = 'alert';
 
 /**
  * notice api 관련
