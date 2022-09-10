@@ -44,3 +44,4 @@ axiosPrivateTemp.interceptors.response.use((response) => {
 
 // https://2mojurmoyang.tistory.com/212
 // https://velog.io/@bang9dev/axios-interceptor-with-ts
+// https://github.com/Team-MailedIt/mailedit-client/blob/master/src/utils/API.js
