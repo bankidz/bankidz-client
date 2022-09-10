@@ -92,7 +92,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
 
   const messageToRNWebView = (link: string) => {
     if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ link }));
+      window.ReactNativeWebView.postMessage(link);
     } else {
       console.log('웹뷰 환경이 아닙니다');
     }
