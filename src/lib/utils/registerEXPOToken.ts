@@ -16,8 +16,8 @@ function registerEXPOToken() {
         const response = await axiosPrivateTemp.patch('/user/expo', {
           expoToken: EXPOToken,
         });
-        isRegistered = true;
         alert(`/user/expo response: ${JSON.stringify(response)}`);
+        isRegistered = true;
       } catch (error: any) {
         alert(`error: ${JSON.stringify(error)}`);
       }

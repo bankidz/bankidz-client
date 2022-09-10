@@ -7,6 +7,8 @@ import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import loadEXPOToken from '@lib/utils/loadEXPOToken';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
+import { axiosPrivateTemp } from '@apis/axios';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
@@ -26,8 +28,15 @@ function KAKAOAuthRedirectPage() {
           setLocalStorage('provider', response.data.provider);
         }
         // loadEXPOToken(setEXPOToken);
+
+        console.log('aT just before patch', getLocalStorage('accessToken'));
+        const response = await axiosPrivateTemp.patch('/user/expo', {
+          expoToken: 'test',
+        });
+        console.log('response: ', response);
+
         registerEXPOToken();
-        navigate('/');
+        // navigate('/');
         // setTimeout(() => {
         //   navigate('/');
         // }, 5000); // dismiss register EXPOToken
