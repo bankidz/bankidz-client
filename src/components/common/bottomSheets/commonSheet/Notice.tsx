@@ -6,7 +6,12 @@ import Button from '@components/common/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface NoticeProps {
-  type: 'giveUpExceeded' | 'sunday' | 'expired' | 'withdrawed';
+  type:
+    | 'giveUpExceeded'
+    | 'sunday'
+    | 'expired'
+    | 'withdrawed'
+    | 'createExceeded';
   onMainActionClick?: () => void;
 }
 
@@ -15,6 +20,11 @@ const content = {
     icon: <Banki />,
     main: '포기 횟수 초과',
     sub: '돈길 포기는 2주에 1개만 가능해요',
+  },
+  createExceeded: {
+    icon: <Banki />,
+    main: '돈길 개수 초과',
+    sub: '돈길은 최대 5개까지 걸을 수 있어요',
   },
   sunday: {
     icon: <Banki />,
@@ -55,7 +65,12 @@ export default Notice;
 const Wrapper = styled.div``;
 
 const Container = styled.div<{
-  type: 'giveUpExceeded' | 'sunday' | 'expired' | 'withdrawed';
+  type:
+    | 'giveUpExceeded'
+    | 'sunday'
+    | 'expired'
+    | 'withdrawed'
+    | 'createExceeded';
 }>`
   svg {
     width: 48px;
