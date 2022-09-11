@@ -12,18 +12,19 @@ import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import GuideTemplate from '@components/manage/guides/GuideTemplate';
 
 function RegisterRole() {
   const birthday = useAppSelector(selectBirthday);
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
+  const [isTutorial, setIsTutorial] = useState<boolean>(false);
 
   const { openModal } = useModals();
-  const navigate = useNavigate();
   function handleModalOpen(isKid: boolean, isFemale: boolean) {
     openModal(modals.primaryModal, {
       onSubmit: () => {
-        navigate('/', { replace: true });
+        setIsTutorial(true);
       },
       isKid,
       isFemale,
@@ -80,54 +81,60 @@ function RegisterRole() {
 
   return (
     <Wrapper>
-      <span>프로필을 선택해요</span>
-      <RoleButtonWrapper>
-        {/* 아빠 */}
-        <RoleButton
-          onClick={() => {
-            openSelectProfileSheet(false, false);
-            setIsKid(false);
-            setIsFemale(false);
-          }}
-          isKid={false}
-          isFemale={false}
-          isSelected={isOpen && isKid === false && isFemale === false}
-        />
-        {/* 엄마 */}
-        <RoleButton
-          onClick={() => {
-            openSelectProfileSheet(false, true);
-            setIsKid(false);
-            setIsFemale(true);
-          }}
-          isKid={false}
-          isFemale={true}
-          isSelected={isOpen && isKid === false && isFemale === true}
-        />
-        {/* 아들 */}
-        <RoleButton
-          onClick={() => {
-            openSelectProfileSheet(true, false);
-            setIsKid(true);
-            setIsFemale(false);
-          }}
-          isKid={true}
-          isFemale={false}
-          isSelected={isOpen && isKid === true && isFemale === false}
-        />
-        {/* 딸 */}
-        <RoleButton
-          onClick={() => {
-            openSelectProfileSheet(true, true);
-            setIsKid(true);
-            setIsFemale(true);
-          }}
-          isKid={true}
-          isFemale={true}
-          isSelected={isOpen && isKid === true && isFemale === true}
-        />
-      </RoleButtonWrapper>
       <Modals />
+      {isTutorial ? (
+        <GuideTemplate page="onboarding" isKid={isKid!} />
+      ) : (
+        <>
+          <span>프로필을 선택해요</span>
+          <RoleButtonWrapper>
+            {/* 아빠 */}
+            <RoleButton
+              onClick={() => {
+                openSelectProfileSheet(false, false);
+                setIsKid(false);
+                setIsFemale(false);
+              }}
+              isKid={false}
+              isFemale={false}
+              isSelected={isOpen && isKid === false && isFemale === false}
+            />
+            {/* 엄마 */}
+            <RoleButton
+              onClick={() => {
+                openSelectProfileSheet(false, true);
+                setIsKid(false);
+                setIsFemale(true);
+              }}
+              isKid={false}
+              isFemale={true}
+              isSelected={isOpen && isKid === false && isFemale === true}
+            />
+            {/* 아들 */}
+            <RoleButton
+              onClick={() => {
+                openSelectProfileSheet(true, false);
+                setIsKid(true);
+                setIsFemale(false);
+              }}
+              isKid={true}
+              isFemale={false}
+              isSelected={isOpen && isKid === true && isFemale === false}
+            />
+            {/* 딸 */}
+            <RoleButton
+              onClick={() => {
+                openSelectProfileSheet(true, true);
+                setIsKid(true);
+                setIsFemale(true);
+              }}
+              isKid={true}
+              isFemale={true}
+              isSelected={isOpen && isKid === true && isFemale === true}
+            />
+          </RoleButtonWrapper>
+        </>
+      )}
     </Wrapper>
   );
 }
@@ -152,23 +159,3 @@ const RoleButtonWrapper = styled.div`
   row-gap: 16px;
   column-gap: 16px;
 `;
-
-// let accessToken;
-// let level: TLevel | null = null;
-// if (isKid === false && isFemale === false) {
-//   accessToken =
-//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0ODQyMTQsInN1YiI6IjUiLCJleHAiOjE2NjI2OTM4MTQsImlkIjo1LCJyb2xlcyI6IlVTRVIifQ.5fKVlH-BGRRXiSP2WFtiLGheiNThQAC8wc7yj38MAG8';
-// } else if (isKid === false && isFemale === true) {
-//   accessToken =
-//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU';
-// } else if (isKid === true && isFemale === false) {
-//   accessToken =
-//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjIxOTg5NTQsInN1YiI6IjQiLCJleHAiOjE2NjM0MDg1NTQsImlkIjo0LCJyb2xlcyI6IlVTRVIifQ.F3tKrx-cVOHqPeU-a8opyLVK6oHbm83eAmh12HDNji0';
-//   level = -4;
-// } else if (isKid === true && isFemale === true) {
-//   accessToken =
-//     'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjI0Nzk4MzksInN1YiI6IjMiLCJleHAiOjE2NjI0Nzk4OTksImlkIjozLCJyb2xlcyI6IlVTRVIifQ.KmzWCJfLq_b2pJ_O1NaahjDStoYWa1PB7cG4PAUZnX0';
-//   level = 2;
-// }
-// accessToken &&
-//   dispatch(setCredentials({ accessToken, isKid, level, provider: 'kakao' }));
