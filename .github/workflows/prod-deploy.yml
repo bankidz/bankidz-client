@@ -15,8 +15,8 @@ jobs:
       # 도커 이미지에 env 파일 포함
       - name: Create .env file
         run: |
-          touch .env
-          echo "${{ secrets.REACT_APP_ENV }}" >> .env
+          touch .env.production
+          echo "${{ secrets.REACT_APP_ENV }}" >> .env.production
 
       # 도커 메타데이터 가져오기
       - name: Docker meta
