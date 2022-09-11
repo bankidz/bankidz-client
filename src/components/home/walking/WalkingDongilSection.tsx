@@ -21,19 +21,18 @@ function WalkingDongilSection() {
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
 
   const navigateCreateDongil = () => {
-    console.log(dayjs().day());
-    if (dayjs().day() === 0) {
-      setOpenBottomSheet({
-        sheetContent: 'Notice',
-        sheetProps: { open: true },
-        contentProps: { type: 'sunday' },
-      });
-      setCreateDisabled(true);
-    } else if (walkingDongils.length === 5) {
+    if (walkingDongils.length === 5) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         sheetProps: { open: true },
         contentProps: { type: 'createExceeded' },
+      });
+      setCreateDisabled(true);
+    } else if (dayjs().day() === 0) {
+      setOpenBottomSheet({
+        sheetContent: 'Notice',
+        sheetProps: { open: true },
+        contentProps: { type: 'sunday' },
       });
       setCreateDisabled(true);
     } else {
