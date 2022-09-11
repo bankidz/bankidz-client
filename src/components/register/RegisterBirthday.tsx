@@ -38,7 +38,7 @@ function RegisterBirthday() {
   const dayInputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const parsedIntYear = parseInt(year);
-    if (1923 <= parsedIntYear && parsedIntYear <= 2022) {
+    if (1923 <= parsedIntYear && parsedIntYear <= 2021) {
       setIsValidYear(true);
       monthInputRef.current!.focus();
     } else {
@@ -75,7 +75,7 @@ function RegisterBirthday() {
     e.preventDefault();
     const parsedIntYear = parseInt(year);
     let temp1 = false;
-    if (1923 <= parsedIntYear && parsedIntYear <= 2022) {
+    if (1923 <= parsedIntYear && parsedIntYear <= 2021) {
       temp1 = true;
     }
     const temp2 = MONTH_REGEX.test(month);

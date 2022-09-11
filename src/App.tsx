@@ -1,17 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 import Layout from './components/layout/Layout';
+import RequireAuth from '@components/auth/RequireAuth';
+import PersistLogin from '@components/auth/PersistLogin';
 import OnBoardingRouter from './pages/OnBoarding';
 import HomeRouter from './pages/Home';
 import WalkRouter from './pages/Walk';
 import MypageRouter from './pages/Mypage';
-import NotFound from './pages/NotFound';
-import RequireAuth from '@components/auth/RequireAuth';
-import PersistLogin from '@components/auth/PersistLogin';
-import TestPage from './pages/Test/TestPage';
-import { useQueryClient } from 'react-query';
 import GroupLink from './components/mypage/GroupLink';
 import ManageRouter from './pages/Manage';
 import InterestRouter from './pages/Interest';
+import NotFound from './pages/NotFound';
+import TestPage from './pages/Test/TestPage';
 
 function App() {
   const queryClient = useQueryClient();
@@ -32,7 +32,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
         <Route path="/link/:groupCode" element={<GroupLink />} />
-        <Route path="/test/*" element={<TestPage />} />
+        {/* <Route path="/test/*" element={<TestPage />} /> */}
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
             <Route path="/*" element={<HomeRouter />} />

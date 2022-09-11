@@ -8,11 +8,12 @@ import {
   setLevel,
 } from '@store/slices/authSlice';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import registerEXPOToken from '@lib/utils/registerEXPOToken';
 
 function PersistLogin() {
   const accessToken = useAppSelector(selectAccessToken);
   const isKid = useAppSelector(selectIsKid);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isFetching, setIsFetching] = useState(true);
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
@@ -32,15 +33,16 @@ function PersistLogin() {
       } catch (error) {
         navigate('/auth/login'); // access token expired
       } finally {
-        isMounted && setIsLoading(false); // escape memory leak
+        isMounted && setIsFetching(false); // escape memory leak
       }
     }
     console.log('aT in fetchLevel: ', accessToken);
     isRegisteredUser && fetchLevel();
+    registerEXPOToken();
     return () => (isMounted = false);
   }, []);
 
-  if (isRegisteredUser && isLoading) {
+  if (isRegisteredUser && isFetching) {
     return <CustomSyncLoader />;
   } else {
     return <Outlet />;
