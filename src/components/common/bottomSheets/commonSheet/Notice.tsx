@@ -29,7 +29,12 @@ const content = {
   sunday: {
     icon: <Banki />,
     main: '오늘은 뱅키즈 쉬는 날',
-    sub: '매주 일요일에는 돈길 수락 및 거절이 불가해요.',
+    sub: (
+      <>
+        <p>매주 일요일에는 돈길 계약과 수락이 불가해요</p>
+        <p>다만, 돈길 걷기는 할 수 있어요!</p>
+      </>
+    ),
   },
   expired: {
     icon: <Warning />,
@@ -49,7 +54,7 @@ function Notice({ type, onMainActionClick }: NoticeProps) {
       <Container type={type}>
         {content[type].icon}
         <p>{content[type].main}</p>
-        <p>{content[type].sub}</p>
+        <div className="sub">{content[type].sub}</div>
       </Container>
       <Button
         label="확인"
@@ -89,9 +94,12 @@ const Container = styled.div<{
         ? theme.palette.sementic.red300
         : theme.palette.greyScale.black};
   }
-  & > p:last-child {
+  .sub {
     ${({ theme }) => theme.typo.popup.Sub_S_14_R}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
     margin-right: auto;
+    & > p:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 `;
