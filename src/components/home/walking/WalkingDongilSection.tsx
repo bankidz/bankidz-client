@@ -1,9 +1,12 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useAppSelector } from '@store/app/hooks';
 import {
   selectWalkingDongils,
   selectWalkingDongilsStatus,
 } from '@store/slices/walkingDongilsSlice';
+import dayjs from 'dayjs';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ContractNewDongilLink from './ContractNewDongilLink';
@@ -14,18 +17,49 @@ function WalkingDongilSection() {
   const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
   const walkingDongils = useAppSelector(selectWalkingDongils);
   const navigate = useNavigate();
+  const { setOpenBottomSheet } = useGlobalBottomSheet();
+  const [createDisabled, setCreateDisabled] = useState<boolean>(false);
+
+  const navigateCreateDongil = () => {
+    if (walkingDongils.length === 5) {
+      setOpenBottomSheet({
+        sheetContent: 'Notice',
+        sheetProps: { open: true },
+        contentProps: { type: 'createExceeded' },
+      });
+      setCreateDisabled(true);
+    } else if (dayjs().day() === 0) {
+      setOpenBottomSheet({
+        sheetContent: 'Notice',
+        sheetProps: { open: true },
+        contentProps: { type: 'sunday' },
+      });
+      setCreateDisabled(true);
+    } else {
+      navigate('create/1');
+    }
+  };
 
   let content: JSX.Element = <></>;
   if (walkingDongilsStatus === 'loading') {
     content = <SkeletonDongilList variant="walking" />;
   } else if (walkingDongilsStatus === 'succeeded') {
     if (walkingDongils?.length === 0) {
-      content = <EmptyWalkingDongil onClick={() => navigate('/create/1')} />;
+      content = (
+        <EmptyWalkingDongil
+          onClick={navigateCreateDongil}
+          createDisabled={createDisabled}
+        />
+      );
     } else {
       content = (
         <>
           <WalkingDongilList walkingDongils={walkingDongils!} />
-          <ContractNewDongilLink to={'/create/1'} />
+          <ContractNewDongilLink
+            to={'/create/1'}
+            createDisabled={createDisabled}
+            navigateCreateDongil={navigateCreateDongil}
+          />
         </>
       );
     }

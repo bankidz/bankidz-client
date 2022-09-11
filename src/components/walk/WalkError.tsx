@@ -6,15 +6,35 @@ import { useNavigate } from 'react-router-dom';
 import { FAMILY } from '@lib/constants/QUERY_KEY';
 import { useQuery } from 'react-query';
 import useFamilyApi from '@apis/family/useFamilyApi';
+import dayjs from 'dayjs';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import { useState } from 'react';
 
 function WalkError() {
   const { getFamily } = useFamilyApi();
   const { data, status } = useQuery(FAMILY, getFamily);
   const hasParent = status === 'success' && data?.familyUserList.length > 0;
+  const { setOpenBottomSheet } = useGlobalBottomSheet();
+  const [createDisabled, setCreateDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
+
+  const navigateCreateDongil = () => {
+    console.log(dayjs().day());
+    if (dayjs().day() === 0) {
+      setOpenBottomSheet({
+        sheetContent: 'Notice',
+        sheetProps: { open: true },
+        contentProps: { type: 'sunday' },
+      });
+      setCreateDisabled(true);
+    } else {
+      navigate('create/1');
+    }
+  };
+
   const onButtonClick = () => {
     if (hasParent) {
-      navigate('/create/1');
+      navigateCreateDongil();
     } else {
       //임시
       navigate('/mypage');
@@ -41,6 +61,7 @@ function WalkError() {
                 )}
               </div>
               <OutlinedButton
+                state={!createDisabled}
                 label={hasParent ? '새로운 돈길 계약하기' : '가족 추가하기'}
                 onClick={hasParent ? onButtonClick : onButtonClick}
               />

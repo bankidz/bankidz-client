@@ -3,7 +3,6 @@ import Alerts from './Alerts';
 import Faq from './Faq';
 import Features from './Features';
 import Guides from './Guides';
-import Inquiry from './Inquiry';
 import Notices from './Notices';
 import NoticeView from './NoticeView';
 import Privacy from './Privacy';

@@ -155,8 +155,8 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   return (
     <StyledButton
       onClick={
-        // 7: Sunday
-        currentDayOfWeek === 7
+        // 0: Sunday
+        currentDayOfWeek === 0
           ? openNoticeSundayBottomSheet
           : openProposedReceiptModal
       }
