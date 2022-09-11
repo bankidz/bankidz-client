@@ -56,7 +56,11 @@ function WalkingDongilSection() {
       content = (
         <>
           <WalkingDongilList walkingDongils={walkingDongils!} />
-          <ContractNewDongilLink to={'/create/1'} />
+          <ContractNewDongilLink
+            to={'/create/1'}
+            createDisabled={createDisabled}
+            navigateCreateDongil={navigateCreateDongil}
+          />
         </>
       );
     }
