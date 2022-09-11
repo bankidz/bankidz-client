@@ -1,6 +1,9 @@
+import { IMyPageDTO, IUserDTO } from '@apis/user/user.dto';
 import MarginTemplate from '@components/layout/MarginTemplate';
+import { USER } from '@lib/constants/QUERY_KEY';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
+import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
 
 interface WithdrawTemplateProps {
@@ -8,7 +11,8 @@ interface WithdrawTemplateProps {
 }
 
 function WithdrawTemplate({ children }: WithdrawTemplateProps) {
-  const username = '안도영'; // TODO: get User data -> render username
+  const queryClient = useQueryClient();
+  const user = queryClient.getQueryData(USER) as IMyPageDTO;
   const isKid = useAppSelector(selectIsKid);
 
   return (
@@ -16,7 +20,7 @@ function WithdrawTemplate({ children }: WithdrawTemplateProps) {
       <h1>탈퇴하기</h1>
       <MarginTemplate>
         <header>
-          <h1>{`${username}님, 정말 뱅키즈를\n탈퇴하시겠어요?`}</h1>
+          <h1>{`${user.user.username}님, 정말 뱅키즈를\n탈퇴하시겠어요?`}</h1>
           {isKid ? (
             <p>{`뱅키즈를 이용하면 부모님과 함께\n목표에 한 발짝 다가갈 수 있어요`}</p>
           ) : (

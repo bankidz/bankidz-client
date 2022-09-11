@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 import { ReactComponent as PlusCircle } from '@assets/icons/plus-circle.svg';
 import { HTMLAttributes } from 'react';
+import { create } from 'domain';
 
-interface EmptyWalkingDongilProps extends HTMLAttributes<HTMLButtonElement> {}
+interface EmptyWalkingDongilProps extends HTMLAttributes<HTMLButtonElement> {
+  createDisabled: boolean;
+}
 
-function EmptyWalkingDongil({ ...props }: EmptyWalkingDongilProps) {
+function EmptyWalkingDongil({
+  createDisabled,
+  ...props
+}: EmptyWalkingDongilProps) {
   return (
-    <Wrapper>
-      <button {...props}>
+    <Wrapper createDisabled={createDisabled}>
+      <button disabled={createDisabled} {...props}>
         <PlusCircle />
       </button>
       <span>새로운 돈길 계약하기</span>
@@ -17,7 +23,7 @@ function EmptyWalkingDongil({ ...props }: EmptyWalkingDongilProps) {
 
 export default EmptyWalkingDongil;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ createDisabled: boolean }>`
   width: 100%;
   height: 162px;
   border-radius: ${({ theme }) => theme.radius.medium};
@@ -32,10 +38,19 @@ const Wrapper = styled.div`
     width: 48px;
     height: 48px;
     border-radius: 50%;
+    svg {
+      fill: ${({ createDisabled, theme }) =>
+        createDisabled
+          ? theme.palette.greyScale.grey300
+          : theme.palette.main.yellow300};
+    }
   }
   span {
     margin-top: 16px;
     ${({ theme }) => theme.typo.text.T_18_EB};
-    color: ${({ theme }) => theme.palette.greyScale.black};
+    color: ${({ createDisabled, theme }) =>
+      createDisabled
+        ? theme.palette.greyScale.grey600
+        : theme.palette.greyScale.black};
   }
 `;
