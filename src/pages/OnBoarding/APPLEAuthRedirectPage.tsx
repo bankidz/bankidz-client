@@ -22,8 +22,6 @@ function APPLEAuthRedirectPage() {
         provider &&
         dispatch(setCredentials({ accessToken, isKid, level, provider }));
       setLocalStorage('accessToken', accessToken);
-      setLocalStorage('isKid', isKid);
-      setLocalStorage('provider', provider);
       registerEXPOToken();
       navigate('/');
     }

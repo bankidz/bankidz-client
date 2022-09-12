@@ -109,6 +109,7 @@ export const authSlice = createSlice({
     builder
       .addCase(login.fulfilled, (state, action) => {
         const { accessToken, isKid, level, provider } = action.payload.data;
+        setLocalStorage('accessToken', accessToken);
         state.auth.accessToken = accessToken;
         state.auth.isKid = isKid;
         state.auth.level = level;
