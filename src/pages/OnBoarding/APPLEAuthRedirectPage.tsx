@@ -18,7 +18,9 @@ function APPLEAuthRedirectPage() {
 
   useEffect(() => {
     async function proceedLogin() {
-      dispatch(setCredentials({ accessToken, isKid, level, provider }));
+      accessToken &&
+        provider &&
+        dispatch(setCredentials({ accessToken, isKid, level, provider }));
       setLocalStorage('accessToken', accessToken);
       setLocalStorage('isKid', isKid);
       setLocalStorage('provider', provider);
