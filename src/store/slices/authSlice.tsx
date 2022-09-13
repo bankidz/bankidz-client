@@ -1,10 +1,9 @@
-import { axiosPrivateTemp, axiosPublic } from '@apis/axios';
-import { TLevel } from '@lib/types/TLevel';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
-import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
+import { RootState } from '../app/store';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { RootState } from '../app/store';
+import { axiosPrivateTemp, axiosPublic } from '@apis/axios';
+import { TLevel } from '@lib/types/TLevel';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 interface IAuth {
   accessToken: string;

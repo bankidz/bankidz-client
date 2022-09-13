@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { useNavigate } from 'react-router-dom';
-import { FAMILY } from '@lib/constants/QUERY_KEY';
 import { useQuery } from 'react-query';
-import useFamilyApi from '@apis/family/useFamilyApi';
+import useFamilyApi from '@lib/apis/family/useFamilyApi';
 import dayjs from 'dayjs';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useState } from 'react';
+import queryKeys from '@lib/constants/queryKeys';
 
 function WalkError() {
   const { getFamily } = useFamilyApi();
-  const { data, status } = useQuery(FAMILY, getFamily);
+  const { data, status } = useQuery(queryKeys.FAMILY, getFamily);
   const hasParent = status === 'success' && data?.familyUserList.length > 0;
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
