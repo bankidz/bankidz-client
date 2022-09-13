@@ -1,8 +1,8 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import styled from 'styled-components';
-import useGetNotifications from '@lib/hooks/queries/useGetNotifications';
 import AlertList from '@components/home/AlertList';
+import useGetNotifications from '@queries/notification/useGetNotifications';
 const Alert = () => {
   const { data, Observation } = useGetNotifications();
   return (

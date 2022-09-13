@@ -5,39 +5,42 @@ import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
-import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useFamilyApi from '@apis/family/useFamilyApi';
-import useUserApi from '@apis/user/useUserAPi';
+import useFamilyApi from '@lib/apis/family/useFamilyApi';
+import useUserApi from '@lib/apis/user/useUserAPi';
 import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
+import queryKeys from '@lib/constants/queryKeys';
 
 function Mypage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
-  const { getFamily, createFamily } = useFamilyApi();
+  const { getFamily, createFamily, getKid } = useFamilyApi();
   const { getUser } = useUserApi();
-  const { getKid } = useFamilyApi();
 
   const [family, user] = useQueries([
-    { queryKey: FAMILY, queryFn: getFamily },
-    { queryKey: USER, queryFn: getUser },
+    { queryKey: queryKeys.FAMILY, queryFn: getFamily },
+    { queryKey: queryKeys.USER, queryFn: getUser },
   ]);
 
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
-  const { data: kidData, status: kidStatus } = useQuery(KID, getKid, {
-    enabled: userData?.user.isKid === false,
-  });
+  const { data: kidData, status: kidStatus } = useQuery(
+    queryKeys.FAMILY_KID,
+    getKid,
+    {
+      enabled: userData?.user.isKid === false,
+    },
+  );
 
   const { mutate: MutateCreateFamily } = useMutation(createFamily, {
     onSuccess: (data) => {
       openCreateDongilCompletedSheet();
-      queryClient.invalidateQueries(FAMILY);
+      queryClient.invalidateQueries(queryKeys.FAMILY);
     },
   });
 

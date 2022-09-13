@@ -12,9 +12,9 @@ import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TPage } from '@lib/types/TPage';
 import { useNavigate } from 'react-router-dom';
-import useNotificationApi from '@apis/notification/useNotificationApi';
-import { NOTIFICATION_IS_READ } from '@lib/constants/QUERY_KEY';
+import useNotificationApi from '@lib/apis/notification/useNotificationApi';
 import { useQuery } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
 
 interface FixedBarProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -33,7 +33,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
   const kidsStatus = useAppSelector(selectKidsStatus);
   const { getNotificationIsAllRead } = useNotificationApi();
   const { data: isAllRead } = useQuery(
-    NOTIFICATION_IS_READ,
+    queryKeys.NOTIFICATION_IS_READ,
     getNotificationIsAllRead,
   );
   let kidsList;

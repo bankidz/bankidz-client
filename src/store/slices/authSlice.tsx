@@ -1,4 +1,4 @@
-import { axiosPublic } from '@apis/axios';
+import { axiosPublic } from '@lib/apis/axios';
 import { TLevel } from '@lib/types/TLevel';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';

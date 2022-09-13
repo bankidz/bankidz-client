@@ -1,4 +1,3 @@
-import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
@@ -9,22 +8,23 @@ import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
-import useFamilyApi from '@apis/family/useFamilyApi';
-import { IMyPageDTO } from '@apis/user/user.dto';
-import { IFamilyDTO } from '@apis/family/family.dto';
+import useFamilyApi from '@lib/apis/family/useFamilyApi';
+import { IMyPageDTO } from '@lib/apis/user/user.dto';
+import { IFamilyDTO } from '@lib/apis/family/family.dto';
+import queryKeys from '@lib/constants/queryKeys';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
   const { leaveFamily } = useFamilyApi();
   const queryClient = useQueryClient();
-  const userData = queryClient.getQueryData(USER) as IMyPageDTO;
-  const familyData = queryClient.getQueryData(FAMILY) as IFamilyDTO;
+  const userData = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
+  const familyData = queryClient.getQueryData(queryKeys.FAMILY) as IFamilyDTO;
 
   const { mutate: MutateLeaveFamily } = useMutation(leaveFamily, {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
-      queryClient.invalidateQueries(FAMILY);
-      queryClient.invalidateQueries(KID);
+      queryClient.invalidateQueries(queryKeys.FAMILY);
+      queryClient.invalidateQueries(queryKeys.FAMILY_KID);
     },
   });
 
