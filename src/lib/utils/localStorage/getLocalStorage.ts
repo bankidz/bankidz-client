@@ -1,4 +1,4 @@
-import { TLocalStorageKey } from './TLocalStorageKey';
+import { TLocalStorageKey } from '../../types/TLocalStorageKey';
 
 /**
  * @param key 필요 시 key를 TKey에 추가해주세요.
@@ -6,7 +6,6 @@ import { TLocalStorageKey } from './TLocalStorageKey';
  */
 function getLocalStorage(key: TLocalStorageKey) {
   const value = localStorage.getItem(key);
-  console.log(value);
   if (value) {
     return JSON.parse(value);
   }

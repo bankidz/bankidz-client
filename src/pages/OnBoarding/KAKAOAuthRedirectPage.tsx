@@ -18,9 +18,6 @@ function KAKAOAuthRedirectPage() {
       try {
         if (code) {
           const response = await dispatch(login({ code })).unwrap();
-          setLocalStorage('accessToken', response.data.accessToken);
-          setLocalStorage('isKid', response.data.isKid);
-          setLocalStorage('provider', response.data.provider);
         }
         registerEXPOToken();
         navigate('/');

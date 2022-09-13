@@ -1,48 +1,34 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import {
-  selectAccessToken,
-  selectIsKid,
-  setLevel,
-} from '@store/slices/authSlice';
+import { useAppDispatch } from '@store/app/hooks';
+import { persistLogin } from '@store/slices/authSlice';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 
 function PersistLogin() {
-  const accessToken = useAppSelector(selectAccessToken);
-  const isKid = useAppSelector(selectIsKid);
-  const [isFetching, setIsFetching] = useState(true);
+  const accessToken = getLocalStorage('accessToken');
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const isRegisteredUser = accessToken && isKid;
 
   // @ts-expect-error
   useEffect(() => {
     let isMounted = true;
-    async function fetchLevel() {
+    async function proceedPersistLogin() {
       try {
-        const response = await axiosPrivate.get('/user');
-        const { isKid } = response.data.data.user;
-        if (isKid) {
-          const { level } = response.data.data.kid;
-          dispatch(setLevel(level)); // get latest level
-        }
+        const response = await dispatch(persistLogin()).unwrap();
       } catch (error) {
-        navigate('/auth/login'); // access token expired
+        console.error(error);
       } finally {
-        isMounted && setIsFetching(false); // escape memory leak
+        isMounted && setIsLoading(false); // escape memory leak
       }
     }
-    console.log('aT in fetchLevel: ', accessToken);
-    isRegisteredUser && fetchLevel();
+    accessToken && proceedPersistLogin();
     registerEXPOToken();
     return () => (isMounted = false);
   }, []);
 
-  if (isRegisteredUser && isFetching) {
+  if (accessToken && isLoading) {
     return <CustomSyncLoader />;
   } else {
     return <Outlet />;
