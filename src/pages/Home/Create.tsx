@@ -8,11 +8,11 @@ import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
 import { useQuery } from 'react-query';
-import { FAMILY } from '@lib/constants/QUERY_KEY';
-import useFamilyApi from '@apis/family/useFamilyApi';
+import useFamilyApi from '@lib/apis/family/useFamilyApi';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { dispatchParent } from '@store/slices/createChallengeSlice';
+import queryKeys from '@lib/constants/queryKeys';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -32,7 +32,7 @@ function Create() {
   const { step } = useParams();
   const dispatch = useAppDispatch();
   const { getFamily } = useFamilyApi();
-  const { data: familyData, status } = useQuery(FAMILY, getFamily);
+  const { data: familyData, status } = useQuery(queryKeys.FAMILY, getFamily);
   const parents = familyData?.familyUserList.filter((member) => !member.isKid);
   const isAlone = parents?.length === 1;
 

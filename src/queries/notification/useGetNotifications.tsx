@@ -1,16 +1,16 @@
 import { useInfiniteQuery } from 'react-query';
 import { useInView } from 'react-intersection-observer';
 import { ReactElement, useEffect } from 'react';
-import { INotificationDTO } from '@apis/notification/notification.dto';
-import useNotificationApi from '@apis/notification/useNotificationApi';
-import { NOTIFICATION } from '@lib/constants/QUERY_KEY';
+import { INotificationDTO } from '@lib/apis/notification/notification.dto';
+import useNotificationApi from '@lib/apis/notification/useNotificationApi';
+import queryKeys from '@lib/constants/queryKeys';
 
 const useGetNotifications = () => {
   const { getNotification } = useNotificationApi();
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
     INotificationDTO,
     unknown
-  >(NOTIFICATION, getNotification, {
+  >(queryKeys.NOTIFICATION, getNotification, {
     getNextPageParam: (lastPage) => lastPage.lastId,
     //refetchInterval: 5000,
   });

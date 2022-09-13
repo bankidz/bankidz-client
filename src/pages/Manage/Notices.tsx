@@ -1,15 +1,15 @@
-import useNoticeApi from '@apis/notice/useNoticeApi';
+import useNoticeApi from '@lib/apis/notice/useNoticeApi';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { NOTICE } from '@lib/constants/QUERY_KEY';
 import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import queryKeys from '@lib/constants/queryKeys';
 
 const Notices = () => {
   const navigate = useNavigate();
   const { getNotices } = useNoticeApi();
-  const { data } = useQuery(NOTICE, getNotices);
+  const { data } = useQuery(queryKeys.NOTICE, getNotices);
   console.log(data);
   return (
     <ForegroundTemplate label="공지사항">
