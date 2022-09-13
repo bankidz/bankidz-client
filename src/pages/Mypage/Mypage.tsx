@@ -10,34 +10,32 @@ import { darken } from 'polished';
 import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useFamilyApi from '@lib/apis/family/useFamilyApi';
-import useUserApi from '@lib/apis/user/useUserAPi';
 import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
 import queryKeys from '@lib/constants/queryKeys';
+import familyApi from '@lib/apis/family/familyApi';
+import userApi from '@lib/apis/user/userApi';
 
 function Mypage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
-  const { getFamily, createFamily, getKid } = useFamilyApi();
-  const { getUser } = useUserApi();
 
   const [family, user] = useQueries([
-    { queryKey: queryKeys.FAMILY, queryFn: getFamily },
-    { queryKey: queryKeys.USER, queryFn: getUser },
+    { queryKey: queryKeys.FAMILY, queryFn: familyApi.getFamily },
+    { queryKey: queryKeys.USER, queryFn: userApi.getUser },
   ]);
-
+  console.log(family, user);
   const { data: familyData, status: familyStatus } = family;
   const { data: userData, status: userStatus } = user;
   const { data: kidData, status: kidStatus } = useQuery(
     queryKeys.FAMILY_KID,
-    getKid,
+    familyApi.getKid,
     {
       enabled: userData?.user.isKid === false,
     },
   );
 
-  const { mutate: MutateCreateFamily } = useMutation(createFamily, {
+  const { mutate: MutateCreateFamily } = useMutation(familyApi.createFamily, {
     onSuccess: (data) => {
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);

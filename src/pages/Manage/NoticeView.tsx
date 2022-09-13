@@ -1,5 +1,5 @@
-import useNoticeApi from '@lib/apis/notice/useNoticeApi';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
+import noticeApi from '@lib/apis/notice/noticeApi';
 import queryKeys from '@lib/constants/queryKeys';
 import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
@@ -9,9 +9,8 @@ import { NoticeItem } from './Notices';
 
 const NoticeView = () => {
   const { id } = useParams();
-  const { getNotice } = useNoticeApi();
   const { data, status } = useQuery([queryKeys.NOTICE, id], () =>
-    getNotice(id!),
+    noticeApi.getNotice(id!),
   );
   return (
     <ForegroundTemplate>

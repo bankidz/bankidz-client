@@ -8,19 +8,18 @@ import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
-import useFamilyApi from '@lib/apis/family/useFamilyApi';
 import { IMyPageDTO } from '@lib/apis/user/user.dto';
 import { IFamilyDTO } from '@lib/apis/family/family.dto';
 import queryKeys from '@lib/constants/queryKeys';
+import familyApi from '@lib/apis/family/familyApi';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
-  const { leaveFamily } = useFamilyApi();
   const queryClient = useQueryClient();
   const userData = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
   const familyData = queryClient.getQueryData(queryKeys.FAMILY) as IFamilyDTO;
 
-  const { mutate: MutateLeaveFamily } = useMutation(leaveFamily, {
+  const { mutate: MutateLeaveFamily } = useMutation(familyApi.leaveFamily, {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
