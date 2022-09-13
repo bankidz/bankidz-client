@@ -50,9 +50,7 @@ export const login = createAsyncThunk(
 
 // PATCH: 재접속 시 자동로그인 처리
 export const persistLogin = createAsyncThunk('auth/persistLogin', async () => {
-  const accessToken = getLocalStorage('accessToken');
-  const response = await axiosPrivateTemp.patch('/user/refresh', accessToken);
-  console.log('what: ', response.data);
+  const response = await axiosPrivateTemp.patch('/user/refresh');
   return response.data;
 });
 
