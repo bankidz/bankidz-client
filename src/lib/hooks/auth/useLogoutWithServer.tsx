@@ -12,8 +12,6 @@ function useLogoutWithServer() {
       await axiosPrivate.patch('/user/logout');
       dispatch(resetCredentials());
       removeLocalStorage('accessToken');
-      removeLocalStorage('isKid');
-      removeLocalStorage('provider');
     } catch (error) {
       console.error(error);
     }
