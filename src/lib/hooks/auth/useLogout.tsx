@@ -10,8 +10,6 @@ function useLogout() {
   function logout() {
     dispatch(resetCredentials());
     removeLocalStorage('accessToken');
-    removeLocalStorage('isKid');
-    removeLocalStorage('provider');
   }
   return logout;
 }

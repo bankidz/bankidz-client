@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { register, selectBirthday } from '@store/slices/authSlice';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
@@ -10,8 +9,6 @@ import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
 
 function RegisterRole() {
@@ -52,7 +49,6 @@ function RegisterRole() {
             isFemale,
           }),
         ).unwrap();
-        setLocalStorage('isKid', isKid);
         setCloseBottomSheet();
         handleModalOpen(isKid, isFemale);
       } catch (error: any) {

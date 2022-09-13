@@ -1,15 +1,15 @@
-import { axiosPublic } from '@lib/apis/axios';
-import { TLevel } from '@lib/types/TLevel';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import { RootState } from '../app/store';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { RootState } from '../app/store';
+import { axiosPrivateTemp, axiosPublic } from '@apis/axios';
+import { TLevel } from '@lib/types/TLevel';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 interface IAuth {
-  accessToken: string | null;
+  accessToken: string;
   isKid: boolean | null;
-  provider: string | null;
   level: TLevel | null;
+  provider: string;
   birthday: string;
   username: string;
   isFemale: boolean | null;
@@ -23,13 +23,10 @@ interface IAuthState {
 
 const initialState: IAuthState = {
   auth: {
-    accessToken: getLocalStorage('accessToken'),
-    isKid: getLocalStorage('isKid'),
-    //accessToken:
-    //  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyODg3MDc3LCJzdWIiOiI0IiwiZXhwIjoxNjc4NDM5MDc3LCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.W-VmYQgmG_hW8YpNMoogJU3zmSz4CS-3YK9JV9OHNdw',
-    //isKid: true,
-    provider: getLocalStorage('provider'),
+    accessToken: '',
+    isKid: null,
     level: null,
+    provider: '',
     birthday: '',
     username: '',
     isFemale: null,
@@ -37,25 +34,6 @@ const initialState: IAuthState = {
     withdrawReason: '',
   },
 };
-
-// 한규진 카카오 (아들) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzMyMjM4LCJzdWIiOiI0IiwiZXhwIjoxNjc4Mjg0MjM4LCJpZCI6NCwicm9sZXMiOiJVU0VSIn0.EN5n-n8RQv825ummHGIVyoZEnjfyd9N4BA5W8tekuVc"
-// 한규진 애플 (아빠) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzMyMzM5LCJzdWIiOiIxNiIsImV4cCI6MTY3ODI4NDMzOSwiaWQiOjE2LCJyb2xlcyI6IlVTRVIifQ.Xq1D3K03-_OmhdJRDtMPA8okaYkBO2QAka1LJ8vVAGw"
-// 김민준 카카오 (엄마) : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiYW5raWRzIiwiaWF0IjoxNjYyNzE2MjIwLCJzdWIiOiIyIiwiZXhwIjoxNjc4MjY4MjIwLCJpZCI6Miwicm9sZXMiOiJVU0VSIn0.ESHvIwFq_D4Kh7IJGVb3FYZvlZtjSkG_RefmzZ1EhNs"
-
-// const initialState: IAuthState = {
-//   auth: {
-//     accessToken:
-//       'eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NjE0MTMxNTcsInN1YiI6IjIiLCJleHAiOjE2NjI2MjI3NTcsImlkIjoyLCJyb2xlcyI6IlVTRVIifQ.ev6Jy4r-sgdOmASOLQ2aioMVhkYhXFZz3HXeyBzvYwU',
-//     isKid: false,
-//     provider: 'kakao',
-//     level: null,
-//     birthday: '',
-//     username: '',
-//     isFemale: null,
-//     phone: null,
-//     withdrawReason: '',
-//   },
-// };
 
 // POST: 카카오 서버로부터 받은 인증코드를 뱅키즈 서버로 전송
 export const login = createAsyncThunk(
@@ -68,6 +46,12 @@ export const login = createAsyncThunk(
     return response.data;
   },
 );
+
+// PATCH: 재접속 시 자동로그인 처리
+export const persistLogin = createAsyncThunk('auth/persistLogin', async () => {
+  const response = await axiosPrivateTemp.patch('/user/refresh');
+  return response.data;
+});
 
 interface IRegisterThunkPayload
   extends Pick<IAuth, 'birthday' | 'isFemale' | 'isKid'> {
@@ -103,10 +87,10 @@ export const authSlice = createSlice({
       state.auth.provider = provider;
     },
     resetCredentials: (state) => {
-      state.auth.accessToken = null;
+      state.auth.accessToken = '';
       state.auth.isKid = null;
       state.auth.level = null;
-      state.auth.provider = null;
+      state.auth.provider = '';
     },
     setBirthday: (state, action: PayloadAction<string>) => {
       state.auth.birthday = action.payload;
@@ -122,6 +106,15 @@ export const authSlice = createSlice({
     builder
       .addCase(login.fulfilled, (state, action) => {
         const { accessToken, isKid, level, provider } = action.payload.data;
+        setLocalStorage('accessToken', accessToken);
+        state.auth.accessToken = accessToken;
+        state.auth.isKid = isKid;
+        state.auth.level = level;
+        state.auth.provider = provider;
+      })
+      .addCase(persistLogin.fulfilled, (state, action) => {
+        const { accessToken, isKid, level, provider } = action.payload;
+        setLocalStorage('accessToken', accessToken);
         state.auth.accessToken = accessToken;
         state.auth.isKid = isKid;
         state.auth.level = level;
