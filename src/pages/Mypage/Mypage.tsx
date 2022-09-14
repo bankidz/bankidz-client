@@ -7,28 +7,32 @@ import OverView from '@components/mypage/OverView';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
 import queryKeys from '@lib/constants/queryKeys';
-import familyApi from '@lib/apis/family/familyApi';
 import useFamilyQuery from '@queries/family/useFamilyQuery';
 import useUserQuery from '@queries/user/useUserQuery';
 import useFamilyKidQuery from '@queries/family/useFamilyKidQuery';
+import useCreateFamilyMutation from '@queries/family/useCreateFamilyMutation';
 
 function Mypage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
 
-  const { data: familyData, status: familyStatus } = useFamilyQuery();
+  const { data: familyData, status: familyStatus } = useFamilyQuery({
+    onError: () => {
+      console.log('가족 없음');
+    },
+  });
   const { data: userData, status: userStatus } = useUserQuery();
   const { data: kidData, status: kidStatus } = useFamilyKidQuery({
     enabled: userData?.user.isKid === false,
   });
 
-  const { mutate: MutateCreateFamily } = useMutation(familyApi.createFamily, {
+  const { mutate: MutateCreateFamily } = useCreateFamilyMutation({
     onSuccess: (data) => {
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
@@ -73,18 +77,14 @@ function Mypage() {
           </Section>
         )}
         <Section>
-          {familyStatus === 'success' && (
-            <>
-              <h2>가족 관리</h2>
-              {familyData!.id ? (
-                <FamilyList family={familyData!.familyUserList} />
-              ) : (
-                <CreateDongil onClick={() => MutateCreateFamily()}>
-                  <p>가족그룹 만들기</p>
-                  <p>그룹을 만들고 가족을 초대해봐요</p>
-                </CreateDongil>
-              )}
-            </>
+          <h2>가족 관리</h2>
+          {familyStatus === 'success' ? (
+            <FamilyList family={familyData!.familyUserList} />
+          ) : (
+            <CreateDongil onClick={MutateCreateFamily}>
+              <p>가족그룹 만들기</p>
+              <p>그룹을 만들고 가족을 초대해봐요</p>
+            </CreateDongil>
           )}
         </Section>
       </MarginTemplate>
