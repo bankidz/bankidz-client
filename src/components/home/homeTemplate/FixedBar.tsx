@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import notificationApi from '@lib/apis/notification/notificationApi';
+import useNotificationIsAllReadQuery from '@queries/notification/useNotificationIsAllReadQuery';
 
 interface FixedBarProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -31,10 +32,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
 
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
   const kidsStatus = useAppSelector(selectKidsStatus);
-  const { data: isAllRead } = useQuery(
-    queryKeys.NOTIFICATION_IS_READ,
-    notificationApi.getNotificationIsAllRead,
-  );
+  const { data: isAllRead } = useNotificationIsAllReadQuery();
   let kidsList;
   if (kidsStatus === 'loading') {
     kidsList = <p>Loading</p>;

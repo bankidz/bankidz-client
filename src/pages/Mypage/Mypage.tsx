@@ -7,33 +7,26 @@ import OverView from '@components/mypage/OverView';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
-import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
 import queryKeys from '@lib/constants/queryKeys';
 import familyApi from '@lib/apis/family/familyApi';
-import userApi from '@lib/apis/user/userApi';
+import useFamilyQuery from '@queries/family/useFamilyQuery';
+import useUserQuery from '@queries/user/useUserQuery';
+import useFamilyKidQuery from '@queries/family/useFamilyKidQuery';
 
 function Mypage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
 
-  const [family, user] = useQueries([
-    { queryKey: queryKeys.FAMILY, queryFn: familyApi.getFamily },
-    { queryKey: queryKeys.USER, queryFn: userApi.getUser },
-  ]);
-  console.log(family, user);
-  const { data: familyData, status: familyStatus } = family;
-  const { data: userData, status: userStatus } = user;
-  const { data: kidData, status: kidStatus } = useQuery(
-    queryKeys.FAMILY_KID,
-    familyApi.getKid,
-    {
-      enabled: userData?.user.isKid === false,
-    },
-  );
+  const { data: familyData, status: familyStatus } = useFamilyQuery();
+  const { data: userData, status: userStatus } = useUserQuery();
+  const { data: kidData, status: kidStatus } = useFamilyKidQuery({
+    enabled: userData?.user.isKid === false,
+  });
 
   const { mutate: MutateCreateFamily } = useMutation(familyApi.createFamily, {
     onSuccess: (data) => {

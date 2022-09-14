@@ -6,10 +6,10 @@ import isEmptyObject from '@lib/utils/isEmptyObject';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
-import queryKeys from '@lib/constants/queryKeys';
 import userApi from '@lib/apis/user/userApi';
+import useUserOptInQuery from '@queries/user/useUserOptInQuery';
 
 const Alerts = () => {
   const { mutate: mutateNotice } = useMutation(userApi.patchNoticeAlert, {
@@ -26,9 +26,9 @@ const Alerts = () => {
     setLocalStorage('alert', data);
     setAlert(data);
   };
-  const { data } = useQuery(queryKeys.USER_OPTIN, userApi.getUserOptIn, {
+  const { data } = useUserOptInQuery({
     enabled: isEmptyObject(alert),
-    onSuccess: (data) => syncAlert(data),
+    onSuccess: (res) => syncAlert(res),
   });
 
   const [toggleNotice, setToggleNotice, clickToggleNotice] = useToggle(

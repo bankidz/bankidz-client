@@ -6,7 +6,7 @@ import useNotificationApi from '@lib/apis/notification/notificationApi';
 import queryKeys from '@lib/constants/queryKeys';
 import notificationApi from '@lib/apis/notification/notificationApi';
 
-const useGetNotifications = () => {
+const useInfiniteNotificationQuery = () => {
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
     INotificationDTO,
     unknown
@@ -35,4 +35,4 @@ const useGetNotifications = () => {
   return { data, fetchNextPage, isFetchingNextPage, Observation };
 };
 
-export default useGetNotifications;
+export default useInfiniteNotificationQuery;

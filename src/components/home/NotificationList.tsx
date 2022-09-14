@@ -9,7 +9,11 @@ import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import notificationApi from '@lib/apis/notification/notificationApi';
 
-const AlertList = ({ alertList }: { alertList: INotification[] }) => {
+const NotificationList = ({
+  notifications,
+}: {
+  notifications: INotification[];
+}) => {
   const navigate = useNavigate();
   const icon = {
     CHALLENGE: <AlertDongil />,
@@ -24,7 +28,7 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
     FAMILY: '가족',
   };
 
-  const onAlertItemClick = useCallback(
+  const onNotificationItemClick = useCallback(
     async (id: number, isRead: boolean, url: string) => {
       if (!isRead) {
         await notificationApi.patchNotificationIsRead(id);
@@ -37,23 +41,27 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
 
   return (
     <Wrapper>
-      {alertList.map((alert) => (
+      {notifications.map((notification) => (
         <Item
-          key={alert.id}
-          isRead={alert.isRead}
+          key={notification.id}
+          isRead={notification.isRead}
           onClick={() =>
-            onAlertItemClick(alert.id, alert.isRead, alert.linkUrl)
+            onNotificationItemClick(
+              notification.id,
+              notification.isRead,
+              notification.linkUrl,
+            )
           }
         >
-          {icon[alert.notificationCategory]}
+          {icon[notification.notificationCategory]}
           <div>
             <div className="sub">
-              <p>{category[alert.notificationCategory]}</p>
-              <p>{getTimeForToday(alert.createdAt)}</p>
+              <p>{category[notification.notificationCategory]}</p>
+              <p>{getTimeForToday(notification.createdAt)}</p>
             </div>
             <div className="main">
-              <p>{alert.title}</p>
-              <p>{alert.message}</p>
+              <p>{notification.title}</p>
+              <p>{notification.message}</p>
             </div>
           </div>
         </Item>
@@ -62,7 +70,7 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
   );
 };
 
-export default AlertList;
+export default NotificationList;
 
 const Wrapper = styled.div``;
 

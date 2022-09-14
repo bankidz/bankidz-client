@@ -1,10 +1,11 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import styled from 'styled-components';
-import AlertList from '@components/home/AlertList';
-import useGetNotifications from '@queries/notification/useGetNotifications';
-const Alert = () => {
-  const { data, Observation } = useGetNotifications();
+import useInfiniteNotificationQuery from '@queries/notification/useGetNotifications';
+import NotificationList from '@components/home/NotificationList';
+
+const Notification = () => {
+  const { data, Observation } = useInfiniteNotificationQuery();
   return (
     <ForegroundTemplate label="알림 내역">
       <>
@@ -15,10 +16,10 @@ const Alert = () => {
           </Content>
         ) : (
           <>
-            {data?.pages.map((alertList) => (
-              <AlertList
-                alertList={alertList.notificationList}
-                key={alertList.lastId}
+            {data?.pages.map((notifications) => (
+              <NotificationList
+                notifications={notifications.notificationList}
+                key={notifications.lastId}
               />
             ))}
           </>
@@ -30,7 +31,7 @@ const Alert = () => {
   );
 };
 
-export default Alert;
+export default Notification;
 
 const Content = styled.div`
   height: 224px;
