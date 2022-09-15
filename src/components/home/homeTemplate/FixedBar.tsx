@@ -12,9 +12,10 @@ import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TPage } from '@lib/types/TPage';
 import { useNavigate } from 'react-router-dom';
-import useNotificationApi from '@lib/apis/notification/useNotificationApi';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
+import notificationApi from '@lib/apis/notification/notificationApi';
+import useNotificationIsAllReadQuery from '@queries/notification/useNotificationIsAllReadQuery';
 
 interface FixedBarProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -31,11 +32,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
 
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
   const kidsStatus = useAppSelector(selectKidsStatus);
-  const { getNotificationIsAllRead } = useNotificationApi();
-  const { data: isAllRead } = useQuery(
-    queryKeys.NOTIFICATION_IS_READ,
-    getNotificationIsAllRead,
-  );
+  const { data: isAllRead } = useNotificationIsAllReadQuery();
   let kidsList;
   if (kidsStatus === 'loading') {
     kidsList = <p>Loading</p>;
@@ -62,7 +59,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
       hasMultipleKids={hasMultipleKids}
       isAllRead={isAllRead!}
     >
-      <div className="alert" onClick={() => navigate('/alert')}>
+      <div className="alert" onClick={() => navigate('/notification')}>
         <Bell />
       </div>
       <div className="logo-wrapper">
@@ -89,7 +86,8 @@ const Wrapper = styled.div<{
   transition-property: background-color;
   position: fixed;
   width: 100%;
-
+  left: 0px;
+  top: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

@@ -9,7 +9,7 @@ import Create from './Create';
 import DetailPage from './DetailPage';
 import Reject from './Reject';
 import useLevel from '@lib/hooks/useLevel';
-import Alert from './Alert';
+import Notification from './Notification';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -53,7 +53,7 @@ function HomeRouter() {
         path="reject/:id"
         element={isKid ? <>부적절한 접근입니다.</> : <Reject />}
       />
-      <Route path="alert" element={<Alert />} />
+      <Route path="notification" element={<Notification />} />
     </Routes>
   );
 }

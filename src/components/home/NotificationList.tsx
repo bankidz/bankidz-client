@@ -1,4 +1,4 @@
-import { INotification } from '@apis/notification/notification.dto';
+import { INotification } from '@lib/apis/notification/notification.dto';
 import { ReactComponent as AlertDongil } from '@assets/icons/alertDongil.svg';
 import { ReactComponent as AlertNotice } from '@assets/icons/alertNotice.svg';
 import { ReactComponent as AlertLevel } from '@assets/icons/alertLevel.svg';
@@ -6,11 +6,14 @@ import { ReactComponent as AlertFamily } from '@assets/icons/alertFamily.svg';
 import styled, { css } from 'styled-components';
 import getTimeForToday from '@lib/utils/getTimeForToday';
 import { useCallback } from 'react';
-import useNotificationApi from '@apis/notification/useNotificationApi';
 import { useNavigate } from 'react-router-dom';
+import notificationApi from '@lib/apis/notification/notificationApi';
 
-const AlertList = ({ alertList }: { alertList: INotification[] }) => {
-  const { patchNotificationIsRead } = useNotificationApi();
+const NotificationList = ({
+  notifications,
+}: {
+  notifications: INotification[];
+}) => {
   const navigate = useNavigate();
   const icon = {
     CHALLENGE: <AlertDongil />,
@@ -25,10 +28,10 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
     FAMILY: '가족',
   };
 
-  const onAlertItemClick = useCallback(
+  const onNotificationItemClick = useCallback(
     async (id: number, isRead: boolean, url: string) => {
       if (!isRead) {
-        await patchNotificationIsRead(id);
+        await notificationApi.patchNotificationIsRead(id);
       }
       console.log(url);
       url && navigate(url); //TODO : 임시
@@ -38,23 +41,27 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
 
   return (
     <Wrapper>
-      {alertList.map((alert) => (
+      {notifications.map((notification) => (
         <Item
-          key={alert.id}
-          isRead={alert.isRead}
+          key={notification.id}
+          isRead={notification.isRead}
           onClick={() =>
-            onAlertItemClick(alert.id, alert.isRead, alert.linkUrl)
+            onNotificationItemClick(
+              notification.id,
+              notification.isRead,
+              notification.linkUrl,
+            )
           }
         >
-          {icon[alert.notificationCategory]}
+          {icon[notification.notificationCategory]}
           <div>
             <div className="sub">
-              <p>{category[alert.notificationCategory]}</p>
-              <p>{getTimeForToday(alert.createdAt)}</p>
+              <p>{category[notification.notificationCategory]}</p>
+              <p>{getTimeForToday(notification.createdAt)}</p>
             </div>
             <div className="main">
-              <p>{alert.title}</p>
-              <p>{alert.message}</p>
+              <p>{notification.title}</p>
+              <p>{notification.message}</p>
             </div>
           </div>
         </Item>
@@ -63,7 +70,7 @@ const AlertList = ({ alertList }: { alertList: INotification[] }) => {
   );
 };
 
-export default AlertList;
+export default NotificationList;
 
 const Wrapper = styled.div``;
 

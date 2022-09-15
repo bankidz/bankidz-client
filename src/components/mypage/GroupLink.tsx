@@ -1,13 +1,12 @@
-import useFamilyApi from '@lib/apis/family/useFamilyApi';
-import useUserApi from '@lib/apis/user/useUserAPi';
 import useOpenGroupLinkSheets from '@components/mypage/useOpenGroupLinkSheets';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { decipher } from '@lib/utils/crypt';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { useMutation, useQueries } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import queryKeys from '@lib/constants/queryKeys';
+import useJoinFamilyMutation from '@queries/family/useJoinFamilyMutation';
+import useFamilyQuery from '@queries/family/useFamilyQuery';
+import useUserQuery from '@queries/user/useUserQuery';
 
 const GroupLink = () => {
   const navigate = useNavigate();
@@ -22,14 +21,8 @@ const GroupLink = () => {
     openMoveGroupCompletedSheet,
   } = useOpenGroupLinkSheets();
 
-  const { getFamily, joinFamily } = useFamilyApi();
-  const { getUser } = useUserApi();
-  const [family, user] = useQueries([
-    { queryKey: queryKeys.FAMILY, queryFn: getFamily },
-    { queryKey: queryKeys.USER, queryFn: getUser },
-  ]);
-  const { data: familyData, status: familyStatus } = family;
-  const { data: userData, status: userStatus } = user;
+  const { data: familyData, status: familyStatus } = useFamilyQuery();
+  const { data: userData, status: userStatus } = useUserQuery();
 
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
@@ -40,10 +33,10 @@ const GroupLink = () => {
     openMoveGroupCompletedSheet(handleSheetCompletedAction);
   };
 
-  const { mutate: MutateJoinFamily } = useMutation(joinFamily, {
+  const { mutate: MutateJoinFamily } = useJoinFamilyMutation({
     onSuccess: handleSheetCompletedAction,
   });
-  const { mutate: MutateMoveFamily } = useMutation(joinFamily, {
+  const { mutate: MutateMoveFamily } = useJoinFamilyMutation({
     onSuccess: handleMoveGroupCompleted,
   });
 
