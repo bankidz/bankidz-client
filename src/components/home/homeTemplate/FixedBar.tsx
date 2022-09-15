@@ -59,7 +59,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
       hasMultipleKids={hasMultipleKids}
       isAllRead={isAllRead!}
     >
-      <div className="alert" onClick={() => navigate('/alert')}>
+      <div className="alert" onClick={() => navigate('/notification')}>
         <Bell />
       </div>
       <div className="logo-wrapper">
@@ -86,7 +86,8 @@ const Wrapper = styled.div<{
   transition-property: background-color;
   position: fixed;
   width: 100%;
-
+  left: 0px;
+  top: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
