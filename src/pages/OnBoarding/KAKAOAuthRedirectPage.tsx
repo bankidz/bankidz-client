@@ -1,10 +1,12 @@
 import { useAppDispatch } from '@store/app/hooks';
-import { login } from '@store/slices/authSlice';
+import { login, setCredentials } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
+import useKakaoLoginMutation from '@queries/kakao/useKakaoLoginMutation';
+import { ILoginDTO } from '@lib/apis/kakao/kakaoDTO';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
@@ -13,19 +15,18 @@ function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const kakaoLoginMutation = useKakaoLoginMutation({
+    onSuccess: (data: ILoginDTO) => {
+      const { accessToken, isKid, level, provider } = data;
+      setLocalStorage('accessToken', accessToken);
+      dispatch(setCredentials({ accessToken, isKid, level, provider })); // TODO: exclude aT
+      registerEXPOToken();
+      navigate('/');
+    },
+  });
+
   useEffect(() => {
-    async function proceedLogin() {
-      try {
-        if (code) {
-          const response = await dispatch(login({ code })).unwrap();
-        }
-        registerEXPOToken();
-        navigate('/');
-      } catch (error: any) {
-        console.error(error);
-      }
-    }
-    code && proceedLogin();
+    code && kakaoLoginMutation.mutate(code);
   }, []);
 
   return <CustomSyncLoader />;
