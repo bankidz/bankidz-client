@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
-import useKakaoLoginMutation from '@queries/kakao/useKakaoLoginMutation';
 import { ILoginDTO } from '@lib/apis/kakao/kakaoDTO';
+import kakaoAPI from '@lib/apis/kakao/kakaoAPI';
+import { useMutation } from 'react-query';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
@@ -15,7 +16,7 @@ function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const kakaoLoginMutation = useKakaoLoginMutation({
+  const kakaoLoginMutation = useMutation(kakaoAPI.login, {
     onSuccess: (data: ILoginDTO) => {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);

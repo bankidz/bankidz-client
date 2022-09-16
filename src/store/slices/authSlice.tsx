@@ -53,27 +53,14 @@ export const persistLogin = createAsyncThunk('auth/persistLogin', async () => {
   return response.data;
 });
 
-interface IRegisterThunkPayload
-  extends Pick<IAuth, 'birthday' | 'isFemale' | 'isKid'> {
-  axiosPrivate: AxiosInstance;
-}
-
-// PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
-export const register = createAsyncThunk(
-  'auth/register',
-  async (thunkPayload: IRegisterThunkPayload) => {
-    const { axiosPrivate, birthday, isFemale, isKid } = thunkPayload;
-    const response = await axiosPrivate.patch('/user', {
-      birthday,
-      isFemale,
-      isKid,
-    });
-    return response.data;
-  },
-);
-
 interface ICredentials
   extends Pick<IAuth, 'accessToken' | 'isKid' | 'level' | 'provider'> {}
+
+interface IProfile
+  extends Pick<
+    IAuth,
+    'username' | 'isFemale' | 'isKid' | 'birthday' | 'phone'
+  > {}
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -91,6 +78,14 @@ export const authSlice = createSlice({
       state.auth.isKid = null;
       state.auth.level = null;
       state.auth.provider = '';
+    },
+    setProfile: (state, action: PayloadAction<IProfile>) => {
+      const { username, isFemale, isKid, birthday, phone } = action.payload;
+      state.auth.username = username;
+      state.auth.isFemale = isFemale;
+      state.auth.isKid = isKid;
+      state.auth.birthday = birthday;
+      state.auth.phone = phone;
     },
     setBirthday: (state, action: PayloadAction<string>) => {
       state.auth.birthday = action.payload;
@@ -119,15 +114,6 @@ export const authSlice = createSlice({
         state.auth.isKid = isKid;
         state.auth.level = level;
         state.auth.provider = provider;
-      })
-      .addCase(register.fulfilled, (state, action) => {
-        const { birthday, isFemale, isKid, phone, username } =
-          action.payload.data;
-        state.auth.birthday = birthday;
-        state.auth.isFemale = isFemale;
-        state.auth.isKid = isKid;
-        state.auth.phone = phone;
-        state.auth.username = username;
       });
   },
 });
@@ -135,6 +121,7 @@ export const authSlice = createSlice({
 export const {
   setCredentials,
   resetCredentials,
+  setProfile,
   setBirthday,
   setLevel,
   setWithdrawReason,
