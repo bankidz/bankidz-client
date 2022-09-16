@@ -1,5 +1,5 @@
 import { useAppDispatch } from '@store/app/hooks';
-import { login, setCredentials } from '@store/slices/authSlice';
+import { setCredentials } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
