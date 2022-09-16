@@ -1,4 +1,4 @@
-import { IKidListDTO } from '@queries/family/api/familyDTO';
+import { IKidListDTO } from '@lib/apis/family/family.dto';
 import styled from 'styled-components';
 import KidsRecordItem from './KidsRecordItem';
 

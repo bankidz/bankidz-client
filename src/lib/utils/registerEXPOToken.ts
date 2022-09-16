@@ -1,4 +1,4 @@
-import { axiosPrivateTemp } from '@lib/axios/axios';
+import { axiosPrivateTemp } from '@lib/apis/axios';
 
 function registerEXPOToken() {
   let isRegistered = false;

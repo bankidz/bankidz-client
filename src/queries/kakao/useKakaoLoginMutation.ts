@@ -1,4 +1,4 @@
-import kakaoAPI from '@queries/kakao/api/kakaoAPI';
+import kakaoAPI from '@lib/apis/kakao/kakaoAPI';
 import { useMutation } from 'react-query';
 
 function useKakaoLoginMutation({ ...options }) {

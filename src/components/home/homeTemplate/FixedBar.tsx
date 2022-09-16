@@ -14,6 +14,7 @@ import { TPage } from '@lib/types/TPage';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
+import notificationApi from '@lib/apis/notification/notificationApi';
 import useNotificationIsAllReadQuery from '@queries/notification/useNotificationIsAllReadQuery';
 
 interface FixedBarProps {
