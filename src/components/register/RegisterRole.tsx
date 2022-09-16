@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { register, selectBirthday } from '@store/slices/authSlice';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { selectBirthday, setProfile } from '@store/slices/authSlice';
 import RoleButton from '../common/buttons/RoleButton';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
+import userApi from '@lib/apis/user/userApi';
+import { useMutation } from 'react-query';
 
 function RegisterRole() {
   const birthday = useAppSelector(selectBirthday);
@@ -18,7 +18,7 @@ function RegisterRole() {
   const [isTutorial, setIsTutorial] = useState<boolean>(false);
 
   const { openModal } = useModals();
-  function handleModalOpen(isKid: boolean, isFemale: boolean) {
+  const handleModalOpen = (isKid: boolean, isFemale: boolean) => {
     openModal(modals.primaryModal, {
       onSubmit: () => {
         setIsTutorial(true);
@@ -28,36 +28,25 @@ function RegisterRole() {
       headerText: '뱅키즈 첫 가입을 축하해요',
       bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
     });
-  }
+  };
 
   const dispatch = useAppDispatch();
   const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
     useGlobalBottomSheet();
-  const axiosPrivate = useAxiosPrivate();
-  const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
-  const canRegister = birthday && registerStatus === 'idle';
 
-  async function handleSubmit(isKid: boolean, isFemale: boolean) {
-    if (canRegister) {
-      try {
-        setRegisterStatus('pending');
-        await dispatch(
-          register({
-            axiosPrivate,
-            birthday,
-            isKid,
-            isFemale,
-          }),
-        ).unwrap();
-        setCloseBottomSheet();
-        handleModalOpen(isKid, isFemale);
-      } catch (error: any) {
-        console.error(error);
-      } finally {
-        setRegisterStatus('idle');
-      }
-    }
-  }
+  // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
+  const patchUserMutation = useMutation(userApi.patchUser, {
+    onSuccess: (data) => {
+      const { username, isFemale, isKid, birthday, phone } = data;
+      dispatch(setProfile({ username, isFemale, isKid, birthday, phone }));
+      setCloseBottomSheet();
+      handleModalOpen(isKid, isFemale);
+    },
+  });
+
+  const handleSubmit = async (isKid: boolean, isFemale: boolean) => {
+    patchUserMutation.mutate({ isKid, isFemale, birthday });
+  };
 
   const openSelectProfileSheet = (isKid: boolean, isFemale: boolean) => {
     setOpenBottomSheet({

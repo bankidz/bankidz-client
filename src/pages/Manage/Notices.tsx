@@ -10,7 +10,7 @@ const Notices = () => {
   return (
     <ForegroundTemplate label="공지사항">
       <>
-        {data?.map((notice) => (
+        {data?.map((notice: any) => (
           <NoticeItem
             key={notice.id}
             onClick={() => {

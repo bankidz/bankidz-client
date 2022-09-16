@@ -14,6 +14,12 @@ export interface IUserDTO {
   phone: string | null;
 }
 
+export interface IUserTypeRequest {
+  birthday: string;
+  isFemale: boolean;
+  isKid: boolean;
+}
+
 export interface IKidDTO {
   achievedChallenge: number;
   totalChallenge: number;
