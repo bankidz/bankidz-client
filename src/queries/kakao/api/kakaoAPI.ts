@@ -1,4 +1,4 @@
-import { axiosPublic } from '../axios';
+import { axiosPublic } from '../../../lib/axios/axios';
 import { ILoginDTO } from './kakaoDTO';
 
 const kakaoAPI = {

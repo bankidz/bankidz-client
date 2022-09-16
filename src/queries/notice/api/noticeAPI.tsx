@@ -1,7 +1,7 @@
-import { axiosPrivateTemp } from '../axios';
-import { INoticeDTO, TNoticesDTO } from './notice.dto';
+import { axiosPrivateTemp } from '@lib/axios/axios';
+import { INoticeDTO, TNoticesDTO } from './noticeDTO';
 
-const noticeApi = {
+const noticeAPI = {
   getNotice: async (): Promise<TNoticesDTO> => {
     const response = await axiosPrivateTemp.get('/notice');
     const data = response.data;
@@ -15,4 +15,4 @@ const noticeApi = {
   },
 };
 
-export default noticeApi;
+export default noticeAPI;

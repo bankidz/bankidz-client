@@ -1,4 +1,4 @@
-import { INotification } from '@lib/apis/notification/notification.dto';
+import { INotification } from '@queries/notification/api/notificationDTO';
 import { ReactComponent as AlertDongil } from '@assets/icons/alertDongil.svg';
 import { ReactComponent as AlertNotice } from '@assets/icons/alertNotice.svg';
 import { ReactComponent as AlertLevel } from '@assets/icons/alertLevel.svg';
@@ -7,7 +7,7 @@ import styled, { css } from 'styled-components';
 import getTimeForToday from '@lib/utils/getTimeForToday';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import notificationApi from '@lib/apis/notification/notificationApi';
+import notificationAPI from '@queries/notification/api/notificationAPI';
 
 const NotificationList = ({
   notifications,
@@ -31,7 +31,7 @@ const NotificationList = ({
   const onNotificationItemClick = useCallback(
     async (id: number, isRead: boolean, url: string) => {
       if (!isRead) {
-        await notificationApi.patchNotificationIsRead(id);
+        await notificationAPI.patchNotificationIsRead(id);
       }
       console.log(url);
       url && navigate(url); //TODO : 임시

@@ -1,7 +1,7 @@
-import { axiosPrivateTemp } from '../axios';
-import { IMyPageDTO, IOptInDTO } from './user.dto';
+import { axiosPrivateTemp } from '@lib/axios/axios';
+import { IMyPageDTO, IOptInDTO } from './userDTO';
 
-const userApi = {
+const userAPI = {
   getUser: async (): Promise<IMyPageDTO> => {
     const response = await axiosPrivateTemp.get('/user');
     console.log(response);
@@ -25,4 +25,4 @@ const userApi = {
   },
 };
 
-export default userApi;
+export default userAPI;

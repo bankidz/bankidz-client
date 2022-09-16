@@ -8,8 +8,8 @@ import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
-import { IMyPageDTO } from '@lib/apis/user/user.dto';
-import { IFamilyDTO } from '@lib/apis/family/family.dto';
+import { IMyPageDTO } from '@queries/user/api/userDTO';
+import { IFamilyDTO } from '@queries/family/api/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
 import useLeaveFamilyMutation from '@queries/family/useLeaveFamilyMutation';
 

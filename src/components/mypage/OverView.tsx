@@ -3,8 +3,8 @@ import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 import OverViewContent from './OverViewContent';
 import { useQueryClient } from 'react-query';
 import getPercentValue from '@lib/utils/get/getPercentValue';
-import { IMyPageDTO } from '@lib/apis/user/user.dto';
-import { IKidListDTO } from '@lib/apis/family/family.dto';
+import { IMyPageDTO } from '@queries/user/api/userDTO';
+import { IKidListDTO } from '@queries/family/api/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
 
 export type OverViewProps = {

@@ -1,6 +1,7 @@
-import { axiosPrivateTemp } from '../axios';
-import { INotificationDTO } from './notification.dto';
-const notificationApi = {
+import { axiosPrivateTemp } from '@lib/axios/axios';
+import { INotificationDTO } from './notificationDTO';
+
+const notificationAPI = {
   // 알림 내역 가져오기 (무한스크롤)
   getNotification: async ({ pageParam = '' }): Promise<INotificationDTO> => {
     const response = await axiosPrivateTemp.get(
@@ -25,4 +26,4 @@ const notificationApi = {
   },
 };
 
-export default notificationApi;
+export default notificationAPI;

@@ -1,7 +1,7 @@
 import { RootState } from '../app/store';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { axiosPrivateTemp, axiosPublic } from '@apis/axios';
+import { axiosPrivateTemp, axiosPublic } from '@lib/axios/axios';
 import { TLevel } from '@lib/types/TLevel';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 

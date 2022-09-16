@@ -6,7 +6,7 @@ import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import useKakaoLoginMutation from '@queries/kakao/useKakaoLoginMutation';
-import { ILoginDTO } from '@lib/apis/kakao/kakaoDTO';
+import { ILoginDTO } from '@queries/kakao/api/kakaoDTO';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
