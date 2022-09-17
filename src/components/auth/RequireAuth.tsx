@@ -10,7 +10,7 @@ function RequireAuth() {
   if (accessToken === null) {
     return <Navigate to="auth/login" replace />; // logout, revoke
   } else if (isKid === null) {
-    return <Navigate to="auth/register/1" replace />; // register
+    return <Navigate to="auth/register/1" replace />; // unregistered
   } else {
     return <Outlet />;
   }

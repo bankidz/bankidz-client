@@ -14,11 +14,12 @@ export interface IUserDTO {
   phone: string | null;
 }
 
-export interface IUserTypeRequest {
-  birthday: string;
-  isFemale: boolean;
-  isKid: boolean;
+export interface IWithdrawalRequest {
+  message: string;
 }
+
+export interface IUserTypeRequest
+  extends Pick<IUserDTO, 'birthday' | 'isFemale' | 'isKid'> {}
 
 export interface IKidDTO {
   achievedChallenge: number;
