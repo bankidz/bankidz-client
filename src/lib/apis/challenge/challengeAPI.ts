@@ -118,7 +118,6 @@ const challengeAPI = {
 
   // 주차 정보 가져오기
   getChallengeProgress: async (): Promise<IWeekDTO> => {
-    console.log();
     const response = await axiosPrivateTemp.get('/challenge/progress');
     return response.data;
   },

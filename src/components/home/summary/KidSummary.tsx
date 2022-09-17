@@ -1,21 +1,20 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
-import { UseQueryResult } from 'react-query';
+import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import Summary from './Summary';
 
 interface KidSummaryProps {
-  result: UseQueryResult<IWeekDTO, unknown>;
+  kidSummaryStatus: TStatus;
+  kidSummaryData: IWeekDTO | undefined;
 }
 
-function KidSummary({ result }: KidSummaryProps) {
-  const { status, data: kidSummary } = result;
-
+function KidSummary({ kidSummaryStatus, kidSummaryData }: KidSummaryProps) {
   let content;
-  if (status === 'loading') {
+  if (kidSummaryStatus === 'loading') {
     content = <SkeletonSummary variant="KidHome" />;
-  } else if (status === 'success') {
-    const { currentSavings, totalPrice } = kidSummary;
+  } else if (kidSummaryStatus === 'success') {
+    const { currentSavings, totalPrice } = kidSummaryData!;
     content = (
       <Summary
         variant="KidHome"
@@ -23,8 +22,8 @@ function KidSummary({ result }: KidSummaryProps) {
         totalPrice={totalPrice}
       />
     );
-  } else if (status === 'error') {
-    content = <Summary variant="KidHome" currentSavings={0} totalPrice={0} />;
+  } else if (kidSummaryStatus === 'error') {
+    content = <SkeletonSummary variant="KidHome" />;
   }
 
   return <SummaryWrapper>{content}</SummaryWrapper>;

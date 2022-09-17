@@ -1,9 +1,9 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import { TStatus } from '@lib/types/TStatus';
 import dayjs from 'dayjs';
 import { useState } from 'react';
-import { UseQueryResult } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ContractNewDongilLink from './ContractNewDongilLink';
@@ -11,18 +11,20 @@ import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
 interface WalkingDongilSectionProps {
-  result: UseQueryResult<IChallengeDTO[], unknown>;
+  walkingDongilsStatus: TStatus;
+  walkingDongilsData: IChallengeDTO[] | undefined;
 }
 
-function WalkingDongilSection({ result }: WalkingDongilSectionProps) {
-  const { status, data: walkingDongils } = result;
-
+function WalkingDongilSection({
+  walkingDongilsStatus,
+  walkingDongilsData,
+}: WalkingDongilSectionProps) {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
 
   const navigateCreateDongil = () => {
-    if (walkingDongils?.length === 5) {
+    if (walkingDongilsData?.length === 5) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         sheetProps: { open: true },
@@ -41,11 +43,11 @@ function WalkingDongilSection({ result }: WalkingDongilSectionProps) {
     }
   };
 
-  let content: JSX.Element = <></>;
-  if (status === 'loading') {
+  let content;
+  if (walkingDongilsStatus === 'loading') {
     content = <SkeletonDongilList variant="walking" />;
-  } else if (status === 'success') {
-    if (walkingDongils?.length === 0) {
+  } else if (walkingDongilsStatus === 'success') {
+    if (walkingDongilsData?.length === 0) {
       content = (
         <EmptyWalkingDongil
           onClick={navigateCreateDongil}
@@ -55,7 +57,7 @@ function WalkingDongilSection({ result }: WalkingDongilSectionProps) {
     } else {
       content = (
         <>
-          <WalkingDongilList walkingDongils={walkingDongils!} />
+          <WalkingDongilList walkingDongils={walkingDongilsData!} />
           <ContractNewDongilLink
             to={'/create/1'}
             createDisabled={createDisabled}
@@ -64,13 +66,13 @@ function WalkingDongilSection({ result }: WalkingDongilSectionProps) {
         </>
       );
     }
-  } else if (status === 'error') {
-    content = <p>Failed</p>;
+  } else if (walkingDongilsStatus === 'error') {
+    content = <SkeletonDongilList variant="walking" />;
   }
 
   return (
     <Wrapper>
-      {status !== 'idle' && <h1>걷고있는 돈길</h1>}
+      {walkingDongilsStatus !== 'idle' && <h1>걷고있는 돈길</h1>}
       {content}
     </Wrapper>
   );
