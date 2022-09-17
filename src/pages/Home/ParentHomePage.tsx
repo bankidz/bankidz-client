@@ -10,13 +10,14 @@ import { setSelectedKid } from '@store/slices/kidsSlice';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
-// 부모홈의 계층 구조는 다음과 같습니다.
-// 1. ParentHomePage: 연결된 자녀, 첫번째 자녀 데이터 fetch
-// 2. 연결된 가족이 없는 경우 - NoFamily
-// 2. 연결된 가족이 있는 경우 - HomeTemplate: FixedBar, Background 랜더링
-// 3. ParentHome: FixedBar, Background 제외 UI 요소 랜더링,
-// 선택한 자녀 데이터 추가 fetch 및 caching
-
+/**
+ * 부모홈의 계층 구조는 다음과 같습니다.
+ * 1. ParentHomePage: 연결된 자녀, 첫번째 자녀 데이터 fetch
+ * 2. 연결된 가족이 없는 경우 - NoFamily
+ * 2. 연결된 가족이 있는 경우 - HomeTemplate: FixedBar, Background 랜더링
+ * 3. ParentHome: FixedBar, Background 제외 UI 요소 랜더링
+ * 선택한 자녀 데이터 추가 fetch 및 caching
+ */
 function ParentHomePage() {
   usePreventGoBack();
 

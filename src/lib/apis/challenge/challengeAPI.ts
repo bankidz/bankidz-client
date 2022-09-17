@@ -2,7 +2,6 @@ import { axiosPrivateTemp } from '../axios';
 import {
   IChallengeRequest,
   IChallengeDTO,
-  IKidChallengeRequest,
   IProgressDTO,
   IAchievedChallengeDTO,
   IKidChallengeListDTO,
@@ -107,6 +106,7 @@ const challengeAPI = {
     const response = await axiosPrivateTemp.get(
       `/challenge/kid/achieved/${kidId}?interestPayment=${interestPayment}`,
     );
+    console.log('response: ', response);
     return response.data;
   },
 

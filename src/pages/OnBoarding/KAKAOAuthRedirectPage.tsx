@@ -27,7 +27,7 @@ function KAKAOAuthRedirectPage() {
   });
 
   useEffect(() => {
-    code && kakaoLoginMutation.mutate(code);
+    code && kakaoLoginMutation.mutate({ code });
   }, []);
 
   return <CustomSyncLoader />;
