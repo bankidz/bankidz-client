@@ -56,12 +56,12 @@ const GroupLink = () => {
         openMoveGroupCheckSheet(() => {
           MutateMoveFamily({ code });
         });
-      } else {
-        // 4. 가족 없을때: 가족 그룹 참여
-        openJoinGroupCheckSheet(() => {
-          MutateJoinFamily({ code });
-        });
       }
+    } else {
+      // 4. 가족 없을때: 가족 그룹 참여
+      openJoinGroupCheckSheet(() => {
+        MutateJoinFamily({ code });
+      });
     }
   }, [userStatus, familyStatus]);
 
