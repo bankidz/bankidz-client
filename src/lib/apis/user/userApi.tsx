@@ -22,6 +22,11 @@ const userApi = {
     return response.data;
   },
 
+  patchUserLogout: async (): Promise<IUserDTO> => {
+    const response = await axiosPrivateTemp.patch('/user/logout');
+    return response.data;
+  },
+
   getUserOptIn: async (): Promise<IOptInDTO> => {
     const response = await axiosPrivateTemp.get('/user/opt-in');
     const data = response.data;

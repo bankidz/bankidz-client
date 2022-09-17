@@ -1,14 +1,6 @@
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import KidHome from '@components/home/KidHome';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  fetchFamily,
-  selectFamily,
-  selectFamilyStatus,
-} from '@store/slices/familySlice';
-import { useEffect } from 'react';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';

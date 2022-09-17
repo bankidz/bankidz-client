@@ -1,6 +1,6 @@
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import useLogout from '@lib/hooks/auth/useLogout';
+import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useAppSelector } from '@store/app/hooks';
 import { selectWithdrawReason } from '@store/slices/authSlice';
@@ -10,7 +10,7 @@ function WithdrawCallbackPage() {
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const axiosPrivate = useAxiosPrivate();
   const withdrawReason = useAppSelector(selectWithdrawReason);
-  const logout = useLogout();
+  const logout = useLogoutClient();
 
   useEffect(() => {
     setOpenBottomSheet({

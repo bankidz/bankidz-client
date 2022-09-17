@@ -3,8 +3,7 @@ import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import styled from 'styled-components';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import useLogoutWithServer from '@lib/hooks/auth/useLogoutWithServer';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
 import { useEffect } from 'react';
 
 const contents = [
@@ -21,35 +20,18 @@ const contents = [
 ];
 
 function Manage() {
-  const navigate = useNavigate();
-
-  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
-  const logoutWithServer = useLogoutWithServer();
   useEffect(() => {
     const KAKAO_JS_KEY = `${process.env.REACT_APP_KAKAO_JS_KEY}`;
     if (!window.Kakao.isInitialized()) {
       // JavaScript key를 인자로 주고 SDK 초기화
       window.Kakao.init(KAKAO_JS_KEY);
-      // SDK 초기화 여부를 확인하자.
+      // SDK 초기화 여부를 확인하자
     }
   }, []);
 
-  const onManageLinkClick = (content: { title: string; link: string }) => {
-    if (content.title === '로그아웃') {
-      openLogoutCheckBottomSheet();
-    } else if (content.title === '문의하기') {
-      onChatButtonClick();
-    } else navigate(content.link);
-  };
-
-  //카카오채널 상담 열기
-  const onChatButtonClick = () => {
-    window.Kakao.Channel.chat({
-      channelPublicId: '_LjxjVxj',
-    });
-  };
-
   // 로그아웃 하시겠습니까 바텀시트
+  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
+  const logoutWithServer = useLogoutServer();
   const openLogoutCheckBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Check',
@@ -59,13 +41,27 @@ function Manage() {
         onMainActionClick: async () => {
           await logoutWithServer();
           setCloseBottomSheet();
-          console.log(
-            'aT in onMainActionClick: ',
-            getLocalStorage('accessToken'),
-          );
         },
       },
     });
+  };
+
+  //카카오채널 상담 열기
+  const onChatButtonClick = () => {
+    window.Kakao.Channel.chat({
+      channelPublicId: '_LjxjVxj',
+    });
+  };
+
+  const navigate = useNavigate();
+  const onManageLinkClick = (content: { title: string; link: string }) => {
+    if (content.title === '로그아웃') {
+      openLogoutCheckBottomSheet();
+    } else if (content.title === '문의하기') {
+      onChatButtonClick();
+    } else {
+      navigate(content.link);
+    }
   };
 
   return (

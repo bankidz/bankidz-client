@@ -2,7 +2,7 @@ import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import useLogout from '@lib/hooks/auth/useLogout';
+import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useAppSelector } from '@store/app/hooks';
 import { selectProvider, setWithdrawReason } from '@store/slices/authSlice';
@@ -31,7 +31,7 @@ function WithdrawReason() {
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
   const dispatch = useDispatch();
-  const logout = useLogout();
+  const logout = useLogoutClient();
   function openWithdrawCompletedBottomSheet() {
     setOpenBottomSheet({
       sheetContent: 'Completed',
