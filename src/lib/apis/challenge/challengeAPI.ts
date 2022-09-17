@@ -1,16 +1,19 @@
-import { TDongilStatus } from '@lib/types/TDongilStatus';
 import { axiosPrivateTemp } from '../axios';
 import {
-  IAchievedDongilDTO,
   IChallengeRequest,
-  IDongilDTO,
+  IChallengeDTO,
   IKidChallengeRequest,
-  IKidDongilDTO,
+  IProgressDTO,
+  IAchievedChallengeDTO,
+  IKidChallengeListDTO,
+  IKidAchievedChallengeListDTO,
+  IKidWeekDTO,
+  IWeekDTO,
 } from './challengeDTO';
 
 const challengeAPI = {
   // 돈길 리스트 가져오기
-  getChallenge: async (): Promise<IDongilDTO> => {
+  getChallenge: async (): Promise<IChallengeDTO> => {
     const response = await axiosPrivateTemp.get('/challenge/progress');
     return response.data;
   },
@@ -27,7 +30,7 @@ const challengeAPI = {
     totalPrice,
     weekPrice,
     weeks,
-  }: IChallengeRequest): Promise<IDongilDTO> => {
+  }: IChallengeRequest): Promise<IChallengeDTO> => {
     const response = await axiosPrivateTemp.patch('/challenge', {
       challengeCategory,
       fileName,
@@ -44,7 +47,7 @@ const challengeAPI = {
   },
 
   // 돈길 포기하기
-  deleteChallenge: async (challengeId: number): Promise<IDongilDTO> => {
+  deleteChallenge: async (challengeId: number): Promise<IChallengeDTO> => {
     const response = await axiosPrivateTemp.delete(`/challenge/${challengeId}`);
     return response.data;
   },
@@ -53,7 +56,7 @@ const challengeAPI = {
   patchChallenge: async (
     challengeId: number,
     { accept, comment }: IKidChallengeRequest,
-  ): Promise<IDongilDTO> => {
+  ): Promise<IChallengeDTO> => {
     const response = await axiosPrivateTemp.patch(`/challenge/${challengeId}`, {
       accept,
       comment,
@@ -61,10 +64,20 @@ const challengeAPI = {
     return response.data;
   },
 
+  // 돈길 걷기
+  patchChallengeProgress: async (
+    challengeId: number,
+  ): Promise<IProgressDTO> => {
+    const response = await axiosPrivateTemp.patch(
+      `/challenge/${challengeId}/progress`,
+    );
+    return response.data;
+  },
+
   // 완주한 돈길에 이자 지급하기
   patchChallengeInterestPayment: async (
     challengeId: number,
-  ): Promise<IAchievedDongilDTO> => {
+  ): Promise<IAchievedChallengeDTO> => {
     const response = await axiosPrivateTemp.patch(
       `/challenge/interest-payment/${challengeId}`,
     );
@@ -75,7 +88,7 @@ const challengeAPI = {
   getChallengeKid: async (
     kidId: number,
     status: 'pending' | 'walking',
-  ): Promise<IKidDongilDTO> => {
+  ): Promise<IKidChallengeListDTO> => {
     const response = await axiosPrivateTemp.get(
       `/challenge/kid/${kidId}?status=${status}`,
     );
@@ -86,7 +99,7 @@ const challengeAPI = {
   getChallengeKidAchieved: async (
     interestPayment: 'payed' | 'notPayed',
     kidId: number,
-  ) => {
+  ): Promise<IKidAchievedChallengeListDTO> => {
     const response = await axiosPrivateTemp.get(
       `/challenge/kid/achieved/${kidId}?interestPayment=${interestPayment}`,
     );
@@ -94,13 +107,18 @@ const challengeAPI = {
   },
 
   // 자녀의 주차 정보 가져오기
-  getChallengeKidProgress: async (kidId: number) => {
+  getChallengeKidProgress: async (kidId: number): Promise<IKidWeekDTO> => {
     const response = await axiosPrivateTemp.get(
       `/challenge/kid/progress/${kidId}`,
     );
+    return response.data;
   },
 
   // 주차 정보 가져오기
+  getChallengeProgress: async (): Promise<IWeekDTO> => {
+    const response = await axiosPrivateTemp.get('/challenge/progress');
+    return response.data;
+  },
 };
 
 export default challengeAPI;

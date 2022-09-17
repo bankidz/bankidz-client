@@ -12,7 +12,7 @@ export interface IProgressDTO {
   weeks: number;
 }
 
-export interface IDongilDTO {
+export interface IChallengeDTO {
   challengeCategory: TDongilCategory;
   challengeStatus: TDongilStatus;
   comment: {
@@ -25,7 +25,7 @@ export interface IDongilDTO {
   interestRate: TInterestRate;
   isMom: boolean;
   itemName: TItemName;
-  progressList: IDongilDTO[];
+  progressList: IProgressDTO[];
   successWeeks: number;
   title: string;
   totalPrice: number;
@@ -35,7 +35,7 @@ export interface IDongilDTO {
 
 export interface IChallengeRequest
   extends Pick<
-    IDongilDTO,
+    IChallengeDTO,
     | 'challengeCategory'
     | 'fileName'
     | 'interestPrice'
@@ -53,19 +53,31 @@ export interface IKidChallengeRequest {
   comment: string;
 }
 
-// 완주한 돈길 관련 API response DTO
-// 완주한 돈길 리스트 DTO
-export interface IAchievedDongilDTO {
-  challenge: IDongilDTO;
+export interface IAchievedChallengeDTO {
+  challenge: IChallengeDTO;
   interestPrice: number;
 }
+export interface IAchievedChallengeListDTO {
+  challengeDTOList: IAchievedChallengeDTO[];
+  totalInterestPrice: number;
+}
 
-export interface IKidDongilDTO {
-  challengeList: IDongilDTO[];
+export interface IKidChallengeListDTO {
+  challengeList: IChallengeDTO[];
   kidId: number;
 }
 
-export interface IKidAchievedDongilDTO {
-  achievedChallengeListDTO: IAchievedDongilDTO;
+export interface IKidAchievedChallengeListDTO {
+  achievedChallengeListDTO: IAchievedChallengeListDTO;
   kidId: number;
+}
+
+export interface IWeekDTO {
+  currentSavings: number;
+  totalPrice: number;
+}
+
+export interface IKidWeekDTO {
+  kidId: number;
+  weekInfo: IWeekDTO;
 }
