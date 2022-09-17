@@ -1,42 +1,34 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { useAppSelector } from '@store/app/hooks';
-import { selectSelectedKid } from '@store/slices/kidsSlice';
-import {
-  selectThisWeekSDongils,
-  selectThisWeekSDongilsStatus,
-} from '@store/slices/thisWeekSDongilsSlice';
+import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
+import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
 
-function ThisWeekSDongilSection() {
-  const thisWeekSDongils = useAppSelector(selectThisWeekSDongils);
-  const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
-  const selectedKid = useAppSelector(selectSelectedKid);
+interface ThisWeekSDongilSectionProps {
+  thisWeekSDongilsStatus: TStatus;
+  thisWeekSDongilsData: IKidChallengeListDTO | undefined;
+}
 
-  let content: JSX.Element = <></>;
+function ThisWeekSDongilSection({
+  thisWeekSDongilsStatus,
+  thisWeekSDongilsData,
+}: ThisWeekSDongilSectionProps) {
+  let content;
   if (thisWeekSDongilsStatus === 'loading') {
     content = <SkeletonDongilList variant="thisWeekS" />;
-  } else if (thisWeekSDongilsStatus === 'succeeded') {
-    const getSelectedKidSThisWeekSDongils = (kidId: number) => {
-      const found = thisWeekSDongils?.find(
-        (thisWeekSDongil) => thisWeekSDongil.kidId === kidId,
-      );
-      return found?.challengeList;
-    };
-    const selectedKidSThisWeekSDongils = getSelectedKidSThisWeekSDongils(
-      selectedKid?.kidId!,
-    );
-
-    if (selectedKidSThisWeekSDongils?.length === 0) {
+  } else if (thisWeekSDongilsStatus === 'success') {
+    if (thisWeekSDongilsData?.challengeList.length === 0) {
       content = <EmptyDongil subject="걷고있는" />;
     } else {
       content = (
-        <ThisWeekSDongilList thisWeekSDongils={selectedKidSThisWeekSDongils!} />
+        <ThisWeekSDongilList
+          thisWeekSDongils={thisWeekSDongilsData?.challengeList!}
+        />
       );
     }
-  } else if (thisWeekSDongilsStatus === 'failed') {
-    content = <p>Failed</p>;
+  } else if (thisWeekSDongilsStatus === 'error') {
+    content = <SkeletonDongilList variant="thisWeekS" />;
   }
 
   return (
