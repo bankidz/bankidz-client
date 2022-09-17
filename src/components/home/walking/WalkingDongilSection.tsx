@@ -1,27 +1,28 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import { useAppSelector } from '@store/app/hooks';
-import {
-  selectWalkingDongils,
-  selectWalkingDongilsStatus,
-} from '@store/slices/walkingDongilsSlice';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import { UseQueryResult } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
-function WalkingDongilSection() {
-  const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
-  const walkingDongils = useAppSelector(selectWalkingDongils);
+interface WalkingDongilSectionProps {
+  result: UseQueryResult<IChallengeDTO[], unknown>;
+}
+
+function WalkingDongilSection({ result }: WalkingDongilSectionProps) {
+  const { status, data: walkingDongils } = result;
+
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
 
   const navigateCreateDongil = () => {
-    if (walkingDongils.length === 5) {
+    if (walkingDongils?.length === 5) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         sheetProps: { open: true },
@@ -41,9 +42,9 @@ function WalkingDongilSection() {
   };
 
   let content: JSX.Element = <></>;
-  if (walkingDongilsStatus === 'loading') {
+  if (status === 'loading') {
     content = <SkeletonDongilList variant="walking" />;
-  } else if (walkingDongilsStatus === 'succeeded') {
+  } else if (status === 'success') {
     if (walkingDongils?.length === 0) {
       content = (
         <EmptyWalkingDongil
@@ -63,13 +64,13 @@ function WalkingDongilSection() {
         </>
       );
     }
-  } else if (walkingDongilsStatus === 'failed') {
+  } else if (status === 'error') {
     content = <p>Failed</p>;
   }
 
   return (
     <Wrapper>
-      {walkingDongilsStatus !== 'idle' && <h1>걷고있는 돈길</h1>}
+      {status !== 'idle' && <h1>걷고있는 돈길</h1>}
       {content}
     </Wrapper>
   );

@@ -15,7 +15,7 @@ const challengeAPI = {
   // 돈길 리스트 가져오기
   getChallenge: async (
     status: 'pending' | 'walking',
-  ): Promise<IChallengeDTO> => {
+  ): Promise<IChallengeDTO[]> => {
     const response = await axiosPrivateTemp.get(`/challenge?status=${status}`);
     return response.data;
   },
@@ -118,6 +118,7 @@ const challengeAPI = {
 
   // 주차 정보 가져오기
   getChallengeProgress: async (): Promise<IWeekDTO> => {
+    console.log();
     const response = await axiosPrivateTemp.get('/challenge/progress');
     return response.data;
   },

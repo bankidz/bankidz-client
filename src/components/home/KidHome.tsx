@@ -22,6 +22,12 @@ import { useQueries } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 
+enum EQueryIdentifier {
+  KID_SUMMARY,
+  WALKING_DONGILS,
+  PENDING_DONGILS,
+}
+
 /**
  * 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
  * 이후에 홈 페이지 재 진입 시는 해당 데이터를 fetch 하지 않습니다.
@@ -29,13 +35,13 @@ import challengeAPI from '@lib/apis/challenge/challengeAPI';
  * 해당 함수에서 반환하는 JSX는 RTK slice 내부의 fetchStatus에 따라 적절한 값으로 변화합니다.
  */
 function KidHome() {
-  const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
-  const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
-  const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
-  const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
+  // const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
+  // const walkingDongilsStatus = useAppSelector(selectWalkingDongilsStatus);
+  // const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
+  // const dispatch = useAppDispatch();
+  // const axiosPrivate = useAxiosPrivate();
 
-  const result = useQueries([
+  const results = useQueries([
     {
       queryKey: queryKeys.KID_SUMMARY,
       queryFn: () => challengeAPI.getChallengeProgress(),
@@ -50,29 +56,14 @@ function KidHome() {
     },
   ]);
 
-  useEffect(() => {
-    console.log('qB:', result);
-    const loadingFinishAll = result.some((result) => result.isLoading);
-    console.log('lFA:', loadingFinishAll);
-    // async function hydrate() {
-    //   try {
-    //     kidSummaryStatus === 'idle' &&
-    //       (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
-    //     walkingDongilsStatus === 'idle' &&
-    //       (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
-    //     pendingDongilsStatus === 'idle' &&
-    //       (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
-    //   } catch (error: any) {
-    //     console.log(error);
-    //   }
-    // }
-    // hydrate();
-  }, [result]);
+  console.log('qB:', results);
 
   return (
     <>
-      <KidSummary />
-      <WalkingDongilSection />
+      <KidSummary result={results[EQueryIdentifier.KID_SUMMARY]} />
+      <WalkingDongilSection
+        result={results[EQueryIdentifier.WALKING_DONGILS]}
+      />
       <PendingDongilSection />
       <LargeSpacer />
       <Modals />
@@ -81,3 +72,22 @@ function KidHome() {
 }
 
 export default KidHome;
+
+// useEffect(() => {
+//   console.log('qB:', result);
+//   const loadingFinishAll = result.some((result) => result.isLoading);
+//   console.log('lFA:', loadingFinishAll);
+// async function hydrate() {
+//   try {
+//     kidSummaryStatus === 'idle' &&
+//       (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
+//     walkingDongilsStatus === 'idle' &&
+//       (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
+//     pendingDongilsStatus === 'idle' &&
+//       (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
+//   } catch (error: any) {
+//     console.log(error);
+//   }
+// }
+// hydrate();
+// }, [result]);

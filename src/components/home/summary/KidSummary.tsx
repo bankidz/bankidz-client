@@ -1,17 +1,17 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import queryKeys from '@lib/constants/queryKeys';
-import { useQuery } from 'react-query';
+import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
+import { UseQueryResult } from 'react-query';
 import styled from 'styled-components';
 import Summary from './Summary';
 
-function KidSummary() {
-  const { status, data: kidSummary } = useQuery(
-    queryKeys.KID_SUMMARY,
-    challengeAPI.getChallengeProgress,
-  );
+interface KidSummaryProps {
+  result: UseQueryResult<IWeekDTO, unknown>;
+}
 
-  let content: JSX.Element = <></>;
+function KidSummary({ result }: KidSummaryProps) {
+  const { status, data: kidSummary } = result;
+
+  let content;
   if (status === 'loading') {
     content = <SkeletonSummary variant="KidHome" />;
   } else if (status === 'success') {

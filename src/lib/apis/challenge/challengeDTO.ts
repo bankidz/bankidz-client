@@ -20,6 +20,7 @@ export interface IChallengeDTO {
   };
   createdAt: string;
   fileName: string;
+  id: number;
   interestPrice: number;
   interestRate: TInterestRate;
   isMom: boolean;
