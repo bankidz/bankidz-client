@@ -9,6 +9,7 @@ import {
   IKidAchievedChallengeListDTO,
   IKidWeekDTO,
   IWeekDTO,
+  IPatchChallengePayload,
 } from './challengeDTO';
 
 const challengeAPI = {
@@ -55,10 +56,11 @@ const challengeAPI = {
   },
 
   // 자녀의 돈길 수락 / 거절
-  patchChallenge: async (
-    challengeId: number,
-    { accept, comment }: IKidChallengeRequest,
-  ): Promise<IChallengeDTO> => {
+  patchChallenge: async ({
+    challengeId,
+    accept,
+    comment,
+  }: IPatchChallengePayload): Promise<IChallengeDTO> => {
     const response = await axiosPrivateTemp.patch(`/challenge/${challengeId}`, {
       accept,
       comment,

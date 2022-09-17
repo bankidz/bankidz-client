@@ -1,20 +1,16 @@
 import InterestBadge from '@components/common/badges/InterestBadge';
 import { modals } from '@components/common/modals/Modals';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
+import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import { IDongil } from '@lib/types/IDongil';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import {
-  approveProposedDongil,
-  selectProposedDongils,
-} from '@store/slices/proposedDongilsSlice';
-import { appendThisWeekSDongil } from '@store/slices/thisWeekSDongilsSlice';
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 interface ProposedDongilItemProps {
@@ -35,68 +31,8 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     fileName,
   } = proposedDongil;
 
-  const {
-    isOpen,
-    setOpenBottomSheet,
-    setCloseBottomSheet,
-    openSheetBySequence,
-  } = useGlobalBottomSheet();
-
-  const selectedKid = useAppSelector(selectSelectedKid);
-  const proposedDongils = useAppSelector(selectProposedDongils);
-  const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
-  const [approveProposedDongilStatus, setApproveProposedDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const canApproveProposedDongil =
-    approveProposedDongilStatus === 'idle' && selectedKid !== null;
-
-  // 3. 제안받은 돈길 수락
-  async function handleApproveButtonClick() {
-    console.log('asdf');
-    if (canApproveProposedDongil) {
-      try {
-        setApproveProposedDongilStatus('pending');
-        await dispatch(
-          approveProposedDongil({
-            axiosPrivate,
-            id,
-            isApprove: true,
-          }),
-        ).unwrap();
-
-        const getApprovedDongil = (id: number) => {
-          let found;
-          proposedDongils.map((proposedDongil) => {
-            found = proposedDongil.challengeList.find(
-              (challenge) => challenge.id === id,
-            );
-          });
-          return found;
-        };
-        const approvedDongil = getApprovedDongil(id)!;
-        dispatch(appendThisWeekSDongil({ selectedKid, approvedDongil }));
-        openApproveCompletedBottomSheet();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setApproveProposedDongilStatus('idle');
-      }
-    }
-  }
-
-  // 2. 자녀의 돈길을 수락할까요?
-  const openApproveCheckBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'Check',
-      sheetProps: { open: true },
-      contentProps: {
-        type: 'approve',
-        onMainActionClick: handleApproveButtonClick,
-        onDismiss: setCloseBottomSheet,
-      },
-    });
-  };
+  const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
+    useGlobalBottomSheet();
 
   // 4. 자녀의 돈길이 수락되었어요
   const openApproveCompletedBottomSheet = () => {
@@ -112,11 +48,58 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     openSheetBySequence(openSheet);
   };
 
-  // 1. 제안받은 돈길 모달
+  // 3. 자녀의 돈길 수락
+  const queryClient = useQueryClient();
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const approveMutation = useMutation(challengeAPI.patchChallenge, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        queryKeys.CHALLENGE_KID,
+        selectedKid?.kidId,
+        'pending',
+      ]);
+      queryClient.invalidateQueries([
+        queryKeys.CHALLENGE_KID,
+        selectedKid?.kidId,
+        'walking',
+      ]);
+      openApproveCompletedBottomSheet();
+    },
+  });
+  const handleApproveButtonClick = async () => {
+    approveMutation.mutate({ challengeId: id, accept: true, comment: '' });
+  };
+
+  // 2. 자녀의 돈길을 수락할까요?
+  const openApproveCheckBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Check',
+      sheetProps: { open: true },
+      contentProps: {
+        type: 'approve',
+        onMainActionClick: handleApproveButtonClick,
+        onDismiss: setCloseBottomSheet,
+      },
+    });
+  };
+
+  // 1-a. 오늘은 뱅키즈 쉬는날
+  const openNoticeSundayBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Notice',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        type: 'sunday',
+      },
+    });
+  };
+
+  // 1-b. 제안받은 돈길 모달
   const { openModal } = useModals();
   const navigate = useNavigate();
-
-  function openProposedReceiptModal() {
+  const openProposedReceiptModal = () => {
     openModal(modals.receiptModal, {
       variant: 'proposed',
       onSubmit: () => {
@@ -136,18 +119,6 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       isMom,
       shouldCloseOnOverlayClick: true,
     });
-  }
-
-  const openNoticeSundayBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'Notice',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        type: 'sunday',
-      },
-    });
   };
 
   const currentDayOfWeek = dayjs().day();
@@ -155,8 +126,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   return (
     <StyledButton
       onClick={
-        // 0: Sunday
-        currentDayOfWeek === 0
+        currentDayOfWeek === EDayOfWeek.SUNDAY
           ? openNoticeSundayBottomSheet
           : openProposedReceiptModal
       }

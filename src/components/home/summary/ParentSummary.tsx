@@ -16,6 +16,7 @@ function ParentSummary({
   parentSummaryData,
 }: ParentSummaryProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
+
   let content;
   if (parentSummaryStatus === 'loading') {
     content = <SkeletonSummary variant="ParentHome" />;
@@ -32,6 +33,7 @@ function ParentSummary({
   } else if (parentSummaryStatus === 'error') {
     content = <SkeletonSummary variant="ParentHome" />;
   }
+
   return <Wrapper>{content}</Wrapper>;
 }
 

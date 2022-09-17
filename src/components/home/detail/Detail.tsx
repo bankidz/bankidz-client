@@ -81,6 +81,20 @@ function Detail() {
     openSheetBySequence(openSheet);
   };
 
+  // 1. 돈길 포기하기 -> 정말 포기할거에요?
+  const openGiveUpBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'GiveUpCheck',
+      sheetProps: {
+        open: true,
+      },
+      contentProps: {
+        onGiveUpButtonClick: handleGiveUpButtonClick,
+        onDismiss: openCancelGiveUpBottomSheet,
+      },
+    });
+  };
+
   // 2-a. 포기하기
   const queryClient = useQueryClient();
   const deleteMutation = useMutation(challengeAPI.deleteChallenge, {
@@ -108,20 +122,6 @@ function Detail() {
         },
       });
     openSheetBySequence(openSheet);
-  };
-
-  // 1. 돈길 포기하기 -> 정말 포기할거에요?
-  const openGiveUpBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'GiveUpCheck',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        onGiveUpButtonClick: handleGiveUpButtonClick,
-        onDismiss: openCancelGiveUpBottomSheet,
-      },
-    });
   };
 
   return (

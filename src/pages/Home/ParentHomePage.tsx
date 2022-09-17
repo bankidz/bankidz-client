@@ -2,31 +2,11 @@ import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import familyApi from '@lib/apis/family/familyApi';
 import queryKeys from '@lib/constants/queryKeys';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  fetchKids,
-  selectKids,
-  selectKidsStatus,
-  setSelectedKid,
-} from '@store/slices/kidsSlice';
-import {
-  fetchParentSummaries,
-  selectParentSummariesStatus,
-} from '@store/slices/parentSummariesSlice';
-import {
-  fetchProposedDongils,
-  selectProposedDongilsStatus,
-} from '@store/slices/proposedDongilsSlice';
-import {
-  fetchThisWeekSDongils,
-  selectThisWeekSDongilsStatus,
-} from '@store/slices/thisWeekSDongilsSlice';
-import { useEffect } from 'react';
+import { useAppDispatch } from '@store/app/hooks';
+import { setSelectedKid } from '@store/slices/kidsSlice';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
@@ -39,16 +19,8 @@ import styled from 'styled-components';
 
 function ParentHomePage() {
   usePreventGoBack();
-  const kidsStatus = useAppSelector(selectKidsStatus);
-  const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
-  const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
-  const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
+
   const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
-
-  // const kids = useAppSelector(selectKids);
-  // const hasNoFamily = kids.length === 0 && kidsStatus === 'succeeded';
-
   const { status, data: kids } = useQuery(
     queryKeys.FAMILY_KID,
     familyApi.getKid,
@@ -76,75 +48,7 @@ function ParentHomePage() {
     );
   }
 
-  // const { status: proposedDongilStatus, data: proposedDongilData } = useQuery(
-  //   [queryKeys.CHALLENGE_KID, tempData![0].kidId],
-  //   () => challengeAPI.getChallengeKid(tempData![0].kidId, 'pending'),
-  //   {
-  //     enabled: !!parentSummaryData,
-  //   },
-  // );
-  // const { status: thisWeekSDongilStatus, data: thisWeekSDongilData } = useQuery(
-  //   [queryKeys.CHALLENGE_KID, tempData![0].kidId],
-  //   () => challengeAPI.getChallengeKid(tempData![0].kidId, 'walking'),
-  //   {
-  //     enabled: !!proposedDongilData,
-  //   },
-  // );
-
-  // useEffect(() => {
-  //   async function hydrate() {
-  //     try {
-  //       let response;
-  //       // GET: 연결된 자녀 목록 조회
-  //       if (kidsStatus === 'idle') {
-  //         response = await dispatch(fetchKids({ axiosPrivate })).unwrap();
-  //       }
-  //       // GET: 첫번째 자녀의 Summary 데이터 조회
-  //       parentSummariesStatus === 'idle' &&
-  //         !hasNoFamily &&
-  //         (await dispatch(
-  //           fetchParentSummaries({
-  //             axiosPrivate,
-  //             kidId: response.data[0].kidId,
-  //           }),
-  //         ).unwrap());
-  //       // GET: 첫번째 자녀의 제안받은 돈길 조회
-  //       proposedDongilsStatus === 'idle' &&
-  //         !hasNoFamily &&
-  //         (await dispatch(
-  //           fetchProposedDongils({
-  //             axiosPrivate,
-  //             kidId: response.data[0].kidId,
-  //           }),
-  //         ).unwrap());
-  //       // GET: 첫번째 자녀의 금주의 돈길 조희
-  //       thisWeekSDongilsStatus === 'idle' &&
-  //         !hasNoFamily &&
-  //         (await dispatch(
-  //           fetchThisWeekSDongils({
-  //             axiosPrivate,
-  //             kidId: response.data[0].kidId,
-  //           }),
-  //         ).unwrap());
-  //     } catch (error: any) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   hydrate();
-  // }, []);
-
-  return (
-    <>
-      {content}
-      {/* {hasNoFamily ? (
-        <NoFamily />
-      ) : (
-        <HomeTemplate>
-          <ParentHome />
-        </HomeTemplate>
-      )} */}
-    </>
-  );
+  return <>{content}</>;
 }
 
 export default ParentHomePage;

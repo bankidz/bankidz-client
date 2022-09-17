@@ -53,6 +53,10 @@ export interface IKidChallengeRequest {
   comment: string;
 }
 
+export interface IPatchChallengePayload extends IKidChallengeRequest {
+  challengeId: number;
+}
+
 export interface IAchievedChallengeDTO {
   challenge: IChallengeDTO;
   interestPrice: number;
