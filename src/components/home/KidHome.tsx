@@ -51,23 +51,23 @@ function KidHome() {
   ]);
 
   useEffect(() => {
-    // console.log('qB:', result);
-    // const loadingFinishAll = result.some((result) => result.isLoading);
-    // console.log('lFA:', loadingFinishAll);
-    async function hydrate() {
-      try {
-        kidSummaryStatus === 'idle' &&
-          (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
-        walkingDongilsStatus === 'idle' &&
-          (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
-        pendingDongilsStatus === 'idle' &&
-          (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    hydrate();
-  }, []);
+    console.log('qB:', result);
+    const loadingFinishAll = result.some((result) => result.isLoading);
+    console.log('lFA:', loadingFinishAll);
+    // async function hydrate() {
+    //   try {
+    //     kidSummaryStatus === 'idle' &&
+    //       (await dispatch(fetchKidSummary({ axiosPrivate })).unwrap());
+    //     walkingDongilsStatus === 'idle' &&
+    //       (await dispatch(fetchWalkingDongils({ axiosPrivate })).unwrap());
+    //     pendingDongilsStatus === 'idle' &&
+    //       (await dispatch(fetchPendingDongils({ axiosPrivate })).unwrap());
+    //   } catch (error: any) {
+    //     console.log(error);
+    //   }
+    // }
+    // hydrate();
+  }, [result]);
 
   return (
     <>

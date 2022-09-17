@@ -1,31 +1,32 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
-import { useAppSelector } from '@store/app/hooks';
-import {
-  selectKidSummary,
-  selectKidSummaryStatus,
-} from '@store/slices/kidSummarySlice';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import Summary from './Summary';
 
 function KidSummary() {
-  const kidSummary = useAppSelector(selectKidSummary);
-  const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
+  const { status, data: kidSummary } = useQuery(
+    queryKeys.KID_SUMMARY,
+    challengeAPI.getChallengeProgress,
+  );
 
   let content: JSX.Element = <></>;
-  if (kidSummaryStatus === 'loading') {
+  if (status === 'loading') {
     content = <SkeletonSummary variant="KidHome" />;
-  } else if (kidSummaryStatus === 'succeeded') {
-    const { currentSavings, totalPrice } = kidSummary!;
+  } else if (status === 'success') {
+    const { currentSavings, totalPrice } = kidSummary;
     content = (
       <Summary
         variant="KidHome"
-        currentSavings={currentSavings!}
-        totalPrice={totalPrice!}
+        currentSavings={currentSavings}
+        totalPrice={totalPrice}
       />
     );
-  } else if (kidSummaryStatus === 'failed') {
-    content = <p>Failed</p>;
+  } else if (status === 'error') {
+    content = <Summary variant="KidHome" currentSavings={0} totalPrice={0} />;
   }
+
   return <SummaryWrapper>{content}</SummaryWrapper>;
 }
 
