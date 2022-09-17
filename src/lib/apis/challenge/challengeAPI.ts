@@ -13,8 +13,10 @@ import {
 
 const challengeAPI = {
   // 돈길 리스트 가져오기
-  getChallenge: async (): Promise<IChallengeDTO> => {
-    const response = await axiosPrivateTemp.get('/challenge/progress');
+  getChallenge: async (
+    status: 'pending' | 'walking',
+  ): Promise<IChallengeDTO> => {
+    const response = await axiosPrivateTemp.get(`/challenge?status=${status}`);
     return response.data;
   },
 

@@ -2,7 +2,6 @@ import { TInterestRate } from '@lib/types/IInterestRate';
 import { TDongilCategory } from '@lib/types/TDongilCategory';
 import { TDongilStatus } from '@lib/types/TDongilStatus';
 import { TItemName } from '@lib/types/TItemName';
-import { number } from 'prop-types';
 
 export interface IProgressDTO {
   approvedAt: string;

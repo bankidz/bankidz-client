@@ -18,6 +18,9 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import KidSummary from '@components/home/summary/KidSummary';
 import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
 import PendingDongilSection from '@components/home/pending/PendingDongilSection';
+import { useQueries } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
 
 /**
  * 홈 페이지 최초 진입 시 주간 진행상황, 걷고있는 돈길 리스트, 대기중인 돈길 리스트를 순차적으로 fetch 합니다.
@@ -32,7 +35,25 @@ function KidHome() {
   const dispatch = useAppDispatch();
   const axiosPrivate = useAxiosPrivate();
 
+  const result = useQueries([
+    {
+      queryKey: queryKeys.KID_SUMMARY,
+      queryFn: () => challengeAPI.getChallengeProgress(),
+    },
+    {
+      queryKey: queryKeys.WALKING_DONGILS,
+      queryFn: () => challengeAPI.getChallenge('walking'),
+    },
+    {
+      queryKey: queryKeys.PENDING_DONGILS,
+      queryFn: () => challengeAPI.getChallenge('pending'),
+    },
+  ]);
+
   useEffect(() => {
+    // console.log('qB:', result);
+    // const loadingFinishAll = result.some((result) => result.isLoading);
+    // console.log('lFA:', loadingFinishAll);
     async function hydrate() {
       try {
         kidSummaryStatus === 'idle' &&
