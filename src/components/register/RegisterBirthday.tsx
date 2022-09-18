@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
@@ -23,15 +23,24 @@ function RegisterBirthday() {
   const [isMonthFocused, setIsMonthFocused] = useState(false);
   const [isDayFocused, setIsDayFocused] = useState(false);
 
-  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setYear(e.target.value.slice(0, 4));
-  };
-  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMonth(e.target.value.slice(0, 2));
-  };
-  const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setDay(e.target.value.slice(0, 2));
-  };
+  const handleYearChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setYear(e.target.value.slice(0, 4));
+    },
+    [],
+  );
+  const handleMonthChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setMonth(e.target.value.slice(0, 2));
+    },
+    [],
+  );
+  const handleDayChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setDay(e.target.value.slice(0, 2));
+    },
+    [],
+  );
 
   // 형식에 맞는 input이 입력되면 바로 focus 이동
   const monthInputRef = useRef<HTMLInputElement>(null);
