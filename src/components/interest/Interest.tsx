@@ -1,5 +1,5 @@
 import NoFamily from '@components/home/NoFamily';
-import familyApi from '@lib/apis/family/familyApi';
+import familyAPI from '@lib/apis/family/familyAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
@@ -7,7 +7,7 @@ import InterestTemplate from './InterestTemplate';
 import InterestToPay from './InterestToPay';
 
 function Interest() {
-  const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyApi.getFamilyKid);
+  const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyAPI.getKid);
 
   let content;
   if (kids?.length === 0) {

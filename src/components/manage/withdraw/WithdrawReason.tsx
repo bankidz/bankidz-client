@@ -1,6 +1,6 @@
 import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
-import userApi from '@lib/apis/user/userApi';
+import userApi from '@lib/apis/user/userAPI';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';

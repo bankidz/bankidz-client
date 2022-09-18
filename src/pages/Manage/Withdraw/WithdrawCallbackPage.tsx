@@ -1,4 +1,4 @@
-import userApi from '@lib/apis/user/userApi';
+import userApi from '@lib/apis/user/userAPI';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';

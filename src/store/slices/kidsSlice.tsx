@@ -1,4 +1,4 @@
-import { IKidListDTO } from '@lib/apis/family/family.dto';
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import { IKid } from '@lib/types/IKid';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';

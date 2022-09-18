@@ -2,7 +2,8 @@ import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
-import familyApi from '@lib/apis/family/familyApi';
+import familyAPI from '@lib/apis/family/familyAPI';
+import familyApi from '@lib/apis/family/familyAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import { useAppDispatch } from '@store/app/hooks';
@@ -24,7 +25,7 @@ function ParentHomePage() {
   const dispatch = useAppDispatch();
   const { status, data: kids } = useQuery(
     queryKeys.FAMILY_KID,
-    familyApi.getFamilyKid,
+    familyAPI.getKid,
     {
       onSuccess: (data) => {
         dispatch(setSelectedKid(data[0]));

@@ -4,11 +4,11 @@ import KidHome from '@components/home/KidHome';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
-import familyApi from '@lib/apis/family/familyApi';
 import { AxiosError } from 'axios';
-import { IFamilyDTO } from '@lib/apis/family/family.dto';
+import { IFamilyDTO } from '@lib/apis/family/familyDTO';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import styled from 'styled-components';
+import familyAPI from '@lib/apis/family/familyAPI';
 
 /**
  * 자녀홈의 계층 구조는 다음과 같습니다.
@@ -24,7 +24,7 @@ function KidHomePage() {
     status,
     data: family,
     error,
-  } = useQuery<IFamilyDTO, AxiosError>(queryKeys.FAMILY, familyApi.getFamily);
+  } = useQuery<IFamilyDTO, AxiosError>(queryKeys.FAMILY, familyAPI.getFamily);
 
   const hasParent = family?.familyUserList?.find(
     (member) => member.isKid === false,

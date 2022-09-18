@@ -6,14 +6,14 @@ import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { useMutation } from 'react-query';
-import userApi from '@lib/apis/user/userApi';
+import userAPI from '@lib/apis/user/userAPI';
 
 function PersistLogin() {
   const accessToken = getLocalStorage('accessToken');
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
 
-  const persistLoginMutation = useMutation(userApi.patchUserRefresh, {
+  const persistLoginMutation = useMutation(userAPI.patchUserRefresh, {
     onSuccess: (data) => {
       const { isKid, level, provider } = data;
       dispatch(setCredentials({ accessToken, isKid, level, provider }));

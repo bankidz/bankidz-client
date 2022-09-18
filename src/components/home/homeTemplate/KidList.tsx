@@ -6,8 +6,9 @@ import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
-import familyApi from '@lib/apis/family/familyApi';
-import { IKidListDTO } from '@lib/apis/family/family.dto';
+import familyApi from '@lib/apis/family/familyAPI';
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
+import familyAPI from '@lib/apis/family/familyAPI';
 
 function KidList() {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ function KidList() {
 
   const { status, data: kids } = useQuery(
     queryKeys.FAMILY_KID,
-    familyApi.getFamilyKid,
+    familyAPI.getKid,
   );
 
   return (

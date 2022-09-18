@@ -1,4 +1,4 @@
-import userApi from '@lib/apis/user/userApi';
+import userApi from '@lib/apis/user/userAPI';
 import { useMutation } from 'react-query';
 import useLogoutClient from './useLogoutClient';
 

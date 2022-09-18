@@ -1,4 +1,4 @@
-import { IOptInDTO } from '@lib/apis/user/user.dto';
+import { IOptInDTO } from '@lib/apis/user/userDTO';
 import ToggleButton from '@components/common/buttons/ToggleButton';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useToggle from '@lib/hooks/useToggle';

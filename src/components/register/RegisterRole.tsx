@@ -8,7 +8,7 @@ import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
-import userApi from '@lib/apis/user/userApi';
+import userAPI from '@lib/apis/user/userAPI';
 import { useMutation } from 'react-query';
 
 function RegisterRole() {
@@ -35,7 +35,7 @@ function RegisterRole() {
     useGlobalBottomSheet();
 
   // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
-  const patchUserMutation = useMutation(userApi.patchUser, {
+  const patchUserMutation = useMutation(userAPI.patchUser, {
     onSuccess: (data) => {
       const { username, isFemale, isKid, birthday, phone } = data;
       dispatch(setProfile({ username, isFemale, isKid, birthday, phone }));
