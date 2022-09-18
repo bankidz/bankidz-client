@@ -12,7 +12,6 @@ const userAPI = {
   // 유저 정보 조회하기
   getUser: async (): Promise<IMyPageDTO> => {
     const response = await axiosPrivateTemp.get('/user');
-    console.log(response);
     const data = response.data;
     return data;
   },
