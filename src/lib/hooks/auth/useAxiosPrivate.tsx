@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
-import { useAppSelector } from '@store/app/hooks';
-import { selectAccessToken } from '@store/slices/authSlice';
 import { axiosPrivateInstance } from '@lib/apis/axios';
 import useRefreshAccessToken from '@lib/hooks/auth/useRefreshAccessToken';
+// import { useAppSelector } from '@store/app/hooks';
+// import { selectAccessToken } from '@store/slices/authSlice';
 
 function useAxiosPrivate() {
   const refreshAccessToken = useRefreshAccessToken();
-  const accessToken = useAppSelector(selectAccessToken);
+  // const accessToken = useAppSelector(selectAccessToken);
 
   useEffect(() => {
     const requestIntercept = axiosPrivateInstance.interceptors.request.use(
@@ -40,7 +40,7 @@ function useAxiosPrivate() {
       axiosPrivateInstance.interceptors.request.eject(requestIntercept);
       axiosPrivateInstance.interceptors.response.eject(responseIntercept);
     };
-  }, [accessToken, refreshAccessToken]);
+  }, [refreshAccessToken]); // }, [accessToken, refreshAccessToken]);
 
   return axiosPrivateInstance; // interceptors applied
 }

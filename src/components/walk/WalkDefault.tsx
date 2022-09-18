@@ -2,7 +2,7 @@ import moment from 'moment';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
-import { selectAuth, selectLevel } from '@store/slices/authSlice';
+import { selectIsKid, selectLevel } from '@store/slices/authSlice';
 import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -29,7 +29,7 @@ type TWalkDefaultProps = {
 function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
   const level = useAppSelector(selectLevel);
   const patched = useAppSelector(selectIsWalkingDongilsPatched);
-  const { username, isKid, isFemale } = useAppSelector(selectAuth);
+  const isKid = useAppSelector(selectIsKid);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkDongil(walkingDongils);
   const dDayLeft = 7 - moment().day();
@@ -48,7 +48,11 @@ function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
       openModal(modals.primaryModal, {
         onSubmit: () => {},
         isKid: isKid,
-        isFemale: isFemale,
+
+        isFemale: false,
+        // isFemale: isFemale,
+        // isFemale은 첫 회원가입(register) 시에만 서버로 부터 받습니다.
+        // 따라서 본 컴포넌트에서 isFemale을 사용하고자할 때 authSlice에서 가져올 수 없습니다.
         headerText: `${user.username} 뱅키 이번주 저금 성공`,
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });

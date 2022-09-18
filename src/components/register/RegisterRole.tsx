@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { selectBirthday, setProfile } from '@store/slices/authSlice';
+import { assignIsKid, selectBirthday } from '@store/slices/authSlice';
 import RoleButton from '../common/buttons/RoleButton';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
@@ -12,12 +12,14 @@ import userAPI from '@lib/apis/user/userAPI';
 import { useMutation } from 'react-query';
 
 function RegisterRole() {
-  const birthday = useAppSelector(selectBirthday);
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
+  const { openModal } = useModals();
+
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
   const [isTutorial, setIsTutorial] = useState<boolean>(false);
 
-  const { openModal } = useModals();
   const handleModalOpen = (isKid: boolean, isFemale: boolean) => {
     openModal(modals.primaryModal, {
       onSubmit: () => {
@@ -31,19 +33,16 @@ function RegisterRole() {
   };
 
   const dispatch = useAppDispatch();
-  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
-    useGlobalBottomSheet();
-
-  // PATCH: 생년월일과 역할 정보가 없는 회원에 대해 입력받은 정보를 서버로 전송
   const patchUserMutation = useMutation(userAPI.patchUser, {
     onSuccess: (data) => {
-      const { username, isFemale, isKid, birthday, phone } = data;
-      dispatch(setProfile({ username, isFemale, isKid, birthday, phone }));
+      const { isFemale, isKid } = data;
+      dispatch(assignIsKid(isKid));
       setCloseBottomSheet();
       handleModalOpen(isKid, isFemale);
     },
   });
 
+  const birthday = useAppSelector(selectBirthday);
   const handleSubmit = (isKid: boolean, isFemale: boolean) => {
     patchUserMutation.mutate({ isKid, isFemale, birthday });
   };
