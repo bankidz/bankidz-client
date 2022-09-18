@@ -11,14 +11,11 @@ import TopContent from './contents/TopContent';
 import BottomContent from './contents/BottomContent';
 import CommentContent from './contents/CommentContent';
 import SubmitButton from './SubmitButton';
-import {
-  MODAL_CLOSE_TRANSITION_TIME,
-  MODAL_SLIDE_FROM_POSITION,
-  MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants/MODAL';
-// import useModals from '@lib/hooks/useModals';
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
+import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
+import { slideAnimation } from '../slideAnimation';
 
 interface ReceiptModalProps
   extends Pick<
@@ -65,14 +62,13 @@ function ReceiptModal({
   fileName,
 }: ReceiptModalProps) {
   const [isOpen, setIsOpen] = useState(true);
-
-  // const { closeModal } = useModals();
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        // closeModal(modals.receiptModal);
+        closeModal(modals.receiptModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
@@ -147,15 +143,7 @@ function ReceiptModal({
 export default ReceiptModal;
 
 const StyledReactModal = styled(ReactModal)`
-  @keyframes slide {
-    from {
-      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
-    }
-    to {
-      transform: translateY(${MODAL_SLIDE_TO_POSITION});
-    }
-  }
-  animation: slide ${({ theme }) => theme.animation.modalOpen};
+  ${slideAnimation}
 `;
 
 const Content = styled.div`

@@ -20,7 +20,7 @@ function PersistLogin() {
       registerEXPOToken();
     },
     onSettled: () => {
-      setIsLoading(false); // escape memory leak
+      setIsLoading(false);
     },
   });
 

@@ -4,6 +4,7 @@ import SecondaryModal from './SecondaryModal';
 export default {
   title: 'common/modals/SecondaryModal',
   component: SecondaryModal,
+  decorators: [(Story) => <Story />],
   argTypes: {
     onSubmit: { action: 'handle click' },
   },
