@@ -8,4 +8,3 @@ export type TItemName =
   | '선물'
   | '비상금'
   | '기타';
-
