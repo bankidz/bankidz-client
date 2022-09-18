@@ -31,13 +31,7 @@ function KidHomePage() {
   );
 
   let content;
-  if (status === 'loading') {
-    content = (
-      <CustomSyncLoaderWrapper>
-        <CustomSyncLoader />
-      </CustomSyncLoaderWrapper>
-    );
-  } else if (
+  if (
     (status === 'success' && !hasParent) ||
     (status === 'error' && error?.response?.status === 400)
   ) {
@@ -47,6 +41,12 @@ function KidHomePage() {
       <HomeTemplate>
         <KidHome />
       </HomeTemplate>
+    );
+  } else {
+    content = (
+      <CustomSyncLoaderWrapper>
+        <CustomSyncLoader />
+      </CustomSyncLoaderWrapper>
     );
   }
 
