@@ -4,7 +4,6 @@ import getPercentValue from '@lib/utils/get/getPercentValue';
 import styled from 'styled-components';
 import OverViewData from './OverViewContent';
 
-// TODO: any
 function KidsRecordItem({ kid }: { kid: IKidListDTO }) {
   const overViewData = [
     { name: '총 저금액', value: `${getCommaThreeDigits(kid.savings)}` },

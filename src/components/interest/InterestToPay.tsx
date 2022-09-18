@@ -1,55 +1,48 @@
 import EmptyDongil from '@components/home/EmptyDongil';
-import MarginTemplate from '@components/layout/MarginTemplate';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   selectHasMultipleKids,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
-import {
-  fetchNotPayedInterest,
-  selectNotPayedInterests,
-} from '@store/slices/notPayedInterestsSlice';
-import { useEffect } from 'react';
-import styled, { ThemeContext } from 'styled-components';
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
 import InterestToPayList from './InterestToPayList';
 
 function InterestToPay() {
-  const axiosPrivate = useAxiosPrivate();
-  const dispatch = useAppDispatch();
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  useEffect(() => {
-    dispatch(
-      fetchNotPayedInterest({ axiosPrivate, kidId: selectedKid?.kidId! }),
-    );
-  }, [selectedKid]);
-
-  const notPayedInterests = useAppSelector(selectNotPayedInterests);
-  const getSelectedKidSNotPayedInterests = (kidId: number) => {
-    const found = notPayedInterests?.find(
-      (notPayedInterest) => notPayedInterest.kidId === kidId,
-    );
-    return found?.achievedChallengeListDTO;
-  };
-  const selectedKidSNotPayedInterests = getSelectedKidSNotPayedInterests(
-    selectedKid?.kidId!,
+  const { status, data: notPayedInterests } = useQuery(
+    [queryKeys.CHALLENGE_KID_ACHIEVED, 'notPayed', selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidAchieved('notPayed', selectedKid?.kidId!),
   );
+
+  let interestToPay;
+  if (status === 'success') {
+    interestToPay =
+      notPayedInterests?.achievedChallengeListDTO.totalInterestPrice;
+  } else {
+    interestToPay = 0;
+  }
 
   return (
     <>
       <Header hasMultipleKids={hasMultipleKids}>
         <h1>지급이 필요한 이자</h1>
-        <h2>{selectedKidSNotPayedInterests?.totalInterestPrice}원</h2>
+        <h2>{interestToPay}원</h2>
       </Header>
-      {selectedKidSNotPayedInterests?.totalInterestPrice === 0 ? (
+      {notPayedInterests?.achievedChallengeListDTO.totalInterestPrice === 0 ? (
         <EmptyDongilWrapper>
           <EmptyDongil subject="아직 완주한" />
         </EmptyDongilWrapper>
       ) : (
         <InterestToPayList
-          challengeDTOList={selectedKidSNotPayedInterests?.challengeDTOList!}
+          challengeDTOList={
+            notPayedInterests?.achievedChallengeListDTO?.challengeDTOList!
+          }
         />
       )}
     </>

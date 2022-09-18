@@ -1,1 +1,1 @@
-export type TLocalStorageKey = 'accessToken' | 'alert';
+export type TLocalStorageKey = 'accessToken' | 'alert' | 'appleWithdrawReason';

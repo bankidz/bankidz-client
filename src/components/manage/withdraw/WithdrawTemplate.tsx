@@ -1,4 +1,4 @@
-import { IMyPageDTO, IUserDTO } from '@lib/apis/user/user.dto';
+import { IMyPageDTO } from '@lib/apis/user/user.dto';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';

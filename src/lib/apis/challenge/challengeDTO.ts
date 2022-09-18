@@ -20,6 +20,7 @@ export interface IChallengeDTO {
   };
   createdAt: string;
   fileName: string;
+  id: number;
   interestPrice: number;
   interestRate: TInterestRate;
   isMom: boolean;
@@ -50,6 +51,10 @@ export interface IChallengeRequest
 export interface IKidChallengeRequest {
   accept: boolean;
   comment: string;
+}
+
+export interface IPatchChallengePayload extends IKidChallengeRequest {
+  challengeId: number;
 }
 
 export interface IAchievedChallengeDTO {

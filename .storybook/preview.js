@@ -4,23 +4,26 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../src/lib/styles/global-style';
 import { theme } from '../src/lib/styles/theme';
 import { store } from '../src/store/app/store';
+import { ModalsContextProvider } from '../src/components/common/modals/ModalsContext';
 import '../src/assets/fonts/fontStyle.css';
 
 export const decorators = [
   (Story) => (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <div
-          style={{
-            width: '100%',
-            backgroundColor: '#FAFAFC',
-            padding: '18px',
-            boxSizing: 'border-box',
-          }}
-        >
-          <Story />
-        </div>
+        <ModalsContextProvider>
+          <GlobalStyle />
+          <div
+            style={{
+              width: '100%',
+              backgroundColor: '#FAFAFC',
+              padding: '18px',
+              boxSizing: 'border-box',
+            }}
+          >
+            <Story />
+          </div>
+        </ModalsContextProvider>
       </ThemeProvider>
     </Provider>
   ),

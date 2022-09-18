@@ -17,5 +17,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/custom.d.ts", "craco.config.js"]
+  "include": ["src", "src/custom.d.ts", "craco.config.js", "PendingDongilSection.tsx"]
 }

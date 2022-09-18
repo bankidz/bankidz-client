@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SkeletonDongilList from './SkeletonDongilList';
 
 export default {
-  title: 'common/SkeletonDongilList',
+  title: 'common/skeletons/SkeletonDongilList',
   component: SkeletonDongilList,
 } as ComponentMeta<typeof SkeletonDongilList>;
 

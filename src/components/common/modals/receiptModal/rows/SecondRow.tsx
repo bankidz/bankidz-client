@@ -1,9 +1,9 @@
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { calcRatio } from '@lib/styles/theme';
-import { IDongil } from '@lib/types/IDongil';
 import styled from 'styled-components';
 
 interface SecondRowProps
-  extends Pick<IDongil, 'totalPrice' | 'weekPrice' | 'interestRate'> {}
+  extends Pick<IChallengeDTO, 'totalPrice' | 'weekPrice' | 'interestRate'> {}
 
 function SecondRow({ totalPrice, weekPrice, interestRate }: SecondRowProps) {
   return (

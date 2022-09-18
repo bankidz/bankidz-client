@@ -1,23 +1,18 @@
 import { ReactComponent as Plus } from '@assets/icons/plus.svg';
-import { useAppSelector } from '@store/app/hooks';
-import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
-import { Dispatch, SetStateAction } from 'react';
-import { Link } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface ContractNewDongilLinkProps {
   to: string;
   createDisabled: boolean;
-  navigateCreateDongil: () => void;
+  navigateToCreateDongil: () => void;
 }
 
 function ContractNewDongilLink({
-  to,
   createDisabled,
-  navigateCreateDongil,
+  navigateToCreateDongil,
 }: ContractNewDongilLinkProps) {
   return (
-    <StyledDiv onClick={navigateCreateDongil} createDisabled={createDisabled}>
+    <StyledDiv onClick={navigateToCreateDongil} createDisabled={createDisabled}>
       <Plus />
       새로운 돈길 계약하기
     </StyledDiv>
@@ -55,10 +50,6 @@ const StyledDiv = styled.div<{ createDisabled: boolean }>`
         ? theme.palette.greyScale.grey200
         : theme.palette.main.yellow400};
   }
-`;
-
-const StyledLink = styled(Link)`
-  color: ${({ theme }) => theme.palette.main.yellow400};
 `;
 
 // https://mygumi.tistory.com/382

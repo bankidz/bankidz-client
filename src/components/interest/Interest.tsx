@@ -1,31 +1,28 @@
-import FixedBar from '@components/home/homeTemplate/FixedBar';
 import NoFamily from '@components/home/NoFamily';
-import { useAppSelector } from '@store/app/hooks';
-import { selectFamily, selectFamilyStatus } from '@store/slices/familySlice';
+import familyApi from '@lib/apis/family/familyApi';
+import queryKeys from '@lib/constants/queryKeys';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import InterestTemplate from './InterestTemplate';
 import InterestToPay from './InterestToPay';
 
 function Interest() {
-  const family = useAppSelector(selectFamily);
-  const familyStatus = useAppSelector(selectFamilyStatus);
-  const hasNoFamily = family?.length === 0 && familyStatus === 'succeeded';
+  const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyApi.getFamilyKid);
 
-  return (
-    <>
-      {hasNoFamily ? (
-        <NoFamily variant="Interest" />
-      ) : (
-        <>
-          <InterestTemplate>
-            <FlexContainer>
-              <InterestToPay />
-            </FlexContainer>
-          </InterestTemplate>
-        </>
-      )}
-    </>
-  );
+  let content;
+  if (kids?.length === 0) {
+    content = <NoFamily variant="Interest" />;
+  } else {
+    content = (
+      <InterestTemplate>
+        <FlexContainer>
+          <InterestToPay />
+        </FlexContainer>
+      </InterestTemplate>
+    );
+  }
+
+  return <>{content}</>;
 }
 
 export default Interest;

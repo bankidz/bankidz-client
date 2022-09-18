@@ -5,13 +5,10 @@ import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
-import {
-  MODAL_CLOSE_TRANSITION_TIME,
-  MODAL_SLIDE_FROM_POSITION,
-  MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants/MODAL';
-// import useModals from '@lib/hooks/useModals';
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
+import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
+import { slideAnimation } from '../slideAnimation';
 
 interface PrimaryModalProps {
   onSubmit: any;
@@ -37,20 +34,13 @@ function PrimaryModal({
   shouldCloseOnOverlayClick = false,
 }: PrimaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
-  function handleSubmit() {
-    setIsOpen(false); // close transition 적용을 위해 필요
-    setTimeout(() => {
-      onSubmit();
-    }, MODAL_CLOSE_TRANSITION_TIME);
-  }
-
-  // const { closeModal } = useModals();
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        // closeModal(modals.primaryModal);
+        closeModal(modals.primaryModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
@@ -85,6 +75,13 @@ function PrimaryModal({
     },
   };
 
+  const handleSubmit = () => {
+    setIsOpen(false); // close transition 적용을 위해 필요
+    setTimeout(() => {
+      onSubmit();
+    }, MODAL_CLOSE_TRANSITION_TIME);
+  };
+
   return (
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
@@ -112,15 +109,7 @@ function PrimaryModal({
 export default PrimaryModal;
 
 const StyledReactModal = styled(ReactModal)`
-  @keyframes slide {
-    from {
-      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
-    }
-    to {
-      transform: translateY(${MODAL_SLIDE_TO_POSITION});
-    }
-  }
-  animation: slide ${({ theme }) => theme.animation.modalOpen};
+  ${slideAnimation}
 `;
 
 const Content = styled.div`

@@ -1,7 +1,7 @@
 /**
  * @return 'yyyymmdd' 형식으로 가공된 date를 반홥합니다. (attach zero padding)
  */
-function refineDate(year: string, month: string, day: string) {
+function getRefinedDate(year: string, month: string, day: string) {
   if (month.length === 1) {
     month = '0' + month;
   }
@@ -11,4 +11,4 @@ function refineDate(year: string, month: string, day: string) {
   return year + month + day;
 }
 
-export default refineDate;
+export default getRefinedDate;

@@ -1,8 +1,9 @@
 import { axiosPublic } from '../axios';
-import { ILoginDTO } from './kakaoDTO';
+import { IKakaoRequest, ILoginDTO } from './kakaoDTO';
 
 const kakaoAPI = {
-  login: async (code: string): Promise<ILoginDTO> => {
+  // 카카오 로그인
+  kakaoLogin: async ({ code }: IKakaoRequest): Promise<ILoginDTO> => {
     const response = await axiosPublic.post('/kakao/login', code);
     return response.data.data;
   },

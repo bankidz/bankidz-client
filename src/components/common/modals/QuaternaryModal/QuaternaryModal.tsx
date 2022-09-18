@@ -2,15 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import '../styles.css';
-import {
-  MODAL_CLOSE_TRANSITION_TIME,
-  MODAL_SLIDE_FROM_POSITION,
-  MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants/MODAL';
-// import useModals from '@lib/hooks/useModals';
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
+import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 import renderBankiWalk from '@lib/utils/render/renderBankiWalk';
 import Button from '@components/common/buttons/Button';
+import { slideAnimation } from '../slideAnimation';
 
 interface QuaternaryModalProps {
   onSubmit: any;
@@ -37,14 +34,13 @@ function QuaternaryModal({
   shouldCloseOnOverlayClick = false,
 }: QuaternaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
-
-  // const { closeModal } = useModals();
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        // closeModal(modals.primaryModal);
+        closeModal(modals.primaryModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
@@ -79,18 +75,18 @@ function QuaternaryModal({
     },
   };
 
-  function handleSubmit() {
+  const handleSubmit = () => {
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
     }, MODAL_CLOSE_TRANSITION_TIME);
-  }
-  function handleExtraSubmit() {
+  };
+  const handleExtraSubmit = () => {
     setIsOpen(false);
     setTimeout(() => {
       onExtraSubmit();
     }, MODAL_CLOSE_TRANSITION_TIME);
-  }
+  };
 
   return (
     // @ts-expect-error
@@ -129,15 +125,7 @@ function QuaternaryModal({
 export default QuaternaryModal;
 
 const StyledReactModal = styled(ReactModal)`
-  @keyframes slide {
-    from {
-      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
-    }
-    to {
-      transform: translateY(${MODAL_SLIDE_TO_POSITION});
-    }
-  }
-  animation: slide ${({ theme }) => theme.animation.modalOpen};
+  ${slideAnimation}
 `;
 
 const Content = styled.div`

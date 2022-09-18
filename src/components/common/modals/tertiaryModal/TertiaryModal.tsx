@@ -5,13 +5,10 @@ import '../styles.css';
 import Background from './Background';
 import StyledSwiper from './StyledSwiper';
 import CloseButtonSection from './CloseButton';
-import {
-  MODAL_CLOSE_TRANSITION_TIME,
-  MODAL_SLIDE_FROM_POSITION,
-  MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants/MODAL';
-// import useModals from '@lib/hooks/useModals';
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
+import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
+import { slideAnimation } from '../slideAnimation';
 
 interface TertiaryModalProps {
   onSubmit: any;
@@ -29,13 +26,13 @@ function TertiaryModal({
   const [isOpen, setIsOpen] = useState(true);
   const [currentCardIdx, setCurrentCardIdx] = useState(0);
 
-  // const { closeModal } = useModals();
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        // closeModal(modals.tertiaryModal);
+        closeModal(modals.tertiaryModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
@@ -92,15 +89,7 @@ function TertiaryModal({
 export default TertiaryModal;
 
 const StyledReactModal = styled(ReactModal)`
-  @keyframes slide {
-    from {
-      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
-    }
-    to {
-      transform: translateY(${MODAL_SLIDE_TO_POSITION});
-    }
-  }
-  animation: slide ${({ theme }) => theme.animation.modalOpen};
+  ${slideAnimation}
 `;
 
 const Content = styled.div`

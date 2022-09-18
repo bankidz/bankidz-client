@@ -82,8 +82,6 @@ const SignatureWrapper = styled.div`
   z-index: 710;
   position: absolute;
   width: ${calcRatio(146, 324)};
-  // TODO: 도영이는 뒤에 글씨 가리는게 별로라고 생각해서 기디 회의 후에
-  // 서명 크기 재조정 필요할것 같습니다.
   height: 173px;
   right: 2px;
   bottom: 0;

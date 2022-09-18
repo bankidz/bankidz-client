@@ -6,3 +6,7 @@ export interface ILoginDTO {
   level: TLevel;
   provider: string;
 }
+
+export interface IKakaoRequest {
+  code: string;
+}

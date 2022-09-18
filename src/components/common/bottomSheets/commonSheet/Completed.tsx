@@ -54,7 +54,7 @@ const content = {
 function Completed({ type, title, onMainActionClick }: CompleteProps) {
   const { setCloseBottomSheet } = useGlobalBottomSheet();
   return (
-    // TODO: fragment
+    // 성우의 제안: fragment 활용
     <Wrapper>
       <Container>
         {content[type].icon}

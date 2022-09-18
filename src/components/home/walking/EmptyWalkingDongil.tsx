@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { ReactComponent as PlusCircle } from '@assets/icons/plus-circle.svg';
 import { HTMLAttributes } from 'react';
-import { create } from 'domain';
 
 interface EmptyWalkingDongilProps extends HTMLAttributes<HTMLButtonElement> {
   createDisabled: boolean;
