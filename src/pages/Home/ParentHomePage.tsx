@@ -7,6 +7,7 @@ import queryKeys from '@lib/constants/queryKeys';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
+  selectHasMultipleKids,
   selectSelectedKid,
   setHasMultipleKids,
   setSelectedKid,
@@ -26,14 +27,21 @@ function ParentHomePage() {
   usePreventGoBack();
 
   const selectedKid = useAppSelector(selectSelectedKid);
+  const hasMultipleKids = useAppSelector(selectHasMultipleKids);
   const dispatch = useAppDispatch();
   const { status, data: kids } = useQuery(
     queryKeys.FAMILY_KID,
     familyAPI.getKid,
     {
       onSuccess: (data) => {
-        selectedKid === null && dispatch(setSelectedKid(data[0]));
-        data.length > 1 && dispatch(setHasMultipleKids(true));
+        selectedKid === undefined && dispatch(setSelectedKid(data[0]));
+        if (hasMultipleKids === undefined) {
+          if (data.length >= 2) {
+            dispatch(setHasMultipleKids(true));
+          } else {
+            dispatch(setHasMultipleKids(false));
+          }
+        }
       },
     },
   );

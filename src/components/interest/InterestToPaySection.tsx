@@ -51,7 +51,7 @@ function InterestToPaySection() {
 
   return (
     <>
-      <Header hasMultipleKids={hasMultipleKids}>
+      <Header hasMultipleKids={hasMultipleKids!}>
         <h1>지급이 필요한 이자</h1>
         <h2>{interestToPay}원</h2>
       </Header>

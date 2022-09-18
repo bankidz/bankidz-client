@@ -41,7 +41,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
   return (
     <Wrapper
       colorByLevel={colorByLevel}
-      hasMultipleKids={hasMultipleKids}
+      hasMultipleKids={hasMultipleKids!}
       isAllRead={isAllRead!}
     >
       <div className="alert" onClick={() => navigate('/notification')}>
