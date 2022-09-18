@@ -4,14 +4,14 @@ import { RootState } from '../app/store';
 
 interface IKidsState {
   // 부모 홈에서 다자녀중 선택된 한명의 자녀
-  selectedKid: IKidListDTO | null;
+  selectedKid: IKidListDTO | undefined;
   // 다자녀 유무
-  hasMultipleKids: boolean;
+  hasMultipleKids: boolean | undefined;
 }
 
 const initialState: IKidsState = {
-  selectedKid: null,
-  hasMultipleKids: false,
+  selectedKid: undefined,
+  hasMultipleKids: undefined,
 };
 
 export const kidsSlice = createSlice({
