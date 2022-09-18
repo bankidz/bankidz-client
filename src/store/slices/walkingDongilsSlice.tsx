@@ -71,7 +71,6 @@ export const walkingDongilsSlice = createSlice({
     dispatchResetIsPatched(state) {
       state.isWalkingDongilsPatched = false;
     },
-    // TODO: demo day
     dispatchSetPatched(state, action) {
       const id = action.payload.id;
       const achievedDongil = state.walkingDongils!.find(

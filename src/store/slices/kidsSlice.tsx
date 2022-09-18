@@ -1,3 +1,4 @@
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import { IKid } from '@lib/types/IKid';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -6,7 +7,7 @@ import { RootState } from '../app/store';
 
 interface IKidsState {
   kids: IKid[];
-  selectedKid: IKid | null; // 부모 홈에서 다자녀중 선택한 자녀 한명
+  selectedKid: IKidListDTO | null; // 부모 홈에서 다자녀중 선택한 자녀 한명
   hasMultipleKids: boolean; // 다자녀 유무
   kidsStatus: TFetchStatus;
 }
@@ -32,7 +33,7 @@ export const kidsSlice = createSlice({
   name: 'kids',
   initialState,
   reducers: {
-    setSelectedKid: (state, action: PayloadAction<IKid>) => {
+    setSelectedKid: (state, action: PayloadAction<IKidListDTO>) => {
       state.selectedKid = action.payload;
     },
   },
@@ -44,12 +45,12 @@ export const kidsSlice = createSlice({
       .addCase(fetchKids.fulfilled, (state, action) => {
         state.kidsStatus = 'succeeded';
         state.kids = action.payload.data;
-        if (state.kids) {
-          state.selectedKid = state.kids[0];
-          if (state.kids.length >= 2) {
-            state.hasMultipleKids = true;
-          }
-        }
+        // if (state.kids) {
+        //   state.selectedKid = state.kids[0];
+        //   if (state.kids.length >= 2) {
+        //     state.hasMultipleKids = true;
+        //   }
+        // }
       })
       .addCase(fetchKids.rejected, (state) => {
         state.kidsStatus = 'failed';

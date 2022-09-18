@@ -44,7 +44,6 @@ const notifications = {
 };
 
 function SelectInterest({ form, setForm }: TSetStep4Form) {
-  // TODO: TInterestRate
   const [select, setSelect] = useState<TInterestRate | null>(
     form?.interestRate ? form.interestRate : null,
   );

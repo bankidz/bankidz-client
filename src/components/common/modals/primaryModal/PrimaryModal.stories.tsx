@@ -4,6 +4,7 @@ import PrimaryModal from './PrimaryModal';
 export default {
   title: 'common/modals/PrimaryModal',
   component: PrimaryModal,
+  decorators: [(Story) => <Story />],
   argTypes: {
     onSubmit: { action: 'handle click' },
   },

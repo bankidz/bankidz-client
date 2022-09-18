@@ -29,7 +29,7 @@ import dayjs from 'dayjs';
 
 export type TStep4Form = {
   weekPrice: number;
-  // TODO: TInterestRate, null
+  // 성우의 제안: null 삭제
   interestRate: 10 | 20 | 30 | null;
 };
 export type TSetStep4Form = {
@@ -72,11 +72,9 @@ function Step4({ currentStep }: { currentStep: number }) {
 
   const { openModal } = useModals();
 
-  // 모달 여는 함수
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      // TODO: 알아서 닫힘
-      // onSubmit: () => {},
+      onSubmit: () => {},
     });
   };
 
@@ -111,7 +109,7 @@ function Step4({ currentStep }: { currentStep: number }) {
       const { month, weekNo } = getWeekNumberByMonth(endDate.toDate());
       setContractInfo({
         weekCost: weekCost,
-        contractEndWeek: `${month}월 ${weekNo}주`, //TODO
+        contractEndWeek: `${month}월 ${weekNo}주`,
         overPrice: totalPriceWithInterest - totalPrice,
       });
     }

@@ -1,40 +1,57 @@
 import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
-import { IChallengeDTO } from '@store/slices/notPayedInterestsSlice';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import getCompletionDate from '@lib/utils/get/getCompletionDate';
+import { IAchievedChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import { useMutation, useQueryClient } from 'react-query';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
+import { useAppSelector } from '@store/app/hooks';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
 
 interface InterestTOPayListProps {
-  challengeDTOList: IChallengeDTO[];
+  challengeDTOList: IAchievedChallengeDTO[];
 }
 
 function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
+  // 2. 지급했어요
   const { openModal } = useModals();
-
-  function handlePaidButtonClick() {
-    console.log('click');
+  const queryClient = useQueryClient();
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const payMutation = useMutation(challengeAPI.patchChallengeInterestPayment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        queryKeys.CHALLENGE_KID_ACHIEVED,
+        'notPayed',
+        selectedKid?.kidId,
+      ]);
+    },
+  });
+  const handlePaidButtonClick = (id: number) => {
     openModal(modals.secondaryModal, {
       onSubmit: () => {
-        console.log('handle submit');
+        payMutation.mutate(id);
       },
       headerText: '이자지급을 완료했어요',
       bodyText: '자녀의 급융습관이 쑥쑥 자라고 있어요!',
       hasBadge: false,
     });
-  }
+  };
 
-  function handleIsPaidButtonClick(
+  // 1. 지급 완료하기
+  const handleCompletePaymentButtonClick = (
     interestPrice: number,
+    id: number,
     title: string,
     weeks: number,
     successWeeks: number,
-  ) {
+  ) => {
     openModal(modals.quaternaryModal, {
       onExtraSubmit: () => {
         setTimeout(() => {
-          handlePaidButtonClick();
+          handlePaidButtonClick(id);
         }, MODAL_CLOSE_TRANSITION_TIME);
       },
       interestPrice,
@@ -43,7 +60,7 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
       successWeeks,
       shouldCloseOnOverlayClick: true,
     });
-  }
+  };
 
   return (
     <Wrapper>
@@ -67,8 +84,9 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
           <Button
             label="지급 완료하기"
             onClick={() =>
-              handleIsPaidButtonClick(
+              handleCompletePaymentButtonClick(
                 challengeDTO.interestPrice,
+                challengeDTO.challenge.id,
                 challengeDTO.challenge.title,
                 challengeDTO.challenge.weeks,
                 challengeDTO.challenge.successWeeks,

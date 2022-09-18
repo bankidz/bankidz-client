@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { ReactComponent as BankiSad } from '@assets/illusts/banki/banki_sad.svg';
-import { TDongilVariant } from '@lib/types/TDongilVariant';
 
 interface EmptyDongilProps {
   subject: string;

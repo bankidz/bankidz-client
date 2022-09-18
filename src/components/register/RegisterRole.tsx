@@ -44,7 +44,7 @@ function RegisterRole() {
     },
   });
 
-  const handleSubmit = async (isKid: boolean, isFemale: boolean) => {
+  const handleSubmit = (isKid: boolean, isFemale: boolean) => {
     patchUserMutation.mutate({ isKid, isFemale, birthday });
   };
 

@@ -84,7 +84,7 @@ function Step5({ currentStep }: { currentStep: number }) {
         onSubmit: () => {
           navigate('/', { replace: true });
         },
-        // TODO: day.js
+        // 성우의 제안: day.js로 날짜관련 함수 통일
         createdAt: moment().format('YYYY/MM/DD hh:mm:ss'),
         interestRate,
         isMom,

@@ -1,9 +1,10 @@
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import React from 'react';
 import styled from 'styled-components';
 import WalkingDongilItem from './WalkingDongilItem';
 
 interface WalkingDongilListProps {
-  walkingDongils: IDongil[];
+  walkingDongils: IChallengeDTO[];
 }
 
 function WalkingDongilList({ walkingDongils }: WalkingDongilListProps) {
@@ -23,7 +24,7 @@ function WalkingDongilList({ walkingDongils }: WalkingDongilListProps) {
   );
 }
 
-export default WalkingDongilList;
+export default React.memo(WalkingDongilList);
 
 const Wrapper = styled.div`
   display: flex;

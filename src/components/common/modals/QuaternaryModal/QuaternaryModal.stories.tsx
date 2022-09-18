@@ -4,8 +4,10 @@ import QuaternaryModal from './QuaternaryModal';
 export default {
   title: 'common/modals/QuaternaryModal',
   component: QuaternaryModal,
+  decorators: [(Story) => <Story />],
   argTypes: {
-    onSubmit: { action: 'handle click' },
+    onSubmit: { action: 'handle submit' },
+    onExtraSubmit: { action: 'handle extra submit' },
   },
 } as ComponentMeta<typeof QuaternaryModal>;
 

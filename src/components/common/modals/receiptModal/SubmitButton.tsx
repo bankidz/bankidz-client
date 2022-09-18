@@ -20,18 +20,18 @@ function SubmitButton({
   onExtraSubmit,
   shouldCloseOnOverlayClick,
 }: SubmitButtonProps) {
-  function handleSubmit() {
+  const handleSubmit = () => {
     setIsOpen(false);
     setTimeout(() => {
       onSubmit();
     }, MODAL_CLOSE_TRANSITION_TIME);
-  }
-  function handleExtraSubmit() {
+  };
+  const handleExtraSubmit = () => {
     setIsOpen(false);
     setTimeout(() => {
       onExtraSubmit();
     }, MODAL_CLOSE_TRANSITION_TIME);
-  }
+  };
 
   let collection;
   if (variant === 'contract') {

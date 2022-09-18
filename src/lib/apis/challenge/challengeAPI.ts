@@ -2,20 +2,20 @@ import { axiosPrivateTemp } from '../axios';
 import {
   IChallengeRequest,
   IChallengeDTO,
-  IKidChallengeRequest,
   IProgressDTO,
   IAchievedChallengeDTO,
   IKidChallengeListDTO,
   IKidAchievedChallengeListDTO,
   IKidWeekDTO,
   IWeekDTO,
+  IPatchChallengePayload,
 } from './challengeDTO';
 
 const challengeAPI = {
   // 돈길 리스트 가져오기
   getChallenge: async (
     status: 'pending' | 'walking',
-  ): Promise<IChallengeDTO> => {
+  ): Promise<IChallengeDTO[]> => {
     const response = await axiosPrivateTemp.get(`/challenge?status=${status}`);
     return response.data;
   },
@@ -55,10 +55,11 @@ const challengeAPI = {
   },
 
   // 자녀의 돈길 수락 / 거절
-  patchChallenge: async (
-    challengeId: number,
-    { accept, comment }: IKidChallengeRequest,
-  ): Promise<IChallengeDTO> => {
+  patchChallenge: async ({
+    challengeId,
+    accept,
+    comment,
+  }: IPatchChallengePayload): Promise<IChallengeDTO> => {
     const response = await axiosPrivateTemp.patch(`/challenge/${challengeId}`, {
       accept,
       comment,
@@ -105,6 +106,7 @@ const challengeAPI = {
     const response = await axiosPrivateTemp.get(
       `/challenge/kid/achieved/${kidId}?interestPayment=${interestPayment}`,
     );
+    console.log('response: ', response);
     return response.data;
   },
 

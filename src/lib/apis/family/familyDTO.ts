@@ -1,5 +1,5 @@
 import { IFamilyState } from '@lib/types/IFamilyState';
-import { IKid } from '@lib/types/IKid';
+import { TLevel } from '@lib/types/TLevel';
 
 export interface IFamilyDTO {
   id: number;
@@ -7,10 +7,14 @@ export interface IFamilyDTO {
   familyUserList: IFamilyState[];
 }
 
-export interface IKidListDTO extends IKid {
-  savings: number;
+export interface IKidListDTO {
   achievedChallenge: number;
+  isFemale: boolean;
+  kidId: number;
+  level: TLevel;
+  savings: number;
   totalChallenge: number;
+  username: string;
 }
 
 export interface IFamilyGroupPayload {

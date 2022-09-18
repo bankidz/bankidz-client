@@ -1,9 +1,9 @@
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
 import InterestStampList from './InterestStampList';
 
 interface DetailInterestStampListProps
-  extends Pick<IDongil, 'weeks' | 'progressList'> {}
+  extends Pick<IChallengeDTO, 'weeks' | 'progressList'> {}
 
 function InterestStampListSection({
   weeks,

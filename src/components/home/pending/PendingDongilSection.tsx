@@ -1,40 +1,33 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { useAppSelector } from '@store/app/hooks';
-import {
-  selectPendingDongils,
-  selectPendingDongilsStatus,
-} from '@store/slices/pendingDongilsSlice';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import PendingDongilList from './PendingDongilList';
 
-function PendingDongilSection() {
-  const pendingDongilsStatus = useAppSelector(selectPendingDongilsStatus);
-  const pendingDongils = useAppSelector(selectPendingDongils);
+interface PendingDongilSectionProps {
+  pendingDongilsStatus: TStatus;
+  pendingDongilsData: IChallengeDTO[] | undefined;
+}
 
-  let content: JSX.Element = <></>;
-  if (pendingDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="pending" />;
-  } else if (pendingDongilsStatus === 'succeeded') {
-    if (pendingDongils?.length === 0) {
-      content = (
-        <>
-          <EmptyDongil subject="대기중인" />
-        </>
-      );
+function PendingDongilSection({
+  pendingDongilsStatus,
+  pendingDongilsData,
+}: PendingDongilSectionProps) {
+  let content;
+  if (pendingDongilsStatus === 'success') {
+    if (pendingDongilsData?.length === 0) {
+      content = <EmptyDongil subject="대기중인" />;
     } else {
-      content = (
-        <>
-          <PendingDongilList pendingDongils={pendingDongils!} />
-        </>
-      );
+      content = <PendingDongilList pendingDongils={pendingDongilsData!} />;
     }
-  } else if (pendingDongilsStatus === 'failed') {
-    content = <p>Failed</p>;
+  } else {
+    content = <SkeletonDongilList variant="pending" />;
   }
+
   return (
     <Wrapper>
-      {pendingDongilsStatus !== 'idle' && <h1>대기중인 돈길</h1>}
+      <h1>대기중인 돈길</h1>
       {content}
     </Wrapper>
   );

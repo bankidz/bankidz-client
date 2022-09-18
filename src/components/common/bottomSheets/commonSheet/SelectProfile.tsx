@@ -5,7 +5,7 @@ import renderRoleText from '@lib/utils/get/getRoleText';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
-  // TODO: typing
+  // 성우의 제안: null 삭제
   isKid: boolean | null;
   isFemale: boolean | null;
 }

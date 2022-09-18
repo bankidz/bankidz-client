@@ -1,31 +1,31 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
-import { persistLogin } from '@store/slices/authSlice';
+import { setCredentials } from '@store/slices/authSlice';
 import CustomSyncLoader from '@components/common/CustomSyncLoader';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import { useMutation } from 'react-query';
+import userAPI from '@lib/apis/user/userAPI';
 
 function PersistLogin() {
   const accessToken = getLocalStorage('accessToken');
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
 
-  // @ts-expect-error
+  const persistLoginMutation = useMutation(userAPI.patchUserRefresh, {
+    onSuccess: (data) => {
+      const { isKid, level, provider } = data;
+      dispatch(setCredentials({ accessToken, isKid, level, provider }));
+      registerEXPOToken();
+    },
+    onSettled: () => {
+      setIsLoading(false);
+    },
+  });
+
   useEffect(() => {
-    let isMounted = true;
-    async function proceedPersistLogin() {
-      try {
-        const response = await dispatch(persistLogin()).unwrap();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        isMounted && setIsLoading(false); // escape memory leak
-      }
-    }
-    accessToken && proceedPersistLogin();
-    registerEXPOToken();
-    return () => (isMounted = false);
+    accessToken && persistLoginMutation.mutate();
   }, []);
 
   if (accessToken && isLoading) {
@@ -71,3 +71,17 @@ export default PersistLogin;
 // } else {
 //   return <Outlet />;
 // }
+
+// let isMounted = true;
+// async function proceedPersistLogin() {
+//   try {
+//     const response = await dispatch(persistLogin()).unwrap();
+//   } catch (error) {
+//     console.error(error);
+//   } finally {
+//     isMounted && setIsLoading(false); // escape memory leak
+//   }
+// }
+// accessToken && proceedPersistLogin();
+// registerEXPOToken();
+// return () => (isMounted = false);

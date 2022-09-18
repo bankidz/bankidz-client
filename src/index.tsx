@@ -30,7 +30,7 @@ root.render(
       <ThemeProvider theme={theme}>
         <ModalsContextProvider>
           <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen />
+            <ReactQueryDevtools initialIsOpen={false} />
             <App />
             <GlobalBottomSheet />
           </QueryClientProvider>

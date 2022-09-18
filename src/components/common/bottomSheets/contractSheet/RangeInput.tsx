@@ -25,7 +25,7 @@ function RangeInput({
     form?.weekPrice ? form.weekPrice : 0,
   );
 
-  // TODO: magic number
+  // 성우의 제안: magic number 지양
   useEffect(() => {
     if (totalPrice < 100000) {
       form && setForm && setForm({ ...form, weekPrice: value });

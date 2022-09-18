@@ -1,7 +1,7 @@
 import { axiosPrivateTemp } from '../axios';
 import { IFamilyGroupPayload, IFamilyDTO, IKidListDTO } from './familyDTO';
 
-const familyApi = {
+const familyAPI = {
   getFamily: async (): Promise<IFamilyDTO> => {
     const response = await axiosPrivateTemp.get('/family');
     const data = response.data;
@@ -35,4 +35,4 @@ const familyApi = {
   },
 };
 
-export default familyApi;
+export default familyAPI;

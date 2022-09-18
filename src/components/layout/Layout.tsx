@@ -12,7 +12,7 @@ function Layout() {
   useEffect(() => {
     const setBodyYellow = () => {
       const bodyElement = document.querySelector('body');
-      bodyElement!.style.backgroundColor = '#ffd56f'; // TODO: 주석 남겨줘요
+      bodyElement!.style.backgroundColor = '#ffd56f';
     };
     const setBodyWhite = () => {
       const bodyElement = document.querySelector('body');

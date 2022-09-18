@@ -3,13 +3,12 @@ const queryKeys = {
   APPLE_LOGIN: '/apple/login',
   APPLE_REVOKE: '/apple/revoke',
   /** challenge-controller */
-  WALKING_DONGILS: '/challenge/?status=walking', // CHALLENGE: '/challenge'
-  PENDING_DONGILS: '/challenge/?status=pending', // CHALLENGE: '/challenge'
+  CHALLENGE: '/challenge',
   CHALLENGE_ACHIEVED: '/challenge/achieved',
   CHALLENGE_KID: '/challenge/kid',
   CHALLENGE_KID_ACHIEVED: '/challenge/kid/achieved',
   CHALLENGE_KID_PROGRESS: '/challenge/kid/progress',
-  KID_SUMMARY: '/challenge/progress', // CHALLENGE_PROGRESS: '/challenge/progress',
+  CHALLENGE_PROGRESS: '/challenge/progress',
   /** family-controller */
   FAMILY: '/family',
   FAMILY_KID: '/family_kid',
