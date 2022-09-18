@@ -106,7 +106,6 @@ const challengeAPI = {
     const response = await axiosPrivateTemp.get(
       `/challenge/kid/achieved/${kidId}?interestPayment=${interestPayment}`,
     );
-    console.log('response: ', response);
     return response.data;
   },
 

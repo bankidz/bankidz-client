@@ -1,8 +1,8 @@
+import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import EmptyDongil from '@components/home/EmptyDongil';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { useAppSelector } from '@store/app/hooks';
 import {
   selectHasMultipleKids,
   selectSelectedKid,
@@ -11,7 +11,7 @@ import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import InterestToPayList from './InterestToPayList';
 
-function InterestToPay() {
+function InterestToPaySection() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
@@ -28,28 +28,39 @@ function InterestToPay() {
     interestToPay = 0;
   }
 
-  return (
-    <>
-      <Header hasMultipleKids={hasMultipleKids}>
-        <h1>지급이 필요한 이자</h1>
-        <h2>{interestToPay}원</h2>
-      </Header>
-      {notPayedInterests?.achievedChallengeListDTO.totalInterestPrice === 0 ? (
+  let content;
+  if (status === 'success') {
+    if (notPayedInterests?.achievedChallengeListDTO.totalInterestPrice === 0) {
+      content = (
         <EmptyDongilWrapper>
           <EmptyDongil subject="아직 완주한" />
         </EmptyDongilWrapper>
-      ) : (
+      );
+    } else {
+      content = (
         <InterestToPayList
           challengeDTOList={
             notPayedInterests?.achievedChallengeListDTO?.challengeDTOList!
           }
         />
-      )}
+      );
+    }
+  } else {
+    content = <SkeletonInterestToPayList />;
+  }
+
+  return (
+    <>
+      <Header hasMultipleKids={hasMultipleKids!}>
+        <h1>지급이 필요한 이자</h1>
+        <h2>{interestToPay}원</h2>
+      </Header>
+      {content}
     </>
   );
 }
 
-export default InterestToPay;
+export default InterestToPaySection;
 
 const Header = styled.header<{ hasMultipleKids: boolean }>`
   margin-top: ${({ hasMultipleKids }) => (hasMultipleKids ? '159px' : '112px')};

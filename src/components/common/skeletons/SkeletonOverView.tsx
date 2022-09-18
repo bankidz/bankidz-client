@@ -8,7 +8,7 @@ const SkeletonOverview = ({ isKid }: { isKid: boolean }) => {
   return (
     <Wrapper>
       <div>
-        <ContentLoader width="128px" height="103px" speed={2.1}>
+        <ContentLoader width="128px" height="103px" speed={2}>
           <rect rx={8} ry={8} width="128px" height="103px" />
         </ContentLoader>
       </div>

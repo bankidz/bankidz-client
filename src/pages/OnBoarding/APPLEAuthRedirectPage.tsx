@@ -17,14 +17,14 @@ function APPLEAuthRedirectPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    async function proceedLogin() {
+    const proceedLogin = () => {
       accessToken &&
         provider &&
         dispatch(setCredentials({ accessToken, isKid, level, provider }));
       setLocalStorage('accessToken', accessToken);
       registerEXPOToken();
       navigate('/');
-    }
+    };
     proceedLogin();
   }, []);
 

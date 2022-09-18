@@ -1,8 +1,6 @@
 import { IDongil } from '@lib/types/IDongil';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { RootState } from '../app/store';
 
 interface IProposedDongil {
   kidId: number;
@@ -11,46 +9,11 @@ interface IProposedDongil {
 
 interface IProposedDongilsState {
   proposedDongils: IProposedDongil[];
-  proposedDongilsStatus: TFetchStatus;
 }
 
 const initialState: IProposedDongilsState = {
   proposedDongils: [],
-  proposedDongilsStatus: 'idle',
 };
-
-interface IFetchProposedDongilsThunkPayload
-  extends Pick<IProposedDongil, 'kidId'> {
-  axiosPrivate: AxiosInstance;
-}
-
-// GET: 제안받은 돈길 조회
-export const fetchProposedDongils = createAsyncThunk(
-  'proposedDongils/fetch',
-  async (thunkPayload: IFetchProposedDongilsThunkPayload) => {
-    const { axiosPrivate, kidId } = thunkPayload;
-    const response = await axiosPrivate.get(
-      `/challenge/kid/${kidId}?status=pending`,
-    );
-    return response.data;
-  },
-);
-
-// PATCH: 제안받은 돈길 수락
-export const approveProposedDongil = createAsyncThunk(
-  'proposedDongils/approve',
-  async (thunkPayload: {
-    axiosPrivate: AxiosInstance;
-    id: number;
-    isApprove: boolean;
-  }) => {
-    const { axiosPrivate, id, isApprove } = thunkPayload;
-    const response = await axiosPrivate.patch(`/challenge/${id}`, {
-      accept: isApprove,
-    });
-    return response.data;
-  },
-);
 
 // PATCH: 제안받은 돈길 거절
 export const rejectProposedDongil = createAsyncThunk(
@@ -65,7 +28,6 @@ export const rejectProposedDongil = createAsyncThunk(
       accept: false,
       comment,
     });
-    console.log(response);
     return response.data;
   },
 );
@@ -75,47 +37,17 @@ export const proposedDongilsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder
-      .addCase(fetchProposedDongils.pending, (state) => {
-        state.proposedDongilsStatus = 'loading';
-      })
-      .addCase(fetchProposedDongils.fulfilled, (state, action) => {
-        state.proposedDongilsStatus = 'succeeded';
-        state.proposedDongils = state.proposedDongils.concat(
-          action.payload.data,
+    builder.addCase(rejectProposedDongil.fulfilled, (state, action) => {
+      const approvedId = action.payload.data.id;
+      state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
+        proposedDongil.challengeList = proposedDongil.challengeList.filter(
+          (challenge) => challenge.id !== approvedId,
         );
-      })
-      .addCase(fetchProposedDongils.rejected, (state) => {
-        state.proposedDongilsStatus = 'failed';
-      })
-      .addCase(approveProposedDongil.fulfilled, (state, action) => {
-        const approvedId = action.payload.data.id;
-        state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
-          proposedDongil.challengeList = proposedDongil.challengeList.filter(
-            (challenge) => challenge.id !== approvedId,
-          );
-          return proposedDongil;
-        });
-      })
-      .addCase(rejectProposedDongil.fulfilled, (state, action) => {
-        const approvedId = action.payload.data.id;
-        state.proposedDongils = state.proposedDongils.map((proposedDongil) => {
-          proposedDongil.challengeList = proposedDongil.challengeList.filter(
-            (challenge) => challenge.id !== approvedId,
-          );
-          return proposedDongil;
-        });
-      })
-      .addCase(rejectProposedDongil.rejected, (state, action: any) => {
-        console.log(action);
+        return proposedDongil;
       });
+    });
   },
 });
-
-export const selectProposedDongilsStatus = (state: RootState) =>
-  state.proposedDongils.proposedDongilsStatus;
-export const selectProposedDongils = (state: RootState) =>
-  state.proposedDongils.proposedDongils;
 
 export default proposedDongilsSlice.reducer;
 
