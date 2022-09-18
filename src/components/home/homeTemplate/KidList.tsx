@@ -1,44 +1,66 @@
 import styled from 'styled-components';
 import { ReactComponent as UsernameUnderline } from '@assets/borders/username-underline.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  selectKids,
-  selectSelectedKid,
-  setSelectedKid,
-} from '@store/slices/kidsSlice';
+import { selectSelectedKid, setSelectedKid } from '@store/slices/kidsSlice';
 import { IKid } from '@lib/types/IKid';
+import useLevel from '@lib/hooks/useLevel';
+import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import { useQuery } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
+import familyApi from '@lib/apis/family/familyApi';
 
 function KidList() {
   const dispatch = useAppDispatch();
-  const kids = useAppSelector(selectKids);
   const selectedKid = useAppSelector(selectSelectedKid);
   const isSelectedKid = (kid: IKid) => kid === selectedKid;
+  const level = useLevel();
+  const colorByLevel = getColorByLevel(level);
+
+  const { status, data: kids } = useQuery(
+    queryKeys.FAMILY_KID,
+    familyApi.getFamilyKid,
+  );
 
   return (
-    <Wrapper>
-      {kids?.map((kid) => (
-        <UsernameButton
-          key={kid.kidId}
-          onClick={() => {
-            dispatch(setSelectedKid(kid));
-          }}
-          className={isSelectedKid(kid) ? 'active' : undefined}
-        >
-          {kid.username}
-          {isSelectedKid(kid) && (
-            <div className="username-underline-wrapper">
-              <UsernameUnderline />
-            </div>
-          )}
-        </UsernameButton>
-      ))}
+    <Wrapper colorByLevel={colorByLevel}>
+      <FlexContainer>
+        {status === 'success' &&
+          kids?.map((kid) => (
+            <UsernameButton
+              key={kid.kidId}
+              onClick={() => {
+                dispatch(setSelectedKid(kid));
+              }}
+              className={isSelectedKid(kid) ? 'active' : undefined}
+            >
+              {kid.username}
+              {isSelectedKid(kid) && (
+                <div className="username-underline-wrapper">
+                  <UsernameUnderline />
+                </div>
+              )}
+            </UsernameButton>
+          ))}
+      </FlexContainer>
     </Wrapper>
   );
 }
 
 export default KidList;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ colorByLevel: string }>`
+  margin-top: 38.44px;
+  width: 250px;
+  height: 24px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  z-index: 3;
+  width: 100%;
+`;
+
+const FlexContainer = styled.div`
   width: 100%;
   height: 24px;
   display: flex;

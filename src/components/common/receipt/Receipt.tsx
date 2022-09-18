@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 import { theme } from '@lib/styles/theme';
-import { TItemName } from '@lib/types/TItemName';
-import { TInterestRate } from '@lib/types/IInterestRate';
 import FirstRow from './FirstRow';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
 import PerforatedLineTop from '../modals/receiptModal/perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from '../modals/receiptModal/perforatedLines/PerforatedLineBottom';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-interface ReceiptProps {
-  createdAt: string;
-  interestRate: TInterestRate;
-  isMom: boolean;
-  itemName: TItemName;
-  totalPrice: number;
-  weekPrice: number;
-  weeks: number;
-}
+interface ReceiptProps
+  extends Pick<
+    IChallengeDTO,
+    | 'createdAt'
+    | 'interestRate'
+    | 'isMom'
+    | 'itemName'
+    | 'totalPrice'
+    | 'weekPrice'
+    | 'weeks'
+  > {}
 
 function Receipt({
   createdAt,
@@ -29,7 +30,6 @@ function Receipt({
 }: ReceiptProps) {
   return (
     <Wrapper>
-      {/* <DashedBorder /> */}
       <PerforatedLineTop fill={theme.palette.greyScale.grey100} />
       <Content>
         <FirstRow isMom={isMom} itemName={itemName} />

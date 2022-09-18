@@ -7,7 +7,7 @@ import InterestTemplate from './InterestTemplate';
 import InterestToPay from './InterestToPay';
 
 function Interest() {
-  const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyApi.getKid);
+  const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyApi.getFamilyKid);
 
   let content;
   if (kids?.length === 0) {

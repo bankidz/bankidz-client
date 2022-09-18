@@ -24,7 +24,7 @@ function ParentHomePage() {
   const dispatch = useAppDispatch();
   const { status, data: kids } = useQuery(
     queryKeys.FAMILY_KID,
-    familyApi.getKid,
+    familyApi.getFamilyKid,
     {
       onSuccess: (data) => {
         dispatch(setSelectedKid(data[0]));

@@ -3,16 +3,11 @@ import styled from 'styled-components';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useState } from 'react';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
-import { useAppDispatch } from '@store/app/hooks';
-import {
-  deleteClientSideWalkingDongilById,
-  deleteWalkingDongil,
-} from '@store/slices/walkingDongilsSlice';
 import { IDongil } from '@lib/types/IDongil';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import { useMutation, useQueryClient } from 'react-query';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
 
 interface WalkingDongilItemProps
   extends Pick<
@@ -29,37 +24,55 @@ function WalkingDongilItem({
 }: WalkingDongilItemProps) {
   const navigate = useNavigate();
   const to = `/detail/${id}`;
+
   const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
     useGlobalBottomSheet();
 
-  const axiosPrivate = useAxiosPrivate();
-  const [deleteWalkingDongilStatus, setDeleteWalingDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const canDeleteWalkingDongil =
-    deleteWalkingDongilStatus === 'idle' && challengeStatus === 'FAILED';
-  const dispatch = useAppDispatch();
+  // 4. 삭제되었어요
+  const openDeleteCompletedSheet = () => {
+    const openSheet = () => {
+      setOpenBottomSheet({
+        sheetContent: 'Completed',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'delete',
+        },
+      });
+    };
+    openSheetBySequence(openSheet);
+  };
 
-  async function handleDeleteButtonClick() {
-    if (canDeleteWalkingDongil) {
-      try {
-        setDeleteWalingDongilStatus('pending');
-        await dispatch(
-          deleteWalkingDongil({
-            axiosPrivate,
-            id,
-          }),
-        ).unwrap();
-        dispatch(deleteClientSideWalkingDongilById(id));
-        // 삭제되었어요 바텀시트 열기
-        openDeleteCompletedSheet();
-      } catch (error: any) {
-        console.log(error);
-      } finally {
-        setDeleteWalingDongilStatus('idle');
-      }
+  // 3. 걷고있는 돈길 삭제
+  const canDelete = challengeStatus === 'FAILED';
+  const queryClient = useQueryClient();
+  const deleteMutation = useMutation(challengeAPI.deleteChallenge, {
+    onSuccess: () => {
+      openDeleteCompletedSheet();
+      queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
+    },
+  });
+  const handleDeleteButtonClick = () => {
+    if (canDelete) {
+      deleteMutation.mutate(id);
     }
-  }
-  // 1. '돈길 걷기에 실패했어요' 바텀시트 열기
+  };
+
+  // 2. 정말로 삭제할까요?
+  const openWarningDeleteSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Warning',
+        sheetProps: { open: true },
+        contentProps: {
+          type: 'delete',
+          onMainActionClick: handleDeleteButtonClick,
+          onDismiss: setCloseBottomSheet,
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
+  // 1. 돈길 걷기에 실패했어요
   const openDongilFailedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'DongilFailed',
@@ -76,35 +89,6 @@ function WalkingDongilItem({
         },
       },
     });
-  };
-
-  // 2. '정말로 삭제할까요?' 바텀시트 열기
-  const openWarningDeleteSheet = () => {
-    const openSheet = () =>
-      setOpenBottomSheet({
-        sheetContent: 'Warning',
-        sheetProps: { open: true },
-        contentProps: {
-          type: 'delete',
-          onMainActionClick: handleDeleteButtonClick,
-          onDismiss: setCloseBottomSheet,
-        },
-      });
-    openSheetBySequence(openSheet);
-  };
-
-  // 3. '삭제되었어요' 바텀시트 열기
-  const openDeleteCompletedSheet = () => {
-    const openSheet = () => {
-      setOpenBottomSheet({
-        sheetContent: 'Completed',
-        sheetProps: { open: true },
-        contentProps: {
-          type: 'delete',
-        },
-      });
-    };
-    openSheetBySequence(openSheet);
   };
 
   return (

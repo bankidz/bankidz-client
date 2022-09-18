@@ -1,4 +1,5 @@
 import { TDongilVariant } from '@lib/types/TDongilVariant';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import PendingDongilItem from './dongilItems/PendingDongilItem';
 import ProposedDongilItem from './dongilItems/ProposedDongilItem';
@@ -10,21 +11,16 @@ interface SkeletonDongilListProps {
 }
 
 function SkeletonDongilList({ variant }: SkeletonDongilListProps) {
-  let item;
-  if (variant === 'walking') {
-    item = <WalkingDongilItem />;
-  } else if (variant === 'pending') {
-    item = <PendingDongilItem />;
-  } else if (variant === 'proposed') {
-    item = <ProposedDongilItem />;
-  } else if (variant === 'thisWeekS') {
-    item = <ThisWeekSDongilItem />;
-  }
+  const map = new Map<TDongilVariant, React.ReactElement>();
+  map.set('walking', <WalkingDongilItem />);
+  map.set('pending', <PendingDongilItem />);
+  map.set('proposed', <ProposedDongilItem />);
+  map.set('thisWeekS', <ThisWeekSDongilItem />);
 
   return (
     <Wrapper variant={variant}>
-      <ItemWrapper variant={variant}>{item}</ItemWrapper>
-      <ItemWrapper variant={variant}>{item}</ItemWrapper>
+      <ItemWrapper variant={variant}>{map.get(variant)}</ItemWrapper>
+      <ItemWrapper variant={variant}>{map.get(variant)}</ItemWrapper>
     </Wrapper>
   );
 }

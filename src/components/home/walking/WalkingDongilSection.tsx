@@ -23,7 +23,7 @@ function WalkingDongilSection({
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
 
-  const navigateCreateDongil = () => {
+  const navigateToCreateDongil = () => {
     if (walkingDongilsData?.length === 5) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
@@ -50,7 +50,7 @@ function WalkingDongilSection({
     if (walkingDongilsData?.length === 0) {
       content = (
         <EmptyWalkingDongil
-          onClick={navigateCreateDongil}
+          onClick={navigateToCreateDongil}
           createDisabled={createDisabled}
         />
       );
@@ -61,7 +61,7 @@ function WalkingDongilSection({
           <ContractNewDongilLink
             to={'/create/1'}
             createDisabled={createDisabled}
-            navigateCreateDongil={navigateCreateDongil}
+            navigateToCreateDongil={navigateToCreateDongil}
           />
         </>
       );

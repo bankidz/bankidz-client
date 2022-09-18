@@ -1,12 +1,9 @@
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { calcRatio } from '@lib/styles/theme';
-import { TInterestRate } from '@lib/types/IInterestRate';
 import styled from 'styled-components';
 
-interface SecondRowProps {
-  totalPrice: number;
-  weekPrice: number;
-  interestRate: TInterestRate;
-}
+interface SecondRowProps
+  extends Pick<IChallengeDTO, 'totalPrice' | 'weekPrice' | 'interestRate'> {}
 
 function getSecondRow({ totalPrice, weekPrice, interestRate }: SecondRowProps) {
   return (
