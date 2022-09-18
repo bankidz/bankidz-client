@@ -4,7 +4,6 @@ import authReducer from '../slices/authSlice';
 import kidsReducer from '../slices/kidsSlice';
 import familyReducer from '../slices/familySlice';
 import createChallengeReducer from '../slices/createChallengeSlice';
-import parentSummariesReducer from '../slices/parentSummariesSlice';
 import walkingDongilsReducer from '../slices/walkingDongilsSlice';
 import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
@@ -18,7 +17,6 @@ export const store = configureStore({
     kids: kidsReducer,
     family: familyReducer,
     createChallenge: createChallengeReducer,
-    parentSummaries: parentSummariesReducer,
     walkingDongils: walkingDongilsReducer,
     pendingDongils: pendingDongilsReducer,
     proposedDongils: proposedDongilsReducer,
