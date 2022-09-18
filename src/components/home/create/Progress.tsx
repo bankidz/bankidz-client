@@ -2,7 +2,6 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 interface ProgressProps {
-  // TODO: TStep 빼는게?
   step: 1 | 2 | 3 | 4 | 5;
   skipSelectParents: boolean;
 }

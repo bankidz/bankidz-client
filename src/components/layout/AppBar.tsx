@@ -21,12 +21,11 @@ function AppBar({ label, level, to }: AppBarProps) {
     to ? navigate(to) : navigate(-1);
   };
 
-  // TODO: undefined
   const colorByLevel = level !== undefined && getColorByLevel(level!);
-  // TODO: null type
+  // 성우의 제안: null 삭제
   const textColor = (level?: TLevel | null) => {
     if (level === null || level === undefined) {
-      return '#2E3234'; // TODO: 요런건 주석 남기기
+      return '#2E3234'; // 성우의 제안: 색상 코드 단독으로 사용하는 경우 주석 남기기
     } else {
       return '#fff';
     }
@@ -70,8 +69,6 @@ const Wrapper = styled.div<{ colorByLevel: string | null }>`
   }
 
   p {
-    //TODO : 보류
-    // TODO: 디자인 시스템
     ${({ theme }) => theme.typo.fixed.Navbar_T_17_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
   }

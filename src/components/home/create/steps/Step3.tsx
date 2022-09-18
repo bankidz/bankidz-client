@@ -36,7 +36,6 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
-  //TODO : api fetching
   const walkingDongil = useAppSelector(selectWalkingDongils);
   const testDuplicate = walkingDongil.map((dongil) => dongil.title);
 
@@ -70,7 +69,7 @@ function Step3({ currentStep }: { currentStep: number }) {
 
   return (
     <Wrapper>
-      {/* TODO: JSX는 요약처럼 보일 수 있게 */}
+      {/* 성우의 제안: 하위 UI 컴포넌트 분리 */}
       <InputSection validate={validateName}>
         <InputForm
           placeholder="돈길 이름을 입력하세요"
