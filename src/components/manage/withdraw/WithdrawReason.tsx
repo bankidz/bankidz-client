@@ -1,13 +1,14 @@
 import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
+import userApi from '@lib/apis/user/userApi';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import { useAppSelector } from '@store/app/hooks';
-import { selectProvider, setWithdrawReason } from '@store/slices/authSlice';
+import { selectProvider } from '@store/slices/authSlice';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 function WithdrawReason() {
@@ -30,9 +31,8 @@ function WithdrawReason() {
   );
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
-  const dispatch = useDispatch();
-  const logout = useLogoutClient();
-  function openWithdrawCompletedBottomSheet() {
+  const logoutClient = useLogoutClient();
+  const openWithdrawCompletedBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
       sheetProps: {
@@ -42,30 +42,26 @@ function WithdrawReason() {
         type: 'delete',
         onMainActionClick: () => {
           setCloseBottomSheet();
-          logout();
+          logoutClient();
         },
       },
     });
-  }
+  };
 
-  const axiosPrivate = useAxiosPrivate();
   const provider = useAppSelector(selectProvider);
-  async function handleWithdrawButtonClick() {
+  const deleteMutation = useMutation(userApi.deleteUser, {
+    onSuccess: () => {
+      openWithdrawCompletedBottomSheet();
+    },
+  });
+  const handleWithdrawButtonClick = () => {
     if (provider === 'kakao') {
-      try {
-        const response = await axiosPrivate.delete('/user', {
-          data: { message: reason },
-        });
-        console.log(response);
-        openWithdrawCompletedBottomSheet();
-      } catch (error: any) {
-        console.log(error);
-      }
+      deleteMutation.mutate({ message: reason });
     } else if (provider === 'apple') {
-      dispatch(setWithdrawReason(reason)); // get latest level
+      setLocalStorage('appleWithdrawReason', reason);
       window.location.href = APPLE_DEAUTH_URL;
     }
-  }
+  };
 
   return (
     <Wrapper>
