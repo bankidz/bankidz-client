@@ -1,5 +1,5 @@
 import { IDongil } from '@lib/types/IDongil';
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import ProposedDongilItem from './ProposedDongilItem';
 
@@ -20,7 +20,7 @@ function ProposedDongilList({ proposedDongils }: ProposedDongilListProps) {
   );
 }
 
-export default ProposedDongilList;
+export default React.memo(ProposedDongilList);
 
 const Wrapper = styled.div`
   display: flex;

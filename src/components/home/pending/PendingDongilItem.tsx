@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
+import React from 'react';
 
 interface PendingDongilItemProps {
   pendingDongil: IDongil;
@@ -131,7 +132,7 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   );
 }
 
-export default PendingDongilItem;
+export default React.memo(PendingDongilItem);
 
 const StyledButton = styled.button`
   width: 100%;

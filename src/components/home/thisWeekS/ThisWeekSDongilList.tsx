@@ -1,4 +1,5 @@
 import { IDongil } from '@lib/types/IDongil';
+import React from 'react';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';
 
@@ -22,7 +23,7 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
   );
 }
 
-export default ThisWeekSDongilList;
+export default React.memo(ThisWeekSDongilList);
 
 const Wrapper = styled.div`
   display: flex;

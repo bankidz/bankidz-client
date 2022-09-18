@@ -8,6 +8,7 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
+import React from 'react';
 
 interface WalkingDongilItemProps
   extends Pick<
@@ -117,7 +118,7 @@ function WalkingDongilItem({
   );
 }
 
-export default WalkingDongilItem;
+export default React.memo(WalkingDongilItem);
 
 const StyledLink = styled(Link)`
   width: 100%;

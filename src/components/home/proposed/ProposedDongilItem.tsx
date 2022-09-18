@@ -12,6 +12,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
+import React from 'react';
 
 interface ProposedDongilItemProps {
   proposedDongil: IDongil;
@@ -142,7 +143,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   );
 }
 
-export default ProposedDongilItem;
+export default React.memo(ProposedDongilItem);
 
 const StyledButton = styled.button`
   width: 100%;

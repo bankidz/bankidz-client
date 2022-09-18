@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
 import { IDongil } from '@lib/types/IDongil';
+import React from 'react';
 
 interface ThisWeekSDongilItemProps
   extends Pick<IDongil, 'itemName' | 'title' | 'progressList'> {
@@ -28,7 +29,7 @@ function ThisWeekSDongilItem({
   );
 }
 
-export default ThisWeekSDongilItem;
+export default React.memo(ThisWeekSDongilItem);
 
 const StyledLink = styled(Link)`
   width: 100%;

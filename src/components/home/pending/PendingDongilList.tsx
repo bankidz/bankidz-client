@@ -1,4 +1,5 @@
 import { IDongil } from '@lib/types/IDongil';
+import React from 'react';
 import styled from 'styled-components';
 import PendingDongilItem from './PendingDongilItem';
 
@@ -19,7 +20,7 @@ function PendingDongilList({ pendingDongils }: PendingDongilListProps) {
   );
 }
 
-export default PendingDongilList;
+export default React.memo(PendingDongilList);
 
 const Wrapper = styled.div`
   display: flex;
