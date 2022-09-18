@@ -3,11 +3,10 @@ import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
 import familyAPI from '@lib/apis/family/familyAPI';
-import familyApi from '@lib/apis/family/familyAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import { useAppDispatch } from '@store/app/hooks';
-import { setSelectedKid } from '@store/slices/kidsSlice';
+import { setHasMultipleKids, setSelectedKid } from '@store/slices/kidsSlice';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
@@ -29,24 +28,27 @@ function ParentHomePage() {
     {
       onSuccess: (data) => {
         dispatch(setSelectedKid(data[0]));
+        data.length > 1 && dispatch(setHasMultipleKids(true));
       },
     },
   );
 
   let content;
-  if (status === 'loading') {
+  if (status === 'success') {
+    if (kids.length === 0) {
+      content = <NoFamily />;
+    } else {
+      content = (
+        <HomeTemplate>
+          <ParentHome />
+        </HomeTemplate>
+      );
+    }
+  } else {
     content = (
       <CustomSyncLoaderWrapper>
         <CustomSyncLoader />
       </CustomSyncLoaderWrapper>
-    );
-  } else if (status === 'success' && kids.length === 0) {
-    content = <NoFamily />;
-  } else if (status === 'success') {
-    content = (
-      <HomeTemplate>
-        <ParentHome />
-      </HomeTemplate>
     );
   }
 

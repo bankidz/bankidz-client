@@ -16,7 +16,7 @@ function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const kakaoLoginMutation = useMutation(kakaoAPI.kakaoLogin, {
+  const KAKAOLoginMutation = useMutation(kakaoAPI.kakaoLogin, {
     onSuccess: (data: ILoginDTO) => {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);
@@ -27,7 +27,7 @@ function KAKAOAuthRedirectPage() {
   });
 
   useEffect(() => {
-    code && kakaoLoginMutation.mutate({ code });
+    code && KAKAOLoginMutation.mutate({ code });
   }, []);
 
   return <CustomSyncLoader />;

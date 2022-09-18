@@ -36,6 +36,9 @@ export const kidsSlice = createSlice({
     setSelectedKid: (state, action: PayloadAction<IKidListDTO>) => {
       state.selectedKid = action.payload;
     },
+    setHasMultipleKids: (state, action: PayloadAction<boolean>) => {
+      state.hasMultipleKids = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
@@ -58,7 +61,7 @@ export const kidsSlice = createSlice({
   },
 });
 
-export const { setSelectedKid } = kidsSlice.actions;
+export const { setSelectedKid, setHasMultipleKids } = kidsSlice.actions;
 
 export const selectKidsStatus = (state: RootState) => state.kids.kidsStatus;
 export const selectKids = (state: RootState) => state.kids.kids;
