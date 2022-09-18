@@ -7,7 +7,6 @@ import createChallengeReducer from '../slices/createChallengeSlice';
 import walkingDongilsReducer from '../slices/walkingDongilsSlice';
 import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
-import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
 import overViewReducer from '@store/slices/overViewSlice';
 import bottomSheetReducer from '@store/slices/bottomSheetSlice';
 
@@ -20,7 +19,6 @@ export const store = configureStore({
     walkingDongils: walkingDongilsReducer,
     pendingDongils: pendingDongilsReducer,
     proposedDongils: proposedDongilsReducer,
-    thisWeekSDongils: thisWeekSDongilsReducer,
     overView: overViewReducer,
     bottomSheet: bottomSheetReducer,
   },
