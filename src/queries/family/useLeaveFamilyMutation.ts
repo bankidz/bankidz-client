@@ -1,12 +1,12 @@
-import { IFamilyDTO } from '@lib/apis/family/family.dto';
-import familyApi from '@lib/apis/family/familyApi';
+import { IFamilyDTO } from '@lib/apis/family/familyDTO';
+import familyAPI from '@lib/apis/family/familyAPI';
 import { AxiosError } from 'axios';
 import { useMutation, UseMutationOptions } from 'react-query';
 
 const useLeaveFamilyMutation = (
   options?: UseMutationOptions<IFamilyDTO, AxiosError, any, void>,
 ) => {
-  return useMutation(familyApi.leaveFamily, options);
+  return useMutation(familyAPI.leaveFamily, options);
 };
 
 export default useLeaveFamilyMutation;

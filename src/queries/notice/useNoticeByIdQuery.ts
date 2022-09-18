@@ -1,5 +1,5 @@
-import { INoticeDTO } from '@lib/apis/notice/notice.dto';
-import noticeApi from '@lib/apis/notice/noticeApi';
+import { INoticeDTO } from '@lib/apis/notice/noticeDTO';
+import noticeAPI from '@lib/apis/notice/noticeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { AxiosError } from 'axios';
 import { useQuery, UseQueryOptions } from 'react-query';
@@ -10,7 +10,7 @@ const useNoticeByIdQuery = (
 ) => {
   return useQuery(
     [queryKeys.NOTICE, id],
-    () => noticeApi.getNoticeById(id),
+    () => noticeAPI.getNoticeById(id),
     options,
   );
 };
