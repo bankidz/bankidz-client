@@ -15,21 +15,18 @@ import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkDongil from '@lib/hooks/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
-import { TUser } from '@store/slices/overViewSlice';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
 import { IDongil } from '@lib/types/IDongil';
+import useUserQuery from '@queries/user/useUserQuery';
 
 type TWalkDefaultProps = {
   walkingDongils: IDongil[];
-  user: TUser;
 };
 
-function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
-  const level = useAppSelector(selectLevel);
-  const patched = useAppSelector(selectIsWalkingDongilsPatched);
-  const { username, isKid, isFemale } = useAppSelector(selectAuth);
+function WalkDefault({ walkingDongils }: TWalkDefaultProps) {
+  const { level, isFemale, isKid } = useAppSelector(selectAuth);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkDongil(walkingDongils);
   const dDayLeft = 7 - moment().day();
@@ -42,7 +39,7 @@ function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
     setSelected(v);
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (getWeeklySuccess() && patched) {
       //if (getWeeklySuccess()) {
       openModal(modals.primaryModal, {
@@ -53,7 +50,7 @@ function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }
-  }, [walkingDongils, patched]);
+  }, [walkingDongils, patched]); */
 
   return (
     <Wrapper>

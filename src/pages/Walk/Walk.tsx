@@ -1,49 +1,45 @@
 import LargeSpacer from '@components/layout/LargeSpacer';
 import WalkDefault from '@components/walk/WalkDefault';
 import WalkError from '@components/walk/WalkError';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
 import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  fetchOverView,
-  selectOverViewStatus,
-  selectUserOverView,
-} from '@store/slices/overViewSlice';
 import {
   dispatchResetIsPatched,
   selectWalkingDongils,
 } from '@store/slices/walkingDongilsSlice';
 import { useEffect } from 'react';
+import { useQuery } from 'react-query';
 import styled from 'styled-components';
 
 function Walk() {
-  const walkingDongils = useAppSelector(selectWalkingDongils);
-  const overViewStatus = useAppSelector(selectOverViewStatus);
-  const user = useAppSelector(selectUserOverView);
+  const { status: walkingDongilsStatus, data: walkingDongilsData } = useQuery(
+    [queryKeys.CHALLENGE, 'walking'],
+    () => challengeAPI.getChallenge('walking'),
+  );
   const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
 
-  const walkAbleDongils = walkingDongils?.filter(
+  const walkAbleDongils = walkingDongilsData?.filter(
     (dongil) => dongil.challengeStatus === 'WALKING',
   );
   useEffect(() => {
     // @ts-expect-error
     dispatch(dispatchResetIsPatched({}));
-  }, [walkingDongils]);
-
-  useEffect(() => {
-    if (overViewStatus === 'idle') {
-      dispatch(fetchOverView({ axiosPrivate }));
-    }
-  }, []);
+  }, [walkingDongilsData]);
 
   return (
     <Wrapper>
-      {walkAbleDongils.length > 0 ? (
+      {walkingDongilsStatus === 'success' && (
         <>
-          <WalkDefault walkingDongils={walkAbleDongils} user={user} />
+          {walkingDongilsData.length > 0 ? (
+            <>
+              <WalkDefault walkingDongils={walkingDongilsData} />
+            </>
+          ) : (
+            <WalkError />
+          )}
         </>
-      ) : (
-        <WalkError />
       )}
     </Wrapper>
   );
