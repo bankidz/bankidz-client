@@ -16,7 +16,7 @@ function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const kakaoLoginMutation = useMutation(kakaoAPI.login, {
+  const kakaoLoginMutation = useMutation(kakaoAPI.kakaoLogin, {
     onSuccess: (data: ILoginDTO) => {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);

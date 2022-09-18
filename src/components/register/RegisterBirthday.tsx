@@ -5,7 +5,7 @@ import { setBirthday } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import InputForm from '@components/common/forms/InputForm';
 import Button from '@components/common/buttons/Button';
-import refineDate from '../../lib/utils/refineDate';
+import getRefinedDate from '../../lib/utils/get/getRefinedDate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -23,15 +23,15 @@ function RegisterBirthday() {
   const [isMonthFocused, setIsMonthFocused] = useState(false);
   const [isDayFocused, setIsDayFocused] = useState(false);
 
-  function handleYearChange(e: React.ChangeEvent<HTMLInputElement>) {
+  const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setYear(e.target.value.slice(0, 4));
-  }
-  function handleMonthChange(e: React.ChangeEvent<HTMLInputElement>) {
+  };
+  const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMonth(e.target.value.slice(0, 2));
-  }
-  function handleDayChange(e: React.ChangeEvent<HTMLInputElement>) {
+  };
+  const handleDayChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDay(e.target.value.slice(0, 2));
-  }
+  };
 
   // 형식에 맞는 input이 입력되면 바로 focus 이동
   const monthInputRef = useRef<HTMLInputElement>(null);
@@ -71,7 +71,7 @@ function RegisterBirthday() {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const parsedIntYear = parseInt(year);
     let temp1 = false;
@@ -87,9 +87,9 @@ function RegisterBirthday() {
     setYear('');
     setMonth('');
     setDay('');
-    dispatch(setBirthday(refineDate(year, month, day)));
+    dispatch(setBirthday(getRefinedDate(year, month, day)));
     navigate('/auth/register/2');
-  }
+  };
 
   return (
     <Wrapper>
