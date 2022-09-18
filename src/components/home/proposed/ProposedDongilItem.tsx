@@ -5,7 +5,6 @@ import queryKeys from '@lib/constants/queryKeys';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import { EDayOfWeek } from '@lib/types/EDayOfWeek';
-import { IDongil } from '@lib/types/IDongil';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { useMutation, useQueryClient } from 'react-query';
@@ -13,9 +12,10 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 import React from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface ProposedDongilItemProps {
-  proposedDongil: IDongil;
+  proposedDongil: IChallengeDTO;
 }
 
 function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {

@@ -4,7 +4,6 @@ import { theme } from '@lib/styles/theme';
 import '../styles.css';
 import ReactModal from 'react-modal';
 import getHeightByVariant from './getHeightByVariant';
-import { IDongil } from '@lib/types/IDongil';
 import PerforatedLineTop from './perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from './perforatedLines/PerforatedLineBottom';
 import TopContent from './contents/TopContent';
@@ -16,10 +15,11 @@ import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
 import { slideAnimation } from '../slideAnimation';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface ReceiptModalProps
   extends Pick<
-      IDongil,
+      IChallengeDTO,
       | 'createdAt'
       | 'interestRate'
       | 'itemName'
@@ -29,7 +29,7 @@ interface ReceiptModalProps
       | 'weeks'
       | 'fileName'
     >,
-    Pick<Partial<IDongil>, 'comment'> {
+    Pick<Partial<IChallengeDTO>, 'comment'> {
   variant: TReceiptModalVariant;
   onSubmit: any;
   onExtraSubmit?: any;

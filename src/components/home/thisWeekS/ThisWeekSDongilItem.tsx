@@ -2,11 +2,11 @@ import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
-import { IDongil } from '@lib/types/IDongil';
 import React from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface ThisWeekSDongilItemProps
-  extends Pick<IDongil, 'itemName' | 'title' | 'progressList'> {
+  extends Pick<IChallengeDTO, 'itemName' | 'title' | 'progressList'> {
   to: string;
 }
 

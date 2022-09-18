@@ -29,6 +29,7 @@ export const 제안중 = Template.bind({});
     challengeCategory: '이자율 받기',
     challengeStatus: 'PENDING',
     interestRate: 10,
+    interestPrice: 2000,
     totalPrice: 150000,
     weekPrice: 10000,
     successWeeks: 0,
@@ -37,6 +38,7 @@ export const 제안중 = Template.bind({});
     fileName: 'example',
     progressList: [
       {
+        challengeStatus: 'REJECTED',
         challengeId: 8,
         weeks: 1,
         isAchieved: false,
@@ -60,6 +62,7 @@ export const 거절됨 = Template.bind({});
     challengeCategory: '이자율 받기',
     challengeStatus: 'REJECTED',
     interestRate: 10,
+    interestPrice: 2000,
     totalPrice: 150000,
     weekPrice: 10000,
     successWeeks: 0,
@@ -68,6 +71,7 @@ export const 거절됨 = Template.bind({});
     fileName: 'example',
     progressList: [
       {
+        challengeStatus: 'REJECTED',
         challengeId: 8,
         weeks: 1,
         isAchieved: false,

@@ -1,10 +1,10 @@
-import { IDongil } from '@lib/types/IDongil';
-import React, { Dispatch, SetStateAction } from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import React from 'react';
 import styled from 'styled-components';
 import ProposedDongilItem from './ProposedDongilItem';
 
 interface ProposedDongilListProps {
-  proposedDongils: IDongil[];
+  proposedDongils: IChallengeDTO[];
 }
 
 function ProposedDongilList({ proposedDongils }: ProposedDongilListProps) {

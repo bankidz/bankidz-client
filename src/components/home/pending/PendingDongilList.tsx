@@ -1,10 +1,10 @@
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import React from 'react';
 import styled from 'styled-components';
 import PendingDongilItem from './PendingDongilItem';
 
 interface PendingDongilListProps {
-  pendingDongils: IDongil[];
+  pendingDongils: IChallengeDTO[];
 }
 
 function PendingDongilList({ pendingDongils }: PendingDongilListProps) {

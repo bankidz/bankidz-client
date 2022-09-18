@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
-import { IDongil } from '@lib/types/IDongil';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import React from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface WalkingDongilItemProps
   extends Pick<
-    IDongil,
+    IChallengeDTO,
     'itemName' | 'title' | 'id' | 'challengeStatus' | 'interestRate'
   > {}
 
