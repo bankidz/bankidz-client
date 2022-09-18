@@ -6,7 +6,6 @@ import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
-import familyApi from '@lib/apis/family/familyAPI';
 import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import familyAPI from '@lib/apis/family/familyAPI';
 
