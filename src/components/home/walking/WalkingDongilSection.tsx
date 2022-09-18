@@ -44,9 +44,7 @@ function WalkingDongilSection({
   };
 
   let content;
-  if (walkingDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="walking" />;
-  } else if (walkingDongilsStatus === 'success') {
+  if (walkingDongilsStatus === 'success') {
     if (walkingDongilsData?.length === 0) {
       content = (
         <EmptyWalkingDongil
@@ -66,13 +64,13 @@ function WalkingDongilSection({
         </>
       );
     }
-  } else if (walkingDongilsStatus === 'error') {
+  } else {
     content = <SkeletonDongilList variant="walking" />;
   }
 
   return (
     <Wrapper>
-      {walkingDongilsStatus !== 'idle' && <h1>걷고있는 돈길</h1>}
+      <h1>걷고있는 돈길</h1>
       {content}
     </Wrapper>
   );

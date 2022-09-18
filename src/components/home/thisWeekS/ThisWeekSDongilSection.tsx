@@ -15,9 +15,7 @@ function ThisWeekSDongilSection({
   thisWeekSDongilsData,
 }: ThisWeekSDongilSectionProps) {
   let content;
-  if (thisWeekSDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="thisWeekS" />;
-  } else if (thisWeekSDongilsStatus === 'success') {
+  if (thisWeekSDongilsStatus === 'success') {
     if (thisWeekSDongilsData?.challengeList.length === 0) {
       content = <EmptyDongil subject="걷고있는" />;
     } else {
@@ -27,13 +25,13 @@ function ThisWeekSDongilSection({
         />
       );
     }
-  } else if (thisWeekSDongilsStatus === 'error') {
+  } else {
     content = <SkeletonDongilList variant="thisWeekS" />;
   }
 
   return (
     <Wrapper>
-      {thisWeekSDongilsStatus !== 'idle' && <h1>금주의 돈길</h1>}
+      <h1>금주의 돈길</h1>
       {content}
     </Wrapper>
   );

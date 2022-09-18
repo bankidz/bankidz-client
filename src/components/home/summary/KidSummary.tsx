@@ -11,9 +11,7 @@ interface KidSummaryProps {
 
 function KidSummary({ kidSummaryStatus, kidSummaryData }: KidSummaryProps) {
   let content;
-  if (kidSummaryStatus === 'loading') {
-    content = <SkeletonSummary variant="KidHome" />;
-  } else if (kidSummaryStatus === 'success') {
+  if (kidSummaryStatus === 'success') {
     const { currentSavings, totalPrice } = kidSummaryData!;
     content = (
       <Summary
@@ -22,7 +20,7 @@ function KidSummary({ kidSummaryStatus, kidSummaryData }: KidSummaryProps) {
         totalPrice={totalPrice}
       />
     );
-  } else if (kidSummaryStatus === 'error') {
+  } else {
     content = <SkeletonSummary variant="KidHome" />;
   }
 

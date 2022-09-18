@@ -15,21 +15,19 @@ function PendingDongilSection({
   pendingDongilsData,
 }: PendingDongilSectionProps) {
   let content;
-  if (pendingDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="pending" />;
-  } else if (pendingDongilsStatus === 'success') {
+  if (pendingDongilsStatus === 'success') {
     if (pendingDongilsData?.length === 0) {
       content = <EmptyDongil subject="대기중인" />;
     } else {
       content = <PendingDongilList pendingDongils={pendingDongilsData!} />;
     }
-  } else if (pendingDongilsStatus === 'error') {
+  } else {
     content = <SkeletonDongilList variant="pending" />;
   }
 
   return (
     <Wrapper>
-      {pendingDongilsStatus !== 'idle' && <h1>대기중인 돈길</h1>}
+      <h1>대기중인 돈길</h1>
       {content}
     </Wrapper>
   );

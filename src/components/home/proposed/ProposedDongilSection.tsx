@@ -15,9 +15,7 @@ function ProposedDongilSection({
   proposedDongilsData,
 }: ProposedDongilSectionProps) {
   let content;
-  if (proposedDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="proposed" />;
-  } else if (proposedDongilsStatus === 'success') {
+  if (proposedDongilsStatus === 'success') {
     if (proposedDongilsData?.challengeList.length === 0) {
       content = <EmptyDongil subject="제안받은" />;
     } else {
@@ -27,13 +25,13 @@ function ProposedDongilSection({
         />
       );
     }
-  } else if (proposedDongilsStatus === 'error') {
+  } else {
     content = <SkeletonDongilList variant="proposed" />;
   }
 
   return (
     <Wrapper>
-      {proposedDongilsStatus !== 'idle' && <h1>제안받은 돈길</h1>}
+      <h1>제안받은 돈길</h1>
       {content}
     </Wrapper>
   );
