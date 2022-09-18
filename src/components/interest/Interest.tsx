@@ -4,7 +4,7 @@ import queryKeys from '@lib/constants/queryKeys';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import InterestTemplate from './InterestTemplate';
-import InterestToPay from './InterestToPay';
+import InterestToPaySection from './InterestToPaySection';
 
 function Interest() {
   const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyAPI.getKid);
@@ -16,7 +16,7 @@ function Interest() {
     content = (
       <InterestTemplate>
         <FlexContainer>
-          <InterestToPay />
+          <InterestToPaySection />
         </FlexContainer>
       </InterestTemplate>
     );
