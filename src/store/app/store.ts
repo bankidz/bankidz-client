@@ -7,7 +7,6 @@ import createChallengeReducer from '../slices/createChallengeSlice';
 import walkingDongilsReducer from '../slices/walkingDongilsSlice';
 import pendingDongilsReducer from '../slices/pendingDongilsSlice';
 import proposedDongilsReducer from '../slices/proposedDongilsSlice';
-import overViewReducer from '@store/slices/overViewSlice';
 import bottomSheetReducer from '@store/slices/bottomSheetSlice';
 
 export const store = configureStore({
@@ -19,7 +18,6 @@ export const store = configureStore({
     walkingDongils: walkingDongilsReducer,
     pendingDongils: pendingDongilsReducer,
     proposedDongils: proposedDongilsReducer,
-    overView: overViewReducer,
     bottomSheet: bottomSheetReducer,
   },
   middleware: (getDefaultMiddleware) =>
