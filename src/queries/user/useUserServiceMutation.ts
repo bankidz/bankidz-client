@@ -1,5 +1,5 @@
-import { IOptInDTO } from '@lib/apis/user/userDTO';
 import userAPI from '@lib/apis/user/userAPI';
+import { IOptInDTO } from '@lib/apis/user/userDTO';
 import { AxiosError } from 'axios';
 import { useMutation, UseMutationOptions } from 'react-query';
 
