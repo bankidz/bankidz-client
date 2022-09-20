@@ -9,7 +9,7 @@ import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/createChallengeSlice';
+import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@queries/family/useFamilyQuery';
 
 const title = [
@@ -35,7 +35,7 @@ function Create() {
 
   useEffect(() => {
     if (isAlone) {
-      dispatch(dispatchParent(parents[0].isFemale));
+      dispatch(setParent(parents[0].isFemale));
     }
   }, [isAlone]);
 

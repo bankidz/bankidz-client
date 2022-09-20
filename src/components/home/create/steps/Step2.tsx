@@ -1,12 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
-import {
-  dispatchInProcess,
-  dispatchItemName,
-} from '@store/slices/createChallengeSlice';
+
 import SelectItemNameButton from '../SelectItemNameButton';
 import { TItemName } from '@lib/types/TItemName';
+import { setInProcess, setItemName } from '@store/slices/createChallengeSlice';
 
 const itemNames: TItemName[] = [
   '학용품',
@@ -25,9 +23,9 @@ function Step2({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
 
   const onClickItemNameButton = (itemName: string) => {
-    dispatch(dispatchItemName(itemName));
+    dispatch(setItemName(itemName));
     if (currentStep === 1) {
-      dispatch(dispatchInProcess());
+      dispatch(setInProcess());
     }
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };

@@ -7,8 +7,8 @@ import useModals from '@lib/hooks/useModals';
 import convertDataURLtoFile from '@lib/utils/convertDataURLtoFile';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  dispatchFileName,
-  dispatchResetChallengePayload,
+  setFileName,
+  resetChallengePayload,
   postChallenge,
   selectCreateChallenge,
   selectPostChallengeResponse,
@@ -47,7 +47,7 @@ function Step5({ currentStep }: { currentStep: number }) {
         const response = await axiosPrivate.get('/s3/url');
         console.log(response.data);
         setPreSignedUrl(response.data.data);
-        dispatch(dispatchFileName(response.data.data.imageName));
+        dispatch(setFileName(response.data.data.imageName));
       } catch (err) {
         console.error(err);
       }
@@ -77,7 +77,7 @@ function Step5({ currentStep }: { currentStep: number }) {
   useEffect(() => {
     if (status === 'succeeded') {
       // 스토어 초기화
-      dispatch(dispatchResetChallengePayload());
+      dispatch(resetChallengePayload());
       onDismiss(); // 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
       openModal(modals.receiptModal, {
         variant: 'contract',

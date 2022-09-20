@@ -6,12 +6,12 @@ import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  dispatchInterestPrice,
-  dispatchInterestRate,
-  dispatchWeekPrice,
-  dispatchWeeks,
   selectStep4InitData,
   selectTotalPrice,
+  setInterestPrice,
+  setInterestRate,
+  setWeekPrice,
+  setWeeks,
 } from '@store/slices/createChallengeSlice';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
@@ -80,10 +80,10 @@ function Step4({ currentStep }: { currentStep: number }) {
 
   // 다음으로 버튼 클릭
   const onClickNextButton = () => {
-    dispatch(dispatchWeekPrice(form.weekPrice));
-    dispatch(dispatchInterestRate(form.interestRate));
-    dispatch(dispatchWeeks(contractInfo.weekCost));
-    dispatch(dispatchInterestPrice(totalPrice * form.interestRate! * 0.01));
+    dispatch(setWeekPrice(form.weekPrice));
+    dispatch(setInterestRate(form.interestRate));
+    dispatch(setWeeks(contractInfo.weekCost));
+    dispatch(setInterestPrice(totalPrice * form.interestRate! * 0.01));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
