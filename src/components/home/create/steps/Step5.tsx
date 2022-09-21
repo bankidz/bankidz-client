@@ -65,7 +65,7 @@ function Step5({ currentStep }: { currentStep: number }) {
 
   // 렌더링하자마자 presignedUrl 가져오기
   useEffect(() => {
-    const getPresignedUrl = async (preSignedUrl: string, file: any) => {
+    const getPresignedUrl = async () => {
       try {
         const response = await axiosPrivateTemp.get('/s3/url');
         dispatch(setFileName(response.data.imageName));
@@ -74,7 +74,7 @@ function Step5({ currentStep }: { currentStep: number }) {
         console.error(err);
       }
     };
-    getPresignedUrl(preSignedUrl.preSignedUrl, sign);
+    getPresignedUrl();
   }, []);
 
   // 다음으로 버튼 클릭
