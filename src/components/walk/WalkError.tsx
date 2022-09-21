@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useState } from 'react';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
+import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 
 function WalkError() {
   const { data, status } = useFamilyQuery();
@@ -16,8 +17,7 @@ function WalkError() {
   const navigate = useNavigate();
 
   const navigateCreateDongil = () => {
-    console.log(dayjs().day());
-    if (dayjs().day() === 0) {
+    if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         sheetProps: { open: true },
