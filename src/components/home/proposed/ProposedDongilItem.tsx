@@ -122,12 +122,10 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     });
   };
 
-  const currentDayOfWeek = dayjs().day();
-
   return (
     <StyledButton
       onClick={
-        currentDayOfWeek === EDayOfWeek.SUNDAY
+        dayjs().day() === EDayOfWeek.SUNDAY
           ? openNoticeSundayBottomSheet
           : openProposedReceiptModal
       }

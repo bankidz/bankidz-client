@@ -44,7 +44,6 @@ function WalkingDongilItem({
   };
 
   // 3. 걷고있는 돈길 삭제
-  const canDelete = challengeStatus === 'FAILED';
   const queryClient = useQueryClient();
   const deleteMutation = useMutation(challengeAPI.deleteChallenge, {
     onSuccess: () => {
@@ -53,9 +52,7 @@ function WalkingDongilItem({
     },
   });
   const handleDeleteButtonClick = () => {
-    if (canDelete) {
-      deleteMutation.mutate(id);
-    }
+    challengeStatus === 'FAILED' && deleteMutation.mutate(id);
   };
 
   // 2. 정말로 삭제할까요?

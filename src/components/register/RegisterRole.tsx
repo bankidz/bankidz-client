@@ -33,7 +33,7 @@ function RegisterRole() {
   };
 
   const dispatch = useAppDispatch();
-  const patchUserMutation = useMutation(userAPI.patchUser, {
+  const registerMutation = useMutation(userAPI.patchUser, {
     onSuccess: (data) => {
       const { isFemale, isKid } = data;
       dispatch(assignIsKid(isKid));
@@ -44,7 +44,7 @@ function RegisterRole() {
 
   const birthday = useAppSelector(selectBirthday);
   const handleSubmit = (isKid: boolean, isFemale: boolean) => {
-    patchUserMutation.mutate({ isKid, isFemale, birthday });
+    registerMutation.mutate({ isKid, isFemale, birthday });
   };
 
   const openSelectProfileSheet = (isKid: boolean, isFemale: boolean) => {
