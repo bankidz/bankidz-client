@@ -4,7 +4,6 @@ import Modals, { modals } from '@components/common/modals/Modals';
 import { axiosPrivateTemp } from '@lib/apis/axios';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import convertDataURLtoFile from '@lib/utils/convertDataURLtoFile';
@@ -12,9 +11,7 @@ import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   setFileName,
   resetChallengePayload,
-  postChallenge,
   selectCreateChallenge,
-  selectPostChallengeResponse,
 } from '@store/slices/createChallengeSlice';
 import axios from 'axios';
 import dayjs from 'dayjs';

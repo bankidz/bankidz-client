@@ -2,12 +2,11 @@ import GoBackHeader from '@components/common/buttons/GoBackHeader';
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/forms/InputForm';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
-import { useAppDispatch } from '@store/app/hooks';
-import { rejectProposedDongil } from '@store/slices/proposedDongilsSlice';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -18,34 +17,11 @@ function Reject() {
   const [validateComment, checkValidateComment] = useValidation();
   const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
     useGlobalBottomSheet();
-  const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
+
   //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
     checkValidateComment('comment', comment);
   }, [comment]);
-
-  const submitFeedBack = async () => {
-    if (comment.length <= 15) {
-      try {
-        await dispatch(
-          rejectProposedDongil({
-            axiosPrivate,
-            id: parseInt(id!),
-            comment: comment,
-          }),
-        ).unwrap();
-      } catch (err) {
-        console.error(err);
-      }
-      openFeedBackCompletedSheet();
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    submitFeedBack();
-  };
 
   // '피드백이 전송되었어요' 바텀시트 열기
   const openFeedBackCompletedSheet = () => {
@@ -59,6 +35,20 @@ function Reject() {
           navigate('/');
         },
       },
+    });
+  };
+
+  const { mutate: mutateRejectProposedDongil } = useMutation(
+    challengeAPI.patchChallenge,
+    { onSuccess: openFeedBackCompletedSheet },
+  );
+
+  const handleSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    mutateRejectProposedDongil({
+      challengeId: parseInt(id!),
+      accept: false,
+      comment,
     });
   };
 
@@ -88,7 +78,7 @@ function Reject() {
       <SheetButton
         label="피드백 보내기"
         outerSheet={true}
-        onClickNext={submitFeedBack}
+        onClickNext={handleSubmit}
         disabledNext={comment.length > 15 || comment.length < 1}
       />
     </Wrapper>
