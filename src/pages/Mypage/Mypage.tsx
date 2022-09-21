@@ -32,7 +32,7 @@ function Mypage() {
     enabled: userData?.user.isKid === false,
   });
 
-  const { mutate: MutateCreateFamily } = useMutation(familyAPI.createFamily, {
+  const { mutate: mutateCreateFamily } = useMutation(familyAPI.createFamily, {
     onSuccess: (data) => {
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
@@ -81,7 +81,7 @@ function Mypage() {
           {familyStatus === 'success' ? (
             <FamilyList family={familyData!.familyUserList} />
           ) : (
-            <CreateDongil onClick={() => MutateCreateFamily}>
+            <CreateDongil onClick={() => mutateCreateFamily}>
               <p>가족그룹 만들기</p>
               <p>그룹을 만들고 가족을 초대해봐요</p>
             </CreateDongil>
