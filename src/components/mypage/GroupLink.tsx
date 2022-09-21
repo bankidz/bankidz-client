@@ -34,10 +34,10 @@ const GroupLink = () => {
     openMoveGroupCompletedSheet(handleSheetCompletedAction);
   };
 
-  const { mutate: MutateJoinFamily } = useMutation(familyAPI.joinFamily, {
+  const { mutate: mutateJoinFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleSheetCompletedAction,
   });
-  const { mutate: MutateMoveFamily } = useMutation(familyAPI.joinFamily, {
+  const { mutate: mutateMoveFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleMoveGroupCompleted,
   });
 
@@ -55,13 +55,13 @@ const GroupLink = () => {
       if (familyData.code) {
         // 3. 가족이 있을때 : 새로운 가족그룹으로 이동
         openMoveGroupCheckSheet(() => {
-          MutateMoveFamily({ code });
+          mutateMoveFamily({ code });
         });
       }
     } else {
       // 4. 가족 없을때: 가족 그룹 참여
       openJoinGroupCheckSheet(() => {
-        MutateJoinFamily({ code });
+        mutateJoinFamily({ code });
       });
     }
   }, [userStatus, familyStatus]);

@@ -46,7 +46,7 @@ function SwipeToWalk({
     queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
   };
 
-  const { mutate: walkDongilMutate } = useMutation(
+  const { mutate: mutateWalkDongil } = useMutation(
     challengeAPI.patchChallengeProgress,
     { onSuccess: onWalkCompleted },
   );
@@ -56,7 +56,7 @@ function SwipeToWalk({
       setValue(id, 0);
     } else {
       setValue(id, 100);
-      walkDongilMutate(id);
+      mutateWalkDongil(id);
     }
   };
 
