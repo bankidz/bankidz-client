@@ -7,15 +7,15 @@ import OverView from '@components/mypage/OverView';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
 import queryKeys from '@lib/constants/queryKeys';
-import useFamilyQuery from '@queries/family/useFamilyQuery';
-import useUserQuery from '@queries/user/useUserQuery';
-import useFamilyKidQuery from '@queries/family/useFamilyKidQuery';
-import useCreateFamilyMutation from '@queries/family/useCreateFamilyMutation';
+import useUserQuery from '@lib/hooks/queries/useUserQuery';
+import useFamilyKidQuery from '@lib/hooks/queries/useFamilyKidQuery';
+import familyAPI from '@lib/apis/family/familyAPI';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 function Mypage() {
   const queryClient = useQueryClient();
@@ -32,7 +32,7 @@ function Mypage() {
     enabled: userData?.user.isKid === false,
   });
 
-  const { mutate: MutateCreateFamily } = useCreateFamilyMutation({
+  const { mutate: MutateCreateFamily } = useMutation(familyAPI.createFamily, {
     onSuccess: (data) => {
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
@@ -81,7 +81,7 @@ function Mypage() {
           {familyStatus === 'success' ? (
             <FamilyList family={familyData!.familyUserList} />
           ) : (
-            <CreateDongil onClick={MutateCreateFamily}>
+            <CreateDongil onClick={() => MutateCreateFamily}>
               <p>가족그룹 만들기</p>
               <p>그룹을 만들고 가족을 초대해봐요</p>
             </CreateDongil>

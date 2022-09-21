@@ -1,5 +1,5 @@
 import { IFamilyState } from '@lib/types/IFamilyState';
-import { useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import FamilyItem from './FamilyItem';
 import { ReactComponent as Share } from '@assets/icons/shareMypage.svg';
@@ -11,7 +11,7 @@ import { cipher } from '@lib/utils/crypt';
 import { IMyPageDTO } from '@lib/apis/user/userDTO';
 import { IFamilyDTO } from '@lib/apis/family/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
-import useLeaveFamilyMutation from '@queries/family/useLeaveFamilyMutation';
+import familyAPI from '@lib/apis/family/familyAPI';
 
 function FamilyList({ family }: { family: IFamilyState[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
@@ -19,7 +19,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   const userData = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
   const familyData = queryClient.getQueryData(queryKeys.FAMILY) as IFamilyDTO;
 
-  const { mutate: MutateLeaveFamily } = useLeaveFamilyMutation({
+  const { mutate: MutateLeaveFamily } = useMutation(familyAPI.leaveFamily, {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);

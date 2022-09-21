@@ -10,7 +10,7 @@ import Step5 from '@components/home/create/steps/Step5';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setParent } from '@store/slices/createChallengeSlice';
-import useFamilyQuery from '@queries/family/useFamilyQuery';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,

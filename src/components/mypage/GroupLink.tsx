@@ -4,9 +4,10 @@ import { decipher } from '@lib/utils/crypt';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import useJoinFamilyMutation from '@queries/family/useJoinFamilyMutation';
-import useFamilyQuery from '@queries/family/useFamilyQuery';
-import useUserQuery from '@queries/user/useUserQuery';
+import useUserQuery from '@lib/hooks/queries/useUserQuery';
+import { useMutation } from 'react-query';
+import familyAPI from '@lib/apis/family/familyAPI';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 const GroupLink = () => {
   const navigate = useNavigate();
@@ -33,10 +34,10 @@ const GroupLink = () => {
     openMoveGroupCompletedSheet(handleSheetCompletedAction);
   };
 
-  const { mutate: MutateJoinFamily } = useJoinFamilyMutation({
+  const { mutate: MutateJoinFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleSheetCompletedAction,
   });
-  const { mutate: MutateMoveFamily } = useJoinFamilyMutation({
+  const { mutate: MutateMoveFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleMoveGroupCompleted,
   });
 

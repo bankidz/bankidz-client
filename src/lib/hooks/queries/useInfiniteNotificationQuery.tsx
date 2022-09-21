@@ -2,7 +2,6 @@ import { useInfiniteQuery } from 'react-query';
 import { useInView } from 'react-intersection-observer';
 import { ReactElement, useEffect } from 'react';
 import { INotificationDTO } from '@lib/apis/notification/notificationDTO';
-import useNotificationAPI from '@lib/apis/notification/notificationAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import notificationAPI from '@lib/apis/notification/notificationAPI';
 
