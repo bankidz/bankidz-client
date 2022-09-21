@@ -19,7 +19,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   const userData = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
   const familyData = queryClient.getQueryData(queryKeys.FAMILY) as IFamilyDTO;
 
-  const { mutate: MutateLeaveFamily } = useMutation(familyAPI.leaveFamily, {
+  const { mutate: mutateLeaveFamily } = useMutation(familyAPI.leaveFamily, {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
@@ -61,7 +61,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
 
   const onLeaveGroupButtonClick = async () => {
     const code = familyData.code;
-    MutateLeaveFamily({ code });
+    mutateLeaveFamily({ code });
   };
 
   // 3. 기존 가족그룹에서 나갔어요
