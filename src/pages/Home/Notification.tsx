@@ -1,7 +1,7 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import styled from 'styled-components';
-import useInfiniteNotificationQuery from '@queries/notification/useGetNotifications';
+import useInfiniteNotificationQuery from '@lib/hooks/queries/useInfiniteNotificationQuery';
 import NotificationList from '@components/home/NotificationList';
 
 const Notification = () => {

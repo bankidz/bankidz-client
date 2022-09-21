@@ -9,8 +9,8 @@ import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/createChallengeSlice';
-import useFamilyQuery from '@queries/family/useFamilyQuery';
+import { setParent } from '@store/slices/createChallengeSlice';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -35,7 +35,7 @@ function Create() {
 
   useEffect(() => {
     if (isAlone) {
-      dispatch(dispatchParent(parents[0].isFemale));
+      dispatch(setParent(parents[0].isFemale));
     }
   }, [isAlone]);
 

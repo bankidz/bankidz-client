@@ -7,9 +7,9 @@ import { useNavigate } from 'react-router-dom';
 import useStackAmount from '@lib/hooks/useStackAmount';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  dispatchTitle,
-  dispatchTotalPrice,
   selectStep3InitData,
+  setTitle,
+  setTotalPrice,
 } from '@store/slices/createChallengeSlice';
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/forms/InputForm';
@@ -40,8 +40,8 @@ function Step3({ currentStep }: { currentStep: number }) {
   const testDuplicate = walkingDongil.map((dongil) => dongil.title);
 
   const onClickNextButton = () => {
-    dispatch(dispatchTitle(form.contractName));
-    dispatch(dispatchTotalPrice(form.contractAmount));
+    dispatch(setTitle(form.contractName));
+    dispatch(setTotalPrice(form.contractAmount));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 

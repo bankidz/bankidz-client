@@ -82,37 +82,37 @@ export const createChallengeSlice = createSlice({
   name: 'createChallenge',
   initialState,
   reducers: {
-    dispatchParent(state, action: PayloadAction<boolean>) {
+    setParent(state, action: PayloadAction<boolean>) {
       state.challenge.isMom = action.payload;
     },
-    dispatchItemName(state, action: PayloadAction<string>) {
+    setItemName(state, action: PayloadAction<string>) {
       state.challenge.itemName = action.payload;
     },
-    dispatchTitle(state, action: PayloadAction<string>) {
+    setTitle(state, action: PayloadAction<string>) {
       state.challenge.title = action.payload;
     },
-    dispatchTotalPrice(state, action: PayloadAction<number>) {
+    setTotalPrice(state, action: PayloadAction<number>) {
       state.challenge.totalPrice = action.payload;
     },
-    dispatchWeekPrice(state, action: PayloadAction<number>) {
+    setWeekPrice(state, action: PayloadAction<number>) {
       state.challenge.weekPrice = action.payload;
     },
-    dispatchInterestRate(state, action: PayloadAction<10 | 20 | 30 | null>) {
+    setInterestRate(state, action: PayloadAction<10 | 20 | 30 | null>) {
       state.challenge.interestRate = action.payload;
     },
-    dispatchInterestPrice(state, action: PayloadAction<number>) {
+    setInterestPrice(state, action: PayloadAction<number>) {
       state.challenge.interestPrice = action.payload;
     },
-    dispatchWeeks(state, action: PayloadAction<number>) {
+    setWeeks(state, action: PayloadAction<number>) {
       state.challenge.weeks = action.payload;
     },
-    dispatchFileName(state, action: PayloadAction<string>) {
+    setFileName(state, action: PayloadAction<string>) {
       state.challenge.fileName = action.payload;
     },
-    dispatchInProcess(state) {
+    setInProcess(state) {
       state.inProcess = true;
     },
-    dispatchResetChallengePayload(state) {
+    resetChallengePayload(state) {
       return initialState;
     },
   },
@@ -132,17 +132,17 @@ export const createChallengeSlice = createSlice({
 });
 
 export const {
-  dispatchParent,
-  dispatchItemName,
-  dispatchTitle,
-  dispatchTotalPrice,
-  dispatchWeekPrice,
-  dispatchInterestRate,
-  dispatchInterestPrice,
-  dispatchWeeks,
-  dispatchResetChallengePayload,
-  dispatchInProcess,
-  dispatchFileName,
+  setParent,
+  setItemName,
+  setTitle,
+  setTotalPrice,
+  setWeekPrice,
+  setInterestRate,
+  setInterestPrice,
+  setWeeks,
+  resetChallengePayload,
+  setInProcess,
+  setFileName,
 } = createChallengeSlice.actions;
 
 export const selectCreateChallenge = (state: RootState) =>

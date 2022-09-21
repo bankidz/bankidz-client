@@ -3,12 +3,9 @@ import WalkDefault from '@components/walk/WalkDefault';
 import WalkError from '@components/walk/WalkError';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  dispatchResetIsPatched,
-  selectWalkingDongils,
-} from '@store/slices/walkingDongilsSlice';
+import useUserQuery from '@lib/hooks/queries/useUserQuery';
+import { useAppDispatch } from '@store/app/hooks';
+import { resetDongilPatched } from '@store/slices/walkingDongilsSlice';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
@@ -19,22 +16,26 @@ function Walk() {
     () => challengeAPI.getChallenge('walking'),
   );
   const dispatch = useAppDispatch();
-
+  const { data: userData, status: userStatus } = useUserQuery();
   const walkAbleDongils = walkingDongilsData?.filter(
     (dongil) => dongil.challengeStatus === 'WALKING',
   );
   useEffect(() => {
-    // @ts-expect-error
-    dispatch(dispatchResetIsPatched({}));
+    dispatch(resetDongilPatched());
   }, [walkingDongilsData]);
+
+  const status = walkingDongilsStatus === 'success' && userStatus === 'success';
 
   return (
     <Wrapper>
-      {walkingDongilsStatus === 'success' && (
+      {status && (
         <>
-          {walkingDongilsData.length > 0 ? (
+          {walkingDongilsData!.length > 0 ? (
             <>
-              <WalkDefault walkingDongils={walkingDongilsData} />
+              <WalkDefault
+                walkingDongils={walkAbleDongils!}
+                userData={userData!.user}
+              />
             </>
           ) : (
             <WalkError />

@@ -1,5 +1,5 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import useNoticeByIdQuery from '@queries/notice/useNoticeByIdQuery';
+import useNoticeByIdQuery from '@lib/hooks/queries/useNoticeByIdQuery';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';

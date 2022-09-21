@@ -2,7 +2,7 @@ import moment from 'moment';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { selectLevel } from '@store/slices/authSlice';
 import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -19,16 +19,16 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
 import { IDongil } from '@lib/types/IDongil';
-import useUserQuery from '@queries/user/useUserQuery';
+import { IUserDTO } from '@lib/apis/user/userDTO';
 
 type TWalkDefaultProps = {
   walkingDongils: IDongil[];
+  userData: IUserDTO;
 };
 
-function WalkDefault({ walkingDongils }: TWalkDefaultProps) {
+function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
   const level = useAppSelector(selectLevel);
   const patched = useAppSelector(selectIsWalkingDongilsPatched);
-  const isKid = useAppSelector(selectIsKid);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkDongil(walkingDongils);
   const dDayLeft = 7 - moment().day();
@@ -41,22 +41,18 @@ function WalkDefault({ walkingDongils }: TWalkDefaultProps) {
     setSelected(v);
   };
 
-  /*   useEffect(() => {
+  // 이번주 저금 완료했을 때 모달 띄우기
+  useEffect(() => {
     if (getWeeklySuccess() && patched) {
-      //if (getWeeklySuccess()) {
       openModal(modals.primaryModal, {
         onSubmit: () => {},
-        isKid: isKid,
-
-        isFemale: false,
-        // isFemale: isFemale,
-        // isFemale은 첫 회원가입(register) 시에만 서버로 부터 받습니다.
-        // 따라서 본 컴포넌트에서 isFemale을 사용하고자할 때 authSlice에서 가져올 수 없습니다.
-        headerText: `${user.username} 뱅키 이번주 저금 성공`,
+        isKid: userData.isKid,
+        isFemale: userData.isFemale,
+        headerText: `${userData.username} 뱅키 이번주 저금 성공`,
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
       });
     }
-  }, [walkingDongils, patched]); */
+  }, [walkingDongils, patched]);
 
   return (
     <Wrapper>

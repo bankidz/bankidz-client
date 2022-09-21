@@ -1,19 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch } from '@store/app/hooks';
-import {
-  dispatchInProcess,
-  dispatchParent,
-} from '@store/slices/createChallengeSlice';
+
 import RoleButton from '@components/common/buttons/RoleButton';
+import { setInProcess, setParent } from '@store/slices/createChallengeSlice';
 
 function Step1({ currentStep }: { currentStep: number }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const onClickRoleButton = (isFemale: boolean) => {
-    dispatch(dispatchParent(isFemale));
-    dispatch(dispatchInProcess());
+    dispatch(setParent(isFemale));
+    dispatch(setInProcess());
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 

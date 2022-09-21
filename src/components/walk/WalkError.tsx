@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useState } from 'react';
-import useFamilyQuery from '@queries/family/useFamilyQuery';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 function WalkError() {
   const { data, status } = useFamilyQuery();

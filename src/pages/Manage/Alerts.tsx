@@ -7,15 +7,16 @@ import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useUserOptInQuery from '@queries/user/useUserOptInQuery';
-import useUserNoticeMutation from '@queries/user/useUserNoticeMutation';
-import useUserServiceMutation from '@queries/user/useUserServiceMutation';
+import { useMutation, useQuery } from 'react-query';
+import userAPI from '@lib/apis/user/userAPI';
+import queryKeys from '@lib/constants/queryKeys';
 
 const Alerts = () => {
-  const { mutate: mutateNotice } = useUserNoticeMutation({
+  const { mutate: mutateNotice } = useMutation(userAPI.patchNoticeAlert, {
     onSuccess: (data) => syncAlert(data),
   });
-  const { mutate: mutateService } = useUserServiceMutation({
+
+  const { mutate: mutateService } = useMutation(userAPI.patchServiceAlert, {
     onSuccess: (data) => syncAlert(data),
   });
 
@@ -26,7 +27,7 @@ const Alerts = () => {
     setLocalStorage('alert', data);
     setAlert(data);
   };
-  const { data } = useUserOptInQuery({
+  const { data } = useQuery(queryKeys.USER_OPTIN, userAPI.getUserOptIn, {
     enabled: isEmptyObject(alert),
     onSuccess: (res) => syncAlert(res),
   });
