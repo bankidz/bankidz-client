@@ -2,7 +2,7 @@ import { useModalsDispatch, useModalsState } from './ModalsContext';
 import PrimaryModal from './primaryModal/PrimaryModal';
 import SecondaryModal from './secondaryModal/SecondaryModal';
 import TertiaryModal from './tertiaryModal/TertiaryModal';
-import QuaternaryModal from './QuaternaryModal/QuaternaryModal';
+import QuaternaryModal from './quaternaryModalTemp/QuaternaryModal';
 import ReceiptModal from './receiptModal/ReceiptModal';
 
 // TODO: code splitting
