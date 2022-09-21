@@ -1,6 +1,6 @@
+import { ICreateChallengePayload } from '@store/slices/createChallengeSlice';
 import { axiosPrivateTemp } from '../axios';
 import {
-  IChallengeRequest,
   IChallengeDTO,
   IProgressDTO,
   IAchievedChallengeDTO,
@@ -32,8 +32,8 @@ const challengeAPI = {
     totalPrice,
     weekPrice,
     weeks,
-  }: IChallengeRequest): Promise<IChallengeDTO> => {
-    const response = await axiosPrivateTemp.patch('/challenge', {
+  }: ICreateChallengePayload): Promise<IChallengeDTO> => {
+    const response = await axiosPrivateTemp.post('/challenge', {
       challengeCategory,
       fileName,
       interestPrice,
