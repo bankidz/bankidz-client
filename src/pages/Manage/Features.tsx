@@ -1,7 +1,8 @@
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import features from '@assets/images/features.png';
 import styled from 'styled-components';
-const Features = () => {
+
+function Features() {
   return (
     <ForegroundTemplate label="서비스 소개">
       <Content>
@@ -9,7 +10,7 @@ const Features = () => {
       </Content>
     </ForegroundTemplate>
   );
-};
+}
 export default Features;
 
 const Content = styled.div`

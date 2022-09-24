@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
 
-const Notices = () => {
+function Notices() {
   const navigate = useNavigate();
   const { data } = useQuery(queryKeys.NOTICE, noticeAPI.getNotice);
   return (
@@ -26,7 +26,7 @@ const Notices = () => {
       </>
     </ForegroundTemplate>
   );
-};
+}
 export default Notices;
 
 export const NoticeItem = styled.button`

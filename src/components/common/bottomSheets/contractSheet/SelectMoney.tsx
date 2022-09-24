@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 import { ReactComponent as Money_500 } from '@assets/illusts/selectMoney/money_500.svg';
 import { ReactComponent as Money_1000 } from '@assets/illusts/selectMoney/money_1000.svg';
 import { ReactComponent as Money_5000 } from '@assets/illusts/selectMoney/money_5000.svg';
@@ -7,7 +8,6 @@ import { ReactComponent as Money_50000 } from '@assets/illusts/selectMoney/money
 import { ReactComponent as Backspace } from '@assets/icons/backspace.svg';
 import { ReactComponent as Refresh } from '@assets/icons/refresh.svg';
 import { calcRatio } from '@lib/styles/theme';
-import { darken } from 'polished';
 
 export interface SelectMoneyProps {
   pushAmount: (amount: number) => void;

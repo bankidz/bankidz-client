@@ -7,6 +7,7 @@ import { useState } from 'react';
 import KidMain from './KidMain';
 import Step from './Step';
 import ParentMain from './ParentMain';
+
 interface GuideTemplateProps {
   page: 'manage' | 'onboarding';
   isKid: boolean;
@@ -40,7 +41,6 @@ const GuideTemplate = ({ page, isKid }: GuideTemplateProps) => {
   };
 
   const content = () => {
-    console.log(isKid, step);
     if (step) {
       return <Step step={step} isKid={isKid} />;
     } else if (isKid && !step) {

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { isMetaProperty } from 'typescript';
 
 type OverViewDataProps = {
   data: { name: string; value: any }[];

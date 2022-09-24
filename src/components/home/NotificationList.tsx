@@ -33,8 +33,7 @@ const NotificationList = ({
       if (!isRead) {
         await notificationAPI.patchNotificationIsRead(id);
       }
-      console.log(url);
-      url && navigate(url); //TODO : 임시
+      url && navigate(url);
     },
     [],
   );

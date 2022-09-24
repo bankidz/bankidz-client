@@ -5,13 +5,11 @@ import renderRoleText from '@lib/utils/get/getRoleText';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 
 interface SelectProfileProps extends HTMLAttributes<HTMLButtonElement> {
-  // 성우의 제안: null 삭제
-  isKid: boolean | null;
-  isFemale: boolean | null;
+  isKid: boolean;
+  isFemale: boolean;
 }
 
 function SelectProfile({ isKid, isFemale, ...props }: SelectProfileProps) {
-  console.log(isKid, isFemale);
   return (
     <Wrapper>
       <Container>

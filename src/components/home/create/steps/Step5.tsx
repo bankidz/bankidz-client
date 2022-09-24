@@ -27,11 +27,11 @@ interface IPreSignedUrl {
 function Step5({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const payload = useAppSelector(selectCreateChallenge);
+  const createChallengePayload = useAppSelector(selectCreateChallenge);
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [sign, setSign] = useState();
   const [open, onOpen, onDismiss] = useBottomSheet(true);
-  const { openModal, closeModal } = useModals();
+  const { openModal } = useModals();
   const [preSignedUrl, setPreSignedUrl] = useState<IPreSignedUrl>({
     imageName: '',
     preSignedUrl: '',
@@ -41,13 +41,13 @@ function Step5({ currentStep }: { currentStep: number }) {
   // 돈길 생성하면 모달 띄우고 초기화
   const onSuccessPostChallenge = () => {
     dispatch(resetChallengePayload());
-    onDismiss(); // 바텀시트 내려가고 모달 뜨는게 좀 부자연수러움
+    onDismiss();
     openModal(modals.receiptModal, {
       variant: 'contract',
       onSubmit: () => {
         navigate('/', { replace: true });
       },
-      ...payload,
+      ...createChallengePayload,
       createdAt: dayjs().format('YYYY/MM/DD hh:mm:ss'),
       isKid: true,
       isSubmit: true,
@@ -85,10 +85,9 @@ function Step5({ currentStep }: { currentStep: number }) {
       const response = await axios.put(preSignedUrl.preSignedUrl, file, {
         headers: { 'Content-Type': 'image/png' },
       });
-      console.log(response);
     };
     uploadS3(sign);
-    mutatePostChallenge(payload);
+    mutatePostChallenge(createChallengePayload);
   };
 
   return (

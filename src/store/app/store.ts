@@ -2,22 +2,16 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
 import kidsReducer from '../slices/kidsSlice';
-import familyReducer from '../slices/familySlice';
 import createChallengeReducer from '../slices/createChallengeSlice';
 import walkingDongilsReducer from '../slices/walkingDongilsSlice';
-import pendingDongilsReducer from '../slices/pendingDongilsSlice';
-import proposedDongilsReducer from '../slices/proposedDongilsSlice';
 import bottomSheetReducer from '@store/slices/bottomSheetSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     kids: kidsReducer,
-    family: familyReducer,
     createChallenge: createChallengeReducer,
     walkingDongils: walkingDongilsReducer,
-    pendingDongils: pendingDongilsReducer,
-    proposedDongils: proposedDongilsReducer,
     bottomSheet: bottomSheetReducer,
   },
   middleware: (getDefaultMiddleware) =>

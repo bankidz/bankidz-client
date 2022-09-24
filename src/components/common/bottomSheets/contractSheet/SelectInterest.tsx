@@ -48,12 +48,11 @@ function SelectInterest({ form, setForm }: TSetStep4Form) {
     form?.interestRate ? form.interestRate : null,
   );
 
-  const onClickInterestButton = (risk: 10 | 20 | 30) => {
-    setSelect(risk);
+  const onClickInterestButton = (interest: TInterestRate) => {
+    setSelect(interest);
   };
 
   useEffect(() => {
-    // 스토리에 인자로 form이랑 setForm을 넘기기가 번거로워서 옵셔널로 넣어서 이렇게 해둠..
     form && setForm && setForm({ ...form, interestRate: select });
   }, [select]);
 

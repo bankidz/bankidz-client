@@ -24,7 +24,7 @@ function Mypage() {
 
   const { data: familyData, status: familyStatus } = useFamilyQuery({
     onError: () => {
-      console.log('가족 없음');
+      //TODO : 에러처리
     },
   });
   const { data: userData, status: userStatus } = useUserQuery();

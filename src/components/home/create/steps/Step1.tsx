@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch } from '@store/app/hooks';
-
 import RoleButton from '@components/common/buttons/RoleButton';
 import { setInProcess, setParent } from '@store/slices/createChallengeSlice';
 

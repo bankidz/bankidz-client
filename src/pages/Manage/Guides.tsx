@@ -3,7 +3,7 @@ import GuideTemplate from '@components/manage/guides/GuideTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 
-const Guides = () => {
+function Guides() {
   const isKid = useAppSelector(selectIsKid);
   return (
     <>
@@ -11,5 +11,5 @@ const Guides = () => {
       <GuideTemplate page={'manage'} isKid={isKid!} />
     </>
   );
-};
+}
 export default Guides;

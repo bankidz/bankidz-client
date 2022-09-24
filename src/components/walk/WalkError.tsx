@@ -16,7 +16,6 @@ function WalkError() {
   const navigate = useNavigate();
 
   const navigateCreateDongil = () => {
-    console.log(dayjs().day());
     if (dayjs().day() === 0) {
       setOpenBottomSheet({
         sheetContent: 'Notice',

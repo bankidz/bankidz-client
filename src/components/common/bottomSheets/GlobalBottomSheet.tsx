@@ -11,20 +11,6 @@ import SelectProfile from './commonSheet/SelectProfile';
 import Completed from './commonSheet/Completed';
 import Warning from './commonSheet/Warning';
 
-/* export const CONTRACT_SHEET_CONTENTS = {
-  RangeInput: 'RangeInput',
-  SelectInterest: 'SelectInterest',
-  SelectMoney: 'SelectMoney',
-  Signature: 'Signature',
-} as const;
-
-const ContractSheetContent: any = {
-  [CONTRACT_SHEET_CONTENTS.RangeInput]: RangeInput,
-  [CONTRACT_SHEET_CONTENTS.SelectInterest]: SelectInterest,
-  [CONTRACT_SHEET_CONTENTS.SelectMoney]: SelectMoney,
-  [CONTRACT_SHEET_CONTENTS.Signature]: Signature,
-}; */
-
 export const COMMON_SHEET_CONTENTS = {
   Check: 'Check',
   DongilFailed: 'DongilFailed',
@@ -32,7 +18,6 @@ export const COMMON_SHEET_CONTENTS = {
   Notice: 'Notice',
   SelectProfile: 'SelectProfile',
   Completed: 'Completed',
-
   Warning: 'Warning',
 } as const;
 
@@ -43,7 +28,6 @@ const CommonSheetContent: any = {
   [COMMON_SHEET_CONTENTS.Notice]: Notice,
   [COMMON_SHEET_CONTENTS.SelectProfile]: SelectProfile,
   [COMMON_SHEET_CONTENTS.Completed]: Completed,
-
   [COMMON_SHEET_CONTENTS.Warning]: Warning,
 };
 

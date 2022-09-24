@@ -23,6 +23,7 @@ interface SwipeToWalkProps {
   isAchieved: boolean;
   setIsAchieved: (id: number, newValue: boolean) => void;
 }
+
 function SwipeToWalk({
   interestRate,
   weekPrice,
