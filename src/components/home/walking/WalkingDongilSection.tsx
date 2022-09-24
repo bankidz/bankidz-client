@@ -1,6 +1,7 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import { TStatus } from '@lib/types/TStatus';
 import dayjs from 'dayjs';
 import { useState } from 'react';
@@ -31,7 +32,7 @@ function WalkingDongilSection({
         contentProps: { type: 'createExceeded' },
       });
       setCreateDisabled(true);
-    } else if (dayjs().day() === 0) {
+    } else if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         sheetProps: { open: true },
