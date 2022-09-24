@@ -1,3 +1,4 @@
+import { AWS_S3_URL } from '@lib/constants/AWS_S3_URL';
 import { calcRatio } from '@lib/styles/theme';
 import { IDongil } from '@lib/types/IDongil';
 import styled, { css } from 'styled-components';
@@ -42,10 +43,7 @@ function BottomContent({
       />
       <ThirdRow weeks={weeks} createdAt={createdAt} />
       <SignatureWrapper>
-        <img
-          /* src={`https://ppoketdon-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`} */
-          src={`https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
-        />
+        <img src={`${AWS_S3_URL}/${fileName}`} />
       </SignatureWrapper>
     </Wrapper>
   );

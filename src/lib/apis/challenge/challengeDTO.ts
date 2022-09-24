@@ -33,21 +33,6 @@ export interface IChallengeDTO {
   weeks: number;
 }
 
-export interface IChallengeRequest
-  extends Pick<
-    IChallengeDTO,
-    | 'challengeCategory'
-    | 'fileName'
-    | 'interestPrice'
-    | 'interestRate'
-    | 'isMom'
-    | 'itemName'
-    | 'title'
-    | 'totalPrice'
-    | 'weekPrice'
-    | 'weeks'
-  > {}
-
 export interface IKidChallengeRequest {
   accept: boolean;
   comment: string;

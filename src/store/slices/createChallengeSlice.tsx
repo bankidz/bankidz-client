@@ -1,3 +1,5 @@
+import { TInterestRate } from '@lib/types/IInterestRate';
+import { TDongilCategory } from '@lib/types/TDongilCategory';
 import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosInstance } from 'axios';
@@ -20,27 +22,29 @@ type TPostChallengeResponseState = {
   weeks: number;
 };
 
-type TcreateChallengeState = {
+type TCreateChallengeState = {
   status: TFetchStatus;
   error: string | undefined;
-  challenge: {
-    challengeCategory: string;
-    isMom: boolean | null;
-    itemName: string | null;
-    title: string;
-    interestRate: 10 | 20 | 30 | null;
-    interestPrice: number;
-    totalPrice: number;
-    weekPrice: number;
-    weeks: number;
-    fileName: string;
-  };
+  challenge: ICreateChallengePayload;
   response: TPostChallengeResponseState | null;
   // 새로고침시 false -> step1으로
   inProcess: boolean;
 };
 
-const initialState: TcreateChallengeState = {
+export interface ICreateChallengePayload {
+  challengeCategory: TDongilCategory;
+  isMom: boolean | null;
+  itemName: string | null;
+  title: string;
+  interestRate: TInterestRate | null;
+  interestPrice: number;
+  totalPrice: number;
+  weekPrice: number;
+  weeks: number;
+  fileName: string;
+}
+
+const initialState: TCreateChallengeState = {
   status: 'idle',
   error: undefined,
   challenge: {
@@ -115,19 +119,6 @@ export const createChallengeSlice = createSlice({
     resetChallengePayload(state) {
       return initialState;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(postChallenge.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(postChallenge.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.response = action.payload;
-      })
-      .addCase(postChallenge.rejected, (state, action) => {
-        state.status = 'failed';
-      });
   },
 });
 

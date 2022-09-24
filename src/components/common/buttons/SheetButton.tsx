@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface SheetButtonProps {
-  onClickNext: () => void;
+  onClickNext: (e: any) => void;
   disabledNext: boolean;
   label: string;
   outerSheet?: boolean;
