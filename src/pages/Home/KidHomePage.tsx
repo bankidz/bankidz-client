@@ -8,7 +8,7 @@ import { AxiosError } from 'axios';
 import { IFamilyDTO } from '@lib/apis/family/familyDTO';
 import styled from 'styled-components';
 import familyAPI from '@lib/apis/family/familyAPI';
-import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 
 /**
  * 자녀홈의 계층 구조는 다음과 같습니다.
@@ -44,9 +44,9 @@ function KidHomePage() {
     );
   } else {
     content = (
-      <CustomThreeDotsWrapper>
-        <CustomThreeDots />
-      </CustomThreeDotsWrapper>
+      <CustomRotatingLinesWrapper>
+        <CustomRotatingLines />
+      </CustomRotatingLinesWrapper>
     );
   }
 
@@ -55,7 +55,7 @@ function KidHomePage() {
 
 export default KidHomePage;
 
-const CustomThreeDotsWrapper = styled.div`
+const CustomRotatingLinesWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);

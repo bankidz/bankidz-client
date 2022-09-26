@@ -4,7 +4,6 @@ import Background from '@components/home/homeTemplate/Background';
 import ContentWrapper from './ContentWrapper';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { axiosPublic } from '@lib/apis/axios';
-import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { useQueryClient } from 'react-query';
@@ -15,6 +14,7 @@ import {
 } from '@store/slices/kidsSlice';
 import queryKeys from '@lib/constants/queryKeys';
 import { selectIsKid } from '@store/slices/authSlice';
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 
 interface HomeTemplateProps {
   children: React.ReactNode;
@@ -66,7 +66,7 @@ function HomeTemplate({ children }: HomeTemplateProps) {
             colorByLevel={colorByLevel}
             hasMultipleKids={hasMultipleKids!}
           >
-            <CustomThreeDots variant="grey" />
+            <CustomRotatingLines />
           </RefreshingContentWrapper>
         }
         backgroundColor="FAFAFC" // grey 100

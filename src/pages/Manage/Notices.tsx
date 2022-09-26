@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
-import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 
 function Notices() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Notices() {
       </>
     );
   } else {
-    content = <CustomThreeDots />;
+    content = <CustomRotatingLines />;
   }
 
   return <ForegroundTemplate label="공지사항">{content}</ForegroundTemplate>;

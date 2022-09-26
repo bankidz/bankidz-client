@@ -1,4 +1,4 @@
-import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
@@ -59,9 +59,9 @@ function ParentHomePage() {
     }
   } else {
     content = (
-      <CustomThreeDotsWrapper>
-        <CustomThreeDots />
-      </CustomThreeDotsWrapper>
+      <CustomRotatingLinesWrapper>
+        <CustomRotatingLines />
+      </CustomRotatingLinesWrapper>
     );
   }
 
@@ -70,7 +70,7 @@ function ParentHomePage() {
 
 export default ParentHomePage;
 
-const CustomThreeDotsWrapper = styled.div`
+const CustomRotatingLinesWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
