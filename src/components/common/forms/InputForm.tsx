@@ -1,12 +1,14 @@
 import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
-// 성우의 제안: interface 내부 주석을 봐도 이해가 되지 않습니다.
-// JSDoc으로 주석 정리 부탁드립니다.
+/**
+ * @param readonly 바텀시트를 통해 입력받는 경우에는 readonly로 사용
+ * @param sheetOpen 포커스가 되어있지 않아도 포커스된 스타일을 보여줍니다 (바텀시트가 열려있는 상황)
+ * @param disabled 선택할 수 없는 인풋
+ */
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
   value: string | number;
-  //onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   error: boolean;
   /* 바텀시트를 사용하는 경우에 true */
   readonly?: boolean;

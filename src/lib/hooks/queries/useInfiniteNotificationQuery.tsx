@@ -22,7 +22,6 @@ const useInfiniteNotificationQuery = () => {
 
       const pageLastIdx = data.pages.length - 1;
       const isLast = data?.pages[pageLastIdx].isLast;
-      console.log(isLast);
       if (!isLast && inView) fetchNextPage();
     }, [inView]);
 

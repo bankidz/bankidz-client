@@ -1,4 +1,3 @@
-import LargeSpacer from '@components/layout/LargeSpacer';
 import WalkDefault from '@components/walk/WalkDefault';
 import WalkError from '@components/walk/WalkError';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
@@ -31,12 +30,10 @@ function Walk() {
       {status && (
         <>
           {walkingDongilsData!.length > 0 ? (
-            <>
-              <WalkDefault
-                walkingDongils={walkAbleDongils!}
-                userData={userData!.user}
-              />
-            </>
+            <WalkDefault
+              walkingDongils={walkAbleDongils!}
+              userData={userData!.user}
+            />
           ) : (
             <WalkError />
           )}

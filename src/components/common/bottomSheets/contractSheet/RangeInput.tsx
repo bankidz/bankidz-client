@@ -1,10 +1,10 @@
-import { TSetStep4Form } from '@components/home/create/steps/Step4';
 import styled, { css } from 'styled-components';
-import { ReactComponent as WalkingBanki } from '@assets/illusts/banki/banki_walking.svg';
 import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { TSetStep4Form } from '@components/home/create/steps/Step4';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import { ReactComponent as WalkingBanki } from '@assets/illusts/banki/banki_walking.svg';
 
 export interface RangeInputProps extends TSetStep4Form {
   totalPrice: number;
@@ -25,13 +25,12 @@ function RangeInput({
     form?.weekPrice ? form.weekPrice : 0,
   );
 
-  // 성우의 제안: magic number 지양
   useEffect(() => {
+    // 목표 저금액이 10만원 이하일때는 500원 단위, 그 위로는 1000원
     if (totalPrice < 100000) {
       form && setForm && setForm({ ...form, weekPrice: value });
     } else {
       const roundedValue = Math.min(max, value + (value % 1000));
-
       form && setForm && setForm({ ...form, weekPrice: roundedValue });
     }
   }, [value]);

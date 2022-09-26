@@ -20,6 +20,7 @@ function Signature({ setDisabledNext, setSign }: SignatureProps) {
       setSign(signImage);
     }
   };
+
   return (
     <Wrapper>
       <CanvasContainer>

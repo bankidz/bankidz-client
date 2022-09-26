@@ -8,7 +8,6 @@ import { theme } from '@lib/styles/theme';
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   property?: 'default' | 'kakao' | 'delete' | 'sub' | 'apple';
   label: string;
-  // 성우의 제안: state -> disabled 최대한 기본 태그와 일치하게
   state?: boolean;
   fixed?: boolean;
 }

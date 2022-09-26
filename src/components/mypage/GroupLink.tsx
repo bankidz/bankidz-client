@@ -9,7 +9,7 @@ import { useMutation } from 'react-query';
 import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
-const GroupLink = () => {
+function GroupLink() {
   const navigate = useNavigate();
   const { groupCode } = useParams();
   const { code, expiredDate } = decipher(groupCode!);
@@ -67,6 +67,6 @@ const GroupLink = () => {
   }, [userStatus, familyStatus]);
 
   return <></>;
-};
+}
 
 export default GroupLink;

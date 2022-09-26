@@ -1,10 +1,11 @@
 import { HTMLAttributes, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import RiskBadge from '@components/common/badges/RiskBadge';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 interface SelectInterestButtonProps extends HTMLAttributes<HTMLButtonElement> {
   isSelected: boolean;
-  risk: 10 | 20 | 30;
+  risk: TInterestRate;
 }
 
 function SelectInterestButton({
@@ -12,7 +13,7 @@ function SelectInterestButton({
   risk,
   ...props
 }: SelectInterestButtonProps) {
-  const levelToString = useCallback((risk: number) => {
+  const levelToString = useCallback((risk: TInterestRate) => {
     switch (risk) {
       case 10:
         return '안정';
@@ -20,8 +21,6 @@ function SelectInterestButton({
         return '보통';
       case 30:
         return '위험';
-      default:
-        return '안정';
     }
   }, []);
 

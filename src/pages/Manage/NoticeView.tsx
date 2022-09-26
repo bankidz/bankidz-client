@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { NoticeItem } from './Notices';
 
-const NoticeView = () => {
+function NoticeView() {
   const { id } = useParams();
   const { data, status } = useNoticeByIdQuery(id!);
   return (
@@ -23,7 +23,7 @@ const NoticeView = () => {
       </>
     </ForegroundTemplate>
   );
-};
+}
 
 export default NoticeView;
 

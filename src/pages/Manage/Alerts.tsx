@@ -11,7 +11,7 @@ import { useMutation, useQuery } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
 import queryKeys from '@lib/constants/queryKeys';
 
-const Alerts = () => {
+function Alerts() {
   const { mutate: mutateNotice } = useMutation(userAPI.patchNoticeAlert, {
     onSuccess: (data) => syncAlert(data),
   });
@@ -74,7 +74,7 @@ const Alerts = () => {
       </Wrapper>
     </ForegroundTemplate>
   );
-};
+}
 export default Alerts;
 
 const Wrapper = styled.div`

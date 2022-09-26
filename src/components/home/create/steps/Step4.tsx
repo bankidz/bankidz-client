@@ -26,11 +26,11 @@ import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import dayjs from 'dayjs';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 export type TStep4Form = {
   weekPrice: number;
-  // 성우의 제안: null 삭제
-  interestRate: 10 | 20 | 30 | null;
+  interestRate: TInterestRate | null;
 };
 export type TSetStep4Form = {
   form?: TStep4Form;
