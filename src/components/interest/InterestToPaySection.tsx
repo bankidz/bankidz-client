@@ -1,3 +1,4 @@
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import EmptyDongil from '@components/home/EmptyDongil';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
@@ -53,7 +54,12 @@ function InterestToPaySection() {
     <>
       <Header hasMultipleKids={hasMultipleKids!}>
         <h1>지급이 필요한 이자</h1>
-        <h2>{interestToPay}원</h2>
+        <h2>{interestToPay}원 </h2>
+        {status === 'loading' && (
+          <CustomRotatingLinesWrapper>
+            <CustomRotatingLines width="15" />
+          </CustomRotatingLinesWrapper>
+        )}
       </Header>
       {content}
     </>
@@ -73,6 +79,16 @@ const Header = styled.header<{ hasMultipleKids: boolean }>`
     ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+  position: relative;
+`;
+
+const CustomRotatingLinesWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 60px;
+  top: 39px;
+  transform: translate3d(-50%, -50%, 0);
 `;
 
 const EmptyDongilWrapper = styled.div`
