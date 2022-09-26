@@ -5,12 +5,14 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 
 function Notices() {
   const navigate = useNavigate();
-  const { data } = useQuery(queryKeys.NOTICE, noticeAPI.getNotice);
-  return (
-    <ForegroundTemplate label="공지사항">
+  const { data, status } = useQuery(queryKeys.NOTICE, noticeAPI.getNotice);
+  let content;
+  if (status === 'success') {
+    content = (
       <>
         {data?.map((notice: any) => (
           <NoticeItem
@@ -24,6 +26,27 @@ function Notices() {
           </NoticeItem>
         ))}
       </>
+    );
+  } else {
+    content = <CustomRotatingLines />;
+  }
+
+  return (
+    <ForegroundTemplate label="공지사항">
+      {content}
+      {/* <>
+        {data?.map((notice: any) => (
+          <NoticeItem
+            key={notice.id}
+            onClick={() => {
+              navigate(`${notice.id}`);
+            }}
+          >
+            <p>{notice.title}</p>
+            <p>{dayjs(notice.createdAt).format('YYYY.MM.DD')}</p>
+          </NoticeItem>
+        ))}
+      </> */}
     </ForegroundTemplate>
   );
 }

@@ -86,7 +86,7 @@ const CustomRotatingLinesWrapper = styled.div`
   width: 20px;
   height: 20px;
   position: absolute;
-  left: 60px;
+  left: 59px;
   top: 39px;
   transform: translate3d(-50%, -50%, 0);
 `;

@@ -6,13 +6,13 @@ interface CustomRotatingLinesProps {
 }
 
 /**
- * @param width 필요 시 크기를 지정합니다. 기본값은 28입니다.
+ * @param width 필요 시 크기를 지정합니다. 기본값은 22입니다.
  */
-function CustomRotatingLines({ width = '28' }: CustomRotatingLinesProps) {
+function CustomRotatingLines({ width = '22' }: CustomRotatingLinesProps) {
   return (
     <Wrapper>
       <RotatingLines
-        strokeColor="#525354" // grey700
+        strokeColor="#828489" // grey600
         strokeWidth="5"
         animationDuration="0.75"
         width={width}

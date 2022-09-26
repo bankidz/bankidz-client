@@ -1,14 +1,22 @@
 import { ThreeDots } from 'react-loader-spinner';
 import styled from 'styled-components';
 
-function CustomThreeDots() {
+interface CustomThreeDotsProps {
+  variant?: 'grey' | 'yellow';
+}
+
+/**
+ * @param variant 'grey'와 'yellow'중 컴포넌트의 색상을 선택합니다.
+ * 기본값은 'grey'입니다.
+ */
+function CustomThreeDots({ variant = 'grey' }: CustomThreeDotsProps) {
   return (
     <Wrapper>
       <ThreeDots
         height={60}
         width={60}
         radius={8}
-        color="#525354" // grey700
+        color={variant === 'grey' ? '#525354' : '#FFC52F'} // grey700, yellow400
         ariaLabel="three-dots-loading"
         visible={true}
       />
