@@ -34,9 +34,9 @@ function WithdrawReason() {
   const logoutClient = useLogoutClient();
   const openWithdrawCompletedBottomSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'Completed',
+      sheetContent: 'Notice',
       contentProps: {
-        type: 'delete',
+        type: 'withdrawed',
         onMainActionClick: () => {
           setCloseBottomSheet();
           logoutClient();
