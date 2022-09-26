@@ -66,7 +66,7 @@ function HomeTemplate({ children }: HomeTemplateProps) {
             colorByLevel={colorByLevel}
             hasMultipleKids={hasMultipleKids!}
           >
-            <CustomThreeDots />
+            <CustomThreeDots variant="grey" />
           </RefreshingContentWrapper>
         }
         backgroundColor="FAFAFC" // grey 100

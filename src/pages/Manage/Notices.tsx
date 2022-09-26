@@ -28,7 +28,7 @@ function Notices() {
       </>
     );
   } else {
-    content = <CustomThreeDots variant="yellow" />;
+    content = <CustomThreeDots />;
   }
 
   return <ForegroundTemplate label="공지사항">{content}</ForegroundTemplate>;

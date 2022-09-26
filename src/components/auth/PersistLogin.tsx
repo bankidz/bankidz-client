@@ -2,12 +2,11 @@ import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setCredentials } from '@store/slices/authSlice';
-import CustomSyncLoader from '@components/common/loadingSpinners/CustomSyncLoader';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { useMutation } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
 
 function PersistLogin() {
   const accessToken = getLocalStorage('accessToken');
@@ -28,7 +27,7 @@ function PersistLogin() {
   }, []);
 
   if (accessToken && isLoading) {
-    return <CustomRotatingLines />;
+    return <CustomThreeDots variant="yellow" />;
   } else {
     return <Outlet />;
   }
