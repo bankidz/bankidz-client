@@ -66,8 +66,7 @@ function WithdrawReason() {
   return (
     <Wrapper>
       <header>
-        <h1>탈퇴하기</h1>
-        <h2>탈퇴하시는 이유를 알려주세요</h2>
+        <h1>탈퇴하시는 이유를 알려주세요</h1>
       </header>
       <InputWrapper>
         <TextAreaForm
@@ -99,17 +98,11 @@ const Wrapper = styled.div`
   overflow-x: hidden;
 
   header h1 {
-    ${({ theme }) => theme.typo.fixed.TabName_T_21_EB};
-    color: ${({ theme }) => theme.palette.greyScale.black};
-    margin-top: 16px;
-    margin-left: 16px;
-  }
-  header h2 {
     ${({ theme }) => theme.typo.text.T_21_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
     margin-left: 26px;
     margin-right: 26px;
-    margin-top: 51px;
+    margin-top: 40px;
   }
 `;
 
