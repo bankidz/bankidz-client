@@ -88,6 +88,7 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
       weekPrice,
       weeks,
       fileName,
+      shouldCloseOnOverlayClick: true,
     });
   };
 
@@ -108,6 +109,7 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
       weeks,
       comment,
       fileName,
+      shouldCloseOnOverlayClick: true,
     });
   };
 
