@@ -9,13 +9,15 @@ import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
 import { slideAnimation } from '../slideAnimation';
+import { ReactComponent as CongratsFamily } from '@assets/illusts/congrats/congrats_family.svg';
 
 interface PrimaryModalProps {
   onSubmit: any;
-  isKid: boolean;
-  isFemale: boolean;
+  isKid?: boolean;
+  isFemale?: boolean;
   headerText: string;
   bodyText: string;
+  isFamilyCreated?: boolean;
   shouldCloseOnOverlayClick?: boolean;
 }
 
@@ -24,6 +26,8 @@ interface PrimaryModalProps {
  * useModals hook에 의해 반환 됩니다.
  * @param headerText header에 표시될 내용을 입력합니다.
  * @param bodyText body에 표시될 내용을 입력합니다.
+ * @param isFamilyCreated '가족이 생겼어요' 컨텐츠 사용 시 true로 설정합니다.
+ * 기본값은 false 입니다.
  */
 function PrimaryModal({
   onSubmit,
@@ -31,6 +35,7 @@ function PrimaryModal({
   isFemale,
   headerText,
   bodyText,
+  isFamilyCreated = false,
   shouldCloseOnOverlayClick = false,
 }: PrimaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
@@ -86,9 +91,13 @@ function PrimaryModal({
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
-        <WhiteBox>
+        <WhiteBox isFamilyCreated={isFamilyCreated}>
           <div className="illust-wrapper">
-            {renderCongratsIllust(isKid, isFemale)}
+            {isFamilyCreated ? (
+              <CongratsFamily />
+            ) : (
+              renderCongratsIllust(isKid!, isFemale!)
+            )}
           </div>
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
@@ -119,7 +128,7 @@ const Content = styled.div`
   width: 100%;
 `;
 
-const WhiteBox = styled.div`
+const WhiteBox = styled.div<{ isFamilyCreated: boolean }>`
   background: ${({ theme }) => theme.palette.greyScale.white};
   height: 424px;
   width: 100%;
@@ -145,7 +154,8 @@ const WhiteBox = styled.div`
     margin-bottom: 8px;
   }
   svg {
-    width: ${calcRatio(206, 292)};
+    width: ${({ isFamilyCreated }) =>
+      isFamilyCreated ? `${calcRatio(245, 292)}` : `${calcRatio(206, 292)}`};
   }
   .header {
     ${({ theme }) => theme.typo.popup.Title_T_21_EB}
