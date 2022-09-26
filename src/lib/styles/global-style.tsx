@@ -64,6 +64,8 @@ export const GlobalStyle = createGlobalStyle`
     input:focus {
       outline: none;
     }
+    /* removing the highlight in mobile webview */
+    -webkit-tap-highlight-color: transparent;
 
     /* react spring bottom sheet */
     :root {
@@ -75,7 +77,4 @@ export const GlobalStyle = createGlobalStyle`
       --rsbs-mr: env(safe-area-inset-right);
       --rsbs-overlay-rounded: 16px;
     }
-
-
-
 `;
