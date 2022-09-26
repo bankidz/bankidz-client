@@ -20,9 +20,6 @@ function WithdrawCallbackPage() {
   useEffect(() => {
     setOpenBottomSheet({
       sheetContent: 'Notice',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         type: 'withdrawed',
         onMainActionClick: async () => {

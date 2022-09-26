@@ -50,9 +50,6 @@ function RegisterRole() {
   const openSelectProfileSheet = (isKid: boolean, isFemale: boolean) => {
     setOpenBottomSheet({
       sheetContent: 'SelectProfile',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         isKid: isKid,
         isFemale: isFemale,

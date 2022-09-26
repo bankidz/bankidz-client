@@ -6,7 +6,6 @@ const useOpenGroupLinkSheets = () => {
   const openUnregisteredCheckSheet = (handler: () => void) => {
     setOpenBottomSheet({
       sheetContent: 'Check',
-      sheetProps: { open: true },
       contentProps: {
         type: 'unregistered',
         onMainActionClick: handler,
@@ -18,7 +17,6 @@ const useOpenGroupLinkSheets = () => {
   const openExpiredNoticeSheet = (handler: () => void) => {
     setOpenBottomSheet({
       sheetContent: 'Notice',
-      sheetProps: { open: true },
       contentProps: {
         type: 'expired',
         onMainActionClick: handler,
@@ -30,7 +28,7 @@ const useOpenGroupLinkSheets = () => {
   const openMoveGroupCheckSheet = (handler: () => void) => {
     setOpenBottomSheet({
       sheetContent: 'Check',
-      sheetProps: { open: true },
+
       contentProps: {
         type: 'moveGroup',
         onMainActionClick: () => {
@@ -45,7 +43,7 @@ const useOpenGroupLinkSheets = () => {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Check',
-        sheetProps: { open: true },
+
         contentProps: {
           type: 'moveGroupCheck',
           onMainActionClick: handler,
@@ -58,7 +56,7 @@ const useOpenGroupLinkSheets = () => {
   const openJoinGroupCheckSheet = (handler: () => void) => {
     setOpenBottomSheet({
       sheetContent: 'Check',
-      sheetProps: { open: true },
+
       contentProps: {
         type: 'joinGroup',
         onMainActionClick: handler,
@@ -71,7 +69,7 @@ const useOpenGroupLinkSheets = () => {
     const sheetOpen = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: { open: true },
+
         contentProps: {
           type: 'moveGroup',
           onMainActionClick: handler,

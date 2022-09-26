@@ -27,7 +27,6 @@ function Reject() {
   const openFeedBackCompletedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
-      sheetProps: { open: true },
       contentProps: {
         type: 'feedback',
         onMainActionClick: () => {

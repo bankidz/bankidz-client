@@ -34,7 +34,6 @@ function WalkingDongilItem({
     const openSheet = () => {
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: { open: true },
         contentProps: {
           type: 'delete',
         },
@@ -60,7 +59,7 @@ function WalkingDongilItem({
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Warning',
-        sheetProps: { open: true },
+
         contentProps: {
           type: 'delete',
           onMainActionClick: handleDeleteButtonClick,
@@ -74,9 +73,7 @@ function WalkingDongilItem({
   const openDongilFailedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'DongilFailed',
-      sheetProps: {
-        open: true,
-      },
+
       contentProps: {
         title,
         interestRate,

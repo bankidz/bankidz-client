@@ -53,6 +53,7 @@ const content = {
 
 function Completed({ type, title, onMainActionClick }: CompleteProps) {
   const { setCloseBottomSheet } = useGlobalBottomSheet();
+  console.log(type);
   return (
     <>
       <Container>

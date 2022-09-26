@@ -40,7 +40,6 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: { open: true },
         contentProps: {
           type: 'approve',
           onMainActionClick: setCloseBottomSheet,
@@ -75,7 +74,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   const openApproveCheckBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Check',
-      sheetProps: { open: true },
+
       contentProps: {
         type: 'approve',
         onMainActionClick: handleApproveButtonClick,
@@ -88,9 +87,6 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   const openNoticeSundayBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Notice',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         type: 'sunday',
       },

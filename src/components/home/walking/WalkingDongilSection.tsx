@@ -28,14 +28,12 @@ function WalkingDongilSection({
     if (walkingDongilsData?.length === 5) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
-        sheetProps: { open: true },
         contentProps: { type: 'createExceeded' },
       });
       setCreateDisabled(true);
     } else if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
-        sheetProps: { open: true },
         contentProps: { type: 'sunday' },
       });
       setCreateDisabled(true);
