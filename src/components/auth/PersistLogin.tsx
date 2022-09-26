@@ -18,8 +18,6 @@ function PersistLogin() {
       const { isKid, level, provider } = data;
       dispatch(setCredentials({ accessToken, isKid, level, provider }));
       registerEXPOToken();
-    },
-    onSettled: () => {
       setIsLoading(false);
     },
   });
