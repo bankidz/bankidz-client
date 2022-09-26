@@ -16,7 +16,6 @@ interface InterestTOPayListProps {
 }
 
 function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
-  // 2. 지급했어요
   const { openModal } = useModals();
   const queryClient = useQueryClient();
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -29,14 +28,14 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
       ]);
     },
   });
+
+  // 2. 지급했어요
   const handlePaidButtonClick = (id: number) => {
     openModal(modals.secondaryModal, {
-      onSubmit: () => {
-        payMutation.mutate(id);
-      },
       headerText: '이자지급을 완료했어요',
       bodyText: '자녀의 급융습관이 쑥쑥 자라고 있어요!',
       hasBadge: false,
+      shouldCloseOnOverlayClick: true,
     });
   };
 
@@ -50,6 +49,7 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
   ) => {
     openModal(modals.quaternaryModal, {
       onExtraSubmit: () => {
+        payMutation.mutate(id);
         setTimeout(() => {
           handlePaidButtonClick(id);
         }, MODAL_CLOSE_TRANSITION_TIME);

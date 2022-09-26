@@ -5,6 +5,14 @@ import Modals, { modals } from '@components/common/modals/Modals';
 function ModalTest() {
   const { openModal } = useModals();
 
+  const openPrimary = () => {
+    openModal(modals.primaryModal, {
+      headerText: '가족이 생겼어요',
+      bodyText: '이제 돈길을 계약해봐요!',
+      isFamilyCreated: true,
+    });
+  };
+
   function openTertiary() {
     openModal(modals.tertiaryModal, {
       onSubmit: () => {
@@ -12,6 +20,7 @@ function ModalTest() {
       },
     });
   }
+
   function openContract() {
     openModal(modals.receiptModal, {
       variant: 'contract',
@@ -31,6 +40,7 @@ function ModalTest() {
       weeks: 4,
     });
   }
+
   function openProposed() {
     openModal(modals.receiptModal, {
       variant: 'proposed',
@@ -50,6 +60,7 @@ function ModalTest() {
       weeks: 4,
     });
   }
+
   function openProposing() {
     openModal(modals.receiptModal, {
       variant: 'proposing',
@@ -91,6 +102,7 @@ function ModalTest() {
   return (
     <>
       <Modals />
+      <button onClick={openPrimary}>PrimaryModal</button>
       <button onClick={openContract}>ReceiptModal variant: contract</button>
       <button onClick={openProposed}>ReceiptModal variant: proposed</button>
       <button onClick={openProposing}>ReceiptModal variant: proposing</button>

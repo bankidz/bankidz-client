@@ -75,6 +75,7 @@ function Step4({ currentStep }: { currentStep: number }) {
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
       onSubmit: () => {},
+      shouldCloseOnOverlayClick: true,
     });
   };
 

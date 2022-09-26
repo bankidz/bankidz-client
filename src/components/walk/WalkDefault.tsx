@@ -50,6 +50,7 @@ function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
         isFemale: userData.isFemale,
         headerText: `${userData.username} 뱅키 이번주 저금 성공`,
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
+        shouldCloseOnOverlayClick: true,
       });
     }
   }, [walkingDongils, patched]);

@@ -33,9 +33,3 @@ axiosPrivateTemp.interceptors.request.use((request) => {
 axiosPrivateTemp.interceptors.response.use((response) => {
   return response.data;
 });
-
-export interface APIResponse<T> {
-  data: T | null;
-  statusCode: string | null;
-  responseMessage: string | null;
-}
