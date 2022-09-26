@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setCredentials } from '@store/slices/authSlice';
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import CustomSyncLoader from '@components/common/loadingSpinners/CustomSyncLoader';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { useMutation } from 'react-query';

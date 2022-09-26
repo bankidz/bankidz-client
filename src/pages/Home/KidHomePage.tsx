@@ -6,7 +6,7 @@ import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import { AxiosError } from 'axios';
 import { IFamilyDTO } from '@lib/apis/family/familyDTO';
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import CustomSyncLoader from '@components/common/loadingSpinners/CustomSyncLoader';
 import styled from 'styled-components';
 import familyAPI from '@lib/apis/family/familyAPI';
 

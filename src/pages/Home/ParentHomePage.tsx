@@ -1,4 +1,4 @@
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import CustomSyncLoader from '@components/common/loadingSpinners/CustomSyncLoader';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
