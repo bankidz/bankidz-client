@@ -62,7 +62,7 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   // 1. 정말로 삭제할거에요?
   const openDeleteCheckSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'Check',
+      sheetContent: 'Warning',
       sheetProps: {
         open: true,
       },
