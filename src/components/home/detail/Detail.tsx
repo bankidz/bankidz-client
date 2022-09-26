@@ -56,9 +56,6 @@ function Detail() {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: {
-          open: true,
-        },
         contentProps: {
           type: 'giveUp',
           title: title,
@@ -73,9 +70,6 @@ function Detail() {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Notice',
-        sheetProps: {
-          open: true,
-        },
         contentProps: { type: 'giveUpExceeded' },
       });
     openSheetBySequence(openSheet);
@@ -85,9 +79,6 @@ function Detail() {
   const openGiveUpBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'GiveUpCheck',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         onGiveUpButtonClick: handleGiveUpButtonClick,
         onDismiss: openCancelGiveUpBottomSheet,
@@ -114,9 +105,6 @@ function Detail() {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: {
-          open: true,
-        },
         contentProps: {
           type: 'cancel',
         },

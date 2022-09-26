@@ -37,9 +37,6 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   const openDeleteCompletedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         type: 'delete',
       },
@@ -63,9 +60,6 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   const openDeleteCheckSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Warning',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         type: 'delete',
         onMainActionClick: handleDeleteButtonClick,

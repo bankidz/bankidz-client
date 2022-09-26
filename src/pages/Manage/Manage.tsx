@@ -35,7 +35,6 @@ function Manage() {
   const openLogoutCheckBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Check',
-      sheetProps: { open: true },
       contentProps: {
         type: 'logout',
         onMainActionClick: async () => {
