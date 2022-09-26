@@ -35,9 +35,6 @@ function WithdrawReason() {
   const openWithdrawCompletedBottomSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         type: 'delete',
         onMainActionClick: () => {

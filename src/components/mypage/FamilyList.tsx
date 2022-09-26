@@ -37,7 +37,6 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   const openLeaveGroupWarningSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Warning',
-      sheetProps: { open: true },
       contentProps: {
         type: 'leaveGroup',
         onMainActionClick: openLeaveGroupCheckWarningSheet,
@@ -50,7 +49,6 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Warning',
-        sheetProps: { open: true },
         contentProps: {
           type: 'leaveGroupCheck',
           onMainActionClick: onLeaveGroupButtonClick,
@@ -69,7 +67,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: { open: true },
+
         contentProps: {
           type: 'leaveGroup',
         },

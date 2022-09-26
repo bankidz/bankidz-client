@@ -16,13 +16,12 @@ const useGlobalBottomSheet = () => {
   // 바텀시트 열기
   const setOpenBottomSheet = ({
     sheetContent,
-    sheetProps,
     contentProps,
-  }: IBottomSheet) => {
+  }: Pick<IBottomSheet, 'sheetContent' | 'contentProps'>) => {
     dispatch(
       openBottomSheet({
         sheetContent,
-        sheetProps: { ...sheetProps, open: true },
+        sheetProps: { open: true },
         contentProps,
       }),
     );

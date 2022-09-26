@@ -37,9 +37,6 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   const openDeleteCompletedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         type: 'delete',
       },
@@ -62,10 +59,7 @@ function PendingDongilItem({ pendingDongil }: PendingDongilItemProps) {
   // 1. 정말로 삭제할거에요?
   const openDeleteCheckSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'Check',
-      sheetProps: {
-        open: true,
-      },
+      sheetContent: 'Warning',
       contentProps: {
         type: 'delete',
         onMainActionClick: handleDeleteButtonClick,

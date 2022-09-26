@@ -20,7 +20,6 @@ function WalkError() {
     if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
-        sheetProps: { open: true },
         contentProps: { type: 'sunday' },
       });
       setCreateDisabled(true);

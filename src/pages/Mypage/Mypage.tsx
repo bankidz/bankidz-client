@@ -42,7 +42,6 @@ function Mypage() {
   const openCreateDongilCompletedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
-      sheetProps: { open: true },
       contentProps: {
         type: 'createGroup',
       },
