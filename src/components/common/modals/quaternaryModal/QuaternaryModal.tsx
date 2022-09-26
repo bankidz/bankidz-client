@@ -100,9 +100,13 @@ function QuaternaryModal({
           <div className="illust-wrapper">{renderBankiWalk(10)}</div>
           <section>
             <h1>{title}</h1>
-            <h2>{`총 ${weeks}주 중에 ${successWeeks}주 걷기 성공해서\n이자가 ${interestPrice.toLocaleString(
-              'ko-KR',
-            )}원 쌓였어요`}</h2>
+            <p>
+              {`총 ${weeks}주 중에 `}
+              <span>{`${successWeeks}주 `}</span>
+              {`걷기 성공해서\n이자가 `}
+              <span>{`${interestPrice.toLocaleString('ko-KR')}원 `}</span>
+              쌓였어요
+            </p>
           </section>
         </WhiteBox>
         <DoubleButtonWrapper>
@@ -174,12 +178,16 @@ const WhiteBox = styled.div`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
-  section h2 {
+  section p {
     margin-top: 24px;
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB}
     color: ${({ theme }) => theme.palette.greyScale.black};
     white-space: pre-wrap;
     line-height: 150%;
+
+    span {
+      color: ${({ theme }) => theme.palette.main.yellow400};
+    }
   }
 `;
 
