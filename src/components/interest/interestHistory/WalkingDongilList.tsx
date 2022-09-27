@@ -1,3 +1,4 @@
+import EmptyDongil from '@components/home/EmptyDongil';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import getContractEndDate from '@lib/utils/get/getContractEndDate';
@@ -15,40 +16,43 @@ function WalkingDongilList() {
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
   );
 
-  return (
-    <Wrapper>
-      {thisWeekSDongils?.challengeList?.map((thisWeekSDongil) => {
-        const contractEndDate = getContractEndDate(
-          thisWeekSDongil.createdAt,
-          thisWeekSDongil.weeks,
-        );
-        const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
-        const current = dayjs();
-        const leftOverWeek = current.diff(contractEndDate, 'week') * -1;
+  let content;
+  if (thisWeekSDongils?.challengeList.length === 0) {
+    content = <EmptyDongil subject="걷고있는" />;
+  } else {
+    content = thisWeekSDongils?.challengeList?.map((challenge) => {
+      const contractEndDate = getContractEndDate(
+        challenge.createdAt,
+        challenge.weeks,
+      );
+      const { year, month, weekNo } = getWeekNumberByMonth(contractEndDate);
+      const current = dayjs();
+      const leftOverWeek = current.diff(contractEndDate, 'week') * -1;
 
-        return (
-          <Block key={thisWeekSDongil.id}>
-            <FirstRow>
-              <div className="text-wrapper">
-                <h1>{thisWeekSDongil.title}</h1>
-                <span>{`${year}년 ${month}월 ${weekNo}주 만료`}</span>
-              </div>
-              <Badge>{`${leftOverWeek}주 남음`}</Badge>
-            </FirstRow>
-            <SecondRow>
-              <span>{`총 ${thisWeekSDongil.weeks}주 중에 ${thisWeekSDongil.successWeeks}주 성공해서 쌓인 이자`}</span>
-              <h1>{`${
-                (thisWeekSDongil.weekPrice *
-                  thisWeekSDongil.interestRate *
-                  thisWeekSDongil.successWeeks) /
-                100
-              }원`}</h1>
-            </SecondRow>
-          </Block>
-        );
-      })}
-    </Wrapper>
-  );
+      return (
+        <Block key={challenge.id}>
+          <FirstRow>
+            <div className="text-wrapper">
+              <h1>{challenge.title}</h1>
+              <span>{`${year}년 ${month}월 ${weekNo}주 만료`}</span>
+            </div>
+            <Badge>{`${leftOverWeek}주 남음`}</Badge>
+          </FirstRow>
+          <SecondRow>
+            <span>{`총 ${challenge.weeks}주 중에 ${challenge.successWeeks}주 성공해서 쌓인 이자`}</span>
+            <h1>{`${(
+              (challenge.weekPrice *
+                challenge.interestRate *
+                challenge.successWeeks) /
+              100
+            ).toLocaleString('ko-KR')}원`}</h1>
+          </SecondRow>
+        </Block>
+      );
+    });
+  }
+
+  return <Wrapper>{content}</Wrapper>;
 }
 
 export default WalkingDongilList;

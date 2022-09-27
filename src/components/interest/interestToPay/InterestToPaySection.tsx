@@ -1,6 +1,5 @@
 import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
-import EmptyDongil from '@components/home/EmptyDongil';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
@@ -31,21 +30,13 @@ function InterestToPaySection() {
 
   let content;
   if (status === 'success') {
-    if (notPaidInterests?.achievedChallengeListDTO.totalInterestPrice === 0) {
-      content = (
-        <EmptyDongilWrapper>
-          <EmptyDongil subject="아직 완주한" />
-        </EmptyDongilWrapper>
-      );
-    } else {
-      content = (
-        <InterestToPayList
-          challengeDTOList={
-            notPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
-          }
-        />
-      );
-    }
+    content = (
+      <InterestToPayList
+        challengeDTOList={
+          notPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
+        }
+      />
+    );
   } else {
     content = <SkeletonInterestToPayList />;
   }
