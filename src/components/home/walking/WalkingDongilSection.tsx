@@ -13,19 +13,19 @@ import WalkingDongilList from './WalkingDongilList';
 
 interface WalkingDongilSectionProps {
   walkingDongilsStatus: TStatus;
-  walkingDongilsData: IChallengeDTO[] | undefined;
+  walkingDongils: IChallengeDTO[] | undefined;
 }
 
 function WalkingDongilSection({
   walkingDongilsStatus,
-  walkingDongilsData,
+  walkingDongils,
 }: WalkingDongilSectionProps) {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
 
   const navigateToCreateDongil = () => {
-    if (walkingDongilsData?.length === 5) {
+    if (walkingDongils?.length === 5) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         contentProps: { type: 'createExceeded' },
@@ -44,7 +44,7 @@ function WalkingDongilSection({
 
   let content;
   if (walkingDongilsStatus === 'success') {
-    if (walkingDongilsData?.length === 0) {
+    if (walkingDongils?.length === 0) {
       content = (
         <EmptyWalkingDongil
           onClick={navigateToCreateDongil}
@@ -54,7 +54,7 @@ function WalkingDongilSection({
     } else {
       content = (
         <>
-          <WalkingDongilList walkingDongils={walkingDongilsData!} />
+          <WalkingDongilList walkingDongils={walkingDongils!} />
           <ContractNewDongilLink
             to={'/create/1'}
             createDisabled={createDisabled}

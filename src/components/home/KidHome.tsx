@@ -14,38 +14,35 @@ import challengeAPI from '@lib/apis/challenge/challengeAPI';
  * 해당 함수에서 반환하는 JSX는 RTK slice 내부의 fetchStatus에 따라 적절한 값으로 변화합니다.
  */
 function KidHome() {
-  const { status: kidSummaryStatus, data: kidSummaryData } = useQuery(
+  const { status: kidSummaryStatus, data: kidSummary } = useQuery(
     queryKeys.CHALLENGE_PROGRESS,
     challengeAPI.getChallengeProgress,
   );
-  const { status: walkingDongilsStatus, data: walkingDongilsData } = useQuery(
+  const { status: walkingDongilsStatus, data: walkingDongils } = useQuery(
     [queryKeys.CHALLENGE, 'walking'],
     () => challengeAPI.getChallenge('walking'),
     {
-      enabled: !!kidSummaryData,
+      enabled: !!kidSummary,
     },
   );
-  const { status: pendingDongilsStatus, data: pendingDongilsData } = useQuery(
+  const { status: pendingDongilsStatus, data: pendingDongils } = useQuery(
     [queryKeys.CHALLENGE, 'pending'],
     () => challengeAPI.getChallenge('pending'),
     {
-      enabled: !!walkingDongilsData,
+      enabled: !!walkingDongils,
     },
   );
 
   return (
     <>
-      <KidSummary
-        kidSummaryStatus={kidSummaryStatus}
-        kidSummaryData={kidSummaryData}
-      />
+      <KidSummary kidSummaryStatus={kidSummaryStatus} kidSummary={kidSummary} />
       <WalkingDongilSection
         walkingDongilsStatus={walkingDongilsStatus}
-        walkingDongilsData={walkingDongilsData}
+        walkingDongils={walkingDongils}
       />
       <PendingDongilSection
         pendingDongilsStatus={pendingDongilsStatus}
-        pendingDongilsData={pendingDongilsData}
+        pendingDongils={pendingDongils}
       />
       <LargeSpacer />
       <Modals />

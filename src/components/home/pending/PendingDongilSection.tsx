@@ -7,19 +7,19 @@ import PendingDongilList from './PendingDongilList';
 
 interface PendingDongilSectionProps {
   pendingDongilsStatus: TStatus;
-  pendingDongilsData: IChallengeDTO[] | undefined;
+  pendingDongils: IChallengeDTO[] | undefined;
 }
 
 function PendingDongilSection({
   pendingDongilsStatus,
-  pendingDongilsData,
+  pendingDongils,
 }: PendingDongilSectionProps) {
   let content;
   if (pendingDongilsStatus === 'success') {
-    if (pendingDongilsData?.length === 0) {
+    if (pendingDongils?.length === 0) {
       content = <EmptyDongil subject="대기중인" />;
     } else {
-      content = <PendingDongilList pendingDongils={pendingDongilsData!} />;
+      content = <PendingDongilList pendingDongils={pendingDongils!} />;
     }
   } else {
     content = <SkeletonDongilList variant="pending" />;

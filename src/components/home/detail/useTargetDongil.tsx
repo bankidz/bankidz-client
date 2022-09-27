@@ -13,7 +13,7 @@ function useTargetDongil(id: string) {
     [queryKeys.CHALLENGE, 'walking'],
     () => challengeAPI.getChallenge('walking'),
   );
-  const { data: thisWeekSDongilsData } = useQuery(
+  const { data: thisWeekSDongils } = useQuery(
     [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'walking'],
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
   );
@@ -23,7 +23,7 @@ function useTargetDongil(id: string) {
       (walkingDongil) => walkingDongil.id === parseInt(id!),
     )!;
   } else if (isKid === false) {
-    return thisWeekSDongilsData?.challengeList.find(
+    return thisWeekSDongils?.challengeList.find(
       (thisWeekSDongil) => thisWeekSDongil.id === parseInt(id!),
     )!;
   }

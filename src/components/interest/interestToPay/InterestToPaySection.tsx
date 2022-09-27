@@ -16,7 +16,7 @@ function InterestToPaySection() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  const { status, data: notPayedInterests } = useQuery(
+  const { status, data: notPaidInterests } = useQuery(
     [queryKeys.CHALLENGE_KID_ACHIEVED, 'notPayed', selectedKid?.kidId],
     () => challengeAPI.getChallengeKidAchieved('notPayed', selectedKid?.kidId!),
   );
@@ -24,14 +24,14 @@ function InterestToPaySection() {
   let interestToPay;
   if (status === 'success') {
     interestToPay =
-      notPayedInterests?.achievedChallengeListDTO.totalInterestPrice;
+      notPaidInterests?.achievedChallengeListDTO.totalInterestPrice;
   } else {
     interestToPay = 0;
   }
 
   let content;
   if (status === 'success') {
-    if (notPayedInterests?.achievedChallengeListDTO.totalInterestPrice === 0) {
+    if (notPaidInterests?.achievedChallengeListDTO.totalInterestPrice === 0) {
       content = (
         <EmptyDongilWrapper>
           <EmptyDongil subject="아직 완주한" />
@@ -41,7 +41,7 @@ function InterestToPaySection() {
       content = (
         <InterestToPayList
           challengeDTOList={
-            notPayedInterests?.achievedChallengeListDTO?.challengeDTOList!
+            notPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
           }
         />
       );

@@ -49,15 +49,17 @@ function HomeTemplate({ children }: HomeTemplateProps) {
     ]);
   };
 
+  const handleRefresh = () => {
+    isKid ? refreshKidHome() : refreshParentHome();
+    const dummyResponse = axiosPublic.get('/health');
+    return dummyResponse;
+  };
+
   return (
     <Wrapper>
       <FixedBar />
       <StyledPullToRefresh
-        onRefresh={() => {
-          isKid ? refreshKidHome() : refreshParentHome();
-          const dummyResponse = axiosPublic.get('/health');
-          return dummyResponse;
-        }}
+        onRefresh={handleRefresh}
         refreshingContent={
           <RefreshingContentWrapper hasMultipleKids={hasMultipleKids!}>
             <CustomThreeDots />

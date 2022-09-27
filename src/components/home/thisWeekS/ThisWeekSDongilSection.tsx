@@ -7,21 +7,21 @@ import ThisWeekSDongilList from './ThisWeekSDongilList';
 
 interface ThisWeekSDongilSectionProps {
   thisWeekSDongilsStatus: TStatus;
-  thisWeekSDongilsData: IKidChallengeListDTO | undefined;
+  thisWeekSDongils: IKidChallengeListDTO | undefined;
 }
 
 function ThisWeekSDongilSection({
   thisWeekSDongilsStatus,
-  thisWeekSDongilsData,
+  thisWeekSDongils,
 }: ThisWeekSDongilSectionProps) {
   let content;
   if (thisWeekSDongilsStatus === 'success') {
-    if (thisWeekSDongilsData?.challengeList.length === 0) {
+    if (thisWeekSDongils?.challengeList.length === 0) {
       content = <EmptyDongil subject="걷고있는" />;
     } else {
       content = (
         <ThisWeekSDongilList
-          thisWeekSDongils={thisWeekSDongilsData?.challengeList!}
+          thisWeekSDongils={thisWeekSDongils?.challengeList!}
         />
       );
     }
