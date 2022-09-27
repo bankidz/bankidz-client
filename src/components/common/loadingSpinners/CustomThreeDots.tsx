@@ -1,3 +1,4 @@
+import { theme } from '@lib/styles/theme';
 import { ThreeDots } from 'react-loader-spinner';
 import styled from 'styled-components';
 
@@ -8,7 +9,7 @@ function CustomThreeDots() {
         height={50}
         width={50}
         radius={8}
-        color="#828489" // grey600
+        color={theme.palette.greyScale.grey600}
         ariaLabel="three-dots-loading"
         visible={true}
       />

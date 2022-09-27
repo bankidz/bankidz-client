@@ -3,6 +3,7 @@ import familyAPI from '@lib/apis/family/familyAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
+import InterestHistorySection from './InterestHistorySection';
 import InterestTemplate from './InterestTemplate';
 import InterestToPaySection from './InterestToPaySection';
 
@@ -17,6 +18,7 @@ function Interest() {
       <InterestTemplate>
         <FlexContainer>
           <InterestToPaySection />
+          <InterestHistorySection />
         </FlexContainer>
       </InterestTemplate>
     );

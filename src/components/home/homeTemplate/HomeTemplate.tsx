@@ -4,8 +4,6 @@ import Background from '@components/home/homeTemplate/Background';
 import ContentWrapper from './ContentWrapper';
 import PullToRefresh from 'react-simple-pull-to-refresh';
 import { axiosPublic } from '@lib/apis/axios';
-import useLevel from '@lib/hooks/useLevel';
-import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { useQueryClient } from 'react-query';
 import { useAppSelector } from '@store/app/hooks';
 import {
@@ -14,15 +12,14 @@ import {
 } from '@store/slices/kidsSlice';
 import queryKeys from '@lib/constants/queryKeys';
 import { selectIsKid } from '@store/slices/authSlice';
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
+import { theme } from '@lib/styles/theme';
 
 interface HomeTemplateProps {
   children: React.ReactNode;
 }
 
 function HomeTemplate({ children }: HomeTemplateProps) {
-  const level = useLevel();
-  const colorByLevel = getColorByLevel(level);
   const queryClient = useQueryClient();
   const selectedKid = useAppSelector(selectSelectedKid);
   const isKid = useAppSelector(selectIsKid);
@@ -62,16 +59,13 @@ function HomeTemplate({ children }: HomeTemplateProps) {
           return dummyResponse;
         }}
         refreshingContent={
-          <RefreshingContentWrapper
-            colorByLevel={colorByLevel}
-            hasMultipleKids={hasMultipleKids!}
-          >
-            <CustomRotatingLines />
+          <RefreshingContentWrapper hasMultipleKids={hasMultipleKids!}>
+            <CustomThreeDots />
           </RefreshingContentWrapper>
         }
-        backgroundColor="FAFAFC" // grey 100
-        pullDownThreshold={hasMultipleKids ? 93 : 46}
-        maxPullDownDistance={hasMultipleKids ? 143 : 98}
+        backgroundColor={theme.palette.greyScale.grey100}
+        pullDownThreshold={hasMultipleKids ? 95 : 48}
+        maxPullDownDistance={hasMultipleKids ? 145 : 98}
       >
         <>
           <ContentWrapper>{children}</ContentWrapper>
@@ -87,13 +81,12 @@ export default HomeTemplate;
 const StyledPullToRefresh = styled(PullToRefresh)``;
 
 const RefreshingContentWrapper = styled.div<{
-  colorByLevel: string;
   hasMultipleKids: boolean;
 }>`
-  margin-top: ${({ hasMultipleKids }) => (hasMultipleKids ? '93px' : '46px')};
+  margin-top: ${({ hasMultipleKids }) => (hasMultipleKids ? '95px' : '48px')};
   width: 100%;
   height: 50px;
-  background: ${({ colorByLevel }) => colorByLevel};
+  background: ${({ theme }) => theme.palette.greyScale.grey100};
 `;
 
 const Wrapper = styled.div`
