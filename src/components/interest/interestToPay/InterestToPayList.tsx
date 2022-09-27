@@ -26,6 +26,11 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
         'notPayed',
         selectedKid?.kidId,
       ]);
+      queryClient.invalidateQueries([
+        queryKeys.CHALLENGE_KID_ACHIEVED,
+        'payed',
+        selectedKid?.kidId,
+      ]);
     },
   });
 
