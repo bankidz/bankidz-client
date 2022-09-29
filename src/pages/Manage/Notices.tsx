@@ -28,7 +28,11 @@ function Notices() {
       </>
     );
   } else {
-    content = <LoadingSpinner />;
+    content = (
+      <Wrapper>
+        <LoadingSpinner />
+      </Wrapper>
+    );
   }
 
   return <ForegroundTemplate label="공지사항">{content}</ForegroundTemplate>;
@@ -55,4 +59,8 @@ export const NoticeItem = styled.button`
     ${({ theme }) => theme.typo.text.S_12_M}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
+`;
+
+const Wrapper = styled.div`
+  height: 100vh;
 `;

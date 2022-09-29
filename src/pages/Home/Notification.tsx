@@ -3,30 +3,39 @@ import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import styled from 'styled-components';
 import useInfiniteNotificationQuery from '@lib/hooks/queries/useInfiniteNotificationQuery';
 import NotificationList from '@components/home/NotificationList';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 
 const Notification = () => {
-  const { data, Observation } = useInfiniteNotificationQuery();
+  const { data, status, Observation } = useInfiniteNotificationQuery();
   return (
     <ForegroundTemplate label="알림 내역">
-      <>
-        {data?.pages[0].notificationList.length === 0 ? (
-          <Content>
-            <Banki />
-            <p>등록된 알림이 없어요</p>
-          </Content>
-        ) : (
-          <>
-            {data?.pages.map((notifications) => (
-              <NotificationList
-                notifications={notifications.notificationList}
-                key={notifications.lastId}
-              />
-            ))}
-          </>
-        )}
+      {status === 'success' ? (
+        <>
+          {data?.pages[0].notificationList.length === 0 ? (
+            <Content>
+              <Banki />
+              <p>등록된 알림이 없어요</p>
+            </Content>
+          ) : (
+            <>
+              {data?.pages.map((notifications) => (
+                <NotificationList
+                  notifications={notifications.notificationList}
+                  key={notifications.lastId}
+                />
+              ))}
+            </>
+          )}
 
-        <Observation />
-      </>
+          <Observation />
+        </>
+      ) : (
+        <>
+          <Wrapper>
+            <LoadingSpinner />
+          </Wrapper>
+        </>
+      )}
     </ForegroundTemplate>
   );
 };
@@ -56,4 +65,8 @@ const Content = styled.div`
     color: ${({ theme }) => theme.palette.greyScale.grey600};
     margin-top: 17px;
   }
+`;
+
+const Wrapper = styled.div`
+  height: 100vh;
 `;

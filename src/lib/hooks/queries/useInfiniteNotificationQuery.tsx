@@ -6,7 +6,7 @@ import queryKeys from '@lib/constants/queryKeys';
 import notificationAPI from '@lib/apis/notification/notificationAPI';
 
 const useInfiniteNotificationQuery = () => {
-  const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
+  const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery<
     INotificationDTO,
     unknown
   >(queryKeys.NOTIFICATION, notificationAPI.getNotification, {
@@ -30,7 +30,7 @@ const useInfiniteNotificationQuery = () => {
     );
   };
 
-  return { data, fetchNextPage, isFetchingNextPage, Observation };
+  return { data, status, fetchNextPage, isFetchingNextPage, Observation };
 };
 
 export default useInfiniteNotificationQuery;
