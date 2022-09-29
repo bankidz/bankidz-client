@@ -2,7 +2,6 @@ import NoFamily from '@components/home/NoFamily';
 import familyAPI from '@lib/apis/family/familyAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useQuery } from 'react-query';
-import styled from 'styled-components';
 import InterestHistorySection from './interestHistory/InterestHistorySection';
 import InterestTemplate from './InterestTemplate';
 import InterestToPaySection from './interestToPay/InterestToPaySection';
@@ -16,10 +15,8 @@ function Interest() {
   } else {
     content = (
       <InterestTemplate>
-        <Positioner>
-          <InterestToPaySection />
-          <InterestHistorySection />
-        </Positioner>
+        <InterestToPaySection />
+        <InterestHistorySection />
       </InterestTemplate>
     );
   }
@@ -28,7 +25,3 @@ function Interest() {
 }
 
 export default Interest;
-
-const Positioner = styled.div`
-  margin-top: 100px;
-`;

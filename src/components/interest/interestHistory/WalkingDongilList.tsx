@@ -7,6 +7,7 @@ import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import dayjs from 'dayjs';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 function WalkingDongilList() {
@@ -30,7 +31,7 @@ function WalkingDongilList() {
       const leftOverWeek = current.diff(contractEndDate, 'week') * -1;
 
       return (
-        <Block key={challenge.id}>
+        <StyledLink key={challenge.id} to={`/detail/${challenge.id}`}>
           <FirstRow>
             <div className="text-wrapper">
               <h1>{challenge.title}</h1>
@@ -47,7 +48,7 @@ function WalkingDongilList() {
               100
             ).toLocaleString('ko-KR')}원`}</h1>
           </SecondRow>
-        </Block>
+        </StyledLink>
       );
     });
   }
@@ -61,7 +62,7 @@ const Wrapper = styled.div`
   margin-top: 44px;
 `;
 
-const Block = styled.section`
+const StyledLink = styled(Link)`
   & + & {
     margin-top: 16px;
   }

@@ -100,7 +100,7 @@ const challengeAPI = {
 
   // 자녀의 완주한 돈길 리스트 가져오기
   getChallengeKidAchieved: async (
-    interestPayment: 'paid' | 'unpaid',
+    interestPayment: 'paid' | 'unPaid',
     kidId: number,
   ): Promise<IKidAchievedChallengeListDTO> => {
     const response = await axiosPrivate.get(

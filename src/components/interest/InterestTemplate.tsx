@@ -11,7 +11,9 @@ function InterestTemplate({ children }: InterestTemplateProps) {
   return (
     <Wrapper>
       <FixedBar variant="Interest" />
-      <MarginTemplate>{children}</MarginTemplate>
+      <MarginTemplate>
+        <Positioner>{children}</Positioner>
+      </MarginTemplate>
       <LargeSpacer />
     </Wrapper>
   );
@@ -28,4 +30,8 @@ const Wrapper = styled.div`
   height: calc(var(--vh, 1vh) * 100);
 
   background: ${({ theme }) => theme.palette.greyScale.grey100};
+`;
+
+const Positioner = styled.div`
+  margin-top: 100px;
 `;

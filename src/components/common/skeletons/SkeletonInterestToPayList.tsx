@@ -2,30 +2,25 @@ import styled from 'styled-components';
 import SkeletonElement from './SkeletonElement';
 
 function SkeletonInterestToPayList() {
-  const block = (
-    <Block>
-      <div className="text-wrapper">
-        <span className="date">
-          <SkeletonElement borderRadius={6} />
-        </span>
-        <h1>
-          <SkeletonElement borderRadius={8} />
-        </h1>
-        <div className="amount-wrapper">
-          <SkeletonElement borderRadius={8} />
-        </div>
-      </div>
-      <DoubleButtonWrapper>
-        <SkeletonElement borderRadius={12} />
-        <SkeletonElement borderRadius={12} />
-      </DoubleButtonWrapper>
-    </Block>
-  );
-
   return (
     <Wrapper>
-      {block}
-      {block}
+      <Block>
+        <div className="text-wrapper">
+          <span className="date">
+            <SkeletonElement borderRadius={6} />
+          </span>
+          <h1>
+            <SkeletonElement borderRadius={8} />
+          </h1>
+          <div className="amount-wrapper">
+            <SkeletonElement borderRadius={8} />
+          </div>
+        </div>
+        <DoubleButtonWrapper>
+          <SkeletonElement borderRadius={12} />
+          <SkeletonElement borderRadius={12} />
+        </DoubleButtonWrapper>
+      </Block>
     </Wrapper>
   );
 }

@@ -6,7 +6,7 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { calcRatio } from '@lib/styles/theme';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import useTargetDongil from '@components/home/detail/useTargetDongil';
@@ -26,9 +26,14 @@ function Detail() {
   const level = useLevel();
   const colorByLevel = getColorByLevel(level!);
   const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as {
+    isPaid: boolean;
+  };
+  const isPaid = state?.isPaid;
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
-  const targetDongil = useTargetDongil(id!);
+  const targetDongil = useTargetDongil(id!, isPaid);
   const {
     isMom,
     title,

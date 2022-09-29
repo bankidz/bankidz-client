@@ -16,8 +16,8 @@ function InterestToPaySection() {
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
   const { status, data: unPaidInterests } = useQuery(
-    [queryKeys.CHALLENGE_KID_ACHIEVED, 'unpaid', selectedKid?.kidId],
-    () => challengeAPI.getChallengeKidAchieved('unpaid', selectedKid?.kidId!),
+    [queryKeys.CHALLENGE_KID_ACHIEVED, 'unPaid', selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidAchieved('unPaid', selectedKid?.kidId!),
   );
 
   let interestToPay;
