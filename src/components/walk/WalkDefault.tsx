@@ -17,12 +17,12 @@ import Modals, { modals } from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
-import { IDongil } from '@lib/types/IDongil';
 import { IUserDTO } from '@lib/apis/user/userDTO';
 import dayjs from 'dayjs';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 type TWalkDefaultProps = {
-  walkingDongils: IDongil[];
+  walkingDongils: IChallengeDTO[];
   userData: IUserDTO;
 };
 
@@ -32,12 +32,12 @@ function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkDongil(walkingDongils);
   const dDayLeft = 7 - dayjs().day();
-  const [selected, setSelected] = useState<IDongil>(walkingDongils[0]);
+  const [selected, setSelected] = useState<IChallengeDTO>(walkingDongils[0]);
   const { openModal } = useModals();
   const { getValue, setValue, getIsAchieved, setIsAchieved } =
     useWalkDongil(walkingDongils);
 
-  const onWalkingItemNameButtonClick = (v: IDongil) => {
+  const onWalkingItemNameButtonClick = (v: IChallengeDTO) => {
     setSelected(v);
   };
 

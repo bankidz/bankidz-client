@@ -1,4 +1,3 @@
-import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import FamilyItem from './FamilyItem';
@@ -9,11 +8,11 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
 import { IMyPageDTO } from '@lib/apis/user/userDTO';
-import { IFamilyDTO } from '@lib/apis/family/familyDTO';
+import { IFamilyDTO, IFamilyUserDTO } from '@lib/apis/family/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
 import familyAPI from '@lib/apis/family/familyAPI';
 
-function FamilyList({ family }: { family: IFamilyState[] }) {
+function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
   const queryClient = useQueryClient();
   const userData = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
