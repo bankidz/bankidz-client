@@ -78,6 +78,10 @@ const StyledButton = styled.button`
 
   padding: 20px 16px;
 
+  & + & {
+    margin-top: 8px;
+  }
+
   header h1 {
     ${({ theme }) => theme.typo.button.Title_T_14_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
