@@ -61,12 +61,14 @@ function RegisterRole() {
   };
 
   return (
-    <Wrapper>
-      <Modals />
+    <>
       {isTutorial ? (
-        <GuideTemplate page="onboarding" isKid={isKid!} />
+        <GuideWrapper>
+          <GuideTemplate page="onboarding" isKid={isKid!} />
+        </GuideWrapper>
       ) : (
-        <>
+        <Wrapper>
+          <Modals />
           <span>프로필을 선택해요</span>
           <RoleButtonWrapper>
             {/* 아빠 */}
@@ -114,9 +116,9 @@ function RegisterRole() {
               isSelected={isOpen && isKid === true && isFemale === true}
             />
           </RoleButtonWrapper>
-        </>
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   );
 }
 
@@ -130,6 +132,17 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const GuideWrapper = styled.div`
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(var(--vh, 1vh) * 100);
+
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-top: -64px;
 `;
 
 const RoleButtonWrapper = styled.div`
