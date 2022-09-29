@@ -1,4 +1,4 @@
-import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import CustomThreeDots from '@components/common/loaders/CustomThreeDots';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import MarginTemplate from '@components/layout/MarginTemplate';
@@ -9,7 +9,7 @@ function TestPage() {
   return (
     <Wrapper>
       {/* <ModalTest /> */}
-      <CustomRotatingLines />
+      <LoadingSpinner />
       <CustomThreeDots />
     </Wrapper>
   );

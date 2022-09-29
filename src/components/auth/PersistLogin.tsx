@@ -6,7 +6,7 @@ import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { useMutation } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
-import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 function PersistLogin() {
@@ -29,7 +29,7 @@ function PersistLogin() {
   }, []);
 
   if (accessToken && isLoading) {
-    return <CustomRotatingLines />;
+    return <LoadingSpinner />;
   } else {
     return <Outlet />;
   }

@@ -1,4 +1,4 @@
-import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
@@ -47,9 +47,9 @@ function InterestToPaySection() {
         <h1>지급이 필요한 이자</h1>
         <h2>{interestToPay}원 </h2>
         {status === 'loading' && (
-          <CustomRotatingLinesWrapper>
-            <CustomRotatingLines width="15" />
-          </CustomRotatingLinesWrapper>
+          <LoadingSpinnerWrapper>
+            <LoadingSpinner width="15" />
+          </LoadingSpinnerWrapper>
         )}
       </Header>
       {content}
@@ -73,7 +73,7 @@ const Header = styled.header<{ hasMultipleKids: boolean }>`
   position: relative;
 `;
 
-const CustomRotatingLinesWrapper = styled.div`
+const LoadingSpinnerWrapper = styled.div`
   width: 20px;
   height: 20px;
   position: absolute;
