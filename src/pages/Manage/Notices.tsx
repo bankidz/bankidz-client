@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 
 function Notices() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Notices() {
       </>
     );
   } else {
-    content = <CustomRotatingLines />;
+    content = <LoadingSpinner />;
   }
 
   return <ForegroundTemplate label="공지사항">{content}</ForegroundTemplate>;

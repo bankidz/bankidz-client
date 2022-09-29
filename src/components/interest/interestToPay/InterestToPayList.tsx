@@ -10,6 +10,7 @@ import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface InterestTOPayListProps {
   challengeDTOList: IAchievedChallengeDTO[];
@@ -23,16 +24,17 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
     onSuccess: () => {
       queryClient.invalidateQueries([
         queryKeys.CHALLENGE_KID_ACHIEVED,
-        'notPayed',
+        'unPaid',
         selectedKid?.kidId,
       ]);
       queryClient.invalidateQueries([
         queryKeys.CHALLENGE_KID_ACHIEVED,
-        'payed',
+        'paid',
         selectedKid?.kidId,
       ]);
     },
   });
+  const navigate = useNavigate();
 
   // 2. 지급했어요
   const handlePaidButtonClick = (id: number) => {
@@ -86,18 +88,31 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
               <span className="amount">{challengeDTO.interestPrice}원</span>
             </div>
           </div>
-          <Button
-            label="지급 완료하기"
-            onClick={() =>
-              handleCompletePaymentButtonClick(
-                challengeDTO.interestPrice,
-                challengeDTO.challenge.id,
-                challengeDTO.challenge.title,
-                challengeDTO.challenge.weeks,
-                challengeDTO.challenge.successWeeks,
-              )
-            }
-          />
+          <DoubleButtonWrapper>
+            <GoToDetailButton
+              onClick={() => {
+                navigate(`/detail/achieved/${challengeDTO.challenge.id}`, {
+                  state: {
+                    isPaid: false,
+                  },
+                });
+              }}
+            >
+              자세히 보기
+            </GoToDetailButton>
+            <CompletePaymentButton
+              label="지급 완료하기"
+              onClick={() =>
+                handleCompletePaymentButtonClick(
+                  challengeDTO.interestPrice,
+                  challengeDTO.challenge.id,
+                  challengeDTO.challenge.title,
+                  challengeDTO.challenge.weeks,
+                  challengeDTO.challenge.successWeeks,
+                )
+              }
+            />
+          </DoubleButtonWrapper>
         </Block>
       ))}
     </Wrapper>
@@ -109,6 +124,31 @@ export default InterestToPayList;
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 32px;
+`;
+
+const GoToDetailButton = styled.button`
+  width: 100%;
+  height: 40px;
+  background: ${({ theme }) => theme.palette.greyScale.grey300};
+  border-radius: ${({ theme }) => theme.radius.medium};
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${({ theme }) => theme.typo.button.Primary_T_15_EB};
+  color: ${({ theme }) => theme.palette.greyScale.white};
+`;
+
+const CompletePaymentButton = styled(Button)`
+  height: 40px;
+`;
+
+const DoubleButtonWrapper = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
 `;
 
 const Block = styled.section`

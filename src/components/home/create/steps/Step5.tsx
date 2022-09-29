@@ -1,7 +1,7 @@
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import Signature from '@components/common/bottomSheets/contractSheet/Signature';
 import Modals, { modals } from '@components/common/modals/Modals';
-import { axiosPrivateTemp } from '@lib/apis/axios';
+import { axiosPrivate } from '@lib/apis/axios';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -64,7 +64,7 @@ function Step5({ currentStep }: { currentStep: number }) {
   useEffect(() => {
     const getPresignedUrl = async () => {
       try {
-        const response = await axiosPrivateTemp.get('/s3/url');
+        const response = await axiosPrivate.get('/s3/url');
         dispatch(setFileName(response.data.imageName));
         setPreSignedUrl(response.data);
       } catch (err) {

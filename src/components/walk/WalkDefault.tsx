@@ -1,4 +1,3 @@
-import moment from 'moment';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
@@ -20,6 +19,7 @@ import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
 import { IDongil } from '@lib/types/IDongil';
 import { IUserDTO } from '@lib/apis/user/userDTO';
+import dayjs from 'dayjs';
 
 type TWalkDefaultProps = {
   walkingDongils: IDongil[];
@@ -31,7 +31,7 @@ function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
   const patched = useAppSelector(selectIsWalkingDongilsPatched);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkDongil(walkingDongils);
-  const dDayLeft = 7 - moment().day();
+  const dDayLeft = 7 - dayjs().day();
   const [selected, setSelected] = useState<IDongil>(walkingDongils[0]);
   const { openModal } = useModals();
   const { getValue, setValue, getIsAchieved, setIsAchieved } =

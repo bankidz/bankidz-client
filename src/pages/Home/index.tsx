@@ -47,6 +47,15 @@ function HomeRouter() {
           </ForegroundTemplate>
         }
       />
+      {/* 부모 - 완주한 돈길 */}
+      <Route
+        path="/detail/achieved/:id"
+        element={
+          <ForegroundTemplate label={'완주한 돈길'} level={level}>
+            <DetailPage />
+          </ForegroundTemplate>
+        }
+      />
       {/* 부모 - 대기중인 돈길 */}
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route

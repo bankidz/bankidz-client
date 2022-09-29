@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { setCredentials } from '@store/slices/authSlice';
-import CustomSyncLoader from '@components/common/loadingSpinners/CustomSyncLoader';
+import CustomSyncLoader from '@components/common/loaders/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 
@@ -18,10 +18,8 @@ function APPLEAuthRedirectPage() {
 
   useEffect(() => {
     const proceedLogin = () => {
-      accessToken &&
-        provider &&
-        dispatch(setCredentials({ accessToken, isKid, level, provider }));
       setLocalStorage('accessToken', accessToken);
+      provider && dispatch(setCredentials({ isKid, level, provider }));
       registerEXPOToken();
       navigate('/');
     };

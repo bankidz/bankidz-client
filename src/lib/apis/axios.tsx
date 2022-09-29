@@ -16,12 +16,11 @@ export const axiosPrivateInstance = axios.create({
   withCredentials: true,
 });
 
-// 임시 axiosPrivate
-export const axiosPrivateTemp = axios.create({
+export const axiosPrivate = axios.create({
   baseURL: BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
-axiosPrivateTemp.interceptors.request.use((request) => {
+axiosPrivate.interceptors.request.use((request) => {
   const accessToken = getLocalStorage('accessToken');
   // @ts-expect-error
   if (!request.headers['X-AUTH-TOKEN']) {
@@ -30,6 +29,6 @@ axiosPrivateTemp.interceptors.request.use((request) => {
   }
   return request;
 });
-axiosPrivateTemp.interceptors.response.use((response) => {
+axiosPrivate.interceptors.response.use((response) => {
   return response.data;
 });

@@ -1,27 +1,27 @@
-import { axiosPrivateTemp } from '../axios';
+import { axiosPrivate } from '../axios';
 import { IFamilyGroupPayload, IFamilyDTO, IKidListDTO } from './familyDTO';
 
 const familyAPI = {
   getFamily: async (): Promise<IFamilyDTO> => {
-    const response = await axiosPrivateTemp.get('/family');
+    const response = await axiosPrivate.get('/family');
     const data = response.data;
     return data;
   },
 
   getKid: async (): Promise<IKidListDTO[]> => {
-    const response = await axiosPrivateTemp.get('/family/kid');
+    const response = await axiosPrivate.get('/family/kid');
     const data = response.data;
     return data;
   },
 
   createFamily: async (): Promise<IFamilyDTO> => {
-    const response = await axiosPrivateTemp.post('/family');
+    const response = await axiosPrivate.post('/family');
     const data = response.data;
     return data;
   },
 
   leaveFamily: async (payload: IFamilyGroupPayload): Promise<IFamilyDTO> => {
-    const response = await axiosPrivateTemp.delete('/family/user', {
+    const response = await axiosPrivate.delete('/family/user', {
       data: payload,
     });
     const data = response.data;
@@ -29,7 +29,7 @@ const familyAPI = {
   },
 
   joinFamily: async (payload: IFamilyGroupPayload): Promise<IFamilyDTO> => {
-    const response = await axiosPrivateTemp.post('/family/user', payload);
+    const response = await axiosPrivate.post('/family/user', payload);
     const data = response.data;
     return data;
   },

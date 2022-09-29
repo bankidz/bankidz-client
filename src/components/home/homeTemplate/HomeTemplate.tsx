@@ -12,7 +12,7 @@ import {
 } from '@store/slices/kidsSlice';
 import queryKeys from '@lib/constants/queryKeys';
 import { selectIsKid } from '@store/slices/authSlice';
-import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
+import CustomThreeDots from '@components/common/loaders/CustomThreeDots';
 import { theme } from '@lib/styles/theme';
 
 interface HomeTemplateProps {

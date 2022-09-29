@@ -20,7 +20,6 @@ import Modals, { modals } from '@components/common/modals/Modals';
 import getChallengeStep4Prices from '@lib/utils/get/getChallengeStep4Prices';
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import moment from 'moment';
 import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';

@@ -1,4 +1,4 @@
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
@@ -15,15 +15,15 @@ function InterestToPaySection() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  const { status, data: notPaidInterests } = useQuery(
-    [queryKeys.CHALLENGE_KID_ACHIEVED, 'notPayed', selectedKid?.kidId],
-    () => challengeAPI.getChallengeKidAchieved('notPayed', selectedKid?.kidId!),
+  const { status, data: unPaidInterests } = useQuery(
+    [queryKeys.CHALLENGE_KID_ACHIEVED, 'unPaid', selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidAchieved('unPaid', selectedKid?.kidId!),
   );
 
   let interestToPay;
   if (status === 'success') {
     interestToPay =
-      notPaidInterests?.achievedChallengeListDTO.totalInterestPrice;
+      unPaidInterests?.achievedChallengeListDTO.totalInterestPrice;
   } else {
     interestToPay = 0;
   }
@@ -33,7 +33,7 @@ function InterestToPaySection() {
     content = (
       <InterestToPayList
         challengeDTOList={
-          notPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
+          unPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
         }
       />
     );
@@ -47,9 +47,9 @@ function InterestToPaySection() {
         <h1>지급이 필요한 이자</h1>
         <h2>{interestToPay}원 </h2>
         {status === 'loading' && (
-          <CustomRotatingLinesWrapper>
-            <CustomRotatingLines width="15" />
-          </CustomRotatingLinesWrapper>
+          <LoadingSpinnerWrapper>
+            <LoadingSpinner width="15" />
+          </LoadingSpinnerWrapper>
         )}
       </Header>
       {content}
@@ -73,7 +73,7 @@ const Header = styled.header<{ hasMultipleKids: boolean }>`
   position: relative;
 `;
 
-const CustomRotatingLinesWrapper = styled.div`
+const LoadingSpinnerWrapper = styled.div`
   width: 20px;
   height: 20px;
   position: absolute;
