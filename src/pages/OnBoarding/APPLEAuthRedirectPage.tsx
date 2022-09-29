@@ -18,10 +18,8 @@ function APPLEAuthRedirectPage() {
 
   useEffect(() => {
     const proceedLogin = () => {
-      accessToken &&
-        provider &&
-        dispatch(setCredentials({ accessToken, isKid, level, provider }));
       setLocalStorage('accessToken', accessToken);
+      provider && dispatch(setCredentials({ isKid, level, provider }));
       registerEXPOToken();
       navigate('/');
     };

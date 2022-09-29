@@ -20,7 +20,7 @@ function KAKAOAuthRedirectPage() {
     onSuccess: (data: ILoginDTO) => {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);
-      dispatch(setCredentials({ accessToken, isKid, level, provider })); // TODO: exclude aT
+      dispatch(setCredentials({ isKid, level, provider }));
       registerEXPOToken();
       navigate('/');
     },

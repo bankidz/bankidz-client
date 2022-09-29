@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TLevel } from '@lib/types/TLevel';
 
 interface IAuth {
-  accessToken: string;
   isKid: boolean | null;
   level: TLevel | null;
   provider: string;
@@ -16,7 +15,6 @@ interface IAuthState {
 
 const initialState: IAuthState = {
   auth: {
-    accessToken: '', // TODO: delete
     isKid: null,
     level: null,
     provider: '',
@@ -24,22 +22,19 @@ const initialState: IAuthState = {
   },
 };
 
-interface ICredentials
-  extends Pick<IAuth, 'accessToken' | 'isKid' | 'level' | 'provider'> {}
+interface ICredentials extends Pick<IAuth, 'isKid' | 'level' | 'provider'> {}
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
     setCredentials: (state, action: PayloadAction<ICredentials>) => {
-      const { accessToken, isKid, level, provider } = action.payload;
-      state.auth.accessToken = accessToken;
+      const { isKid, level, provider } = action.payload;
       state.auth.isKid = isKid;
       state.auth.level = level;
       state.auth.provider = provider;
     },
     resetCredentials: (state) => {
-      state.auth.accessToken = '';
       state.auth.isKid = null;
       state.auth.level = null;
       state.auth.provider = '';

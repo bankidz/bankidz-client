@@ -7,6 +7,7 @@ import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import { useMutation } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
 import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 function PersistLogin() {
   const accessToken = getLocalStorage('accessToken');
@@ -15,8 +16,9 @@ function PersistLogin() {
 
   const persistLoginMutation = useMutation(userAPI.patchUserRefresh, {
     onSuccess: (data) => {
-      const { isKid, level, provider } = data;
-      dispatch(setCredentials({ accessToken, isKid, level, provider }));
+      const { accessToken, isKid, level, provider } = data;
+      setLocalStorage('accessToken', accessToken);
+      dispatch(setCredentials({ isKid, level, provider }));
       registerEXPOToken();
       setIsLoading(false);
     },
