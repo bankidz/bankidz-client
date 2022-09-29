@@ -1,4 +1,4 @@
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';

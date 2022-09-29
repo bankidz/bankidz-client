@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
 
 function Notices() {
   const navigate = useNavigate();

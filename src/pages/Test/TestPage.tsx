@@ -1,5 +1,5 @@
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
-import CustomThreeDots from '@components/common/loadingSpinners/CustomThreeDots';
+import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
+import CustomThreeDots from '@components/common/loaders/CustomThreeDots';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import styled from 'styled-components';

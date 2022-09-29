@@ -8,7 +8,7 @@ import { AxiosError } from 'axios';
 import { IFamilyDTO } from '@lib/apis/family/familyDTO';
 import styled from 'styled-components';
 import familyAPI from '@lib/apis/family/familyAPI';
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
 
 /**
  * 자녀홈의 계층 구조는 다음과 같습니다.

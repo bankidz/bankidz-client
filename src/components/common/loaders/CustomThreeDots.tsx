@@ -2,6 +2,9 @@ import { theme } from '@lib/styles/theme';
 import { ThreeDots } from 'react-loader-spinner';
 import styled from 'styled-components';
 
+/**
+ * 홈 페이지 당겨서 새고침 시 사용합니다.
+ */
 function CustomThreeDots() {
   return (
     <Wrapper>

@@ -1,4 +1,4 @@
-import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
+import CustomRotatingLines from '@components/common/loaders/CustomRotatingLines';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';

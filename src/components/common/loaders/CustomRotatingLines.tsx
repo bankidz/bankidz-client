@@ -1,3 +1,4 @@
+import { theme } from '@lib/styles/theme';
 import { RotatingLines } from 'react-loader-spinner';
 import styled from 'styled-components';
 
@@ -6,13 +7,14 @@ interface CustomRotatingLinesProps {
 }
 
 /**
+ * loading spinner 입니다.
  * @param width 필요 시 크기를 지정합니다. 기본값은 22입니다.
  */
 function CustomRotatingLines({ width = '22' }: CustomRotatingLinesProps) {
   return (
     <Wrapper>
       <RotatingLines
-        strokeColor="#828489" // grey600
+        strokeColor={theme.palette.greyScale.grey600}
         strokeWidth="5"
         animationDuration="0.75"
         width={width}
