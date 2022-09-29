@@ -10,8 +10,8 @@ import styled from 'styled-components';
 function PaidDongilList() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const { data: paidInterests } = useQuery(
-    [queryKeys.CHALLENGE_KID_ACHIEVED, 'payed', selectedKid?.kidId],
-    () => challengeAPI.getChallengeKidAchieved('payed', selectedKid?.kidId!),
+    [queryKeys.CHALLENGE_KID_ACHIEVED, 'paid', selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidAchieved('paid', selectedKid?.kidId!),
   );
 
   let content;

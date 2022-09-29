@@ -23,12 +23,12 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
     onSuccess: () => {
       queryClient.invalidateQueries([
         queryKeys.CHALLENGE_KID_ACHIEVED,
-        'notPayed',
+        'unpaid',
         selectedKid?.kidId,
       ]);
       queryClient.invalidateQueries([
         queryKeys.CHALLENGE_KID_ACHIEVED,
-        'payed',
+        'paid',
         selectedKid?.kidId,
       ]);
     },

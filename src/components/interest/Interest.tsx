@@ -16,10 +16,10 @@ function Interest() {
   } else {
     content = (
       <InterestTemplate>
-        <FlexContainer>
+        <Positioner>
           <InterestToPaySection />
           <InterestHistorySection />
-        </FlexContainer>
+        </Positioner>
       </InterestTemplate>
     );
   }
@@ -29,6 +29,6 @@ function Interest() {
 
 export default Interest;
 
-const FlexContainer = styled.div`
+const Positioner = styled.div`
   margin-top: 100px;
 `;

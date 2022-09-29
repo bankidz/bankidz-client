@@ -15,15 +15,15 @@ function InterestToPaySection() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  const { status, data: notPaidInterests } = useQuery(
-    [queryKeys.CHALLENGE_KID_ACHIEVED, 'notPayed', selectedKid?.kidId],
-    () => challengeAPI.getChallengeKidAchieved('notPayed', selectedKid?.kidId!),
+  const { status, data: unPaidInterests } = useQuery(
+    [queryKeys.CHALLENGE_KID_ACHIEVED, 'unpaid', selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidAchieved('unpaid', selectedKid?.kidId!),
   );
 
   let interestToPay;
   if (status === 'success') {
     interestToPay =
-      notPaidInterests?.achievedChallengeListDTO.totalInterestPrice;
+      unPaidInterests?.achievedChallengeListDTO.totalInterestPrice;
   } else {
     interestToPay = 0;
   }
@@ -33,7 +33,7 @@ function InterestToPaySection() {
     content = (
       <InterestToPayList
         challengeDTOList={
-          notPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
+          unPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
         }
       />
     );
