@@ -1,6 +1,6 @@
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { AWS_S3_URL } from '@lib/constants/AWS_S3_URL';
 import { calcRatio } from '@lib/styles/theme';
-import { IDongil } from '@lib/types/IDongil';
 import styled, { css } from 'styled-components';
 import FirstRow from '../rows/FirstRow';
 import SecondRow from '../rows/SecondRow';
@@ -9,7 +9,7 @@ import { TReceiptModalVariant } from '../TReceiptModalVariant';
 
 interface BottomContentProps
   extends Pick<
-    IDongil,
+    IChallengeDTO,
     | 'itemName'
     | 'totalPrice'
     | 'weekPrice'

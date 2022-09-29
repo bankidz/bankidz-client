@@ -1,10 +1,10 @@
 import ProposalBadge from '@components/common/badges/ProposalBadge';
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { TReceiptModalVariant } from '../TReceiptModalVariant';
 
-interface TopProps extends Pick<IDongil, 'title'> {
+interface TopProps extends Pick<IChallengeDTO, 'title'> {
   variant: TReceiptModalVariant;
 }
 
