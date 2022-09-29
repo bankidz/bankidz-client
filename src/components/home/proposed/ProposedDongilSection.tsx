@@ -7,22 +7,20 @@ import ProposedDongilList from './ProposedDongilList';
 
 interface ProposedDongilSectionProps {
   proposedDongilsStatus: TStatus;
-  proposedDongilsData: IKidChallengeListDTO | undefined;
+  proposedDongils: IKidChallengeListDTO | undefined;
 }
 
 function ProposedDongilSection({
   proposedDongilsStatus,
-  proposedDongilsData,
+  proposedDongils,
 }: ProposedDongilSectionProps) {
   let content;
   if (proposedDongilsStatus === 'success') {
-    if (proposedDongilsData?.challengeList.length === 0) {
+    if (proposedDongils?.challengeList.length === 0) {
       content = <EmptyDongil subject="제안받은" />;
     } else {
       content = (
-        <ProposedDongilList
-          proposedDongils={proposedDongilsData?.challengeList!}
-        />
+        <ProposedDongilList proposedDongils={proposedDongils?.challengeList!} />
       );
     }
   } else {

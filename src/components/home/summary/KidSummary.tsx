@@ -6,13 +6,13 @@ import Summary from './Summary';
 
 interface KidSummaryProps {
   kidSummaryStatus: TStatus;
-  kidSummaryData: IWeekDTO | undefined;
+  kidSummary: IWeekDTO | undefined;
 }
 
-function KidSummary({ kidSummaryStatus, kidSummaryData }: KidSummaryProps) {
+function KidSummary({ kidSummaryStatus, kidSummary }: KidSummaryProps) {
   let content;
   if (kidSummaryStatus === 'success') {
-    const { currentSavings, totalPrice } = kidSummaryData!;
+    const { currentSavings, totalPrice } = kidSummary!;
     content = (
       <Summary
         variant="KidHome"

@@ -1,5 +1,5 @@
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
-import EmptyDongil from '@components/home/EmptyDongil';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
@@ -15,7 +15,7 @@ function InterestToPaySection() {
   const selectedKid = useAppSelector(selectSelectedKid);
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
 
-  const { status, data: notPayedInterests } = useQuery(
+  const { status, data: notPaidInterests } = useQuery(
     [queryKeys.CHALLENGE_KID_ACHIEVED, 'notPayed', selectedKid?.kidId],
     () => challengeAPI.getChallengeKidAchieved('notPayed', selectedKid?.kidId!),
   );
@@ -23,28 +23,20 @@ function InterestToPaySection() {
   let interestToPay;
   if (status === 'success') {
     interestToPay =
-      notPayedInterests?.achievedChallengeListDTO.totalInterestPrice;
+      notPaidInterests?.achievedChallengeListDTO.totalInterestPrice;
   } else {
     interestToPay = 0;
   }
 
   let content;
   if (status === 'success') {
-    if (notPayedInterests?.achievedChallengeListDTO.totalInterestPrice === 0) {
-      content = (
-        <EmptyDongilWrapper>
-          <EmptyDongil subject="아직 완주한" />
-        </EmptyDongilWrapper>
-      );
-    } else {
-      content = (
-        <InterestToPayList
-          challengeDTOList={
-            notPayedInterests?.achievedChallengeListDTO?.challengeDTOList!
-          }
-        />
-      );
-    }
+    content = (
+      <InterestToPayList
+        challengeDTOList={
+          notPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
+        }
+      />
+    );
   } else {
     content = <SkeletonInterestToPayList />;
   }
@@ -53,7 +45,12 @@ function InterestToPaySection() {
     <>
       <Header hasMultipleKids={hasMultipleKids!}>
         <h1>지급이 필요한 이자</h1>
-        <h2>{interestToPay}원</h2>
+        <h2>{interestToPay}원 </h2>
+        {status === 'loading' && (
+          <CustomRotatingLinesWrapper>
+            <CustomRotatingLines width="15" />
+          </CustomRotatingLinesWrapper>
+        )}
       </Header>
       {content}
     </>
@@ -73,6 +70,16 @@ const Header = styled.header<{ hasMultipleKids: boolean }>`
     ${({ theme }) => theme.typo.fixed.HomeTitle_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+  position: relative;
+`;
+
+const CustomRotatingLinesWrapper = styled.div`
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 59px;
+  top: 39px;
+  transform: translate3d(-50%, -50%, 0);
 `;
 
 const EmptyDongilWrapper = styled.div`

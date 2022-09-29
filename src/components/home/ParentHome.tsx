@@ -21,39 +21,38 @@ import challengeAPI from '@lib/apis/challenge/challengeAPI';
 function ParentHome() {
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  const { status: parentSummaryStatus, data: parentSummaryData } = useQuery(
+  const { status: parentSummaryStatus, data: parentSummary } = useQuery(
     [queryKeys.CHALLENGE_KID_PROGRESS, selectedKid?.kidId],
     () => challengeAPI.getChallengeKidProgress(selectedKid!.kidId),
   );
-  const { status: proposedDongilsStatus, data: proposedDongilsData } = useQuery(
+  const { status: proposedDongilsStatus, data: proposedDongils } = useQuery(
     [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'pending'],
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'pending'),
     {
-      enabled: !!parentSummaryData,
+      enabled: !!parentSummary,
     },
   );
-  const { status: thisWeekSDongilsStatus, data: thisWeekSDongilsData } =
-    useQuery(
-      [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'walking'],
-      () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
-      {
-        enabled: !!proposedDongilsData,
-      },
-    );
+  const { status: thisWeekSDongilsStatus, data: thisWeekSDongils } = useQuery(
+    [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'walking'],
+    () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
+    {
+      enabled: !!proposedDongils,
+    },
+  );
 
   return (
     <>
       <ParentSummary
         parentSummaryStatus={parentSummaryStatus}
-        parentSummaryData={parentSummaryData}
+        parentSummary={parentSummary}
       />
       <ProposedDongilSection
         proposedDongilsStatus={proposedDongilsStatus}
-        proposedDongilsData={proposedDongilsData}
+        proposedDongils={proposedDongils}
       />
       <ThisWeekSDongilSection
         thisWeekSDongilsStatus={thisWeekSDongilsStatus}
-        thisWeekSDongilsData={thisWeekSDongilsData}
+        thisWeekSDongils={thisWeekSDongils}
       />
       <LargeSpacer />
       <Modals />

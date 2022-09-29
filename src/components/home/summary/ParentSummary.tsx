@@ -8,12 +8,12 @@ import Summary from './Summary';
 
 interface ParentSummaryProps {
   parentSummaryStatus: TStatus;
-  parentSummaryData: IKidWeekDTO | undefined;
+  parentSummary: IKidWeekDTO | undefined;
 }
 
 function ParentSummary({
   parentSummaryStatus,
-  parentSummaryData,
+  parentSummary,
 }: ParentSummaryProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
 
@@ -21,7 +21,7 @@ function ParentSummary({
   if (parentSummaryStatus === 'loading') {
     content = <SkeletonSummary variant="ParentHome" />;
   } else if (parentSummaryStatus === 'success') {
-    const { currentSavings, totalPrice } = parentSummaryData!.weekInfo;
+    const { currentSavings, totalPrice } = parentSummary!.weekInfo;
     content = (
       <Summary
         variant="ParentHome"

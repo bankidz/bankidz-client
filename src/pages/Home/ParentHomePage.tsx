@@ -1,4 +1,4 @@
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import CustomRotatingLines from '@components/common/loadingSpinners/CustomRotatingLines';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import ParentHome from '@components/home/ParentHome';
@@ -59,9 +59,9 @@ function ParentHomePage() {
     }
   } else {
     content = (
-      <CustomSyncLoaderWrapper>
-        <CustomSyncLoader />
-      </CustomSyncLoaderWrapper>
+      <CustomRotatingLinesWrapper>
+        <CustomRotatingLines />
+      </CustomRotatingLinesWrapper>
     );
   }
 
@@ -70,7 +70,7 @@ function ParentHomePage() {
 
 export default ParentHomePage;
 
-const CustomSyncLoaderWrapper = styled.div`
+const CustomRotatingLinesWrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
