@@ -1,4 +1,4 @@
-import { axiosPrivateTemp } from '@lib/apis/axios';
+import { axiosPrivate } from '@lib/apis/axios';
 
 function registerEXPOToken() {
   let isRegistered = false;
@@ -6,7 +6,7 @@ function registerEXPOToken() {
     const EXPOToken = event.data;
     if (isRegistered === false) {
       try {
-        const response = await axiosPrivateTemp.patch('/user/expo', {
+        const response = await axiosPrivate.patch('/user/expo', {
           expoToken: EXPOToken,
         });
         isRegistered = true;
