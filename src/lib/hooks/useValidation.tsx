@@ -4,15 +4,7 @@ export type TValidationResult = {
   error: boolean;
   message: string;
 };
-/* type TValidationCheck = [
-  TValidationResult,
-  (
-    formType: TFormType,
-    value: string | number,
-    existChallengeNames?: string[] | undefined,
-  ) => void,
-]; */
-// 유효성 검사 로직 추가할때마다 타입도 같이 추가
+
 type TFormType = 'contractName' | 'contractAmount' | 'comment';
 
 const initialState = {
@@ -53,39 +45,55 @@ function useValidation() {
   const [validateResult, setValidateResult] =
     useState<TValidationResult>(initialState);
 
+  const validateContractName = (
+    value: string,
+    existChallengeNames: string[],
+  ) => {
+    if (!value) {
+      setValidateResult(validateResultContent.contractName.default);
+    } else if (value.length > 12)
+      setValidateResult(validateResultContent.contractName.outOfForm);
+    else if (
+      existChallengeNames &&
+      existChallengeNames.filter(
+        (existChallengeName) => existChallengeName === value,
+      ).length > 0
+    )
+      setValidateResult(validateResultContent.contractName.duplicate);
+    else setValidateResult(validateResultContent.contractName.pass);
+  };
+
+  const validateContractAmount = (value: number) => {
+    if (!value) setValidateResult(validateResultContent.contractAmount.default);
+    else if (value < 1500)
+      setValidateResult(validateResultContent.contractAmount.under);
+    else if (value > 300000)
+      setValidateResult(validateResultContent.contractAmount.over);
+    else setValidateResult(validateResultContent.contractAmount.pass);
+  };
+
+  const validateComment = (value: string) => {
+    if (!value) setValidateResult(validateResultContent.comment.default);
+    else if (value.length > 15)
+      setValidateResult(validateResultContent.comment.outOfForm);
+    else setValidateResult(validateResultContent.comment.pass);
+  };
+
   const checkValidate = (
     formType: TFormType,
     value: string | number,
     existChallengeNames?: string[],
   ) => {
     if (formType === 'contractName' && typeof value === 'string') {
-      if (!value) {
-        setValidateResult(validateResultContent.contractName.default);
-      } else if (value.length > 12)
-        setValidateResult(validateResultContent.contractName.outOfForm);
-      else if (
-        existChallengeNames &&
-        existChallengeNames.filter(
-          (existChallengeName) => existChallengeName === value,
-        ).length > 0
-      )
-        setValidateResult(validateResultContent.contractName.duplicate);
-      else setValidateResult(validateResultContent.contractName.pass);
+      validateContractName(value, existChallengeNames!);
     }
-    if (formType === 'contractAmount') {
-      if (!value)
-        setValidateResult(validateResultContent.contractAmount.default);
-      else if (value < 1500)
-        setValidateResult(validateResultContent.contractAmount.under);
-      else if (value > 300000)
-        setValidateResult(validateResultContent.contractAmount.over);
-      else setValidateResult(validateResultContent.contractAmount.pass);
+
+    if (formType === 'contractAmount' && typeof value === 'number') {
+      validateContractAmount(value);
     }
+
     if (formType === 'comment' && typeof value === 'string') {
-      if (!value) setValidateResult(validateResultContent.comment.default);
-      else if (value.length > 15)
-        setValidateResult(validateResultContent.comment.outOfForm);
-      else setValidateResult(validateResultContent.comment.pass);
+      validateComment(value);
     }
   };
 
