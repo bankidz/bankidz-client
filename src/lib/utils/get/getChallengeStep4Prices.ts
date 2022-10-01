@@ -5,13 +5,6 @@ function getChallengeStep4Prices(
   // 500원 단위로 올림
   const getRoundUpBy500 = (price: number) =>
     price % 500 === 0 ? price : price - (price % 500) + 500;
-  const getRoundDownBy500 = (price: number) =>
-    price % 500 === 0 ? price : price - (price % 500);
-  // 1000원 단위로 올림
-  const getRoundUpBy1000 = (price: number) =>
-    price % 1000 === 0 ? price : price - (price % 1000) + 1000;
-  const getRoundDownBy1000 = (price: number) =>
-    price % 1000 === 0 ? price : price - (price % 1000);
 
   const maxPrice = interestRate
     ? getRoundUpBy500(((1 - 0.01 * interestRate) * totalPrice) / 3)
