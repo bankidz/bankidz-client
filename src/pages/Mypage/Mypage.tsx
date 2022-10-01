@@ -76,14 +76,18 @@ function Mypage() {
           </Section>
         )}
         <Section>
-          <h2>가족 관리</h2>
-          {familyStatus === 'success' ? (
-            <FamilyList family={familyData!.familyUserList} />
-          ) : (
-            <CreateDongil onClick={() => mutateCreateFamily}>
-              <p>가족그룹 만들기</p>
-              <p>그룹을 만들고 가족을 초대해봐요</p>
-            </CreateDongil>
+          {familyStatus === 'success' && (
+            <>
+              <h2>가족 관리</h2>
+              {familyData!.id ? (
+                <FamilyList family={familyData!.familyUserList} />
+              ) : (
+                <CreateDongil onClick={() => mutateCreateFamily()}>
+                  <p>가족그룹 만들기</p>
+                  <p>그룹을 만들고 가족을 초대해봐요</p>
+                </CreateDongil>
+              )}
+            </>
           )}
         </Section>
       </MarginTemplate>

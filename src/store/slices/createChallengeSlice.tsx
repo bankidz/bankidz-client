@@ -1,6 +1,5 @@
 import { TInterestRate } from '@lib/types/IInterestRate';
 import { TDongilCategory } from '@lib/types/TDongilCategory';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios, { AxiosInstance } from 'axios';
 import { RootState } from '../app/store';
@@ -23,8 +22,6 @@ type TPostChallengeResponseState = {
 };
 
 type TCreateChallengeState = {
-  status: TFetchStatus;
-  error: string | undefined;
   challenge: ICreateChallengePayload;
   response: TPostChallengeResponseState | null;
   // 새로고침시 false -> step1으로
@@ -45,8 +42,6 @@ export interface ICreateChallengePayload {
 }
 
 const initialState: TCreateChallengeState = {
-  status: 'idle',
-  error: undefined,
   challenge: {
     challengeCategory: '이자율 받기',
     isMom: null,
@@ -155,12 +150,5 @@ export const selectTotalPrice = (state: RootState) =>
   state.createChallenge.challenge.totalPrice;
 export const selectInProcess = (state: RootState) =>
   state.createChallenge.inProcess;
-
-export const selectPostChallengeResponse = (state: RootState) => {
-  return {
-    responseData: state.createChallenge.response,
-    status: state.createChallenge.status,
-  };
-};
 
 export default createChallengeSlice.reducer;

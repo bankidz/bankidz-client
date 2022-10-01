@@ -1,10 +1,15 @@
-import { IFamilyState } from '@lib/types/IFamilyState';
 import { TLevel } from '@lib/types/TLevel';
 
 export interface IFamilyDTO {
   id: number;
   code: string;
-  familyUserList: IFamilyState[];
+  familyUserList: IFamilyUserDTO[];
+}
+
+export interface IFamilyUserDTO {
+  username: string;
+  isFemale: boolean;
+  isKid: boolean;
 }
 
 export interface IKidListDTO {

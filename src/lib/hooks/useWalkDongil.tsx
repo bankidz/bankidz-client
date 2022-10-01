@@ -1,4 +1,4 @@
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { useState } from 'react';
 
 export type TWalkDongilType = {
@@ -8,7 +8,7 @@ export type TWalkDongilType = {
 };
 
 // 걷고 있는 돈길들에 대한 state의 게터 세터 -> 현재 보여주고 있는 돈길 하나에 대한 게터 세터로 추상화
-const useWalkDongil = (walkingDongils: IDongil[]) => {
+const useWalkDongil = (walkingDongils: IChallengeDTO[]) => {
   const [walkDongils, setWalkDongils] = useState<TWalkDongilType[]>(
     walkingDongils.map((v) => {
       if (v.progressList) {

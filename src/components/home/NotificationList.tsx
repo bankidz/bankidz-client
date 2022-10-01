@@ -3,7 +3,7 @@ import { ReactComponent as AlertDongil } from '@assets/icons/alertDongil.svg';
 import { ReactComponent as AlertNotice } from '@assets/icons/alertNotice.svg';
 import { ReactComponent as AlertLevel } from '@assets/icons/alertLevel.svg';
 import { ReactComponent as AlertFamily } from '@assets/icons/alertFamily.svg';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import getTimeForToday from '@lib/utils/getTimeForToday';
 import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
