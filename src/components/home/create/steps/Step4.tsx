@@ -6,12 +6,12 @@ import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  dispatchInterestPrice,
-  dispatchInterestRate,
-  dispatchWeekPrice,
-  dispatchWeeks,
   selectStep4InitData,
   selectTotalPrice,
+  setInterestPrice,
+  setInterestRate,
+  setWeekPrice,
+  setWeeks,
 } from '@store/slices/createChallengeSlice';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
@@ -20,17 +20,16 @@ import Modals, { modals } from '@components/common/modals/Modals';
 import getChallengeStep4Prices from '@lib/utils/get/getChallengeStep4Prices';
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import moment from 'moment';
 import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import dayjs from 'dayjs';
+import { TInterestRate } from '@lib/types/IInterestRate';
 
 export type TStep4Form = {
   weekPrice: number;
-  // TODO: TInterestRate, null
-  interestRate: 10 | 20 | 30 | null;
+  interestRate: TInterestRate | null;
 };
 export type TSetStep4Form = {
   form?: TStep4Form;
@@ -72,20 +71,19 @@ function Step4({ currentStep }: { currentStep: number }) {
 
   const { openModal } = useModals();
 
-  // 모달 여는 함수
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      // TODO: 알아서 닫힘
-      // onSubmit: () => {},
+      onSubmit: () => {},
+      shouldCloseOnOverlayClick: true,
     });
   };
 
   // 다음으로 버튼 클릭
   const onClickNextButton = () => {
-    dispatch(dispatchWeekPrice(form.weekPrice));
-    dispatch(dispatchInterestRate(form.interestRate));
-    dispatch(dispatchWeeks(contractInfo.weekCost));
-    dispatch(dispatchInterestPrice(totalPrice * form.interestRate! * 0.01));
+    dispatch(setWeekPrice(form.weekPrice));
+    dispatch(setInterestRate(form.interestRate));
+    dispatch(setWeeks(contractInfo.weekCost));
+    dispatch(setInterestPrice(totalPrice * form.interestRate! * 0.01));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
@@ -111,7 +109,7 @@ function Step4({ currentStep }: { currentStep: number }) {
       const { month, weekNo } = getWeekNumberByMonth(endDate.toDate());
       setContractInfo({
         weekCost: weekCost,
-        contractEndWeek: `${month}월 ${weekNo}주`, //TODO
+        contractEndWeek: `${month}월 ${weekNo}주`,
         overPrice: totalPriceWithInterest - totalPrice,
       });
     }

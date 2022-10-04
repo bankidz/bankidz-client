@@ -1,10 +1,10 @@
 import Receipt from '@components/common/receipt/Receipt';
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
 
 interface DongilContractContentSectionProps
   extends Pick<
-    IDongil,
+    IChallengeDTO,
     | 'progressList'
     | 'interestRate'
     | 'isMom'

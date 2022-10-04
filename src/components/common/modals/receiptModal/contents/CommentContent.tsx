@@ -1,7 +1,7 @@
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
 
-interface CommentContentProps extends Pick<IDongil, 'comment'> {}
+interface CommentContentProps extends Pick<IChallengeDTO, 'comment'> {}
 
 function CommentContent({ comment }: CommentContentProps) {
   return (

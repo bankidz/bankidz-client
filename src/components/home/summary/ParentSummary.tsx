@@ -1,46 +1,39 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
+import { IKidWeekDTO } from '@lib/apis/challenge/challengeDTO';
+import { TStatus } from '@lib/types/TStatus';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import {
-  selectParentSummaries,
-  selectParentSummariesStatus,
-} from '@store/slices/parentSummariesSlice';
 import styled from 'styled-components';
 import Summary from './Summary';
 
-function ParentSummary() {
-  const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
-  const parentSummaries = useAppSelector(selectParentSummaries);
+interface ParentSummaryProps {
+  parentSummaryStatus: TStatus;
+  parentSummary: IKidWeekDTO | undefined;
+}
+
+function ParentSummary({
+  parentSummaryStatus,
+  parentSummary,
+}: ParentSummaryProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
 
-  let content: JSX.Element = <></>;
-  if (parentSummariesStatus === 'loading') {
+  let content;
+  if (parentSummaryStatus === 'loading') {
     content = <SkeletonSummary variant="ParentHome" />;
-  } else if (parentSummariesStatus === 'succeeded') {
-    const getSelectedKidSParentSummary = (kidId: number) => {
-      const found = parentSummaries?.find(
-        (parentSummary) => parentSummary.kidId === kidId,
-      );
-      return found;
-    };
-    const selectedKidSParentSummary = getSelectedKidSParentSummary(
-      selectedKid?.kidId!,
+  } else if (parentSummaryStatus === 'success') {
+    const { currentSavings, totalPrice } = parentSummary!.weekInfo;
+    content = (
+      <Summary
+        variant="ParentHome"
+        currentSavings={currentSavings!}
+        totalPrice={totalPrice!}
+        username={selectedKid?.username}
+      />
     );
-
-    if (selectedKidSParentSummary) {
-      const { currentSavings, totalPrice } = selectedKidSParentSummary.weekInfo;
-      content = (
-        <Summary
-          variant="ParentHome"
-          currentSavings={currentSavings!}
-          totalPrice={totalPrice!}
-          username={selectedKid?.username}
-        />
-      );
-    }
-  } else if (parentSummariesStatus === 'failed') {
-    content = <p>Failed</p>;
+  } else if (parentSummaryStatus === 'error') {
+    content = <SkeletonSummary variant="ParentHome" />;
   }
+
   return <Wrapper>{content}</Wrapper>;
 }
 

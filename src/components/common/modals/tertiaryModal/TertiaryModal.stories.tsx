@@ -4,6 +4,7 @@ import TertiaryModal from './TertiaryModal';
 export default {
   title: 'common/modals/TertiaryModal',
   component: TertiaryModal,
+  decorators: [(Story) => <Story />],
   argTypes: {
     onSubmit: { action: 'handle click' },
   },

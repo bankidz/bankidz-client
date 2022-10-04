@@ -32,7 +32,7 @@ function App() {
       <Route element={<Layout />}>
         <Route path="/auth/*" element={<OnBoardingRouter />} />
         <Route path="/link/:groupCode" element={<GroupLink />} />
-        {/* <Route path="/test/*" element={<TestPage />} /> */}
+        <Route path="/test/*" element={<TestPage />} />
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
             <Route path="/*" element={<HomeRouter />} />

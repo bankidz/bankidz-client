@@ -5,46 +5,43 @@ import KidsRecordList from '@components/mypage/KidsRecordList';
 import MyLevel from '@components/mypage/MyLevel';
 import OverView from '@components/mypage/OverView';
 import { ReactComponent as Setting } from '@assets/icons/setting.svg';
-import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { darken } from 'polished';
-import { useMutation, useQueries, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useFamilyApi from '@apis/family/useFamilyApi';
-import useUserApi from '@apis/user/useUserAPi';
 import SkeletonOverview from '@components/common/skeletons/SkeletonOverView';
+import queryKeys from '@lib/constants/queryKeys';
+import useUserQuery from '@lib/hooks/queries/useUserQuery';
+import useFamilyKidQuery from '@lib/hooks/queries/useFamilyKidQuery';
+import familyAPI from '@lib/apis/family/familyAPI';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 function Mypage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
-  const { getFamily, createFamily } = useFamilyApi();
-  const { getUser } = useUserApi();
-  const { getKid } = useFamilyApi();
 
-  const [family, user] = useQueries([
-    { queryKey: FAMILY, queryFn: getFamily },
-    { queryKey: USER, queryFn: getUser },
-  ]);
-
-  const { data: familyData, status: familyStatus } = family;
-  const { data: userData, status: userStatus } = user;
-  const { data: kidData, status: kidStatus } = useQuery(KID, getKid, {
+  const { data: familyData, status: familyStatus } = useFamilyQuery({
+    onError: () => {
+      //TODO : 에러처리
+    },
+  });
+  const { data: userData, status: userStatus } = useUserQuery();
+  const { data: kidData, status: kidStatus } = useFamilyKidQuery({
     enabled: userData?.user.isKid === false,
   });
 
-  const { mutate: MutateCreateFamily } = useMutation(createFamily, {
+  const { mutate: mutateCreateFamily } = useMutation(familyAPI.createFamily, {
     onSuccess: (data) => {
       openCreateDongilCompletedSheet();
-      queryClient.invalidateQueries(FAMILY);
+      queryClient.invalidateQueries(queryKeys.FAMILY);
     },
   });
 
   const openCreateDongilCompletedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
-      sheetProps: { open: true },
       contentProps: {
         type: 'createGroup',
       },
@@ -85,7 +82,7 @@ function Mypage() {
               {familyData!.id ? (
                 <FamilyList family={familyData!.familyUserList} />
               ) : (
-                <CreateDongil onClick={() => MutateCreateFamily()}>
+                <CreateDongil onClick={() => mutateCreateFamily()}>
                   <p>가족그룹 만들기</p>
                   <p>그룹을 만들고 가족을 초대해봐요</p>
                 </CreateDongil>

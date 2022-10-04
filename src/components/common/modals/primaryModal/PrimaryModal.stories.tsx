@@ -4,6 +4,7 @@ import PrimaryModal from './PrimaryModal';
 export default {
   title: 'common/modals/PrimaryModal',
   component: PrimaryModal,
+  decorators: [(Story) => <Story />],
   argTypes: {
     onSubmit: { action: 'handle click' },
   },
@@ -19,4 +20,10 @@ export const 에어팟_사기 = Template.bind({});
   isFemale: false,
   headerText: '뱅키즈 첫 가입을 축하해요',
   bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
+};
+
+export const 가족이_생겼어요 = Template.bind({});
+가족이_생겼어요.args = {
+  headerText: '가족이 생겼어요',
+  bodyText: '이제 돈길을 계약해봐요!',
 };

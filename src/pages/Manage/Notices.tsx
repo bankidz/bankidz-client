@@ -1,20 +1,20 @@
-import useNoticeApi from '@apis/notice/useNoticeApi';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { NOTICE } from '@lib/constants/QUERY_KEY';
 import dayjs from 'dayjs';
-import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
+import noticeAPI from '@lib/apis/notice/noticeAPI';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 
-const Notices = () => {
+function Notices() {
   const navigate = useNavigate();
-  const { getNotices } = useNoticeApi();
-  const { data } = useQuery(NOTICE, getNotices);
-  console.log(data);
-  return (
-    <ForegroundTemplate label="공지사항">
+  const { data, status } = useQuery(queryKeys.NOTICE, noticeAPI.getNotice);
+  let content;
+  if (status === 'success') {
+    content = (
       <>
-        {data?.map((notice) => (
+        {data?.map((notice: any) => (
           <NoticeItem
             key={notice.id}
             onClick={() => {
@@ -26,9 +26,17 @@ const Notices = () => {
           </NoticeItem>
         ))}
       </>
-    </ForegroundTemplate>
-  );
-};
+    );
+  } else {
+    content = (
+      <Wrapper>
+        <LoadingSpinner />
+      </Wrapper>
+    );
+  }
+
+  return <ForegroundTemplate label="공지사항">{content}</ForegroundTemplate>;
+}
 export default Notices;
 
 export const NoticeItem = styled.button`
@@ -51,4 +59,8 @@ export const NoticeItem = styled.button`
     ${({ theme }) => theme.typo.text.S_12_M}
     color: ${({ theme }) => theme.palette.greyScale.grey600};
   }
+`;
+
+const Wrapper = styled.div`
+  height: 100vh;
 `;

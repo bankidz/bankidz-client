@@ -212,13 +212,13 @@ const content = `
 - 개인정보 처리방침은 2022.9.7 부터 적용됩니다.
 - 회사는 개인정보 처리방침을 개정하는 경우 홈페이지의 공지사항을 통하여 고지할 것입니다. `;
 
-const Privacy = () => {
+function Privacy() {
   return (
     <ForegroundTemplate label="개인정보 처리방침">
       <Content>{content}</Content>
     </ForegroundTemplate>
   );
-};
+}
 
 export default Privacy;
 

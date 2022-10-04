@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { TInterestRate } from '@lib/types/IInterestRate';
-import { theme } from '@lib/styles/theme';
+import getColorByInterestRate from '@lib/utils/get/getColorByInterestRate';
 
 interface InterestBadgeProps {
   interestRate: TInterestRate;
@@ -9,15 +9,6 @@ interface InterestBadgeProps {
 function InterestBadge({ interestRate }: InterestBadgeProps) {
   const label = '이자부스터 ' + interestRate.toString() + '%';
   const colorByInterestRate = getColorByInterestRate(interestRate);
-  function getColorByInterestRate(interestRate: TInterestRate) {
-    if (interestRate === 10) {
-      return theme.palette.sementic.green300;
-    } else if (interestRate === 20) {
-      return theme.palette.main.yellow300;
-    } else if (interestRate === 30) {
-      return theme.palette.sementic.red300;
-    }
-  }
 
   return (
     <Wrapper colorByInterestRate={colorByInterestRate!}>

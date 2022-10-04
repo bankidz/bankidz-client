@@ -3,27 +3,23 @@ import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { useNavigate } from 'react-router-dom';
-import { FAMILY } from '@lib/constants/QUERY_KEY';
-import { useQuery } from 'react-query';
-import useFamilyApi from '@apis/family/useFamilyApi';
 import dayjs from 'dayjs';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useState } from 'react';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
+import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 
 function WalkError() {
-  const { getFamily } = useFamilyApi();
-  const { data, status } = useQuery(FAMILY, getFamily);
+  const { data, status } = useFamilyQuery();
   const hasParent = status === 'success' && data?.familyUserList.length > 0;
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const navigateCreateDongil = () => {
-    console.log(dayjs().day());
-    if (dayjs().day() === 0) {
+    if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
-        sheetProps: { open: true },
         contentProps: { type: 'sunday' },
       });
       setCreateDisabled(true);

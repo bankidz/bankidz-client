@@ -1,15 +1,15 @@
-import useFamilyApi from '@apis/family/useFamilyApi';
-import useUserApi from '@apis/user/useUserAPi';
 import useOpenGroupLinkSheets from '@components/mypage/useOpenGroupLinkSheets';
-import { FAMILY, USER } from '@lib/constants/QUERY_KEY';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { decipher } from '@lib/utils/crypt';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';
-import { useMutation, useQueries } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
+import useUserQuery from '@lib/hooks/queries/useUserQuery';
+import { useMutation } from 'react-query';
+import familyAPI from '@lib/apis/family/familyAPI';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
-const GroupLink = () => {
+function GroupLink() {
   const navigate = useNavigate();
   const { groupCode } = useParams();
   const { code, expiredDate } = decipher(groupCode!);
@@ -22,14 +22,8 @@ const GroupLink = () => {
     openMoveGroupCompletedSheet,
   } = useOpenGroupLinkSheets();
 
-  const { getFamily, joinFamily } = useFamilyApi();
-  const { getUser } = useUserApi();
-  const [family, user] = useQueries([
-    { queryKey: FAMILY, queryFn: getFamily },
-    { queryKey: USER, queryFn: getUser },
-  ]);
-  const { data: familyData, status: familyStatus } = family;
-  const { data: userData, status: userStatus } = user;
+  const { data: familyData, status: familyStatus } = useFamilyQuery();
+  const { data: userData, status: userStatus } = useUserQuery();
 
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
@@ -40,10 +34,10 @@ const GroupLink = () => {
     openMoveGroupCompletedSheet(handleSheetCompletedAction);
   };
 
-  const { mutate: MutateJoinFamily } = useMutation(joinFamily, {
+  const { mutate: mutateJoinFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleSheetCompletedAction,
   });
-  const { mutate: MutateMoveFamily } = useMutation(joinFamily, {
+  const { mutate: mutateMoveFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleMoveGroupCompleted,
   });
 
@@ -61,18 +55,18 @@ const GroupLink = () => {
       if (familyData.code) {
         // 3. 가족이 있을때 : 새로운 가족그룹으로 이동
         openMoveGroupCheckSheet(() => {
-          MutateMoveFamily({ code });
+          mutateMoveFamily({ code });
         });
       } else {
         // 4. 가족 없을때: 가족 그룹 참여
         openJoinGroupCheckSheet(() => {
-          MutateJoinFamily({ code });
+          mutateJoinFamily({ code });
         });
       }
     }
   }, [userStatus, familyStatus]);
 
   return <></>;
-};
+}
 
 export default GroupLink;

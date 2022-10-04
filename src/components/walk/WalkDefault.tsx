@@ -1,8 +1,7 @@
-import moment from 'moment';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
-import { selectAuth, selectLevel } from '@store/slices/authSlice';
+import { selectLevel } from '@store/slices/authSlice';
 import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
@@ -15,42 +14,43 @@ import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkDongil from '@lib/hooks/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
-import { TUser } from '@store/slices/overViewSlice';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
-import { IDongil } from '@lib/types/IDongil';
+import { IUserDTO } from '@lib/apis/user/userDTO';
+import dayjs from 'dayjs';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 type TWalkDefaultProps = {
-  walkingDongils: IDongil[];
-  user: TUser;
+  walkingDongils: IChallengeDTO[];
+  userData: IUserDTO;
 };
 
-function WalkDefault({ walkingDongils, user }: TWalkDefaultProps) {
+function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
   const level = useAppSelector(selectLevel);
   const patched = useAppSelector(selectIsWalkingDongilsPatched);
-  const { username, isKid, isFemale } = useAppSelector(selectAuth);
   const colorByLevel = getColorByLevel(level!);
   const { getWeeklySuccess } = useWalkDongil(walkingDongils);
-  const dDayLeft = 7 - moment().day();
-  const [selected, setSelected] = useState<IDongil>(walkingDongils[0]);
+  const dDayLeft = 7 - dayjs().day();
+  const [selected, setSelected] = useState<IChallengeDTO>(walkingDongils[0]);
   const { openModal } = useModals();
   const { getValue, setValue, getIsAchieved, setIsAchieved } =
     useWalkDongil(walkingDongils);
 
-  const onWalkingItemNameButtonClick = (v: IDongil) => {
+  const onWalkingItemNameButtonClick = (v: IChallengeDTO) => {
     setSelected(v);
   };
 
+  // 이번주 저금 완료했을 때 모달 띄우기
   useEffect(() => {
     if (getWeeklySuccess() && patched) {
-      //if (getWeeklySuccess()) {
       openModal(modals.primaryModal, {
         onSubmit: () => {},
-        isKid: isKid,
-        isFemale: isFemale,
-        headerText: `${user.username} 뱅키 이번주 저금 성공`,
+        isKid: userData.isKid,
+        isFemale: userData.isFemale,
+        headerText: `${userData.username} 뱅키 이번주 저금 성공`,
         bodyText: '뱅키즈와 함께 돈길만 걸어요',
+        shouldCloseOnOverlayClick: true,
       });
     }
   }, [walkingDongils, patched]);

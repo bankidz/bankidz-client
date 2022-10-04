@@ -1,13 +1,14 @@
 import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
+import userApi from '@lib/apis/user/userAPI';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import useLogout from '@lib/hooks/auth/useLogout';
+import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import { useAppSelector } from '@store/app/hooks';
-import { selectProvider, setWithdrawReason } from '@store/slices/authSlice';
+import { selectProvider } from '@store/slices/authSlice';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useMutation } from 'react-query';
 import styled from 'styled-components';
 
 function WithdrawReason() {
@@ -30,48 +31,39 @@ function WithdrawReason() {
   );
 
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
-  const dispatch = useDispatch();
-  const logout = useLogout();
-  function openWithdrawCompletedBottomSheet() {
+  const logoutClient = useLogoutClient();
+  const openWithdrawCompletedBottomSheet = () => {
     setOpenBottomSheet({
-      sheetContent: 'Completed',
-      sheetProps: {
-        open: true,
-      },
+      sheetContent: 'Notice',
       contentProps: {
-        type: 'delete',
+        type: 'withdrawed',
         onMainActionClick: () => {
           setCloseBottomSheet();
-          logout();
+          logoutClient();
         },
       },
     });
-  }
+  };
 
-  const axiosPrivate = useAxiosPrivate();
   const provider = useAppSelector(selectProvider);
-  async function handleWithdrawButtonClick() {
+  const deleteMutation = useMutation(userApi.deleteUser, {
+    onSuccess: () => {
+      openWithdrawCompletedBottomSheet();
+    },
+  });
+  const handleWithdrawButtonClick = () => {
     if (provider === 'kakao') {
-      try {
-        const response = await axiosPrivate.delete('/user', {
-          data: { message: reason },
-        });
-        console.log(response);
-        openWithdrawCompletedBottomSheet();
-      } catch (error: any) {
-        console.log(error);
-      }
+      deleteMutation.mutate({ message: reason });
     } else if (provider === 'apple') {
-      dispatch(setWithdrawReason(reason)); // get latest level
+      setLocalStorage('appleWithdrawReason', reason);
       window.location.href = APPLE_DEAUTH_URL;
     }
-  }
+  };
 
   return (
     <Wrapper>
       <header>
-        <h1>탈퇴하기</h1>
-        <h2>탈퇴하시는 이유를 알려주세요</h2>
+        <h1>탈퇴하시는 이유를 알려주세요</h1>
       </header>
       <InputWrapper>
         <TextAreaForm
@@ -103,17 +95,11 @@ const Wrapper = styled.div`
   overflow-x: hidden;
 
   header h1 {
-    ${({ theme }) => theme.typo.fixed.TabName_T_21_EB};
-    color: ${({ theme }) => theme.palette.greyScale.black};
-    margin-top: 16px;
-    margin-left: 16px;
-  }
-  header h2 {
     ${({ theme }) => theme.typo.text.T_21_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
     margin-left: 26px;
     margin-right: 26px;
-    margin-top: 51px;
+    margin-top: 40px;
   }
 `;
 

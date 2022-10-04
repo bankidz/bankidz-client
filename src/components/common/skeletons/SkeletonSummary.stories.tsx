@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SkeletonSummary from './SkeletonSummary';
 
 export default {
-  title: 'common/SkeletonSummary',
+  title: 'common/skeletons/SkeletonSummary',
   component: SkeletonSummary,
 } as ComponentMeta<typeof SkeletonSummary>;
 

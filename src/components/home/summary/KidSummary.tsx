@@ -1,31 +1,29 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
-import { useAppSelector } from '@store/app/hooks';
-import {
-  selectKidSummary,
-  selectKidSummaryStatus,
-} from '@store/slices/kidSummarySlice';
+import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
+import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import Summary from './Summary';
 
-function KidSummary() {
-  const kidSummary = useAppSelector(selectKidSummary);
-  const kidSummaryStatus = useAppSelector(selectKidSummaryStatus);
+interface KidSummaryProps {
+  kidSummaryStatus: TStatus;
+  kidSummary: IWeekDTO | undefined;
+}
 
-  let content: JSX.Element = <></>;
-  if (kidSummaryStatus === 'loading') {
-    content = <SkeletonSummary variant="KidHome" />;
-  } else if (kidSummaryStatus === 'succeeded') {
+function KidSummary({ kidSummaryStatus, kidSummary }: KidSummaryProps) {
+  let content;
+  if (kidSummaryStatus === 'success') {
     const { currentSavings, totalPrice } = kidSummary!;
     content = (
       <Summary
         variant="KidHome"
-        currentSavings={currentSavings!}
-        totalPrice={totalPrice!}
+        currentSavings={currentSavings}
+        totalPrice={totalPrice}
       />
     );
-  } else if (kidSummaryStatus === 'failed') {
-    content = <p>Failed</p>;
+  } else {
+    content = <SkeletonSummary variant="KidHome" />;
   }
+
   return <SummaryWrapper>{content}</SummaryWrapper>;
 }
 

@@ -1,27 +1,26 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { register, selectBirthday } from '@store/slices/authSlice';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { assignIsKid, selectBirthday } from '@store/slices/authSlice';
 import RoleButton from '../common/buttons/RoleButton';
 import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
+import userAPI from '@lib/apis/user/userAPI';
+import { useMutation } from 'react-query';
 
 function RegisterRole() {
-  const birthday = useAppSelector(selectBirthday);
+  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
+    useGlobalBottomSheet();
+  const { openModal } = useModals();
+
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
   const [isTutorial, setIsTutorial] = useState<boolean>(false);
 
-  const { openModal } = useModals();
-  function handleModalOpen(isKid: boolean, isFemale: boolean) {
+  const handleModalOpen = (isKid: boolean, isFemale: boolean) => {
     openModal(modals.primaryModal, {
       onSubmit: () => {
         setIsTutorial(true);
@@ -31,44 +30,26 @@ function RegisterRole() {
       headerText: '뱅키즈 첫 가입을 축하해요',
       bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
     });
-  }
+  };
 
   const dispatch = useAppDispatch();
-  const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
-    useGlobalBottomSheet();
-  const axiosPrivate = useAxiosPrivate();
-  const [registerStatus, setRegisterStatus] = useState<TFetchStatus>('idle');
-  const canRegister = birthday && registerStatus === 'idle';
+  const registerMutation = useMutation(userAPI.patchUser, {
+    onSuccess: (data) => {
+      const { isFemale, isKid } = data;
+      dispatch(assignIsKid(isKid));
+      setCloseBottomSheet();
+      handleModalOpen(isKid, isFemale);
+    },
+  });
 
-  async function handleSubmit(isKid: boolean, isFemale: boolean) {
-    if (canRegister) {
-      try {
-        setRegisterStatus('pending');
-        await dispatch(
-          register({
-            axiosPrivate,
-            birthday,
-            isKid,
-            isFemale,
-          }),
-        ).unwrap();
-        setLocalStorage('isKid', isKid);
-        setCloseBottomSheet();
-        handleModalOpen(isKid, isFemale);
-      } catch (error: any) {
-        console.error(error);
-      } finally {
-        setRegisterStatus('idle');
-      }
-    }
-  }
+  const birthday = useAppSelector(selectBirthday);
+  const handleSubmit = (isKid: boolean, isFemale: boolean) => {
+    registerMutation.mutate({ isKid, isFemale, birthday });
+  };
 
   const openSelectProfileSheet = (isKid: boolean, isFemale: boolean) => {
     setOpenBottomSheet({
       sheetContent: 'SelectProfile',
-      sheetProps: {
-        open: true,
-      },
       contentProps: {
         isKid: isKid,
         isFemale: isFemale,
@@ -80,12 +61,14 @@ function RegisterRole() {
   };
 
   return (
-    <Wrapper>
-      <Modals />
+    <>
       {isTutorial ? (
-        <GuideTemplate page="onboarding" isKid={isKid!} />
+        <GuideWrapper>
+          <GuideTemplate page="onboarding" isKid={isKid!} />
+        </GuideWrapper>
       ) : (
-        <>
+        <Wrapper>
+          <Modals />
           <span>프로필을 선택해요</span>
           <RoleButtonWrapper>
             {/* 아빠 */}
@@ -133,9 +116,9 @@ function RegisterRole() {
               isSelected={isOpen && isKid === true && isFemale === true}
             />
           </RoleButtonWrapper>
-        </>
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   );
 }
 
@@ -149,6 +132,17 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const GuideWrapper = styled.div`
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(var(--vh, 1vh) * 100);
+
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-top: -64px;
 `;
 
 const RoleButtonWrapper = styled.div`

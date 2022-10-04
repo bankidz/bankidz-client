@@ -1,22 +1,22 @@
-import { IOptInDTO } from '@apis/user/user.dto';
-import useUserApi from '@apis/user/useUserAPi';
+import { IOptInDTO } from '@lib/apis/user/userDTO';
 import ToggleButton from '@components/common/buttons/ToggleButton';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { ALERT } from '@lib/constants/QUERY_KEY';
 import useToggle from '@lib/hooks/useToggle';
 import isEmptyObject from '@lib/utils/isEmptyObject';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import { useEffect, useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
 import styled from 'styled-components';
+import { useMutation, useQuery } from 'react-query';
+import userAPI from '@lib/apis/user/userAPI';
+import queryKeys from '@lib/constants/queryKeys';
 
-const Alerts = () => {
-  const { patchNoticeAlert, patchServiceAlert, getUserOptIn } = useUserApi();
-  const { mutate: mutateNotice } = useMutation(patchNoticeAlert, {
+function Alerts() {
+  const { mutate: mutateNotice } = useMutation(userAPI.patchNoticeAlert, {
     onSuccess: (data) => syncAlert(data),
   });
-  const { mutate: mutateService } = useMutation(patchServiceAlert, {
+
+  const { mutate: mutateService } = useMutation(userAPI.patchServiceAlert, {
     onSuccess: (data) => syncAlert(data),
   });
 
@@ -27,9 +27,9 @@ const Alerts = () => {
     setLocalStorage('alert', data);
     setAlert(data);
   };
-  const { data } = useQuery(ALERT, getUserOptIn, {
+  const { data } = useQuery(queryKeys.USER_OPTIN, userAPI.getUserOptIn, {
     enabled: isEmptyObject(alert),
-    onSuccess: (data) => syncAlert(data),
+    onSuccess: (res) => syncAlert(res),
   });
 
   const [toggleNotice, setToggleNotice, clickToggleNotice] = useToggle(
@@ -74,7 +74,7 @@ const Alerts = () => {
       </Wrapper>
     </ForegroundTemplate>
   );
-};
+}
 export default Alerts;
 
 const Wrapper = styled.div`

@@ -4,6 +4,7 @@ import ReceiptModal from './ReceiptModal';
 export default {
   title: 'common/modals/ReceiptModal',
   component: ReceiptModal,
+  decorators: [(Story) => <Story />],
 } as ComponentMeta<typeof ReceiptModal>;
 
 const Template: ComponentStory<typeof ReceiptModal> = (args) => (

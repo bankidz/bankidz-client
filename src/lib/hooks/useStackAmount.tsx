@@ -1,12 +1,5 @@
 import { useState } from 'react';
 
-/* type TStackAmount = [
-  number[],
-  (amount: number) => void,
-  () => void,
-  () => void,
-]; */
-
 function useStackAmount() {
   const [amountStack, setAmountStack] = useState<number[]>([]);
 

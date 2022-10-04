@@ -1,5 +1,6 @@
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import { AWS_S3_URL } from '@lib/constants/AWS_S3_URL';
 import { calcRatio } from '@lib/styles/theme';
-import { IDongil } from '@lib/types/IDongil';
 import styled, { css } from 'styled-components';
 import FirstRow from '../rows/FirstRow';
 import SecondRow from '../rows/SecondRow';
@@ -8,7 +9,7 @@ import { TReceiptModalVariant } from '../TReceiptModalVariant';
 
 interface BottomContentProps
   extends Pick<
-    IDongil,
+    IChallengeDTO,
     | 'itemName'
     | 'totalPrice'
     | 'weekPrice'
@@ -42,10 +43,7 @@ function BottomContent({
       />
       <ThirdRow weeks={weeks} createdAt={createdAt} />
       <SignatureWrapper>
-        <img
-          /* src={`https://ppoketdon-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`} */
-          src={`https://bankidz-bucket.s3.ap-northeast-2.amazonaws.com/${fileName}`}
-        />
+        <img src={`${AWS_S3_URL}/${fileName}`} />
       </SignatureWrapper>
     </Wrapper>
   );
@@ -82,8 +80,6 @@ const SignatureWrapper = styled.div`
   z-index: 710;
   position: absolute;
   width: ${calcRatio(146, 324)};
-  // TODO: 도영이는 뒤에 글씨 가리는게 별로라고 생각해서 기디 회의 후에
-  // 서명 크기 재조정 필요할것 같습니다.
   height: 173px;
   right: 2px;
   bottom: 0;

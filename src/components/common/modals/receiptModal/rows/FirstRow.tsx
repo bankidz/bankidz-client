@@ -3,9 +3,9 @@ import { ReactComponent as BankiDad } from '@assets/illusts/banki/banki_dad.svg'
 import { ReactComponent as BankiMom } from '@assets/illusts/banki/banki_mom.svg';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { calcRatio } from '@lib/styles/theme';
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-interface FirstRowProps extends Pick<IDongil, 'itemName'> {
+interface FirstRowProps extends Pick<IChallengeDTO, 'itemName'> {
   isMom: boolean;
 }
 

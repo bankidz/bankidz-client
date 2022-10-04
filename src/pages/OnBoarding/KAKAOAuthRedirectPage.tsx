@@ -1,10 +1,13 @@
 import { useAppDispatch } from '@store/app/hooks';
-import { login } from '@store/slices/authSlice';
+import { setCredentials } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import CustomSyncLoader from '@components/common/loaders/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
+import { ILoginDTO } from '@lib/apis/kakao/kakaoDTO';
+import kakaoAPI from '@lib/apis/kakao/kakaoAPI';
+import { useMutation } from 'react-query';
 
 function KAKAOAuthRedirectPage() {
   // @ts-expect-error
@@ -13,22 +16,18 @@ function KAKAOAuthRedirectPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const KAKAOLoginMutation = useMutation(kakaoAPI.kakaoLogin, {
+    onSuccess: (data: ILoginDTO) => {
+      const { accessToken, isKid, level, provider } = data;
+      setLocalStorage('accessToken', accessToken);
+      dispatch(setCredentials({ isKid, level, provider }));
+      registerEXPOToken();
+      navigate('/');
+    },
+  });
+
   useEffect(() => {
-    async function proceedLogin() {
-      try {
-        if (code) {
-          const response = await dispatch(login({ code })).unwrap();
-          setLocalStorage('accessToken', response.data.accessToken);
-          setLocalStorage('isKid', response.data.isKid);
-          setLocalStorage('provider', response.data.provider);
-        }
-        registerEXPOToken();
-        navigate('/');
-      } catch (error: any) {
-        console.error(error);
-      }
-    }
-    code && proceedLogin();
+    code && KAKAOLoginMutation.mutate({ code });
   }, []);
 
   return <CustomSyncLoader />;

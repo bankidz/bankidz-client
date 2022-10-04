@@ -1,25 +1,13 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
+import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import {
-  fetchParentSummaries,
-  selectParentSummariesStatus,
-} from '@store/slices/parentSummariesSlice';
-import {
-  fetchThisWeekSDongils,
-  selectThisWeekSDongilsStatus,
-} from '@store/slices/thisWeekSDongilsSlice';
-import {
-  fetchProposedDongils,
-  selectProposedDongilsStatus,
-} from '@store/slices/proposedDongilsSlice';
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
-import useIsFetched from '../../lib/hooks/useIsFetched';
+import { useQuery } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
 
 /**
  * 홈 페이지 최초 진입 시 연결된 자녀 목록을 fetch 합니다.
@@ -31,65 +19,41 @@ import useIsFetched from '../../lib/hooks/useIsFetched';
  * 해당 함수에서 반환하는 JSX는 RTK slice 내부의 fetchStatus에 따라 적절한 값으로 변화합니다.
  */
 function ParentHome() {
-  const parentSummariesStatus = useAppSelector(selectParentSummariesStatus);
-  const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
-  const thisWeekSDongilsStatus = useAppSelector(selectThisWeekSDongilsStatus);
   const selectedKid = useAppSelector(selectSelectedKid);
-  const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
 
-  // 다자녀의 경우 자녀 선택에 따라 추가 조회, 이미 fetch한 경우 캐시된 데이터 사용
-  const canFetchParentSummary =
-    !useIsFetched('parentSummaries') &&
-    parentSummariesStatus === 'succeeded' &&
-    selectedKid !== null;
-  const canFetchProposedDongils =
-    !useIsFetched('proposedDongils') &&
-    proposedDongilsStatus === 'succeeded' &&
-    selectedKid !== null;
-  const canFetchThisWeekSDongils =
-    !useIsFetched('thisWeekSDongils') &&
-    thisWeekSDongilsStatus === 'succeeded' &&
-    selectedKid !== null;
-  useEffect(() => {
-    async function hydrate() {
-      try {
-        // GET: 선택한 자녀의 Summary 데이터 조회
-        canFetchParentSummary &&
-          (await dispatch(
-            fetchParentSummaries({
-              axiosPrivate,
-              kidId: selectedKid.kidId,
-            }),
-          ).unwrap());
-        // GET: 선택한 자녀의 제안받은 돈길 조회
-        canFetchProposedDongils &&
-          (await dispatch(
-            fetchProposedDongils({
-              axiosPrivate,
-              kidId: selectedKid.kidId,
-            }),
-          ).unwrap());
-        // GET: 선택한 자녀의 금주의 돈길 조희
-        canFetchThisWeekSDongils &&
-          (await dispatch(
-            fetchThisWeekSDongils({
-              axiosPrivate,
-              kidId: selectedKid.kidId,
-            }),
-          ).unwrap());
-      } catch (error: any) {
-        console.log(error);
-      }
-    }
-    hydrate();
-  }, [selectedKid]);
+  const { status: parentSummaryStatus, data: parentSummary } = useQuery(
+    [queryKeys.CHALLENGE_KID_PROGRESS, selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidProgress(selectedKid!.kidId),
+  );
+  const { status: proposedDongilsStatus, data: proposedDongils } = useQuery(
+    [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'pending'],
+    () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'pending'),
+    {
+      enabled: !!parentSummary,
+    },
+  );
+  const { status: thisWeekSDongilsStatus, data: thisWeekSDongils } = useQuery(
+    [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'walking'],
+    () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
+    {
+      enabled: !!proposedDongils,
+    },
+  );
 
   return (
     <>
-      <ParentSummary />
-      <ProposedDongilSection />
-      <ThisWeekSDongilSection />
+      <ParentSummary
+        parentSummaryStatus={parentSummaryStatus}
+        parentSummary={parentSummary}
+      />
+      <ProposedDongilSection
+        proposedDongilsStatus={proposedDongilsStatus}
+        proposedDongils={proposedDongils}
+      />
+      <ThisWeekSDongilSection
+        thisWeekSDongilsStatus={thisWeekSDongilsStatus}
+        thisWeekSDongils={thisWeekSDongils}
+      />
       <LargeSpacer />
       <Modals />
     </>

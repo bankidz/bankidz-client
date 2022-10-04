@@ -9,7 +9,7 @@ import Create from './Create';
 import DetailPage from './DetailPage';
 import Reject from './Reject';
 import useLevel from '@lib/hooks/useLevel';
-import Alert from './Alert';
+import Notification from './Notification';
 
 function HomeRouter() {
   const isKid = useAppSelector(selectIsKid);
@@ -47,13 +47,22 @@ function HomeRouter() {
           </ForegroundTemplate>
         }
       />
+      {/* 부모 - 완주한 돈길 */}
+      <Route
+        path="/detail/achieved/:id"
+        element={
+          <ForegroundTemplate label={'완주한 돈길'} level={level}>
+            <DetailPage />
+          </ForegroundTemplate>
+        }
+      />
       {/* 부모 - 대기중인 돈길 */}
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
         path="reject/:id"
         element={isKid ? <>부적절한 접근입니다.</> : <Reject />}
       />
-      <Route path="alert" element={<Alert />} />
+      <Route path="notification" element={<Notification />} />
     </Routes>
   );
 }

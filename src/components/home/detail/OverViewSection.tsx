@@ -1,9 +1,12 @@
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { TPercent } from '@lib/types/TPercent';
 import renderGraph from '@lib/utils/render/renderGraph';
-import { IDongil } from '@lib/types/IDongil';
 
 interface DetailOverViewProps
-  extends Pick<IDongil, 'successWeeks' | 'weeks' | 'progressList' | 'title'> {}
+  extends Pick<
+    IChallengeDTO,
+    'successWeeks' | 'weeks' | 'progressList' | 'title'
+  > {}
 
 function OverViewSection({
   successWeeks,

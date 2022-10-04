@@ -1,16 +1,13 @@
-import useNoticeApi from '@apis/notice/useNoticeApi';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { NOTICE } from '@lib/constants/QUERY_KEY';
+import useNoticeByIdQuery from '@lib/hooks/queries/useNoticeByIdQuery';
 import dayjs from 'dayjs';
-import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { NoticeItem } from './Notices';
 
-const NoticeView = () => {
+function NoticeView() {
   const { id } = useParams();
-  const { getNotice } = useNoticeApi();
-  const { data, status } = useQuery([NOTICE, id], () => getNotice(id!));
+  const { data, status } = useNoticeByIdQuery(id!);
   return (
     <ForegroundTemplate>
       <>
@@ -26,7 +23,7 @@ const NoticeView = () => {
       </>
     </ForegroundTemplate>
   );
-};
+}
 
 export default NoticeView;
 

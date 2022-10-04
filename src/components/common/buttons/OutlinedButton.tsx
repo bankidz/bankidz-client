@@ -6,7 +6,6 @@ import { theme } from '@lib/styles/theme';
 
 interface OutlinedButtonProps extends HTMLAttributes<HTMLButtonElement> {
   label: string;
-  // 성우의 제안: disabled
   state?: boolean;
 }
 

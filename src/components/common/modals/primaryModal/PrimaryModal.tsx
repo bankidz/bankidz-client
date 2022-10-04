@@ -5,20 +5,19 @@ import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
-import {
-  MODAL_CLOSE_TRANSITION_TIME,
-  MODAL_SLIDE_FROM_POSITION,
-  MODAL_SLIDE_TO_POSITION,
-} from '@lib/constants/MODAL';
-// import useModals from '@lib/hooks/useModals';
+import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
+import useModals from '@lib/hooks/useModals';
 import { modals } from '../Modals';
+import { slideAnimation } from '../slideAnimation';
+import { ReactComponent as CongratsFamily } from '@assets/illusts/congrats/congrats_family.svg';
 
 interface PrimaryModalProps {
   onSubmit: any;
-  isKid: boolean;
-  isFemale: boolean;
+  isKid?: boolean;
+  isFemale?: boolean;
   headerText: string;
   bodyText: string;
+  isFamilyCreated?: boolean;
   shouldCloseOnOverlayClick?: boolean;
 }
 
@@ -27,6 +26,8 @@ interface PrimaryModalProps {
  * useModals hook에 의해 반환 됩니다.
  * @param headerText header에 표시될 내용을 입력합니다.
  * @param bodyText body에 표시될 내용을 입력합니다.
+ * @param isFamilyCreated '가족이 생겼어요' 컨텐츠 사용 시 true로 설정합니다.
+ * 기본값은 false 입니다.
  */
 function PrimaryModal({
   onSubmit,
@@ -34,23 +35,17 @@ function PrimaryModal({
   isFemale,
   headerText,
   bodyText,
+  isFamilyCreated = false,
   shouldCloseOnOverlayClick = false,
 }: PrimaryModalProps) {
   const [isOpen, setIsOpen] = useState(true);
-  function handleSubmit() {
-    setIsOpen(false); // close transition 적용을 위해 필요
-    setTimeout(() => {
-      onSubmit();
-    }, MODAL_CLOSE_TRANSITION_TIME);
-  }
-
-  // const { closeModal } = useModals();
+  const { closeModal } = useModals();
   const reactModalParams = {
     isOpen: isOpen,
     onRequestClose: () => {
       setIsOpen(false);
       setTimeout(() => {
-        // closeModal(modals.primaryModal);
+        closeModal(modals.primaryModal);
       }, MODAL_CLOSE_TRANSITION_TIME);
     },
     shouldCloseOnOverlayClick: shouldCloseOnOverlayClick,
@@ -85,13 +80,24 @@ function PrimaryModal({
     },
   };
 
+  const handleSubmit = () => {
+    setIsOpen(false); // close transition 적용을 위해 필요
+    setTimeout(() => {
+      onSubmit();
+    }, MODAL_CLOSE_TRANSITION_TIME);
+  };
+
   return (
     // @ts-expect-error
     <StyledReactModal {...reactModalParams}>
       <Content>
-        <WhiteBox>
+        <WhiteBox isFamilyCreated={isFamilyCreated}>
           <div className="illust-wrapper">
-            {renderCongratsIllust(isKid, isFemale)}
+            {isFamilyCreated ? (
+              <CongratsFamily />
+            ) : (
+              renderCongratsIllust(isKid!, isFemale!)
+            )}
           </div>
           <span className="header">{headerText}</span>
           <span className="body">{bodyText}</span>
@@ -112,15 +118,7 @@ function PrimaryModal({
 export default PrimaryModal;
 
 const StyledReactModal = styled(ReactModal)`
-  @keyframes slide {
-    from {
-      transform: translateY(${MODAL_SLIDE_FROM_POSITION});
-    }
-    to {
-      transform: translateY(${MODAL_SLIDE_TO_POSITION});
-    }
-  }
-  animation: slide ${({ theme }) => theme.animation.modalOpen};
+  ${slideAnimation}
 `;
 
 const Content = styled.div`
@@ -130,7 +128,7 @@ const Content = styled.div`
   width: 100%;
 `;
 
-const WhiteBox = styled.div`
+const WhiteBox = styled.div<{ isFamilyCreated: boolean }>`
   background: ${({ theme }) => theme.palette.greyScale.white};
   height: 424px;
   width: 100%;
@@ -156,7 +154,8 @@ const WhiteBox = styled.div`
     margin-bottom: 8px;
   }
   svg {
-    width: ${calcRatio(206, 292)};
+    width: ${({ isFamilyCreated }) =>
+      isFamilyCreated ? `${calcRatio(245, 292)}` : `${calcRatio(206, 292)}`};
   }
   .header {
     ${({ theme }) => theme.typo.popup.Title_T_21_EB}

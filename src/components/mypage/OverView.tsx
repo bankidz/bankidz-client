@@ -2,10 +2,10 @@ import styled, { css } from 'styled-components';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 import OverViewContent from './OverViewContent';
 import { useQueryClient } from 'react-query';
-import { KID } from '@lib/constants/QUERY_KEY';
 import getPercentValue from '@lib/utils/get/getPercentValue';
-import { IMyPageDTO } from '@apis/user/user.dto';
-import { IKidListDTO } from '@apis/family/family.dto';
+import { IMyPageDTO } from '@lib/apis/user/userDTO';
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
+import queryKeys from '@lib/constants/queryKeys';
 
 export type OverViewProps = {
   userData: IMyPageDTO;
@@ -14,7 +14,9 @@ export type OverViewProps = {
 function OverView({ userData }: OverViewProps) {
   const { user, kid, parent } = userData;
   const queryClient = useQueryClient();
-  const kidData = queryClient.getQueryData(KID) as IKidListDTO[];
+  const kidData = queryClient.getQueryData(
+    queryKeys.FAMILY_KID,
+  ) as IKidListDTO[];
 
   const getOverViewData = (isKid: boolean) => {
     let overViewData;

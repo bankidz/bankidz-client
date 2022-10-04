@@ -7,12 +7,10 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
-import { useQuery } from 'react-query';
-import { FAMILY } from '@lib/constants/QUERY_KEY';
-import useFamilyApi from '@apis/family/useFamilyApi';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
-import { dispatchParent } from '@store/slices/createChallengeSlice';
+import { setParent } from '@store/slices/createChallengeSlice';
+import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -31,14 +29,13 @@ const title = [
 function Create() {
   const { step } = useParams();
   const dispatch = useAppDispatch();
-  const { getFamily } = useFamilyApi();
-  const { data: familyData, status } = useQuery(FAMILY, getFamily);
+  const { data: familyData, status } = useFamilyQuery();
   const parents = familyData?.familyUserList.filter((member) => !member.isKid);
   const isAlone = parents?.length === 1;
 
   useEffect(() => {
     if (isAlone) {
-      dispatch(dispatchParent(parents[0].isFemale));
+      dispatch(setParent(parents[0].isFemale));
     }
   }, [isAlone]);
 

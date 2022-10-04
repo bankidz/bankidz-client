@@ -1,9 +1,10 @@
-import { IDongil } from '@lib/types/IDongil';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import React from 'react';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';
 
 interface ThisWeekSDongilListProps {
-  thisWeekSDongils: IDongil[];
+  thisWeekSDongils: IChallengeDTO[];
 }
 
 function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
@@ -22,7 +23,7 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
   );
 }
 
-export default ThisWeekSDongilList;
+export default React.memo(ThisWeekSDongilList);
 
 const Wrapper = styled.div`
   display: flex;

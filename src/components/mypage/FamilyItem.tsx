@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import renderMypageRoleIllust from '@lib/utils/render/renderMypageRoleIllust';
-import { IFamilyState } from '@lib/types/IFamilyState';
 import getRoleText from '@lib/utils/get/getRoleText';
+import { IFamilyUserDTO } from '@lib/apis/family/familyDTO';
 
 interface FamilyItemProps {
-  user: IFamilyState;
+  user: IFamilyUserDTO;
   me?: boolean;
 }
 

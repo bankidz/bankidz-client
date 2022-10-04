@@ -1,10 +1,10 @@
-import { IMyPageDTO, IUserDTO } from '@apis/user/user.dto';
+import { IMyPageDTO, IUserDTO } from '@lib/apis/user/userDTO';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import { USER } from '@lib/constants/QUERY_KEY';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
+import queryKeys from '@lib/constants/queryKeys';
 
 interface WithdrawTemplateProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ interface WithdrawTemplateProps {
 
 function WithdrawTemplate({ children }: WithdrawTemplateProps) {
   const queryClient = useQueryClient();
-  const user = queryClient.getQueryData(USER) as IMyPageDTO;
+  const user = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
   const isKid = useAppSelector(selectIsKid);
 
   return (

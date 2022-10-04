@@ -1,46 +1,35 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { useAppSelector } from '@store/app/hooks';
-import { selectSelectedKid } from '@store/slices/kidsSlice';
-import {
-  selectProposedDongils,
-  selectProposedDongilsStatus,
-} from '@store/slices/proposedDongilsSlice';
+import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
+import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ProposedDongilList from './ProposedDongilList';
 
-function ProposedDongilSection() {
-  const proposedDongils = useAppSelector(selectProposedDongils);
-  const proposedDongilsStatus = useAppSelector(selectProposedDongilsStatus);
-  const selectedKid = useAppSelector(selectSelectedKid);
+interface ProposedDongilSectionProps {
+  proposedDongilsStatus: TStatus;
+  proposedDongils: IKidChallengeListDTO | undefined;
+}
 
-  let content: JSX.Element = <></>;
-  if (proposedDongilsStatus === 'loading') {
-    content = <SkeletonDongilList variant="proposed" />;
-  } else if (proposedDongilsStatus === 'succeeded') {
-    const getSelectedKidSProposedDongils = (kidId: number) => {
-      const found = proposedDongils?.find(
-        (proposedDongil) => proposedDongil.kidId === kidId,
-      );
-      return found?.challengeList;
-    };
-    const selectedKidSProposedDongils = getSelectedKidSProposedDongils(
-      selectedKid?.kidId!,
-    );
-
-    if (selectedKidSProposedDongils?.length === 0) {
+function ProposedDongilSection({
+  proposedDongilsStatus,
+  proposedDongils,
+}: ProposedDongilSectionProps) {
+  let content;
+  if (proposedDongilsStatus === 'success') {
+    if (proposedDongils?.challengeList.length === 0) {
       content = <EmptyDongil subject="제안받은" />;
     } else {
       content = (
-        <ProposedDongilList proposedDongils={selectedKidSProposedDongils!} />
+        <ProposedDongilList proposedDongils={proposedDongils?.challengeList!} />
       );
     }
-  } else if (proposedDongilsStatus === 'failed') {
-    content = <p>Failed</p>;
+  } else {
+    content = <SkeletonDongilList variant="proposed" />;
   }
+
   return (
     <Wrapper>
-      {proposedDongilsStatus !== 'idle' && <h1>제안받은 돈길</h1>}
+      <h1>제안받은 돈길</h1>
       {content}
     </Wrapper>
   );

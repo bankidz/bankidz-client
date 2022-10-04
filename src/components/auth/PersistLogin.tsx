@@ -1,49 +1,35 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import {
-  selectAccessToken,
-  selectIsKid,
-  setLevel,
-} from '@store/slices/authSlice';
-import CustomSyncLoader from '@components/common/CustomSyncLoader';
+import { useAppDispatch } from '@store/app/hooks';
+import { setCredentials } from '@store/slices/authSlice';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import { useMutation } from 'react-query';
+import userAPI from '@lib/apis/user/userAPI';
+import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 function PersistLogin() {
-  const accessToken = useAppSelector(selectAccessToken);
-  const isKid = useAppSelector(selectIsKid);
-  const [isFetching, setIsFetching] = useState(true);
+  const accessToken = getLocalStorage('accessToken');
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
-  const navigate = useNavigate();
-  const isRegisteredUser = accessToken && isKid;
 
-  // @ts-expect-error
+  const persistLoginMutation = useMutation(userAPI.patchUserRefresh, {
+    onSuccess: (data) => {
+      const { accessToken, isKid, level, provider } = data;
+      setLocalStorage('accessToken', accessToken);
+      dispatch(setCredentials({ isKid, level, provider }));
+      registerEXPOToken();
+      setIsLoading(false);
+    },
+  });
+
   useEffect(() => {
-    let isMounted = true;
-    async function fetchLevel() {
-      try {
-        const response = await axiosPrivate.get('/user');
-        const { isKid } = response.data.data.user;
-        if (isKid) {
-          const { level } = response.data.data.kid;
-          dispatch(setLevel(level)); // get latest level
-        }
-      } catch (error) {
-        navigate('/auth/login'); // access token expired
-      } finally {
-        isMounted && setIsFetching(false); // escape memory leak
-      }
-    }
-    console.log('aT in fetchLevel: ', accessToken);
-    isRegisteredUser && fetchLevel();
-    registerEXPOToken();
-    return () => (isMounted = false);
+    accessToken && persistLoginMutation.mutate();
   }, []);
 
-  if (isRegisteredUser && isFetching) {
-    return <CustomSyncLoader />;
+  if (accessToken && isLoading) {
+    return <LoadingSpinner />;
   } else {
     return <Outlet />;
   }
@@ -85,3 +71,17 @@ export default PersistLogin;
 // } else {
 //   return <Outlet />;
 // }
+
+// let isMounted = true;
+// async function proceedPersistLogin() {
+//   try {
+//     const response = await dispatch(persistLogin()).unwrap();
+//   } catch (error) {
+//     console.error(error);
+//   } finally {
+//     isMounted && setIsLoading(false); // escape memory leak
+//   }
+// }
+// accessToken && proceedPersistLogin();
+// registerEXPOToken();
+// return () => (isMounted = false);

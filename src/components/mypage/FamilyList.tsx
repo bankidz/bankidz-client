@@ -1,5 +1,3 @@
-import { FAMILY, KID, USER } from '@lib/constants/QUERY_KEY';
-import { IFamilyState } from '@lib/types/IFamilyState';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import FamilyItem from './FamilyItem';
@@ -9,22 +7,22 @@ import { darken } from 'polished';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import dayjs from 'dayjs';
 import { cipher } from '@lib/utils/crypt';
-import useFamilyApi from '@apis/family/useFamilyApi';
-import { IMyPageDTO } from '@apis/user/user.dto';
-import { IFamilyDTO } from '@apis/family/family.dto';
+import { IMyPageDTO } from '@lib/apis/user/userDTO';
+import { IFamilyDTO, IFamilyUserDTO } from '@lib/apis/family/familyDTO';
+import queryKeys from '@lib/constants/queryKeys';
+import familyAPI from '@lib/apis/family/familyAPI';
 
-function FamilyList({ family }: { family: IFamilyState[] }) {
+function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
-  const { leaveFamily } = useFamilyApi();
   const queryClient = useQueryClient();
-  const userData = queryClient.getQueryData(USER) as IMyPageDTO;
-  const familyData = queryClient.getQueryData(FAMILY) as IFamilyDTO;
+  const userData = queryClient.getQueryData(queryKeys.USER) as IMyPageDTO;
+  const familyData = queryClient.getQueryData(queryKeys.FAMILY) as IFamilyDTO;
 
-  const { mutate: MutateLeaveFamily } = useMutation(leaveFamily, {
+  const { mutate: mutateLeaveFamily } = useMutation(familyAPI.leaveFamily, {
     onSuccess: () => {
       openLeaveGroupCompletedSheet();
-      queryClient.invalidateQueries(FAMILY);
-      queryClient.invalidateQueries(KID);
+      queryClient.invalidateQueries(queryKeys.FAMILY);
+      queryClient.invalidateQueries(queryKeys.FAMILY_KID);
     },
   });
 
@@ -38,7 +36,6 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
   const openLeaveGroupWarningSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Warning',
-      sheetProps: { open: true },
       contentProps: {
         type: 'leaveGroup',
         onMainActionClick: openLeaveGroupCheckWarningSheet,
@@ -51,7 +48,6 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Warning',
-        sheetProps: { open: true },
         contentProps: {
           type: 'leaveGroupCheck',
           onMainActionClick: onLeaveGroupButtonClick,
@@ -62,7 +58,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
 
   const onLeaveGroupButtonClick = async () => {
     const code = familyData.code;
-    MutateLeaveFamily({ code });
+    mutateLeaveFamily({ code });
   };
 
   // 3. 기존 가족그룹에서 나갔어요
@@ -70,7 +66,7 @@ function FamilyList({ family }: { family: IFamilyState[] }) {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: { open: true },
+
         contentProps: {
           type: 'leaveGroup',
         },

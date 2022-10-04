@@ -37,5 +37,4 @@ export const 부모_홈 = Template.bind({});
   variant: 'ParentHome',
   currentSavings: 10000,
   totalPrice: 150000,
-  username: '신성우',
 };

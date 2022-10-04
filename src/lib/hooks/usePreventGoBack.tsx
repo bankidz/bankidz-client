@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-function setState() {
+const setState = () => {
   history.pushState(null, '', location.href);
-}
+};
 
 function usePreventGoBack() {
   useEffect(() => {

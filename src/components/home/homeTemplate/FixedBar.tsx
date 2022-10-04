@@ -1,8 +1,5 @@
 import { useAppSelector } from '@store/app/hooks';
-import {
-  selectHasMultipleKids,
-  selectKidsStatus,
-} from '@store/slices/kidsSlice';
+import { selectHasMultipleKids } from '@store/slices/kidsSlice';
 import styled, { css } from 'styled-components';
 import KidList from './KidList';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
@@ -12,9 +9,9 @@ import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TPage } from '@lib/types/TPage';
 import { useNavigate } from 'react-router-dom';
-import useNotificationApi from '@apis/notification/useNotificationApi';
-import { NOTIFICATION_IS_READ } from '@lib/constants/QUERY_KEY';
 import { useQuery } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
+import notificationAPI from '@lib/apis/notification/notificationAPI';
 
 interface FixedBarProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -28,22 +25,12 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
   const navigate = useNavigate();
   const level = useLevel();
   const colorByLevel = getColorByLevel(level);
-
   const hasMultipleKids = useAppSelector(selectHasMultipleKids);
-  const kidsStatus = useAppSelector(selectKidsStatus);
-  const { getNotificationIsAllRead } = useNotificationApi();
+
   const { data: isAllRead } = useQuery(
-    NOTIFICATION_IS_READ,
-    getNotificationIsAllRead,
+    queryKeys.NOTIFICATION_IS_READ,
+    notificationAPI.getNotificationIsAllRead,
   );
-  let kidsList;
-  if (kidsStatus === 'loading') {
-    kidsList = <p>Loading</p>;
-  } else if (kidsStatus === 'succeeded') {
-    kidsList = <KidList />;
-  } else if (kidsList === 'failed') {
-    kidsList = <p>Failed</p>;
-  }
 
   let headerText;
   if (variant === 'Home') {
@@ -59,18 +46,14 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
   return (
     <Wrapper
       colorByLevel={colorByLevel}
-      hasMultipleKids={hasMultipleKids}
+      hasMultipleKids={hasMultipleKids!}
       isAllRead={isAllRead!}
     >
-      <div className="alert" onClick={() => navigate('/alert')}>
+      <div className="alert" onClick={() => navigate('/notification')}>
         <Bell />
       </div>
-      <div className="logo-wrapper">
-        <BANKIDZ fill={theme.palette.greyScale.white} />
-      </div>
-      {hasMultipleKids && (
-        <KidListWrapper colorByLevel={colorByLevel}>{kidsList}</KidListWrapper>
-      )}
+      {headerText}
+      {hasMultipleKids && <KidList />}
     </Wrapper>
   );
 }
@@ -89,7 +72,8 @@ const Wrapper = styled.div<{
   transition-property: background-color;
   position: fixed;
   width: 100%;
-
+  left: 0px;
+  top: 0px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -129,16 +113,4 @@ const Wrapper = styled.div<{
         top: 14px;
       }
     `}
-`;
-
-const KidListWrapper = styled.div<{ colorByLevel: string }>`
-  margin-top: 38.44px;
-  width: 250px;
-  height: 24px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-
-  z-index: 3;
-  width: 100%;
 `;

@@ -6,14 +6,13 @@ import { ReactComponent as Flag } from '@assets/illusts/walk/flag.svg';
 import { ReactComponent as Stamp } from '@assets/illusts/walk/achieved-stamp.svg';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { useAppDispatch } from '@store/app/hooks';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import {
-  dispatchSetPatched,
-  walkDongil,
-} from '@store/slices/walkingDongilsSlice';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
+import { useMutation, useQueryClient } from 'react-query';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
+import { useAppDispatch } from '@store/app/hooks';
+import { setDongilPatched } from '@store/slices/walkingDongilsSlice';
 
 interface SwipeToWalkProps {
   interestRate: TInterestRate;
@@ -24,6 +23,7 @@ interface SwipeToWalkProps {
   isAchieved: boolean;
   setIsAchieved: (id: number, newValue: boolean) => void;
 }
+
 function SwipeToWalk({
   interestRate,
   weekPrice,
@@ -34,24 +34,30 @@ function SwipeToWalk({
   setIsAchieved,
 }: SwipeToWalkProps) {
   const dispatch = useAppDispatch();
-  const axiosPrivate = useAxiosPrivate();
+  const queryClient = useQueryClient();
   const BankiByInterest = {
     10: <BankiInterest10 />,
     20: <BankiInterest20 />,
     30: <BankiInterest30 />,
   };
 
+  const onWalkCompleted = () => {
+    setIsAchieved(id, true);
+    dispatch(setDongilPatched());
+    queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
+  };
+
+  const { mutate: mutateWalkDongil } = useMutation(
+    challengeAPI.patchChallengeProgress,
+    { onSuccess: onWalkCompleted },
+  );
+
   const onAfterChange = async (v: number) => {
     if (v < 90) {
       setValue(id, 0);
     } else {
       setValue(id, 100);
-      try {
-        await dispatch(walkDongil({ axiosPrivate, id })).unwrap();
-        setIsAchieved(id, true);
-      } catch (err) {
-        console.error(err);
-      }
+      mutateWalkDongil(id);
     }
   };
 

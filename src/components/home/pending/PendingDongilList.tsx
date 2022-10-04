@@ -1,10 +1,10 @@
-import { IDongil } from '@lib/types/IDongil';
-import { Dispatch, SetStateAction } from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import React from 'react';
 import styled from 'styled-components';
 import PendingDongilItem from './PendingDongilItem';
 
 interface PendingDongilListProps {
-  pendingDongils: IDongil[];
+  pendingDongils: IChallengeDTO[];
 }
 
 function PendingDongilList({ pendingDongils }: PendingDongilListProps) {
@@ -20,7 +20,7 @@ function PendingDongilList({ pendingDongils }: PendingDongilListProps) {
   );
 }
 
-export default PendingDongilList;
+export default React.memo(PendingDongilList);
 
 const Wrapper = styled.div`
   display: flex;

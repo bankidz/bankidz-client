@@ -53,7 +53,7 @@ function WithdrawContent() {
         <section>
           <EmojiCircle variant="books" />
           <div className="text-wrapper">
-            <h1>계좌 연결 예정</h1>
+            <h1>금융 교육 및 생활 꿀팁</h1>
             <p>
               어렵고 잘 모르던 금융 교육과 나에게 딱 맞는 금융생활을 핵심만
               제공해줘요
@@ -63,7 +63,7 @@ function WithdrawContent() {
         <section>
           <EmojiCircle variant="creditCard" />
           <div className="text-wrapper">
-            <h1>위시리스트 및 목표에 보상받기</h1>
+            <h1>자녀와의 계좌 연결</h1>
             <p>
               향후 앱 내에서 자녀와의 계좌 연결을 토해 편하게 용돈을 보낼 수
               있어요

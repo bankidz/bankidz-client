@@ -1,19 +1,12 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import Summary from '@components/home/summary/Summary';
 import TotalInterest from '@components/home/detail/TotalInterest';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
 
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
-import { useNavigate, useParams } from 'react-router-dom';
-import { TFetchStatus } from '@lib/types/TFetchStatus';
-import useAxiosPrivate from '@lib/hooks/auth/useAxiosPrivate';
-import {
-  deleteClientSideWalkingDongilById,
-  deleteWalkingDongil,
-} from '@store/slices/walkingDongilsSlice';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { calcRatio } from '@lib/styles/theme';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import useTargetDongil from '@components/home/detail/useTargetDongil';
@@ -23,15 +16,24 @@ import InterestStampListSection from '@components/home/detail/InterestStampListS
 import DongilContractContentSection from '@components/home/detail/DongilContractContentSection';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLevel from '@lib/hooks/useLevel';
+import { useMutation, useQueryClient } from 'react-query';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
 
 function Detail() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
   const level = useLevel();
   const colorByLevel = getColorByLevel(level!);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const state = location.state as {
+    isPaid: boolean;
+  };
+  const isPaid = state?.isPaid;
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
-  const targetDongil = useTargetDongil(id!);
+  const targetDongil = useTargetDongil(id!, isPaid);
   const {
     isMom,
     title,
@@ -47,76 +49,18 @@ function Detail() {
   const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
     useGlobalBottomSheet();
 
-  // 1. '돈길 포기하기' 바텀시트 열기
-  const openGiveUpBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'GiveUpCheck',
-      sheetProps: {
-        open: true,
-      },
-      contentProps: {
-        onGiveUpButtonClick: handleGiveUpButtonClick,
-        onDismiss: openCancelGiveUpBottomSheet,
-      },
-    });
+  // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
+  const handleConfirmButtonClick = () => {
+    setCloseBottomSheet();
+    queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
+    navigate('/');
   };
 
-  const axiosPrivate = useAxiosPrivate();
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [giveUpWalkingDongilStatus, setGiveUpWalkingDongilStatus] =
-    useState<TFetchStatus>('idle');
-  const canGiveUpWalkingDongil = giveUpWalkingDongilStatus === 'idle';
-
-  // 2-a. 포기하기 버튼 클릭
-  async function handleGiveUpButtonClick() {
-    if (canGiveUpWalkingDongil) {
-      try {
-        setGiveUpWalkingDongilStatus('pending');
-        await dispatch(
-          deleteWalkingDongil({
-            axiosPrivate,
-            id: parseInt(id!),
-          }),
-        ).unwrap();
-        // '포기 완료' 바텀시트
-        openGiveUpCompletedBottomSheet();
-      } catch (error) {
-        if (error === 'E400-40007') {
-          // 포기횟수 초과
-          openGiveUpExceededBottomSheet();
-        } else {
-          console.log(error);
-        }
-      } finally {
-        setGiveUpWalkingDongilStatus('idle');
-      }
-    }
-  }
-
-  // 2-b. 포기하기 취소 버튼 클릭
-  const openCancelGiveUpBottomSheet = () => {
-    const openSheet = () =>
-      setOpenBottomSheet({
-        sheetContent: 'Completed',
-        sheetProps: {
-          open: true,
-        },
-        contentProps: {
-          type: 'cancel',
-        },
-      });
-    openSheetBySequence(openSheet);
-  };
-
-  // 3-a. '포기 완료' 바텀시트 열기
+  // 3-a. 포기 완료
   const openGiveUpCompletedBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Completed',
-        sheetProps: {
-          open: true,
-        },
         contentProps: {
           type: 'giveUp',
           title: title,
@@ -126,24 +70,51 @@ function Detail() {
     openSheetBySequence(openSheet);
   };
 
-  // 3-b. '포기 횟수 초과' 바텀시트 열기
+  // 3-b. 포기 횟수 초과
   const openGiveUpExceededBottomSheet = () => {
     const openSheet = () =>
       setOpenBottomSheet({
         sheetContent: 'Notice',
-        sheetProps: {
-          open: true,
-        },
         contentProps: { type: 'giveUpExceeded' },
       });
     openSheetBySequence(openSheet);
   };
 
-  // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
-  const handleConfirmButtonClick = () => {
-    setCloseBottomSheet();
-    dispatch(deleteClientSideWalkingDongilById(parseInt(id!)));
-    navigate('/');
+  // 1. 돈길 포기하기 -> 정말 포기할거에요?
+  const openGiveUpBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'GiveUpCheck',
+      contentProps: {
+        onGiveUpButtonClick: handleGiveUpButtonClick,
+        onDismiss: openCancelGiveUpBottomSheet,
+      },
+    });
+  };
+
+  // 2-a. 포기하기
+  const queryClient = useQueryClient();
+  const deleteMutation = useMutation(challengeAPI.deleteChallenge, {
+    onSuccess: () => {
+      openGiveUpCompletedBottomSheet();
+    },
+    onError: (error: any) => {
+      error.response.status === 403 && openGiveUpExceededBottomSheet();
+    },
+  });
+  const handleGiveUpButtonClick = async () => {
+    deleteMutation.mutate(parseInt(id!));
+  };
+
+  // 2-b. 다시 도전해볼게요 -> '포기하기'가 취소되었어요
+  const openCancelGiveUpBottomSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Completed',
+        contentProps: {
+          type: 'cancel',
+        },
+      });
+    openSheetBySequence(openSheet);
   };
 
   return (

@@ -1,4 +1,10 @@
-import { ChangeEvent, Dispatch, HTMLAttributes, SetStateAction } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  HTMLAttributes,
+  SetStateAction,
+  useCallback,
+} from 'react';
 import styled from 'styled-components';
 
 interface TextAreaFormProps extends HTMLAttributes<HTMLTextAreaElement> {
@@ -27,9 +33,9 @@ function TextAreaForm({
   autoFocus = false,
   ...props
 }: TextAreaFormProps) {
-  function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
+  const handleChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
-  }
+  }, []);
 
   return (
     <InputBox

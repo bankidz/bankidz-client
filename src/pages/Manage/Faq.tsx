@@ -47,7 +47,7 @@ const content = [
   },
 ];
 
-const Faq = () => {
+function Faq() {
   const [isOpen, setIsOpen] = useState(content.map((v) => false));
   const toggle = (index: number) => {
     const temp = [...isOpen];
@@ -75,7 +75,7 @@ const Faq = () => {
       </>
     </ForegroundTemplate>
   );
-};
+}
 
 export default Faq;
 

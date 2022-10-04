@@ -42,7 +42,7 @@ function SkeletonElement({
       height={'100%'}
       backgroundColor="#FAFAFC" // grey100
       foregroundColor="#EAEAEC" // grey200
-      speed={1.3}
+      speed={2}
     >
       {figure}
     </ContentLoader>

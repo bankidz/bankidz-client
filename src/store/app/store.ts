@@ -2,32 +2,16 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import authReducer from '../slices/authSlice';
 import kidsReducer from '../slices/kidsSlice';
-import familyReducer from '../slices/familySlice';
 import createChallengeReducer from '../slices/createChallengeSlice';
-import kidSummaryReducer from '../slices/kidSummarySlice';
-import parentSummariesReducer from '../slices/parentSummariesSlice';
 import walkingDongilsReducer from '../slices/walkingDongilsSlice';
-import pendingDongilsReducer from '../slices/pendingDongilsSlice';
-import proposedDongilsReducer from '../slices/proposedDongilsSlice';
-import thisWeekSDongilsReducer from '../slices/thisWeekSDongilsSlice';
-import notPayedInterestsReducer from '../slices/notPayedInterestsSlice';
-import overViewReducer from '@store/slices/overViewSlice';
 import bottomSheetReducer from '@store/slices/bottomSheetSlice';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     kids: kidsReducer,
-    family: familyReducer,
     createChallenge: createChallengeReducer,
-    kidSummary: kidSummaryReducer,
-    parentSummaries: parentSummariesReducer,
     walkingDongils: walkingDongilsReducer,
-    pendingDongils: pendingDongilsReducer,
-    proposedDongils: proposedDongilsReducer,
-    thisWeekSDongils: thisWeekSDongilsReducer,
-    notPayedInterests: notPayedInterestsReducer,
-    overView: overViewReducer,
     bottomSheet: bottomSheetReducer,
   },
   middleware: (getDefaultMiddleware) =>

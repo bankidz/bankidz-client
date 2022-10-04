@@ -1,7 +1,6 @@
-import { theme } from '@lib/styles/theme';
+import { TRiskLevel } from '@lib/types/TRiskLevel';
+import getColorByRiskLevel from '@lib/utils/get/getColorByRiskLevel';
 import styled from 'styled-components';
-
-type TRiskLevel = '안정' | '보통' | '위험';
 
 interface RiskBadgeProps {
   riskLevel: TRiskLevel;
@@ -12,15 +11,6 @@ interface RiskBadgeProps {
  */
 function RiskBadge({ riskLevel }: RiskBadgeProps) {
   const colorByRiskLevel = getColorByRiskLevel(riskLevel);
-  function getColorByRiskLevel(interestRate: TRiskLevel) {
-    if (interestRate === '안정') {
-      return theme.palette.sementic.green300;
-    } else if (interestRate === '보통') {
-      return theme.palette.main.yellow300;
-    } else if (interestRate === '위험') {
-      return theme.palette.sementic.red300;
-    }
-  }
 
   return (
     <Wrapper colorByRiskLevel={colorByRiskLevel!}>

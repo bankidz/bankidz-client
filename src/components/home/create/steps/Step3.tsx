@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SelectMoney from '@components/common/bottomSheets/contractSheet/SelectMoney';
 import styled from 'styled-components';
@@ -7,21 +7,23 @@ import { useNavigate } from 'react-router-dom';
 import useStackAmount from '@lib/hooks/useStackAmount';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
-  dispatchTitle,
-  dispatchTotalPrice,
   selectStep3InitData,
+  setTitle,
+  setTotalPrice,
 } from '@store/slices/createChallengeSlice';
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
-import { selectWalkingDongils } from '@store/slices/walkingDongilsSlice';
+import { useQueryClient } from 'react-query';
+import queryKeys from '@lib/constants/queryKeys';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-type TStep3Form = {
+interface TStep3Form {
   contractName: string;
   contractAmount: number;
-};
+}
 
 function Step3({ currentStep }: { currentStep: number }) {
   const navigate = useNavigate();
@@ -29,20 +31,23 @@ function Step3({ currentStep }: { currentStep: number }) {
   const [form, setForm] = useState<TStep3Form>(
     useAppSelector(selectStep3InitData),
   );
-
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
   const [validateName, checkValidateName] = useValidation();
   const [validateAmount, checkValidateAmount] = useValidation();
   const [open, onOpen, onDismiss] = useBottomSheet(false);
   const [amountStack, pushAmount, popAmount, resetAmount] = useStackAmount();
   const [sheetDivRef, inputDivRef] = useBottomSheetOutSideRef(onDismiss);
-  //TODO : api fetching
-  const walkingDongil = useAppSelector(selectWalkingDongils);
-  const testDuplicate = walkingDongil.map((dongil) => dongil.title);
+  const queryClient = useQueryClient();
+
+  const walkingDongils = queryClient.getQueryData([
+    queryKeys.CHALLENGE,
+    'walking',
+  ]) as IChallengeDTO[];
+  const existingDongilName = walkingDongils.map((dongil) => dongil.title);
 
   const onClickNextButton = () => {
-    dispatch(dispatchTitle(form.contractName));
-    dispatch(dispatchTotalPrice(form.contractAmount));
+    dispatch(setTitle(form.contractName));
+    dispatch(setTotalPrice(form.contractAmount));
     navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
   };
 
@@ -56,7 +61,7 @@ function Step3({ currentStep }: { currentStep: number }) {
 
   //form 값이 바뀔때마다 유효성검사 실행
   useEffect(() => {
-    checkValidateName('contractName', form.contractName, testDuplicate);
+    checkValidateName('contractName', form.contractName, existingDongilName);
     checkValidateAmount('contractAmount', form.contractAmount);
   }, [form]);
 
@@ -70,7 +75,6 @@ function Step3({ currentStep }: { currentStep: number }) {
 
   return (
     <Wrapper>
-      {/* TODO: JSX는 요약처럼 보일 수 있게 */}
       <InputSection validate={validateName}>
         <InputForm
           placeholder="돈길 이름을 입력하세요"
@@ -79,7 +83,11 @@ function Step3({ currentStep }: { currentStep: number }) {
             setForm({ ...form, contractName: e.target.value });
           }}
           onBlur={() => {
-            checkValidateName('contractName', form.contractName, testDuplicate);
+            checkValidateName(
+              'contractName',
+              form.contractName,
+              existingDongilName,
+            );
           }}
           error={validateName.error}
         />
