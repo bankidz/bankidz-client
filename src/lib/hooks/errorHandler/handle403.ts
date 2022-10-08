@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 
 /** default handler */
 export const handle403default = () => {
+  console.log('권한이 없습니다.');
   toast.error('권한이 없습니다.', {
     onClose: navigateToHome,
   });
@@ -41,5 +42,7 @@ export const handle403_40012 = () => {
 };
 
 export const handle403_40014 = () => {
-  toast.error('일요일에는 불가능한 요청입니다.');
+  toast.error(
+    '일요일에는 불가능한 요청입니다. 일요일에는 불가능한 요청입니다. 일요일에는 불가능한 요청입니다.',
+  );
 };

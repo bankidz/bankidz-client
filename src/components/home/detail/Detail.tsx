@@ -221,7 +221,8 @@ const GiveUpDongilButton = styled.button`
   text-decoration: underline;
   text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
   margin-top: 48px;
-  width: 100%;
+  width: 117px;
+  height: 46px;
   text-align: center;
   ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
   color: ${({ theme }) => theme.palette.greyScale.grey500};

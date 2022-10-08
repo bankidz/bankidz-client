@@ -138,7 +138,11 @@ function useAPIError(handlers: any = undefined) {
       }
 
       // 우선순위 2. 컴포넌트에서 (HTTP Status) Key로 재정의한 핸들러
-      else if (handlers && handlers[httpStatus]) {
+      else if (
+        handlers &&
+        handlers[httpStatus] &&
+        handlers[httpStatus]?.default
+      ) {
         handlers[httpStatus].default();
       }
 
