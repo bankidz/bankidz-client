@@ -47,17 +47,17 @@ const handleCommon = (serviceCode: string | undefined) => {
 
 /** default handler */
 const handleDefault = () => {
-  toast.error('예상치 못한 오류가 발생했습니다. 다시 로그인 해주세요.', {
+  toast.error('예상치 못한 오류가 발생했어요. 다시 로그인 해주세요.', {
     onClose: logoutClient,
   });
 };
 const handle401default = () => {
-  toast.error('로그인 정보가 만료되었습니다. 다시 로그인 해주세요.', {
+  toast.error('로그인 정보가 만료됐어요. 다시 로그인 해주세요.', {
     onClose: logoutClient,
   });
 };
 const handle500default = () => {
-  toast.error('예상치 못한 서버 오류가 발생했습니다.');
+  toast.error('예상치 못한 서버 오류가 발생했어요.');
 };
 
 /**
