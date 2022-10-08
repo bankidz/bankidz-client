@@ -19,6 +19,7 @@ import useLevel from '@lib/hooks/useLevel';
 import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
+import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 
 function Detail() {
   const { id } = useParams();
@@ -93,13 +94,16 @@ function Detail() {
 
   // 2-a. 포기하기
   const queryClient = useQueryClient();
+  const { handleError } = useAPIError({
+    403: {
+      'E403-40007': openGiveUpExceededBottomSheet,
+    },
+  });
   const deleteMutation = useMutation(challengeAPI.deleteChallenge, {
     onSuccess: () => {
       openGiveUpCompletedBottomSheet();
     },
-    onError: (error: any) => {
-      error.response.status === 403 && openGiveUpExceededBottomSheet();
-    },
+    onError: handleError,
   });
   const handleGiveUpButtonClick = async () => {
     deleteMutation.mutate(parseInt(id!));
