@@ -52,7 +52,7 @@ function Mypage() {
     <Wrapper>
       <Header>
         마이페이지
-        <Setting onClick={() => navigate('/manage')} />
+        <Setting onClick={() => navigate('manage')} />
       </Header>
       <MarginTemplate>
         {userStatus === 'success' ? (
@@ -102,6 +102,7 @@ const Wrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
 `;
 
 const Header = styled.div`

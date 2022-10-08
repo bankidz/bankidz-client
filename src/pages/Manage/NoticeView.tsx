@@ -9,7 +9,7 @@ function NoticeView() {
   const { id } = useParams();
   const { data, status } = useNoticeByIdQuery(id!);
   return (
-    <ForegroundTemplate>
+    <ForegroundTemplate to="/mypage/manage/notices">
       <>
         {status === 'success' && (
           <>

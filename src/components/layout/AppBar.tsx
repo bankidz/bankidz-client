@@ -18,7 +18,7 @@ interface AppBarProps {
 function AppBar({ label, level, to }: AppBarProps) {
   const navigate = useNavigate();
   const onClickAppBar = () => {
-    to ? navigate(to) : navigate(-1);
+    to ? navigate(to, { state: { direction: 'back' } }) : navigate(-1);
   };
 
   const colorByLevel = level !== undefined && getColorByLevel(level!);

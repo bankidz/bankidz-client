@@ -17,14 +17,21 @@ function ForegroundTemplate({
   to,
 }: ForegroundTemplateProps) {
   return (
-    <>
+    <Wrapper>
       <AppBar label={label} level={level} to={to} />
       <Screen>{children}</Screen>
-    </>
+    </Wrapper>
   );
 }
 
 export default ForegroundTemplate;
+
+const Wrapper = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
+`;
 
 const Screen = styled.div`
   margin-top: 48px;
