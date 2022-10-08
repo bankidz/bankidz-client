@@ -8,7 +8,7 @@ import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 const Notification = () => {
   const { data, status, Observation } = useInfiniteNotificationQuery();
   return (
-    <ForegroundTemplate label="알림 내역">
+    <ForegroundTemplate label="알림 내역" to="/">
       {status === 'success' ? (
         <>
           {data?.pages[0].notificationList.length === 0 ? (
