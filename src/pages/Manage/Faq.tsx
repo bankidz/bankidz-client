@@ -56,7 +56,7 @@ function Faq() {
   };
 
   return (
-    <ForegroundTemplate label="자주 묻는 질문">
+    <ForegroundTemplate label="자주 묻는 질문" to="/mypage/manage">
       <>
         {content.map((item, index) => (
           <div key={item.title}>

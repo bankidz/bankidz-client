@@ -26,7 +26,7 @@ const GuideTemplate = ({ page, isKid }: GuideTemplateProps) => {
   const navigate = useNavigate();
   const onExitButtonClick = () => {
     if (page === 'manage') {
-      navigate('/manage');
+      navigate('/mypage/manage');
     } else {
       navigate('/');
     }

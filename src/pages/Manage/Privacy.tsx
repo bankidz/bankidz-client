@@ -214,7 +214,7 @@ const content = `
 
 function Privacy() {
   return (
-    <ForegroundTemplate label="개인정보 처리방침">
+    <ForegroundTemplate label="개인정보 처리방침" to="/mypage/manage">
       <Content>{content}</Content>
     </ForegroundTemplate>
   );

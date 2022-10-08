@@ -45,7 +45,7 @@ function Alerts() {
   }, [alert]);
 
   return (
-    <ForegroundTemplate label="알림 설정">
+    <ForegroundTemplate label="알림 설정" to="/mypage/manage">
       <Wrapper>
         <h2>푸쉬 알림</h2>
         <Cell>

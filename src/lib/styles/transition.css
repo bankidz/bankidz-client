@@ -9,7 +9,6 @@
   transition: transform 400ms ease-in-out;
 
   box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.08);
-  /* transition-timing-function: ease-in-out; */
 }
 
 .slide-exit {
@@ -21,7 +20,6 @@
   /* z-index: 0; */
   transform: translateX(-20%);
   transition: transform 400ms ease-in-out;
-  /* transition-timing-function: ease-in-out; */
 }
 
 /* ----------------------------- */
@@ -35,9 +33,6 @@
   z-index: 1;
   transform: translateX(0%);
   transition: transform 400ms ease-in-out;
-
-  box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.08);
-  /* transition-timing-function: ease-in-out; */
 }
 
 .back-exit {
@@ -49,7 +44,7 @@
   z-index: 1;
   transform: translateX(100%);
   transition: transform 400ms ease-in-out;
-  /* transition-timing-function: ease-in-out; */
+  box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.08);
 }
 
 .transition-wrapper {

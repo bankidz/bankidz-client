@@ -37,7 +37,10 @@ export default WithdrawTemplate;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
+
   white-space: pre-wrap;
 
   > h1 {
