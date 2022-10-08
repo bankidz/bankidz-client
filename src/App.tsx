@@ -12,6 +12,7 @@ import ManageRouter from './pages/Manage';
 import InterestRouter from './pages/Interest';
 import NotFound from './pages/NotFound';
 import TestPage from './pages/Test/TestPage';
+import RouteChangeTracker from '@components/auth/RouteChangeTracker';
 
 function App() {
   const queryClient = useQueryClient();
@@ -26,6 +27,8 @@ function App() {
       onError: (error: any) => {},
     },
   });
+
+  RouteChangeTracker();
 
   return (
     <Routes>

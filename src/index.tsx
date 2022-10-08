@@ -15,6 +15,7 @@ import './assets/fonts/fontStyle.css';
 import ReactModal from 'react-modal';
 import { ModalsContextProvider } from './components/common/modals/ModalsContext';
 import GlobalBottomSheet from '@components/common/bottomSheets/GlobalBottomSheet';
+import ReactGA from 'react-ga';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -22,6 +23,9 @@ const root = createRoot(container);
 const queryClient = new QueryClient();
 
 ReactModal.setAppElement('#root');
+
+const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
+ReactGA.initialize(TRACKING_ID!);
 
 root.render(
   <Provider store={store}>
