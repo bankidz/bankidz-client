@@ -16,6 +16,8 @@ import ReactModal from 'react-modal';
 import { ModalsContextProvider } from './components/common/modals/ModalsContext';
 import GlobalBottomSheet from '@components/common/bottomSheets/GlobalBottomSheet';
 import ReactGA from 'react-ga';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -36,6 +38,18 @@ root.render(
           <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools initialIsOpen={false} />
             <App />
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              closeButton={false}
+            />
             <GlobalBottomSheet />
           </QueryClientProvider>
         </ModalsContextProvider>

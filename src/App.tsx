@@ -13,18 +13,20 @@ import InterestRouter from './pages/Interest';
 import NotFound from './pages/NotFound';
 import TestPage from './pages/Test/TestPage';
 import RouteChangeTracker from '@components/auth/RouteChangeTracker';
+import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 
 function App() {
   const queryClient = useQueryClient();
+  const { handleError } = useAPIError();
   queryClient.setDefaultOptions({
     queries: {
       refetchInterval: 0,
       retry: 0,
       refetchOnWindowFocus: false,
-      onError: (error: any) => {},
+      onError: handleError,
     },
     mutations: {
-      onError: (error: any) => {},
+      onError: handleError,
     },
   });
 
