@@ -49,6 +49,10 @@ const content = {
     icon: <Complete />,
     main: '기존 가족그룹에서 나갔어요',
   },
+  pushNoti: {
+    icon: <Complete />,
+    main: '푸시알림이 설정되었어요',
+  },
 };
 
 function Completed({ type, title, onMainActionClick }: CompleteProps) {

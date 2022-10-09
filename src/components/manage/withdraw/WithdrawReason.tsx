@@ -1,6 +1,6 @@
 import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
-import userApi from '@lib/apis/user/userAPI';
+import userAPI from '@lib/apis/user/userAPI';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
@@ -46,7 +46,7 @@ function WithdrawReason() {
   };
 
   const provider = useAppSelector(selectProvider);
-  const deleteMutation = useMutation(userApi.deleteUser, {
+  const deleteMutation = useMutation(userAPI.deleteUser, {
     onSuccess: () => {
       openWithdrawCompletedBottomSheet();
     },

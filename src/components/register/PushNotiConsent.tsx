@@ -2,8 +2,10 @@ import Button from '@components/common/buttons/Button';
 import styled from 'styled-components';
 import { ReactComponent as AppICon } from '@assets/icons/app-icon-6.svg';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
+import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface PushNotiBlockProps {
   children: React.ReactNode;
@@ -28,21 +30,34 @@ const PushNotiBlockTemplate = ({ children }: PushNotiBlockProps) => {
 
 function PushNotiConsent() {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const noticeAlertMutation = useMutation(userAPI.patchNoticeAlert, {
-    onSuccess: () => {},
-  });
+  const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
+
+  const openBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'Completed',
+      contentProps: {
+        type: 'pushNoti',
+        onMainActionClick: () => {
+          setCloseBottomSheet();
+          navigate('/auth/register/4');
+        },
+      },
+    });
+  };
+
+  // 가족 활동 알림
   const serviceAlertMutation = useMutation(userAPI.patchServiceAlert, {
-    onSuccess: () => {},
+    onSuccess: (data) => {
+      setLocalStorage('alert', data);
+      openBottomSheet();
+    },
   });
-
-  const handleLaterButtonClick = () => {
-    navigate('/auth/register/4');
-  };
-
-  const handleGetNotiButtonClick = () => {
-    navigate('/auth/register/4');
-  };
+  // 공지 및 이벤트 알림
+  const noticeAlertMutation = useMutation(userAPI.patchNoticeAlert, {
+    onSuccess: () => {
+      serviceAlertMutation.mutate();
+    },
+  });
 
   return (
     <Wrapper>
@@ -64,12 +79,16 @@ function PushNotiConsent() {
         <Button
           property="sub"
           label="다음에요"
-          onClick={handleLaterButtonClick}
+          onClick={() => {
+            navigate('/auth/register/4');
+          }}
         />
         <Button
           property="default"
           label="알림 받을게요"
-          onClick={handleGetNotiButtonClick}
+          onClick={() => {
+            noticeAlertMutation.mutate();
+          }}
         />
       </DoubleButtonWrapper>
     </Wrapper>

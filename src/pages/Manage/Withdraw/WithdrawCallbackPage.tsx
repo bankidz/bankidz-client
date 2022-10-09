@@ -1,4 +1,4 @@
-import userApi from '@lib/apis/user/userAPI';
+import userAPI from '@lib/apis/user/userAPI';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
@@ -10,7 +10,7 @@ function WithdrawCallbackPage() {
   const logoutClient = useLogoutClient();
   const appleWithdrawReason = getLocalStorage('appleWithdrawReason');
 
-  const deleteMutation = useMutation(userApi.deleteUser, {
+  const deleteMutation = useMutation(userAPI.deleteUser, {
     onSuccess: () => {
       setCloseBottomSheet();
       logoutClient();
