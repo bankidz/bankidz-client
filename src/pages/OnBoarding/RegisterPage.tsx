@@ -22,29 +22,49 @@ function RegisterPage() {
     navigate('/auth/login');
   };
 
-  return (
-    <>
-      {(parsedStep === 1 || parsedStep === 2) && (
-        <ArrowWrapper>
-          <Arrow onClick={handleGoBackButtonClick} />
-        </ArrowWrapper>
-      )}
-      <MarginTemplate>
-        {parsedStep === 1 && <RegisterBirthday />}
-      </MarginTemplate>
-      <MarginTemplate margin={26}>
-        {parsedStep === 2 && <RegisterRole />}
-        {parsedStep === 3 && <PushNotiConsent />}
-      </MarginTemplate>
-      {parsedStep === 4 && <GuideTemplate page="onboarding" isKid={isKid!} />}
-    </>
+  const goBackArrow = (
+    <ArrowWrapper>
+      <Arrow onClick={handleGoBackButtonClick} />
+    </ArrowWrapper>
   );
+
+  let content;
+  if (parsedStep === 1) {
+    content = (
+      <>
+        {goBackArrow}
+        <MarginTemplate>
+          <RegisterBirthday />
+        </MarginTemplate>
+      </>
+    );
+  } else if (parsedStep === 2) {
+    content = (
+      <>
+        {goBackArrow}
+        <MarginTemplate margin={26}>
+          <RegisterRole />
+        </MarginTemplate>
+      </>
+    );
+  } else if (parsedStep === 3) {
+    content = (
+      <MarginTemplate margin={26}>
+        <PushNotiConsent />
+      </MarginTemplate>
+    );
+  } else if (parsedStep === 4) {
+    content = <GuideTemplate page="onboarding" isKid={isKid!} />;
+  }
+
+  return <>{content}</>;
 }
 
 export default RegisterPage;
 
 const ArrowWrapper = styled.div`
-  width: 100%;
+  width: 48px;
   height: 48px;
   box-sizing: border-box;
+  cursor: pointer;
 `;

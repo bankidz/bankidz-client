@@ -11,7 +11,7 @@ interface PushNotiBlockProps {
   children: React.ReactNode;
 }
 
-const PushNotiBlockTemplate = ({ children }: PushNotiBlockProps) => {
+function PushNotiBlockTemplate({ children }: PushNotiBlockProps) {
   return (
     <PushNotiBlock>
       <div className="header-wrapper">
@@ -26,7 +26,66 @@ const PushNotiBlockTemplate = ({ children }: PushNotiBlockProps) => {
       {children}
     </PushNotiBlock>
   );
-};
+}
+
+const PushNotiBlock = styled.div`
+  & + & {
+    margin-top: 16px;
+  }
+  margin-top: 60px;
+  width: 100%;
+  height: 79px;
+  background: ${({ theme }) => theme.palette.greyScale.grey700};
+  border-radius: ${({ theme }) => theme.radius.medium};
+  padding: 26px 23px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .left-aligned-wrapper {
+      display: flex;
+
+      .app-icon-wrapper {
+        margin-top: -3px;
+        width: 14px;
+        height: 14px;
+      }
+      .logo {
+        font-family: 'Spoqa Han Sans Neo';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 9px;
+        color: ${({ theme }) => theme.palette.greyScale.grey300};
+        margin-left: 6px;
+      }
+    }
+
+    .now {
+      ${({ theme }) => theme.typo.text.S_12_M};
+      color: ${({ theme }) => theme.palette.greyScale.grey300};
+    }
+  }
+
+  .first {
+    ${({ theme }) => theme.typo.text.S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.white};
+    width: 100%;
+    height: 10px;
+    margin-bottom: 8px;
+  }
+  .second {
+    ${({ theme }) => theme.typo.text.S_12_M};
+    color: ${({ theme }) => theme.palette.greyScale.grey300};
+    width: 100%;
+    height: 10px;
+  }
+`;
 
 function PushNotiConsent() {
   const navigate = useNavigate();
@@ -104,6 +163,7 @@ const Wrapper = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   background: ${({ theme }) => theme.palette.greyScale.white};
   position: relative;
+  background: ${({ theme }) => theme.palette.greyScale.grey100};
 
   header {
     margin-top: 88px;
@@ -120,65 +180,6 @@ const Wrapper = styled.div`
       color: ${({ theme }) => theme.palette.greyScale.grey500};
       height: 37px;
     }
-  }
-`;
-
-const PushNotiBlock = styled.div`
-  & + & {
-    margin-top: 16px;
-  }
-  margin-top: 60px;
-  width: 100%;
-  height: 79px;
-  background: ${({ theme }) => theme.palette.greyScale.grey700};
-  border-radius: ${({ theme }) => theme.radius.medium};
-  padding: 26px 23px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  .header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    .left-aligned-wrapper {
-      display: flex;
-
-      .app-icon-wrapper {
-        margin-top: -3px;
-        width: 14px;
-        height: 14px;
-      }
-      .logo {
-        font-family: 'Spoqa Han Sans Neo';
-        font-style: normal;
-        font-weight: 500;
-        font-size: 9px;
-        color: ${({ theme }) => theme.palette.greyScale.grey300};
-        margin-left: 6px;
-      }
-    }
-
-    .now {
-      ${({ theme }) => theme.typo.text.S_12_M};
-      color: ${({ theme }) => theme.palette.greyScale.grey300};
-    }
-  }
-
-  .first {
-    ${({ theme }) => theme.typo.text.S_12_M};
-    color: ${({ theme }) => theme.palette.greyScale.white};
-    width: 100%;
-    height: 10px;
-    margin-bottom: 8px;
-  }
-  .second {
-    ${({ theme }) => theme.typo.text.S_12_M};
-    color: ${({ theme }) => theme.palette.greyScale.grey300};
-    width: 100%;
-    height: 10px;
   }
 `;
 

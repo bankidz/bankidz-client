@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { selectIsKid } from '@store/slices/authSlice';
 import KidHomePage from './KidHomePage';
 import ParentHomePage from './ParentHomePage';
 import Create from './Create';
