@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import RegisterBirthday from '@components/register/RegisterBirthday';
 import RegisterRole from '@components/register/RegisterRole';
+import PushNotiConsent from '@components/register/PushNotiConsent';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left-big.svg';
 import styled from 'styled-components';
 import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
@@ -23,16 +24,19 @@ function RegisterPage() {
 
   return (
     <>
-      {parsedStep !== 3 && (
+      {(parsedStep === 1 || parsedStep === 2) && (
         <ArrowWrapper>
           <Arrow onClick={handleGoBackButtonClick} />
         </ArrowWrapper>
       )}
       <MarginTemplate>
         {parsedStep === 1 && <RegisterBirthday />}
-        {parsedStep === 2 && <RegisterRole />}
       </MarginTemplate>
-      {parsedStep === 3 && <GuideTemplate page="onboarding" isKid={isKid!} />}
+      <MarginTemplate margin={26}>
+        {parsedStep === 2 && <RegisterRole />}
+        {parsedStep === 3 && <PushNotiConsent />}
+      </MarginTemplate>
+      {parsedStep === 4 && <GuideTemplate page="onboarding" isKid={isKid!} />}
     </>
   );
 }

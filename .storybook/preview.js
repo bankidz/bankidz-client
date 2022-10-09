@@ -5,24 +5,29 @@ import { GlobalStyle } from '../src/lib/styles/global-style';
 import { theme } from '../src/lib/styles/theme';
 import { store } from '../src/store/app/store';
 import { ModalsContextProvider } from '../src/components/common/modals/ModalsContext';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import '../src/assets/fonts/fontStyle.css';
+
+const queryClient = new QueryClient();
 
 export const decorators = [
   (Story) => (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <ModalsContextProvider>
-          <GlobalStyle />
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#FAFAFC',
-              padding: '18px',
-              boxSizing: 'border-box',
-            }}
-          >
-            <Story />
-          </div>
+          <QueryClientProvider client={queryClient}>
+            <GlobalStyle />
+            <div
+              style={{
+                width: '100%',
+                backgroundColor: '#FAFAFC',
+                padding: '18px',
+                boxSizing: 'border-box',
+              }}
+            >
+              <Story />
+            </div>
+          </QueryClientProvider>
         </ModalsContextProvider>
       </ThemeProvider>
     </Provider>
