@@ -62,7 +62,7 @@ function PushNotiConsent() {
   return (
     <Wrapper>
       <header>
-        <h1>끝까지돈을 모을 수 있도록</h1>
+        <h1>끝까지 돈을 모을 수 있도록</h1>
         <h1 className="second">뱅키가 도와드릴게요</h1>
         <sub>이벤트 및 돈길 활동들에 대하여 알림을 보내드려요</sub>
       </header>
