@@ -52,7 +52,7 @@ function Mypage() {
     familyStatus === 'success' &&
     userStatus === 'success' &&
     kidStatus !== 'loading';
-  console.log(isAllFetched, familyStatus, userStatus, kidStatus);
+
   return (
     <Wrapper>
       <Header>
@@ -60,26 +60,11 @@ function Mypage() {
         <Setting onClick={() => navigate('manage')} />
       </Header>
       <MarginTemplate>
-        {userStatus === 'success' ? (
-          <OverView userData={userData} />
+        {isAllFetched ? (
+          <OverView userData={userData!} />
         ) : (
           <SkeletonOverview isKid={true} />
         )}
-        {/*         {userData?.user.isKid ? (
-          <Section>
-            <h2>MY 레벨</h2>
-            <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
-          </Section>
-        ) : (
-          <Section smallGap={true}>
-            {kidStatus === 'success' && (
-              <>
-                <h2>자녀기록</h2>
-                <KidsRecordList kidData={kidData!} />
-              </>
-            )}
-          </Section>
-        )} */}
         <Section>
           {isAllFetched &&
             (userData?.user.isKid ? (
