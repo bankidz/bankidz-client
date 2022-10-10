@@ -14,6 +14,7 @@ import TestPage from './pages/Test/TestPage';
 import '@lib/styles/transition.css';
 import RouteChangeTracker from '@components/auth/RouteChangeTracker';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import ServiceRouter from './pages/ServiceRouter';
 
 function App() {
   const location = useLocation();
@@ -41,10 +42,7 @@ function App() {
         <Route path="/test/*" element={<TestPage />} />
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>
-            <Route path="/*" element={<HomeRouter />} />
-            <Route path="/walk/*" element={<WalkRouter />} />
-            <Route path="/mypage/*" element={<MypageRouter />} />
-            <Route path="/interest/*" element={<InterestRouter />} />
+            <Route path="/*" element={<ServiceRouter />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Route>

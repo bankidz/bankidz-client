@@ -53,7 +53,7 @@ function Reject() {
 
   return (
     <Wrapper>
-      <GoBackHeader />
+      <GoBackHeader to="/" />
       <MarginTemplate>
         <h1>거절 사유를 전송해요</h1>
 

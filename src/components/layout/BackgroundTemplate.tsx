@@ -20,6 +20,7 @@ export default BackgroundTemplate;
 const Wrapper = styled.div`
   position: absolute;
   width: 100vw;
+  height: 100vh;
 `;
 
 const Screen = styled.div`
