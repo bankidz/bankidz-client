@@ -20,28 +20,27 @@ import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 function KidHomePage() {
   usePreventGoBack();
 
-  const {
-    status,
-    data: family,
-    error,
-  } = useQuery<IFamilyDTO, AxiosError>(queryKeys.FAMILY, familyAPI.getFamily);
+  const { status, data: family } = useQuery<IFamilyDTO, AxiosError>(
+    queryKeys.FAMILY,
+    familyAPI.getFamily,
+  );
 
+  const hasFamilyMember = family?.familyUserList.length !== 0;
   const hasParent = family?.familyUserList?.find(
     (member) => member.isKid === false,
   );
 
   let content;
-  if (
-    (status === 'success' && !hasParent) ||
-    (status === 'error' && error?.response?.status === 400)
-  ) {
-    content = <NoFamily />;
-  } else if (status === 'success') {
-    content = (
-      <HomeTemplate>
-        <KidHome />
-      </HomeTemplate>
-    );
+  if (status === 'success') {
+    if (!hasFamilyMember || !hasParent) {
+      content = <NoFamily />;
+    } else {
+      content = (
+        <HomeTemplate>
+          <KidHome />
+        </HomeTemplate>
+      );
+    }
   } else {
     content = (
       <LoadingSpinnerWrapper>

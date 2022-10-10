@@ -1,4 +1,5 @@
 import { axiosPrivate } from '@lib/apis/axios';
+import { toast } from 'react-toastify';
 
 function registerEXPOToken() {
   let isRegistered = false;
@@ -9,9 +10,11 @@ function registerEXPOToken() {
         const response = await axiosPrivate.patch('/user/expo', {
           expoToken: EXPOToken,
         });
+        // alert(`response: ${JSON.stringify(response)}`);
         isRegistered = true;
       } catch (error: any) {
-        alert(`error: ${JSON.stringify(error)}`);
+        // alert(`error: ${JSON.stringify(error)}`);
+        toast.error('기기 식별정보 전송에 실패했습니다.');
       }
     }
   };

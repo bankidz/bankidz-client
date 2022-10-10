@@ -7,32 +7,19 @@ import useModals from '../../lib/hooks/useModals';
 import Modals from '../common/modals/Modals';
 import { modals } from '../common/modals/Modals';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import GuideTemplate from '@components/manage/guides/GuideTemplate';
 import userAPI from '@lib/apis/user/userAPI';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterRole() {
   const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
     useGlobalBottomSheet();
   const { openModal } = useModals();
-
   const [isKid, setIsKid] = useState<boolean | null>(null);
   const [isFemale, setIsFemale] = useState<boolean | null>(null);
-  const [isTutorial, setIsTutorial] = useState<boolean>(false);
-
-  const handleModalOpen = (isKid: boolean, isFemale: boolean) => {
-    openModal(modals.primaryModal, {
-      onSubmit: () => {
-        setIsTutorial(true);
-      },
-      isKid,
-      isFemale,
-      headerText: '뱅키즈 첫 가입을 축하해요',
-      bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
-    });
-  };
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const birthday = useAppSelector(selectBirthday);
   const registerMutation = useMutation(userAPI.patchUser, {
     onSuccess: (data) => {
       const { isFemale, isKid } = data;
@@ -42,7 +29,18 @@ function RegisterRole() {
     },
   });
 
-  const birthday = useAppSelector(selectBirthday);
+  const handleModalOpen = (isKid: boolean, isFemale: boolean) => {
+    openModal(modals.primaryModal, {
+      onSubmit: () => {
+        navigate('/auth/register/3');
+      },
+      isKid,
+      isFemale,
+      headerText: '뱅키즈 첫 가입을 축하해요',
+      bodyText: '뱅키와 저금을 통해 돈길만 걸어요',
+    });
+  };
+
   const handleSubmit = (isKid: boolean, isFemale: boolean) => {
     registerMutation.mutate({ isKid, isFemale, birthday });
   };
@@ -62,62 +60,56 @@ function RegisterRole() {
 
   return (
     <>
-      {isTutorial ? (
-        <GuideWrapper>
-          <GuideTemplate page="onboarding" isKid={isKid!} />
-        </GuideWrapper>
-      ) : (
-        <Wrapper>
-          <Modals />
-          <span>프로필을 선택해요</span>
-          <RoleButtonWrapper>
-            {/* 아빠 */}
-            <RoleButton
-              onClick={() => {
-                openSelectProfileSheet(false, false);
-                setIsKid(false);
-                setIsFemale(false);
-              }}
-              isKid={false}
-              isFemale={false}
-              isSelected={isOpen && isKid === false && isFemale === false}
-            />
-            {/* 엄마 */}
-            <RoleButton
-              onClick={() => {
-                openSelectProfileSheet(false, true);
-                setIsKid(false);
-                setIsFemale(true);
-              }}
-              isKid={false}
-              isFemale={true}
-              isSelected={isOpen && isKid === false && isFemale === true}
-            />
-            {/* 아들 */}
-            <RoleButton
-              onClick={() => {
-                openSelectProfileSheet(true, false);
-                setIsKid(true);
-                setIsFemale(false);
-              }}
-              isKid={true}
-              isFemale={false}
-              isSelected={isOpen && isKid === true && isFemale === false}
-            />
-            {/* 딸 */}
-            <RoleButton
-              onClick={() => {
-                openSelectProfileSheet(true, true);
-                setIsKid(true);
-                setIsFemale(true);
-              }}
-              isKid={true}
-              isFemale={true}
-              isSelected={isOpen && isKid === true && isFemale === true}
-            />
-          </RoleButtonWrapper>
-        </Wrapper>
-      )}
+      <Wrapper>
+        <Modals />
+        <span>프로필을 선택해요</span>
+        <RoleButtonWrapper>
+          {/* 아빠 */}
+          <RoleButton
+            onClick={() => {
+              openSelectProfileSheet(false, false);
+              setIsKid(false);
+              setIsFemale(false);
+            }}
+            isKid={false}
+            isFemale={false}
+            isSelected={isOpen && isKid === false && isFemale === false}
+          />
+          {/* 엄마 */}
+          <RoleButton
+            onClick={() => {
+              openSelectProfileSheet(false, true);
+              setIsKid(false);
+              setIsFemale(true);
+            }}
+            isKid={false}
+            isFemale={true}
+            isSelected={isOpen && isKid === false && isFemale === true}
+          />
+          {/* 아들 */}
+          <RoleButton
+            onClick={() => {
+              openSelectProfileSheet(true, false);
+              setIsKid(true);
+              setIsFemale(false);
+            }}
+            isKid={true}
+            isFemale={false}
+            isSelected={isOpen && isKid === true && isFemale === false}
+          />
+          {/* 딸 */}
+          <RoleButton
+            onClick={() => {
+              openSelectProfileSheet(true, true);
+              setIsKid(true);
+              setIsFemale(true);
+            }}
+            isKid={true}
+            isFemale={true}
+            isSelected={isOpen && isKid === true && isFemale === true}
+          />
+        </RoleButtonWrapper>
+      </Wrapper>
     </>
   );
 }
@@ -132,17 +124,6 @@ const Wrapper = styled.div`
     ${({ theme }) => theme.typo.input.Title_T_24_EB};
     color: ${({ theme }) => theme.palette.greyScale.black};
   }
-`;
-
-const GuideWrapper = styled.div`
-  width: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: calc(var(--vh, 1vh) * 100);
-
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  margin-top: -64px;
 `;
 
 const RoleButtonWrapper = styled.div`

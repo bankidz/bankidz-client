@@ -46,6 +46,7 @@ export interface IAchievedChallengeDTO {
   challenge: IChallengeDTO;
   interestPrice: number;
 }
+
 export interface IAchievedChallengeListDTO {
   challengeDTOList: IAchievedChallengeDTO[];
   totalInterestPrice: number;

@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Layout from './components/layout/Layout';
 import RequireAuth from '@components/auth/RequireAuth';
 import PersistLogin from '@components/auth/PersistLogin';
@@ -9,26 +8,30 @@ import HomeRouter from './pages/Home';
 import WalkRouter from './pages/Walk';
 import MypageRouter from './pages/Mypage';
 import GroupLink from './components/mypage/GroupLink';
-import ManageRouter from './pages/Manage';
 import InterestRouter from './pages/Interest';
 import NotFound from './pages/NotFound';
 import TestPage from './pages/Test/TestPage';
 import '@lib/styles/transition.css';
+import RouteChangeTracker from '@components/auth/RouteChangeTracker';
+import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 
 function App() {
   const location = useLocation();
   const queryClient = useQueryClient();
+  const { handleError } = useAPIError();
   queryClient.setDefaultOptions({
     queries: {
       refetchInterval: 0,
       retry: 0,
       refetchOnWindowFocus: false,
-      onError: (error: any) => {},
+      onError: handleError,
     },
     mutations: {
-      onError: (error: any) => {},
+      onError: handleError,
     },
   });
+
+  RouteChangeTracker();
 
   return (
     <Routes location={location}>

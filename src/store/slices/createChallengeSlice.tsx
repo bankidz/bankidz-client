@@ -1,7 +1,6 @@
 import { TInterestRate } from '@lib/types/IInterestRate';
 import { TDongilCategory } from '@lib/types/TDongilCategory';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios, { AxiosInstance } from 'axios';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 
 type TPostChallengeResponseState = {
@@ -58,25 +57,6 @@ const initialState: TCreateChallengeState = {
   inProcess: false,
 };
 
-// POST: 프로필 정보가 없는 회원에 대해 입력받은 프로필 정보 전송
-export const postChallenge = createAsyncThunk(
-  'createChallenge/postChallenge',
-  async (axiosPrivate: AxiosInstance, { getState, rejectWithValue }) => {
-    try {
-      const { createChallenge } = getState() as RootState;
-      const response = await axiosPrivate.post(
-        '/challenge',
-        createChallenge.challenge,
-      );
-      return response.data;
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        return rejectWithValue(err);
-      }
-    }
-  },
-);
-
 export const createChallengeSlice = createSlice({
   name: 'createChallenge',
   initialState,
@@ -111,7 +91,7 @@ export const createChallengeSlice = createSlice({
     setInProcess(state) {
       state.inProcess = true;
     },
-    resetChallengePayload(state) {
+    resetChallengePayload() {
       return initialState;
     },
   },
