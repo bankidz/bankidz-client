@@ -2,12 +2,12 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import Mypage from './Mypage';
 import ManageRouter from '../Manage';
-import Transition from '@components/layout/Transition';
+import RouteTransition from '@components/layout/RouteTransition';
 
 function MypageRouter() {
   const location = useLocation();
   return (
-    <Transition location={location}>
+    <RouteTransition location={location}>
       <Routes location={location}>
         <Route
           path="/"
@@ -22,7 +22,7 @@ function MypageRouter() {
           element={<ManageRouter location={location} />}
         />
       </Routes>
-    </Transition>
+    </RouteTransition>
   );
 }
 

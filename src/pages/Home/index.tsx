@@ -10,8 +10,7 @@ import DetailPage from './DetailPage';
 import Reject from './Reject';
 import useLevel from '@lib/hooks/useLevel';
 import Notification from './Notification';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import Transition from '@components/layout/Transition';
+import RouteTransition from '@components/layout/RouteTransition';
 
 function HomeRouter() {
   const location = useLocation();
@@ -19,7 +18,7 @@ function HomeRouter() {
   const level = useLevel();
 
   return (
-    <Transition location={location}>
+    <RouteTransition location={location}>
       <Routes location={location}>
         {/* 자녀 / 부모 - 홈 */}
         <Route
@@ -49,7 +48,7 @@ function HomeRouter() {
         <Route
           path="/detail/achieved/:id"
           element={
-            <ForegroundTemplate label={'완주한 돈길'} level={level}>
+            <ForegroundTemplate label={'완주한 돈길'} level={level} to="/">
               <DetailPage />
             </ForegroundTemplate>
           }
@@ -62,7 +61,7 @@ function HomeRouter() {
         />
         <Route path="notification" element={<Notification />} />
       </Routes>
-    </Transition>
+    </RouteTransition>
   );
 }
 

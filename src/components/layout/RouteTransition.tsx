@@ -2,7 +2,7 @@ import React from 'react';
 import { Location } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-const Transition = ({
+const RouteTransition = ({
   location,
   children,
 }: {
@@ -29,4 +29,4 @@ const Transition = ({
   );
 };
 
-export default Transition;
+export default RouteTransition;

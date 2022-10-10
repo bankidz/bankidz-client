@@ -13,6 +13,7 @@ import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import SlideTransition from '@components/layout/SlideTransition';
 
 export interface CreateStepProps {
   currentStep: number;
@@ -116,30 +117,16 @@ function Create() {
               step={step}
               skipSelectParents={status === 'success' && isAlone ? true : false}
             />
-
-            <TransitionGroup
-              style={{ position: 'relative' }}
-              childFactory={(child) => {
-                return React.cloneElement(child, {
-                  classNames: `slide-${direction}`,
-                });
-              }}
-            >
-              <CSSTransition
-                key={step}
-                timeout={300}
-                classNames={`slide-${direction}`}
-              >
-                <ContentWrapper>
-                  <MarginTemplate>
-                    {status === 'success' && isAlone
-                      ? title[step]
-                      : title[step - 1]}
-                    {renderContent(step)}
-                  </MarginTemplate>
-                </ContentWrapper>
-              </CSSTransition>
-            </TransitionGroup>
+            <SlideTransition keyValue={step} direction={direction}>
+              <ContentWrapper>
+                <MarginTemplate>
+                  {status === 'success' && isAlone
+                    ? title[step]
+                    : title[step - 1]}
+                  {renderContent(step)}
+                </MarginTemplate>
+              </ContentWrapper>
+            </SlideTransition>
           </>
         )}
       </Wrapper>
