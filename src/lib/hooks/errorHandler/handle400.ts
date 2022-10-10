@@ -4,7 +4,7 @@ import logoutClient from '@lib/utils/handleLogout';
 
 /** default handler */
 export const handle400default = () => {
-  toast.error('적절하지 않은 요청이에요.', {
+  toast.error('적절하지 않은 요청이에요. 홈으로 이동합니다.', {
     onClose: navigateToHome,
   });
 };

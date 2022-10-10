@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 /** default handler */
 export const handle403default = () => {
-  toast.error('권한이 없어요.', {
+  toast.error('권한이 없어요. 홈으로 이동합니다.', {
     onClose: navigateToHome,
   });
 };
