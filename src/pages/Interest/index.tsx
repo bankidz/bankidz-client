@@ -8,9 +8,9 @@ function InterestRouter() {
       <Route
         path="/"
         element={
-          <BackgroundTemplate>
+          <>
             <InterestPage />
-          </BackgroundTemplate>
+          </>
         }
       />
     </Routes>

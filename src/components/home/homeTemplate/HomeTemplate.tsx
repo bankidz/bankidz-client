@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
 `;
 
 // import PullToRefresh from 'react-simple-pull-to-refresh';
