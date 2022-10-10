@@ -8,8 +8,7 @@ import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSe
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
-
-const REFETCH_INTERVAL = 10000;
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
 
 function ParentHome() {
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -18,7 +17,7 @@ function ParentHome() {
     [queryKeys.CHALLENGE_KID_PROGRESS, selectedKid?.kidId],
     () => challengeAPI.getChallengeKidProgress(selectedKid!.kidId),
     {
-      refetchInterval: REFETCH_INTERVAL,
+      refetchInterval: HOME_REFETCH_INTERVAL,
     },
   );
   const { status: proposedDongilsStatus, data: proposedDongils } = useQuery(
@@ -26,7 +25,7 @@ function ParentHome() {
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'pending'),
     {
       enabled: !!parentSummary,
-      refetchInterval: REFETCH_INTERVAL,
+      refetchInterval: HOME_REFETCH_INTERVAL,
     },
   );
   const { status: thisWeekSDongilsStatus, data: thisWeekSDongils } = useQuery(
@@ -34,7 +33,7 @@ function ParentHome() {
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
     {
       enabled: !!proposedDongils,
-      refetchInterval: REFETCH_INTERVAL,
+      refetchInterval: HOME_REFETCH_INTERVAL,
     },
   );
 
