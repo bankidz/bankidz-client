@@ -2,6 +2,8 @@ import React from 'react';
 import { Location } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+const pageOrder = ['/interest', '/', '/walk', '/mypage'];
+
 const RouteTransition = ({
   location,
   children,
@@ -9,20 +11,31 @@ const RouteTransition = ({
   location: Location;
   children: React.ReactElement;
 }) => {
+  const pathname = location.pathname;
+  const state = location.state;
+
   return (
     <TransitionGroup
       className={'transition-wrapper'}
       childFactory={(child) => {
-        return React.cloneElement(child, {
-          classNames: location.state?.direction || 'navigate-push',
-        });
+        if (!state?.prev) {
+          return React.cloneElement(child, {
+            classNames: location.state?.direction || 'navigate-push',
+          });
+        } else {
+          if (pageOrder.indexOf(pathname) > pageOrder.indexOf(state.prev)) {
+            return React.cloneElement(child, {
+              classNames: 'slide-next',
+            });
+          } else {
+            return React.cloneElement(child, {
+              classNames: 'slide-prev',
+            });
+          }
+        }
       }}
     >
-      <CSSTransition
-        key={location.pathname}
-        classNames={location.state?.direction || 'navigate-push'}
-        timeout={300}
-      >
+      <CSSTransition exact key={pathname} timeout={300}>
         {children}
       </CSSTransition>
     </TransitionGroup>

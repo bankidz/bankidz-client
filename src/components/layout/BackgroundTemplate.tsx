@@ -1,3 +1,4 @@
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import TabBar from './TabBar';
 
@@ -5,11 +6,15 @@ interface BackgroundTemplateProps {
   children: JSX.Element;
 }
 
+const pageOrder = ['', '/interest', '/', '/walk', '/mypage'];
+
 // 화면 하단에 'TapBar'를 함께 랜더링 하는 activity stack의 하위 UI template
 function BackgroundTemplate({ children }: BackgroundTemplateProps) {
+  const { pathname } = useLocation();
+  console.log(pageOrder.includes(pathname));
   return (
     <Wrapper>
-      <TabBar />
+      {pageOrder.includes(pathname) && <TabBar />}
       <Screen>{children}</Screen>
     </Wrapper>
   );

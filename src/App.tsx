@@ -11,7 +11,7 @@ import GroupLink from './components/mypage/GroupLink';
 import InterestRouter from './pages/Interest';
 import NotFound from './pages/NotFound';
 import TestPage from './pages/Test/TestPage';
-import '@lib/styles/transition.css';
+import '@components/layout/transition.css';
 import RouteChangeTracker from '@components/auth/RouteChangeTracker';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import ServiceRouter from './pages/ServiceRouter';

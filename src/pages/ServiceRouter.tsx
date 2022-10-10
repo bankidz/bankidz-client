@@ -9,8 +9,8 @@ import WalkRouter from './Walk';
 const ServiceRouter = () => {
   const location = useLocation();
   return (
-    <RouteTransition location={location}>
-      <BackgroundTemplate>
+    <BackgroundTemplate>
+      <RouteTransition location={location}>
         <Routes location={location}>
           <Route path="/*" element={<HomeRouter location={location} />} />
           <Route path="/walk/*" element={<WalkRouter />} />
@@ -20,8 +20,8 @@ const ServiceRouter = () => {
           />
           <Route path="/interest/*" element={<InterestRouter />} />
         </Routes>
-      </BackgroundTemplate>
-    </RouteTransition>
+      </RouteTransition>
+    </BackgroundTemplate>
   );
 };
 
