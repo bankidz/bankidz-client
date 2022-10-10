@@ -48,6 +48,11 @@ function Mypage() {
     });
   };
 
+  const isAllFetched =
+    familyStatus === 'success' &&
+    userStatus === 'success' &&
+    kidStatus !== 'loading';
+  console.log(isAllFetched, familyStatus, userStatus, kidStatus);
   return (
     <Wrapper>
       <Header>
@@ -60,7 +65,7 @@ function Mypage() {
         ) : (
           <SkeletonOverview isKid={true} />
         )}
-        {userData?.user.isKid ? (
+        {/*         {userData?.user.isKid ? (
           <Section>
             <h2>MY 레벨</h2>
             <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
@@ -74,9 +79,23 @@ function Mypage() {
               </>
             )}
           </Section>
-        )}
+        )} */}
         <Section>
-          {familyStatus === 'success' && (
+          {isAllFetched &&
+            (userData?.user.isKid ? (
+              <>
+                <h2>MY 레벨</h2>
+                <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
+              </>
+            ) : (
+              <>
+                <h2>자녀기록</h2>
+                <KidsRecordList kidData={kidData!} />
+              </>
+            ))}
+        </Section>
+        <Section>
+          {isAllFetched && (
             <>
               <h2>가족 관리</h2>
               {familyData!.id ? (

@@ -21,7 +21,7 @@ const Transition = ({
       <CSSTransition
         key={location.pathname}
         classNames={location.state?.direction || 'slide'}
-        timeout={400}
+        timeout={300}
       >
         {children}
       </CSSTransition>

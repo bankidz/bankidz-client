@@ -46,6 +46,7 @@ function HomeRouter() {
             <ForegroundTemplate
               label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
               level={level}
+              to="/"
             >
               <DetailPage />
             </ForegroundTemplate>
