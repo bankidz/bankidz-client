@@ -2,7 +2,6 @@ import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList'
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { EDayOfWeek } from '@lib/types/EDayOfWeek';
-import { TStatus } from '@lib/types/TStatus';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -12,13 +11,13 @@ import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
 interface WalkingDongilSectionProps {
-  walkingDongilsStatus: TStatus;
   walkingDongils: IChallengeDTO[] | undefined;
+  isAllSuccess: boolean;
 }
 
 function WalkingDongilSection({
-  walkingDongilsStatus,
   walkingDongils,
+  isAllSuccess,
 }: WalkingDongilSectionProps) {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
@@ -43,7 +42,7 @@ function WalkingDongilSection({
   };
 
   let content;
-  if (walkingDongilsStatus === 'success') {
+  if (isAllSuccess) {
     if (walkingDongils?.length === 0) {
       content = (
         <EmptyWalkingDongil

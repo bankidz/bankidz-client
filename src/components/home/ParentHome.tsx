@@ -31,19 +31,24 @@ function ParentHome() {
     },
   );
 
+  const isAllSuccess =
+    parentSummaryStatus === 'success' &&
+    proposedDongilsStatus === 'success' &&
+    thisWeekSDongilsStatus === 'success';
+
   return (
     <>
       <ParentSummary
-        parentSummaryStatus={parentSummaryStatus}
         parentSummary={parentSummary}
+        isAllSuccess={isAllSuccess}
       />
       <ProposedDongilSection
-        proposedDongilsStatus={proposedDongilsStatus}
         proposedDongils={proposedDongils}
+        isAllSuccess={isAllSuccess}
       />
       <ThisWeekSDongilSection
-        thisWeekSDongilsStatus={thisWeekSDongilsStatus}
         thisWeekSDongils={thisWeekSDongils}
+        isAllSuccess={isAllSuccess}
       />
       <LargeSpacer />
       <Modals />

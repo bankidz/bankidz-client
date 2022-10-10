@@ -1,21 +1,20 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
-import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
 
 interface ThisWeekSDongilSectionProps {
-  thisWeekSDongilsStatus: TStatus;
   thisWeekSDongils: IKidChallengeListDTO | undefined;
+  isAllSuccess: boolean;
 }
 
 function ThisWeekSDongilSection({
-  thisWeekSDongilsStatus,
   thisWeekSDongils,
+  isAllSuccess,
 }: ThisWeekSDongilSectionProps) {
   let content;
-  if (thisWeekSDongilsStatus === 'success') {
+  if (isAllSuccess) {
     if (thisWeekSDongils?.challengeList.length === 0) {
       content = <EmptyDongil subject="걷고있는" />;
     } else {

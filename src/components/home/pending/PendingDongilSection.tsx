@@ -6,16 +6,16 @@ import EmptyDongil from '../EmptyDongil';
 import PendingDongilList from './PendingDongilList';
 
 interface PendingDongilSectionProps {
-  pendingDongilsStatus: TStatus;
   pendingDongils: IChallengeDTO[] | undefined;
+  isAllSuccess: boolean;
 }
 
 function PendingDongilSection({
-  pendingDongilsStatus,
   pendingDongils,
+  isAllSuccess,
 }: PendingDongilSectionProps) {
   let content;
-  if (pendingDongilsStatus === 'success') {
+  if (isAllSuccess) {
     if (pendingDongils?.length === 0) {
       content = <EmptyDongil subject="대기중인" />;
     } else {

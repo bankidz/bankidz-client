@@ -1,26 +1,20 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { IKidWeekDTO } from '@lib/apis/challenge/challengeDTO';
-import { TStatus } from '@lib/types/TStatus';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import styled from 'styled-components';
 import Summary from './Summary';
 
 interface ParentSummaryProps {
-  parentSummaryStatus: TStatus;
   parentSummary: IKidWeekDTO | undefined;
+  isAllSuccess: boolean;
 }
 
-function ParentSummary({
-  parentSummaryStatus,
-  parentSummary,
-}: ParentSummaryProps) {
+function ParentSummary({ parentSummary, isAllSuccess }: ParentSummaryProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
 
   let content;
-  if (parentSummaryStatus === 'loading') {
-    content = <SkeletonSummary variant="ParentHome" />;
-  } else if (parentSummaryStatus === 'success') {
+  if (isAllSuccess) {
     const { currentSavings, totalPrice } = parentSummary!.weekInfo;
     content = (
       <Summary
@@ -30,7 +24,7 @@ function ParentSummary({
         username={selectedKid?.username}
       />
     );
-  } else if (parentSummaryStatus === 'error') {
+  } else {
     content = <SkeletonSummary variant="ParentHome" />;
   }
 

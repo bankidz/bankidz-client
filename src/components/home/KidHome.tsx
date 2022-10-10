@@ -27,16 +27,21 @@ function KidHome() {
     },
   );
 
+  const isAllSuccess =
+    kidSummaryStatus === 'success' &&
+    walkingDongilsStatus === 'success' &&
+    pendingDongilsStatus === 'success';
+
   return (
     <>
-      <KidSummary kidSummaryStatus={kidSummaryStatus} kidSummary={kidSummary} />
+      <KidSummary kidSummary={kidSummary} isAllSuccess={isAllSuccess} />
       <WalkingDongilSection
-        walkingDongilsStatus={walkingDongilsStatus}
         walkingDongils={walkingDongils}
+        isAllSuccess={isAllSuccess}
       />
       <PendingDongilSection
-        pendingDongilsStatus={pendingDongilsStatus}
         pendingDongils={pendingDongils}
+        isAllSuccess={isAllSuccess}
       />
       <LargeSpacer />
       <Modals />
