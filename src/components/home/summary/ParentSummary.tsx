@@ -6,11 +6,11 @@ import styled from 'styled-components';
 import Summary from './Summary';
 
 interface ParentSummaryProps {
-  parentSummary: IKidWeekDTO | undefined;
   isAllSuccess: boolean;
+  parentSummary: IKidWeekDTO | undefined;
 }
 
-function ParentSummary({ parentSummary, isAllSuccess }: ParentSummaryProps) {
+function ParentSummary({ isAllSuccess, parentSummary }: ParentSummaryProps) {
   const selectedKid = useAppSelector(selectSelectedKid);
 
   let content;

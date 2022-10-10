@@ -5,13 +5,13 @@ import EmptyDongil from '../EmptyDongil';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
 
 interface ThisWeekSDongilSectionProps {
-  thisWeekSDongils: IKidChallengeListDTO | undefined;
   isAllSuccess: boolean;
+  thisWeekSDongils: IKidChallengeListDTO | undefined;
 }
 
 function ThisWeekSDongilSection({
-  thisWeekSDongils,
   isAllSuccess,
+  thisWeekSDongils,
 }: ThisWeekSDongilSectionProps) {
   let content;
   if (isAllSuccess) {

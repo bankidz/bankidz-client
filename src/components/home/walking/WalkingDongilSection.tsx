@@ -11,13 +11,13 @@ import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
 interface WalkingDongilSectionProps {
-  walkingDongils: IChallengeDTO[] | undefined;
   isAllSuccess: boolean;
+  walkingDongils: IChallengeDTO[] | undefined;
 }
 
 function WalkingDongilSection({
-  walkingDongils,
   isAllSuccess,
+  walkingDongils,
 }: WalkingDongilSectionProps) {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();

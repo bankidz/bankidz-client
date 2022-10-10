@@ -5,13 +5,13 @@ import EmptyDongil from '../EmptyDongil';
 import ProposedDongilList from './ProposedDongilList';
 
 interface ProposedDongilSectionProps {
-  proposedDongils: IKidChallengeListDTO | undefined;
   isAllSuccess: boolean;
+  proposedDongils: IKidChallengeListDTO | undefined;
 }
 
 function ProposedDongilSection({
-  proposedDongils,
   isAllSuccess,
+  proposedDongils,
 }: ProposedDongilSectionProps) {
   let content;
   if (isAllSuccess) {

@@ -6,13 +6,13 @@ import EmptyDongil from '../EmptyDongil';
 import PendingDongilList from './PendingDongilList';
 
 interface PendingDongilSectionProps {
-  pendingDongils: IChallengeDTO[] | undefined;
   isAllSuccess: boolean;
+  pendingDongils: IChallengeDTO[] | undefined;
 }
 
 function PendingDongilSection({
-  pendingDongils,
   isAllSuccess,
+  pendingDongils,
 }: PendingDongilSectionProps) {
   let content;
   if (isAllSuccess) {

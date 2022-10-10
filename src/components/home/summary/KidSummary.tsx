@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import Summary from './Summary';
 
 interface KidSummaryProps {
-  kidSummary: IWeekDTO | undefined;
   isAllSuccess: boolean;
+  kidSummary: IWeekDTO | undefined;
 }
 
-function KidSummary({ kidSummary, isAllSuccess }: KidSummaryProps) {
+function KidSummary({ isAllSuccess, kidSummary }: KidSummaryProps) {
   let content;
   if (isAllSuccess) {
     const { currentSavings, totalPrice } = kidSummary!;
