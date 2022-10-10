@@ -12,7 +12,6 @@ import { useAppDispatch } from '@store/app/hooks';
 import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import SlideTransition from '@components/layout/SlideTransition';
 
 export interface CreateStepProps {
