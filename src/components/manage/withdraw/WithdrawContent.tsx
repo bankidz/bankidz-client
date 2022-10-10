@@ -89,7 +89,7 @@ function WithdrawContent() {
           property="default"
           label="돌아가기"
           onClick={() =>
-            navigate('/mypage/manage', { state: { direction: 'back' } })
+            navigate('/mypage/manage', { state: { direction: 'navigate-pop' } })
           }
         />
       </DoubleButtonWrapper>

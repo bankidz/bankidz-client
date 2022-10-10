@@ -14,13 +14,13 @@ const Transition = ({
       className={'transition-wrapper'}
       childFactory={(child) => {
         return React.cloneElement(child, {
-          classNames: location.state?.direction || 'slide',
+          classNames: location.state?.direction || 'navigate-push',
         });
       }}
     >
       <CSSTransition
         key={location.pathname}
-        classNames={location.state?.direction || 'slide'}
+        classNames={location.state?.direction || 'navigate-push'}
         timeout={300}
       >
         {children}

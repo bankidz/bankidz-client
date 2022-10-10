@@ -13,19 +13,26 @@ interface AppBarProps {
   level?: TLevel | null;
   // 이전 페이지 링크
   to?: string;
+  // 커스텀 이벤트
+  customEvent?: () => void;
 }
 
-function AppBar({ label, level, to }: AppBarProps) {
+function AppBar({ label, level, to, customEvent }: AppBarProps) {
   const navigate = useNavigate();
   const onClickAppBar = () => {
-    to ? navigate(to, { state: { direction: 'back' } }) : navigate(-1);
+    if (customEvent) {
+      customEvent();
+    } else {
+      to
+        ? navigate(to, { state: { direction: 'navigate-pop' } })
+        : navigate(-1);
+    }
   };
 
   const colorByLevel = level !== undefined && getColorByLevel(level!);
-  // 성우의 제안: null 삭제
   const textColor = (level?: TLevel | null) => {
     if (level === null || level === undefined) {
-      return '#2E3234'; // 성우의 제안: 색상 코드 단독으로 사용하는 경우 주석 남기기
+      return '#2E3234'; // black
     } else {
       return '#fff';
     }

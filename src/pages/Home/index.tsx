@@ -31,14 +31,7 @@ function HomeRouter() {
           }
         />
         {/* 자녀 - 돈길 계약하기 */}
-        <Route
-          path="/create/:step"
-          element={
-            <ForegroundTemplate label="돈길 계약하기">
-              <Create />
-            </ForegroundTemplate>
-          }
-        />
+        <Route path="/create" element={<Create />} />
         {/* 자녀 / 부모 - 걷고있는 돈길 / 금주의 돈길 */}
         <Route
           path="/detail/:id"

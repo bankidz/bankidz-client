@@ -3,7 +3,6 @@ import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SelectMoney from '@components/common/bottomSheets/contractSheet/SelectMoney';
 import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
-import { useNavigate } from 'react-router-dom';
 import useStackAmount from '@lib/hooks/useStackAmount';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
@@ -19,14 +18,14 @@ import ContractSheet from '@components/common/bottomSheets/contractSheet/Contrac
 import { useQueryClient } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import { CreateStepProps } from 'src/pages/Home/Create';
 
 interface TStep3Form {
   contractName: string;
   contractAmount: number;
 }
 
-function Step3({ currentStep }: { currentStep: number }) {
-  const navigate = useNavigate();
+function Step3({ onNextButtonClick }: CreateStepProps) {
   const dispatch = useAppDispatch();
   const [form, setForm] = useState<TStep3Form>(
     useAppSelector(selectStep3InitData),
@@ -43,12 +42,14 @@ function Step3({ currentStep }: { currentStep: number }) {
     queryKeys.CHALLENGE,
     'walking',
   ]) as IChallengeDTO[];
+
   const existingDongilName = walkingDongils.map((dongil) => dongil.title);
 
   const onClickNextButton = () => {
     dispatch(setTitle(form.contractName));
     dispatch(setTotalPrice(form.contractAmount));
-    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
+    onDismiss();
+    onNextButtonClick();
   };
 
   // stack에 있는 숫자들 더해서 form state에 저장

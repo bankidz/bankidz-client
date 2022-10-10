@@ -1,4 +1,4 @@
-import { useParams, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Step1 from '@components/home/create/steps/Step1';
 import Step2 from '@components/home/create/steps/Step2';
@@ -7,10 +7,19 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
+export interface CreateStepProps {
+  currentStep: number;
+  onNextButtonClick: () => void;
+}
+
+type TStep = 1 | 2 | 3 | 4 | 5;
 
 const title = [
   <h1>누구와 계약하나요?</h1>,
@@ -27,7 +36,8 @@ const title = [
 ];
 
 function Create() {
-  const { step } = useParams();
+  const [step, setStep] = useState<TStep>(1);
+  const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const dispatch = useAppDispatch();
   const { data: familyData, status } = useFamilyQuery();
   const parents = familyData?.familyUserList.filter((member) => !member.isKid);
@@ -39,61 +49,101 @@ function Create() {
     }
   }, [isAlone]);
 
-  const getTypedStep = (parsedStep: number) => {
-    if (step && parsedStep > 0 && parsedStep <= 5) {
-      return parsedStep as 1 | 2 | 3 | 4 | 5;
-    } else {
-      throw 'step error';
-    }
+  const onPrevButtonClick = () => {
+    setDirection('prev');
+    setStep((step - 1) as TStep);
   };
 
-  const renderContent = (typedStep: 1 | 2 | 3 | 4 | 5) => {
+  const onNextButtonClick = () => {
+    setDirection('next');
+    setStep((step + 1) as TStep);
+  };
+
+  const renderContent = (step: TStep) => {
     if (isAlone) {
-      switch (typedStep) {
+      switch (step) {
         case 1:
-          return <Step2 currentStep={1} />;
+          return (
+            <Step2 currentStep={1} onNextButtonClick={onNextButtonClick} />
+          );
         case 2:
-          return <Step3 currentStep={2} />;
+          return (
+            <Step3 currentStep={2} onNextButtonClick={onNextButtonClick} />
+          );
         case 3:
-          return <Step4 currentStep={3} />;
+          return (
+            <Step4 currentStep={3} onNextButtonClick={onNextButtonClick} />
+          );
         case 4:
-          return <Step5 currentStep={4} />;
+          return <Step5 />;
         case 5:
-          return <Navigate to="/create/1" />;
+          return <Navigate to="/" />;
       }
     } else {
-      switch (typedStep) {
+      switch (step) {
         case 1:
-          return <Step1 currentStep={1} />;
+          return (
+            <Step1 currentStep={1} onNextButtonClick={onNextButtonClick} />
+          );
         case 2:
-          return <Step2 currentStep={2} />;
+          return (
+            <Step2 currentStep={2} onNextButtonClick={onNextButtonClick} />
+          );
         case 3:
-          return <Step3 currentStep={3} />;
+          return (
+            <Step3 currentStep={3} onNextButtonClick={onNextButtonClick} />
+          );
         case 4:
-          return <Step4 currentStep={4} />;
+          return (
+            <Step4 currentStep={4} onNextButtonClick={onNextButtonClick} />
+          );
         case 5:
-          return <Step5 currentStep={4} />;
+          return <Step5 />;
       }
     }
   };
 
   return (
-    <Wrapper>
-      {step && (
-        <>
-          <Progress
-            step={getTypedStep(parseInt(step))}
-            skipSelectParents={status === 'success' && isAlone ? true : false}
-          />
-          <MarginTemplate>
-            {status === 'success' && isAlone
-              ? title[parseInt(step)]
-              : title[parseInt(step) - 1]}
-            {renderContent(getTypedStep(parseInt(step)))}
-          </MarginTemplate>
-        </>
-      )}
-    </Wrapper>
+    <ForegroundTemplate
+      label="돈길 계약하기"
+      customEvent={step !== 1 ? onPrevButtonClick : undefined}
+      to="/"
+    >
+      <Wrapper>
+        {step && (
+          <>
+            <Progress
+              step={step}
+              skipSelectParents={status === 'success' && isAlone ? true : false}
+            />
+
+            <TransitionGroup
+              style={{ position: 'relative' }}
+              childFactory={(child) => {
+                return React.cloneElement(child, {
+                  classNames: `slide-${direction}`,
+                });
+              }}
+            >
+              <CSSTransition
+                key={step}
+                timeout={300}
+                classNames={`slide-${direction}`}
+              >
+                <ContentWrapper>
+                  <MarginTemplate>
+                    {status === 'success' && isAlone
+                      ? title[step]
+                      : title[step - 1]}
+                    {renderContent(step)}
+                  </MarginTemplate>
+                </ContentWrapper>
+              </CSSTransition>
+            </TransitionGroup>
+          </>
+        )}
+      </Wrapper>
+    </ForegroundTemplate>
   );
 }
 
@@ -118,4 +168,10 @@ const Wrapper = styled.div`
       margin-top: 10px;
     }
   }
+`;
+
+const ContentWrapper = styled.div`
+  position: absolute;
+  width: 100%;
+  height: calc(100vh - 80px);
 `;

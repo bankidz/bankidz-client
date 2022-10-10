@@ -6,6 +6,7 @@ interface ForegroundTemplateProps {
   level?: TLevel | null;
   label?: string;
   to?: string;
+  customEvent?: () => void;
   children: JSX.Element;
 }
 
@@ -15,10 +16,11 @@ function ForegroundTemplate({
   label,
   children,
   to,
+  customEvent,
 }: ForegroundTemplateProps) {
   return (
     <Wrapper>
-      <AppBar label={label} level={level} to={to} />
+      <AppBar label={label} level={level} to={to} customEvent={customEvent} />
       <Screen>{children}</Screen>
     </Wrapper>
   );

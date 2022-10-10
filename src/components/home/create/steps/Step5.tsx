@@ -24,7 +24,7 @@ interface IPreSignedUrl {
   preSignedUrl: string;
 }
 
-function Step5({ currentStep }: { currentStep: number }) {
+function Step5() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const createChallengePayload = useAppSelector(selectCreateChallenge);
