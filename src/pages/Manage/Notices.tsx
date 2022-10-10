@@ -35,7 +35,11 @@ function Notices() {
     );
   }
 
-  return <ForegroundTemplate label="공지사항">{content}</ForegroundTemplate>;
+  return (
+    <ForegroundTemplate label="공지사항" to="/mypage/manage">
+      {content}
+    </ForegroundTemplate>
+  );
 }
 export default Notices;
 

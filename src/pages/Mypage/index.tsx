@@ -1,10 +1,11 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Location } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import Mypage from './Mypage';
+import ManageRouter from '../Manage';
 
-function MypageRouter() {
+function MypageRouter({ location }: { location: Location }) {
   return (
-    <Routes>
+    <Routes location={location}>
       <Route
         path="/"
         element={
@@ -13,6 +14,7 @@ function MypageRouter() {
           </BackgroundTemplate>
         }
       />
+      <Route path="/manage/*" element={<ManageRouter location={location} />} />
     </Routes>
   );
 }

@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Location, Route, Routes } from 'react-router-dom';
 import Alerts from './Alerts';
 import Faq from './Faq';
 import Features from './Features';
@@ -12,9 +12,9 @@ import WithdrawCallbackPage from './Withdraw/WithdrawCallbackPage';
 import WithdrawPage from './Withdraw/WithdrawPage';
 import WithdrawReasonPage from './Withdraw/WithdrawReasonPage';
 
-const ManageRouter = () => {
+const ManageRouter = ({ location }: { location: Location }) => {
   return (
-    <Routes>
+    <Routes location={location}>
       <Route path="/" element={<Manage />} />
       <Route path="/notices" element={<Notices />} />
       <Route path="/notices/:id" element={<NoticeView />} />

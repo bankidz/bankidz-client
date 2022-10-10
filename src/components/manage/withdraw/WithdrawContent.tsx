@@ -88,7 +88,9 @@ function WithdrawContent() {
         <Button
           property="default"
           label="돌아가기"
-          onClick={() => navigate('/manage')}
+          onClick={() =>
+            navigate('/mypage/manage', { state: { direction: 'navigate-pop' } })
+          }
         />
       </DoubleButtonWrapper>
     </Wrapper>
@@ -99,6 +101,7 @@ export default WithdrawContent;
 
 const Wrapper = styled.div`
   margin-top: 40px;
+
   section {
     width: 100%;
     height: 105px;

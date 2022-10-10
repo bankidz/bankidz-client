@@ -37,7 +37,7 @@ function WalkingDongilSection({
       });
       setCreateDisabled(true);
     } else {
-      navigate('create/1');
+      navigate('create');
     }
   };
 
@@ -55,7 +55,7 @@ function WalkingDongilSection({
         <>
           <WalkingDongilList walkingDongils={walkingDongils!} />
           <ContractNewDongilLink
-            to={'/create/1'}
+            to={'/create'}
             createDisabled={createDisabled}
             navigateToCreateDongil={navigateToCreateDongil}
           />
