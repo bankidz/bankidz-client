@@ -1,21 +1,20 @@
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
-import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ProposedDongilList from './ProposedDongilList';
 
 interface ProposedDongilSectionProps {
-  proposedDongilsStatus: TStatus;
+  isAllSuccess: boolean;
   proposedDongils: IKidChallengeListDTO | undefined;
 }
 
 function ProposedDongilSection({
-  proposedDongilsStatus,
+  isAllSuccess,
   proposedDongils,
 }: ProposedDongilSectionProps) {
   let content;
-  if (proposedDongilsStatus === 'success') {
+  if (isAllSuccess) {
     if (proposedDongils?.challengeList.length === 0) {
       content = <EmptyDongil subject="제안받은" />;
     } else {

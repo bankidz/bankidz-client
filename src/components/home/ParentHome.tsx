@@ -9,18 +9,24 @@ import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 
+const REFETCH_INTERVAL = 10000;
+
 function ParentHome() {
   const selectedKid = useAppSelector(selectSelectedKid);
 
   const { status: parentSummaryStatus, data: parentSummary } = useQuery(
     [queryKeys.CHALLENGE_KID_PROGRESS, selectedKid?.kidId],
     () => challengeAPI.getChallengeKidProgress(selectedKid!.kidId),
+    {
+      refetchInterval: REFETCH_INTERVAL,
+    },
   );
   const { status: proposedDongilsStatus, data: proposedDongils } = useQuery(
     [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'pending'],
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'pending'),
     {
       enabled: !!parentSummary,
+      refetchInterval: REFETCH_INTERVAL,
     },
   );
   const { status: thisWeekSDongilsStatus, data: thisWeekSDongils } = useQuery(
@@ -28,21 +34,27 @@ function ParentHome() {
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
     {
       enabled: !!proposedDongils,
+      refetchInterval: REFETCH_INTERVAL,
     },
   );
+
+  const isAllSuccess =
+    parentSummaryStatus === 'success' &&
+    proposedDongilsStatus === 'success' &&
+    thisWeekSDongilsStatus === 'success';
 
   return (
     <>
       <ParentSummary
-        parentSummaryStatus={parentSummaryStatus}
+        isAllSuccess={isAllSuccess}
         parentSummary={parentSummary}
       />
       <ProposedDongilSection
-        proposedDongilsStatus={proposedDongilsStatus}
+        isAllSuccess={isAllSuccess}
         proposedDongils={proposedDongils}
       />
       <ThisWeekSDongilSection
-        thisWeekSDongilsStatus={thisWeekSDongilsStatus}
+        isAllSuccess={isAllSuccess}
         thisWeekSDongils={thisWeekSDongils}
       />
       <LargeSpacer />

@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import RegisterBirthday from '@components/register/RegisterBirthday';
 import RegisterRole from '@components/register/RegisterRole';
+import PushNotiConsent from '@components/register/PushNotiConsent';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left-big.svg';
 import styled from 'styled-components';
 import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
@@ -21,26 +22,50 @@ function RegisterPage() {
     navigate('/auth/login');
   };
 
-  return (
-    <>
-      {parsedStep !== 3 && (
-        <ArrowWrapper>
-          <Arrow onClick={handleGoBackButtonClick} />
-        </ArrowWrapper>
-      )}
-      <MarginTemplate>
-        {parsedStep === 1 && <RegisterBirthday />}
-        {parsedStep === 2 && <RegisterRole />}
-      </MarginTemplate>
-      {parsedStep === 3 && <GuideTemplate page="onboarding" isKid={isKid!} />}
-    </>
+  const goBackArrow = (
+    <ArrowWrapper>
+      <Arrow onClick={handleGoBackButtonClick} />
+    </ArrowWrapper>
   );
+
+  let content;
+  if (parsedStep === 1) {
+    content = (
+      <>
+        {goBackArrow}
+        <MarginTemplate>
+          <RegisterBirthday />
+        </MarginTemplate>
+      </>
+    );
+  } else if (parsedStep === 2) {
+    content = (
+      <>
+        {goBackArrow}
+        <MarginTemplate margin={26}>
+          <RegisterRole />
+        </MarginTemplate>
+      </>
+    );
+  } else if (parsedStep === 3) {
+    content = (
+      <MarginTemplate margin={26}>
+        <PushNotiConsent />
+      </MarginTemplate>
+    );
+  } else if (parsedStep === 4) {
+    content = <GuideTemplate page="onboarding" isKid={isKid!} />;
+  }
+
+  return <>{content}</>;
 }
 
 export default RegisterPage;
 
 const ArrowWrapper = styled.div`
-  width: 100%;
+  width: 48px;
   height: 48px;
   box-sizing: border-box;
+  cursor: pointer;
+  margin-left: 4px;
 `;

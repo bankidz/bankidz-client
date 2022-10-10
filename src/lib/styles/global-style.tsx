@@ -64,8 +64,6 @@ export const GlobalStyle = createGlobalStyle`
     input:focus {
       outline: none;
     }
-    /* removing the highlight in mobile webview */
-    -webkit-tap-highlight-color: transparent;
 
     /* react spring bottom sheet */
     :root {
@@ -76,5 +74,20 @@ export const GlobalStyle = createGlobalStyle`
       --rsbs-ml: env(safe-area-inset-left);
       --rsbs-mr: env(safe-area-inset-right);
       --rsbs-overlay-rounded: 16px;
+    }
+
+    /* removing the highlight in mobile webview */
+    /* https://stackoverflow.com/questions/21003535/anyway-to-prevent-the-blue-highlighting-of-elements-in-chrome-when-clicking-quic */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    *:focus {
+      outline: none !important;
     }
 `;

@@ -1,17 +1,16 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
-import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import Summary from './Summary';
 
 interface KidSummaryProps {
-  kidSummaryStatus: TStatus;
+  isAllSuccess: boolean;
   kidSummary: IWeekDTO | undefined;
 }
 
-function KidSummary({ kidSummaryStatus, kidSummary }: KidSummaryProps) {
+function KidSummary({ isAllSuccess, kidSummary }: KidSummaryProps) {
   let content;
-  if (kidSummaryStatus === 'success') {
+  if (isAllSuccess) {
     const { currentSavings, totalPrice } = kidSummary!;
     content = (
       <Summary
