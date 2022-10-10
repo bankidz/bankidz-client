@@ -1,4 +1,3 @@
-import removeLocalStorage from '@lib/utils/localStorage/removeLocalStorage';
 import { resetCredentials } from '@store/slices/authSlice';
 import { useDispatch } from 'react-redux';
 

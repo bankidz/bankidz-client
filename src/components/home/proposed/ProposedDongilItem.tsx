@@ -66,7 +66,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       openApproveCompletedBottomSheet();
     },
   });
-  const handleApproveButtonClick = async () => {
+  const handleApproveButtonClick = () => {
     approveMutation.mutate({ challengeId: id, accept: true, comment: '' });
   };
 

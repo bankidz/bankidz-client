@@ -22,18 +22,14 @@ function Mypage() {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
 
-  const { data: familyData, status: familyStatus } = useFamilyQuery({
-    onError: () => {
-      //TODO : 에러처리
-    },
-  });
+  const { data: familyData, status: familyStatus } = useFamilyQuery();
   const { data: userData, status: userStatus } = useUserQuery();
   const { data: kidData, status: kidStatus } = useFamilyKidQuery({
     enabled: userData?.user.isKid === false,
   });
 
   const { mutate: mutateCreateFamily } = useMutation(familyAPI.createFamily, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
     },
