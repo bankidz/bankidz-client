@@ -87,8 +87,9 @@ function Reject() {
 export default Reject;
 
 const Wrapper = styled.div`
+  position: absolute;
   background: ${({ theme }) => theme.palette.greyScale.grey100};
-  width: 100%;
+  width: 100vw;
   height: calc(var(--vh, 1vh) * 100);
   h1 {
     margin: 16px 0px 96px 8px;

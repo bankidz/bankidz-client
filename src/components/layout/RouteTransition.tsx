@@ -25,11 +25,11 @@ const RouteTransition = ({
         } else {
           if (pageOrder.indexOf(pathname) > pageOrder.indexOf(state.prev)) {
             return React.cloneElement(child, {
-              classNames: 'slide-next',
+              classNames: 'none',
             });
           } else {
             return React.cloneElement(child, {
-              classNames: 'slide-prev',
+              classNames: 'none',
             });
           }
         }
