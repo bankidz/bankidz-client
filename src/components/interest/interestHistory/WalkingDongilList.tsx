@@ -33,7 +33,7 @@ function WalkingDongilList() {
       return (
         <StyledLink
           key={challenge.id}
-          to={`/detail/${challenge.id}`}
+          to={`/detail/interest/${challenge.id}`}
           state={{ detailPrev: 'interest' }}
         >
           <FirstRow>

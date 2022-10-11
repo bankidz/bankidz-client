@@ -6,15 +6,14 @@ import PendingDongilSection from '@components/home/pending/PendingDongilSection'
 import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
-
-const REFETCH_INTERVAL = 10000;
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
 
 function KidHome() {
   const { status: kidSummaryStatus, data: kidSummary } = useQuery(
     queryKeys.CHALLENGE_PROGRESS,
     challengeAPI.getChallengeProgress,
     {
-      refetchInterval: REFETCH_INTERVAL,
+      refetchInterval: HOME_REFETCH_INTERVAL,
     },
   );
   const { status: walkingDongilsStatus, data: walkingDongils } = useQuery(
@@ -22,7 +21,7 @@ function KidHome() {
     () => challengeAPI.getChallenge('walking'),
     {
       enabled: !!kidSummary,
-      refetchInterval: REFETCH_INTERVAL,
+      refetchInterval: HOME_REFETCH_INTERVAL,
     },
   );
   const { status: pendingDongilsStatus, data: pendingDongils } = useQuery(
@@ -30,7 +29,7 @@ function KidHome() {
     () => challengeAPI.getChallenge('pending'),
     {
       enabled: !!walkingDongils,
-      refetchInterval: REFETCH_INTERVAL,
+      refetchInterval: HOME_REFETCH_INTERVAL,
     },
   );
 
