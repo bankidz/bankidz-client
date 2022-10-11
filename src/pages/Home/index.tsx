@@ -15,7 +15,6 @@ import RouteTransition from '@components/layout/RouteTransition';
 function HomeRouter({ location }: { location: Location }) {
   const isKid = useAppSelector(selectIsKid);
   const level = useLevel();
-
   return (
     <Routes location={location}>
       {/* 자녀 / 부모 - 홈 */}
@@ -36,7 +35,7 @@ function HomeRouter({ location }: { location: Location }) {
           <ForegroundTemplate
             label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
             level={level}
-            to="/"
+            to={location.state?.detailPrev === 'interest ' ? '/interest' : '/'}
           >
             <DetailPage />
           </ForegroundTemplate>
@@ -46,7 +45,11 @@ function HomeRouter({ location }: { location: Location }) {
       <Route
         path="/detail/achieved/:id"
         element={
-          <ForegroundTemplate label={'완주한 돈길'} level={level} to="/">
+          <ForegroundTemplate
+            label={'완주한 돈길'}
+            level={level}
+            to="/interest"
+          >
             <DetailPage />
           </ForegroundTemplate>
         }

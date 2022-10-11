@@ -87,3 +87,23 @@
   transform: translateX(100%);
   transition: transform 300ms ease-in-out;
 }
+
+/* ------------------------ */
+
+.none-enter {
+  transform: translateX(0%);
+}
+
+.none-enter-active {
+  transform: translateX(0%);
+  transition: transform 0ms;
+}
+
+.none-exit {
+  transform: translateX(100%);
+}
+
+.none-exit-active {
+  transform: translateX(100%);
+  transition: transform 0ms;
+}
