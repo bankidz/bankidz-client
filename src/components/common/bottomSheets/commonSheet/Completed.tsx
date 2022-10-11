@@ -63,7 +63,9 @@ function Completed({ type, title, onMainActionClick }: CompleteProps) {
       <Container>
         {content[type].icon}
         <div>
-          {type === 'giveUp' ? `'${title}'가 취소되었어요` : content[type].main}
+          {type === 'giveUp'
+            ? `'${title}' 돈길이 포기되었어요`
+            : content[type].main}
         </div>
       </Container>
       <Button

@@ -65,7 +65,7 @@ function Detail() {
         sheetContent: 'Completed',
         contentProps: {
           type: 'giveUp',
-          title: title,
+          title,
           onMainActionClick: handleConfirmButtonClick,
         },
       });
@@ -82,17 +82,6 @@ function Detail() {
     openSheetBySequence(openSheet);
   };
 
-  // 1. 돈길 포기하기 -> 정말 포기할거에요?
-  const openGiveUpBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'GiveUpCheck',
-      contentProps: {
-        onGiveUpButtonClick: handleGiveUpButtonClick,
-        onDismiss: openCancelGiveUpBottomSheet,
-      },
-    });
-  };
-
   // 2-a. 포기하기
   const queryClient = useQueryClient();
   const { handleError } = useAPIError({
@@ -106,7 +95,7 @@ function Detail() {
     },
     onError: handleError,
   });
-  const handleGiveUpButtonClick = async () => {
+  const handleGiveUpButtonClick = () => {
     deleteMutation.mutate(parseInt(id!));
   };
 
@@ -120,6 +109,17 @@ function Detail() {
         },
       });
     openSheetBySequence(openSheet);
+  };
+
+  // 1. 돈길 포기하기 -> 정말 포기할거에요?
+  const openGiveUpBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'GiveUpCheck',
+      contentProps: {
+        onGiveUpButtonClick: handleGiveUpButtonClick,
+        onDismiss: openCancelGiveUpBottomSheet,
+      },
+    });
   };
 
   return (
