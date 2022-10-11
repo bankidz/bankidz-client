@@ -56,7 +56,7 @@ function Detail() {
 
   // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
   const handleConfirmButtonClick = () => {
-    navigate('/', { state: { direction: 'none' } });
+    navigate('/', { state: { direction: 'navigate-pop' } });
     setCloseBottomSheet();
     queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
   };
