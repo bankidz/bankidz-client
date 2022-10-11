@@ -35,7 +35,7 @@ function HomeRouter({ location }: { location: Location }) {
           <ForegroundTemplate
             label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
             level={level}
-            to={location.state?.detailPrev === 'interest ' ? '/interest' : '/'}
+            to="/"
           >
             <DetailPage />
           </ForegroundTemplate>
