@@ -35,6 +35,7 @@ function Detail() {
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const targetDongil = useTargetDongil(id!, isPaid);
+
   const {
     isMom,
     title,
@@ -52,9 +53,9 @@ function Detail() {
 
   // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
   const handleConfirmButtonClick = () => {
+    navigate('/', { state: { direction: 'none' } });
     setCloseBottomSheet();
-    navigate('/');
-    queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
+    /* queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']); */
   };
 
   // 3-a. 포기 완료
