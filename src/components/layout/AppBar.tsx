@@ -24,7 +24,9 @@ function AppBar({ label, level, to, customEvent }: AppBarProps) {
       customEvent();
     } else {
       to
-        ? navigate(to, { state: { direction: 'navigate-pop' } })
+        ? navigate(to, {
+            state: { direction: 'navigate-pop' },
+          })
         : navigate(-1);
     }
   };
