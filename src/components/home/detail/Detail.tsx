@@ -53,8 +53,8 @@ function Detail() {
   // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
   const handleConfirmButtonClick = () => {
     setCloseBottomSheet();
-    queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
     navigate('/');
+    queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
   };
 
   // 3-a. 포기 완료
@@ -64,7 +64,7 @@ function Detail() {
         sheetContent: 'Completed',
         contentProps: {
           type: 'giveUp',
-          title: title,
+          title,
           onMainActionClick: handleConfirmButtonClick,
         },
       });
@@ -81,17 +81,6 @@ function Detail() {
     openSheetBySequence(openSheet);
   };
 
-  // 1. 돈길 포기하기 -> 정말 포기할거에요?
-  const openGiveUpBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'GiveUpCheck',
-      contentProps: {
-        onGiveUpButtonClick: handleGiveUpButtonClick,
-        onDismiss: openCancelGiveUpBottomSheet,
-      },
-    });
-  };
-
   // 2-a. 포기하기
   const queryClient = useQueryClient();
   const { handleError } = useAPIError({
@@ -105,7 +94,7 @@ function Detail() {
     },
     onError: handleError,
   });
-  const handleGiveUpButtonClick = async () => {
+  const handleGiveUpButtonClick = () => {
     deleteMutation.mutate(parseInt(id!));
   };
 
@@ -119,6 +108,17 @@ function Detail() {
         },
       });
     openSheetBySequence(openSheet);
+  };
+
+  // 1. 돈길 포기하기 -> 정말 포기할거에요?
+  const openGiveUpBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'GiveUpCheck',
+      contentProps: {
+        onGiveUpButtonClick: handleGiveUpButtonClick,
+        onDismiss: openCancelGiveUpBottomSheet,
+      },
+    });
   };
 
   return (
