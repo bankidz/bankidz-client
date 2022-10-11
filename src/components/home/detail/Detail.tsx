@@ -20,6 +20,38 @@ import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import { useState } from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+
+const dummy: IChallengeDTO = {
+  isMom: true,
+  title: '',
+  itemName: '기타',
+  interestRate: 10,
+  totalPrice: 1000,
+  weekPrice: 1000,
+  weeks: 3,
+  progressList: [
+    {
+      approvedAt: '',
+      challengeId: 1,
+      challengeStatus: 'WALKING',
+      isAchieved: false,
+      weeks: 1,
+    },
+  ],
+  successWeeks: 1,
+  challengeStatus: 'WALKING',
+  challengeCategory: '이자율 받기',
+  comment: {
+    content: '',
+    id: 0,
+  },
+  createdAt: '',
+  fileName: '',
+  id: 0,
+  interestPrice: 0,
+};
 
 function Detail() {
   const { id } = useParams();
@@ -28,6 +60,7 @@ function Detail() {
   const colorByLevel = getColorByLevel(level!);
   const navigate = useNavigate();
   const location = useLocation();
+
   const state = location.state as {
     isPaid: boolean;
   };
@@ -35,7 +68,7 @@ function Detail() {
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const targetDongil = useTargetDongil(id!, isPaid);
-
+  const [copy] = useState<IChallengeDTO>(targetDongil!);
   const {
     isMom,
     title,
@@ -47,7 +80,7 @@ function Detail() {
     progressList,
     successWeeks,
     challengeStatus,
-  } = targetDongil!;
+  } = targetDongil || copy;
   const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
     useGlobalBottomSheet();
 
@@ -55,7 +88,7 @@ function Detail() {
   const handleConfirmButtonClick = () => {
     navigate('/', { state: { direction: 'none' } });
     setCloseBottomSheet();
-    /* queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']); */
+    queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
   };
 
   // 3-a. 포기 완료
