@@ -54,6 +54,19 @@ function HomeRouter({ location }: { location: Location }) {
           </ForegroundTemplate>
         }
       />
+      {/* 부모 - 이자내역 걷고있는 돈길 */}
+      <Route
+        path="/detail/interest/:id"
+        element={
+          <ForegroundTemplate
+            label={'걷고있는 돈길'}
+            level={level}
+            to="/interest"
+          >
+            <DetailPage />
+          </ForegroundTemplate>
+        }
+      />
       {/* 부모 - 대기중인 돈길 */}
       {/* 자녀의 대기중인 돈길은 별도의 라우팅 없이 모달 / 바텀시트 팝업으로 처리 */}
       <Route
