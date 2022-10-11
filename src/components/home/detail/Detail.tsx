@@ -23,36 +23,6 @@ import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import { useState } from 'react';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-const dummy: IChallengeDTO = {
-  isMom: true,
-  title: '',
-  itemName: '기타',
-  interestRate: 10,
-  totalPrice: 1000,
-  weekPrice: 1000,
-  weeks: 3,
-  progressList: [
-    {
-      approvedAt: '',
-      challengeId: 1,
-      challengeStatus: 'WALKING',
-      isAchieved: false,
-      weeks: 1,
-    },
-  ],
-  successWeeks: 1,
-  challengeStatus: 'WALKING',
-  challengeCategory: '이자율 받기',
-  comment: {
-    content: '',
-    id: 0,
-  },
-  createdAt: '',
-  fileName: '',
-  id: 0,
-  interestPrice: 0,
-};
-
 function Detail() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
@@ -68,7 +38,7 @@ function Detail() {
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const targetDongil = useTargetDongil(id!, isPaid);
-  const [copy] = useState<IChallengeDTO>(targetDongil!);
+  const [copy] = useState<IChallengeDTO>(targetDongil!); // 포기하기 이후 애니메이션 렌더링용 카피
   const {
     isMom,
     title,
