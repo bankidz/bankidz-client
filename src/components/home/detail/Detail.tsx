@@ -20,6 +20,8 @@ import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import { useState } from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 function Detail() {
   const { id } = useParams();
@@ -28,6 +30,7 @@ function Detail() {
   const colorByLevel = getColorByLevel(level!);
   const navigate = useNavigate();
   const location = useLocation();
+
   const state = location.state as {
     isPaid: boolean;
   };
@@ -35,6 +38,7 @@ function Detail() {
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const targetDongil = useTargetDongil(id!, isPaid);
+  const [copy] = useState<IChallengeDTO>(targetDongil!); // 포기하기 이후 애니메이션 렌더링용 카피
   const {
     isMom,
     title,
@@ -46,14 +50,14 @@ function Detail() {
     progressList,
     successWeeks,
     challengeStatus,
-  } = targetDongil!;
+  } = targetDongil || copy;
   const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
     useGlobalBottomSheet();
 
   // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
   const handleConfirmButtonClick = () => {
+    navigate('/', { state: { direction: 'none' } });
     setCloseBottomSheet();
-    navigate('/');
     queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
   };
 

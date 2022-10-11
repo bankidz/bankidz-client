@@ -90,8 +90,9 @@ function WithdrawReason() {
 export default WithdrawReason;
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: calc(100vh - 48px);
+  position: absolute;
   overflow-x: hidden;
 
   header h1 {
