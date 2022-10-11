@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import { useAppDispatch } from '@store/app/hooks';
 import RoleButton from '@components/common/buttons/RoleButton';
 import { setInProcess, setParent } from '@store/slices/createChallengeSlice';
+import { CreateStepProps } from 'src/pages/Home/Create';
 
-function Step1({ currentStep }: { currentStep: number }) {
+function Step1({ onNextButtonClick }: CreateStepProps) {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const onClickRoleButton = (isFemale: boolean) => {
     dispatch(setParent(isFemale));
     dispatch(setInProcess());
-    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
+    onNextButtonClick();
   };
 
   return (

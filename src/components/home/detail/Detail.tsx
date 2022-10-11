@@ -19,6 +19,9 @@ import useLevel from '@lib/hooks/useLevel';
 import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
+import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import { useState } from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 function Detail() {
   const { id } = useParams();
@@ -27,6 +30,7 @@ function Detail() {
   const colorByLevel = getColorByLevel(level!);
   const navigate = useNavigate();
   const location = useLocation();
+
   const state = location.state as {
     isPaid: boolean;
   };
@@ -34,6 +38,7 @@ function Detail() {
 
   // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const targetDongil = useTargetDongil(id!, isPaid);
+  const [copy] = useState<IChallengeDTO>(targetDongil!); // 포기하기 이후 애니메이션 렌더링용 카피
   const {
     isMom,
     title,
@@ -45,15 +50,15 @@ function Detail() {
     progressList,
     successWeeks,
     challengeStatus,
-  } = targetDongil!;
+  } = targetDongil || copy;
   const { setOpenBottomSheet, setCloseBottomSheet, openSheetBySequence } =
     useGlobalBottomSheet();
 
   // 4-a. '돈길이 포기되었어요' 바텀시트 확인 버튼
   const handleConfirmButtonClick = () => {
+    navigate('/', { state: { direction: 'navigate-pop' } });
     setCloseBottomSheet();
     queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
-    navigate('/');
   };
 
   // 3-a. 포기 완료
@@ -63,7 +68,7 @@ function Detail() {
         sheetContent: 'Completed',
         contentProps: {
           type: 'giveUp',
-          title: title,
+          title,
           onMainActionClick: handleConfirmButtonClick,
         },
       });
@@ -80,28 +85,20 @@ function Detail() {
     openSheetBySequence(openSheet);
   };
 
-  // 1. 돈길 포기하기 -> 정말 포기할거에요?
-  const openGiveUpBottomSheet = () => {
-    setOpenBottomSheet({
-      sheetContent: 'GiveUpCheck',
-      contentProps: {
-        onGiveUpButtonClick: handleGiveUpButtonClick,
-        onDismiss: openCancelGiveUpBottomSheet,
-      },
-    });
-  };
-
   // 2-a. 포기하기
   const queryClient = useQueryClient();
+  const { handleError } = useAPIError({
+    403: {
+      'E403-40007': openGiveUpExceededBottomSheet,
+    },
+  });
   const deleteMutation = useMutation(challengeAPI.deleteChallenge, {
     onSuccess: () => {
       openGiveUpCompletedBottomSheet();
     },
-    onError: (error: any) => {
-      error.response.status === 403 && openGiveUpExceededBottomSheet();
-    },
+    onError: handleError,
   });
-  const handleGiveUpButtonClick = async () => {
+  const handleGiveUpButtonClick = () => {
     deleteMutation.mutate(parseInt(id!));
   };
 
@@ -115,6 +112,17 @@ function Detail() {
         },
       });
     openSheetBySequence(openSheet);
+  };
+
+  // 1. 돈길 포기하기 -> 정말 포기할거에요?
+  const openGiveUpBottomSheet = () => {
+    setOpenBottomSheet({
+      sheetContent: 'GiveUpCheck',
+      contentProps: {
+        onGiveUpButtonClick: handleGiveUpButtonClick,
+        onDismiss: openCancelGiveUpBottomSheet,
+      },
+    });
   };
 
   return (
@@ -217,7 +225,8 @@ const GiveUpDongilButton = styled.button`
   text-decoration: underline;
   text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
   margin-top: 48px;
-  width: 100%;
+  width: 117px;
+  height: 46px;
   text-align: center;
   ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
   color: ${({ theme }) => theme.palette.greyScale.grey500};

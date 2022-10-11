@@ -209,7 +209,7 @@ const content = `제1장 총칙
 
 function Terms() {
   return (
-    <ForegroundTemplate label="서비스 약관">
+    <ForegroundTemplate label="서비스 약관" to="/mypage/manage">
       <Content>{content}</Content>
     </ForegroundTemplate>
   );

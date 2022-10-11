@@ -4,6 +4,12 @@ import { ReactComponent as ChevronDown } from '@assets/icons/chevronDown.svg';
 import { ReactComponent as ChevronUp } from '@assets/icons/chevronUp.svg';
 import { useState } from 'react';
 
+const onChatButtonClick = () => {
+  window.Kakao.Channel.chat({
+    channelPublicId: '_LjxjVxj',
+  });
+};
+
 const content = [
   {
     index: 0,
@@ -43,7 +49,14 @@ const content = [
   {
     index: 7,
     title: '더 궁금한 점이 있다면?',
-    body: '더 궁금한 점이 있다면 아래 링크를 클릭하고 질문을 남겨주세요!',
+    body: (
+      <>
+        더 궁금한 점이 있다면 아래 링크를 눌러 질문을 남겨주세요!
+        <br />
+        <br />
+        <span onClick={onChatButtonClick}>[카카오톡으로 문의하기]</span>
+      </>
+    ),
   },
 ];
 
@@ -56,7 +69,7 @@ function Faq() {
   };
 
   return (
-    <ForegroundTemplate label="자주 묻는 질문">
+    <ForegroundTemplate label="자주 묻는 질문" to="/mypage/manage">
       <>
         {content.map((item, index) => (
           <div key={item.title}>

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 function Features() {
   return (
-    <ForegroundTemplate label="서비스 소개">
+    <ForegroundTemplate label="서비스 소개" to="/mypage/manage">
       <Content>
         <img src={features} />
       </Content>

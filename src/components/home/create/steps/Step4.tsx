@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import SelectInterest from '@components/common/bottomSheets/contractSheet/SelectInterest';
 import SheetButton from '@components/common/buttons/SheetButton';
@@ -26,6 +25,7 @@ import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import dayjs from 'dayjs';
 import { TInterestRate } from '@lib/types/IInterestRate';
+import { CreateStepProps } from 'src/pages/Home/Create';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -42,8 +42,7 @@ type TContractInfo = {
   overPrice: number;
 };
 
-function Step4({ currentStep }: { currentStep: number }) {
-  const navigate = useNavigate();
+function Step4({ onNextButtonClick }: CreateStepProps) {
   const dispatch = useAppDispatch();
   const totalPrice = useAppSelector(selectTotalPrice);
   const [form, setForm] = useState<TStep4Form>(
@@ -84,7 +83,10 @@ function Step4({ currentStep }: { currentStep: number }) {
     dispatch(setInterestRate(form.interestRate));
     dispatch(setWeeks(contractInfo.weekCost));
     dispatch(setInterestPrice(totalPrice * form.interestRate! * 0.01));
-    navigate(`/create/${currentStep + 1}`, { state: { from: currentStep } });
+
+    onDismissInterestRate();
+    onDismissWeekPrice();
+    onNextButtonClick();
   };
 
   // 다음으로 버튼 활성화,비활성화 처리

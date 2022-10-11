@@ -49,6 +49,10 @@ const content = {
     icon: <Complete />,
     main: '기존 가족그룹에서 나갔어요',
   },
+  pushNoti: {
+    icon: <Complete />,
+    main: '푸시알림이 설정되었어요',
+  },
 };
 
 function Completed({ type, title, onMainActionClick }: CompleteProps) {
@@ -59,7 +63,9 @@ function Completed({ type, title, onMainActionClick }: CompleteProps) {
       <Container>
         {content[type].icon}
         <div>
-          {type === 'giveUp' ? `'${title}'가 취소되었어요` : content[type].main}
+          {type === 'giveUp'
+            ? `'${title}' 돈길이 포기되었어요`
+            : content[type].main}
         </div>
       </Container>
       <Button

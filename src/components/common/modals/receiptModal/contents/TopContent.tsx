@@ -12,7 +12,7 @@ function TopContent({ variant, title }: TopProps) {
   const map = new Map<TReceiptModalVariant, React.ReactElement>();
   map.set('contract', <span className="header">계약서 전송 성공!</span>);
   map.set('proposing', <ProposalBadge isProposing />);
-  map.set('rejected', <ProposalBadge isProposing />);
+  map.set('rejected', <ProposalBadge isProposing={false} />);
 
   return (
     <Wrapper variant={variant}>

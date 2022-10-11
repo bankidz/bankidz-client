@@ -7,6 +7,7 @@ import { useState } from 'react';
 import KidMain from './KidMain';
 import Step from './Step';
 import ParentMain from './ParentMain';
+import SlideTransition from '@components/layout/SlideTransition';
 
 interface GuideTemplateProps {
   page: 'manage' | 'onboarding';
@@ -26,7 +27,7 @@ const GuideTemplate = ({ page, isKid }: GuideTemplateProps) => {
   const navigate = useNavigate();
   const onExitButtonClick = () => {
     if (page === 'manage') {
-      navigate('/manage');
+      navigate('/mypage/manage');
     } else {
       navigate('/');
     }
@@ -58,7 +59,9 @@ const GuideTemplate = ({ page, isKid }: GuideTemplateProps) => {
       <div className="progress">
         {step !== 0 && <Progress step={step} skipSelectParents={true} />}
       </div>
-      {content()}
+      <SlideTransition keyValue={step} direction={'next'}>
+        <ContentWrapper>{content()}</ContentWrapper>
+      </SlideTransition>
       <SheetButton
         onClickNext={onNextButtonClick}
         label={label[step]}
@@ -73,6 +76,7 @@ export default GuideTemplate;
 
 const Wrapper = styled.div`
   margin-top: 64px;
+  width: 100vw;
   .exit {
     cursor: pointer;
     position: absolute;
@@ -85,4 +89,10 @@ const Wrapper = styled.div`
       margin: 0 auto;
     }
   }
+`;
+
+const ContentWrapper = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: calc(100vh - 80px);
 `;

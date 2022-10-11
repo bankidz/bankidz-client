@@ -31,7 +31,11 @@ function WalkingDongilList() {
       const leftOverWeek = current.diff(contractEndDate, 'week') * -1;
 
       return (
-        <StyledLink key={challenge.id} to={`/detail/${challenge.id}`}>
+        <StyledLink
+          key={challenge.id}
+          to={`/detail/interest/${challenge.id}`}
+          state={{ detailPrev: 'interest' }}
+        >
           <FirstRow>
             <div className="text-wrapper">
               <h1>{challenge.title}</h1>

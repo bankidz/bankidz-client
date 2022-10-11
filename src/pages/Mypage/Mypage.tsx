@@ -22,18 +22,14 @@ function Mypage() {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
 
-  const { data: familyData, status: familyStatus } = useFamilyQuery({
-    onError: () => {
-      //TODO : 에러처리
-    },
-  });
+  const { data: familyData, status: familyStatus } = useFamilyQuery();
   const { data: userData, status: userStatus } = useUserQuery();
   const { data: kidData, status: kidStatus } = useFamilyKidQuery({
     enabled: userData?.user.isKid === false,
   });
 
   const { mutate: mutateCreateFamily } = useMutation(familyAPI.createFamily, {
-    onSuccess: (data) => {
+    onSuccess: () => {
       openCreateDongilCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
     },
@@ -48,35 +44,39 @@ function Mypage() {
     });
   };
 
+  const isAllFetched =
+    familyStatus === 'success' &&
+    userStatus === 'success' &&
+    kidStatus !== 'loading';
+
   return (
     <Wrapper>
       <Header>
         마이페이지
-        <Setting onClick={() => navigate('/manage')} />
+        <Setting onClick={() => navigate('manage')} />
       </Header>
       <MarginTemplate>
-        {userStatus === 'success' ? (
-          <OverView userData={userData} />
+        {isAllFetched ? (
+          <OverView userData={userData!} />
         ) : (
           <SkeletonOverview isKid={true} />
         )}
-        {userData?.user.isKid ? (
-          <Section>
-            <h2>MY 레벨</h2>
-            <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
-          </Section>
-        ) : (
-          <Section smallGap={true}>
-            {kidStatus === 'success' && (
+        <Section>
+          {isAllFetched &&
+            (userData?.user.isKid ? (
+              <>
+                <h2>MY 레벨</h2>
+                <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
+              </>
+            ) : (
               <>
                 <h2>자녀기록</h2>
                 <KidsRecordList kidData={kidData!} />
               </>
-            )}
-          </Section>
-        )}
+            ))}
+        </Section>
         <Section>
-          {familyStatus === 'success' && (
+          {isAllFetched && (
             <>
               <h2>가족 관리</h2>
               {familyData!.id ? (
@@ -102,6 +102,7 @@ const Wrapper = styled.div`
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(var(--vh, 1vh) * 100);
+  background-color: ${({ theme }) => theme.palette.greyScale.grey100};
 `;
 
 const Header = styled.div`

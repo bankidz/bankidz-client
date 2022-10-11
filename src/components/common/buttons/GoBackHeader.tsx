@@ -2,10 +2,10 @@ import { ReactComponent as Arrow } from '@assets/icons/arrow-left-big.svg';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-function GoBackHeader() {
+function GoBackHeader({ to }: { to?: string }) {
   const navigate = useNavigate();
   const onGoBackButtonClick = () => {
-    navigate(-1);
+    to ? navigate(to, { state: { direction: 'navigate-pop' } }) : navigate(-1);
   };
   return (
     <Wrapper>

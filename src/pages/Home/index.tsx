@@ -1,8 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import { Location, Route, Routes, useLocation } from 'react-router-dom';
 import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid, selectLevel } from '@store/slices/authSlice';
+import { selectIsKid } from '@store/slices/authSlice';
 import KidHomePage from './KidHomePage';
 import ParentHomePage from './ParentHomePage';
 import Create from './Create';
@@ -10,13 +10,13 @@ import DetailPage from './DetailPage';
 import Reject from './Reject';
 import useLevel from '@lib/hooks/useLevel';
 import Notification from './Notification';
+import RouteTransition from '@components/layout/RouteTransition';
 
-function HomeRouter() {
+function HomeRouter({ location }: { location: Location }) {
   const isKid = useAppSelector(selectIsKid);
   const level = useLevel();
-
   return (
-    <Routes>
+    <Routes location={location}>
       {/* 자녀 / 부모 - 홈 */}
       <Route
         path="/"
@@ -27,14 +27,7 @@ function HomeRouter() {
         }
       />
       {/* 자녀 - 돈길 계약하기 */}
-      <Route
-        path="/create/:step"
-        element={
-          <ForegroundTemplate label="돈길 계약하기">
-            <Create />
-          </ForegroundTemplate>
-        }
-      />
+      <Route path="/create" element={<Create />} />
       {/* 자녀 / 부모 - 걷고있는 돈길 / 금주의 돈길 */}
       <Route
         path="/detail/:id"
@@ -42,6 +35,7 @@ function HomeRouter() {
           <ForegroundTemplate
             label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
             level={level}
+            to="/"
           >
             <DetailPage />
           </ForegroundTemplate>
@@ -51,7 +45,24 @@ function HomeRouter() {
       <Route
         path="/detail/achieved/:id"
         element={
-          <ForegroundTemplate label={'완주한 돈길'} level={level}>
+          <ForegroundTemplate
+            label={'완주한 돈길'}
+            level={level}
+            to="/interest"
+          >
+            <DetailPage />
+          </ForegroundTemplate>
+        }
+      />
+      {/* 부모 - 이자내역 걷고있는 돈길 */}
+      <Route
+        path="/detail/interest/:id"
+        element={
+          <ForegroundTemplate
+            label={'걷고있는 돈길'}
+            level={level}
+            to="/interest"
+          >
             <DetailPage />
           </ForegroundTemplate>
         }
