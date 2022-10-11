@@ -9,6 +9,7 @@ import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
+import SlideTransition from '@components/layout/SlideTransition';
 
 function RegisterPage() {
   const { step } = useParams();
@@ -57,7 +58,11 @@ function RegisterPage() {
     content = <GuideTemplate page="onboarding" isKid={isKid!} />;
   }
 
-  return <>{content}</>;
+  return (
+    <SlideTransition keyValue={step} direction={'next'}>
+      <Wrapper>{content}</Wrapper>
+    </SlideTransition>
+  );
 }
 
 export default RegisterPage;
@@ -68,4 +73,10 @@ const ArrowWrapper = styled.div`
   box-sizing: border-box;
   cursor: pointer;
   margin-left: 4px;
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
 `;
