@@ -102,6 +102,8 @@
 </div>
 </details>
 
+<br/>
+
 ## 4.2. 홈 탭 (자녀)
 
 1. 걷고있는 돈길 → 돈길 포기하기 → 실패한 돈길 삭제
@@ -122,6 +124,8 @@
 | <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="width:71%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
+<br/>
+
 ## 4.3. 돈길 계약하기, 돈길 걷기 탭 (자녀)
 
 1. 계약 대상 → 계약 상품 → 이름, 목표금액 → 이자율, 매주 저금액 → 서명 → 계약서 확인
@@ -138,6 +142,8 @@
 
 | <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="width:50%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+<br/>
 
 ## 4.4. 홈 탭, 이자 내역 탭 (부모)
 
@@ -160,6 +166,8 @@
 | <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="width:71%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
+<br/>
+
 ## 4.5. 마이페이지 탭 및 가족 초대 (공통)
 
 1. 가족초대
@@ -174,10 +182,10 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="width:50%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="width:50%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
-
+<br/>
 
 ## 4.6. 기타
 
@@ -195,9 +203,9 @@
 
 ### 신성우
 
-- **회원 관리 및 온보딩 (공통)**
-- **홈 탭 (자녀, 부모)**
-- **이자 내역 탭 (부모)**
+- [회원 관리 및 온보딩 (공통)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#3-%EB%B1%85%ED%82%A4%EC%A6%88%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EA%B8%B0%EC%88%A0)
+- [홈 탭 (자녀)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
+- [홈 탭, 이자 내역 탭 (부모)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#44-%ED%99%88-%ED%83%AD-%EC%9D%B4%EC%9E%90-%EB%82%B4%EC%97%AD-%ED%83%AD-%EB%B6%80%EB%AA%A8)
 - Boiler-plate 세팅
 - Coding Convention 정립
 - OAuth 전략, JWT 운용
@@ -208,9 +216,9 @@
 
 ### 한규진
 
-- **돈길 계약하기 및 돈길 걷기 탭 (자녀)**
-- **마이페이지 탭 및** 가**족 초대 (공통)**
-- **알림 내역 (공통)**
+- [돈길 계약하기, 돈길 걷기 탭 (자녀)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#43-%EB%8F%88%EA%B8%B8-%EA%B3%84%EC%95%BD%ED%95%98%EA%B8%B0-%EB%8F%88%EA%B8%B8-%EA%B1%B7%EA%B8%B0-%ED%83%AD-%EC%9E%90%EB%85%80)
+- [마이페이지 탭 및 가족 초대 (공통)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#45-%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%83%AD-%EB%B0%8F-%EA%B0%80%EC%A1%B1-%EC%B4%88%EB%8C%80-%EA%B3%B5%ED%86%B5)
+- 알림 내역 (공통)
 - Docker-compose, github Actions 기반 CI/CD 구축
 - storybook, Theme-provider 기반 Design System 세팅
 - 전역상태로 관리되는 바텀시트
@@ -222,7 +230,7 @@
 # 5. 개발 후기
 
 - **신성우** | [우당탕 뱅키즈 개발기](https://24siefil.oopy.io/bankidz)
-- **한규진** | [Antifreeze!/뱅키즈](https://9yujin.tistory.com/category/🐬 프로젝트/CEOS)
+- **한규진** | [Antifreeze! 뱅키즈](https://9yujin.tistory.com/category/🐬 프로젝트/CEOS)
 
 <br/>
 
