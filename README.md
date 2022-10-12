@@ -25,7 +25,7 @@
 
 # 3. 뱅키즈를 만드는 기술
 
-뱅키즈는 가설 검증 주기를 최소화 하기 위해 모든 비즈니스 로직을 웹 기술로 구현합니다. 이를 통해 사용자에게 항상 최신의 서비스를 제공하고 피드백에 기민하게 대응합니다. 푸시알림 제공과 서비스 접속에 대한 접근성 향상을 위해 웹 서비스를 웹뷰로 이식한 앱으로 최종 프로덕트를 제작합니다.
+뱅키즈 앱은 가설 검증 주기를 최소화 하기 위해 푸시알림, 딥링크를 통한 가족 초대 기능을 제외한 모든 비즈니스 로직을 웹 기술로 구현합니다. 이를 통해 사용자에게 항상 최신의 서비스를 제공하고 피드백에 기민하게 대응합니다.
 
 - **코어**: React, TypeScript
 
@@ -53,13 +53,13 @@
   .
   ├── App.tsx
   ├── assets
-  ├── components # business logic
+  ├── components # business logic, UI
   ├── index.tsx
   ├── lib
   │   ├── apis # api call, server-side type
   │   ├── constants # macros
-  │   ├── hooks # custom hooks, custom queries
-  │   ├── styles # theme provider
+  │   ├── hooks # custom hooks, queries
+  │   ├── styles # Theme-provider
   │   ├── types # client-side type
   │   └── utils # reusable functions
   ├── pages # routing
@@ -92,9 +92,9 @@
 <summary>자세히</summary>
 <div markdown="1">
 
-  - 카카오, 애플 소셜 로그인을 사용한다.
-  - 서버로부터 받은 accessToken은 memory (Redux Store)를 통해 관리되며, refreshToken은 httpOnly & secure cookie를 통해 관리되어 Client단에서의 직접 접근을 차단하고 보안성을 제고한다.
-  - 웹뷰 이식 과정에서 EXPO 관련 호환성 문제로 token은 localStorage를 통해 관리되는 것으로 정책이 변경되었다.
+  - 카카오, 애플 소셜 로그인을 사용합니다.
+  - 서버로부터 받은 accessToken은 memory (Redux Store)를 통해 관리되며, refreshToken은 httpOnly & secure cookie를 통해 관리되어 Client단에서의 직접 접근을 차단하고 보안성을 제고합니다.
+  - 웹뷰 이식 과정에서 EXPO 관련 호환성 문제로 token은 localStorage를 통해 관리되는 것으로 정책이 변경되었습니다.
 
 <img src="README.assets/image.svg" alt="https://velog.velcdn.com/images/24siefil/post/945daeaa-533b-4cde-95ef-a677dc4ea940/image.svg" style="zoom:67%;" />
 
@@ -103,8 +103,6 @@
 
 | <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:66%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-
-
 
 <br/>
 
@@ -118,9 +116,9 @@
 <summary>자세히</summary>
 <div markdown="1">
 
-  - 홈 탭에서는 다양한 종류의 돈길에 대한 CRUD가 가능하다.
-  - 홈 탭의 데이터는 ReactQuery 기반의 interval refetch 로직을 통해 최신상태를 유지한다.
-  - 알림내역은 무한스크롤 기반으로 데이터를 지속적으로 fetch 한다.
+  - 홈 탭에서는 네가지 종류의 돈길에 대한 CRUD가 가능합니다.
+  - 홈 탭의 데이터는 ReactQuery 기반의 interval refetching을 통해 최신상태를 유지합니다.
+  - 알림내역은 무한스크롤 기반으로 데이터를 지속적으로 fetch 합니다.
 
 </div>
 </details>
@@ -159,10 +157,8 @@
 <summary>자세히</summary>
 <div markdown="1">
 
-  - 선택된 자녀의 데이터만 optimistic하게 fetch 하여 리소스 사용을 최적화 한다.
-  - fetch된 데이터는 Cache 되어 로딩을 최적화 한다.
-  - 홈 탭에서는 다양한 종류의 돈길에 대한 CRUD가 가능하다.
-  - 홈 탭의 데이터는 ReactQuery 기반의 interval refetch 로직을 통해 최신상태를 유지한다.
+  - 선택된 자녀의 데이터만 optimistic하게 fetch 하여 효율적으로 리소스를 사용합니다.
+  - fetch된 데이터는 cache 되어 추후 로딩을 최적화 합니다.
 
 </div>
 </details>
@@ -213,9 +209,9 @@
 - React, TypeScript, Redux, Theme-provider 기반 Boiler-plate 세팅
 - Coding Convention 정립
 - OAuth 전략, JWT 운용
-- Skeleton UI, ReactQuery 기반 Caching, Refetching
 - 우선순위에 따른 전역 API 에러처리
 - 전역상태로 관리되는 모달
+- Skeleton UI
 - Google Analytics 연동
 
 ### 한규진
