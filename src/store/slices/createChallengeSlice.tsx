@@ -3,30 +3,6 @@ import { TDongilCategory } from '@lib/types/TDongilCategory';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
 
-type TPostChallengeResponseState = {
-  challengeCategory: string;
-  comment: null;
-  createdAt: string;
-  id: number;
-  interestRate: number;
-  isAchieved: number;
-  isMom: boolean;
-  itemName: string;
-  progressList: null;
-  status: 0 | 1 | 2;
-  title: string;
-  totalPrice: number;
-  weekPrice: number;
-  weeks: number;
-};
-
-type TCreateChallengeState = {
-  challenge: ICreateChallengePayload;
-  response: TPostChallengeResponseState | null;
-  // 새로고침시 false -> step1으로
-  inProcess: boolean;
-};
-
 export interface ICreateChallengePayload {
   challengeCategory: TDongilCategory;
   isMom: boolean | null;
@@ -40,21 +16,17 @@ export interface ICreateChallengePayload {
   fileName: string;
 }
 
-const initialState: TCreateChallengeState = {
-  challenge: {
-    challengeCategory: '이자율 받기',
-    isMom: null,
-    itemName: null,
-    title: '',
-    interestRate: null,
-    interestPrice: 0,
-    totalPrice: 0,
-    weekPrice: 0,
-    weeks: 0,
-    fileName: '',
-  },
-  response: null,
-  inProcess: false,
+const initialState: ICreateChallengePayload = {
+  challengeCategory: '이자율 받기',
+  isMom: null,
+  itemName: null,
+  title: '',
+  interestRate: null,
+  interestPrice: 0,
+  totalPrice: 0,
+  weekPrice: 0,
+  weeks: 0,
+  fileName: '',
 };
 
 export const createChallengeSlice = createSlice({
@@ -62,34 +34,31 @@ export const createChallengeSlice = createSlice({
   initialState,
   reducers: {
     setParent(state, action: PayloadAction<boolean>) {
-      state.challenge.isMom = action.payload;
+      state.isMom = action.payload;
     },
     setItemName(state, action: PayloadAction<string>) {
-      state.challenge.itemName = action.payload;
+      state.itemName = action.payload;
     },
     setTitle(state, action: PayloadAction<string>) {
-      state.challenge.title = action.payload;
+      state.title = action.payload;
     },
     setTotalPrice(state, action: PayloadAction<number>) {
-      state.challenge.totalPrice = action.payload;
+      state.totalPrice = action.payload;
     },
     setWeekPrice(state, action: PayloadAction<number>) {
-      state.challenge.weekPrice = action.payload;
+      state.weekPrice = action.payload;
     },
     setInterestRate(state, action: PayloadAction<10 | 20 | 30 | null>) {
-      state.challenge.interestRate = action.payload;
+      state.interestRate = action.payload;
     },
     setInterestPrice(state, action: PayloadAction<number>) {
-      state.challenge.interestPrice = action.payload;
+      state.interestPrice = action.payload;
     },
     setWeeks(state, action: PayloadAction<number>) {
-      state.challenge.weeks = action.payload;
+      state.weeks = action.payload;
     },
     setFileName(state, action: PayloadAction<string>) {
-      state.challenge.fileName = action.payload;
-    },
-    setInProcess(state) {
-      state.inProcess = true;
+      state.fileName = action.payload;
     },
     resetChallengePayload() {
       return initialState;
@@ -107,28 +76,25 @@ export const {
   setInterestPrice,
   setWeeks,
   resetChallengePayload,
-  setInProcess,
   setFileName,
 } = createChallengeSlice.actions;
 
 export const selectCreateChallenge = (state: RootState) =>
-  state.createChallenge.challenge;
+  state.createChallenge;
 export const selectStep3InitData = (state: RootState) => {
   return {
-    contractName: state.createChallenge.challenge.title,
-    contractAmount: state.createChallenge.challenge.totalPrice,
+    contractName: state.createChallenge.title,
+    contractAmount: state.createChallenge.totalPrice,
   };
 };
 export const selectStep4InitData = (state: RootState) => {
   return {
-    weekPrice: state.createChallenge.challenge.weekPrice,
-    interestRate: state.createChallenge.challenge.interestRate,
-    weeks: state.createChallenge.challenge.weeks,
+    weekPrice: state.createChallenge.weekPrice,
+    interestRate: state.createChallenge.interestRate,
+    weeks: state.createChallenge.weeks,
   };
 };
 export const selectTotalPrice = (state: RootState) =>
-  state.createChallenge.challenge.totalPrice;
-export const selectInProcess = (state: RootState) =>
-  state.createChallenge.inProcess;
+  state.createChallenge.totalPrice;
 
 export default createChallengeSlice.reducer;
