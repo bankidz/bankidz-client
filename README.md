@@ -4,9 +4,9 @@
 
 ![thumbnail_bankidz](README.assets/thumbnail_bankidz.png)
 
-|                 Web                 |                             iOS                              |                           Android                            |
-| :---------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [bankidz.com](https://bankidz.com/) | <a href="https://play.google.com/store/apps/details?id="><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id='><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
+|                 Web                 |  AD  | Instagram | iOS                                                          | Android                                                      |
+| :---------------------------------: | :--: | :-------: | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| [bankidz.com](https://bankidz.com/) |  -   |     -     | <a href="https://play.google.com/store/apps/details?id="><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id='><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
 
 * 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 일부 기능이 작동하지 않습니다.
 * 뱅키즈 앱은 현재 App Store, Google Play 출시를 위해 심사중입니다.
@@ -101,6 +101,11 @@
 
 </div>
 </details>
+
+| <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:50%;" /> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+
+
 
 <br/>
 
@@ -203,7 +208,7 @@
 
 ### 신성우
 
-- [회원 관리 및 온보딩 (공통)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#3-%EB%B1%85%ED%82%A4%EC%A6%88%EB%A5%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EA%B8%B0%EC%88%A0)
+- [회원 관리 및 온보딩 (공통)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#41-%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC-%EC%98%A8%EB%B3%B4%EB%94%A9-%EA%B3%B5%ED%86%B5)
 - [홈 탭 (자녀)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
 - [홈 탭, 이자 내역 탭 (부모)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#44-%ED%99%88-%ED%83%AD-%EC%9D%B4%EC%9E%90-%EB%82%B4%EC%97%AD-%ED%83%AD-%EB%B6%80%EB%AA%A8)
 - Boiler-plate 세팅
@@ -230,7 +235,7 @@
 # 5. 개발 후기
 
 - **신성우** | [우당탕 뱅키즈 개발기](https://24siefil.oopy.io/bankidz)
-- **한규진** | [Antifreeze! 뱅키즈](https://9yujin.tistory.com/category/🐬 프로젝트/CEOS)
+- **한규진** | [Antifreeze! 뱅키즈](https://9yujin.tistory.com/category/%F0%9F%90%AC%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/CEOS)
 
 <br/>
 
