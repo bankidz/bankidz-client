@@ -4,9 +4,9 @@
 
 ![thumbnail_bankidz](README.assets/thumbnail_bankidz.png)
 
-|                 Web                 |  AD  | Instagram |                           iOS App                            |                         Android App                          |
-| :---------------------------------: | :--: | :-------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| [bankidz.com](https://bankidz.com/) |  -   |     -     | <a href="https://play.google.com/store/apps/details?id="><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id='><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
+|  AD  | Instagram |                 Web                 |                           iOS App                            |                         Android App                          |
+| :--: | :-------: | :---------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+|  -   |     -     | [bankidz.com](https://bankidz.com/) | <a href="https://play.google.com/store/apps/details?id="><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id='><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
 
 * 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 일부 기능이 작동하지 않습니다.
 * 뱅키즈 앱은 현재 App Store, Google Play 출시를 위해 심사중입니다.
@@ -30,21 +30,21 @@
 
 - **코어**: React, TypeScript
 
-- **상태관리**: Redux, React Query
+- **상태관리**: Redux, ReactQuery
 
-- **디자인 시스템**: [Storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme Provider
+- **디자인 시스템**: [Storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
 
 - **스타일링**: Styled-components
 
 - **코드품질**: ESLint, Prettier
 
-- **CI/CD**: Github Action, Docker-compose
+- **CI/CD**: Github-actions, Docker-compose
 
 - **버전관리**: Git with Github, Git-flow
 
 - **웹뷰 앱**: React Native with EXPO
 
-- **협업**: Figma, Slack, Notion
+- **협업**: Slack, Notion, Figma
 
 <details>
 <summary>디랙토리 구조</summary>
@@ -196,7 +196,7 @@
 ## 4.6. 기타
 
 1. React-transition-group 기반 Routing Animation
-2. Skeleton UI, Caching
+2. Skeleton UI, ReactQuery 기반 Caching
 3. 우선순위에 따른 전역 API 에러처리
 
 | <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265915-82a58d5d-11f9-46f9-9b42-381fdb62452a.gif" alt="에러처리 프로필 선택" style="zoom:33%;" /> |
@@ -214,7 +214,7 @@
 - Boiler-plate 세팅
 - Coding Convention 정립
 - OAuth 전략, JWT 운용
-- Skeleton UI, Caching
+- Skeleton UI, ReactQuery 기반 Caching, Refetching
 - 우선순위에 따른 전역 API 에러처리
 - 전역상태로 관리되는 모달
 - Google Analytics 연동
@@ -224,7 +224,7 @@
 - [돈길 계약하기, 돈길 걷기 탭 (자녀)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#43-%EB%8F%88%EA%B8%B8-%EA%B3%84%EC%95%BD%ED%95%98%EA%B8%B0-%EB%8F%88%EA%B8%B8-%EA%B1%B7%EA%B8%B0-%ED%83%AD-%EC%9E%90%EB%85%80)
 - [마이페이지 탭 및 가족 초대 (공통)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#45-%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%83%AD-%EB%B0%8F-%EA%B0%80%EC%A1%B1-%EC%B4%88%EB%8C%80-%EA%B3%B5%ED%86%B5)
 - 알림 내역 (공통)
-- Docker-compose, github Actions 기반 CI/CD 구축
+- Docker-compose, Github-actions 기반 CI/CD 구축
 - storybook, Theme-provider 기반 Design System 세팅
 - 전역상태로 관리되는 바텀시트
 - React-transition-group 기반 Routing Animation
