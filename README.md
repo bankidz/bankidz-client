@@ -102,7 +102,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:50%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:66%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 
@@ -126,7 +126,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="width:71%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
@@ -145,7 +145,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="width:50%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="width:66%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
@@ -168,7 +168,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="width:71%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
@@ -177,6 +177,7 @@
 
 1. 가족초대
 2. 설정
+3. 알림 설정 localStorage Caching
 
 <details>
 <summary>자세히</summary>
@@ -187,8 +188,8 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="width:50%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
 
@@ -197,10 +198,9 @@
 1. React-transition-group 기반 Routing Animation
 2. Skeleton UI, Caching
 3. 우선순위에 따른 전역 API 에러처리
-4. 알림 설정 localStorage Caching
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265915-82a58d5d-11f9-46f9-9b42-381fdb62452a.gif" alt="에러처리 프로필 선택" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265915-82a58d5d-11f9-46f9-9b42-381fdb62452a.gif" alt="에러처리 프로필 선택" style="zoom:33%;" /> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
 
