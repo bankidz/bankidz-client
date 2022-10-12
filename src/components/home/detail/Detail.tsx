@@ -36,7 +36,6 @@ function Detail() {
   };
   const isPaid = state?.isPaid;
 
-  // 자녀 - 걷고있는 돈길 / 부모 - 금주의 돈길
   const targetDongil = useTargetDongil(id!, isPaid);
   const [copy] = useState<IChallengeDTO>(targetDongil!); // 포기하기 이후 애니메이션 렌더링용 카피
   const {
