@@ -1,8 +1,7 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch } from '@store/app/hooks';
 import RoleButton from '@components/common/buttons/RoleButton';
-import { setInProcess, setParent } from '@store/slices/createChallengeSlice';
+import { setParent } from '@store/slices/createChallengeSlice';
 import { CreateStepProps } from 'src/pages/Home/Create';
 
 function Step1({ onNextButtonClick }: CreateStepProps) {
@@ -10,7 +9,6 @@ function Step1({ onNextButtonClick }: CreateStepProps) {
 
   const onClickRoleButton = (isFemale: boolean) => {
     dispatch(setParent(isFemale));
-    dispatch(setInProcess());
     onNextButtonClick();
   };
 
