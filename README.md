@@ -210,7 +210,7 @@
 - [회원 관리 및 온보딩 (공통)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#41-%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC-%EC%98%A8%EB%B3%B4%EB%94%A9-%EA%B3%B5%ED%86%B5)
 - [홈 탭 (자녀)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
 - [홈 탭, 이자 내역 탭 (부모)](https://github.com/bankidz/bankidz-client/blob/docs/readme/README.md#44-%ED%99%88-%ED%83%AD-%EC%9D%B4%EC%9E%90-%EB%82%B4%EC%97%AD-%ED%83%AD-%EB%B6%80%EB%AA%A8)
-- Boiler-plate 세팅
+- React, TypeScript, Redux, Theme-provider기반 Boiler-plate 세팅
 - Coding Convention 정립
 - OAuth 전략, JWT 운용
 - Skeleton UI, ReactQuery 기반 Caching, Refetching
