@@ -15,10 +15,9 @@
 
 # 2. 뱅키즈를 만드는 사람
 
-| <img src="https://avatars.githubusercontent.com/24siefil" width=150px> | <img src="https://avatars.githubusercontent.com/9yujin" width=150px> | <img src="https://avatars.githubusercontent.com/rms5213" width=150px> | <img src="https://avatars.githubusercontent.com/sanbonai06" width=150px> | <img src="https://avatars.githubusercontent.com/ozzing" width=150px> |
+| <img src="https://avatars.githubusercontent.com/24siefil" width=150px><br />[신성우](https://github.com/24siefil) | <img src="https://avatars.githubusercontent.com/9yujin" width=150px><br />[한규진](https://github.com/9yujin) | <img src="https://avatars.githubusercontent.com/rms5213" width=150px><br />[이근우](https://github.com/rms5213) | <img src="https://avatars.githubusercontent.com/sanbonai06" width=150px><br />[김민준](https://github.com/sanbonai06) | <img src="https://avatars.githubusercontent.com/ozzing" width=150px><br />[주어진사랑](https://github.com/ozzing) |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-|            [신성우](https://github.com/24siefil)             |             [한규진](https://github.com/9yujin)              |             [이근우](https://github.com/rms5213)             |           [김민준](https://github.com/sanbonai06)            |           [주어진사랑](https://github.com/ozzing)            |
-|                   Web-client<br />Engineer                   |                   Web-client<br />Engineer                   |                   Web-client<br />Engineer                   |                     Server<br />Engineer                     |                     Server<br />Engineer                     |
+|                   Web-client<br />Engineer                   |                   Web-client<br />Engineer                   |                   App-client<br />Engineer                   |                     Server<br />Engineer                     |                     Server<br />Engineer                     |
 |               [안도영](mailto:ado20@naver.com)               |           [박소정](mailto:the1sojeong@ewhain.net)            |             [김수빈](mailto:beeny9958@gmail.com)             |            [최지혜](mailto:sbbhfl6135@gmail.com)             |                                                              |
 |                             CEO                              |                              PO                              |                           Designer                           |                           Designer                           |                                                              |
 
@@ -32,7 +31,7 @@
 
 - **상태관리**: Redux, ReactQuery
 
-- **디자인 시스템**: [Storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
+- **디자인 시스템**: [storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
 
 - **스타일링**: Styled-components
 
