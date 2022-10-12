@@ -119,7 +119,7 @@
 </div>
 </details>
 
-| ![자녀 홈 걷고있는 돈길_compressed](https://user-images.githubusercontent.com/83692797/195262090-c0a7dbb4-9531-4e3f-897a-dcbc755ec35d.gif) | <img src="https://user-images.githubusercontent.com/83692797/195262139-1ce3ca58-a836-451c-a83f-deaab8349cd3.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | ![알림 내역_compressed](https://user-images.githubusercontent.com/83692797/195262195-56078ff9-b80f-4a33-b05f-19de6853868e.gif) |
+| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 ## 4.3. 돈길 계약하기, 돈길 걷기 탭 (자녀)
@@ -136,7 +136,7 @@
 </div>
 </details>
 
-| <img src="README.assets/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%80%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%A8%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%20%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%A1%E1%84%87%E1%85%AE%E1%84%89%E1%85%B3%E1%84%90%E1%85%A5%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%86%E1%85%A7%E1%86%BC%20%E1%84%86%E1%85%A9%E1%84%83%E1%85%A1%E1%86%AF%20%E1%84%91%E1%85%A9%E1%84%92%E1%85%A1%E1%86%B7.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함" style="zoom:33%;" /> | <img src="README.assets/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%80%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%A5%E1%86%AE%E1%84%80%E1%85%B5.gif" alt="돈길 걷기" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 ## 4.4. 홈 탭, 이자 내역 탭 (부모)
@@ -157,13 +157,13 @@
 </div>
 </details>
 
-| <img src="README.assets/%E1%84%87%E1%85%AE%E1%84%86%E1%85%A9%20%E1%84%92%E1%85%A9%E1%86%B7%20%E1%84%83%E1%85%A1%E1%84%8C%E1%85%A1%E1%84%82%E1%85%A7.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="README.assets/%E1%84%87%E1%85%AE%E1%84%86%E1%85%A9%20%E1%84%92%E1%85%A9%E1%86%B7%20%E1%84%8C%E1%85%A6%E1%84%8B%E1%85%A1%E1%86%AB%E1%84%87%E1%85%A1%E1%86%AE%E1%84%8B%E1%85%B3%E1%86%AB%20%E1%84%83%E1%85%A9%E1%86%AB%E1%84%80%E1%85%B5%E1%86%AF.gif" alt="부모 홈 제안받은 돈길" style="zoom:33%;" /> | <img src="README.assets/%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%A1%E1%84%82%E1%85%A2%E1%84%8B%E1%85%A7%E1%86%A8%20%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%A1%E1%84%8C%E1%85%B5%E1%84%80%E1%85%B3%E1%86%B8.gif" alt="이자내역 이자지급" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 ## 4.5. 마이페이지 탭 및 가족 초대 (공통)
 
-1. 설정
-2. 가족초대
+1. 가족초대
+2. 설정
 
 <details>
 <summary>자세히</summary>
@@ -174,8 +174,8 @@
 </div>
 </details>
 
-| <img src="README.assets/%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8C%E1%85%A1%E1%84%82%E1%85%A7.gif" alt="설정 자녀" style="zoom:33%;" /> |      |
-| ------------------------------------------------------------ | ---- |
+| <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 
 
@@ -186,7 +186,7 @@
 3. 우선순위에 따른 전역 API 에러처리
 4. 알림 설정 localStorage Caching
 
-| <img src="README.assets/%E1%84%90%E1%85%B3%E1%84%85%E1%85%A2%E1%86%AB%E1%84%8C%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%80%E1%85%B3%E1%84%85%E1%85%AE%E1%86%B8%20%E1%84%83%E1%85%A9%E1%86%AB%E1%84%80%E1%85%B5%E1%86%AF%20%E1%84%80%E1%85%A8%E1%84%8B%E1%85%A3%E1%86%A8%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="README.assets/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%A6%E1%86%AF%E1%84%85%E1%85%A6%E1%84%90%E1%85%A9%E1%86%AB%20%E1%84%8C%E1%85%A5%E1%86%AB%E1%84%8E%E1%85%A6%20%E1%84%90%E1%85%A2%E1%86%B8.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="README.assets/%E1%84%8B%E1%85%A6%E1%84%85%E1%85%A5%E1%84%8E%E1%85%A5%E1%84%85%E1%85%B5%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%91%E1%85%B5%E1%86%AF%20%E1%84%89%E1%85%A5%E1%86%AB%E1%84%90%E1%85%A2%E1%86%A8.gif" alt="에러처리 프로필 선택" style="zoom:33%;" /> | <img src="README.assets/%E1%84%8B%E1%85%A1%E1%86%AF%E1%84%85%E1%85%B5%E1%86%B7%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8F%E1%85%A2%E1%84%89%E1%85%B5%E1%86%BC.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265915-82a58d5d-11f9-46f9-9b42-381fdb62452a.gif" alt="에러처리 프로필 선택" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
