@@ -119,7 +119,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="width:71%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 ## 4.3. 돈길 계약하기, 돈길 걷기 탭 (자녀)
@@ -136,7 +136,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="width:50%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 ## 4.4. 홈 탭, 이자 내역 탭 (부모)
@@ -157,7 +157,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="width:71%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="width:71%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 ## 4.5. 마이페이지 탭 및 가족 초대 (공통)
@@ -174,7 +174,7 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="width:50%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265841-dde21d6c-8648-452d-b157-d9b7a7a21e47.gif" alt="설정 자녀_compressed" style="width:50%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 
