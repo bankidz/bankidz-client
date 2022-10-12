@@ -32,7 +32,7 @@
 
 - **상태관리**: Redux, React Query
 
-- **디자인 시스템**: Storybook (링크), Theme Provider
+- **디자인 시스템**: [Storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme Provider
 
 - **스타일링**: Styled-components
 
@@ -44,7 +44,7 @@
 
 - **웹뷰 앱**: React Native with EXPO
 
-- **협업**: Figma (링크), Slack, Notion
+- **협업**: Figma, Slack, Notion
 
 <details>
 <summary>디랙토리 구조</summary>
