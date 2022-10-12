@@ -230,7 +230,7 @@
 # 6. 개발 후기
 
 - **신성우** | [우당탕 뱅키즈 개발기](https://24siefil.oopy.io/bankidz)
-- **한규진** | [Antifreeze! 뱅키즈](https://9yujin.tistory.com/category/%F0%9F%90%AC%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/CEOS)
+- **한규진** | [Antifreeze! 뱅키즈](https://9yujin.tistory.com/category/%F0%9F%90%AC%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/%EB%B1%85%ED%82%A4%EC%A6%88)
 
 <br/>
 
