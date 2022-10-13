@@ -64,6 +64,9 @@ export const handle400_30009 = () => {
 export const handle400_30010 = () => {
   toast.error(
     '이미 가족그룹에 속해있어요. 그룹 나가기 후 새 가족그룹을 만들어주세요.',
+    {
+      onClose: navigateToMypage,
+    },
   );
 };
 
