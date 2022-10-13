@@ -43,7 +43,7 @@
 
 - **웹뷰 앱**: React Native with EXPO
 
-- **협업**: Slack, Notion, Figma
+- **협업**: Slack, Notion, Figma, Github
 
 <details>
 <summary>디랙토리 구조</summary>
