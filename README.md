@@ -9,7 +9,19 @@
 | (준비중) | (준비중)  | [bankidz.com](https://bankidz.com/) | <a href="https://play.google.com/store/apps/details?id="><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id='><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
 
 * 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 일부 기능이 작동하지 않습니다.
+
 * 뱅키즈 앱은 현재 App Store, Google Play 출시를 위해 심사중입니다.
+
+<details>
+<summary>뱅키즈가 만들어진 배경</summary>
+<div markdown="1">
+
+![01](README.assets/01.png)
+
+![02](README.assets/02.png)
+
+</div>
+</details>
 
 <br/>
 
@@ -84,6 +96,12 @@
 <br/>
 
 # 4. 주요 기능
+
+![03](README.assets/03.png)
+
+![04](README.assets/04.png)
+
+<br/>
 
 ## 4.1. 회원관리, 온보딩 (공통)
 
