@@ -171,9 +171,9 @@
 
 ## 4.5. 마이페이지 탭 및 가족 초대 (공통)
 
-1. 가족초대
-2. 설정
-3. 알림 설정 localStorage Caching
+1. 딥링크를 통한 가족 초대
+2. 알림 설정 localStorage Caching
+3. 설정
 
 <details>
 <summary>자세히</summary>
@@ -185,7 +185,7 @@
 </details>
 
 
-| <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/55226431/195668027-7011bdf7-26e9-4830-9885-c6fc0b062a0a.gif" style="zoom:33%;" alt="가족그룹 등록"/> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195767677-30b89754-fff1-41c4-a7cd-b28b2e5442fa.gif" alt="가족 초대" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
