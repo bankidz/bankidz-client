@@ -27,7 +27,7 @@ function GroupLink() {
 
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
-    navigate('/');
+    navigate('/mypage');
   };
 
   const handleMoveGroupCompleted = () => {
