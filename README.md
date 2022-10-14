@@ -184,7 +184,8 @@
 </div>
 </details>
 
-| <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
+
+| <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/55226431/195668027-7011bdf7-26e9-4830-9885-c6fc0b062a0a.gif" style="zoom:33%;" alt="가족그룹 등록"/> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
 <br/>
