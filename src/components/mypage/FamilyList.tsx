@@ -80,8 +80,8 @@ function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
       code: familyData.code,
       expiredDate: dayjs().add(2, 'days'),
     };
-    const encrypted = cipher(JSON.stringify(data));
     const DOMAIN = `${process.env.REACT_APP_DOMAIN}`;
+    const encrypted = cipher(JSON.stringify(data));
     const link = `${DOMAIN}/link/${encrypted}`;
     messageToRNWebView(link);
   };
