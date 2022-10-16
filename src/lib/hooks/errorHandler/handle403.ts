@@ -1,5 +1,6 @@
-import navigateToHome from '@lib/utils/navigateToHome';
 import { toast } from 'react-toastify';
+import navigateToHome from '@lib/utils/navigateToHome';
+import navigateToMypage from '@lib/utils/navigateToMypage';
 
 /** default handler */
 export const handle403default = () => {
@@ -13,15 +14,21 @@ export const handle403_30002 = () => {
 };
 
 export const handle403_30005 = () => {
-  toast.error('가족그룹에 엄마가 이미 존재해요.');
+  toast.error('가족그룹에 엄마가 이미 존재해요.', {
+    onClose: navigateToMypage,
+  });
 };
 
 export const handle403_30006 = () => {
-  toast.error('가족그룹에 아빠가 이미 존재해요.');
+  toast.error('가족그룹에 아빠가 이미 존재해요.', {
+    onClose: navigateToMypage,
+  });
 };
 
 export const handle403_30007 = () => {
-  toast.error('이미 가족그룹에 속해있어요.');
+  toast.error('이미 가족그룹에 속해있어요.', {
+    onClose: navigateToMypage,
+  });
 };
 
 export const handle403_40001 = () => {

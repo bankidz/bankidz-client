@@ -8,6 +8,7 @@ import useUserQuery from '@lib/hooks/queries/useUserQuery';
 import { useMutation } from 'react-query';
 import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
+import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 
 function GroupLink() {
   const navigate = useNavigate();
@@ -21,13 +22,20 @@ function GroupLink() {
     openUnregisteredCheckSheet,
     openMoveGroupCompletedSheet,
   } = useOpenGroupLinkSheets();
+  const { handleError } = useAPIError({
+    401: { default: () => {} },
+  });
 
-  const { data: familyData, status: familyStatus } = useFamilyQuery();
-  const { data: userData, status: userStatus } = useUserQuery();
+  const { data: userData, status: userStatus } = useUserQuery({
+    onError: handleError,
+  });
+  const { data: familyData, status: familyStatus } = useFamilyQuery({
+    enabled: userStatus === 'success',
+  });
 
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
-    navigate('/');
+    navigate('/mypage');
   };
 
   const handleMoveGroupCompleted = () => {

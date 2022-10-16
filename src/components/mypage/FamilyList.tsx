@@ -80,9 +80,9 @@ function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
       code: familyData.code,
       expiredDate: dayjs().add(2, 'days'),
     };
+    const DOMAIN = `${process.env.REACT_APP_DOMAIN}`;
     const encrypted = cipher(JSON.stringify(data));
-    const link = `https://bankidz.com/link/${encrypted}`;
-    console.log(link);
+    const link = `${DOMAIN}/link/${encrypted}`;
     messageToRNWebView(link);
   };
 
@@ -90,7 +90,10 @@ function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
     if (window.ReactNativeWebView) {
       window.ReactNativeWebView.postMessage(link);
     } else {
-      console.log('웹뷰 환경이 아닙니다');
+      alert(
+        `현재 웹뷰 환경이 아닙니다. 그룹링크를 브라우저 개발자 도구의 Console에 출력합니다.`,
+      );
+      console.log(link);
     }
   };
 

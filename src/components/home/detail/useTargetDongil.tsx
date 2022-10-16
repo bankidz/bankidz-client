@@ -1,48 +1,48 @@
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
-import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { useQuery } from 'react-query';
 
+/**
+ * [/detail Page 진입 상황]
+ * 1. 홈 (자녀) - 걷고있는 돈길 -> 걷고있는 돈길, /detail
+ * 2. 홈 (부모) - 금주의 돈길 -> 금주의 돈길, /detail
+ * 3. 이자 내역 (부모) - 지급이 필요한 이자 -> 완주한 돈길, /detail/achieved, state.isPaid: false
+ * 4. 이자 내역 (부모) - 걷고있는 돈길 -> 걷고있는 돈길, /detail/interest
+ * 5. 이자 내역 (부모) - 지급 완료한 돈길 -> 완주한 돈길, /detail/achieved, state.isPaid: true
+ */
 function useTargetDongil(id: string, isPaid: boolean | undefined) {
   const isKid = useAppSelector(selectIsKid);
   const selectedKid = useAppSelector(selectSelectedKid);
-  const { handleError } = useAPIError({
-    500: {
-      default: () => {
-        console.log('expected error');
-      },
-    },
-  });
 
   const { data: paidInterests } = useQuery(
     [queryKeys.CHALLENGE_KID_ACHIEVED, 'paid', selectedKid?.kidId],
     () => challengeAPI.getChallengeKidAchieved('paid', selectedKid?.kidId!),
     {
-      onError: handleError,
+      enabled: isPaid === true,
     },
   );
   const { data: unPaidInterests } = useQuery(
     [queryKeys.CHALLENGE_KID_ACHIEVED, 'unPaid', selectedKid?.kidId],
     () => challengeAPI.getChallengeKidAchieved('unPaid', selectedKid?.kidId!),
     {
-      onError: handleError,
+      enabled: isPaid === false,
     },
   );
   const { data: walkingDongils } = useQuery(
     [queryKeys.CHALLENGE, 'walking'],
     () => challengeAPI.getChallenge('walking'),
     {
-      onError: handleError,
+      enabled: isPaid === undefined && isKid === true,
     },
   );
   const { data: thisWeekSDongils } = useQuery(
     [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'walking'],
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
     {
-      onError: handleError,
+      enabled: isPaid === undefined && isKid === false,
     },
   );
 

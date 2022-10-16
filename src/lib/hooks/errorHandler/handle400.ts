@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
-import navigateToHome from '@lib/utils/navigateToHome';
 import logoutClient from '@lib/utils/handleLogout';
+import navigateToHome from '@lib/utils/navigateToHome';
+import navigateToMypage from '@lib/utils/navigateToMypage';
 
 /** default handler */
 export const handle400default = () => {
@@ -41,11 +42,15 @@ export const handle400_20004 = () => {
 };
 
 export const handle400_30003 = () => {
-  toast.error('그룹링크가 유효하지 않아요.');
+  toast.error('그룹링크가 유효하지 않아요.', {
+    onClose: navigateToMypage,
+  });
 };
 
 export const handle400_30004 = () => {
-  toast.error('프로필 정보가 유효하지 않아요.');
+  toast.error('프로필 정보가 유효하지 않아요.', {
+    onClose: navigateToMypage,
+  });
 };
 
 export const handle400_30008 = () => {
@@ -59,6 +64,9 @@ export const handle400_30009 = () => {
 export const handle400_30010 = () => {
   toast.error(
     '이미 가족그룹에 속해있어요. 그룹 나가기 후 새 가족그룹을 만들어주세요.',
+    {
+      onClose: navigateToMypage,
+    },
   );
 };
 
