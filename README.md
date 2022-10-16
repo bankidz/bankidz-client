@@ -4,9 +4,9 @@
 
 ![thumbnail_bankidz](README.assets/thumbnail_bankidz.png)
 
-|    AD    | Instagram |               PC Web                |                           iOS App                            |                         Android App                          |
-| :------: | :-------: | :---------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| (준비중) | (준비중)  | [bankidz.com](https://bankidz.com/) | <a href="https://play.google.com/store/apps/details?id="><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ko-kr?size=250x83&amp;releaseDate=1654300800&h=dd4ccd7fb22c609cf9132f37bf23c390" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a> | <a href='https://play.google.com/store/apps/details?id='><img alt='다운로드하기 Google Play' width='285px' src='https://play.google.com/intl/en_us/badges/static/images/badges/ko_badge_web_generic.png'/></a> |
+|    AD    | Instagram |               PC Web                | iOS App  | Android App |
+| :------: | :-------: | :---------------------------------: | :------: | :---------: |
+| (준비중) | (준비중)  | [bankidz.com](https://bankidz.com/) | (심사중) |  (심사중)   |
 
 * 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 일부 기능이 작동하지 않습니다.
 
@@ -152,15 +152,6 @@
 1. 계약 대상 → 계약 상품 → 이름, 목표금액 → 이자율, 매주 저금액 → 서명 → 계약서 확인
 2. 돈길 걷기
 
-<details>
-<summary>자세히</summary>
-<div markdown="1">
-
-  …
-
-</div>
-</details>
-
 | <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="width:66%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 
@@ -192,16 +183,6 @@
 1. 딥링크를 통한 가족 초대 → 가족그룹 참여 → 가족그룹 나가기 → 가족그룹 만들기
 2. 알림 설정 localStorage Caching
 3. 설정
-
-<details>
-<summary>자세히</summary>
-<div markdown="1">
-
-  …
-
-</div>
-</details>
-
 
 | <img src="https://user-images.githubusercontent.com/83692797/195767677-30b89754-fff1-41c4-a7cd-b28b2e5442fa.gif" alt="가족 초대" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
@@ -264,6 +245,8 @@
 | 22.08.19  | 오렌지 플래닛 ‘오렌지 가든’ 6기      | 1차 서류 합격, 2차 인터뷰 합격, 3차 PT 탈락 | -           |
 | 22.08.28  | 전국 대학생 창업컨퍼런스 ‘시도’      | 결승진출                                    | -           |
 | 22.08.31  | 예비창업패키지 프리스쿨              | 최종선정                                    | 460         |
+| 22.10.10  | 서강대학교 창업동아리                | 최종선정                                    | 300         |
+| 22.10.15  | d·camp '10월 D·Day x 캠퍼스리그'     | 결승진출                                    | -           |
 
 <br/>
 
