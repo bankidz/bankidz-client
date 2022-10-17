@@ -4,13 +4,12 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const pageOrder = ['/interest', '/', '/walk', '/mypage'];
 
-const RouteTransition = ({
-  location,
-  children,
-}: {
+interface RouteTransitionProps {
   location: Location;
   children: React.ReactElement;
-}) => {
+}
+
+const RouteTransition = ({ location, children }: RouteTransitionProps) => {
   const pathname = location.pathname;
   const state = location.state;
 
