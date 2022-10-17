@@ -41,7 +41,7 @@
 
 - **코어**: React, TypeScript
 - **상태관리**: Redux, ReactQuery
-- **디자인 시스템**: [storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), Theme-provider, [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3)
+- **디자인 시스템**: [storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
 - **스타일링**: Styled-components
 - **코드품질**: ESLint, Prettier
 - **CI/CD**: Github-actions, Docker-compose
