@@ -8,14 +8,14 @@ const RouteChangeTracker = () => {
 
   useEffect(() => {
     if (!window.location.href.includes('localhost')) {
-      ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID!);
+      // ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID!);
     }
     setInitialized(true);
   }, []);
 
   useEffect(() => {
     if (initialized) {
-      ReactGA.pageview(location.pathname + location.search);
+      // ReactGA.pageview(location.pathname + location.search);
     }
   }, [initialized, location]);
 };

@@ -28,7 +28,7 @@ function App() {
     },
   });
 
-  RouteChangeTracker();
+  // RouteChangeTracker();
 
   return (
     <Routes location={location}>
