@@ -8,7 +8,7 @@
 | :------: | :-------: | :---------------------------------: | :------: | :---------: |
 | (준비중) | (준비중)  | [bankidz.com](https://bankidz.com/) | (심사중) |  (심사중)   |
 
-* 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 일부 기능이 작동하지 않습니다.
+* 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 APPLE로 로그인, 딥링크를 통한 가촉 초대, 푸시알림 기능이 작동하지 않습니다.
 
 * 뱅키즈 앱은 현재 App Store, Google Play 출시를 위해 심사중입니다.
 
@@ -40,22 +40,14 @@
 뱅키즈는 가설 검증 주기를 최소화 하기 위해 푸시알림, 딥링크를 통한 가족 초대 기능을 제외한 모든 비즈니스 로직을 웹 기술로 구현합니다. 이를 통해 사용자에게 항상 최신의 서비스를 제공하고 피드백에 기민하게 대응합니다.
 
 - **코어**: React, TypeScript
-
 - **상태관리**: Redux, ReactQuery
-
 - **디자인 시스템**: [storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
-
 - **스타일링**: Styled-components
-
 - **코드품질**: ESLint, Prettier
-
 - **CI/CD**: Github-actions, Docker-compose
-
-- **버전관리**: Git with Github, Git-flow
-
+- **분산 버전 관리**: Git with Git-flow
+- **협업**: [Swagger](https://bankids.click/swagger-ui/index.html), Github
 - **웹뷰 앱**: React Native with EXPO
-
-- **협업**: Slack, Notion, Figma, Github
 
 <details>
 <summary>디랙토리 구조</summary>
