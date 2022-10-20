@@ -38,13 +38,14 @@
 뱅키즈는 가설 검증 주기를 최소화 하기 위해 푸시알림을 제외한 모든 비즈니스 로직을 웹 기술로 구현합니다. 이를 통해 사용자에게 항상 최신의 서비스를 제공하고 피드백에 기민하게 대응합니다.
 
 - **코어**: React, TypeScript
-- **상태관리**: Redux, ReactQuery
+- **상태관리**: Redux, React-Query
 - **디자인 시스템**: [storybook]([bankidz.github.io/bankidz-client](https://bankidz.github.io/bankidz-client)), [Figma](https://www.figma.com/file/pF7iygMk2IXYGZxXockGY8/%5B1.0-ver%5D-%EB%94%94%EC%9E%90%EC%9D%B8?node-id=2%3A3), Theme-provider
 - **스타일링**: Styled-components
 - **코드품질**: ESLint, Prettier
 - **CI/CD**: Github-actions, Docker-compose
 - **분산 버전 관리**: Git with Git-flow
 - **협업**: [Swagger](https://bankids.click/swagger-ui/index.html), Github
+- **코딩 컨벤션**: [Bankidz FE Guide](https://24siefil.oopy.io/254b254d-277b-49fb-a194-56662316550a)
 - **웹뷰 앱**: React Native with EXPO
 
 <details>
@@ -126,7 +127,7 @@
 <div markdown="1">
 
   - 홈 탭에서는 서로간 종속성을 갖는 네가지 종류의 돈길에 대한 CRUD가 가능합니다.
-  - 홈 탭의 데이터는 ReactQuery 기반의 interval refetching을 통해 최신상태를 유지합니다.
+  - 홈 탭의 데이터는 React-Query 기반의 interval refetching을 통해 최신상태를 유지합니다.
   - 알림내역은 무한스크롤 기반으로 데이터를 지속적으로 fetch 합니다.
 
 </div>
@@ -182,7 +183,7 @@
 ## 4.6. 기타
 
 1. React-transition-group 기반 Routing Animation
-2. Skeleton UI, ReactQuery 기반 Caching
+2. Skeleton UI, React-Query 기반 Caching
 3. 우선순위에 따른 전역 API 에러처리
 
 | <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265915-82a58d5d-11f9-46f9-9b42-381fdb62452a.gif" alt="에러처리 프로필 선택" style="zoom:33%;" /> |
