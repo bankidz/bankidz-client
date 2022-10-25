@@ -58,8 +58,8 @@ function RangeInput({
       </RangeInputForm>
 
       <div>
-        <p>{getCommaThreeDigits(min)}</p>
-        <p>{getCommaThreeDigits(max)}</p>
+        <p>{min.toLocaleString('ko-KR')}</p>
+        <p>{max.toLocaleString('ko-KR')}</p>
       </div>
     </Wrapper>
   );

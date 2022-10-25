@@ -11,7 +11,7 @@ import { ReactComponent as D2 } from '@assets/illusts/walk/d-2.svg';
 import { ReactComponent as DDay } from '@assets/illusts/walk/d-day.svg';
 import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
-import useWalkDongil from '@lib/hooks/useWalkDongil';
+import useWalkDongil from '@components/walk/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
 import Modals, { modals } from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';

@@ -27,7 +27,7 @@ function TotalInterest({
   return (
     <Wrapper>
       <Content>
-        <p>1주마다 {getCommaThreeDigits(Math.ceil(weeklyInterest))}원</p>
+        <p>1주마다 {Math.ceil(weeklyInterest).toLocaleString('ko-KR')}원</p>
         <div>
           <p>
             <span>{successWeeks}주</span> 걷기 성공해서
@@ -35,7 +35,8 @@ function TotalInterest({
           <p>
             이자가{' '}
             <span>
-              {getCommaThreeDigits(Math.ceil(weeklyInterest * successWeeks))}원
+              {Math.ceil(weeklyInterest * successWeeks).toLocaleString('ko-KR')}
+              원
             </span>{' '}
             쌓였어요
           </p>

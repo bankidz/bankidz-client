@@ -81,7 +81,7 @@ function SwipeToWalk({
         <p>
           {value < 20 && (
             <>
-              <span>{getCommaThreeDigits(weekPrice)}</span>원 모았으면 걷기
+              <span>{weekPrice.toLocaleString('ko-KR')}</span>원 모았으면 걷기
             </>
           )}
         </p>
