@@ -20,7 +20,6 @@ import getChallengeStep4Prices from '@components/home/create/utils/getChallengeS
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import dayjs from 'dayjs';
 import { TInterestRate } from '@lib/types/IInterestRate';

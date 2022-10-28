@@ -3,7 +3,6 @@ import { ReactComponent as BankiInterest10 } from '@assets/illusts/banki/banki_w
 import { ReactComponent as BankiInterest20 } from '@assets/illusts/banki/banki_walk_20.svg';
 import { ReactComponent as BankiInterest30 } from '@assets/illusts/banki/banki_walk_30.svg';
 import { TInterestRate } from '@lib/types/IInterestRate';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 
 type TotalInterestProps = {
   interestRate: TInterestRate;

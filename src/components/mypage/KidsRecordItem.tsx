@@ -1,5 +1,4 @@
 import { IKidListDTO } from '@lib/apis/family/familyDTO';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import getPercentValue from '@lib/utils/get/getPercentValue';
 import styled from 'styled-components';
 import OverViewData from './OverViewContent';

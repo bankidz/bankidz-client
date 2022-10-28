@@ -20,6 +20,8 @@ interface BottomContentProps
   > {
   variant: TReceiptModalVariant;
   isMom: boolean;
+  // 돈길 계약하기 직후 뜨는 모달에서는 url이 아닌 이미지 dataurl을 prop으로 넘깁니다.
+  signImage?: string;
 }
 
 function BottomContent({
@@ -32,6 +34,7 @@ function BottomContent({
   weeks,
   createdAt,
   fileName,
+  signImage,
 }: BottomContentProps) {
   return (
     <Wrapper variant={variant}>
@@ -43,7 +46,7 @@ function BottomContent({
       />
       <ThirdRow weeks={weeks} createdAt={createdAt} />
       <SignatureWrapper>
-        <img src={`${AWS_S3_URL}/${fileName}`} />
+        <img src={signImage ? signImage : `${AWS_S3_URL}/${fileName}`} />
       </SignatureWrapper>
     </Wrapper>
   );
