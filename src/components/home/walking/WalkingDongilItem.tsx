@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
-import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-dongil.svg';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
