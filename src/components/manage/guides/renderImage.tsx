@@ -6,6 +6,7 @@ import parentStep1 from '@assets/images/guides/parent-step1.png';
 import parentStep2 from '@assets/images/guides/parent-step2.png';
 import parentStep3 from '@assets/images/guides/parent-step3.png';
 import parentStep4 from '@assets/images/guides/parent-step4.png';
+import { useEffect } from 'react';
 
 const renderImage = (isKid: boolean, step: 1 | 2 | 3 | 4) => {
   if (isKid) {

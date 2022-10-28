@@ -44,7 +44,7 @@ root.render(
       <ThemeProvider theme={theme}>
         <ModalsContextProvider>
           <QueryClientProvider client={queryClient}>
-            {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+            <ReactQueryDevtools initialIsOpen={false} />
             <App />
             <StyledToastContainer
               position="top-center"
