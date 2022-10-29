@@ -12,19 +12,19 @@ export const handle400default = () => {
 
 /** service code handler */
 export const handle400_10001 = () => {
-  toast.error('로그인에 실패했어요. 다시 시도해주세요.', {
+  toast.error('로그인에 실패했어요. 다시 시도해봐요.', {
     onClose: logoutClient,
   });
 };
 
 export const handle400_10002 = () => {
-  toast.error('로그인에 실패했어요. 다시 시도해주세요.', {
+  toast.error('로그인에 실패했어요. 다시 시도해봐요.', {
     onClose: logoutClient,
   });
 };
 
 export const handle400_20002 = () => {
-  toast.error('이미 프로필을 선택했어요. 홈으로 이동합니다.', {
+  toast.error('이미 프로필을 선택했어요. 홈으로 이동할게요.', {
     onClose: navigateToHome,
   });
 };
@@ -34,7 +34,7 @@ export const handle400_20003 = () => {
 };
 
 export const handle400_20004 = () => {
-  toast.error('프로필 정보가 없어요. 온보딩으로 이동합니다.', {
+  toast.error('프로필 정보가 없어요. 온보딩으로 이동할게요.', {
     onClose: () => {
       window.location.href = '/auth/register/1';
     },
@@ -63,7 +63,7 @@ export const handle400_30009 = () => {
 
 export const handle400_30010 = () => {
   toast.error(
-    '이미 가족그룹에 속해있어요. 그룹 나가기 후 새 가족그룹을 만들어주세요.',
+    '이미 가족그룹에 속해있어요. 그룹 나가기 후에 새 가족그룹을 만들어봐요.',
     {
       onClose: navigateToMypage,
     },
@@ -132,25 +132,25 @@ export const handle400_80001 = () => {
 };
 
 export const handle400_80002 = () => {
-  toast.error('로그인에 실패했어요. 다시 시도해주세요.', {
+  toast.error('로그인에 실패했습니다. 다시 시도해봐요.', {
     onClose: logoutClient,
   });
 };
 
 export const handle400_80003 = () => {
-  toast.error('Apple OAuth Public Key 조회에 실패했어요. 다시 시도해주세요.', {
+  toast.error('Apple OAuth Public Key 조회에 실패했어요. 다시 시도해봐요.', {
     onClose: logoutClient,
   });
 };
 
 export const handle400_80004 = () => {
-  toast.error('Apple OAuth Nonce 값이 일치하지 않아요. 다시 시도해주세요.', {
+  toast.error('Apple OAuth Nonce 값이 일치하지 않아요. 다시 시도해봐요.', {
     onClose: logoutClient,
   });
 };
 
 export const handle400_80005 = () => {
-  toast.error('로그인에 실패했어요. 다시 시도해주세요.', {
+  toast.error('로그인에 실패했어요. 다시 시도해봐요.', {
     onClose: logoutClient,
   });
 };

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import SkeletonElement from '../SkeletonElement';
-import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-dongil.svg';
 
 function WalkingDongilItem() {
   return (
