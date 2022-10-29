@@ -1,9 +1,9 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import EmptyWalkingDongil from './EmptyWalkingDongil';
+import EmptyWalkingDongil from './walking/EmptyWalkingDongil';
 
 export default {
-  title: 'home/walking/EmptyWalkingDongil',
+  title: 'home/EmptyWalkingDongil',
   component: EmptyWalkingDongil,
   argTypes: { onClick: { action: 'handle click' } },
   decorators: [

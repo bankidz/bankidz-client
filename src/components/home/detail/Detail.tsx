@@ -84,11 +84,24 @@ function Detail() {
     openSheetBySequence(openSheet);
   };
 
+  // 3-c. 오늘은 뱅키즈 쉬는날
+  const openNoticeSundayBottomSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Notice',
+        contentProps: {
+          type: 'sunday',
+        },
+      });
+    openSheetBySequence(openSheet);
+  };
+
   // 2-a. 포기하기
   const queryClient = useQueryClient();
   const { handleError } = useAPIError({
     403: {
       'E403-40007': openGiveUpExceededBottomSheet,
+      'E403-40014': openNoticeSundayBottomSheet,
     },
   });
   const deleteMutation = useMutation(challengeAPI.deleteChallenge, {

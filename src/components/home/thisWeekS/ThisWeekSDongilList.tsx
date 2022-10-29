@@ -16,6 +16,7 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
           itemName={thisWeekSDongil.itemName}
           title={thisWeekSDongil.title}
           progressList={thisWeekSDongil.progressList}
+          challengeStatus={thisWeekSDongil.challengeStatus}
           to={`/detail/${thisWeekSDongil.id}`}
         />
       ))}
