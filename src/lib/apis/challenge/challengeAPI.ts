@@ -95,7 +95,6 @@ const challengeAPI = {
     const response = await axiosPrivate.get(
       `/challenge/kid/${kidId}?status=${status}`,
     );
-    throw new Error('자녀의 주차 정보 가져오기');
     return response.data;
   },
 

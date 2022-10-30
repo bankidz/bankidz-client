@@ -13,7 +13,7 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import RetryErrorBoundary from '@components/common/RetryErrorBoundary';
+import RetryErrorBoundary from '@components/common/errorBoundary/RetryErrorBoundary';
 
 const ParentSummaryWrapper = styled.div`
   ${parentSummaryStyle}

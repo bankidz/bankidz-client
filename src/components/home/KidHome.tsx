@@ -13,6 +13,7 @@ import { Suspense } from 'react';
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import styled from 'styled-components';
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
+import CriticalErrorBoundary from '@components/common/errorBoundary/CriticalErrorBoundary';
 
 function KidHome() {
   return (

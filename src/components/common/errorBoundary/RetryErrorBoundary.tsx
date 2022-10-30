@@ -11,11 +11,21 @@ interface RetryErrorBoundaryProps {
   children: ReactNode;
 }
 
+/**
+ * 오류 발생 시 각 UI별로 재시도 버튼을 제공하는 컴포넌트 입니다.
+ * 치명적인 오류 발생 시 상위 ErrorBoundary로 위임 합니다.
+ */
 function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
   const { reset } = useQueryErrorResetBoundary();
+  const handleError = (error: any) => {
+    if (error?.response?.status === 500) {
+      throw error; // 상위 ErrorBoundary로 위임
+    }
+  };
 
   return (
     <ErrorBoundary
+      onError={handleError}
       onReset={reset}
       fallbackRender={({ resetErrorBoundary }) => (
         <Wrapper>
@@ -26,7 +36,7 @@ function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
                 <FontAwesomeIcon
                   icon={faArrowsRotate}
                   size="2x"
-                  color={theme.palette.greyScale.black}
+                  color={theme.palette.greyScale.grey700}
                 />
               </div>
             </RetryButton>
@@ -43,7 +53,6 @@ function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
 export default RetryErrorBoundary;
 
 const Wrapper = styled.div`
-  background: palegreen;
   position: relative;
 `;
 
@@ -66,13 +75,11 @@ const FallbackBlock = styled.div`
 
 const RetryButton = styled.button`
   .retry-icon {
-    width: 70px;
-    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 `;
 
 // https://react-query.tanstack.com/reference/useQueryErrorResetBoundary
