@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 import Summary from './Summary';
 
 function KidSummary() {
-  const { data: kisSummary } = useQuery(
+  const { data: kidSummary } = useQuery(
     queryKeys.CHALLENGE_PROGRESS,
     challengeAPI.getChallengeProgress,
     {
@@ -19,8 +19,8 @@ function KidSummary() {
     <SummaryWrapper>
       <Summary
         variant="KidHome"
-        currentSavings={kisSummary?.currentSavings}
-        totalPrice={kisSummary?.totalPrice}
+        currentSavings={kidSummary?.currentSavings}
+        totalPrice={kidSummary?.totalPrice}
       />
     </SummaryWrapper>
   );
