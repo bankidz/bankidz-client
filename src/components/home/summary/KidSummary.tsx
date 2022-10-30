@@ -1,6 +1,4 @@
-import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
 import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
 import queryKeys from '@lib/constants/queryKeys';
 import { useQuery } from 'react-query';

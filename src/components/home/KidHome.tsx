@@ -17,7 +17,7 @@ import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList'
 function KidHome() {
   return (
     <>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<LoadingFallback />}>
         <KidSummary />
         <WalkingDongilSection />
         <PendingDongilSection />
@@ -30,20 +30,20 @@ function KidHome() {
 
 export default KidHome;
 
-function Loading() {
+function LoadingFallback() {
   return (
     <>
       <SummaryWrapper>
         <SkeletonSummary variant="KidHome" />
       </SummaryWrapper>
-      <WalkingDongilWrapper>
+      <WalkingSkeletonWrapper>
         <h1>걷고있는 돈길</h1>
         <SkeletonDongilList variant="walking" />
-      </WalkingDongilWrapper>
-      <PendingDongilWrapper>
+      </WalkingSkeletonWrapper>
+      <PendingSkeletonWrapper>
         <h1>대기중인 돈길</h1>
         <SkeletonDongilList variant="pending" />
-      </PendingDongilWrapper>
+      </PendingSkeletonWrapper>
     </>
   );
 }
@@ -52,10 +52,10 @@ const SummaryWrapper = styled.div`
   ${kidSummaryWrapperStyle}
 `;
 
-const WalkingDongilWrapper = styled.section`
+const WalkingSkeletonWrapper = styled.section`
   ${walkingDongilWrapperStyle}
 `;
 
-const PendingDongilWrapper = styled.section`
+const PendingSkeletonWrapper = styled.section`
   ${pendingDongilWrapperStyle}
 `;
