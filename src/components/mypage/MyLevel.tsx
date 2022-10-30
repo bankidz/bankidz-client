@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_walking.svg';
-import getContentsForMyLevel from '@lib/utils/get/getContentsForMyLevel';
+import getContentsForMyLevel from '@components/mypage/getContentsForMyLevel';
 
 type TMyLevel = {
   achievedChallenge: number;

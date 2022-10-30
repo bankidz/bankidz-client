@@ -1,12 +1,11 @@
 import { IKidListDTO } from '@lib/apis/family/familyDTO';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import getPercentValue from '@lib/utils/get/getPercentValue';
 import styled from 'styled-components';
 import OverViewData from './OverViewContent';
 
 function KidsRecordItem({ kid }: { kid: IKidListDTO }) {
   const overViewData = [
-    { name: '총 저금액', value: `${getCommaThreeDigits(kid.savings)}` },
+    { name: '총 저금액', value: `${kid.savings.toLocaleString('ko-KR')}` },
     {
       name: '아이의 총 돈길',
       value: kid.totalChallenge,

@@ -2,7 +2,6 @@ import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Step1 from '@components/home/create/steps/Step1';
 import Step2 from '@components/home/create/steps/Step2';
-import Progress from '@components/home/create/Progress';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
@@ -13,6 +12,7 @@ import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import SlideTransition from '@components/layout/SlideTransition';
+import Progress from '@components/common/progress/Progress';
 
 export interface CreateStepProps {
   currentStep: number;

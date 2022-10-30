@@ -24,7 +24,7 @@ function WalkError() {
       });
       setCreateDisabled(true);
     } else {
-      navigate('/create/1');
+      navigate('/create');
     }
   };
 
