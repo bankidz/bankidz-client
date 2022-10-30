@@ -1,11 +1,11 @@
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import { AWS_S3_URL } from '@lib/constants/AWS_S3_URL';
-import { calcRatio } from '@lib/styles/theme';
 import styled, { css } from 'styled-components';
 import FirstRow from '../rows/FirstRow';
 import SecondRow from '../rows/SecondRow';
 import ThirdRow from '../rows/ThirdRow';
 import { TReceiptModalVariant } from '../TReceiptModalVariant';
+import { calcRatio } from '@lib/styles/theme';
+import { AWS_S3_URL } from '@lib/constants/AWS_S3_URL';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface BottomContentProps
   extends Pick<

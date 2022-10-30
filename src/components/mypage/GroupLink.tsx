@@ -10,7 +10,7 @@ import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '@components/common/modals/Modals';
+import Modals, { modals } from '@components/common/modals/Modals';
 
 function GroupLink() {
   const navigate = useNavigate();
@@ -38,8 +38,10 @@ function GroupLink() {
 
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
-    navigate('/mypage');
     openModal(modals.primaryModal, {
+      onSubmit: () => {
+        navigate('/mypage');
+      },
       isFamilyCreated: true,
       headerText: '돈길을 걸을 가족이 생겼어요',
       bodyText: '이제 그룹 내 가족구성원들과 돈길을 계약해봐요!',
@@ -82,7 +84,11 @@ function GroupLink() {
     }
   }, [userStatus, familyStatus]);
 
-  return <></>;
+  return (
+    <>
+      <Modals />
+    </>
+  );
 }
 
 export default GroupLink;

@@ -1,6 +1,6 @@
-import CloseButton from '@components/common/buttons/CloseButton';
 import { SetStateAction } from 'react';
 import styled from 'styled-components';
+import CloseButton from '@components/common/buttons/CloseButton';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 
 interface CloseButtonProps {
