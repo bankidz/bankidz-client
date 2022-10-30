@@ -1,28 +1,26 @@
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import { TStatus } from '@lib/types/TStatus';
-import styled from 'styled-components';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import queryKeys from '@lib/constants/queryKeys';
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import PendingDongilList from './PendingDongilList';
 
-interface PendingDongilSectionProps {
-  isAllSuccess: boolean;
-  pendingDongils: IChallengeDTO[] | undefined;
-}
+function PendingDongilSection() {
+  const { data: pendingDongils } = useQuery(
+    [queryKeys.CHALLENGE, 'pending'],
+    () => challengeAPI.getChallenge('pending'),
+    {
+      refetchInterval: HOME_REFETCH_INTERVAL,
+      suspense: true,
+    },
+  );
 
-function PendingDongilSection({
-  isAllSuccess,
-  pendingDongils,
-}: PendingDongilSectionProps) {
   let content;
-  if (isAllSuccess) {
-    if (pendingDongils?.length === 0) {
-      content = <EmptyDongil subject="대기중인" />;
-    } else {
-      content = <PendingDongilList pendingDongils={pendingDongils!} />;
-    }
+  if (pendingDongils?.length === 0) {
+    content = <EmptyDongil subject="대기중인" />;
   } else {
-    content = <SkeletonDongilList variant="pending" />;
+    content = <PendingDongilList pendingDongils={pendingDongils!} />;
   }
 
   return (
@@ -35,7 +33,7 @@ function PendingDongilSection({
 
 export default PendingDongilSection;
 
-const Wrapper = styled.section`
+export const pendingDongilWrapperStyle = css`
   margin-top: 48px;
   h1 {
     width: 100%;
@@ -44,4 +42,8 @@ const Wrapper = styled.section`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
     ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const Wrapper = styled.section`
+  ${pendingDongilWrapperStyle}
 `;

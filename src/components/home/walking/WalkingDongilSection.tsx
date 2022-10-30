@@ -1,24 +1,27 @@
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import queryKeys from '@lib/constants/queryKeys';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import dayjs from 'dayjs';
 import { useState } from 'react';
+import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
 
-interface WalkingDongilSectionProps {
-  isAllSuccess: boolean;
-  walkingDongils: IChallengeDTO[] | undefined;
-}
+function WalkingDongilSection() {
+  const { data: walkingDongils } = useQuery(
+    [queryKeys.CHALLENGE, 'walking'],
+    () => challengeAPI.getChallenge('walking'),
+    {
+      refetchInterval: HOME_REFETCH_INTERVAL,
+      suspense: true,
+    },
+  );
 
-function WalkingDongilSection({
-  isAllSuccess,
-  walkingDongils,
-}: WalkingDongilSectionProps) {
   const navigate = useNavigate();
   const { setOpenBottomSheet } = useGlobalBottomSheet();
   const [createDisabled, setCreateDisabled] = useState<boolean>(false);
@@ -42,28 +45,24 @@ function WalkingDongilSection({
   };
 
   let content;
-  if (isAllSuccess) {
-    if (walkingDongils?.length === 0) {
-      content = (
-        <EmptyWalkingDongil
-          onClick={navigateToCreateDongil}
-          createDisabled={createDisabled}
-        />
-      );
-    } else {
-      content = (
-        <>
-          <WalkingDongilList walkingDongils={walkingDongils!} />
-          <ContractNewDongilLink
-            to={'/create'}
-            createDisabled={createDisabled}
-            navigateToCreateDongil={navigateToCreateDongil}
-          />
-        </>
-      );
-    }
+  if (walkingDongils?.length === 0) {
+    content = (
+      <EmptyWalkingDongil
+        onClick={navigateToCreateDongil}
+        createDisabled={createDisabled}
+      />
+    );
   } else {
-    content = <SkeletonDongilList variant="walking" />;
+    content = (
+      <>
+        <WalkingDongilList walkingDongils={walkingDongils!} />
+        <ContractNewDongilLink
+          to={'/create'}
+          createDisabled={createDisabled}
+          navigateToCreateDongil={navigateToCreateDongil}
+        />
+      </>
+    );
   }
 
   return (
@@ -76,7 +75,7 @@ function WalkingDongilSection({
 
 export default WalkingDongilSection;
 
-const Wrapper = styled.section`
+export const walkingDongilWrapperStyle = css`
   margin-top: 48px;
   h1 {
     width: 100%;
@@ -85,4 +84,8 @@ const Wrapper = styled.section`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
     ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const Wrapper = styled.section`
+  ${walkingDongilWrapperStyle}
 `;

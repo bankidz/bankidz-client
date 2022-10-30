@@ -1,54 +1,27 @@
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import KidSummary from '@components/home/summary/KidSummary';
-import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
-import PendingDongilSection from '@components/home/pending/PendingDongilSection';
-import { useQuery } from 'react-query';
-import queryKeys from '@lib/constants/queryKeys';
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import KidSummary, {
+  kidSummaryWrapperStyle,
+} from '@components/home/summary/KidSummary';
+import WalkingDongilSection, {
+  walkingDongilWrapperStyle,
+} from '@components/home/walking/WalkingDongilSection';
+import PendingDongilSection, {
+  pendingDongilWrapperStyle,
+} from '@components/home/pending/PendingDongilSection';
+import { Suspense } from 'react';
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
+import styled from 'styled-components';
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 
 function KidHome() {
-  const { status: kidSummaryStatus, data: kidSummary } = useQuery(
-    queryKeys.CHALLENGE_PROGRESS,
-    challengeAPI.getChallengeProgress,
-    {
-      refetchInterval: HOME_REFETCH_INTERVAL,
-    },
-  );
-  const { status: walkingDongilsStatus, data: walkingDongils } = useQuery(
-    [queryKeys.CHALLENGE, 'walking'],
-    () => challengeAPI.getChallenge('walking'),
-    {
-      enabled: !!kidSummary,
-      refetchInterval: HOME_REFETCH_INTERVAL,
-    },
-  );
-  const { status: pendingDongilsStatus, data: pendingDongils } = useQuery(
-    [queryKeys.CHALLENGE, 'pending'],
-    () => challengeAPI.getChallenge('pending'),
-    {
-      enabled: !!walkingDongils,
-      refetchInterval: HOME_REFETCH_INTERVAL,
-    },
-  );
-
-  const isAllSuccess =
-    kidSummaryStatus === 'success' &&
-    walkingDongilsStatus === 'success' &&
-    pendingDongilsStatus === 'success';
-
   return (
     <>
-      <KidSummary isAllSuccess={isAllSuccess} kidSummary={kidSummary} />
-      <WalkingDongilSection
-        isAllSuccess={isAllSuccess}
-        walkingDongils={walkingDongils}
-      />
-      <PendingDongilSection
-        isAllSuccess={isAllSuccess}
-        pendingDongils={pendingDongils}
-      />
+      <Suspense fallback={<Loading />}>
+        <KidSummary />
+        <WalkingDongilSection />
+        <PendingDongilSection />
+      </Suspense>
       <LargeSpacer />
       <Modals />
     </>
@@ -56,3 +29,33 @@ function KidHome() {
 }
 
 export default KidHome;
+
+function Loading() {
+  return (
+    <>
+      <SummaryWrapper>
+        <SkeletonSummary variant="KidHome" />
+      </SummaryWrapper>
+      <WalkingDongilWrapper>
+        <h1>걷고있는 돈길</h1>
+        <SkeletonDongilList variant="walking" />
+      </WalkingDongilWrapper>
+      <PendingDongilWrapper>
+        <h1>대기중인 돈길</h1>
+        <SkeletonDongilList variant="pending" />
+      </PendingDongilWrapper>
+    </>
+  );
+}
+
+const SummaryWrapper = styled.div`
+  ${kidSummaryWrapperStyle}
+`;
+
+const WalkingDongilWrapper = styled.section`
+  ${walkingDongilWrapperStyle}
+`;
+
+const PendingDongilWrapper = styled.section`
+  ${pendingDongilWrapperStyle}
+`;

@@ -1,33 +1,39 @@
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
-import styled from 'styled-components';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import queryKeys from '@lib/constants/queryKeys';
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
 import Summary from './Summary';
 
-interface KidSummaryProps {
-  isAllSuccess: boolean;
-  kidSummary: IWeekDTO | undefined;
-}
+function KidSummary() {
+  const { data: kisSummary } = useQuery(
+    queryKeys.CHALLENGE_PROGRESS,
+    challengeAPI.getChallengeProgress,
+    {
+      refetchInterval: HOME_REFETCH_INTERVAL,
+      suspense: true,
+    },
+  );
 
-function KidSummary({ isAllSuccess, kidSummary }: KidSummaryProps) {
-  let content;
-  if (isAllSuccess) {
-    const { currentSavings, totalPrice } = kidSummary!;
-    content = (
+  return (
+    <SummaryWrapper>
       <Summary
         variant="KidHome"
-        currentSavings={currentSavings}
-        totalPrice={totalPrice}
+        currentSavings={kisSummary?.currentSavings}
+        totalPrice={kisSummary?.totalPrice}
       />
-    );
-  } else {
-    content = <SkeletonSummary variant="KidHome" />;
-  }
-
-  return <SummaryWrapper>{content}</SummaryWrapper>;
+    </SummaryWrapper>
+  );
 }
 
 export default KidSummary;
 
-const SummaryWrapper = styled.div`
+export const kidSummaryWrapperStyle = css`
   margin-top: 198px;
+`;
+
+const SummaryWrapper = styled.div`
+  ${kidSummaryWrapperStyle}
 `;
