@@ -1,8 +1,8 @@
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
+import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 
 interface ThisWeekSDongilSectionProps {
   isAllSuccess: boolean;

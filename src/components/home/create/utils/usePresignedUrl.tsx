@@ -1,9 +1,9 @@
+import axios from 'axios';
+import { useState } from 'react';
 import { axiosPrivate } from '@lib/apis/axios';
 import convertDataURLtoFile from '@lib/utils/convertDataURLtoFile';
 import { useAppDispatch } from '@store/app/hooks';
 import { setFileName } from '@store/slices/createChallengeSlice';
-import axios from 'axios';
-import { useState } from 'react';
 
 const usePresignedUrl = () => {
   const [url, setUrl] = useState<string>('');
@@ -23,7 +23,7 @@ const usePresignedUrl = () => {
 
   const uploadS3 = async (sign: any) => {
     const file = convertDataURLtoFile(sign, imageName);
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append('file', file);
 
     await axios.put(url, file, {

@@ -1,7 +1,7 @@
-import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
-import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
 import Summary from './Summary';
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
+import { IWeekDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface KidSummaryProps {
   isAllSuccess: boolean;

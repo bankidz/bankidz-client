@@ -1,8 +1,8 @@
+import styled from 'styled-components';
 import AppBar from '@components/layout/AppBar';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
-import styled from 'styled-components';
 
 function Guides() {
   const isKid = useAppSelector(selectIsKid);

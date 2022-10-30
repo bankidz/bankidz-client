@@ -12,7 +12,7 @@ function useLevel() {
   if (isKid === true) {
     level = temp;
   } else if (isKid === false) {
-    level = selectedKid?.level!;
+    level = selectedKid?.level;
   }
   return level as TLevel;
 }

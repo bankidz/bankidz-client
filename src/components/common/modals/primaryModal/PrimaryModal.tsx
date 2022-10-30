@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
+import { slideAnimation } from '../slideAnimation';
+import { modals } from '../Modals';
 import { calcRatio } from '@lib/styles/theme';
 import renderCongratsIllust from '@lib/utils/render/renderCongratsIllust';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '../Modals';
-import { slideAnimation } from '../slideAnimation';
 import { ReactComponent as CongratsFamily } from '@assets/illusts/congrats/congrats_family.svg';
 
 interface PrimaryModalProps {

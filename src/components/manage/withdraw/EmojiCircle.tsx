@@ -1,5 +1,5 @@
-import { theme } from '@lib/styles/theme';
 import styled, { css } from 'styled-components';
+import { theme } from '@lib/styles/theme';
 
 type TVariant = 'present' | 'creditCard' | 'friends' | 'cash' | 'books';
 

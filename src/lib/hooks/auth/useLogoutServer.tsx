@@ -1,6 +1,6 @@
-import userApi from '@lib/apis/user/userAPI';
 import { useMutation } from 'react-query';
 import useLogoutClient from './useLogoutClient';
+import userApi from '@lib/apis/user/userAPI';
 
 /**
  * @return Server-side logout 처리 후 Client-side logout 또한 처리하는 함수를 반환합니다.

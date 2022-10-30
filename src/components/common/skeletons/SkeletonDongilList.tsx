@@ -1,10 +1,10 @@
-import { TDongilVariant } from '@lib/types/TDongilVariant';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import PendingDongilItem from './dongilItems/PendingDongilItem';
 import ProposedDongilItem from './dongilItems/ProposedDongilItem';
 import ThisWeekSDongilItem from './dongilItems/thisWeekSDongilItem';
 import WalkingDongilItem from './dongilItems/WalkingDongilItem';
+import { TDongilVariant } from '@lib/types/TDongilVariant';
 
 interface SkeletonDongilListProps {
   variant: TDongilVariant;

@@ -1,7 +1,7 @@
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import React from 'react';
 import styled from 'styled-components';
 import ProposedDongilItem from './ProposedDongilItem';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface ProposedDongilListProps {
   proposedDongils: IChallengeDTO[];

@@ -1,7 +1,3 @@
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +5,10 @@ import styled from 'styled-components';
 import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
+import { EDayOfWeek } from '@lib/types/EDayOfWeek';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 
 interface WalkingDongilSectionProps {
   isAllSuccess: boolean;

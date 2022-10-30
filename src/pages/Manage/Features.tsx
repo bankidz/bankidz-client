@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import features from '@assets/images/features.png';
-import styled from 'styled-components';
 
 function Features() {
   return (

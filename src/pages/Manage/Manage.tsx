@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import styled from 'styled-components';
+import { useEffect } from 'react';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-walking.svg';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
-import { useEffect } from 'react';
 
 const contents = [
   { title: '공지사항', link: 'notices' },

@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import TabBar from './TabBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import TabBar from './TabBar';
 
 export default {
   title: 'layout/TabBar',

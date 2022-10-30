@@ -2,12 +2,12 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import '../styles.css';
+import { modals } from '../Modals';
+import { slideAnimation } from '../slideAnimation';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '../Modals';
 import renderBankiWalk from '@lib/utils/render/renderBankiWalk';
 import Button from '@components/common/buttons/Button';
-import { slideAnimation } from '../slideAnimation';
 
 interface QuaternaryModalProps {
   onSubmit: any;

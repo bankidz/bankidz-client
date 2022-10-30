@@ -1,6 +1,6 @@
-import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
 
 interface IKidsState {
   // 부모 홈에서 다자녀중 선택된 한명의 자녀

@@ -1,12 +1,12 @@
 import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
 import Step1 from '@components/home/create/steps/Step1';
 import Step2 from '@components/home/create/steps/Step2';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import Step3 from '@components/home/create/steps/Step3';
 import Step4 from '@components/home/create/steps/Step4';
 import Step5 from '@components/home/create/steps/Step5';
-import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '@store/app/hooks';
 import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';

@@ -1,6 +1,6 @@
-import { theme } from '@lib/styles/theme';
 import { ThreeDots } from 'react-loader-spinner';
 import styled from 'styled-components';
+import { theme } from '@lib/styles/theme';
 
 /**
  * 홈 페이지 당겨서 새고침 시 사용합니다.

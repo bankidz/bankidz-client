@@ -1,8 +1,8 @@
-import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { Link, useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
 import React from 'react';
+import { ReactComponent as AchievedStamp } from '@assets/illusts/etc/stamp_parent.svg';
+import renderItemIllust from '@lib/utils/render/renderItemIllust';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { ReactComponent as Failed } from '@assets/icons/failed.svg';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-dongil.svg';

@@ -1,3 +1,4 @@
+import { useQuery } from 'react-query';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import Modals from '@components/common/modals/Modals';
@@ -5,7 +6,6 @@ import LargeSpacer from '@components/layout/LargeSpacer';
 import ParentSummary from '@components/home/summary/ParentSummary';
 import ProposedDongilSection from '@components/home/proposed/ProposedDongilSection';
 import ThisWeekSDongilSection from '@components/home/thisWeekS/ThisWeekSDongilSection';
-import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';

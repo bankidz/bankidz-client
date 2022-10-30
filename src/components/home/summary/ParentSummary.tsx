@@ -1,9 +1,9 @@
+import styled from 'styled-components';
+import Summary from './Summary';
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import { IKidWeekDTO } from '@lib/apis/challenge/challengeDTO';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import styled from 'styled-components';
-import Summary from './Summary';
 
 interface ParentSummaryProps {
   isAllSuccess: boolean;

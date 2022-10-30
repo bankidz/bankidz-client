@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
-import styled from 'styled-components';
 import useInfiniteNotificationQuery from '@lib/hooks/queries/useInfiniteNotificationQuery';
 import NotificationList from '@components/home/NotificationList';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';

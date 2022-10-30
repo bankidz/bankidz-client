@@ -1,9 +1,9 @@
+import { useEffect } from 'react';
+import { useMutation } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
-import { useEffect } from 'react';
-import { useMutation } from 'react-query';
 
 function WithdrawCallbackPage() {
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();

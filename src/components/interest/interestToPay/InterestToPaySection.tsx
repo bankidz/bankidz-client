@@ -1,3 +1,6 @@
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
+import InterestToPayList from './InterestToPayList';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import SkeletonInterestToPayList from '@components/common/skeletons/SkeletonInterestToPayList';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
@@ -7,9 +10,6 @@ import {
   selectHasMultipleKids,
   selectSelectedKid,
 } from '@store/slices/kidsSlice';
-import { useQuery } from 'react-query';
-import styled from 'styled-components';
-import InterestToPayList from './InterestToPayList';
 
 function InterestToPaySection() {
   const selectedKid = useAppSelector(selectSelectedKid);
@@ -33,7 +33,7 @@ function InterestToPaySection() {
     content = (
       <InterestToPayList
         challengeDTOList={
-          unPaidInterests?.achievedChallengeListDTO?.challengeDTOList!
+          unPaidInterests?.achievedChallengeListDTO?.challengeDTOList
         }
       />
     );

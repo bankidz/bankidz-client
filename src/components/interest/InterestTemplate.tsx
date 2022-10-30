@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import FixedBar from '@components/home/homeTemplate/FixedBar';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import MarginTemplate from '@components/layout/MarginTemplate';
-import styled from 'styled-components';
 
 interface InterestTemplateProps {
   children: React.ReactNode;

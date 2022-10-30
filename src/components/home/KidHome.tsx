@@ -1,9 +1,9 @@
+import { useQuery } from 'react-query';
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import KidSummary from '@components/home/summary/KidSummary';
 import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
 import PendingDongilSection from '@components/home/pending/PendingDongilSection';
-import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';

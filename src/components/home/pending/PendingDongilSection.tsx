@@ -1,9 +1,9 @@
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import { TStatus } from '@lib/types/TStatus';
 import styled from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import PendingDongilList from './PendingDongilList';
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import { TStatus } from '@lib/types/TStatus';
 
 interface PendingDongilSectionProps {
   isAllSuccess: boolean;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import getRefinedDate from '../../lib/utils/get/getRefinedDate';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
 import InputForm from '@components/common/forms/InputForm';
 import Button from '@components/common/buttons/Button';
-import getRefinedDate from '../../lib/utils/get/getRefinedDate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month

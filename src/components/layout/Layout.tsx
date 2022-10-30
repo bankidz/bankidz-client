@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { media } from '@lib/styles/theme';
 import { useMediaQuery } from 'react-responsive';
 import { useEffect } from 'react';
+import { media } from '@lib/styles/theme';
 
 function Layout() {
   const { pathname } = useLocation();

@@ -1,15 +1,15 @@
 import { Location, Route, Routes, useLocation } from 'react-router-dom';
-import BackgroundTemplate from '@components/layout/BackgroundTemplate';
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
 import KidHomePage from './KidHomePage';
 import ParentHomePage from './ParentHomePage';
 import Create from './Create';
 import DetailPage from './DetailPage';
 import Reject from './Reject';
-import useLevel from '@lib/hooks/useLevel';
 import Notification from './Notification';
+import useLevel from '@lib/hooks/useLevel';
+import { selectIsKid } from '@store/slices/authSlice';
+import { useAppSelector } from '@store/app/hooks';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
+import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 import RouteTransition from '@components/layout/RouteTransition';
 
 function HomeRouter({ location }: { location: Location }) {

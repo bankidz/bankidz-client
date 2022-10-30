@@ -1,5 +1,5 @@
-import { RootState } from '../app/store';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '../app/store';
 import { TLevel } from '@lib/types/TLevel';
 
 interface IAuth {
@@ -22,7 +22,7 @@ const initialState: IAuthState = {
   },
 };
 
-interface ICredentials extends Pick<IAuth, 'isKid' | 'level' | 'provider'> {}
+type ICredentials = Pick<IAuth, 'isKid' | 'level' | 'provider'>;
 
 export const authSlice = createSlice({
   name: 'auth',

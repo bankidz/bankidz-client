@@ -1,13 +1,13 @@
+import styled from 'styled-components';
+import { useMutation, useQueryClient } from 'react-query';
+import React from 'react';
 import { modals } from '@components/common/modals/Modals';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
 import ProposalBadge from '@components/common/badges/ProposalBadge';
-import styled from 'styled-components';
-import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
-import React from 'react';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface PendingDongilItemProps {

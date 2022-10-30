@@ -1,9 +1,9 @@
-import Button from '@components/common/buttons/Button';
-import { useAppSelector } from '@store/app/hooks';
-import { selectIsKid } from '@store/slices/authSlice';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import EmojiCircle from './EmojiCircle';
+import Button from '@components/common/buttons/Button';
+import { useAppSelector } from '@store/app/hooks';
+import { selectIsKid } from '@store/slices/authSlice';
 
 function WithdrawContent() {
   const isKid = useAppSelector(selectIsKid);

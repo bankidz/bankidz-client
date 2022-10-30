@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 function getWeekNumberByMonth(dateFormat: Date) {
   const inputDate = new Date(dateFormat);
 

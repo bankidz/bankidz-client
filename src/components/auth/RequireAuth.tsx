@@ -1,7 +1,7 @@
-import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
-import { selectIsKid } from '@store/slices/authSlice';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAppSelector } from '../../store/app/hooks';
+import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
+import { selectIsKid } from '@store/slices/authSlice';
 
 function RequireAuth() {
   const accessToken = getLocalStorage('accessToken');
