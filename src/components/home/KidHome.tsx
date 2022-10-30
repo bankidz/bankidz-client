@@ -13,15 +13,59 @@ import { Suspense } from 'react';
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
 import styled from 'styled-components';
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import CriticalErrorBoundary from '@components/common/errorBoundary/CriticalErrorBoundary';
+import RetryErrorBoundary from '@components/common/errorBoundary/RetryErrorBoundary';
+
+const SummaryWrapper = styled.div`
+  ${kidSummaryWrapperStyle}
+`;
+const WalkingSkeletonWrapper = styled.section`
+  ${walkingDongilWrapperStyle}
+`;
+const PendingSkeletonWrapper = styled.section`
+  ${pendingDongilWrapperStyle}
+`;
+
+const kidSummarySkeleton = (
+  <SummaryWrapper>
+    <SkeletonSummary variant="KidHome" />
+  </SummaryWrapper>
+);
+const walkingSkeleton = (
+  <WalkingSkeletonWrapper>
+    <h1>걷고있는 돈길</h1>
+    <SkeletonDongilList variant="walking" />
+  </WalkingSkeletonWrapper>
+);
+const pendingSkeleton = (
+  <PendingSkeletonWrapper>
+    <h1>대기중인 돈길</h1>
+    <SkeletonDongilList variant="pending" />
+  </PendingSkeletonWrapper>
+);
+
+function LoadingFallback() {
+  return (
+    <>
+      {kidSummarySkeleton}
+      {walkingSkeleton}
+      {pendingSkeleton}
+    </>
+  );
+}
 
 function KidHome() {
   return (
     <>
       <Suspense fallback={<LoadingFallback />}>
-        <KidSummary />
-        <WalkingDongilSection />
-        <PendingDongilSection />
+        <RetryErrorBoundary background={kidSummarySkeleton}>
+          <KidSummary />
+        </RetryErrorBoundary>
+        <RetryErrorBoundary background={walkingSkeleton}>
+          <WalkingDongilSection />
+        </RetryErrorBoundary>
+        <RetryErrorBoundary background={pendingSkeleton}>
+          <PendingDongilSection />
+        </RetryErrorBoundary>
       </Suspense>
       <LargeSpacer />
       <Modals />
@@ -30,33 +74,3 @@ function KidHome() {
 }
 
 export default KidHome;
-
-function LoadingFallback() {
-  return (
-    <>
-      <SummaryWrapper>
-        <SkeletonSummary variant="KidHome" />
-      </SummaryWrapper>
-      <WalkingSkeletonWrapper>
-        <h1>걷고있는 돈길</h1>
-        <SkeletonDongilList variant="walking" />
-      </WalkingSkeletonWrapper>
-      <PendingSkeletonWrapper>
-        <h1>대기중인 돈길</h1>
-        <SkeletonDongilList variant="pending" />
-      </PendingSkeletonWrapper>
-    </>
-  );
-}
-
-const SummaryWrapper = styled.div`
-  ${kidSummaryWrapperStyle}
-`;
-
-const WalkingSkeletonWrapper = styled.section`
-  ${walkingDongilWrapperStyle}
-`;
-
-const PendingSkeletonWrapper = styled.section`
-  ${pendingDongilWrapperStyle}
-`;

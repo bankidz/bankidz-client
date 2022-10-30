@@ -18,7 +18,7 @@ interface RetryErrorBoundaryProps {
 function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
   const { reset } = useQueryErrorResetBoundary();
   const handleError = (error: any) => {
-    if (error?.response?.status === 500) {
+    if (error?.response?.status === 404) {
       throw error; // 상위 ErrorBoundary로 위임
     }
   };
