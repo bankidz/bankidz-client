@@ -61,7 +61,7 @@ const FallbackBlock = styled.div`
   align-items: center;
 
   ${({ theme }) => theme.typo.fixed.EmptyText_S_16_M};
-  color: ${({ theme }) => theme.palette.greyScale.black};
+  color: ${({ theme }) => theme.palette.greyScale.grey600};
   white-space: pre-line;
   line-height: 150%;
   text-align: center;

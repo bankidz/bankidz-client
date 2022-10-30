@@ -18,7 +18,7 @@ interface RetryErrorBoundaryProps {
 function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
   const { reset } = useQueryErrorResetBoundary();
   const handleError = (error: any) => {
-    if (error?.response?.status === 500) {
+    if (error?.response?.status === 404) {
       throw error; // 상위 ErrorBoundary로 위임
     }
   };
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 
 const FallbackBlock = styled.div`
   ${({ theme }) => theme.typo.fixed.EmptyText_S_16_M};
-  color: ${({ theme }) => theme.palette.greyScale.black};
+  color: ${({ theme }) => theme.palette.greyScale.grey600};
 
   display: flex;
   flex-direction: column;
