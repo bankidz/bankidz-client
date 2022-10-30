@@ -1,31 +1,33 @@
-import styled from 'styled-components';
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ThisWeekSDongilList from './ThisWeekSDongilList';
-import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import queryKeys from '@lib/constants/queryKeys';
+import { useAppSelector } from '@store/app/hooks';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
 
-interface ThisWeekSDongilSectionProps {
-  isAllSuccess: boolean;
-  thisWeekSDongils: IKidChallengeListDTO | undefined;
-}
+function ThisWeekSDongilSection() {
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const { data: thisWeekSDongils } = useQuery(
+    [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'walking'],
+    () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
+    {
+      refetchInterval: HOME_REFETCH_INTERVAL,
+      suspense: true,
+    },
+  );
 
-function ThisWeekSDongilSection({
-  isAllSuccess,
-  thisWeekSDongils,
-}: ThisWeekSDongilSectionProps) {
   let content;
-  if (isAllSuccess) {
-    if (thisWeekSDongils?.challengeList.length === 0) {
-      content = <EmptyDongil subject="걷고있는" />;
-    } else {
-      content = (
-        <ThisWeekSDongilList
-          thisWeekSDongils={thisWeekSDongils?.challengeList!}
-        />
-      );
-    }
+  if (thisWeekSDongils?.challengeList.length === 0) {
+    content = <EmptyDongil subject="걷고있는" />;
   } else {
-    content = <SkeletonDongilList variant="thisWeekS" />;
+    content = (
+      <ThisWeekSDongilList
+        thisWeekSDongils={thisWeekSDongils?.challengeList!}
+      />
+    );
   }
 
   return (
@@ -38,7 +40,7 @@ function ThisWeekSDongilSection({
 
 export default ThisWeekSDongilSection;
 
-const Wrapper = styled.section`
+export const thisWeekSDongilStyle = css`
   margin-top: 48px;
   h1 {
     width: 100%;
@@ -47,4 +49,8 @@ const Wrapper = styled.section`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
     ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const Wrapper = styled.section`
+  ${thisWeekSDongilStyle}
 `;

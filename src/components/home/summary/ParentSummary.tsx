@@ -1,38 +1,41 @@
-import styled from 'styled-components';
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
 import Summary from './Summary';
-import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
-import { IKidWeekDTO } from '@lib/apis/challenge/challengeDTO';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 
-interface ParentSummaryProps {
-  isAllSuccess: boolean;
-  parentSummary: IKidWeekDTO | undefined;
-}
-
-function ParentSummary({ isAllSuccess, parentSummary }: ParentSummaryProps) {
+function ParentSummary() {
   const selectedKid = useAppSelector(selectSelectedKid);
+  const { data: parentSummary } = useQuery(
+    [queryKeys.CHALLENGE_KID_PROGRESS, selectedKid?.kidId],
+    () => challengeAPI.getChallengeKidProgress(selectedKid!.kidId),
+    {
+      refetchInterval: HOME_REFETCH_INTERVAL,
+      suspense: true,
+    },
+  );
 
-  let content;
-  if (isAllSuccess) {
-    const { currentSavings, totalPrice } = parentSummary!.weekInfo;
-    content = (
+  return (
+    <Wrapper>
       <Summary
         variant="ParentHome"
-        currentSavings={currentSavings!}
-        totalPrice={totalPrice!}
+        currentSavings={parentSummary?.weekInfo?.currentSavings!}
+        totalPrice={parentSummary?.weekInfo?.totalPrice!}
         username={selectedKid?.username}
       />
-    );
-  } else {
-    content = <SkeletonSummary variant="ParentHome" />;
-  }
-
-  return <Wrapper>{content}</Wrapper>;
+    </Wrapper>
+  );
 }
 
 export default ParentSummary;
 
-const Wrapper = styled.div`
+export const parentSummaryStyle = css`
   margin-top: 198px;
+`;
+
+const Wrapper = styled.div`
+  ${parentSummaryStyle}
 `;

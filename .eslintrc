@@ -31,7 +31,7 @@
     "import/order": ["error"],
     "@typescript-eslint/ban-ts-comment": "off",
     "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-non-null-asserted-optional-chain": "warning"
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off"
   },
   "ignorePatterns": ["*.config.js"]
 }

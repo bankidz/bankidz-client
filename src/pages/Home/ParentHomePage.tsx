@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
+import CriticalErrorBoundary from '@components/common/errorBoundary/CriticalErrorBoundary';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
@@ -52,9 +53,11 @@ function ParentHomePage() {
       content = <NoFamily />;
     } else {
       content = (
-        <HomeTemplate>
-          <ParentHome />
-        </HomeTemplate>
+        <CriticalErrorBoundary>
+          <HomeTemplate>
+            <ParentHome />
+          </HomeTemplate>
+        </CriticalErrorBoundary>
       );
     }
   } else {
