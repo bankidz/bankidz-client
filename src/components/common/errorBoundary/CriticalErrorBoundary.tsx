@@ -29,8 +29,8 @@ function CriticalErrorBoundary({ children }: RetryErrorBoundaryProps) {
           </div>
 
           <div className="text-wrapper">
-            <h1> 데이터를 불러오는데 실패했어요. </h1>
-            <p>{`오류가 지속되면 '마이페이지 > 문의하기'에서\n문의해주세요.`}</p>
+            <h1> 데이터를 불러오는데 실패했어요 </h1>
+            <p>{`오류가 지속되면 '마이페이지 > 문의하기'에서\n문의해주세요`}</p>
           </div>
 
           <RetryButton onClick={() => resetErrorBoundary()}>
