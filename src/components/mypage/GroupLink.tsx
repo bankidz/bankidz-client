@@ -9,11 +9,14 @@ import useUserQuery from '@lib/hooks/queries/useUserQuery';
 import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '@components/common/modals/Modals';
 
 function GroupLink() {
   const navigate = useNavigate();
   const { groupCode } = useParams();
   const { code, expiredDate } = decipher(groupCode!);
+  const { openModal } = useModals();
   const { setCloseBottomSheet } = useGlobalBottomSheet();
   const {
     openExpiredNoticeSheet,
@@ -36,6 +39,11 @@ function GroupLink() {
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
     navigate('/mypage');
+    openModal(modals.primaryModal, {
+      isFamilyCreated: true,
+      headerText: '돈길을 걸을 가족이 생겼어요',
+      bodyText: '이제 그룹 내 가족구성원들과 돈길을 계약해봐요!',
+    });
   };
 
   const handleMoveGroupCompleted = () => {
