@@ -95,6 +95,7 @@ const challengeAPI = {
     const response = await axiosPrivate.get(
       `/challenge/kid/${kidId}?status=${status}`,
     );
+    throw new Error('자녀의 주차 정보 가져오기');
     return response.data;
   },
 
@@ -112,6 +113,7 @@ const challengeAPI = {
   // 자녀의 주차 정보 가져오기
   getChallengeKidProgress: async (kidId: number): Promise<IKidWeekDTO> => {
     const response = await axiosPrivate.get(`/challenge/kid/progress/${kidId}`);
+    throw new Error('자녀의 주차 정보 가져오기');
     return response.data;
   },
 

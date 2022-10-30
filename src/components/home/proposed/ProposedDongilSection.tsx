@@ -4,7 +4,7 @@ import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { useQuery } from 'react-query';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ProposedDongilList from './ProposedDongilList';
 
@@ -38,7 +38,7 @@ function ProposedDongilSection() {
 
 export default ProposedDongilSection;
 
-export const ProposedDongilStyle = styled.div`
+export const ProposedDongilStyle = css`
   margin-top: 48px;
   h1 {
     width: 100%;
@@ -50,5 +50,5 @@ export const ProposedDongilStyle = styled.div`
 `;
 
 const Wrapper = styled.section`
-  ${ProposedDongilStyle};
+  ${ProposedDongilStyle}
 `;
