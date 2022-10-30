@@ -1,54 +1,72 @@
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
-import KidSummary from '@components/home/summary/KidSummary';
-import WalkingDongilSection from '@components/home/walking/WalkingDongilSection';
-import PendingDongilSection from '@components/home/pending/PendingDongilSection';
-import { useQuery } from 'react-query';
-import queryKeys from '@lib/constants/queryKeys';
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import KidSummary, {
+  kidSummaryWrapperStyle,
+} from '@components/home/summary/KidSummary';
+import WalkingDongilSection, {
+  walkingDongilWrapperStyle,
+} from '@components/home/walking/WalkingDongilSection';
+import PendingDongilSection, {
+  pendingDongilWrapperStyle,
+} from '@components/home/pending/PendingDongilSection';
+import { Suspense } from 'react';
+import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
+import styled from 'styled-components';
+import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
+import RetryErrorBoundary from '@components/common/errorBoundary/RetryErrorBoundary';
 
-function KidHome() {
-  const { status: kidSummaryStatus, data: kidSummary } = useQuery(
-    queryKeys.CHALLENGE_PROGRESS,
-    challengeAPI.getChallengeProgress,
-    {
-      refetchInterval: HOME_REFETCH_INTERVAL,
-    },
-  );
-  const { status: walkingDongilsStatus, data: walkingDongils } = useQuery(
-    [queryKeys.CHALLENGE, 'walking'],
-    () => challengeAPI.getChallenge('walking'),
-    {
-      enabled: !!kidSummary,
-      refetchInterval: HOME_REFETCH_INTERVAL,
-    },
-  );
-  const { status: pendingDongilsStatus, data: pendingDongils } = useQuery(
-    [queryKeys.CHALLENGE, 'pending'],
-    () => challengeAPI.getChallenge('pending'),
-    {
-      enabled: !!walkingDongils,
-      refetchInterval: HOME_REFETCH_INTERVAL,
-    },
-  );
+const SummaryWrapper = styled.div`
+  ${kidSummaryWrapperStyle}
+`;
+const WalkingSkeletonWrapper = styled.section`
+  ${walkingDongilWrapperStyle}
+`;
+const PendingSkeletonWrapper = styled.section`
+  ${pendingDongilWrapperStyle}
+`;
 
-  const isAllSuccess =
-    kidSummaryStatus === 'success' &&
-    walkingDongilsStatus === 'success' &&
-    pendingDongilsStatus === 'success';
+const kidSummarySkeleton = (
+  <SummaryWrapper>
+    <SkeletonSummary variant="KidHome" />
+  </SummaryWrapper>
+);
+const walkingSkeleton = (
+  <WalkingSkeletonWrapper>
+    <h1>걷고있는 돈길</h1>
+    <SkeletonDongilList variant="walking" />
+  </WalkingSkeletonWrapper>
+);
+const pendingSkeleton = (
+  <PendingSkeletonWrapper>
+    <h1>대기중인 돈길</h1>
+    <SkeletonDongilList variant="pending" />
+  </PendingSkeletonWrapper>
+);
 
+function LoadingFallback() {
   return (
     <>
-      <KidSummary isAllSuccess={isAllSuccess} kidSummary={kidSummary} />
-      <WalkingDongilSection
-        isAllSuccess={isAllSuccess}
-        walkingDongils={walkingDongils}
-      />
-      <PendingDongilSection
-        isAllSuccess={isAllSuccess}
-        pendingDongils={pendingDongils}
-      />
+      {kidSummarySkeleton}
+      {walkingSkeleton}
+      {pendingSkeleton}
+    </>
+  );
+}
+
+function KidHome() {
+  return (
+    <>
+      <Suspense fallback={<LoadingFallback />}>
+        <RetryErrorBoundary background={kidSummarySkeleton}>
+          <KidSummary />
+        </RetryErrorBoundary>
+        <RetryErrorBoundary background={walkingSkeleton}>
+          <WalkingDongilSection />
+        </RetryErrorBoundary>
+        <RetryErrorBoundary background={pendingSkeleton}>
+          <PendingDongilSection />
+        </RetryErrorBoundary>
+      </Suspense>
       <LargeSpacer />
       <Modals />
     </>

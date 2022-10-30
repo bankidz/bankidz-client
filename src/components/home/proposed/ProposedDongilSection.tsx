@@ -1,29 +1,31 @@
-import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
-import { IKidChallengeListDTO } from '@lib/apis/challenge/challengeDTO';
-import styled from 'styled-components';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import queryKeys from '@lib/constants/queryKeys';
+import { useAppSelector } from '@store/app/hooks';
+import { selectSelectedKid } from '@store/slices/kidsSlice';
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
 import EmptyDongil from '../EmptyDongil';
 import ProposedDongilList from './ProposedDongilList';
 
-interface ProposedDongilSectionProps {
-  isAllSuccess: boolean;
-  proposedDongils: IKidChallengeListDTO | undefined;
-}
+function ProposedDongilSection() {
+  const selectedKid = useAppSelector(selectSelectedKid);
+  const { data: proposedDongils } = useQuery(
+    [queryKeys.CHALLENGE_KID, selectedKid?.kidId, 'pending'],
+    () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'pending'),
+    {
+      refetchInterval: HOME_REFETCH_INTERVAL,
+      suspense: true,
+    },
+  );
 
-function ProposedDongilSection({
-  isAllSuccess,
-  proposedDongils,
-}: ProposedDongilSectionProps) {
   let content;
-  if (isAllSuccess) {
-    if (proposedDongils?.challengeList.length === 0) {
-      content = <EmptyDongil subject="제안받은" />;
-    } else {
-      content = (
-        <ProposedDongilList proposedDongils={proposedDongils?.challengeList!} />
-      );
-    }
+  if (proposedDongils?.challengeList.length === 0) {
+    content = <EmptyDongil subject="제안받은" />;
   } else {
-    content = <SkeletonDongilList variant="proposed" />;
+    content = (
+      <ProposedDongilList proposedDongils={proposedDongils?.challengeList!} />
+    );
   }
 
   return (
@@ -36,7 +38,7 @@ function ProposedDongilSection({
 
 export default ProposedDongilSection;
 
-const Wrapper = styled.section`
+export const ProposedDongilStyle = css`
   margin-top: 48px;
   h1 {
     width: 100%;
@@ -45,4 +47,8 @@ const Wrapper = styled.section`
     ${({ theme }) => theme.typo.fixed.HomeSubtitle_T_16_EB};
     ${({ theme }) => theme.palette.greyScale.black};
   }
+`;
+
+const Wrapper = styled.section`
+  ${ProposedDongilStyle}
 `;
