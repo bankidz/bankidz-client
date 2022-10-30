@@ -68,7 +68,6 @@ function KidHome() {
         </RetryErrorBoundary>
       </Suspense>
       <LargeSpacer />
-      <Modals />
     </>
   );
 }

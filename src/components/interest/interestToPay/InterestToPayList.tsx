@@ -71,7 +71,6 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
 
   return (
     <Wrapper>
-      <Modals />
       {challengeDTOList?.map((challengeDTO) => (
         <Block key={challengeDTO.challenge.id}>
           <div className="text-wrapper">

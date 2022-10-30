@@ -100,7 +100,6 @@ function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
           <LargeSpacer isWhite={true} />
         </Content>
       </ContentWrapper>
-      <Modals />
     </Wrapper>
   );
 }

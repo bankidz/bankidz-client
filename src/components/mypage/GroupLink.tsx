@@ -38,10 +38,8 @@ function GroupLink() {
 
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
+    navigate('/mypage');
     openModal(modals.primaryModal, {
-      onSubmit: () => {
-        navigate('/mypage');
-      },
       isFamilyCreated: true,
       headerText: '돈길을 걸을 가족이 생겼어요',
       bodyText: '이제 그룹 내 가족구성원들과 돈길을 계약해봐요!',
@@ -84,11 +82,7 @@ function GroupLink() {
     }
   }, [userStatus, familyStatus]);
 
-  return (
-    <>
-      <Modals />
-    </>
-  );
+  return <></>;
 }
 
 export default GroupLink;

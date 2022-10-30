@@ -60,7 +60,6 @@ function RegisterRole() {
   return (
     <>
       <Wrapper>
-        <Modals />
         <span>프로필을 선택해요</span>
         <RoleButtonWrapper>
           {/* 아빠 */}
