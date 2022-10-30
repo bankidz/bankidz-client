@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import FixedBar from './FixedBar';
-import Background from '@components/home/homeTemplate/Background';
 import ContentWrapper from './ContentWrapper';
+import Background from '@components/home/homeTemplate/Background';
 
 interface HomeTemplateProps {
   children: React.ReactNode;

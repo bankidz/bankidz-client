@@ -1,5 +1,5 @@
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { useState } from 'react';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 export type TWalkDongilType = {
   value: number;

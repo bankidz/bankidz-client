@@ -1,7 +1,9 @@
 import React from 'react';
-import { ReactComponent as BankiWalk10 } from '@assets/illusts/banki/banki_walk_10.svg';
-import { ReactComponent as BankiWalk20 } from '@assets/illusts/banki/banki_walk_10.svg';
-import { ReactComponent as BankiWalk30 } from '@assets/illusts/banki/banki_walk_10.svg';
+import {
+  ReactComponent as BankiWalk10,
+  ReactComponent as BankiWalk20,
+  ReactComponent as BankiWalk30,
+} from '@assets/illusts/banki/banki_walk_10.svg';
 import { TInterestRate } from '@lib/types/IInterestRate';
 
 function renderBankiWalk(interestRate: TInterestRate) {

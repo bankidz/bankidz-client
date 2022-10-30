@@ -1,4 +1,3 @@
-import { ICreateChallengePayload } from '@store/slices/createChallengeSlice';
 import { axiosPrivate } from '../axios';
 import {
   IChallengeDTO,
@@ -10,6 +9,7 @@ import {
   IWeekDTO,
   IPatchChallengePayload,
 } from './challengeDTO';
+import { ICreateChallengePayload } from '@store/slices/createChallengeSlice';
 
 const challengeAPI = {
   // 돈길 리스트 가져오기

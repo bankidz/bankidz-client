@@ -1,3 +1,5 @@
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
 import CriticalErrorBoundary from '@components/common/errorBoundary/CriticalErrorBoundary';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
@@ -13,8 +15,6 @@ import {
   setHasMultipleKids,
   setSelectedKid,
 } from '@store/slices/kidsSlice';
-import { useQuery } from 'react-query';
-import styled from 'styled-components';
 
 /**
  * 부모홈의 계층 구조는 다음과 같습니다.

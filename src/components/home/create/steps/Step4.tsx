@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 import SelectInterest from '@components/common/bottomSheets/contractSheet/SelectInterest';
 import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -21,7 +22,6 @@ import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
-import dayjs from 'dayjs';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import { CreateStepProps } from 'src/pages/Home/Create';
 import getChallengeStep4Weeks from '@components/home/create/utils/getChallengeStep4Weeks';
@@ -71,7 +71,6 @@ function Step4({ onNextButtonClick }: CreateStepProps) {
 
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      onSubmit: () => {},
       shouldCloseOnOverlayClick: true,
     });
   };

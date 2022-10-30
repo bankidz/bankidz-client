@@ -1,15 +1,15 @@
+import styled, { css } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import KidList from './KidList';
 import { useAppSelector } from '@store/app/hooks';
 import { selectHasMultipleKids } from '@store/slices/kidsSlice';
-import styled, { css } from 'styled-components';
-import KidList from './KidList';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import { ReactComponent as Bell } from '@assets/icons/bell.svg';
 import { theme } from '@lib/styles/theme';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import { TPage } from '@lib/types/TPage';
-import { useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import notificationAPI from '@lib/apis/notification/notificationAPI';
 

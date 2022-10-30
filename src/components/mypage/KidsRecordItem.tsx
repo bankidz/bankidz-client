@@ -1,7 +1,7 @@
-import { IKidListDTO } from '@lib/apis/family/familyDTO';
-import getPercentValue from '@lib/utils/get/getPercentValue';
 import styled from 'styled-components';
 import OverViewData from './OverViewContent';
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
+import getPercentValue from '@lib/utils/get/getPercentValue';
 
 function KidsRecordItem({ kid }: { kid: IKidListDTO }) {
   const overViewData = [

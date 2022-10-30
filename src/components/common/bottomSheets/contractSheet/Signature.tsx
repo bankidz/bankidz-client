@@ -1,7 +1,7 @@
-import { theme } from '@lib/styles/theme';
 import { Dispatch, SetStateAction, useRef } from 'react';
 import SignatureCanvas from 'react-signature-canvas';
 import styled from 'styled-components';
+import { theme } from '@lib/styles/theme';
 
 export interface SignatureProps {
   setDisabledNext: Dispatch<SetStateAction<boolean>>;

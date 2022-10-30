@@ -9,7 +9,7 @@ import parentStep3 from '@assets/images/guides/parent-step3.png';
 import parentStep4 from '@assets/images/guides/parent-step4.png';
 
 const useGuideImage = (isKid: boolean) => {
-  let images: HTMLImageElement[] = [];
+  const images: HTMLImageElement[] = [];
 
   const preload = (src: string[]) => {
     for (let i = 0; i < src.length; i++) {

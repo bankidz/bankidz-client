@@ -1,10 +1,10 @@
+import styled from 'styled-components';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderHomeBackground from '@lib/utils/render/renderHomeBackground';
 import renderHomeBanki from '@lib/utils/render/renderHomeBanki';
 import { useAppSelector } from '@store/app/hooks';
 import { selectHasMultipleKids } from '@store/slices/kidsSlice';
-import styled from 'styled-components';
 
 function Background() {
   const level = useLevel();

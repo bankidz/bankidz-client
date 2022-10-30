@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+import styled from 'styled-components';
 import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import KidSummary, {
@@ -9,9 +11,7 @@ import WalkingDongilSection, {
 import PendingDongilSection, {
   pendingDongilWrapperStyle,
 } from '@components/home/pending/PendingDongilSection';
-import { Suspense } from 'react';
 import SkeletonSummary from '@components/common/skeletons/SkeletonSummary';
-import styled from 'styled-components';
 import SkeletonDongilList from '@components/common/skeletons/SkeletonDongilList';
 import RetryErrorBoundary from '@components/common/errorBoundary/RetryErrorBoundary';
 

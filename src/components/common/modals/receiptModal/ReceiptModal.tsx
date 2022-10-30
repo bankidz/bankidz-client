@@ -1,20 +1,20 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { theme } from '@lib/styles/theme';
-import '../styles.css';
 import ReactModal from 'react-modal';
+import { modals } from '../Modals';
+import { slideAnimation } from '../slideAnimation';
+import CommentContent from './contents/CommentContent';
+import '../styles.css';
 import getHeightByVariant from './getHeightByVariant';
 import PerforatedLineTop from './perforatedLines/PerforatedLineTop';
 import PerforatedLineBottom from './perforatedLines/PerforatedLineBottom';
 import TopContent from './contents/TopContent';
 import BottomContent from './contents/BottomContent';
-import CommentContent from './contents/CommentContent';
 import SubmitButton from './SubmitButton';
+import { TReceiptModalVariant } from './TReceiptModalVariant';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '../Modals';
-import { TReceiptModalVariant } from './TReceiptModalVariant';
-import { slideAnimation } from '../slideAnimation';
+import { theme } from '@lib/styles/theme';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface ReceiptModalProps

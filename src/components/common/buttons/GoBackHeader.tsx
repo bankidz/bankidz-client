@@ -1,6 +1,6 @@
-import { ReactComponent as Arrow } from '@assets/icons/arrow-left-big.svg';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { ReactComponent as Arrow } from '@assets/icons/arrow-left-big.svg';
 
 function GoBackHeader({ to }: { to?: string }) {
   const navigate = useNavigate();

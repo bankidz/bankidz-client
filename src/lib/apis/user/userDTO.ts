@@ -18,8 +18,10 @@ export interface IWithdrawalRequest {
   message: string;
 }
 
-export interface IUserTypeRequest
-  extends Pick<IUserDTO, 'birthday' | 'isFemale' | 'isKid'> {}
+export type IUserTypeRequest = Pick<
+  IUserDTO,
+  'birthday' | 'isFemale' | 'isKid'
+>;
 
 export interface IKidDTO {
   achievedChallenge: number;

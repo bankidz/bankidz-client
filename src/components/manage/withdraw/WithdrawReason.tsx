@@ -1,3 +1,6 @@
+import { useState } from 'react';
+import { useMutation } from 'react-query';
+import styled from 'styled-components';
 import Button from '@components/common/buttons/Button';
 import TextAreaForm from '@components/common/forms/TextAreaForm';
 import userAPI from '@lib/apis/user/userAPI';
@@ -7,9 +10,6 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 import { useAppSelector } from '@store/app/hooks';
 import { selectProvider } from '@store/slices/authSlice';
-import { useState } from 'react';
-import { useMutation } from 'react-query';
-import styled from 'styled-components';
 
 function WithdrawReason() {
   const [reason, setReason] = useState('');

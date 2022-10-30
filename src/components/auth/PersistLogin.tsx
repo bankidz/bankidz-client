@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
 import { useAppDispatch } from '@store/app/hooks';
 import { setCredentials } from '@store/slices/authSlice';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
-import { useMutation } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';

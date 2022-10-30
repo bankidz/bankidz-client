@@ -1,10 +1,10 @@
+import styled from 'styled-components';
 import LevelBadge from '@components/common/badges/LevelBadge';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import useLevel from '@lib/hooks/useLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { selectHasMultipleKids } from '@store/slices/kidsSlice';
-import styled from 'styled-components';
 
 interface ContentProps {
   children: React.ReactNode;

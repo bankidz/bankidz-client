@@ -1,26 +1,24 @@
 import styled from 'styled-components';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useMutation, useQueryClient } from 'react-query';
+import { useState } from 'react';
 import Summary from '@components/home/summary/Summary';
 import TotalInterest from '@components/home/detail/TotalInterest';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import LargeSpacer from '@components/layout/LargeSpacer';
-
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { calcRatio } from '@lib/styles/theme';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import useTargetDongil from '@components/home/detail/useTargetDongil';
-
 import OverViewSection from '@components/home/detail/OverViewSection';
 import InterestStampListSection from '@components/home/detail/InterestStampListSection';
 import DongilContractContentSection from '@components/home/detail/DongilContractContentSection';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLevel from '@lib/hooks/useLevel';
-import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
-import { useState } from 'react';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 function Detail() {

@@ -1,11 +1,23 @@
 {
-  "extends": ["plugin:prettier/recommended"],
+  "extends": [
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:import/recommended"
+  ],
   "plugins": ["react", "prettier"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "ecmaFeatures": {
       "jsx": true
     }
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    },
+    "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] }
   },
   "rules": {
     "prettier/prettier": ["error", { "singleQuote": true }],
@@ -15,7 +27,12 @@
       2,
       { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
     ],
-    "eqeqeq": "error"
+    "eqeqeq": "error",
+    "import/order": ["error"],
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "off",
+    "@typescript-eslint/no-non-null-assertion": "off"
   },
   "ignorePatterns": ["*.config.js"]
 }

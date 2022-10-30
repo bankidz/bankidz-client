@@ -1,8 +1,3 @@
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
-import queryKeys from '@lib/constants/queryKeys';
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -11,6 +6,11 @@ import styled, { css } from 'styled-components';
 import ContractNewDongilLink from './ContractNewDongilLink';
 import EmptyWalkingDongil from './EmptyWalkingDongil';
 import WalkingDongilList from './WalkingDongilList';
+import { EDayOfWeek } from '@lib/types/EDayOfWeek';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import queryKeys from '@lib/constants/queryKeys';
+import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
 
 function WalkingDongilSection() {
   const { data: walkingDongils } = useQuery(

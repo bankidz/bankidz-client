@@ -1,11 +1,11 @@
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
+import Summary from './Summary';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import { useQuery } from 'react-query';
-import styled, { css } from 'styled-components';
-import Summary from './Summary';
 
 function ParentSummary() {
   const selectedKid = useAppSelector(selectSelectedKid);

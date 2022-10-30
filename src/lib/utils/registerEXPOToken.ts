@@ -1,5 +1,5 @@
-import { axiosPrivate } from '@lib/apis/axios';
 import { toast } from 'react-toastify';
+import { axiosPrivate } from '@lib/apis/axios';
 
 function registerEXPOToken() {
   let isRegistered = false;

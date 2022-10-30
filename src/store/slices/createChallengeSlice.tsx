@@ -1,7 +1,7 @@
-import { TInterestRate } from '@lib/types/IInterestRate';
-import { TDongilCategory } from '@lib/types/TDongilCategory';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
+import { TInterestRate } from '@lib/types/IInterestRate';
+import { TDongilCategory } from '@lib/types/TDongilCategory';
 
 export interface ICreateChallengePayload {
   challengeCategory: TDongilCategory;

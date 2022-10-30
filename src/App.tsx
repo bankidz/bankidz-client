@@ -1,16 +1,16 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
-import Layout from './components/layout/Layout';
-import RequireAuth from '@components/auth/RequireAuth';
-import PersistLogin from '@components/auth/PersistLogin';
-import OnBoardingRouter from './pages/OnBoarding';
-import GroupLink from './components/mypage/GroupLink';
-import NotFound from './pages/NotFound';
-import TestPage from './pages/Test/TestPage';
-import '@components/layout/transition.css';
+import OnBoardingRouter from '@pages/OnBoarding';
+import TestPage from '@pages/Test/TestPage';
+import ServiceRouter from '@pages/ServiceRouter';
+import NotFound from '@pages/NotFound';
+import Layout from '@components/layout/Layout';
+import GroupLink from '@components/mypage/GroupLink';
 import RouteChangeTracker from '@components/auth/RouteChangeTracker';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
-import ServiceRouter from './pages/ServiceRouter';
+import PersistLogin from '@components/auth/PersistLogin';
+import RequireAuth from '@components/auth/RequireAuth';
+import '@components/layout/transition.css';
 
 function App() {
   const location = useLocation();

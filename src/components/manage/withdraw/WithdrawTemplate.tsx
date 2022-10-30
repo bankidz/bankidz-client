@@ -1,9 +1,9 @@
+import { useQueryClient } from 'react-query';
+import styled from 'styled-components';
 import { IMyPageDTO, IUserDTO } from '@lib/apis/user/userDTO';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
-import { useQueryClient } from 'react-query';
-import styled from 'styled-components';
 import queryKeys from '@lib/constants/queryKeys';
 
 interface WithdrawTemplateProps {

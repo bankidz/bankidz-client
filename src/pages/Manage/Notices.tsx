@@ -1,8 +1,8 @@
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';

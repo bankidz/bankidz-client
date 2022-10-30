@@ -1,29 +1,20 @@
-import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
-import Signature from '@components/common/bottomSheets/contractSheet/Signature';
-import Modals, { modals } from '@components/common/modals/Modals';
-import { axiosPrivate } from '@lib/apis/axios';
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import queryKeys from '@lib/constants/queryKeys';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import useModals from '@lib/hooks/useModals';
-import convertDataURLtoFile from '@lib/utils/convertDataURLtoFile';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  setFileName,
-  resetChallengePayload,
-  selectCreateChallenge,
-} from '@store/slices/createChallengeSlice';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import usePresignedUrl from '../utils/usePresignedUrl';
-
-interface IPreSignedUrl {
-  imageName: string;
-  preSignedUrl: string;
-}
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
+import Signature from '@components/common/bottomSheets/contractSheet/Signature';
+import Modals, { modals } from '@components/common/modals/Modals';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
+import useModals from '@lib/hooks/useModals';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import {
+  resetChallengePayload,
+  selectCreateChallenge,
+} from '@store/slices/createChallengeSlice';
 
 function Step5() {
   const navigate = useNavigate();

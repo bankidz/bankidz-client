@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MarginTemplate from '@components/layout/MarginTemplate';
 import EmptyWalkingDongil from './walking/EmptyWalkingDongil';
+import MarginTemplate from '@components/layout/MarginTemplate';
 
 export default {
   title: 'home/EmptyWalkingDongil',

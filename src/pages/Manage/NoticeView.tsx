@@ -1,9 +1,9 @@
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
-import useNoticeByIdQuery from '@lib/hooks/queries/useNoticeByIdQuery';
 import dayjs from 'dayjs';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { NoticeItem } from './Notices';
+import useNoticeByIdQuery from '@lib/hooks/queries/useNoticeByIdQuery';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 
 function NoticeView() {
   const { id } = useParams();

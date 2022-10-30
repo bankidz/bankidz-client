@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
 import WalkDefault from '@components/walk/WalkDefault';
 import WalkError from '@components/walk/WalkError';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
@@ -5,9 +8,6 @@ import queryKeys from '@lib/constants/queryKeys';
 import useUserQuery from '@lib/hooks/queries/useUserQuery';
 import { useAppDispatch } from '@store/app/hooks';
 import { resetDongilPatched } from '@store/slices/walkingDongilsSlice';
-import { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import styled from 'styled-components';
 
 function Walk() {
   const { status: walkingDongilsStatus, data: walkingDongilsData } = useQuery(

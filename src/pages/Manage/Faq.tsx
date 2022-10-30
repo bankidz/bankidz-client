@@ -1,8 +1,8 @@
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import styled from 'styled-components';
+import { useState } from 'react';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import { ReactComponent as ChevronDown } from '@assets/icons/chevronDown.svg';
 import { ReactComponent as ChevronUp } from '@assets/icons/chevronUp.svg';
-import { useState } from 'react';
 
 const onChatButtonClick = () => {
   window.Kakao.Channel.chat({

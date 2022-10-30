@@ -1,18 +1,17 @@
+import styled from 'styled-components';
 import Receipt from '@components/common/receipt/Receipt';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import styled from 'styled-components';
 
-interface DongilContractContentSectionProps
-  extends Pick<
-    IChallengeDTO,
-    | 'progressList'
-    | 'interestRate'
-    | 'isMom'
-    | 'itemName'
-    | 'totalPrice'
-    | 'weekPrice'
-    | 'weeks'
-  > {}
+type DongilContractContentSectionProps = Pick<
+  IChallengeDTO,
+  | 'progressList'
+  | 'interestRate'
+  | 'isMom'
+  | 'itemName'
+  | 'totalPrice'
+  | 'weekPrice'
+  | 'weeks'
+>;
 
 function DongilContractContentSection({
   progressList,

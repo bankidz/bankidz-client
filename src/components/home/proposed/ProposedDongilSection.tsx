@@ -1,12 +1,12 @@
+import { useQuery } from 'react-query';
+import styled, { css } from 'styled-components';
+import EmptyDongil from '../EmptyDongil';
+import ProposedDongilList from './ProposedDongilList';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import { HOME_REFETCH_INTERVAL } from '@lib/constants/HOME_REFETCH_INTERVAL';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import { useQuery } from 'react-query';
-import styled, { css } from 'styled-components';
-import EmptyDongil from '../EmptyDongil';
-import ProposedDongilList from './ProposedDongilList';
 
 function ProposedDongilSection() {
   const selectedKid = useAppSelector(selectSelectedKid);
