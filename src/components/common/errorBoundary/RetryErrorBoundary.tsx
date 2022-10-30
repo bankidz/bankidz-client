@@ -18,7 +18,7 @@ interface RetryErrorBoundaryProps {
 function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
   const { reset } = useQueryErrorResetBoundary();
   const handleError = (error: any) => {
-    if (error?.response?.status === 404) {
+    if (error?.response?.status === 500) {
       throw error; // 상위 ErrorBoundary로 위임
     }
   };
@@ -36,7 +36,7 @@ function RetryErrorBoundary({ background, children }: RetryErrorBoundaryProps) {
                 <FontAwesomeIcon
                   icon={faArrowsRotate}
                   size="2x"
-                  color={theme.palette.greyScale.grey700}
+                  color={theme.palette.greyScale.grey600}
                 />
               </div>
             </RetryButton>

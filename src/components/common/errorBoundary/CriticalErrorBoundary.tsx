@@ -38,7 +38,7 @@ function CriticalErrorBoundary({ children }: RetryErrorBoundaryProps) {
               <FontAwesomeIcon
                 icon={faArrowsRotate}
                 size="3x"
-                color={theme.palette.greyScale.grey700}
+                color={theme.palette.greyScale.grey600}
               />
             </div>
           </RetryButton>
