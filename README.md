@@ -167,7 +167,7 @@
 
 |                       가족 초대 (공통)                       |                     마이페이지 탭 (공통)                     |                         설정 (공통)                          |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/195767677-30b89754-fff1-41c4-a7cd-b28b2e5442fa.gif" alt="가족 초대" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;width:85%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/195767677-30b89754-fff1-41c4-a7cd-b28b2e5442fa.gif" alt="가족 초대" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;width:80%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
 | 딥링크를 통한 가족 초대 → 가족그룹 참여<br />→ 가족그룹 나가기 → 가족그룹 만들기 |                알림 설정 localStorage Caching                |                              -                               |
 
 <br/>
