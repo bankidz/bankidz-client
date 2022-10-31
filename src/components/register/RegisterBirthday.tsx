@@ -168,13 +168,13 @@ function RegisterBirthday() {
         </ErrorMessage>
       )}
 
-      <LaterButton
+      {/* <LaterButton
         onClick={() => {
           navigate('/auth/register/2');
         }}
       >
         다음에 할래요
-      </LaterButton>
+      </LaterButton> */}
       <ButtonWrapper>
         <Button
           label="다음"
