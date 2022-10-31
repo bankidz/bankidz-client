@@ -93,9 +93,6 @@ function RegisterBirthday() {
       console.error('부적절한 접근입니다.');
       return;
     }
-    setYear('');
-    setMonth('');
-    setDay('');
     dispatch(setBirthday(getRefinedDate(year, month, day)));
     navigate('/auth/register/2');
   };
@@ -170,6 +167,13 @@ function RegisterBirthday() {
         </ErrorMessage>
       )}
 
+      <LaterButton
+        onClick={() => {
+          navigate('/auth/register/2');
+        }}
+      >
+        다음에 할래요
+      </LaterButton>
       <ButtonWrapper>
         <Button
           label="다음"
@@ -221,6 +225,22 @@ const ErrorMessage = styled.div`
 const DummyButton = styled.button`
   position: absolute;
   left: -9999px;
+`;
+
+const LaterButton = styled.button`
+  width: 118px;
+  height: 46px;
+  ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
+  color: ${({ theme }) => theme.palette.greyScale.grey500};
+
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
+  text-align: center;
+
+  position: absolute;
+  left: 50%;
+  top: 288px;
+  transform: translate3d(-50%, -50%, 0);
 `;
 
 const ButtonWrapper = styled.div`
