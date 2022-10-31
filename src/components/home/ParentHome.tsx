@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import styled from 'styled-components';
-import Modals from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import ParentSummary, {
   parentSummaryStyle,

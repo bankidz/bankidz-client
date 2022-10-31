@@ -14,7 +14,7 @@ import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
 import useWalkDongil from '@components/walk/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import usePresignedUrl from '../utils/usePresignedUrl';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
 import Signature from '@components/common/bottomSheets/contractSheet/Signature';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
