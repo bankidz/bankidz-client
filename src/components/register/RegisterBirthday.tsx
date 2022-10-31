@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { darken } from 'polished';
 import getRefinedDate from '../../lib/utils/get/getRefinedDate';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
@@ -236,6 +237,14 @@ const LaterButton = styled.button`
   text-decoration: underline;
   text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
   text-align: center;
+
+  ${({ theme }) =>
+    css`
+      &:active {
+        color: ${darken(0.1, theme.palette.greyScale.grey500)};
+        text-decoration-color: ${darken(0.1, theme.palette.greyScale.grey500)};
+      }
+    `}
 
   position: absolute;
   left: 50%;
