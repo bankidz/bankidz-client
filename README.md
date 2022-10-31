@@ -96,6 +96,11 @@
 
 ## 4.1. 회원관리, 온보딩 (공통)
 
+|                       회원관리 (공통)                        |                        온보딩 (공통)                         |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:66%;" /> |
+| 애플 소셜 로그인 → 로그아웃 → 카카오 소셜 로그인 → 회원 탈퇴 |      생년월일 → 프로필 → 푸시알림 동의 → 튜토리얼 → 홈       |
+
 <details>
 <summary>자세히</summary>
 <div markdown="1">
@@ -108,14 +113,14 @@
 </div>
 </details>
 
-|                       회원관리 (공통)                        |                        온보딩 (공통)                         |
-| :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:66%;" /> |
-| 애플 소셜 로그인 → 로그아웃 → 카카오 소셜 로그인 → 회원 탈퇴 |      생년월일 → 프로필 → 푸시알림 동의 → 튜토리얼 → 홈       |
-
 <br/>
 
 ## 4.2. 홈 탭 (자녀)
+
+|                         홈 탭 (자녀)                         |                         홈 탭 (자녀)                         |                       알림내역 (공통)                        |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="zoom:33%;" /> |
+|    걷고있는 돈길 → 돈길 포기하기<br />→ 실패한 돈길 삭제     |               대기중인 돈길 → 거절된 돈길 삭제               |                              -                               |
 
 <details>
 <summary>자세히</summary>
@@ -127,11 +132,6 @@
 
 </div>
 </details>
-
-|                         홈 탭 (자녀)                         |                         홈 탭 (자녀)                         |                       알림내역 (공통)                        |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="zoom:33%;" /> |
-|    걷고있는 돈길 → 돈길 포기하기<br />→ 실패한 돈길 삭제     |               대기중인 돈길 → 거절된 돈길 삭제               |                              -                               |
 
 <br/>
 
@@ -146,6 +146,11 @@
 
 ## 4.4. 홈 탭, 이자 내역 탭 (부모)
 
+|                         홈 탭 (부모)                         |                         홈 탭 (부모)                         |                     이자 내역 탭 (부모)                      |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
+|             각 자녀의 제안받은 돈길, 금주의 돈길             |             제안받은 돈길 → 수락하기 → 거절하기              |    지급이 필요한 이자 → 자세히 보기<br />→ 지급 완료하기     |
+
 <details>
 <summary>자세히</summary>
 <div markdown="1">
@@ -155,11 +160,6 @@
 
 </div>
 </details>
-
-|                         홈 탭 (부모)                         |                         홈 탭 (부모)                         |                     이자 내역 탭 (부모)                      |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
-|             각 자녀의 제안받은 돈길, 금주의 돈길             |             제안받은 돈길 → 수락하기 → 거절하기              |    지급이 필요한 이자 → 자세히 보기<br />→ 지급 완료하기     |
 
 <br/>
 
