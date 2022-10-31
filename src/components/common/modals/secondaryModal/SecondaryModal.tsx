@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as CongratsGoal } from '@assets/illusts/congrats/congrats_goal.svg';
 import ReactModal from 'react-modal';
+import { slideAnimation } from '../slideAnimation';
+import { modals } from '../Modals';
+import { ReactComponent as CongratsGoal } from '@assets/illusts/congrats/congrats_goal.svg';
 import { calcRatio } from '@lib/styles/theme';
 import '../styles.css';
 import CheckButton from '@components/common/buttons/CheckButton';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '../Modals';
-import { slideAnimation } from '../slideAnimation';
 
 interface SecondaryModalProps {
   onSubmit: any;

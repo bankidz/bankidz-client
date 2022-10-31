@@ -226,8 +226,6 @@ function Step4({ onNextButtonClick }: CreateStepProps) {
           />
         </div>
       </ContractSheet>
-
-      <Modals />
     </Wrapper>
   );
 }

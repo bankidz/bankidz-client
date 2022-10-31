@@ -63,7 +63,6 @@ function Step5() {
 
   return (
     <>
-      <Modals />
       <ContractSheet
         open={open}
         label={'다음'}

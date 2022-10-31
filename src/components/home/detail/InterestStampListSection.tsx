@@ -1,9 +1,11 @@
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
 import InterestStampList from './InterestStampList';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-interface DetailInterestStampListProps
-  extends Pick<IChallengeDTO, 'weeks' | 'progressList'> {}
+type DetailInterestStampListProps = Pick<
+  IChallengeDTO,
+  'weeks' | 'progressList'
+>;
 
 function InterestStampListSection({
   weeks,

@@ -1,9 +1,9 @@
+import { useQuery } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import { useQuery } from 'react-query';
 
 /**
  * [/detail Page 진입 상황]

@@ -1,10 +1,10 @@
+import styled from 'styled-components';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { calcRatio } from '@lib/styles/theme';
 import getContractEndDate from '@lib/utils/get/getContractEndDate';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
-import styled from 'styled-components';
 
-interface ThirdRowProps extends Pick<IChallengeDTO, 'weeks' | 'createdAt'> {}
+type ThirdRowProps = Pick<IChallengeDTO, 'weeks' | 'createdAt'>;
 
 function ThirdRow({ weeks, createdAt }: ThirdRowProps) {
   const contractEndDate = getContractEndDate(createdAt, weeks);

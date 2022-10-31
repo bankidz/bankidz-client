@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MarginTemplate from '@components/layout/MarginTemplate';
 import OutlinedButton from './OutlinedButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
