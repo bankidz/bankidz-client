@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import RegisterBirthday from '@components/register/RegisterBirthday';
 import RegisterRole from '@components/register/RegisterRole';
 import PushNotiConsent from '@components/register/PushNotiConsent';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left-big.svg';
-import styled from 'styled-components';
 import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
 import GuideTemplate from '@components/manage/guides/GuideTemplate';
 import { useAppSelector } from '@store/app/hooks';

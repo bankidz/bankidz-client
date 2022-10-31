@@ -1,1 +1,5 @@
-export type TReceiptModalVariant = 'contract' | 'proposing' | 'rejected' | 'proposed';
+export type TReceiptModalVariant =
+  | 'contract'
+  | 'proposing'
+  | 'rejected'
+  | 'proposed';

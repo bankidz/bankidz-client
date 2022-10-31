@@ -1,8 +1,6 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
-import kakao from '@assets/icons/kakao.svg';
 import { darken } from 'polished';
-import { theme } from '@lib/styles/theme';
 
 interface OutlinedButtonProps extends HTMLAttributes<HTMLButtonElement> {
   label: string;

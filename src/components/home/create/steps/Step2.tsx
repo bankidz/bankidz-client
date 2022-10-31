@@ -1,6 +1,6 @@
-import { useAppDispatch } from '@store/app/hooks';
 import styled from 'styled-components';
 import SelectItemNameButton from '../SelectItemNameButton';
+import { useAppDispatch } from '@store/app/hooks';
 import { TItemName } from '@lib/types/TItemName';
 import { setItemName } from '@store/slices/createChallengeSlice';
 import { CreateStepProps } from 'src/pages/Home/Create';

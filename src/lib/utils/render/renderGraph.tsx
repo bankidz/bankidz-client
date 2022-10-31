@@ -1,3 +1,4 @@
+import React from 'react';
 import { ReactComponent as Graph0 } from '@assets/illusts/graph/graph_0.svg';
 import { ReactComponent as Graph10 } from '@assets/illusts/graph/graph_10.svg';
 import { ReactComponent as Graph20 } from '@assets/illusts/graph/graph_20.svg';
@@ -10,7 +11,6 @@ import { ReactComponent as Graph80 } from '@assets/illusts/graph/graph_80.svg';
 import { ReactComponent as Graph90 } from '@assets/illusts/graph/graph_90.svg';
 import { ReactComponent as Graph100 } from '@assets/illusts/graph/graph_100.svg';
 import { TPercent } from '@lib/types/TPercent';
-import React from 'react';
 
 function renderGraph(percent: TPercent) {
   const map = new Map<TPercent, React.ReactElement>();

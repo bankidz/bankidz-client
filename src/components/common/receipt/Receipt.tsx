@@ -1,23 +1,22 @@
 import styled from 'styled-components';
-import { theme } from '@lib/styles/theme';
+import PerforatedLineTop from '../modals/receiptModal/perforatedLines/PerforatedLineTop';
+import PerforatedLineBottom from '../modals/receiptModal/perforatedLines/PerforatedLineBottom';
 import FirstRow from './FirstRow';
 import SecondRow from './SecondRow';
 import ThirdRow from './ThirdRow';
-import PerforatedLineTop from '../modals/receiptModal/perforatedLines/PerforatedLineTop';
-import PerforatedLineBottom from '../modals/receiptModal/perforatedLines/PerforatedLineBottom';
+import { theme } from '@lib/styles/theme';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-interface ReceiptProps
-  extends Pick<
-    IChallengeDTO,
-    | 'createdAt'
-    | 'interestRate'
-    | 'isMom'
-    | 'itemName'
-    | 'totalPrice'
-    | 'weekPrice'
-    | 'weeks'
-  > {}
+type ReceiptProps = Pick<
+  IChallengeDTO,
+  | 'createdAt'
+  | 'interestRate'
+  | 'isMom'
+  | 'itemName'
+  | 'totalPrice'
+  | 'weekPrice'
+  | 'weeks'
+>;
 
 function Receipt({
   createdAt,

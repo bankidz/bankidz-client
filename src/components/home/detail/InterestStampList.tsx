@@ -1,7 +1,7 @@
+import styled from 'styled-components';
 import { ReactComponent as Fail } from '@assets/illusts/pigCoin/pigcoin_fail.svg';
 import { ReactComponent as None } from '@assets/illusts/pigCoin/pigcoin_none.svg';
 import { ReactComponent as Success } from '@assets/illusts/pigCoin/pigcoin_success.svg';
-import styled from 'styled-components';
 
 interface IStamp {
   challengeId: number;

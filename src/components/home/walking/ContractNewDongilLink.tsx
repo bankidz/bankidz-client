@@ -1,5 +1,5 @@
-import { ReactComponent as Plus } from '@assets/icons/plus.svg';
 import styled from 'styled-components';
+import { ReactComponent as Plus } from '@assets/icons/plus.svg';
 
 interface ContractNewDongilLinkProps {
   to: string;

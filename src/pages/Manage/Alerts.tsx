@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useMutation, useQuery } from 'react-query';
 import { IOptInDTO } from '@lib/apis/user/userDTO';
 import ToggleButton from '@components/common/buttons/ToggleButton';
 import ForegroundTemplate from '@components/layout/ForegroundTemplate';
@@ -5,9 +8,6 @@ import useToggle from '@lib/hooks/useToggle';
 import isEmptyObject from '@lib/utils/isEmptyObject';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useMutation, useQuery } from 'react-query';
 import userAPI from '@lib/apis/user/userAPI';
 import queryKeys from '@lib/constants/queryKeys';
 

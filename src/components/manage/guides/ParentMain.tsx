@@ -1,5 +1,5 @@
-import parentMain from '@assets/images/guides/parent-main.png';
 import styled from 'styled-components';
+import parentMain from '@assets/images/guides/parent-main.png';
 
 const ParentMain = () => {
   return (

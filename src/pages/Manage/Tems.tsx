@@ -1,5 +1,5 @@
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import styled from 'styled-components';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 
 const content = `제1장 총칙
 

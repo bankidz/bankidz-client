@@ -1,16 +1,16 @@
 import styled from 'styled-components';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/buttons/Button';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import getCompletionDate from '@lib/utils/get/getCompletionDate';
 import { IAchievedChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
-import { Link, useNavigate } from 'react-router-dom';
 
 interface InterestTOPayListProps {
   challengeDTOList: IAchievedChallengeDTO[];
@@ -71,7 +71,6 @@ function InterestToPayList({ challengeDTOList }: InterestTOPayListProps) {
 
   return (
     <Wrapper>
-      <Modals />
       {challengeDTOList?.map((challengeDTO) => (
         <Block key={challengeDTO.challenge.id}>
           <div className="text-wrapper">

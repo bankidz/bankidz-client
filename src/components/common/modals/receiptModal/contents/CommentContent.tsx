@@ -1,7 +1,7 @@
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import styled from 'styled-components';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-interface CommentContentProps extends Pick<IChallengeDTO, 'comment'> {}
+type CommentContentProps = Pick<IChallengeDTO, 'comment'>;
 
 function CommentContent({ comment }: CommentContentProps) {
   return (

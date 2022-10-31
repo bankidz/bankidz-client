@@ -1,7 +1,7 @@
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import React from 'react';
 import styled from 'styled-components';
 import ThisWeekSDongilItem from './ThisWeekSDongilItem';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 interface ThisWeekSDongilListProps {
   thisWeekSDongils: IChallengeDTO[];
@@ -16,6 +16,7 @@ function ThisWeekSDongilList({ thisWeekSDongils }: ThisWeekSDongilListProps) {
           itemName={thisWeekSDongil.itemName}
           title={thisWeekSDongil.title}
           progressList={thisWeekSDongil.progressList}
+          challengeStatus={thisWeekSDongil.challengeStatus}
           to={`/detail/${thisWeekSDongil.id}`}
         />
       ))}

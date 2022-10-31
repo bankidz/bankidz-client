@@ -1,8 +1,8 @@
-import ProposalBadge from '@components/common/badges/ProposalBadge';
-import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { TReceiptModalVariant } from '../TReceiptModalVariant';
+import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import ProposalBadge from '@components/common/badges/ProposalBadge';
 
 interface TopProps extends Pick<IChallengeDTO, 'title'> {
   variant: TReceiptModalVariant;

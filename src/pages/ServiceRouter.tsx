@@ -1,12 +1,12 @@
-import BackgroundTemplate from '@components/layout/BackgroundTemplate';
-import RouteTransition from '@components/layout/RouteTransition';
-import TabBar from '@components/layout/TabBar';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import HomeRouter from './Home';
 import InterestRouter from './Interest';
 import MypageRouter from './Mypage';
 import WalkRouter from './Walk';
+import TabBar from '@components/layout/TabBar';
+import RouteTransition from '@components/layout/RouteTransition';
+import BackgroundTemplate from '@components/layout/BackgroundTemplate';
 
 const pageOrder = ['', '/interest', '/', '/walk', '/mypage'];
 

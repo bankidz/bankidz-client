@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import { assignIsKid, selectBirthday } from '@store/slices/authSlice';
-import RoleButton from '../common/buttons/RoleButton';
-import useModals from '../../lib/hooks/useModals';
-import Modals from '../common/modals/Modals';
-import { modals } from '../common/modals/Modals';
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import userAPI from '@lib/apis/user/userAPI';
 import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import RoleButton from '../common/buttons/RoleButton';
+import useModals from '../../lib/hooks/useModals';
+import { modals } from '../common/modals/Modals';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import { assignIsKid, selectBirthday } from '@store/slices/authSlice';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
+import userAPI from '@lib/apis/user/userAPI';
 
 function RegisterRole() {
   const { isOpen, setOpenBottomSheet, setCloseBottomSheet } =
@@ -61,7 +60,6 @@ function RegisterRole() {
   return (
     <>
       <Wrapper>
-        <Modals />
         <span>프로필을 선택해요</span>
         <RoleButtonWrapper>
           {/* 아빠 */}

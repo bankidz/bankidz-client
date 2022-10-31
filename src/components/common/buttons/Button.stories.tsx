@@ -1,7 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MarginTemplate from '@components/layout/MarginTemplate';
 import Button from './Button';
-
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'common/buttons/Button',

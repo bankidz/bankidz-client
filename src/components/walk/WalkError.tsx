@@ -1,11 +1,11 @@
-import MarginTemplate from '@components/layout/MarginTemplate';
 import styled from 'styled-components';
-import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
-import OutlinedButton from '@components/common/buttons/OutlinedButton';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import { useState } from 'react';
+import MarginTemplate from '@components/layout/MarginTemplate';
+import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
+import OutlinedButton from '@components/common/buttons/OutlinedButton';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 
@@ -24,7 +24,7 @@ function WalkError() {
       });
       setCreateDisabled(true);
     } else {
-      navigate('/create/1');
+      navigate('/create');
     }
   };
 

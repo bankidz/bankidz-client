@@ -1,11 +1,12 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { darken } from 'polished';
+import getRefinedDate from '../../lib/utils/get/getRefinedDate';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
 import InputForm from '@components/common/forms/InputForm';
 import Button from '@components/common/buttons/Button';
-import getRefinedDate from '../../lib/utils/get/getRefinedDate';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
@@ -93,9 +94,6 @@ function RegisterBirthday() {
       console.error('부적절한 접근입니다.');
       return;
     }
-    setYear('');
-    setMonth('');
-    setDay('');
     dispatch(setBirthday(getRefinedDate(year, month, day)));
     navigate('/auth/register/2');
   };
@@ -170,6 +168,13 @@ function RegisterBirthday() {
         </ErrorMessage>
       )}
 
+      <LaterButton
+        onClick={() => {
+          navigate('/auth/register/2');
+        }}
+      >
+        다음에 할래요
+      </LaterButton>
       <ButtonWrapper>
         <Button
           label="다음"
@@ -221,6 +226,30 @@ const ErrorMessage = styled.div`
 const DummyButton = styled.button`
   position: absolute;
   left: -9999px;
+`;
+
+const LaterButton = styled.button`
+  width: 118px;
+  height: 46px;
+  ${({ theme }) => theme.typo.button.UnderlinedText_14_EB};
+  color: ${({ theme }) => theme.palette.greyScale.grey500};
+
+  text-decoration: underline;
+  text-decoration-color: ${({ theme }) => theme.palette.greyScale.grey500};
+  text-align: center;
+
+  ${({ theme }) =>
+    css`
+      &:active {
+        color: ${darken(0.1, theme.palette.greyScale.grey500)};
+        text-decoration-color: ${darken(0.1, theme.palette.greyScale.grey500)};
+      }
+    `}
+
+  position: absolute;
+  left: 50%;
+  top: 288px;
+  transform: translate3d(-50%, -50%, 0);
 `;
 
 const ButtonWrapper = styled.div`

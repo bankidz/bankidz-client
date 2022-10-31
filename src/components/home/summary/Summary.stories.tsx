@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import MarginTemplate from '@components/layout/MarginTemplate';
 import Summary from './Summary';
+import MarginTemplate from '@components/layout/MarginTemplate';
 
 export default {
   title: 'home/Summary',

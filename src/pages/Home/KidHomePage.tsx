@@ -1,14 +1,15 @@
+import { useQuery } from 'react-query';
+import { AxiosError } from 'axios';
+import styled from 'styled-components';
 import HomeTemplate from '@components/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/home/NoFamily';
 import KidHome from '@components/home/KidHome';
 import usePreventGoBack from '@lib/hooks/usePreventGoBack';
-import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
-import { AxiosError } from 'axios';
 import { IFamilyDTO } from '@lib/apis/family/familyDTO';
-import styled from 'styled-components';
 import familyAPI from '@lib/apis/family/familyAPI';
 import LoadingSpinner from '@components/common/loaders/LoadingSpinner';
+import CriticalErrorBoundary from '@components/common/errorBoundary/CriticalErrorBoundary';
 
 /**
  * 자녀홈의 계층 구조는 다음과 같습니다.
@@ -36,9 +37,11 @@ function KidHomePage() {
       content = <NoFamily />;
     } else {
       content = (
-        <HomeTemplate>
-          <KidHome />
-        </HomeTemplate>
+        <CriticalErrorBoundary>
+          <HomeTemplate>
+            <KidHome />
+          </HomeTemplate>
+        </CriticalErrorBoundary>
       );
     }
   } else {

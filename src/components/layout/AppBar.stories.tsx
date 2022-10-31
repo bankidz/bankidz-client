@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import AppBar from './AppBar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AppBar from './AppBar';
 
 export default {
   title: 'layout/AppBar',

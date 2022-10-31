@@ -1,3 +1,7 @@
+import React, { useEffect, useState } from 'react';
+import { useMutation } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import GoBackHeader from '@components/common/buttons/GoBackHeader';
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/forms/InputForm';
@@ -5,10 +9,6 @@ import MarginTemplate from '@components/layout/MarginTemplate';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
-import React, { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 
 function Reject() {
   const navigate = useNavigate();

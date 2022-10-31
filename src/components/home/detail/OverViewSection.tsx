@@ -2,11 +2,10 @@ import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { TPercent } from '@lib/types/TPercent';
 import renderGraph from '@lib/utils/render/renderGraph';
 
-interface DetailOverViewProps
-  extends Pick<
-    IChallengeDTO,
-    'successWeeks' | 'weeks' | 'progressList' | 'title'
-  > {}
+type DetailOverViewProps = Pick<
+  IChallengeDTO,
+  'successWeeks' | 'weeks' | 'progressList' | 'title'
+>;
 
 function OverViewSection({
   successWeeks,

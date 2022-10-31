@@ -1,12 +1,12 @@
+import styled from 'styled-components';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { INotification } from '@lib/apis/notification/notificationDTO';
 import { ReactComponent as AlertDongil } from '@assets/icons/alertDongil.svg';
 import { ReactComponent as AlertNotice } from '@assets/icons/alertNotice.svg';
 import { ReactComponent as AlertLevel } from '@assets/icons/alertLevel.svg';
 import { ReactComponent as AlertFamily } from '@assets/icons/alertFamily.svg';
-import styled from 'styled-components';
 import getTimeForToday from '@lib/utils/getTimeForToday';
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import notificationAPI from '@lib/apis/notification/notificationAPI';
 
 const NotificationList = ({

@@ -1,8 +1,8 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
+import { darken } from 'polished';
 import { ReactComponent as Kakao } from '@assets/icons/kakao.svg';
 import { ReactComponent as Apple } from '@assets/icons/apple.svg';
-import { darken } from 'polished';
 import { theme } from '@lib/styles/theme';
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {

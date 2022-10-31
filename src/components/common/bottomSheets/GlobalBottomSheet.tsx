@@ -1,6 +1,3 @@
-import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
-import { useAppSelector } from '@store/app/hooks';
-import { selectBottomSheetState } from '@store/slices/bottomSheetSlice';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 import styled from 'styled-components';
 import Check from './commonSheet/Check';
@@ -10,6 +7,9 @@ import Notice from './commonSheet/Notice';
 import SelectProfile from './commonSheet/SelectProfile';
 import Completed from './commonSheet/Completed';
 import Warning from './commonSheet/Warning';
+import { selectBottomSheetState } from '@store/slices/bottomSheetSlice';
+import { useAppSelector } from '@store/app/hooks';
+import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 export const COMMON_SHEET_CONTENTS = {
   Check: 'Check',

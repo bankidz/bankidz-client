@@ -1,5 +1,5 @@
-import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 import styled from 'styled-components';
+import ForegroundTemplate from '@components/layout/ForegroundTemplate';
 
 const content = `
 <  뱅키즈  >('bankidz.com   '이하  '회사’라 한다)는 「개인정보 보호법」 제30 조에 따라 정보주체의

@@ -1,24 +1,24 @@
+import { useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+import dayjs from 'dayjs';
 import WalkingItemNameButton from '@components/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
 import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
-import { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
 import { ReactComponent as D1 } from '@assets/illusts/walk/d-1.svg';
 import { ReactComponent as D2 } from '@assets/illusts/walk/d-2.svg';
 import { ReactComponent as DDay } from '@assets/illusts/walk/d-day.svg';
 import InterestBadge from '@components/common/badges/InterestBadge';
 import SwipeToWalk from '@components/walk/SwipeToWalk';
-import useWalkDongil from '@lib/hooks/useWalkDongil';
+import useWalkDongil from '@components/walk/useWalkDongil';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 import LargeSpacer from '@components/layout/LargeSpacer';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import renderItemIllustForWalkDefault from '@lib/utils/render/renderItemIllustForWalkDefault';
 import { IUserDTO } from '@lib/apis/user/userDTO';
-import dayjs from 'dayjs';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 type TWalkDefaultProps = {
@@ -45,7 +45,6 @@ function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
   useEffect(() => {
     if (getWeeklySuccess() && patched) {
       openModal(modals.primaryModal, {
-        onSubmit: () => {},
         isKid: userData.isKid,
         isFemale: userData.isFemale,
         headerText: `${userData.username} 뱅키 이번주 저금 성공`,
@@ -101,7 +100,6 @@ function WalkDefault({ walkingDongils, userData }: TWalkDefaultProps) {
           <LargeSpacer isWhite={true} />
         </Content>
       </ContentWrapper>
-      <Modals />
     </Wrapper>
   );
 }

@@ -2,13 +2,13 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import '../styles.css';
+import { modals } from '../Modals';
+import { slideAnimation } from '../slideAnimation';
 import Background from './Background';
 import StyledSwiper from './StyledSwiper';
 import CloseButtonSection from './CloseButton';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '../Modals';
-import { slideAnimation } from '../slideAnimation';
 
 interface TertiaryModalProps {
   onSubmit: any;

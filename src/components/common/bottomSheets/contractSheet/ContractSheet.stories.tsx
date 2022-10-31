@@ -4,7 +4,6 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import ContractSheet from './ContractSheet';
 // import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './SelectMoney';
-import SelectInterestButton from '@components/home/create/SelectInterestButton';
 import SelectInterest from './SelectInterest';
 import Signature from './Signature';
 import RangeInput from './RangeInput';

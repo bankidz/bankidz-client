@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import { TRiskLevel } from '@lib/types/TRiskLevel';
 import getColorByRiskLevel from '@lib/utils/get/getColorByRiskLevel';
-import styled from 'styled-components';
 
 interface RiskBadgeProps {
   riskLevel: TRiskLevel;

@@ -1,6 +1,6 @@
-import { theme } from '@lib/styles/theme';
 import { RotatingLines } from 'react-loader-spinner';
 import styled from 'styled-components';
+import { theme } from '@lib/styles/theme';
 
 interface CustomRotatingLinesProps {
   width?: string;

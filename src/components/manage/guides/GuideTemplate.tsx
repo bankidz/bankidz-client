@@ -1,13 +1,13 @@
-import SheetButton from '@components/common/buttons/SheetButton';
-import Progress from '@components/home/create/Progress';
 import styled from 'styled-components';
-import { ReactComponent as Exit } from '@assets/icons/exit.svg';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import KidMain from './KidMain';
 import Step from './Step';
 import ParentMain from './ParentMain';
+import { ReactComponent as Exit } from '@assets/icons/exit.svg';
+import SheetButton from '@components/common/buttons/SheetButton';
 import SlideTransition from '@components/layout/SlideTransition';
+import Progress from '@components/common/progress/Progress';
 
 interface GuideTemplateProps {
   page: 'manage' | 'onboarding';

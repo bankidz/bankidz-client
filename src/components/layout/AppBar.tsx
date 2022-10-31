@@ -1,8 +1,6 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
 import { ReactComponent as Arrow } from '@assets/icons/arrow-left.svg';
-import { isUndefined } from 'util';
-import { text } from 'stream/consumers';
 import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 

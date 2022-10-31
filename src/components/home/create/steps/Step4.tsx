@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import dayjs from 'dayjs';
 import SelectInterest from '@components/common/bottomSheets/contractSheet/SelectInterest';
 import SheetButton from '@components/common/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
@@ -15,17 +16,15 @@ import {
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
-import getChallengeStep4Prices from '@lib/utils/get/getChallengeStep4Prices';
+import { modals } from '@components/common/modals/Modals';
+import getChallengeStep4Prices from '@components/home/create/utils/getChallengeStep4Prices';
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import getChallengeStep4Weeks from '@lib/utils/get/getChallengeStep4Weeks';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
-import dayjs from 'dayjs';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import { CreateStepProps } from 'src/pages/Home/Create';
+import getChallengeStep4Weeks from '@components/home/create/utils/getChallengeStep4Weeks';
 
 export type TStep4Form = {
   weekPrice: number;
@@ -72,7 +71,6 @@ function Step4({ onNextButtonClick }: CreateStepProps) {
 
   const handleClickAlert = () => {
     openModal(modals.tertiaryModal, {
-      onSubmit: () => {},
       shouldCloseOnOverlayClick: true,
     });
   };
@@ -133,11 +131,12 @@ function Step4({ onNextButtonClick }: CreateStepProps) {
         </p>
         <div onClick={onOpenInterestRate} ref={interestRateInputDivRef}>
           <InputForm
-            placeholder={getCommaThreeDigits(totalPrice * 0.2) + ' 원'}
+            placeholder={(totalPrice * 0.2).toLocaleString('ko-KR') + ' 원'}
             value={
               form.interestRate
-                ? getCommaThreeDigits(totalPrice * form.interestRate * 0.01) +
-                  ' 원'
+                ? (totalPrice * form.interestRate * 0.01).toLocaleString(
+                    'ko-KR',
+                  ) + ' 원'
                 : ''
             }
             readonly={true}
@@ -158,11 +157,11 @@ function Step4({ onNextButtonClick }: CreateStepProps) {
           ref={weekPriceInputDivRef}
         >
           <InputForm
-            placeholder={getCommaThreeDigits(middlePrice) + ' 원'}
+            placeholder={middlePrice.toLocaleString('ko-KR') + ' 원'}
             value={
               form.weekPrice === 0
                 ? ''
-                : getCommaThreeDigits(form.weekPrice) + ' 원'
+                : form.weekPrice.toLocaleString('ko-KR') + ' 원'
             }
             readonly={true}
             onFocus={() => {
@@ -227,8 +226,6 @@ function Step4({ onNextButtonClick }: CreateStepProps) {
           />
         </div>
       </ContractSheet>
-
-      <Modals />
     </Wrapper>
   );
 }

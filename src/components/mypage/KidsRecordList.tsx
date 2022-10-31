@@ -1,6 +1,6 @@
-import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import styled from 'styled-components';
 import KidsRecordItem from './KidsRecordItem';
+import { IKidListDTO } from '@lib/apis/family/familyDTO';
 
 function KidsRecordList({ kidData }: { kidData: IKidListDTO[] }) {
   return (

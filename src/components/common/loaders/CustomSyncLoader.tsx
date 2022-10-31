@@ -1,6 +1,6 @@
-import { theme } from '@lib/styles/theme';
 import SyncLoader from 'react-spinners/SyncLoader';
 import styled from 'styled-components';
+import { theme } from '@lib/styles/theme';
 
 /**
  * 로그인 리다이랙트 시 사용합니다.

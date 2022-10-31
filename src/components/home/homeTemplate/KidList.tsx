@@ -1,10 +1,10 @@
 import styled from 'styled-components';
+import { useQuery } from 'react-query';
 import { ReactComponent as UsernameUnderline } from '@assets/borders/username-underline.svg';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid, setSelectedKid } from '@store/slices/kidsSlice';
 import useLevel from '@lib/hooks/useLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
-import { useQuery } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import familyAPI from '@lib/apis/family/familyAPI';

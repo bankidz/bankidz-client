@@ -1,6 +1,6 @@
-import { TLevel } from '@lib/types/TLevel';
 import styled from 'styled-components';
 import AppBar from './AppBar';
+import { TLevel } from '@lib/types/TLevel';
 
 interface ForegroundTemplateProps {
   level?: TLevel | null;

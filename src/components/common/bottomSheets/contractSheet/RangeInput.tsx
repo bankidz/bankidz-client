@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { TSetStep4Form } from '@components/home/create/steps/Step4';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import { ReactComponent as WalkingBanki } from '@assets/illusts/banki/banki_walking.svg';
 
 export interface RangeInputProps extends TSetStep4Form {
@@ -58,8 +57,8 @@ function RangeInput({
       </RangeInputForm>
 
       <div>
-        <p>{getCommaThreeDigits(min)}</p>
-        <p>{getCommaThreeDigits(max)}</p>
+        <p>{min.toLocaleString('ko-KR')}</p>
+        <p>{max.toLocaleString('ko-KR')}</p>
       </div>
     </Wrapper>
   );

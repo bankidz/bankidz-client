@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useQueryClient } from 'react-query';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import SelectMoney from '@components/common/bottomSheets/contractSheet/SelectMoney';
-import styled from 'styled-components';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
-import useStackAmount from '@lib/hooks/useStackAmount';
+import useStackAmount from '@components/home/create/utils/useStackAmount';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
   selectStep3InitData,
@@ -13,9 +14,7 @@ import {
 import SheetButton from '@components/common/buttons/SheetButton';
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
 import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
-import { useQueryClient } from 'react-query';
 import queryKeys from '@lib/constants/queryKeys';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { CreateStepProps } from 'src/pages/Home/Create';
@@ -102,7 +101,7 @@ function Step3({ onNextButtonClick }: CreateStepProps) {
             value={
               form.contractAmount === 0
                 ? ''
-                : getCommaThreeDigits(form.contractAmount)
+                : form.contractAmount.toLocaleString('ko-KR')
             }
             error={validateAmount.error}
             readonly={true}

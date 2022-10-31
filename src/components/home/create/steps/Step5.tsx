@@ -1,28 +1,20 @@
-import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
-import Signature from '@components/common/bottomSheets/contractSheet/Signature';
-import Modals, { modals } from '@components/common/modals/Modals';
-import { axiosPrivate } from '@lib/apis/axios';
-import challengeAPI from '@lib/apis/challenge/challengeAPI';
-import queryKeys from '@lib/constants/queryKeys';
-import useBottomSheet from '@lib/hooks/useBottomSheet';
-import useModals from '@lib/hooks/useModals';
-import convertDataURLtoFile from '@lib/utils/convertDataURLtoFile';
-import { useAppDispatch, useAppSelector } from '@store/app/hooks';
-import {
-  setFileName,
-  resetChallengePayload,
-  selectCreateChallenge,
-} from '@store/slices/createChallengeSlice';
-import axios from 'axios';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-
-interface IPreSignedUrl {
-  imageName: string;
-  preSignedUrl: string;
-}
+import usePresignedUrl from '../utils/usePresignedUrl';
+import ContractSheet from '@components/common/bottomSheets/contractSheet/ContractSheet';
+import Signature from '@components/common/bottomSheets/contractSheet/Signature';
+import { modals } from '@components/common/modals/Modals';
+import challengeAPI from '@lib/apis/challenge/challengeAPI';
+import queryKeys from '@lib/constants/queryKeys';
+import useBottomSheet from '@lib/hooks/useBottomSheet';
+import useModals from '@lib/hooks/useModals';
+import { useAppDispatch, useAppSelector } from '@store/app/hooks';
+import {
+  resetChallengePayload,
+  selectCreateChallenge,
+} from '@store/slices/createChallengeSlice';
 
 function Step5() {
   const navigate = useNavigate();
@@ -32,10 +24,7 @@ function Step5() {
   const [sign, setSign] = useState();
   const [open, onOpen, onDismiss] = useBottomSheet(true);
   const { openModal } = useModals();
-  const [preSignedUrl, setPreSignedUrl] = useState<IPreSignedUrl>({
-    imageName: '',
-    preSignedUrl: '',
-  });
+  const { getPresignedUrl, uploadS3 } = usePresignedUrl();
   const queryClient = useQueryClient();
 
   // 돈길 생성하면 모달 띄우고 초기화
@@ -51,6 +40,7 @@ function Step5() {
       createdAt: dayjs().format('YYYY/MM/DD hh:mm:ss'),
       isKid: true,
       isSubmit: true,
+      signImage: sign,
     });
     queryClient.invalidateQueries([queryKeys.CHALLENGE, 'walking']);
   };
@@ -62,37 +52,17 @@ function Step5() {
 
   // 렌더링하자마자 presignedUrl 가져오기
   useEffect(() => {
-    const getPresignedUrl = async () => {
-      try {
-        const response = await axiosPrivate.get('/s3/url');
-        dispatch(setFileName(response.data.imageName));
-        setPreSignedUrl(response.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     getPresignedUrl();
   }, []);
 
   // 다음으로 버튼 클릭
   const onClickNextButton = () => {
-    // s3 업로드 로직
-    const uploadS3 = async (sign: any) => {
-      const file = convertDataURLtoFile(sign, preSignedUrl.imageName);
-      let formData = new FormData();
-      formData.append('file', file);
-
-      const response = await axios.put(preSignedUrl.preSignedUrl, file, {
-        headers: { 'Content-Type': 'image/png' },
-      });
-    };
     uploadS3(sign);
     mutatePostChallenge(createChallengePayload);
   };
 
   return (
     <>
-      <Modals />
       <ContractSheet
         open={open}
         label={'다음'}

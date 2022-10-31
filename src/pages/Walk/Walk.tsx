@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import styled from 'styled-components';
 import WalkDefault from '@components/walk/WalkDefault';
 import WalkError from '@components/walk/WalkError';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
@@ -5,9 +8,6 @@ import queryKeys from '@lib/constants/queryKeys';
 import useUserQuery from '@lib/hooks/queries/useUserQuery';
 import { useAppDispatch } from '@store/app/hooks';
 import { resetDongilPatched } from '@store/slices/walkingDongilsSlice';
-import { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import styled from 'styled-components';
 
 function Walk() {
   const { status: walkingDongilsStatus, data: walkingDongilsData } = useQuery(
@@ -19,6 +19,7 @@ function Walk() {
   const walkAbleDongils = walkingDongilsData?.filter(
     (dongil) => dongil.challengeStatus === 'WALKING',
   );
+  console.log(walkAbleDongils);
   useEffect(() => {
     dispatch(resetDongilPatched());
   }, [walkingDongilsData]);
@@ -29,7 +30,7 @@ function Walk() {
     <Wrapper>
       {status && (
         <>
-          {walkingDongilsData!.length > 0 ? (
+          {walkAbleDongils!.length > 0 ? (
             <WalkDefault
               walkingDongils={walkAbleDongils!}
               userData={userData!.user}

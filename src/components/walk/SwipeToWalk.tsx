@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
+import Slider from 'rc-slider';
+import { useMutation, useQueryClient } from 'react-query';
 import { ReactComponent as BankiInterest10 } from '@assets/illusts/banki/banki_walk_10.svg';
 import { ReactComponent as BankiInterest20 } from '@assets/illusts/banki/banki_walk_20.svg';
 import { ReactComponent as BankiInterest30 } from '@assets/illusts/banki/banki_walk_30.svg';
 import { ReactComponent as Flag } from '@assets/illusts/walk/flag.svg';
 import { ReactComponent as Stamp } from '@assets/illusts/walk/achieved-stamp.svg';
-import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { TInterestRate } from '@lib/types/IInterestRate';
-import getCommaThreeDigits from '@lib/utils/get/getCommaThreeDigits';
-import { useMutation, useQueryClient } from 'react-query';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppDispatch } from '@store/app/hooks';
@@ -81,7 +80,7 @@ function SwipeToWalk({
         <p>
           {value < 20 && (
             <>
-              <span>{getCommaThreeDigits(weekPrice)}</span>원 모았으면 걷기
+              <span>{weekPrice.toLocaleString('ko-KR')}</span>원 모았으면 걷기
             </>
           )}
         </p>

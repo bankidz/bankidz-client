@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as Close } from '@assets/icons/close.svg';
 import { HTMLAttributes } from 'react';
 import { darken } from 'polished';
+import { ReactComponent as Close } from '@assets/icons/close.svg';
 
-interface CheckButtonProps extends HTMLAttributes<HTMLButtonElement> {}
+type CheckButtonProps = HTMLAttributes<HTMLButtonElement>;
 
 function CloseButton({ onClick }: CheckButtonProps) {
   return (

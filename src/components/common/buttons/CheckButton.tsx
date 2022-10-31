@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
-import { ReactComponent as Check } from '@assets/icons/check.svg';
 import { HTMLAttributes } from 'react';
 import { darken } from 'polished';
+import { ReactComponent as Check } from '@assets/icons/check.svg';
 
-interface CheckButtonProps extends HTMLAttributes<HTMLButtonElement> {}
+type CheckButtonProps = HTMLAttributes<HTMLButtonElement>;
 
 function CheckButton({ onClick }: CheckButtonProps) {
   return (

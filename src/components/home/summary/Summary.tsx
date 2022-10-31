@@ -1,6 +1,6 @@
+import styled, { css } from 'styled-components';
 import { TPage } from '@lib/types/TPage';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
-import styled, { css } from 'styled-components';
 
 type TVariant = Extract<TPage, 'KidHome' | 'Detail' | 'ParentHome'>;
 

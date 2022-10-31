@@ -1,4 +1,3 @@
-import logoutClient from '@lib/utils/handleLogout';
 import { useCallback } from 'react';
 import { toast } from 'react-toastify';
 import {
@@ -39,6 +38,7 @@ import {
   handle403_40012,
   handle403_40014,
 } from './handle403';
+import logoutClient from '@lib/utils/handleLogout';
 
 /** common handler */
 const handleCommon = (serviceCode: string | undefined) => {

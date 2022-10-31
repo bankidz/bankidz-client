@@ -1,6 +1,6 @@
-import { TPage } from '@lib/types/TPage';
 import styled, { css } from 'styled-components';
 import SkeletonElement from './SkeletonElement';
+import { TPage } from '@lib/types/TPage';
 
 type TVariant = Extract<TPage, 'KidHome' | 'ParentHome'>;
 
