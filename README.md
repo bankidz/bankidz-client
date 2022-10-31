@@ -96,9 +96,6 @@
 
 ## 4.1. 회원관리, 온보딩 (공통)
 
-1. 애플 소셜 로그인 → 로그아웃 → 카카오 소셜 로그인 → 회원 탈퇴
-2. 생년월일 → 프로필 → 푸시알림 동의 → 튜토리얼 → 홈
-
 <details>
 <summary>자세히</summary>
 <div markdown="1">
@@ -111,16 +108,14 @@
 </div>
 </details>
 
+|                       회원관리 (공통)                        |                        온보딩 (공통)                         |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/83692797/195271097-8045ae4e-a79e-4ad9-b58f-5813411a1414.gif" alt="회원관리" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195271071-dcebab69-6924-4fcb-9629-37cbe5480a2b.gif" alt="온보딩 자녀" style="width:66%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 애플 소셜 로그인 → 로그아웃 → 카카오 소셜 로그인 → 회원 탈퇴 |      생년월일 → 프로필 → 푸시알림 동의 → 튜토리얼 → 홈       |
 
 <br/>
 
 ## 4.2. 홈 탭 (자녀)
-
-1. 걷고있는 돈길 → 돈길 포기하기 → 실패한 돈길 삭제
-2. 대기중인 돈길 → 거절된 돈길 삭제
-3. 알림내역
 
 <details>
 <summary>자세히</summary>
@@ -133,26 +128,23 @@
 </div>
 </details>
 
+|                         홈 탭 (자녀)                         |                         홈 탭 (자녀)                         |                       알림내역 (공통)                        |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/83692797/195265630-cdf4a7a9-9a5b-4aef-a95e-8deec1fa73c8.gif" alt="자녀 홈 걷고있는 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265658-426cec67-a1cf-4c28-b401-a89134b562e2.gif" alt="자녀 홈 대기중인 돈길" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265679-cadcc309-da94-4371-85e7-dc00ac4c420c.gif" alt="알림 내역_compressed" style="zoom:33%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|    걷고있는 돈길 → 돈길 포기하기<br />→ 실패한 돈길 삭제     |               대기중인 돈길 → 거절된 돈길 삭제               |                              -                               |
 
 <br/>
 
 ## 4.3. 돈길 계약하기, 돈길 걷기 탭 (자녀)
 
-1. 계약 대상 → 계약 상품 → 이름, 목표금액 → 이자율, 매주 저금액 → 서명 → 계약서 확인
-2. 돈길 걷기
-
+|                     돈길 계약하기 (자녀)                     |                     돈길 걷기 탭 (자녀)                      |
+| :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/83692797/195265700-e4e7d239-55a1-4982-b0cc-901705412d77.gif" alt="돈길 계약하기 이자부스터 설명 모달 포함_compressed" style="width:66%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265718-01482c86-d0d1-47ac-b9d9-55ecf1ff75e9.gif" alt="돈길 걷기" style="width:66%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 계약 대상 → 계약 상품 → 이름, 목표금액<br />→ 이자율, 매주 저금액 → 서명 → 계약서 확인 |                              -                               |
 
 <br/>
 
 ## 4.4. 홈 탭, 이자 내역 탭 (부모)
-
-1. 각 자녀의 제안받은 돈길, 금주의 돈길
-2. 제안받은 돈길 → 수락하기 → 거절하기
-3. 지급이 필요한 이자 → 자세히 보기 → 지급 완료하기
 
 <details>
 <summary>자세히</summary>
@@ -164,30 +156,27 @@
 </div>
 </details>
 
+|                         홈 탭 (부모)                         |                         홈 탭 (부모)                         |                     이자 내역 탭 (부모)                      |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|             각 자녀의 제안받은 돈길, 금주의 돈길             |             제안받은 돈길 → 수락하기 → 거절하기              |    지급이 필요한 이자 → 자세히 보기<br />→ 지급 완료하기     |
 
 <br/>
 
-## 4.5. 마이페이지 탭 및 가족 초대 (공통)
+## 4.5. 가족 초대, 마이페이지 탭 (공통)
 
-1. 딥링크를 통한 가족 초대 → 가족그룹 참여 → 가족그룹 나가기 → 가족그룹 만들기
-2. 알림 설정 localStorage Caching
-3. 설정
-
+|                       가족 초대 (공통)                       |                     마이페이지 탭 (공통)                     |                         설정 (공통)                          |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://user-images.githubusercontent.com/83692797/195767677-30b89754-fff1-41c4-a7cd-b28b2e5442fa.gif" alt="가족 초대" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265929-f2730f17-efe5-4520-8640-464da12cc934.gif" alt="알림 설정 캐싱" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195269471-2aa52131-de2d-4598-a45b-48c7372611bb.gif" alt="설정 자녀_compressed" style="zoom:33%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 딥링크를 통한 가족 초대 → 가족그룹 참여<br />→ 가족그룹 나가기 → 가족그룹 만들기 |                알림 설정 localStorage Caching                |                              -                               |
 
 <br/>
 
 ## 4.6. 기타
 
-1. React-transition-group 기반 Routing Animation
-2. Skeleton UI, React-Query 기반 Caching
-3. 선언형 컴포넌트 기반 refetch UI
-
-| <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/198872251-b119c0f5-9690-40fc-9464-23bca54436f2.gif" alt="홈 오류 재시도" style="zoom:33%;" /> |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
+|     React-transition-group <br />기반 Routing Animation      |         Skeleton UI, <br />React-Query 기반 Caching          |             선언형 컴포넌트<br />기반 refetch UI             |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/83692797/195265867-c33583a4-7edd-4046-9ba4-a845471f8c86.gif" alt="트랜지션 그룹 돈길 계약하기" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/198875007-1decad8b-7b9b-4860-a830-d0422b276261.gif" alt="홈 오류 재시도" style="zoom:33%;" /> |
 
 <br/>
 
@@ -195,7 +184,7 @@
 
 ### 신성우
 
-- [회원 관리 및 온보딩 (공통)](https://github.com/bankidz/bankidz-client#41-%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC-%EC%98%A8%EB%B3%B4%EB%94%A9-%EA%B3%B5%ED%86%B5)
+- [회원 관리, 온보딩 (공통)](https://github.com/bankidz/bankidz-client#41-%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC-%EC%98%A8%EB%B3%B4%EB%94%A9-%EA%B3%B5%ED%86%B5)
 - [홈 탭 (자녀)](https://github.com/bankidz/bankidz-client#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
 - [홈 탭, 이자 내역 탭 (부모)](https://github.com/bankidz/bankidz-client#44-%ED%99%88-%ED%83%AD-%EC%9D%B4%EC%9E%90-%EB%82%B4%EC%97%AD-%ED%83%AD-%EB%B6%80%EB%AA%A8)
 - React, TypeScript, Redux, Theme-provider 기반 Boiler-plate 세팅
@@ -210,7 +199,7 @@
 ### 한규진
 
 - [돈길 계약하기, 돈길 걷기 탭 (자녀)](https://github.com/bankidz/bankidz-client#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
-- [마이페이지 탭 및 가족 초대 (공통)](https://github.com/bankidz/bankidz-client#45-%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%83%AD-%EB%B0%8F-%EA%B0%80%EC%A1%B1-%EC%B4%88%EB%8C%80-%EA%B3%B5%ED%86%B5)
+- [가족 초대, 마이페이지 탭 (공통)](https://github.com/bankidz/bankidz-client#45-%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%83%AD-%EB%B0%8F-%EA%B0%80%EC%A1%B1-%EC%B4%88%EB%8C%80-%EA%B3%B5%ED%86%B5)
 - 알림 내역 (공통)
 - Github-actions, Docker-compose 기반 CI/CD 구축
 - storybook, Theme-provider 기반 디자인 시스템 세팅
