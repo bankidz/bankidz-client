@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react';
+import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { ReactComponent as WalkingItemNameButtonBorder } from '@assets/borders/walking-itemName-border.svg';
 import renderItemIllust from '@lib/utils/render/renderItemIllust';

@@ -10,7 +10,7 @@ import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 
 function GroupLink() {
   const navigate = useNavigate();
@@ -29,7 +29,7 @@ function GroupLink() {
     401: { default: () => {} },
   });
 
-  const { data: userData, status: userStatus } = useUserQuery({
+  const { status: userStatus } = useUserQuery({
     onError: handleError,
   });
   const { data: familyData, status: familyStatus } = useFamilyQuery({

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { theme } from '@lib/styles/theme';
 
 type TVariant = 'present' | 'creditCard' | 'friends' | 'cash' | 'books';
