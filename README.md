@@ -176,7 +176,7 @@
 
 |               Error Handling,<br />Refetch UI                |               Query Caching, <br />Skeleton UI               |                     localStorage Caching                     |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/198875007-1decad8b-7b9b-4860-a830-d0422b276261.gif" alt="홈 오류 재시도" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/199532447-7b00c848-ef2a-4709-8756-dd6fa363393e.gif" alt="스켈레톤 전체 탭" style="zoom:33%;width:95%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/198875007-1decad8b-7b9b-4860-a830-d0422b276261.gif" alt="홈 오류 재시도" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/199532447-7b00c848-ef2a-4709-8756-dd6fa363393e.gif" alt="스켈레톤 전체 탭" style="zoom:33%;width:90%;" /> |
 
 <br/>
 

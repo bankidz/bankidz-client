@@ -20,14 +20,14 @@ const contents = [
 ];
 
 function Manage() {
-  /*  useEffect(() => {
+  useEffect(() => {
     const KAKAO_JS_KEY = `${process.env.REACT_APP_KAKAO_JS_KEY}`;
     if (!window.Kakao.isInitialized()) {
       // JavaScript key를 인자로 주고 SDK 초기화
       window.Kakao.init(KAKAO_JS_KEY);
       // SDK 초기화 여부를 확인하자
     }
-  }, []); */
+  }, []);
 
   // 로그아웃 하시겠습니까 바텀시트
   const { setOpenBottomSheet, setCloseBottomSheet } = useGlobalBottomSheet();
@@ -47,10 +47,9 @@ function Manage() {
 
   //카카오채널 상담 열기
   const onChatButtonClick = () => {
-    window.alert('카카오 서버 오류로 인해 잠시 중단합니다.');
-    /* window.Kakao.Channel.chat({
+    window.Kakao.Channel.chat({
       channelPublicId: '_LjxjVxj',
-    }); */
+    });
   };
 
   const navigate = useNavigate();
