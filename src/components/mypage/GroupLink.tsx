@@ -16,7 +16,6 @@ function GroupLink() {
   const navigate = useNavigate();
   const { groupCode } = useParams();
   const { code, expiredDate } = decipher(groupCode!);
-  const { openModal } = useModals();
   const { setCloseBottomSheet } = useGlobalBottomSheet();
   const {
     openExpiredNoticeSheet,
@@ -25,6 +24,8 @@ function GroupLink() {
     openUnregisteredCheckSheet,
     openMoveGroupCompletedSheet,
   } = useOpenGroupLinkSheets();
+  const { openModal } = useModals();
+
   const { handleError } = useAPIError({
     401: { default: () => {} },
   });
@@ -39,11 +40,6 @@ function GroupLink() {
   const handleSheetCompletedAction = () => {
     setCloseBottomSheet();
     navigate('/mypage');
-    openModal(modals.primaryModal, {
-      isFamilyCreated: true,
-      headerText: '돈길을 걸을 가족이 생겼어요',
-      bodyText: '이제 그룹 내 가족구성원들과 돈길을 계약해봐요!',
-    });
   };
 
   const handleMoveGroupCompleted = () => {
@@ -51,7 +47,14 @@ function GroupLink() {
   };
 
   const { mutate: mutateJoinFamily } = useMutation(familyAPI.joinFamily, {
-    onSuccess: handleSheetCompletedAction,
+    onSuccess: () => {
+      handleSheetCompletedAction();
+      openModal(modals.primaryModal, {
+        isFamilyCreated: true,
+        headerText: '돈길을 걸을 가족이 생겼어요',
+        bodyText: '이제 그룹 내 가족구성원들과 돈길을 계약해봐요!',
+      });
+    },
   });
   const { mutate: mutateMoveFamily } = useMutation(familyAPI.joinFamily, {
     onSuccess: handleMoveGroupCompleted,
