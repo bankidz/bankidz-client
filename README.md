@@ -149,7 +149,7 @@
 |                         홈 탭 (부모)                         |                         홈 탭 (부모)                         |                     이자 내역 탭 (부모)                      |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |             각 자녀의 제안받은 돈길, 금주의 돈길             |             제안받은 돈길 → 수락하기 → 거절하기              |    지급이 필요한 이자 → 자세히 보기<br />→ 지급 완료하기     |
-| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/199890409-8cf9d313-3acf-42c9-9103-d460056ce45f.gif" alt="스켈레톤 홈 캐싱" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
 
 <details>
 <summary>자세히</summary>
