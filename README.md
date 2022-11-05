@@ -149,7 +149,7 @@
 |                         홈 탭 (부모)                         |                         홈 탭 (부모)                         |                     이자 내역 탭 (부모)                      |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 |             각 자녀의 제안받은 돈길, 금주의 돈길             |             제안받은 돈길 → 수락하기 → 거절하기              |    지급이 필요한 이자 → 자세히 보기<br />→ 지급 완료하기     |
-| <img src="https://user-images.githubusercontent.com/83692797/195265753-f2b21516-d8b9-452a-b339-f6e6efde3429.gif" alt="부모 홈 다자녀" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
+| <img src="https://user-images.githubusercontent.com/83692797/199890409-8cf9d313-3acf-42c9-9103-d460056ce45f.gif" alt="스켈레톤 홈 캐싱" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265781-908cd209-af8a-4e3c-bb48-39bd493484f6.gif" alt="부모 홈 제안받은 돈길_compressed" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265803-d84d6626-71cf-465f-9faf-ea4bd9e29e0d.gif" alt="이자내역 이자지급_compressed" style="zoom:33%;" /> |
 
 <details>
 <summary>자세히</summary>
@@ -172,40 +172,19 @@
 
 <br/>
 
-## 4.6. 기타
-
-|               Error Handling,<br />Refetch UI                |               Query Caching, <br />Skeleton UI               |                     localStorage Caching                     |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/198875007-1decad8b-7b9b-4860-a830-d0422b276261.gif" alt="홈 오류 재시도" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/195265886-ce34d4d0-00d8-466e-a1f0-1899146726da.gif" alt="스켈레톤 전체 탭" style="zoom:33%;" /> | <img src="https://user-images.githubusercontent.com/83692797/199532447-7b00c848-ef2a-4709-8756-dd6fa363393e.gif" alt="스켈레톤 전체 탭" style="zoom:33%;width:90%;" /> |
-
-<br/>
-
-# 5. 기여사항
+# 5. 구현 분담
 
 ### 신성우
 
 - [회원 관리, 온보딩 (공통)](https://github.com/bankidz/bankidz-client#41-%ED%9A%8C%EC%9B%90%EA%B4%80%EB%A6%AC-%EC%98%A8%EB%B3%B4%EB%94%A9-%EA%B3%B5%ED%86%B5)
 - [홈 탭 (자녀)](https://github.com/bankidz/bankidz-client#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
 - [홈 탭, 이자 내역 탭 (부모)](https://github.com/bankidz/bankidz-client#44-%ED%99%88-%ED%83%AD-%EC%9D%B4%EC%9E%90-%EB%82%B4%EC%97%AD-%ED%83%AD-%EB%B6%80%EB%AA%A8)
-- React, TypeScript, Redux, Theme-provider 기반 Boiler-plate 세팅
-- Coding Convention 정립
-- OAuth 전략, JWT 운용
-- 선언형 컴포넌트 기반 refetch UI
-- 우선순위에 따른 전역 API 에러처리
-- 전역상태로 관리되는 모달
-- Skeleton UI
-- Google Analytics 연동
 
 ### 한규진
 
 - [돈길 계약하기, 돈길 걷기 탭 (자녀)](https://github.com/bankidz/bankidz-client#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
 - [가족 초대, 마이페이지 탭 (공통)](https://github.com/bankidz/bankidz-client#45-%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80-%ED%83%AD-%EB%B0%8F-%EA%B0%80%EC%A1%B1-%EC%B4%88%EB%8C%80-%EA%B3%B5%ED%86%B5)
-- 알림 내역 (공통)
-- Github-actions, Docker-compose 기반 CI/CD 구축
-- storybook, Theme-provider 기반 디자인 시스템 세팅
-- 전역상태로 관리되는 바텀시트
-- React-transition-group 기반 Routing Animation
-- Routing, Layout, Craco 기반 절대경로 세팅
+- [알림내역 (공통)](https://github.com/bankidz/bankidz-client#42-%ED%99%88-%ED%83%AD-%EC%9E%90%EB%85%80)
 
 <br/>
 
