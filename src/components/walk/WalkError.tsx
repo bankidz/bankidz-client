@@ -33,7 +33,7 @@ function WalkError() {
       navigateCreateDongil();
     } else {
       //임시
-      navigate('/mypage');
+      navigate('/mypage', { state: { prev: '/walk' } });
     }
   };
   return (

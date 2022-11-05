@@ -19,7 +19,7 @@ function Walk() {
   const walkAbleDongils = walkingDongilsData?.filter(
     (dongil) => dongil.challengeStatus === 'WALKING',
   );
-  console.log(walkAbleDongils);
+
   useEffect(() => {
     dispatch(resetDongilPatched());
   }, [walkingDongilsData]);
