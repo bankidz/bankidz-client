@@ -27,7 +27,7 @@ const queryClient = new QueryClient();
 ReactModal.setAppElement('#root');
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
-// ReactGA.initialize(TRACKING_ID!);
+ReactGA.initialize(TRACKING_ID!);
 
 const StyledToastContainer = styled(ToastContainer)`
   // https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
