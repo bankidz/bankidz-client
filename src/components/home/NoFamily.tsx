@@ -1,13 +1,17 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_sad.svg';
 import { ReactComponent as BANKIDZ } from '@assets/icons/BANKIDZ.svg';
 import MarginTemplate from '@components/layout/MarginTemplate';
 import OutlinedButton from '@components/common/buttons/OutlinedButton';
+import { ReactComponent as Bell } from '@assets/icons/bell.svg';
 import { theme } from '@lib/styles/theme';
 import { TPage } from '@lib/types/TPage';
+import queryKeys from '@lib/constants/queryKeys';
+import notificationAPI from '@lib/apis/notification/notificationAPI';
 
 interface NoFamilyProps {
   variant?: Extract<TPage, 'Home' | 'Interest'>;
@@ -21,12 +25,20 @@ function NoFamily({ variant = 'Home' }: NoFamilyProps) {
   const isKid = useAppSelector(selectIsKid);
   const navigate = useNavigate();
 
+  const { data: isAllRead } = useQuery(
+    queryKeys.NOTIFICATION_IS_READ,
+    notificationAPI.getNotificationIsAllRead,
+  );
+
   let header;
   if (variant === 'Home') {
     header = (
       <>
         <div className="logo-wrapper">
           <BANKIDZ fill={theme.palette.main.yellow400} />
+          <div className="alert" onClick={() => navigate('/notification')}>
+            <Bell fill="#2E3234" /> {/* black */}
+          </div>
         </div>
         <div className="home-header-text">
           {isKid
@@ -40,7 +52,7 @@ function NoFamily({ variant = 'Home' }: NoFamilyProps) {
   }
 
   return (
-    <Wrapper>
+    <Wrapper isAllRead={isAllRead!}>
       <MarginTemplate>
         {header}
         <Container>
@@ -62,7 +74,7 @@ function NoFamily({ variant = 'Home' }: NoFamilyProps) {
 
 export default NoFamily;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isAllRead: boolean }>`
   position: relative;
   background-color: ${({ theme }) => theme.palette.greyScale.grey100};
   height: calc(var(--vh, 1vh) * 100);
@@ -89,6 +101,27 @@ const Wrapper = styled.div`
     margin-top: 16px;
     margin-left: -2px;
   }
+
+  .alert {
+    position: absolute;
+    top: 0px;
+    right: 6px;
+    cursor: pointer;
+  }
+  ${({ isAllRead }) =>
+    isAllRead === false &&
+    css`
+      .alert:after {
+        content: '';
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+        background-color: ${({ theme }) => theme.palette.sementic.red300};
+        position: absolute;
+        right: 14px;
+        top: 14px;
+      }
+    `}
 `;
 
 const Container = styled.div`
