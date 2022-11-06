@@ -73,7 +73,3 @@ const LoadingSpinnerWrapper = styled.div`
   top: 39px;
   transform: translate3d(-50%, -50%, 0);
 `;
-
-const EmptyDongilWrapper = styled.div`
-  margin-top: 40px;
-`;
