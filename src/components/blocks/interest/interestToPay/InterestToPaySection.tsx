@@ -28,19 +28,6 @@ function InterestToPaySection() {
     interestToPay = 0;
   }
 
-  let content;
-  if (status === 'success') {
-    content = (
-      <InterestToPayList
-        challengeDTOList={
-          unPaidInterests?.achievedChallengeListDTO?.challengeDTOList
-        }
-      />
-    );
-  } else {
-    content = <SkeletonInterestToPayList />;
-  }
-
   return (
     <>
       <Header hasMultipleKids={hasMultipleKids!}>
@@ -52,7 +39,13 @@ function InterestToPaySection() {
           </LoadingSpinnerWrapper>
         )}
       </Header>
-      {content}
+      {status === 'success' && (
+        <InterestToPayList
+          challengeDTOList={
+            unPaidInterests?.achievedChallengeListDTO?.challengeDTOList
+          }
+        />
+      )}
     </>
   );
 }
