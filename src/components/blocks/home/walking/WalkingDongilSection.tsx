@@ -33,14 +33,14 @@ function WalkingDongilSection() {
         contentProps: { type: 'createExceeded' },
       });
       setCreateDisabled(true);
-    } /* else if (dayjs().day() === EDayOfWeek.SUNDAY) { //TODO : 돈길 계약 일요일 제한 임시로 풀었습니다
+    } else if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         contentProps: { type: 'sunday' },
       });
       setCreateDisabled(true);
-    } */ else {
-      navigate('create', { state: { prevBackground: '/' } });
+    } else {
+      navigate('create', { state: { returnBackgroundTo: '/' } });
     }
   };
 

@@ -31,7 +31,7 @@ function Reject() {
         type: 'feedback',
         onMainActionClick: () => {
           setCloseBottomSheet();
-          navigate('/');
+          navigate('/', { state: { background: '/' } });
         },
       },
     });

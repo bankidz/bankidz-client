@@ -109,7 +109,7 @@ function Create() {
     <ForegroundTemplate
       label="돈길 계약하기"
       customEvent={step !== 1 ? onPrevButtonClick : undefined}
-      to={location.state?.prevBackground || '/'}
+      to={location.state?.returnBackgroundTo || '/'}
     >
       <Wrapper>
         {step && (
