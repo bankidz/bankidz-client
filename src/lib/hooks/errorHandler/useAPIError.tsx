@@ -57,7 +57,9 @@ const handle401default = () => {
   });
 };
 const handle500default = () => {
-  toast.error('예상치 못한 서버 오류가 발생했어요.');
+  toast.error(
+    '예상치 못한 서버 오류가 발생했어요. 앱을 종료하고 다시 실행해주세요.',
+  );
 };
 
 /**

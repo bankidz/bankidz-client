@@ -18,7 +18,7 @@ const initialState: IAuthState = {
     isKid: null,
     level: null,
     provider: '',
-    birthday: '',
+    birthday: '99999999',
   },
 };
 

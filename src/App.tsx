@@ -11,6 +11,7 @@ import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import PersistLogin from '@components/auth/PersistLogin';
 import RequireAuth from '@components/auth/RequireAuth';
 import '@components/layout/transition.css';
+import ThemeColor from '@components/common/ThemeColor';
 
 function App() {
   const location = useLocation();
@@ -28,22 +29,25 @@ function App() {
     },
   });
 
-  // RouteChangeTracker();
+  RouteChangeTracker();
 
   return (
-    <Routes location={location}>
-      <Route element={<Layout />}>
-        <Route path="/auth/*" element={<OnBoardingRouter />} />
-        <Route path="/link/:groupCode" element={<GroupLink />} />
-        <Route path="/test/*" element={<TestPage />} />
-        <Route element={<PersistLogin />}>
-          <Route element={<RequireAuth />}>
-            <Route path="/*" element={<ServiceRouter />} />
-            <Route path="*" element={<NotFound />} />
+    <>
+      <ThemeColor />
+      <Routes location={location}>
+        <Route element={<Layout />}>
+          <Route path="/auth/*" element={<OnBoardingRouter />} />
+          <Route path="/link/:groupCode" element={<GroupLink />} />
+          <Route path="/test/*" element={<TestPage />} />
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAuth />}>
+              <Route path="/*" element={<ServiceRouter />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
           </Route>
         </Route>
-      </Route>
-    </Routes>
+      </Routes>
+    </>
   );
 }
 

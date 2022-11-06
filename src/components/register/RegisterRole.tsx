@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import RoleButton from '../common/buttons/RoleButton';
 import useModals from '../../lib/hooks/useModals';
-import Modals, { modals } from '../common/modals/Modals';
+import { modals } from '../common/modals/Modals';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import { assignIsKid, selectBirthday } from '@store/slices/authSlice';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';

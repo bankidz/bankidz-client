@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '@components/common/buttons/Button';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import getCompletionDate from '@lib/utils/get/getCompletionDate';
 import { IAchievedChallengeDTO } from '@lib/apis/challenge/challengeDTO';

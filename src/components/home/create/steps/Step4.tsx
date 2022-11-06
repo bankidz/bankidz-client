@@ -16,7 +16,7 @@ import {
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
 import RangeInput from '@components/common/bottomSheets/contractSheet/RangeInput';
 import useModals from '@lib/hooks/useModals';
-import Modals, { modals } from '@components/common/modals/Modals';
+import { modals } from '@components/common/modals/Modals';
 import getChallengeStep4Prices from '@components/home/create/utils/getChallengeStep4Prices';
 import InputForm from '@components/common/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
