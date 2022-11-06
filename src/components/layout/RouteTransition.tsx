@@ -17,12 +17,24 @@ const RouteTransition = ({ location, children }: RouteTransitionProps) => {
     <TransitionGroup
       className={'transition-wrapper'}
       childFactory={(child) => {
-        if (!state?.prev) {
+        if (state?.background) {
+          return React.cloneElement(child, {
+            classNames: 'none',
+          });
+        } else {
+          return React.cloneElement(child, {
+            classNames: location.state?.direction || 'navigate-push',
+          });
+        }
+        /* if (!state?.prev) {
           return React.cloneElement(child, {
             classNames: location.state?.direction || 'navigate-push',
           });
         } else {
-          if (pageOrder.indexOf(pathname) > pageOrder.indexOf(state.prev)) {
+          if (
+            pageOrder.indexOf(pathname) >
+            pageOrder.indexOf(state.backGroundPrev)
+          ) {
             return React.cloneElement(child, {
               classNames: 'none',
             });
@@ -31,7 +43,7 @@ const RouteTransition = ({ location, children }: RouteTransitionProps) => {
               classNames: 'none',
             });
           }
-        }
+        } */
       }}
     >
       <CSSTransition exact key={pathname} timeout={300}>

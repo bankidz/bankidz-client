@@ -40,7 +40,7 @@ function WalkingDongilSection() {
       });
       setCreateDisabled(true);
     } */ else {
-      navigate('create');
+      navigate('create', { state: { prevBackground: '/' } });
     }
   };
 

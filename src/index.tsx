@@ -19,6 +19,7 @@ import { store } from './store/app/store';
 import GlobalBottomSheet from '@components/common/bottomSheets/GlobalBottomSheet';
 import 'react-toastify/dist/ReactToastify.css';
 import Modals from '@components/common/modals/Modals';
+import '@components/layout/transition.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

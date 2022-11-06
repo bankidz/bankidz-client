@@ -34,7 +34,7 @@ function Step5() {
     openModal(modals.receiptModal, {
       variant: 'contract',
       onSubmit: () => {
-        navigate('/', { replace: true });
+        navigate('/', { state: { background: '/' }, replace: true });
       },
       ...createChallengePayload,
       createdAt: dayjs().format('YYYY/MM/DD hh:mm:ss'),

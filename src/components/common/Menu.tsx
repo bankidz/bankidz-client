@@ -18,18 +18,19 @@ interface MenuProps {
  * 선택된 메뉴에 따라 랜더링될 Menu.Body를 지정합니다.
  * - Menu.Header와 Menu.Body는 id를 통해 binding 합니다.
  *
- * @param defaultId 기본으로 랜더링할 Menu.Body의 id
+ * @param defaultId 기본으로 랜더링할 Menu.Body의 id를 선택적으로 지정합니다.
  *
  * @example
- * <StyledMenu defaultId="1">
- * <Menu.Header id="1">걷고있는 돈길</Menu.Header>
- * <Menu.Header id="2">지급 완료한 돈길</Menu.Header>
- * <Menu.Body id="1">
- *   <WalkingDongilList />
- * </Menu.Body>
- * <Menu.Body id="2">
- *   <PaidDongilList />
- * </Menu.Body>
+ * <Menu defaultId="1">
+ *   <Menu.Header id="1">걷고있는 돈길</Menu.Header>
+ *   <Menu.Header id="2">지급 완료한 돈길</Menu.Header>
+ *   <Menu.Body id="1">
+ *     <WalkingDongilList />
+ *   </Menu.Body>
+ *   <Menu.Body id="2">
+ *     <PaidDongilList />
+ *   </Menu.Body>
+ * </Menu>
  */
 function Menu({ defaultId = '', children }: MenuProps) {
   const [opened, setOpened] = useState(defaultId);

@@ -26,7 +26,7 @@ function WalkError() {
     } else {
       navigate('/create');
     } */
-    navigate('/create');
+    navigate('/create', { state: { prevBackground: '/walk' } });
   };
 
   const onButtonClick = () => {
@@ -34,7 +34,7 @@ function WalkError() {
       navigateCreateDongil();
     } else {
       //임시
-      navigate('/mypage', { state: { prev: '/walk' } });
+      navigate('/mypage', { state: { background: '/walk' } });
     }
   };
   return (

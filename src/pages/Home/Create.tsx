@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import Step1 from '@components/home/create/steps/Step1';
@@ -42,6 +42,8 @@ function Create() {
   const { data: familyData, status } = useFamilyQuery();
   const parents = familyData?.familyUserList.filter((member) => !member.isKid);
   const isAlone = parents?.length === 1;
+
+  const location = useLocation();
 
   useEffect(() => {
     if (isAlone) {
@@ -107,7 +109,7 @@ function Create() {
     <ForegroundTemplate
       label="돈길 계약하기"
       customEvent={step !== 1 ? onPrevButtonClick : undefined}
-      to="/"
+      to={location.state?.prevBackground || '/'}
     >
       <Wrapper>
         {step && (

@@ -100,7 +100,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     openModal(modals.receiptModal, {
       variant: 'proposed',
       onSubmit: () => {
-        navigate(`/reject/${id}`);
+        navigate(`/reject/${id}`, { state: { background: '/' } });
       },
       onExtraSubmit: () => {
         openApproveCheckBottomSheet!();
@@ -121,9 +121,10 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   return (
     <StyledButton
       onClick={
-        dayjs().day() === EDayOfWeek.SUNDAY
-          ? openNoticeSundayBottomSheet
-          : openProposedReceiptModal
+        // dayjs().day() === EDayOfWeek.SUNDAY
+        //   ? openNoticeSundayBottomSheet
+        //   :
+        openProposedReceiptModal
       }
     >
       <div className="text-wrapper">

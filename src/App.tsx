@@ -10,7 +10,6 @@ import RouteChangeTracker from '@components/auth/RouteChangeTracker';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import PersistLogin from '@components/auth/PersistLogin';
 import RequireAuth from '@components/auth/RequireAuth';
-import '@components/layout/transition.css';
 import ThemeColor from '@components/common/ThemeColor';
 
 function App() {
