@@ -6,8 +6,8 @@
 
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/components/pages/*"],
-      "@shared/*": ["src/components/shared/*"],
       "@blocks/*": ["src/components/blocks/*"],
+      "@atoms/*": ["src/components/shared/*"],
 
       "@store/*": ["src/store/*"],
 
