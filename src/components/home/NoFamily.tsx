@@ -37,7 +37,7 @@ function NoFamily({ variant = 'Home' }: NoFamilyProps) {
         <div className="logo-wrapper">
           <BANKIDZ fill={theme.palette.main.yellow400} />
           <div className="alert" onClick={() => navigate('/notification')}>
-            <Bell fill="#2E3234" /> {/* black */}
+            <Bell fill="#A6A9AD" /> {/* gray500 */}
           </div>
         </div>
         <div className="home-header-text">
