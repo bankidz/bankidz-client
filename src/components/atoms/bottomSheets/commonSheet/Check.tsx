@@ -3,7 +3,7 @@ import { ReactComponent as CheckIcon } from '@assets/icons/approveCheck.svg';
 import { ReactComponent as Group } from '@assets/icons/group.svg';
 import { ReactComponent as Warning } from '@assets/icons/warning.svg';
 import { ReactComponent as Logout } from '@assets/icons/logout.svg';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface CheckProps {

@@ -1,4 +1,4 @@
-import { useModalsDispatch } from '../../components/shared/modals/ModalsContext';
+import { useModalsDispatch } from '../../components/atoms/modals/ModalsContext';
 
 /**
  * OPEN, CLOSE action 대한 dispatch 함수 사용 추상화

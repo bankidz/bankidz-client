@@ -6,7 +6,7 @@ import { setCredentials } from '@store/slices/authSlice';
 import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import userAPI from '@lib/apis/user/userAPI';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
 
 function PersistLogin() {

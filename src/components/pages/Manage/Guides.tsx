@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AppBar from '@components/shared/layout/AppBar';
+import AppBar from '@components/atoms/layout/AppBar';
 import GuideTemplate from '@components/blocks/manage/guides/GuideTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import styled from 'styled-components';
-import LargeSpacer from '@components/shared/layout/LargeSpacer';
+import LargeSpacer from '@components/atoms/layout/LargeSpacer';
 import ParentSummary, {
   parentSummaryStyle,
 } from '@components/blocks/home/summary/ParentSummary';
@@ -10,9 +10,9 @@ import ProposedDongilSection, {
 import ThisWeekSDongilSection, {
   thisWeekSDongilStyle,
 } from '@components/blocks/home/thisWeekS/ThisWeekSDongilSection';
-import SkeletonSummary from '@components/shared/skeletons/SkeletonSummary';
-import SkeletonDongilList from '@components/shared/skeletons/SkeletonDongilList';
-import RetryErrorBoundary from '@components/shared/errorBoundary/RetryErrorBoundary';
+import SkeletonSummary from '@components/atoms/skeletons/SkeletonSummary';
+import SkeletonDongilList from '@components/atoms/skeletons/SkeletonDongilList';
+import RetryErrorBoundary from '@components/atoms/errorBoundary/RetryErrorBoundary';
 
 const ParentSummaryWrapper = styled.div`
   ${parentSummaryStyle}

@@ -8,9 +8,9 @@ import Notification from './Notification';
 import useLevel from '@lib/hooks/useLevel';
 import { selectIsKid } from '@store/slices/authSlice';
 import { useAppSelector } from '@store/app/hooks';
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
-import BackgroundTemplate from '@components/shared/layout/BackgroundTemplate';
-import ThemeColor from '@components/shared/ThemeColor';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
+import BackgroundTemplate from '@components/atoms/layout/BackgroundTemplate';
+import ThemeColor from '@components/atoms/ThemeColor';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 function HomeRouter({ location }: { location: Location }) {

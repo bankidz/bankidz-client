@@ -1,7 +1,7 @@
 import { useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import { IMyPageDTO } from '@lib/apis/user/userDTO';
-import MarginTemplate from '@components/shared/layout/MarginTemplate';
+import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 import queryKeys from '@lib/constants/queryKeys';

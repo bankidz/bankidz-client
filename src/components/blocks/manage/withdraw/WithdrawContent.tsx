@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import EmojiCircle from './EmojiCircle';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
 

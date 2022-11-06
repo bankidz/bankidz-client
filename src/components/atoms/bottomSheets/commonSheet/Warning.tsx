@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ReactComponent as Delete } from '@assets/icons/delete.svg';
 import { ReactComponent as Leave } from '@assets/icons/leaveGroup.svg';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface WarningProps {

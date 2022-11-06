@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
 import InterestToPayList from './InterestToPayList';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { useAppSelector } from '@store/app/hooks';

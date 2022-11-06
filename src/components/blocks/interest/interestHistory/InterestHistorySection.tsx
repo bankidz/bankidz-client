@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PaidDongilList from './PaidDongilList';
 import WalkingDongilList from './WalkingDongilList';
-import Menu from '@components/shared/Menu';
+import Menu from '@components/atoms/Menu';
 
 function InterestHistorySection() {
   return (

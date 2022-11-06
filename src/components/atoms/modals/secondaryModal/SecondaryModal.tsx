@@ -6,7 +6,7 @@ import { modals } from '../Modals';
 import { ReactComponent as CongratsGoal } from '@assets/illusts/congrats/congrats_goal.svg';
 import { calcRatio } from '@lib/styles/theme';
 import '../styles.css';
-import CheckButton from '@components/shared/buttons/CheckButton';
+import CheckButton from '@components/atoms/buttons/CheckButton';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
 

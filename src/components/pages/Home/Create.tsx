@@ -3,16 +3,16 @@ import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import Step1 from '@components/blocks/home/create/steps/Step1';
 import Step2 from '@components/blocks/home/create/steps/Step2';
-import MarginTemplate from '@components/shared/layout/MarginTemplate';
+import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import Step3 from '@components/blocks/home/create/steps/Step3';
 import Step4 from '@components/blocks/home/create/steps/Step4';
 import Step5 from '@components/blocks/home/create/steps/Step5';
 import { useAppDispatch } from '@store/app/hooks';
 import { setParent } from '@store/slices/createChallengeSlice';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
-import SlideTransition from '@components/shared/layout/SlideTransition';
-import Progress from '@components/shared/progress/Progress';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
+import SlideTransition from '@components/atoms/layout/SlideTransition';
+import Progress from '@components/atoms/progress/Progress';
 
 export interface CreateStepProps {
   currentStep: number;

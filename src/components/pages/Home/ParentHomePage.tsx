@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import styled from 'styled-components';
-import CriticalErrorBoundary from '@components/shared/errorBoundary/CriticalErrorBoundary';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
+import CriticalErrorBoundary from '@components/atoms/errorBoundary/CriticalErrorBoundary';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 import HomeTemplate from '@components/blocks/home/homeTemplate/HomeTemplate';
 import NoFamily from '@components/blocks/home/NoFamily';
 import ParentHome from '@components/blocks/home/ParentHome';

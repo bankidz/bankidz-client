@@ -4,8 +4,8 @@ import HomeRouter from './Home';
 import InterestRouter from './Interest';
 import MypageRouter from './Mypage';
 import WalkRouter from './Walk';
-import TabBar from '@components/shared/layout/TabBar';
-import RouteTransition from '@components/shared/layout/RouteTransition';
+import TabBar from '@components/atoms/layout/TabBar';
+import RouteTransition from '@components/atoms/layout/RouteTransition';
 
 const pageOrder = ['', '/interest', '/', '/walk', '/mypage'];
 

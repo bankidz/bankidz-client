@@ -1,7 +1,7 @@
 import { Routes, Route, Location } from 'react-router-dom';
 import ManageRouter from '../Manage';
 import Mypage from './Mypage';
-import BackgroundTemplate from '@components/shared/layout/BackgroundTemplate';
+import BackgroundTemplate from '@components/atoms/layout/BackgroundTemplate';
 
 function MypageRouter({ location }: { location: Location }) {
   return (

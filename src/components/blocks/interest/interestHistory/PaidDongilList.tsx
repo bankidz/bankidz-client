@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 import EmptyDongil from '@components/blocks/home/EmptyDongil';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';

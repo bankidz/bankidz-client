@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import LevelBadge from '@components/shared/badges/LevelBadge';
-import MarginTemplate from '@components/shared/layout/MarginTemplate';
+import LevelBadge from '@components/atoms/badges/LevelBadge';
+import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import useLevel from '@lib/hooks/useLevel';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
 import { TReceiptModalVariant } from './TReceiptModalVariant';
-import Button from '@components/shared/buttons/Button';
-import CheckButton from '@components/shared/buttons/CheckButton';
+import Button from '@components/atoms/buttons/Button';
+import CheckButton from '@components/atoms/buttons/CheckButton';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 
 interface SubmitButtonProps {

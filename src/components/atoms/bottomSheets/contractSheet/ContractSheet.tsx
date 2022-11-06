@@ -4,7 +4,7 @@ import RangeInput from './RangeInput';
 import SelectInterest from './SelectInterest';
 import SelectMoney from './SelectMoney';
 import Signature from './Signature';
-import SheetButton from '@components/shared/buttons/SheetButton';
+import SheetButton from '@components/atoms/buttons/SheetButton';
 
 interface ContractSheetProps {
   children: JSX.Element;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import { ReactComponent as Warning } from '@assets/icons/warning.svg';
 import { ReactComponent as Complete } from '@assets/icons/complete.svg';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface NoticeProps {

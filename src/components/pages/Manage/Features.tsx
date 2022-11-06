@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
 import features from '@assets/images/features.png';
 
 function Features() {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useAppDispatch } from '@store/app/hooks';
-import RoleButton from '@components/shared/buttons/RoleButton';
+import RoleButton from '@components/atoms/buttons/RoleButton';
 import { setParent } from '@store/slices/createChallengeSlice';
 import { CreateStepProps } from '@components/pages/Home/Create';
 

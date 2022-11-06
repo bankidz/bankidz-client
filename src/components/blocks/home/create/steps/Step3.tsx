@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useQueryClient } from 'react-query';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
-import SelectMoney from '@components/shared/bottomSheets/contractSheet/SelectMoney';
+import SelectMoney from '@components/atoms/bottomSheets/contractSheet/SelectMoney';
 import useValidation, { TValidationResult } from '@lib/hooks/useValidation';
 import useStackAmount from '@components/blocks/home/create/utils/useStackAmount';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
@@ -11,10 +11,10 @@ import {
   setTitle,
   setTotalPrice,
 } from '@store/slices/createChallengeSlice';
-import SheetButton from '@components/shared/buttons/SheetButton';
-import InputForm from '@components/shared/forms/InputForm';
+import SheetButton from '@components/atoms/buttons/SheetButton';
+import InputForm from '@components/atoms/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
-import ContractSheet from '@components/shared/bottomSheets/contractSheet/ContractSheet';
+import ContractSheet from '@components/atoms/bottomSheets/contractSheet/ContractSheet';
 import queryKeys from '@lib/constants/queryKeys';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 import { CreateStepProps } from '@components/pages/Home/Create';

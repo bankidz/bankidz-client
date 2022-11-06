@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '@components/shared/buttons/Button';
-import MarginTemplate from '@components/shared/layout/MarginTemplate';
+import Button from '@components/atoms/buttons/Button';
+import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 import { KAKAO_AUTH_URL } from '@lib/constants/KAKAO_AUTH_URL';
 import { APPLE_AUTH_URL } from '@lib/constants/APPLE_AUTH_URL';

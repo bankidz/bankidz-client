@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import Walk from './Walk';
-import BackgroundTemplate from '@components/shared/layout/BackgroundTemplate';
+import BackgroundTemplate from '@components/atoms/layout/BackgroundTemplate';
 
 function WalkRouter() {
   return (

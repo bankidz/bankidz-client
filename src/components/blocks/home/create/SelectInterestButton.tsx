@@ -1,6 +1,6 @@
 import { HTMLAttributes, useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import RiskBadge from '@components/shared/badges/RiskBadge';
+import RiskBadge from '@components/atoms/badges/RiskBadge';
 import { TInterestRate } from '@lib/types/IInterestRate';
 
 interface SelectInterestButtonProps extends HTMLAttributes<HTMLButtonElement> {

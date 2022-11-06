@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { useMutation, useQueryClient } from 'react-query';
 import React from 'react';
-import { modals } from '@components/shared/modals/Modals';
+import { modals } from '@components/atoms/modals/Modals';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useModals from '@lib/hooks/useModals';
 import getFormattedTimeStamp from '@lib/utils/get/getFormattedTimeStamp';
-import ProposalBadge from '@components/shared/badges/ProposalBadge';
+import ProposalBadge from '@components/atoms/badges/ProposalBadge';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';

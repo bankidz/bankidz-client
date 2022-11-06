@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import dayjs from 'dayjs';
-import SelectInterest from '@components/shared/bottomSheets/contractSheet/SelectInterest';
-import SheetButton from '@components/shared/buttons/SheetButton';
+import SelectInterest from '@components/atoms/bottomSheets/contractSheet/SelectInterest';
+import SheetButton from '@components/atoms/buttons/SheetButton';
 import useBottomSheet from '@lib/hooks/useBottomSheet';
 import { useAppDispatch, useAppSelector } from '@store/app/hooks';
 import {
@@ -14,14 +14,14 @@ import {
   setWeeks,
 } from '@store/slices/createChallengeSlice';
 import { ReactComponent as Alert } from '@assets/icons/alert.svg';
-import RangeInput from '@components/shared/bottomSheets/contractSheet/RangeInput';
+import RangeInput from '@components/atoms/bottomSheets/contractSheet/RangeInput';
 import useModals from '@lib/hooks/useModals';
-import { modals } from '@components/shared/modals/Modals';
+import { modals } from '@components/atoms/modals/Modals';
 import getChallengeStep4Prices from '@components/blocks/home/create/utils/getChallengeStep4Prices';
-import InputForm from '@components/shared/forms/InputForm';
+import InputForm from '@components/atoms/forms/InputForm';
 import useBottomSheetOutSideRef from '@lib/hooks/useBottomSheetOutSideRef';
 import getWeekNumberByMonth from '@lib/utils/get/getWeekNumberByMonth';
-import ContractSheet from '@components/shared/bottomSheets/contractSheet/ContractSheet';
+import ContractSheet from '@components/atoms/bottomSheets/contractSheet/ContractSheet';
 import { TInterestRate } from '@lib/types/IInterestRate';
 import { CreateStepProps } from '@components/pages/Home/Create';
 import getChallengeStep4Weeks from '@components/blocks/home/create/utils/getChallengeStep4Weeks';

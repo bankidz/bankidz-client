@@ -1,4 +1,4 @@
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
 import WithdrawReason from '@components/blocks/manage/withdraw/WithdrawReason';
 
 function WithdrawReasonPage() {

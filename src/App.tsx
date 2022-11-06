@@ -4,13 +4,13 @@ import OnBoardingRouter from '@components/pages/OnBoarding';
 import TestPage from '@components/pages/Test/TestPage';
 import ServiceRouter from '@components/pages/ServiceRouter';
 import NotFound from '@components/pages/NotFound';
-import Layout from '@components/shared/layout/Layout';
+import Layout from '@components/atoms/layout/Layout';
 import GroupLink from '@components/blocks/mypage/GroupLink';
 import RouteChangeTracker from '@components/blocks/auth/RouteChangeTracker';
 import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import PersistLogin from '@components/blocks/auth/PersistLogin';
 import RequireAuth from '@components/blocks/auth/RequireAuth';
-import ThemeColor from '@components/shared/ThemeColor';
+import ThemeColor from '@components/atoms/ThemeColor';
 
 function App() {
   const location = useLocation();

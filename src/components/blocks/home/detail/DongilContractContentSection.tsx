@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Receipt from '@components/shared/receipt/Receipt';
+import Receipt from '@components/atoms/receipt/Receipt';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 type DongilContractContentSectionProps = Pick<

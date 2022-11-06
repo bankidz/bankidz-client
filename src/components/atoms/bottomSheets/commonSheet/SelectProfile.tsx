@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { HTMLAttributes } from 'react';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 import renderRoleText from '@lib/utils/get/getRoleText';
 import renderRoleIllust from '@lib/utils/render/renderRoleIllust';
 

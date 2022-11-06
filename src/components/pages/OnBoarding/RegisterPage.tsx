@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import MarginTemplate from '@components/shared/layout/MarginTemplate';
+import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import RegisterBirthday from '@components/blocks/register/RegisterBirthday';
 import RegisterRole from '@components/blocks/register/RegisterRole';
 import PushNotiConsent from '@components/blocks/register/PushNotiConsent';
@@ -9,7 +9,7 @@ import useLogoutServer from '@lib/hooks/auth/useLogoutServer';
 import GuideTemplate from '@components/blocks/manage/guides/GuideTemplate';
 import { useAppSelector } from '@store/app/hooks';
 import { selectIsKid } from '@store/slices/authSlice';
-import SlideTransition from '@components/shared/layout/SlideTransition';
+import SlideTransition from '@components/atoms/layout/SlideTransition';
 
 function RegisterPage() {
   const { step } = useParams();

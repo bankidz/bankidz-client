@@ -5,9 +5,9 @@ import KidMain from './KidMain';
 import Step from './Step';
 import ParentMain from './ParentMain';
 import { ReactComponent as Exit } from '@assets/icons/exit.svg';
-import SheetButton from '@components/shared/buttons/SheetButton';
-import SlideTransition from '@components/shared/layout/SlideTransition';
-import Progress from '@components/shared/progress/Progress';
+import SheetButton from '@components/atoms/buttons/SheetButton';
+import SlideTransition from '@components/atoms/layout/SlideTransition';
+import Progress from '@components/atoms/progress/Progress';
 
 interface GuideTemplateProps {
   page: 'manage' | 'onboarding';

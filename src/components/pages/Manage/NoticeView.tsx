@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { NoticeItem } from './Notices';
 import useNoticeByIdQuery from '@lib/hooks/queries/useNoticeByIdQuery';
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
 
 function NoticeView() {
   const { id } = useParams();

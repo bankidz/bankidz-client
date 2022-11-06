@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useMutation } from 'react-query';
 import styled from 'styled-components';
-import Button from '@components/shared/buttons/Button';
-import TextAreaForm from '@components/shared/forms/TextAreaForm';
+import Button from '@components/atoms/buttons/Button';
+import TextAreaForm from '@components/atoms/forms/TextAreaForm';
 import userAPI from '@lib/apis/user/userAPI';
 import { APPLE_DEAUTH_URL } from '@lib/constants/APPLE_DEAUTH_URL';
 import useLogoutClient from '@lib/hooks/auth/useLogoutClient';

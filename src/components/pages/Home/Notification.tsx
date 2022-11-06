@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
 import { ReactComponent as Banki } from '@assets/icons/giveUpExceeded.svg';
 import useInfiniteNotificationQuery from '@lib/hooks/queries/useInfiniteNotificationQuery';
 import NotificationList from '@components/blocks/home/NotificationList';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 
 const Notification = () => {
   const { data, status, Observation } = useInfiniteNotificationQuery();

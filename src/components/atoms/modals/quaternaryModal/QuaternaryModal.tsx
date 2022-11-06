@@ -7,7 +7,7 @@ import { slideAnimation } from '../slideAnimation';
 import { MODAL_CLOSE_TRANSITION_TIME } from '@lib/constants/MODAL';
 import useModals from '@lib/hooks/useModals';
 import renderBankiWalk from '@lib/utils/render/renderBankiWalk';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 
 interface QuaternaryModalProps {
   onSubmit: any;

@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import BackgroundTemplate from '../../shared/layout/BackgroundTemplate';
+import BackgroundTemplate from '../../atoms/layout/BackgroundTemplate';
 import InterestPage from './InterestPage';
 
 function InterestRouter() {

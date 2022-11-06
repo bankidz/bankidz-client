@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ReactComponent as Complete } from '@assets/icons/complete.svg';
 import { ReactComponent as Feedback } from '@assets/icons/feedback.svg';
 import { ReactComponent as Group } from '@assets/icons/group.svg';
-import Button from '@components/shared/buttons/Button';
+import Button from '@components/atoms/buttons/Button';
 import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 
 interface CompleteProps {

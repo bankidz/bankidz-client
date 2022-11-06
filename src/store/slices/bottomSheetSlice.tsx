@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../app/store';
-import { COMMON_SHEET_CONTENTS } from '@components/shared/bottomSheets/GlobalBottomSheet';
+import { COMMON_SHEET_CONTENTS } from '@components/atoms/bottomSheets/GlobalBottomSheet';
 
 export interface SheetContainerProps {
   open: boolean;

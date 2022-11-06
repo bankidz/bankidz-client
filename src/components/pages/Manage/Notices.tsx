@@ -2,10 +2,10 @@ import dayjs from 'dayjs';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
-import ForegroundTemplate from '@components/shared/layout/ForegroundTemplate';
+import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
 import queryKeys from '@lib/constants/queryKeys';
 import noticeAPI from '@lib/apis/notice/noticeAPI';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 
 function Notices() {
   const navigate = useNavigate();

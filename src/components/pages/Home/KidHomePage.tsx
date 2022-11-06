@@ -8,8 +8,8 @@ import usePreventGoBack from '@lib/hooks/usePreventGoBack';
 import queryKeys from '@lib/constants/queryKeys';
 import { IFamilyDTO } from '@lib/apis/family/familyDTO';
 import familyAPI from '@lib/apis/family/familyAPI';
-import LoadingSpinner from '@components/shared/loaders/LoadingSpinner';
-import CriticalErrorBoundary from '@components/shared/errorBoundary/CriticalErrorBoundary';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
+import CriticalErrorBoundary from '@components/atoms/errorBoundary/CriticalErrorBoundary';
 
 /**
  * 자녀홈의 계층 구조는 다음과 같습니다.

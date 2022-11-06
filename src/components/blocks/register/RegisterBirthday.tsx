@@ -5,8 +5,8 @@ import { darken } from 'polished';
 import getRefinedDate from '../../../lib/utils/get/getRefinedDate';
 import { useAppDispatch } from '@store/app/hooks';
 import { setBirthday } from '@store/slices/authSlice';
-import InputForm from '@components/shared/forms/InputForm';
-import Button from '@components/shared/buttons/Button';
+import InputForm from '@components/atoms/forms/InputForm';
+import Button from '@components/atoms/buttons/Button';
 
 // yyyy/mm/dd || yyyy/m/d
 // allowing any combination of one or two digits for the day and month
