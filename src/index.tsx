@@ -12,14 +12,14 @@ import ReactGA from 'react-ga';
 import { ToastContainer } from 'react-toastify';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
-import { ModalsContextProvider } from './components/common/modals/ModalsContext';
+import { ModalsContextProvider } from './components/shared/modals/ModalsContext';
 import { GlobalStyle } from './lib/styles/global-style';
 import { theme } from './lib/styles/theme';
 import { store } from './store/app/store';
-import GlobalBottomSheet from '@components/common/bottomSheets/GlobalBottomSheet';
+import GlobalBottomSheet from '@components/shared/bottomSheets/GlobalBottomSheet';
 import 'react-toastify/dist/ReactToastify.css';
-import Modals from '@components/common/modals/Modals';
-import '@components/layout/transition.css';
+import Modals from '@components/shared/modals/Modals';
+import '@components/shared/layout/transition.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
