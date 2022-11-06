@@ -10,6 +10,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import ReactModal from 'react-modal';
 import ReactGA from 'react-ga';
 import { ToastContainer } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import { ModalsContextProvider } from './components/common/modals/ModalsContext';
 import { GlobalStyle } from './lib/styles/global-style';
@@ -27,7 +28,7 @@ const queryClient = new QueryClient();
 ReactModal.setAppElement('#root');
 
 const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID;
-// ReactGA.initialize(TRACKING_ID!);
+ReactGA.initialize(TRACKING_ID!);
 
 const StyledToastContainer = styled(ToastContainer)`
   // https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
@@ -46,7 +47,9 @@ root.render(
         <ModalsContextProvider>
           <QueryClientProvider client={queryClient}>
             <ReactQueryDevtools initialIsOpen={false} />
-            <App />
+            <HelmetProvider>
+              <App />
+            </HelmetProvider>
             <StyledToastContainer
               position="top-center"
               autoClose={5000}
