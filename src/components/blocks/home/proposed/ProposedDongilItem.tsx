@@ -121,10 +121,9 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
   return (
     <StyledButton
       onClick={
-        // dayjs().day() === EDayOfWeek.SUNDAY
-        //   ? openNoticeSundayBottomSheet
-        //   :
-        openProposedReceiptModal
+        dayjs().day() === EDayOfWeek.SUNDAY
+          ? openNoticeSundayBottomSheet
+          : openProposedReceiptModal
       }
     >
       <div className="text-wrapper">
