@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../src/lib/styles/global-style';
 import { theme } from '../src/lib/styles/theme';
 import { store } from '../src/store/app/store';
-import { ModalsContextProvider } from '../src/components/common/modals/ModalsContext';
+import { ModalsContextProvider } from '../src/components/shared/modals/ModalsContext';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import '../src/assets/fonts/fontStyle.css';
 import { BrowserRouter } from 'react-router-dom';
