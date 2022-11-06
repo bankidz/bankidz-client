@@ -36,6 +36,7 @@ function BottomContent({
   fileName,
   signImage,
 }: BottomContentProps) {
+  console.log(signImage);
   return (
     <Wrapper variant={variant}>
       <FirstRow isMom={isMom} itemName={itemName} />
@@ -84,7 +85,7 @@ const SignatureWrapper = styled.div`
   position: absolute;
   width: ${calcRatio(146, 324)};
   height: 173px;
-  right: 2px;
+  right: 15px;
   bottom: 0;
 
   & > img {

@@ -35,6 +35,7 @@ interface ReceiptModalProps
   onExtraSubmit?: any;
   isMom: boolean;
   shouldCloseOnOverlayClick?: boolean;
+  signImage?: string;
 }
 
 /**
@@ -60,6 +61,7 @@ function ReceiptModal({
   comment,
   shouldCloseOnOverlayClick = false,
   fileName,
+  signImage,
 }: ReceiptModalProps) {
   const [isOpen, setIsOpen] = useState(true);
   const { closeModal } = useModals();
@@ -125,6 +127,7 @@ function ReceiptModal({
           weeks={weeks}
           createdAt={createdAt}
           fileName={fileName}
+          signImage={signImage}
         />
         {variant === 'rejected' && <CommentContent comment={comment!} />}
         <PerforatedLineBottom fill={theme.palette.greyScale.white} />

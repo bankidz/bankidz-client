@@ -21,7 +21,7 @@ function Step5() {
   const dispatch = useAppDispatch();
   const createChallengePayload = useAppSelector(selectCreateChallenge);
   const [disabledNext, setDisabledNext] = useState<boolean>(true);
-  const [sign, setSign] = useState();
+  const [sign, setSign] = useState<string>('');
   const [open, onOpen, onDismiss] = useBottomSheet(true);
   const { openModal } = useModals();
   const { getPresignedUrl, uploadS3 } = usePresignedUrl();

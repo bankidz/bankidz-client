@@ -5,7 +5,7 @@ import { theme } from '@lib/styles/theme';
 
 export interface SignatureProps {
   setDisabledNext: Dispatch<SetStateAction<boolean>>;
-  setSign: Dispatch<SetStateAction<any>>;
+  setSign: Dispatch<SetStateAction<string>>;
 }
 
 function Signature({ setDisabledNext, setSign }: SignatureProps) {
