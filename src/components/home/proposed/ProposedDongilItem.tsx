@@ -100,7 +100,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     openModal(modals.receiptModal, {
       variant: 'proposed',
       onSubmit: () => {
-        navigate(`/reject/${id}`);
+        navigate(`/reject/${id}`, { state: { background: '/' } });
       },
       onExtraSubmit: () => {
         openApproveCheckBottomSheet!();

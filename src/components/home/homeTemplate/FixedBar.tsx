@@ -50,7 +50,7 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
       isAllRead={isAllRead!}
     >
       <div className="alert" onClick={() => navigate('/notification')}>
-        <Bell />
+        <Bell fill={'white'} />
       </div>
       {headerText}
       {hasMultipleKids && <KidList />}
