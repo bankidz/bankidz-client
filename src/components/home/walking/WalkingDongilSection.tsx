@@ -33,13 +33,13 @@ function WalkingDongilSection() {
         contentProps: { type: 'createExceeded' },
       });
       setCreateDisabled(true);
-    } else if (dayjs().day() === EDayOfWeek.SUNDAY) {
+    } /* else if (dayjs().day() === EDayOfWeek.SUNDAY) { //TODO : 돈길 계약 일요일 제한 임시로 풀었습니다
       setOpenBottomSheet({
         sheetContent: 'Notice',
         contentProps: { type: 'sunday' },
       });
       setCreateDisabled(true);
-    } else {
+    } */ else {
       navigate('create');
     }
   };

@@ -17,7 +17,7 @@ function WalkError() {
   const navigate = useNavigate();
 
   const navigateCreateDongil = () => {
-    if (dayjs().day() === EDayOfWeek.SUNDAY) {
+    /* if (dayjs().day() === EDayOfWeek.SUNDAY) {
       setOpenBottomSheet({
         sheetContent: 'Notice',
         contentProps: { type: 'sunday' },
@@ -25,7 +25,8 @@ function WalkError() {
       setCreateDisabled(true);
     } else {
       navigate('/create');
-    }
+    } */
+    navigate('/create');
   };
 
   const onButtonClick = () => {
