@@ -84,7 +84,7 @@ const UsernameButton = styled.button`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 6px;
+    margin-top: 4px;
   }
 `;
 

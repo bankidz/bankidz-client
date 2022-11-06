@@ -90,4 +90,9 @@ export const GlobalStyle = createGlobalStyle`
     *:focus {
       outline: none !important;
     }
+
+    /* https://velog.io/@jjhstoday/Cross-Browsing-iPhone-inputtextarea-%EC%9E%91%EC%84%B1%EC%9D%B4-%EC%95%88%EB%90%9C%EB%8B%A4 */
+    input, textarea {
+      -webkit-user-select : auto;
+    }
 `;
