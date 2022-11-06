@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import kidStep1 from '@assets/images/guides/kid-step1.png';
 import kidStep2 from '@assets/images/guides/kid-step2.png';
 import kidStep3 from '@assets/images/guides/kid-step3.png';

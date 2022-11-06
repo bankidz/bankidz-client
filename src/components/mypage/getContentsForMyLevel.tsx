@@ -1,4 +1,3 @@
-import { ReactComponent as Next_1 } from '@assets/illusts/mypage/next_1.svg';
 import { ReactComponent as Next_2 } from '@assets/illusts/mypage/next_2.svg';
 import { ReactComponent as Next_3 } from '@assets/illusts/mypage/next_3.svg';
 import { ReactComponent as Next_4 } from '@assets/illusts/mypage/next_4.svg';

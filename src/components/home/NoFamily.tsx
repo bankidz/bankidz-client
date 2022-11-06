@@ -52,7 +52,7 @@ function NoFamily({ variant = 'Home' }: NoFamilyProps) {
           </p>
           <OutlinedButton
             label={'가족 추가하기'}
-            onClick={() => navigate('mypage')}
+            onClick={() => navigate('/mypage', { state: { prev: '/' } })}
           />
         </Container>
       </MarginTemplate>
