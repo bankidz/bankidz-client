@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import '../src/assets/fonts/fontStyle.css';
 import { BrowserRouter } from 'react-router-dom';
 import { themes } from '@storybook/theming';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 
 const queryClient = new QueryClient();
 
@@ -23,8 +24,6 @@ export const decorators = [
               <div
                 style={{
                   width: '100%',
-                  // backgroundColor: '#FAFAFC',
-                  // padding: '18px',
                   boxSizing: 'border-box',
                 }}
               >
@@ -62,37 +61,12 @@ export const parameters = {
   },
   backgrounds: {
     values: [
-      { name: 'bankidz-black', value: '#2E3234' },
-      { name: 'bankidz-grey100', value: '#FAFAFC' },
+      { name: 'black', value: '#2E3234' },
+      { name: 'grey100', value: '#FAFAFC' },
     ],
-    default: 'bankidz-black',
+    default: 'black',
   },
   viewport: {
-    viewports: {
-      mobile1: {
-        name: 'iPhone 13 mini',
-        styles: {
-          width: '375px',
-          height: '812px',
-        },
-        type: 'small mobile',
-      },
-      mobile2: {
-        name: 'iPhone 13 / 13 pro',
-        styles: {
-          width: '360px',
-          height: '740px',
-        },
-        type: 'big mobile',
-      },
-      tablet1: {
-        name: 'iPad Pro 11"',
-        styles: {
-          width: '834px',
-          height: '1194px',
-        },
-        type: 'tablet',
-      },
-    },
+    viewports: INITIAL_VIEWPORTS,
   },
 };

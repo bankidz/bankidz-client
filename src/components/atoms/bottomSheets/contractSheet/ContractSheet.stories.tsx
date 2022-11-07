@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ContractSheet from './ContractSheet';
 import SelectMoney from './SelectMoney';
 import SelectInterest from './SelectInterest';
@@ -10,6 +11,15 @@ export default {
   title: 'atoms/bottomSheets/ContractSheet',
   component: ContractSheet,
   argTypes: {},
+  parameters: {
+    backgrounds: {
+      values: [{ name: 'black', value: '#FAFAFC' }],
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12',
+    },
+  },
 } as ComponentMeta<typeof ContractSheet>;
 
 const Template: ComponentStory<typeof ContractSheet> = (args) => (

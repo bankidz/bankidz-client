@@ -10,6 +10,7 @@ module.exports = {
     '@storybook/preset-create-react-app',
     'storybook-addon-paddings',
     'storybook-dark-mode',
+    '@storybook/addon-viewport/register',
   ],
   webpackFinal: async (config) => {
     config.resolve.plugins.push(

@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import QuaternaryModal from './QuaternaryModal';
 
 export default {
@@ -8,6 +9,15 @@ export default {
   argTypes: {
     onSubmit: { action: 'handle submit' },
     onExtraSubmit: { action: 'handle extra submit' },
+  },
+  parameters: {
+    backgrounds: {
+      values: [{ name: 'black', value: '#FAFAFC' }],
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12',
+    },
   },
 } as ComponentMeta<typeof QuaternaryModal>;
 
