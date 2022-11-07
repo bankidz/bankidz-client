@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
 import InterestBadge from './InterestBadge';
 
 export default {
@@ -6,21 +7,18 @@ export default {
   component: InterestBadge,
 } as ComponentMeta<typeof InterestBadge>;
 
-const Template: ComponentStory<typeof InterestBadge> = (args) => (
-  <InterestBadge {...args} />
+const Template: ComponentStory<typeof InterestBadge> = () => (
+  <Wrapper>
+    <InterestBadge interestRate={10} />
+    <InterestBadge interestRate={20} />
+    <InterestBadge interestRate={30} />
+  </Wrapper>
 );
 
-export const 이자율_10퍼센트 = Template.bind({});
-이자율_10퍼센트.args = {
-  interestRate: 10,
-};
+const Wrapper = styled.div`
+  div + div {
+    margin-top: 10px;
+  }
+`;
 
-export const 이자율_20퍼센트 = Template.bind({});
-이자율_20퍼센트.args = {
-  interestRate: 20,
-};
-
-export const 이자율_30퍼센트 = Template.bind({});
-이자율_30퍼센트.args = {
-  interestRate: 30,
-};
+export const Variants = Template.bind({});
