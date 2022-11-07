@@ -38,6 +38,9 @@ export const decorators = [
 ];
 
 export const parameters = {
+  docs: {
+    inlineStores: false,
+  },
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
     matchers: {
