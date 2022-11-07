@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import AppBar from './AppBar';
 

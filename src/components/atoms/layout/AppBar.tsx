@@ -5,16 +5,17 @@ import { TLevel } from '@lib/types/TLevel';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 
 interface AppBarProps {
-  // 이전 페이지명
   label?: string;
-  // 레벨
   level?: TLevel | null;
-  // 이전 페이지 링크
   to?: string;
-  // 커스텀 이벤트
   customEvent?: () => void;
 }
 
+/**
+ * @param label 이전 페이지명
+ * @param level 레벨
+ * @param to 이전 페이지 링크
+ */
 function AppBar({ label, level, to, customEvent }: AppBarProps) {
   const navigate = useNavigate();
   const onClickAppBar = () => {

@@ -6,7 +6,6 @@ import TabBar from './TabBar';
 export default {
   title: 'atoms/layout/TabBar',
   component: TabBar,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
   decorators: [
     (Story) => (

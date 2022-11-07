@@ -16,6 +16,5 @@ export const 다음 = Template.bind({});
   onClickNext: () => {},
   disabledNext: true,
   label: '다음',
-  /* 바텀시트 내에서 사용될때는 하단고정 하지 않음 */
   outerSheet: true,
 };
