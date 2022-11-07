@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import PrimaryModal from './PrimaryModal';
 
 export default {
-  title: 'common/modals/PrimaryModal',
+  title: 'atoms/modals/PrimaryModal',
   component: PrimaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

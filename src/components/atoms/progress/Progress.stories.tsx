@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Progress from './Progress';
 
 export default {
-  title: 'home/create/progress',
+  title: 'atoms/etc/progress',
   component: Progress,
 } as ComponentMeta<typeof Progress>;
 

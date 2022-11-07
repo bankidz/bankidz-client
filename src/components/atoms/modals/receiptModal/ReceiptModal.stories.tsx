@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ReceiptModal from './ReceiptModal';
 
 export default {
-  title: 'common/modals/ReceiptModal',
+  title: 'atoms/modals/ReceiptModal',
   component: ReceiptModal,
   decorators: [(Story) => <Story />],
 } as ComponentMeta<typeof ReceiptModal>;

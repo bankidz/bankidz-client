@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TabBar from './TabBar';
 
 export default {
-  title: 'layout/TabBar',
+  title: 'atoms/layout/TabBar',
   component: TabBar,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},

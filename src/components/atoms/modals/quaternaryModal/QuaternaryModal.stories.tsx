@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import QuaternaryModal from './QuaternaryModal';
 
 export default {
-  title: 'common/modals/QuaternaryModal',
+  title: 'atoms/modals/QuaternaryModal',
   component: QuaternaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

@@ -9,7 +9,7 @@ import Notice from './Notice';
 import DongilFailed from './DongilFailed';
 
 export default {
-  title: 'common/bottomSheets/CommonSheet',
+  title: 'atoms/bottomSheets/CommonSheet',
   component: CommonSheet,
   argTypes: {},
 } as ComponentMeta<typeof CommonSheet>;

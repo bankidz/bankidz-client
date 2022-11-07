@@ -1,15 +1,13 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-//import './sheetStyle.css';
 import 'react-spring-bottom-sheet/dist/style.css';
 import ContractSheet from './ContractSheet';
-// import SelectInterest from './sheetContent/SelectInterest';
 import SelectMoney from './SelectMoney';
 import SelectInterest from './SelectInterest';
 import Signature from './Signature';
 import RangeInput from './RangeInput';
 
 export default {
-  title: 'common/bottomSheets/ContractSheet',
+  title: 'atoms/bottomSheets/ContractSheet',
   component: ContractSheet,
   argTypes: {},
 } as ComponentMeta<typeof ContractSheet>;

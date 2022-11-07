@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import InterestBadge from './InterestBadge';
 
 export default {
-  title: 'common/badges/InterestBadge',
+  title: 'atoms/badges/InterestBadge',
   component: InterestBadge,
 } as ComponentMeta<typeof InterestBadge>;
 

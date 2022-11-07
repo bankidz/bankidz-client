@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TertiaryModal from './TertiaryModal';
 
 export default {
-  title: 'common/modals/TertiaryModal',
+  title: 'atoms/modals/TertiaryModal',
   component: TertiaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

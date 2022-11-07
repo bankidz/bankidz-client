@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import TextAreaForm from './TextAreaForm';
 
 export default {
-  title: 'common/forms/TextAreaForm',
+  title: 'atoms/forms/TextAreaForm',
   component: TextAreaForm,
 } as ComponentMeta<typeof TextAreaForm>;
 
