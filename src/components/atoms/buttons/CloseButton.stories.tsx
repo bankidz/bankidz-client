@@ -13,4 +13,4 @@ const Template: ComponentStory<typeof CloseButton> = (args) => (
   <CloseButton {...args} />
 );
 
-export const 예시 = Template.bind({});
+export const Example = Template.bind({});

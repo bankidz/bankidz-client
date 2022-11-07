@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
 import RoleButton from './RoleButton';
 
 export default {
@@ -9,30 +10,52 @@ export default {
   },
 } as ComponentMeta<typeof RoleButton>;
 
-const Template: ComponentStory<typeof RoleButton> = (args) => (
-  <RoleButton {...args} />
+const Template: ComponentStory<typeof RoleButton> = () => (
+  <Wrapper>
+    <div className="element">
+      <RoleButton isKid={true} isFemale={true} />
+    </div>
+    <div className="element">
+      <RoleButton isKid={true} isFemale={false} />
+    </div>
+    <div className="element">
+      <RoleButton isKid={false} isFemale={true} />
+    </div>
+    <div className="element">
+      <RoleButton isKid={false} isFemale={false} />
+    </div>
+  </Wrapper>
 );
 
-export const 역할_딸 = Template.bind({});
-역할_딸.args = {
+const Template2: ComponentStory<typeof RoleButton> = (args) => (
+  <Wrapper>
+    <div className="element">
+      <RoleButton {...args} />
+    </div>
+    <div className="element">
+      <RoleButton {...args} />
+    </div>
+    <div className="element">
+      <RoleButton {...args} />
+    </div>
+    <div className="element">
+      <RoleButton {...args} />
+    </div>
+  </Wrapper>
+);
+
+const Wrapper = styled.div`
+  display: flex;
+  .element {
+    width: 150px;
+    margin-right: 10px;
+  }
+`;
+
+export const Variants = Template.bind({});
+
+export const Example = Template2.bind({});
+Example.args = {
   isKid: true,
   isFemale: true,
-};
-
-export const 역할_아들 = Template.bind({});
-역할_아들.args = {
-  isKid: true,
-  isFemale: false,
-};
-
-export const 역할_엄마 = Template.bind({});
-역할_엄마.args = {
-  isKid: false,
-  isFemale: true,
-};
-
-export const 역할_아빠 = Template.bind({});
-역할_아빠.args = {
-  isKid: false,
-  isFemale: false,
 };
