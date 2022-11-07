@@ -8,6 +8,7 @@ import { ModalsContextProvider } from '../src/components/atoms/modals/ModalsCont
 import { QueryClient, QueryClientProvider } from 'react-query';
 import '../src/assets/fonts/fontStyle.css';
 import { BrowserRouter } from 'react-router-dom';
+import { themes } from '@storybook/theming';
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,10 @@ export const decorators = [
 export const parameters = {
   docs: {
     inlineStores: false,
+  },
+  darkMode: {
+    dark: { ...themes.dark, appBg: '#2E3234' }, // Bankidz black
+    light: { ...themes.normal, appBg: 'white' },
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
