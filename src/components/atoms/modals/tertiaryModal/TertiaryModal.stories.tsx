@@ -24,4 +24,4 @@ const Template: ComponentStory<typeof TertiaryModal> = (args) => (
   <TertiaryModal {...args} />
 );
 
-export const 이자란 = Template.bind({});
+export const Example = Template.bind({});
