@@ -2,21 +2,19 @@ import { forwardRef, HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 
 /**
- * @param readonly 바텀시트를 통해 입력받는 경우에는 readonly로 사용
- * @param sheetOpen 포커스가 되어있지 않아도 포커스된 스타일을 보여줍니다 (바텀시트가 열려있는 상황)
- * @param disabled 선택할 수 없는 인풋
+ * @param readonly 바텀시트를 사용하는 경우에 true로 설정합니다.
+ * @param sheetOpen 포커스가 되어있지 않아도 포커스된 스타일을 보여줍니다.
+ * (바텀시트가 열려있는 상황)
+ * @param disabled 선택할 수 없는 인풋 입니다.
+ * @param bigFontSize 이자율, 매주 저금액의 경우 사용합니다.
  */
 interface InputFormProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
   value: string | number;
   error: boolean;
-  /* 바텀시트를 사용하는 경우에 true */
   readonly?: boolean;
-  /* 바텀시트가 올라와있는 상황에 포커스와 같은 스타일을 보여줍니다 */
   sheetOpen?: boolean;
-  /* 선택할 수 없는 인풋 */
   disabled?: boolean;
-  /*이자율. 매주 저금액*/
   bigFontSize?: boolean;
   autoFocus?: boolean;
   postfix?: '년' | '월' | '일';

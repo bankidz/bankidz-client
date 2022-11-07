@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SkeletonOverview from './SkeletonOverView';
 
 export default {
-  title: 'common/skeletons/SkeletonOverview',
+  title: 'atoms/skeletons/SkeletonOverview',
   component: SkeletonOverview,
 } as ComponentMeta<typeof SkeletonOverview>;
 

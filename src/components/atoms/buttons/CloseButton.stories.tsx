@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CloseButton from './CloseButton';
 
 export default {
-  title: 'common/buttons/CloseButton',
+  title: 'atoms/buttons/CloseButton',
   component: CloseButton,
   argTypes: {
     onClick: { action: 'handle click' },
@@ -13,4 +13,4 @@ const Template: ComponentStory<typeof CloseButton> = (args) => (
   <CloseButton {...args} />
 );
 
-export const 예시 = Template.bind({});
+export const Example = Template.bind({});

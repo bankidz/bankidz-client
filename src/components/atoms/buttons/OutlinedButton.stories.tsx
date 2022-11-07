@@ -3,7 +3,7 @@ import OutlinedButton from './OutlinedButton';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'common/buttons/OutlinedButton',
+  title: 'atoms/buttons/OutlinedButton',
   component: OutlinedButton,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: { onClick: { action: 'event' } },

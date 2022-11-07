@@ -1,20 +1,28 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import AppBar from './AppBar';
 
 export default {
-  title: 'layout/AppBar',
+  title: 'atoms/layout/AppBar',
   component: AppBar,
   argTypes: {},
   decorators: [
     (Story) => (
-      <BrowserRouter>
-        <Routes>
-          <Route path="*" element={<Story />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="*" element={<Story />} />
+      </Routes>
     ),
   ],
+  parameters: {
+    backgrounds: {
+      values: [{ name: 'black', value: '#FAFAFC' }],
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12',
+    },
+  },
 } as ComponentMeta<typeof AppBar>;
 
 const Template: ComponentStory<typeof AppBar> = (args) => <AppBar {...args} />;
