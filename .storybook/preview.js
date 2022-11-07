@@ -23,8 +23,8 @@ export const decorators = [
               <div
                 style={{
                   width: '100%',
-                  backgroundColor: '#FAFAFC',
-                  padding: '18px',
+                  // backgroundColor: '#FAFAFC',
+                  // padding: '18px',
                   boxSizing: 'border-box',
                 }}
               >
@@ -43,7 +43,7 @@ export const parameters = {
     inlineStores: false,
   },
   darkMode: {
-    dark: { ...themes.dark, appBg: '#2E3234' }, // Bankidz black
+    dark: { ...themes.dark, appBg: '#2E3234' },
     light: { ...themes.normal, appBg: 'white' },
   },
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -53,6 +53,20 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  paddings: {
+    values: [
+      { name: 'margin-template', value: '18px' },
+      { name: 'none', value: '0px' },
+    ],
+    default: 'margin-template',
+  },
+  backgrounds: {
+    values: [
+      { name: 'bankidz-black', value: '#2E3234' },
+      { name: 'bankidz-grey100', value: '#FAFAFC' },
+    ],
+    default: 'bankidz-black',
+  },
   viewport: {
     viewports: {
       mobile1: {
@@ -61,7 +75,7 @@ export const parameters = {
           width: '375px',
           height: '812px',
         },
-        type: 'mobile',
+        type: 'small mobile',
       },
       mobile2: {
         name: 'iPhone 13 / 13 pro',
@@ -69,7 +83,7 @@ export const parameters = {
           width: '360px',
           height: '740px',
         },
-        type: 'mobile',
+        type: 'big mobile',
       },
       tablet1: {
         name: 'iPad Pro 11"',
@@ -80,12 +94,5 @@ export const parameters = {
         type: 'tablet',
       },
     },
-  },
-  paddings: {
-    values: [
-      { name: 'none', value: '0px' },
-      { name: 'default', value: '18px' },
-    ],
-    default: 'none',
   },
 };
