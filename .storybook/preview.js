@@ -61,7 +61,7 @@ export const parameters = {
   },
   backgrounds: {
     values: [
-      { name: 'black', value: '#2E3234' },
+      { name: 'black', value: 'rgb(23, 23, 23)' },
       { name: 'grey100', value: '#FAFAFC' },
     ],
     default: 'black',
