@@ -1,4 +1,5 @@
 import { Location, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
 import KidHomePage from './KidHomePage';
 import ParentHomePage from './ParentHomePage';
 import Create from './Create';
@@ -12,10 +13,16 @@ import ForegroundTemplate from '@components/atoms/layout/ForegroundTemplate';
 import BackgroundTemplate from '@components/atoms/layout/BackgroundTemplate';
 import ThemeColor from '@components/atoms/ThemeColor';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
+import RNListener from '@lib/utils/RNListener';
 
 function HomeRouter({ location }: { location: Location }) {
   const isKid = useAppSelector(selectIsKid);
   const level = useLevel();
+
+  useEffect(() => {
+    RNListener();
+  }, []);
+
   return (
     <>
       <ThemeColor color={getColorByLevel(level)} />
