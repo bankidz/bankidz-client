@@ -20,7 +20,7 @@ function APPLEAuthRedirectPage() {
     const proceedLogin = () => {
       setLocalStorage('accessToken', accessToken);
       provider && dispatch(setCredentials({ isKid, level, provider }));
-      registerEXPOToken();
+      // registerEXPOToken();
       navigate('/');
     };
     proceedLogin();

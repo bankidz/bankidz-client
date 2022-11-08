@@ -19,7 +19,7 @@ function PersistLogin() {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);
       dispatch(setCredentials({ isKid, level, provider }));
-      registerEXPOToken();
+      // registerEXPOToken();
       setIsLoading(false);
     },
   });

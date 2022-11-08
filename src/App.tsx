@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
+import { useEffect } from 'react';
 import OnBoardingRouter from '@components/pages/OnBoarding';
 import TestPage from '@components/pages/Test/TestPage';
 import ServiceRouter from '@components/pages/ServiceRouter';
@@ -11,6 +12,7 @@ import useAPIError from '@lib/hooks/errorHandler/useAPIError';
 import PersistLogin from '@components/blocks/auth/PersistLogin';
 import RequireAuth from '@components/blocks/auth/RequireAuth';
 import ThemeColor from '@components/atoms/ThemeColor';
+import RNListener from '@lib/utils/RNListener';
 
 function App() {
   const location = useLocation();
@@ -29,6 +31,10 @@ function App() {
   });
 
   RouteChangeTracker();
+
+  useEffect(() => {
+    RNListener();
+  });
 
   return (
     <>
