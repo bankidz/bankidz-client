@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import OnBoardingRouter from '@components/pages/OnBoarding';
-import TestPage from '@components/pages/Test/TestPage';
 import ServiceRouter from '@components/pages/ServiceRouter';
 import NotFound from '@components/pages/NotFound';
 import Layout from '@components/atoms/layout/Layout';
@@ -37,7 +36,6 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/auth/*" element={<OnBoardingRouter />} />
           <Route path="/link/:groupCode" element={<GroupLink />} />
-          <Route path="/test/*" element={<TestPage />} />
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth />}>
               <Route path="/*" element={<ServiceRouter />} />
