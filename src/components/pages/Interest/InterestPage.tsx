@@ -6,7 +6,7 @@ import queryKeys from '@lib/constants/queryKeys';
 import familyAPI from '@lib/apis/family/familyAPI';
 import NoFamily from '@components/blocks/home/NoFamily';
 
-function Interest() {
+function InterestPage() {
   const { data: kids } = useQuery(queryKeys.FAMILY_KID, familyAPI.getKid);
 
   let content;
@@ -24,4 +24,4 @@ function Interest() {
   return <>{content}</>;
 }
 
-export default Interest;
+export default InterestPage;

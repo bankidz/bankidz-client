@@ -21,7 +21,7 @@ import queryKeys from '@lib/constants/queryKeys';
 import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
-function Detail() {
+function DetailPage() {
   const { id } = useParams();
   const isKid = useAppSelector(selectIsKid);
   const level = useLevel();
@@ -185,7 +185,7 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default DetailPage;
 
 const Wrapper = styled.div`
   width: 100%;
