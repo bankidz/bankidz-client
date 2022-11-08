@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RoleButton from './RoleButton';
 
 export default {
-  title: 'atoms/buttons/RoleButton',
+  title: 'buttons/RoleButton',
   component: RoleButton,
   argTypes: {
     onClick: { action: 'handle click' },

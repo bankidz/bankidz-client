@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SheetButton from './SheetButton';
 
 export default {
-  title: 'atoms/buttons/SheetButton',
+  title: 'buttons/SheetButton',
   component: SheetButton,
   decorators: [(Story) => <Story />],
 } as ComponentMeta<typeof SheetButton>;

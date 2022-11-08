@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import TertiaryModal from './TertiaryModal';
 
 export default {
-  title: 'atoms/modals/TertiaryModal',
+  title: 'modals/TertiaryModal',
   component: TertiaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

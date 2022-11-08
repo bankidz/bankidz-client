@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import RiskBadge from './RiskBadge';
 
 export default {
-  title: 'atoms/badges/RiskBadge',
+  title: 'badges/RiskBadge',
   component: RiskBadge,
 } as ComponentMeta<typeof RiskBadge>;
 

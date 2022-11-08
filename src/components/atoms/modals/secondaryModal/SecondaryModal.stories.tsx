@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import SecondaryModal from './SecondaryModal';
 
 export default {
-  title: 'atoms/modals/SecondaryModal',
+  title: 'modals/SecondaryModal',
   component: SecondaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

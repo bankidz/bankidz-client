@@ -4,7 +4,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import TabBar from './TabBar';
 
 export default {
-  title: 'atoms/layout/TabBar',
+  title: 'layout/TabBar',
   component: TabBar,
   argTypes: {},
   decorators: [

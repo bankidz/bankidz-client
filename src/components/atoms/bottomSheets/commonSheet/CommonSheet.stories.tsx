@@ -10,7 +10,7 @@ import Notice from './Notice';
 import DongilFailed from './DongilFailed';
 
 export default {
-  title: 'atoms/bottomSheets/CommonSheet',
+  title: 'bottomSheets/CommonSheet',
   component: CommonSheet,
   argTypes: {},
   parameters: {
