@@ -5,7 +5,6 @@ import { axiosPrivate } from '@lib/apis/axios';
 function RNListener() {
   const listener = async (event: any) => {
     // alert('listener');
-
     const accessToken = getLocalStorage('accessToken');
     // alert(`accessToken: ${JSON.stringify(accessToken)}`);
     const oldEXPOToken = getLocalStorage('EXPOToken');

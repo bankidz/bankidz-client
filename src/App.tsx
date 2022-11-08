@@ -7,7 +7,7 @@ import NotFound from '@components/pages/NotFound';
 import Layout from '@components/atoms/layout/Layout';
 import GroupLink from '@components/blocks/mypage/GroupLink';
 import RouteChangeTracker from '@components/blocks/auth/RouteChangeTracker';
-import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 import PersistLogin from '@components/blocks/auth/PersistLogin';
 import RequireAuth from '@components/blocks/auth/RequireAuth';
 import ThemeColor from '@components/atoms/ThemeColor';

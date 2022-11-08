@@ -13,7 +13,7 @@ import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
-import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 
 interface ProposedDongilItemProps {
   proposedDongil: IChallengeDTO;

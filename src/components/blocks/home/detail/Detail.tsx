@@ -18,7 +18,7 @@ import useGlobalBottomSheet from '@lib/hooks/useGlobalBottomSheet';
 import useLevel from '@lib/hooks/useLevel';
 import challengeAPI from '@lib/apis/challenge/challengeAPI';
 import queryKeys from '@lib/constants/queryKeys';
-import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
 
 function Detail() {
