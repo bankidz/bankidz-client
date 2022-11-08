@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import ContractInputForm from './InputForm';
 
 export default {
-  title: 'atoms/forms/InputForm',
+  title: 'forms/InputForm',
   component: ContractInputForm,
 } as ComponentMeta<typeof ContractInputForm>;
 

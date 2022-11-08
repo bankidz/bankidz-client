@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import QuaternaryModal from './QuaternaryModal';
 
 export default {
-  title: 'atoms/modals/QuaternaryModal',
+  title: 'modals/QuaternaryModal',
   component: QuaternaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

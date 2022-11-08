@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import InterestBadge from './InterestBadge';
 
 export default {
-  title: 'atoms/badges/InterestBadge',
+  title: 'badges/InterestBadge',
   component: InterestBadge,
 } as ComponentMeta<typeof InterestBadge>;
 

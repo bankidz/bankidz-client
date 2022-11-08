@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import CheckButton from './CheckButton';
 
 export default {
-  title: 'atoms/buttons/CheckButton',
+  title: 'buttons/CheckButton',
   component: CheckButton,
   argTypes: {
     onClick: { action: 'handle click' },

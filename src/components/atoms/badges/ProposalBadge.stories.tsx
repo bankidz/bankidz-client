@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ProposalBadge from './ProposalBadge';
 
 export default {
-  title: 'atoms/badges/ProposalBadge',
+  title: 'badges/ProposalBadge',
   component: ProposalBadge,
 } as ComponentMeta<typeof ProposalBadge>;
 

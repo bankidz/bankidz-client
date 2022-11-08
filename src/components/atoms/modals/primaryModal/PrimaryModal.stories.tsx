@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import PrimaryModal from './PrimaryModal';
 
 export default {
-  title: 'atoms/modals/PrimaryModal',
+  title: 'modals/PrimaryModal',
   component: PrimaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {

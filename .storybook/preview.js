@@ -64,7 +64,7 @@ export const parameters = {
       { name: 'grey100', value: '#FAFAFC' },
       { name: 'black', value: 'rgb(23, 23, 23)' },
     ],
-    default: 'black',
+    default: 'grey100',
   },
   viewport: {
     viewports: INITIAL_VIEWPORTS,

@@ -4,7 +4,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import AppBar from './AppBar';
 
 export default {
-  title: 'atoms/layout/AppBar',
+  title: 'layout/AppBar',
   component: AppBar,
   argTypes: {},
   decorators: [

@@ -3,7 +3,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReceiptModal from './ReceiptModal';
 
 export default {
-  title: 'atoms/modals/ReceiptModal',
+  title: 'modals/ReceiptModal',
   component: ReceiptModal,
   decorators: [(Story) => <Story />],
   parameters: {

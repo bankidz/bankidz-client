@@ -8,7 +8,7 @@ import Signature from './Signature';
 import RangeInput from './RangeInput';
 
 export default {
-  title: 'atoms/bottomSheets/ContractSheet',
+  title: 'bottomSheets/ContractSheet',
   component: ContractSheet,
   argTypes: {},
   parameters: {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import LevelBadge from './LevelBadge';
 
 export default {
-  title: 'atoms/badges/LevelBadge',
+  title: 'badges/LevelBadge',
   component: LevelBadge,
 } as ComponentMeta<typeof LevelBadge>;
 

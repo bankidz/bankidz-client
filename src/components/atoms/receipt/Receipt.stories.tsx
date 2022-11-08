@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Receipt from './Receipt';
 
 export default {
-  title: 'atoms/etc/Receipt',
+  title: 'etc/Receipt',
   component: Receipt,
   argTypes: {
     onSubmit: { action: 'handle click' },
