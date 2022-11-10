@@ -49,7 +49,16 @@ function FixedBar({ variant = 'Home' }: FixedBarProps) {
       hasMultipleKids={hasMultipleKids!}
       isAllRead={isAllRead!}
     >
-      <div className="alert" onClick={() => navigate('/notification')}>
+      <div
+        className="alert"
+        onClick={() =>
+          navigate('/notification', {
+            state: {
+              returnBackgroundTo: variant === 'Home' ? '/' : '/interest',
+            },
+          })
+        }
+      >
         <Bell fill={'white'} />
       </div>
       {headerText}
