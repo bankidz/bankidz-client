@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import 'react-spring-bottom-sheet/dist/style.css';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import CommonSheet from './CommonSheet';
 import Check from './Check';
 import SelectProfile from './SelectProfile';
@@ -9,9 +10,18 @@ import Notice from './Notice';
 import DongilFailed from './DongilFailed';
 
 export default {
-  title: 'common/bottomSheets/CommonSheet',
+  title: 'bottomSheets/CommonSheet',
   component: CommonSheet,
   argTypes: {},
+  parameters: {
+    backgrounds: {
+      values: [{ name: 'black', value: '#FAFAFC' }],
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12',
+    },
+  },
 } as ComponentMeta<typeof CommonSheet>;
 
 const Template: ComponentStory<typeof CommonSheet> = (args) => (

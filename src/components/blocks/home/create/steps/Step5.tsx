@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { debounce } from 'throttle-debounce';
 import usePresignedUrl from '../utils/usePresignedUrl';
 import ContractSheet from '@components/atoms/bottomSheets/contractSheet/ContractSheet';
 import Signature from '@components/atoms/bottomSheets/contractSheet/Signature';
@@ -56,10 +57,10 @@ function Step5() {
   }, []);
 
   // 다음으로 버튼 클릭
-  const onClickNextButton = () => {
+  const onClickNextButton = debounce(1000, () => {
     uploadS3(sign);
     mutatePostChallenge(createChallengePayload);
-  };
+  });
 
   return (
     <>

@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SkeletonInterestToPayList from './SkeletonInterestToPayList';
 
 export default {
-  title: 'common/skeletons/SkeletonInterestToPayList',
+  title: 'skeletons/SkeletonInterestToPayList',
   component: SkeletonInterestToPayList,
 } as ComponentMeta<typeof SkeletonInterestToPayList>;
 

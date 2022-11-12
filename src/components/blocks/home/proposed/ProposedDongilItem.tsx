@@ -13,6 +13,7 @@ import { EDayOfWeek } from '@lib/types/EDayOfWeek';
 import { useAppSelector } from '@store/app/hooks';
 import { selectSelectedKid } from '@store/slices/kidsSlice';
 import { IChallengeDTO } from '@lib/apis/challenge/challengeDTO';
+import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 
 interface ProposedDongilItemProps {
   proposedDongil: IChallengeDTO;
@@ -48,7 +49,23 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
     openSheetBySequence(openSheet);
   };
 
+  // 3-e. 돈길 계약 횟수 초과
+  const openCreateExceededBottomSheet = () => {
+    const openSheet = () =>
+      setOpenBottomSheet({
+        sheetContent: 'Notice',
+        contentProps: { type: 'createExceeded' },
+      });
+    openSheetBySequence(openSheet);
+  };
+
   // 3. 자녀의 돈길 수락
+  const { handleError } = useAPIError({
+    403: {
+      'E403-40001': openCreateExceededBottomSheet,
+      'E403-40012': openCreateExceededBottomSheet,
+    },
+  });
   const queryClient = useQueryClient();
   const selectedKid = useAppSelector(selectSelectedKid);
   const approveMutation = useMutation(challengeAPI.patchChallenge, {
@@ -65,6 +82,7 @@ function ProposedDongilItem({ proposedDongil }: ProposedDongilItemProps) {
       ]);
       openApproveCompletedBottomSheet();
     },
+    onError: handleError,
   });
   const handleApproveButtonClick = () => {
     approveMutation.mutate({ challengeId: id, accept: true, comment: '' });

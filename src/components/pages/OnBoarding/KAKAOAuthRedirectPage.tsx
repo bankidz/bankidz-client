@@ -5,7 +5,6 @@ import { useAppDispatch } from '@store/app/hooks';
 import { setCredentials } from '@store/slices/authSlice';
 import CustomSyncLoader from '@components/atoms/loaders/CustomSyncLoader';
 import setLocalStorage from '@lib/utils/localStorage/setLocalStorage';
-import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import { ILoginDTO } from '@lib/apis/kakao/kakaoDTO';
 import kakaoAPI from '@lib/apis/kakao/kakaoAPI';
 
@@ -21,7 +20,6 @@ function KAKAOAuthRedirectPage() {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);
       dispatch(setCredentials({ isKid, level, provider }));
-      registerEXPOToken();
       navigate('/');
     },
   });

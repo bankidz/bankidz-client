@@ -8,7 +8,7 @@ import { decipher } from '@lib/utils/crypt';
 import useUserQuery from '@lib/hooks/queries/useUserQuery';
 import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
-import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 import useModals from '@lib/hooks/useModals';
 import { modals } from '@components/atoms/modals/Modals';
 

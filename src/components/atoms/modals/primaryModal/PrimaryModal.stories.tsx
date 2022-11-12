@@ -1,12 +1,22 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import PrimaryModal from './PrimaryModal';
 
 export default {
-  title: 'common/modals/PrimaryModal',
+  title: 'modals/PrimaryModal',
   component: PrimaryModal,
   decorators: [(Story) => <Story />],
   argTypes: {
     onSubmit: { action: 'handle click' },
+  },
+  parameters: {
+    backgrounds: {
+      values: [{ name: 'black', value: '#FAFAFC' }],
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12',
+    },
   },
 } as ComponentMeta<typeof PrimaryModal>;
 

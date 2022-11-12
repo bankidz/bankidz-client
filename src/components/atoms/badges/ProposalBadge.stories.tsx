@@ -1,21 +1,23 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import styled from 'styled-components';
 import ProposalBadge from './ProposalBadge';
 
 export default {
-  title: 'common/badges/ProposalBadge',
+  title: 'badges/ProposalBadge',
   component: ProposalBadge,
 } as ComponentMeta<typeof ProposalBadge>;
 
-const Template: ComponentStory<typeof ProposalBadge> = (args) => (
-  <ProposalBadge {...args} />
+const Template: ComponentStory<typeof ProposalBadge> = () => (
+  <Wrapper>
+    <ProposalBadge isProposing />
+    <ProposalBadge isProposing={false} />
+  </Wrapper>
 );
 
-export const 상태_제안중 = Template.bind({});
-상태_제안중.args = {
-  isProposing: true,
-};
+const Wrapper = styled.div`
+  div + div {
+    margin-top: 10px;
+  }
+`;
 
-export const 상태_거절됨 = Template.bind({});
-상태_거절됨.args = {
-  isProposing: false,
-};
+export const Variants = Template.bind({});

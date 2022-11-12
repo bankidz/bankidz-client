@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import SheetButton from './SheetButton';
 
 export default {
-  title: 'common/buttons/SheetButton',
+  title: 'buttons/SheetButton',
   component: SheetButton,
   decorators: [(Story) => <Story />],
 } as ComponentMeta<typeof SheetButton>;
@@ -16,6 +16,5 @@ export const 다음 = Template.bind({});
   onClickNext: () => {},
   disabledNext: true,
   label: '다음',
-  /* 바텀시트 내에서 사용될때는 하단고정 하지 않음 */
   outerSheet: true,
 };

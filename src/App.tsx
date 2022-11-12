@@ -1,13 +1,12 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import OnBoardingRouter from '@components/pages/OnBoarding';
-import TestPage from '@components/pages/Test/TestPage';
 import ServiceRouter from '@components/pages/ServiceRouter';
 import NotFound from '@components/pages/NotFound';
 import Layout from '@components/atoms/layout/Layout';
 import GroupLink from '@components/blocks/mypage/GroupLink';
 import RouteChangeTracker from '@components/blocks/auth/RouteChangeTracker';
-import useAPIError from '@lib/hooks/errorHandler/useAPIError';
+import useAPIError from '@lib/hooks/globalErrorHandler/useAPIError';
 import PersistLogin from '@components/blocks/auth/PersistLogin';
 import RequireAuth from '@components/blocks/auth/RequireAuth';
 import ThemeColor from '@components/atoms/ThemeColor';
@@ -37,7 +36,6 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/auth/*" element={<OnBoardingRouter />} />
           <Route path="/link/:groupCode" element={<GroupLink />} />
-          <Route path="/test/*" element={<TestPage />} />
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth />}>
               <Route path="/*" element={<ServiceRouter />} />

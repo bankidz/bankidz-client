@@ -15,7 +15,6 @@ interface TextAreaFormProps extends HTMLAttributes<HTMLTextAreaElement> {
 }
 
 /**
- *
  * @param textValue TextAreaForm을 사용하는 컴포넌트에서 선언한 state를
  * 주입합니다. 예) const [reason, setReason] = useState('');인 경우 reason
  * @param setTextValue TextAreaForm을 사용하는 컴포넌트에서 선언한

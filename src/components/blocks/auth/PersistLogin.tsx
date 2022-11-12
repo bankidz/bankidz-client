@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useMutation } from 'react-query';
 import { useAppDispatch } from '@store/app/hooks';
 import { setCredentials } from '@store/slices/authSlice';
-import registerEXPOToken from '@lib/utils/registerEXPOToken';
 import getLocalStorage from '@lib/utils/localStorage/getLocalStorage';
 import userAPI from '@lib/apis/user/userAPI';
 import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
@@ -19,7 +18,6 @@ function PersistLogin() {
       const { accessToken, isKid, level, provider } = data;
       setLocalStorage('accessToken', accessToken);
       dispatch(setCredentials({ isKid, level, provider }));
-      registerEXPOToken();
       setIsLoading(false);
     },
   });

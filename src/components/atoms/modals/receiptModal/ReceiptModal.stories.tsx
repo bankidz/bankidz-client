@@ -1,10 +1,20 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import ReceiptModal from './ReceiptModal';
 
 export default {
-  title: 'common/modals/ReceiptModal',
+  title: 'modals/ReceiptModal',
   component: ReceiptModal,
   decorators: [(Story) => <Story />],
+  parameters: {
+    backgrounds: {
+      values: [{ name: 'black', value: '#FAFAFC' }],
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphone12',
+    },
+  },
 } as ComponentMeta<typeof ReceiptModal>;
 
 const Template: ComponentStory<typeof ReceiptModal> = (args) => (
