@@ -1,5 +1,5 @@
 import { Location, Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import KidHomePage from './KidHomePage';
 import ParentHomePage from './ParentHomePage';
 import Create from './Create';
@@ -14,6 +14,7 @@ import BackgroundTemplate from '@components/atoms/layout/BackgroundTemplate';
 import ThemeColor from '@components/atoms/ThemeColor';
 import getColorByLevel from '@lib/utils/get/getColorByLevel';
 import RNListener from '@lib/utils/RNListener';
+import LoadingSpinner from '@components/atoms/loaders/LoadingSpinner';
 
 function HomeRouter({ location }: { location: Location }) {
   const isKid = useAppSelector(selectIsKid);
@@ -42,13 +43,15 @@ function HomeRouter({ location }: { location: Location }) {
         <Route
           path="/detail/:id"
           element={
-            <ForegroundTemplate
-              label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
-              level={level}
-              to="/"
-            >
-              <DetailPage />
-            </ForegroundTemplate>
+            <Suspense fallback={<LoadingSpinner isCenter />}>
+              <ForegroundTemplate
+                label={isKid === true ? '걷고있는 돈길' : '금주의 돈길'}
+                level={level}
+                to="/"
+              >
+                <DetailPage />
+              </ForegroundTemplate>
+            </Suspense>
           }
         />
         {/* 부모 - 완주한 돈길 */}

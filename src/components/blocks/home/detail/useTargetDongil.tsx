@@ -22,6 +22,7 @@ function useTargetDongil(id: string, isPaid: boolean | undefined) {
     () => challengeAPI.getChallengeKidAchieved('paid', selectedKid?.kidId!),
     {
       enabled: isPaid === true,
+      suspense: true,
     },
   );
   const { data: unPaidInterests } = useQuery(
@@ -29,6 +30,7 @@ function useTargetDongil(id: string, isPaid: boolean | undefined) {
     () => challengeAPI.getChallengeKidAchieved('unPaid', selectedKid?.kidId!),
     {
       enabled: isPaid === false,
+      suspense: true,
     },
   );
   const { data: walkingDongils } = useQuery(
@@ -36,6 +38,7 @@ function useTargetDongil(id: string, isPaid: boolean | undefined) {
     () => challengeAPI.getChallenge('walking'),
     {
       enabled: isPaid === undefined && isKid === true,
+      suspense: true,
     },
   );
   const { data: thisWeekSDongils } = useQuery(
@@ -43,6 +46,7 @@ function useTargetDongil(id: string, isPaid: boolean | undefined) {
     () => challengeAPI.getChallengeKid(selectedKid!.kidId, 'walking'),
     {
       enabled: isPaid === undefined && isKid === false,
+      suspense: true,
     },
   );
 
