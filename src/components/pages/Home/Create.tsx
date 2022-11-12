@@ -118,16 +118,16 @@ function Create() {
               step={step}
               skipSelectParents={status === 'success' && isAlone ? true : false}
             />
-            <SlideTransition keyValue={step} direction={direction}>
-              <ContentWrapper>
-                <MarginTemplate>
-                  {status === 'success' && isAlone
-                    ? title[step]
-                    : title[step - 1]}
-                  {renderContent(step)}
-                </MarginTemplate>
-              </ContentWrapper>
-            </SlideTransition>
+            {/* <SlideTransition keyValue={step} direction={direction}> */}
+            <ContentWrapper>
+              <MarginTemplate>
+                {status === 'success' && isAlone
+                  ? title[step]
+                  : title[step - 1]}
+                {renderContent(step)}
+              </MarginTemplate>
+            </ContentWrapper>
+            {/* </SlideTransition> */}
           </>
         )}
       </Wrapper>
