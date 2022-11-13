@@ -1,17 +1,12 @@
+import loadable from '@loadable/component';
 import { useModalsDispatch, useModalsState } from './ModalsContext';
-import PrimaryModal from './primaryModal/PrimaryModal';
-import SecondaryModal from './secondaryModal/SecondaryModal';
-import TertiaryModal from './tertiaryModal/TertiaryModal';
-import QuaternaryModal from './quaternaryModal/QuaternaryModal';
-import ReceiptModal from './receiptModal/ReceiptModal';
 
-// TODO: code splitting
 export const modals = {
-  primaryModal: PrimaryModal,
-  secondaryModal: SecondaryModal,
-  tertiaryModal: TertiaryModal,
-  quaternaryModal: QuaternaryModal,
-  receiptModal: ReceiptModal,
+  primaryModal: loadable(() => import('./primaryModal/PrimaryModal')),
+  secondaryModal: loadable(() => import('./secondaryModal/SecondaryModal')),
+  tertiaryModal: loadable(() => import('./tertiaryModal/TertiaryModal')),
+  quaternaryModal: loadable(() => import('./quaternaryModal/QuaternaryModal')),
+  receiptModal: loadable(() => import('./receiptModal/ReceiptModal')),
 };
 
 // 전역 상태 (배열)의 각 요소의 props를 Component와 매핑 & submit / cancel 시 로직을 추가하여 랜더링
