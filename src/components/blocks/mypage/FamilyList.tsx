@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import { useMutation, useQueryClient } from 'react-query';
 import styled from 'styled-components';
 import { darken } from 'polished';
@@ -11,6 +12,7 @@ import { IMyPageDTO } from '@lib/apis/user/userDTO';
 import { IFamilyDTO, IFamilyUserDTO } from '@lib/apis/family/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
 import familyAPI from '@lib/apis/family/familyAPI';
+import copyToClipboard from '@lib/utils/copyToClipboard';
 
 function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
@@ -80,10 +82,14 @@ function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
       code: familyData.code,
       expiredDate: dayjs().add(2, 'days'),
     };
-    const DOMAIN = `${process.env.REACT_APP_DOMAIN}`;
+    // const DOMAIN = `${process.env.REACT_APP_DOMAIN}`;
+
     const encrypted = cipher(JSON.stringify(data));
-    const link = `${DOMAIN}/link/${encrypted}`;
-    messageToRNWebView(link);
+    copyToClipboard(encrypted);
+    toast.success('클립보드에 복사되었어요');
+
+    // const link = `${DOMAIN}/link/${encrypted}`;
+    // messageToRNWebView(link);
   };
 
   const messageToRNWebView = (link: string) => {
@@ -113,7 +119,7 @@ function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
         <span className="divider" />
         <button onClick={onShareButtonClick}>
           <Share />
-          <p className="share">그룹링크 공유하기</p>
+          <p className="share">그룹코드 공유하기</p>
         </button>
       </ButtonSet>
     </Wrapper>
