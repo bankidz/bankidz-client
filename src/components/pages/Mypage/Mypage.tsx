@@ -82,10 +82,16 @@ function Mypage() {
               {familyData!.id ? (
                 <FamilyList family={familyData!.familyUserList} />
               ) : (
-                <CreateDongil onClick={() => mutateCreateFamily()}>
-                  <p>가족그룹 만들기</p>
-                  <p>그룹을 만들고 가족을 초대해봐요</p>
-                </CreateDongil>
+                <>
+                  <CreateDongil onClick={() => mutateCreateFamily()}>
+                    <p>가족그룹 만들기</p>
+                    <p>그룹을 만들고 가족을 초대해봐요</p>
+                  </CreateDongil>
+                  <CreateDongil onClick={() => navigate('/mypage/enter')}>
+                    <p>그룹코드 입력하기</p>
+                    <p>다른 가족에게 전달받은 코드를 입력해요</p>
+                  </CreateDongil>
+                </>
               )}
             </>
           )}
@@ -139,6 +145,8 @@ const Section = styled.div<{ smallGap?: boolean }>`
 `;
 
 const CreateDongil = styled.div`
+  margin-bottom: 8px;
+
   width: 100%;
   background-color: ${({ theme }) => theme.palette.greyScale.white};
   padding: 16px;

@@ -2,9 +2,9 @@
 
 # 1. 어린이를 위한 핀테크 서비스, 뱅키즈
 
-|                           iOS APP                            | AOS App |               PC Web                |
-| :----------------------------------------------------------: | :---------: | :---------------------------------: |
-| <img src="https://user-images.githubusercontent.com/83692797/201513322-6e4f12ab-9a7c-4dec-a7ad-2a435e715f74.png" alt="app-store-qr-code" style="width:200px;" /><br />[App Store](https://apps.apple.com/kr/app/%EB%B1%85%ED%82%A4%EC%A6%88/id6444064518) |  (심사중)   | [bankidz.com](https://bankidz.com/) |
+|                           iOS APP                            | PC Web |
+| :----------------------------------------------------------: | :---------: |
+| <img src="https://user-images.githubusercontent.com/83692797/201513322-6e4f12ab-9a7c-4dec-a7ad-2a435e715f74.png" alt="app-store-qr-code" style="width:200px;" /><br />[App Store](https://apps.apple.com/kr/app/%EB%B1%85%ED%82%A4%EC%A6%88/id6444064518) | [bankidz.com](https://bankidz.com/) |
 
 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 APPLE로 로그인, 딥링크를 통한 가촉 초대, 푸시알림 기능이 정상 작동하지 않습니다.
 

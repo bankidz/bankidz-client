@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import dayjs from 'dayjs';
+import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
 import InterestBadge from '@components/atoms/badges/InterestBadge';
 import { modals } from '@components/atoms/modals/Modals';
 import WalkingItemNameButton from '@components/blocks/walk/WalkingItemNameButton';
 import { calcRatio } from '@lib/styles/theme';
 import { useAppSelector } from '@store/app/hooks';
 import { selectLevel } from '@store/slices/authSlice';
-import { selectIsWalkingDongilsPatched } from '@store/slices/walkingDongilsSlice';
 import { ReactComponent as Polygon } from '@assets/icons/walking-selector-polygon.svg';
 import { ReactComponent as D1 } from '@assets/illusts/walk/d-1.svg';
 import { ReactComponent as D2 } from '@assets/illusts/walk/d-2.svg';
