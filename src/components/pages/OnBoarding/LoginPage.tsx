@@ -14,7 +14,7 @@ function LoginPage() {
           <p>뱅키즈에 오신 것을 환영합니다!</p>
         </TextWrapper>
         <ButtonWithMarginBottom
-          label="카카오로 시작하기"
+          label="카카오톡으로 로그인"
           onClick={() => (window.location.href = KAKAO_AUTH_URL)}
           property="kakao"
         />

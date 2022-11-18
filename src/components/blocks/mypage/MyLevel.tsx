@@ -1,28 +1,35 @@
 import styled, { css } from 'styled-components';
+import { useQueryClient } from 'react-query';
 import { ReactComponent as Banki } from '@assets/illusts/banki/banki_walking.svg';
 import getContentsForMyLevel from '@components/blocks/mypage/getContentsForMyLevel';
+import queryKeys from '@lib/constants/queryKeys';
+import { IMyPageDTO, IUserDTO } from '@lib/apis/user/userDTO';
 
-type TMyLevel = {
-  achievedChallenge: number;
-};
-
-function MyLevel({ achievedChallenge }: TMyLevel) {
+function MyLevel() {
+  const queryClient = useQueryClient();
+  const userData = queryClient.getQueryData(queryKeys.USER) as
+    | IMyPageDTO
+    | undefined;
+  const achievedChallenge = userData?.kid?.achievedChallenge!;
   const { previousIllust, nextIllust, goal, require } =
     getContentsForMyLevel(achievedChallenge)!;
   const bankiPosition =
     (100 / require) * (require - (goal - achievedChallenge));
   return (
-    <Wrapper bankiPosition={bankiPosition}>
-      <div>
-        <div className="previous">{previousIllust}</div>
-        <div className="next">{nextIllust}</div>
-        <Track />
-        <div className="banki">
-          <Banki />
+    <>
+      <h2>MY 레벨</h2>
+      <Wrapper bankiPosition={bankiPosition}>
+        <div>
+          <div className="previous">{previousIllust}</div>
+          <div className="next">{nextIllust}</div>
+          <Track />
+          <div className="banki">
+            <Banki />
+          </div>
         </div>
-      </div>
-      <p>다음 레벨까지 완주해야할 돈길 {goal - achievedChallenge}개</p>
-    </Wrapper>
+        <p>다음 레벨까지 완주해야할 돈길 {goal - achievedChallenge}개</p>
+      </Wrapper>
+    </>
   );
 }
 
