@@ -1,7 +1,8 @@
 import { darken } from 'polished';
 import { useMutation, useQueryClient } from 'react-query';
 import styled, { css } from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import LargeSpacer from '@components/atoms/layout/LargeSpacer';
 import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import FamilyList from '@components/blocks/mypage/FamilyList';
@@ -16,11 +17,16 @@ import useUserQuery from '@lib/hooks/queries/useUserQuery';
 import useFamilyKidQuery from '@lib/hooks/queries/useFamilyKidQuery';
 import familyAPI from '@lib/apis/family/familyAPI';
 import useFamilyQuery from '@lib/hooks/queries/useFamilyQuery';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '@components/atoms/modals/Modals';
 
 function Mypage() {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const { state } = useLocation();
+
   const { setOpenBottomSheet } = useGlobalBottomSheet();
+  const { openModal } = useModals();
 
   const { data: familyData, status: familyStatus } = useFamilyQuery();
   const { data: userData, status: userStatus } = useUserQuery();
@@ -30,12 +36,12 @@ function Mypage() {
 
   const { mutate: mutateCreateFamily } = useMutation(familyAPI.createFamily, {
     onSuccess: () => {
-      openCreateDongilCompletedSheet();
+      openCreateGroupCompletedSheet();
       queryClient.invalidateQueries(queryKeys.FAMILY);
     },
   });
 
-  const openCreateDongilCompletedSheet = () => {
+  const openCreateGroupCompletedSheet = () => {
     setOpenBottomSheet({
       sheetContent: 'Completed',
       contentProps: {
@@ -49,6 +55,21 @@ function Mypage() {
     userStatus === 'success' &&
     kidStatus !== 'loading';
 
+  const openFamilyCreatedModal = () => {
+    if (state && state.newFamily) {
+      openModal(modals.primaryModal, {
+        headerText: `가족이 생겼어요`,
+        bodyText: '이제 돈길을 계약해봐요!',
+        isFamilyCreated: true,
+        shouldCloseOnOverlayClick: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    isAllFetched && openFamilyCreatedModal();
+  }, [isAllFetched]);
+
   return (
     <Wrapper>
       <Header>
@@ -56,17 +77,13 @@ function Mypage() {
         <Setting onClick={() => navigate('manage')} />
       </Header>
       <MarginTemplate>
-        {isAllFetched ? (
-          <OverView userData={userData!} />
-        ) : (
-          <SkeletonOverview isKid={true} />
-        )}
+        {isAllFetched ? <OverView /> : <SkeletonOverview isKid={true} />}
         <Section>
           {isAllFetched &&
             (userData?.user.isKid ? (
               <>
                 <h2>MY 레벨</h2>
-                <MyLevel achievedChallenge={userData.kid!.achievedChallenge} />
+                <MyLevel />
               </>
             ) : (
               <>

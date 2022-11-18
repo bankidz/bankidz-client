@@ -6,13 +6,20 @@ import getPercentValue from '@lib/utils/get/getPercentValue';
 import { IMyPageDTO } from '@lib/apis/user/userDTO';
 import { IKidListDTO } from '@lib/apis/family/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
+import useUserQuery from '@lib/hooks/queries/useUserQuery';
 
 export type OverViewProps = {
   userData: IMyPageDTO;
 };
 
-function OverView({ userData }: OverViewProps) {
-  const { user, kid, parent } = userData;
+function OverView() {
+  const { data: userData, status: userStatus } = useUserQuery({
+    suspense: true,
+  });
+  const kid = userData?.kid;
+  const parent = userData?.parent;
+  const user = userData!.user;
+
   const queryClient = useQueryClient();
   const kidData = queryClient.getQueryData(
     queryKeys.FAMILY_KID,
