@@ -11,7 +11,7 @@ interface TextAreaFormProps extends HTMLAttributes<HTMLTextAreaElement> {
   textValue: string;
   setTextValue: Dispatch<SetStateAction<string>>;
   height: string;
-  autoFocus: boolean;
+  autoFocus?: boolean;
 }
 
 /**
