@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CriticalErrorBoundary from '@components/atoms/errorBoundary/CriticalErrorBoundary';
 import SkeletonOverview from '@components/atoms/skeletons/SkeletonOverView';
 import { selectIsKid } from '@store/slices/authSlice';
@@ -12,10 +12,30 @@ import FamilySection from '@components/blocks/mypage/FamilySection';
 import KidsRecord from '@components/blocks/mypage/KidsRecord';
 import MyLevel from '@components/blocks/mypage/MyLevel';
 import LargeSpacer from '@components/atoms/layout/LargeSpacer';
+import useModals from '@lib/hooks/useModals';
+import { modals } from '@components/atoms/modals/Modals';
 
 const Mypage = () => {
   const isKid = useAppSelector(selectIsKid) || false;
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const { openModal } = useModals();
+
+  const openFamilyCreatedModal = () => {
+    if (state && state.newFamily) {
+      openModal(modals.primaryModal, {
+        headerText: `가족이 그룹에 참여했어요`,
+        bodyText: '이제 그룹 내 구성원들과 함께 돈길을 계약해봐요!',
+        isFamilyCreated: true,
+        shouldCloseOnOverlayClick: true,
+      });
+    }
+  };
+
+  useEffect(() => {
+    openFamilyCreatedModal();
+  }, []);
+
   return (
     <CriticalErrorBoundary>
       <Wrapper>

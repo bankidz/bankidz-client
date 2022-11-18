@@ -18,7 +18,12 @@ function MypageRouter({ location }: { location: Location }) {
       />
       <Route
         path="/new"
-        element={<Navigate to="/mypage" state={{ newFamily: true }} />}
+        element={
+          <Navigate
+            to="/mypage"
+            state={{ newFamily: true, background: true }}
+          />
+        }
       />
       <Route
         path="/enter"
