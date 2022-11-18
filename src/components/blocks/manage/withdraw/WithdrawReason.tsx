@@ -71,7 +71,6 @@ function WithdrawReason() {
           textValue={reason}
           setTextValue={setReason}
           height="168px"
-          autoFocus
         />
       </InputWrapper>
       {notice}
