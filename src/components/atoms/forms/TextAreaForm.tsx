@@ -55,7 +55,7 @@ const InputBox = styled.textarea<{ height: string }>`
   height: ${({ height }) => height};
   border-radius: ${({ theme }) => theme.radius.medium};
   padding: 20px 16px;
-
+  resize: none;
   ${({ theme }) => theme.typo.input.TextField_T_16_EB};
   &::placeholder {
     color: ${({ theme }) => theme.palette.greyScale.grey300};

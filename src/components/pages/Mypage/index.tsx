@@ -1,4 +1,4 @@
-import { Routes, Route, Location } from 'react-router-dom';
+import { Routes, Route, Location, Navigate } from 'react-router-dom';
 import ManageRouter from '../Manage';
 import Mypage from './Mypage';
 import Enter from './Enter';
@@ -14,6 +14,15 @@ function MypageRouter({ location }: { location: Location }) {
           <BackgroundTemplate>
             <Mypage />
           </BackgroundTemplate>
+        }
+      />
+      <Route
+        path="/new"
+        element={
+          <Navigate
+            to="/mypage"
+            state={{ newFamily: true, background: true }}
+          />
         }
       />
       <Route
