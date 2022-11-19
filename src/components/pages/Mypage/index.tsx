@@ -28,7 +28,7 @@ function MypageRouter({ location }: { location: Location }) {
       <Route
         path="/enter"
         element={
-          <ForegroundTemplate>
+          <ForegroundTemplate to="/mypage">
             <Enter />
           </ForegroundTemplate>
         }
