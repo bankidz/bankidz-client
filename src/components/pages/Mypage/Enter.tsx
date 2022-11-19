@@ -23,7 +23,6 @@ function Enter() {
           textValue={familyCode}
           setTextValue={setReason}
           height="185px"
-          autoFocus
         />
       </InputWrapper>
       <DoubleButtonWrapper>
