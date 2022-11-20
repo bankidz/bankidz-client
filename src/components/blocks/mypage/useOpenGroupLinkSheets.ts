@@ -24,6 +24,17 @@ const useOpenGroupLinkSheets = () => {
     });
   };
 
+  // '잘못된 그룹코드에요' 바텀시트
+  const openInvalidNoticeSheet = (handler: () => void) => {
+    setOpenBottomSheet({
+      sheetContent: 'Notice',
+      contentProps: {
+        type: 'invalid',
+        onMainActionClick: handler,
+      },
+    });
+  };
+
   // '새로운 가족그룹으로 이동할까요?' 바텀시트
   const openMoveGroupCheckSheet = (handler: () => void) => {
     setOpenBottomSheet({
@@ -82,6 +93,7 @@ const useOpenGroupLinkSheets = () => {
   return {
     openUnregisteredCheckSheet,
     openExpiredNoticeSheet,
+    openInvalidNoticeSheet,
     openMoveGroupCheckSheet,
     openMoveGroupDoubleCheckSheet,
     openJoinGroupCheckSheet,
