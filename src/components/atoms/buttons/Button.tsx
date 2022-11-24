@@ -95,6 +95,14 @@ const Wrapper = styled.button<{
     `;
   }}
 
+  ${({ property }) =>
+    property === 'apple' &&
+    css`
+      &:active {
+        color: ${({ theme }) => theme.palette.greyScale.grey300};
+      }
+    `}
+
   :disabled {
     background-color: ${({ theme }) => theme.palette.greyScale.grey300};
   }
