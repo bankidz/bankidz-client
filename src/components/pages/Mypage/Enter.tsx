@@ -22,8 +22,7 @@ function Enter() {
           placeholder="다른 가족에게 전달받은 코드를 입력해요"
           textValue={familyCode}
           setTextValue={setReason}
-          height="190px"
-          autoFocus
+          height="185px"
         />
       </InputWrapper>
       <DoubleButtonWrapper>
@@ -51,12 +50,14 @@ const Wrapper = styled.div`
     color: ${({ theme }) => theme.palette.greyScale.black};
     margin-left: 26px;
     margin-right: 26px;
-    margin-top: 40px;
+    /* margin-top: 40px; */
+    margin-top: 20px;
   }
 `;
 
 const InputWrapper = styled.div`
-  margin-top: 32px;
+  /* margin-top: 32px; */
+  margin-top: 16px;
   width: 100%;
   padding: 0px 18px;
   box-sizing: border-box;

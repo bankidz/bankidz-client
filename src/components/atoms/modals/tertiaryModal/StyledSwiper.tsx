@@ -37,7 +37,7 @@ function StyledSwiperSection({
       <SwiperSlide>
         <InstructionCard
           headerText="이자율이란?"
-          bodyText={`돈을 밭기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
+          bodyText={`돈을 맡기면 얼만큼 이자를\n받을 수 있는지 나타내는 말\n\n예를 들어 내가 100만원을 저금하고\n이자율이 20%라면,\n100 X 20% (0.02) = 20만원\n이자를 받을 수 있어요`}
           currentCardIdx={currentCardIdx}
         >
           <ModalContentMoney />
