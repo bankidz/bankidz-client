@@ -2,9 +2,9 @@
 
 # 1. 어린이를 위한 핀테크 서비스, 뱅키즈
 
-|                           iOS APP                            | PC Web |
-| :----------------------------------------------------------: | :---------: |
-| <img src="https://user-images.githubusercontent.com/83692797/201513322-6e4f12ab-9a7c-4dec-a7ad-2a435e715f74.png" alt="app-store-qr-code" style="width:200px;" /><br />[App Store](https://apps.apple.com/kr/app/%EB%B1%85%ED%82%A4%EC%A6%88/id6444064518) | [bankidz.com](https://bankidz.com/) |
+|                           iOS App                           | AOS App | PC Web |
+| :----------------------------------------------------------: | :---------: | :----------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/83692797/205567841-a72c7ce2-1156-4879-8afe-6389abd7f93c.png" alt="ios-qr-code" style="width:200px;" /><br />[App Store](https://apps.apple.com/kr/app/%EB%B1%85%ED%82%A4%EC%A6%88/id6444064518) | <img src="https://user-images.githubusercontent.com/83692797/205567833-570d8d92-06e6-4dc4-90fc-a4270a889e92.png" alt="aos-qr-code" style="width:200px;" /><br />[Play Store](https://play.google.com/store/apps/details?id=com.bankidz.bankidzapp) | [bankidz.com](https://bankidz.com/) |
 
 뱅키즈는 웹뷰 환경에 최적화 되어 있습니다. 기타 웹 브라우저 환경에서는 APPLE로 로그인, 딥링크를 통한 가촉 초대, 푸시알림 기능이 정상 작동하지 않습니다.
 
@@ -50,23 +50,23 @@
 <summary>디랙토리 구조</summary>
 <div markdown="1">
 
-  ```
+  ```shell
   .
-  ├── App.tsx
-  ├── assets
-  ├── components # business logic, UI
-  ├── index.tsx
+  ├── components # Atomic Design Pattern
+  │   ├── atoms
+  │   ├── blocks
+  │   └── pages
   ├── lib
-  │   ├── apis # api call, server-side type
-  │   ├── constants # macro
-  │   ├── hooks # custom hook, query
-  │   ├── styles # Theme-provider
-  │   ├── types # client-side type
-  │   └── utils # reusable function
-  ├── pages # router
-  └── store
-      ├── app # Redux store
-      └── slices # RTK slice
+  │   ├── apis
+  │   │   └── ${controller}
+  │   │       ├── ${controller}Api.ts # queryFn, mutationFn
+  │   │       └── ${controller}Dto.ts # 'Server-side' types
+  │   ├── constants
+  │   │   └── queryKeys.ts # queryKey
+  │   ├── hooks # Global custom hooks
+  │   ├── styles # themeProvider
+  │   └── types # 'Client-side' types
+  └── store # Redux Store
   ```
 </div>
 </details>
