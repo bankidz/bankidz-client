@@ -41,6 +41,11 @@ const content = {
     main: '링크가 만료되었어요',
     sub: '가족에게 그룹링크를 다시 요청해주세요',
   },
+  invalid: {
+    icon: <Warning />,
+    main: '잘못된 그룹코드에요',
+    sub: '그룹 코드를 다시 입력해주세요',
+  },
   withdrawed: {
     icon: <Complete />,
     main: '탈퇴되었습니다',

@@ -15,10 +15,10 @@ import { modals } from '@components/atoms/modals/Modals';
 function GroupLink() {
   const navigate = useNavigate();
   const { groupCode } = useParams();
-  const { code, expiredDate } = decipher(groupCode!);
   const { setCloseBottomSheet } = useGlobalBottomSheet();
   const {
     openExpiredNoticeSheet,
+    openInvalidNoticeSheet,
     openJoinGroupCheckSheet,
     openMoveGroupCheckSheet,
     openUnregisteredCheckSheet,
@@ -42,6 +42,11 @@ function GroupLink() {
     navigate('/mypage');
   };
 
+  const handleInvalidNoticeAction = () => {
+    setCloseBottomSheet();
+    navigate('/mypage/enter');
+  };
+
   const handleMoveGroupCompleted = () => {
     openMoveGroupCompletedSheet(handleSheetCompletedAction);
   };
@@ -61,27 +66,32 @@ function GroupLink() {
   });
 
   useEffect(() => {
-    const expired = dayjs(expiredDate);
-    const now = dayjs();
+    try {
+      const { code, expiredDate } = decipher(groupCode!);
+      const expired = dayjs(expiredDate);
+      const now = dayjs();
 
-    if (expired.isBefore(now)) {
-      // 1. 링크 만료되었을 때
-      openExpiredNoticeSheet(handleSheetCompletedAction);
-    } else if (userStatus === 'error') {
-      // 2. 리프레쉬토큰 없을때 : 로그인 또는 가입하기 바텀시트
-      openUnregisteredCheckSheet(handleSheetCompletedAction);
-    } else if (familyStatus === 'success') {
-      if (familyData.code) {
-        // 3. 가족이 있을때 : 새로운 가족그룹으로 이동
-        openMoveGroupCheckSheet(() => {
-          mutateMoveFamily({ code });
-        });
-      } else {
-        // 4. 가족 없을때: 가족 그룹 참여
-        openJoinGroupCheckSheet(() => {
-          mutateJoinFamily({ code });
-        });
+      if (expired.isBefore(now)) {
+        // 1. 링크 만료되었을 때
+        openExpiredNoticeSheet(handleSheetCompletedAction);
+      } else if (userStatus === 'error') {
+        // 2. 리프레쉬토큰 없을때 : 로그인 또는 가입하기 바텀시트
+        openUnregisteredCheckSheet(handleSheetCompletedAction);
+      } else if (familyStatus === 'success') {
+        if (familyData.code) {
+          // 3. 가족이 있을때 : 새로운 가족그룹으로 이동
+          openMoveGroupCheckSheet(() => {
+            mutateMoveFamily({ code });
+          });
+        } else {
+          // 4. 가족 없을때: 가족 그룹 참여
+          openJoinGroupCheckSheet(() => {
+            mutateJoinFamily({ code });
+          });
+        }
       }
+    } catch (error) {
+      openInvalidNoticeSheet(handleInvalidNoticeAction);
     }
   }, [userStatus, familyStatus]);
 

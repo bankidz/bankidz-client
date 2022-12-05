@@ -17,12 +17,18 @@ export const cipher = (parsedData: string) => {
 };
 
 export const decipher = (encryptedData: string) => {
-  const toDecrypt = encryptedData.replace(
-    /[_]/g,
-    (match: string) => substitutionsBeforeDecryption.get(match) ?? match,
-  );
-  console.log(CryptoJS.AES.decrypt(toDecrypt, key).toString(CryptoJS.enc.Utf8));
-  return JSON.parse(
-    CryptoJS.AES.decrypt(toDecrypt, key).toString(CryptoJS.enc.Utf8),
-  );
+  try {
+    const toDecrypt = encryptedData.replace(
+      /[_]/g,
+      (match: string) => substitutionsBeforeDecryption.get(match) ?? match,
+    );
+    console.log(
+      CryptoJS.AES.decrypt(toDecrypt, key).toString(CryptoJS.enc.Utf8),
+    );
+    return JSON.parse(
+      CryptoJS.AES.decrypt(toDecrypt, key).toString(CryptoJS.enc.Utf8),
+    );
+  } catch (e) {
+    throw new Error('invalid code');
+  }
 };
