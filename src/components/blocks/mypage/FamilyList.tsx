@@ -13,6 +13,7 @@ import { IFamilyDTO, IFamilyUserDTO } from '@lib/apis/family/familyDTO';
 import queryKeys from '@lib/constants/queryKeys';
 import familyAPI from '@lib/apis/family/familyAPI';
 import copyToClipboard from '@lib/utils/copyToClipboard';
+import messageToRNWebView from '@lib/utils/messageToRNWebView';
 
 function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
   const { setOpenBottomSheet, openSheetBySequence } = useGlobalBottomSheet();
@@ -85,22 +86,11 @@ function FamilyList({ family }: { family: IFamilyUserDTO[] }) {
     // const DOMAIN = `${process.env.REACT_APP_DOMAIN}`;
 
     const encrypted = cipher(JSON.stringify(data));
-    copyToClipboard(encrypted);
-    toast.success('클립보드에 복사되었어요');
+    //copyToClipboard(encrypted);
+    //toast.success('클립보드에 복사되었어요');
 
     // const link = `${DOMAIN}/link/${encrypted}`;
-    // messageToRNWebView(link);
-  };
-
-  const messageToRNWebView = (link: string) => {
-    if (window.ReactNativeWebView) {
-      window.ReactNativeWebView.postMessage(link);
-    } else {
-      alert(
-        `현재 웹뷰 환경이 아닙니다. 그룹링크를 브라우저 개발자 도구의 Console에 출력합니다.`,
-      );
-      console.log(link);
-    }
+    messageToRNWebView(encrypted);
   };
 
   return (

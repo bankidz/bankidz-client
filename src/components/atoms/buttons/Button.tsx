@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react';
 import styled, { css } from 'styled-components';
 import { darken } from 'polished';
+import { debounce } from 'throttle-debounce';
 import { ReactComponent as Kakao } from '@assets/icons/kakao.svg';
 import { ReactComponent as Apple } from '@assets/icons/apple.svg';
 import { theme } from '@lib/styles/theme';
@@ -10,6 +11,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   label: string;
   state?: boolean;
   fixed?: boolean;
+  onClick: () => void;
 }
 
 /**
@@ -23,14 +25,17 @@ function Button({
   label,
   state = true,
   fixed = false,
+  onClick,
   ...props
 }: ButtonProps) {
+  const onClickDebounce = debounce(1000, onClick);
   return (
     <Wrapper
       property={property}
       state={state}
       disabled={!state}
       fixed={fixed}
+      onClick={onClickDebounce}
       {...props}
     >
       {property === 'kakao' && <Kakao />}
