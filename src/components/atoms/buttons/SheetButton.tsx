@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { debounce } from 'throttle-debounce';
 
 interface SheetButtonProps {
   onClickNext: (e: any) => void;
@@ -16,9 +17,10 @@ function SheetButton({
   label,
   outerSheet = false,
 }: SheetButtonProps) {
+  const onClickDebounce = debounce(200, onClickNext);
   return (
     <Wrapper
-      onClick={onClickNext}
+      onClick={onClickDebounce}
       disabled={disabledNext}
       outerSheet={outerSheet}
     >

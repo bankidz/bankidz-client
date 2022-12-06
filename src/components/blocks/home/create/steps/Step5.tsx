@@ -57,10 +57,10 @@ function Step5() {
   }, []);
 
   // 다음으로 버튼 클릭
-  const onClickNextButton = debounce(1000, () => {
+  const onClickNextButton = () => {
     uploadS3(sign);
     mutatePostChallenge(createChallengePayload);
-  });
+  };
 
   return (
     <>
