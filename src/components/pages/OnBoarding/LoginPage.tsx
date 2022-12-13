@@ -1,16 +1,36 @@
 import styled from 'styled-components';
-import { debounce } from 'throttle-debounce';
 import Button from '@components/atoms/buttons/Button';
 import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 import { KAKAO_AUTH_URL } from '@lib/constants/KAKAO_AUTH_URL';
 import { APPLE_AUTH_URL } from '@lib/constants/APPLE_AUTH_URL';
 
-function LoginPage() {
-  const handleLoginWithAppleWithDebouncing = debounce(1000, () => {
-    location.href = APPLE_AUTH_URL;
-  });
+// @ts-expect-error
+function url_redirect(url) {
+  const X = setTimeout(function () {
+    window.location.replace(url);
+    return true;
+  }, 300);
 
+  if ((window.location = url)) {
+    clearTimeout(X);
+    return true;
+  } else {
+    // @ts-expect-error
+    if ((window.location.href = url)) {
+      clearTimeout(X);
+      return true;
+    } else {
+      clearTimeout(X);
+      // @ts-expect-error
+      window.location.replace(url);
+      return true;
+    }
+  }
+  return false;
+}
+
+function LoginPage() {
   return (
     <Wrapper>
       <MarginTemplate>
@@ -24,32 +44,13 @@ function LoginPage() {
           property="kakao"
         />
         <ButtonWithMarginBottom
-          label="APPLE로 로그인 location.href"
-          onClick={() => (location.href = APPLE_AUTH_URL)}
+          label="APPLE로 로그인 url_redirect"
+          onClick={() => url_redirect(APPLE_AUTH_URL)}
           property="apple"
         />
         <ButtonWithMarginBottom
-          label="APPLE로 로그인 debouncing"
-          onClick={handleLoginWithAppleWithDebouncing}
-          property="apple"
-        />
-        <ButtonWithMarginBottom
-          label="APPLE로 로그인 setTimeout 250"
-          onClick={() =>
-            setTimeout(() => {
-              document.location.href = APPLE_AUTH_URL;
-            }, 250)
-          }
-          property="apple"
-        />
-        <ButtonWithMarginBottom
-          label="APPLE로 로그인 document.location.assign"
-          onClick={() => document.location.assign(APPLE_AUTH_URL)}
-          property="apple"
-        />
-        <ButtonWithMarginBottom
-          label="APPLE로 로그인 location.assign"
-          onClick={() => location.assign(APPLE_AUTH_URL)}
+          label="APPLE로 로그인 replace"
+          onClick={() => window.location.replace(APPLE_AUTH_URL)}
           property="apple"
         />
       </MarginTemplate>
