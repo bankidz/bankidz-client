@@ -21,7 +21,7 @@ function LoginPage() {
         />
         <ButtonWithMarginBottom
           label="APPLE로 로그인"
-          onClick={() => redirectUrl(APPLE_AUTH_URL)}
+          onClick={() => (window.location.href = APPLE_AUTH_URL)}
           property="apple"
         />
       </MarginTemplate>
