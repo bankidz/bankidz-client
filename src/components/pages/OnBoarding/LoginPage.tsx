@@ -4,31 +4,7 @@ import MarginTemplate from '@components/atoms/layout/MarginTemplate';
 import { ReactComponent as Logo } from '@assets/icons/logo.svg';
 import { KAKAO_AUTH_URL } from '@lib/constants/KAKAO_AUTH_URL';
 import { APPLE_AUTH_URL } from '@lib/constants/APPLE_AUTH_URL';
-
-// @ts-expect-error
-function url_redirect(url) {
-  const X = setTimeout(function () {
-    window.location.replace(url);
-    return true;
-  }, 300);
-
-  if ((window.location = url)) {
-    clearTimeout(X);
-    return true;
-  } else {
-    // @ts-expect-error
-    if ((window.location.href = url)) {
-      clearTimeout(X);
-      return true;
-    } else {
-      clearTimeout(X);
-      // @ts-expect-error
-      window.location.replace(url);
-      return true;
-    }
-  }
-  return false;
-}
+import redirectUrl from '@lib/utils/redirectUrl';
 
 function LoginPage() {
   return (
@@ -44,13 +20,8 @@ function LoginPage() {
           property="kakao"
         />
         <ButtonWithMarginBottom
-          label="APPLE로 로그인 url_redirect"
-          onClick={() => url_redirect(APPLE_AUTH_URL)}
-          property="apple"
-        />
-        <ButtonWithMarginBottom
-          label="APPLE로 로그인 replace"
-          onClick={() => window.location.replace(APPLE_AUTH_URL)}
+          label="APPLE로 로그인"
+          onClick={() => redirectUrl(APPLE_AUTH_URL)}
           property="apple"
         />
       </MarginTemplate>
